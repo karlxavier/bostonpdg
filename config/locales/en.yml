@@ -30,4 +30,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  helpers:
+    label:
+      vendor:
+        id: Vendor ID
+        name: Vendor Name
+        created_at: Created Date
+        updated_at: Modified Date
