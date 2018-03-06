@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  approval_status: MyString
+  online_date: 2018-03-07 00:29:48
+  offline_date: 2018-03-07 00:29:48
+  unit: MyString
+  description: MyString
+  base_product: MyString
+  category: 1
+  product_references: MyString
+  price: 9.99
+  picture: 
+  variant_type: MyString
+  style: MyString
+  variants: MyString
+  force_in_stock: false
+
+two:
+  name: MyString
+  approval_status: MyString
+  online_date: 2018-03-07 00:29:48
+  offline_date: 2018-03-07 00:29:48
+  unit: MyString
+  description: MyString
+  base_product: MyString
+  category: 1
+  product_references: MyString
+  price: 9.99
+  picture: 
+  variant_type: MyString
+  style: MyString
+  variants: MyString
+  force_in_stock: false
