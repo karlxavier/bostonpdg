@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   namespace :admin do
     resources :users
+    resources :vendors
     root to: "users#index" # <--- Root route
   end
   get 'static_pages/dashboard'
