@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
     resources :inventories
+    resources :vendors
     root to: "users#index" # <--- Root route
   end
   get 'static_pages/dashboard'
