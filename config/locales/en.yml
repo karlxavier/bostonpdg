@@ -30,8 +30,25 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  helpers:
+ helpers:
     label:
+      product:
+        id: Product ID
+        approval_status: Approval
+        online_date: Online from
+        offline_date: Online to
+        unit: Sales Unit
+        base_product: Base Product
+        product_references: Product References
+        price: Price Class
+        picture: Image
+        variant_type: Product Variant Type
+        variants: Product Variants
+        force_in_stock: Force in Stock
+        created_at: Created Date
+      category:
+        id: Category ID
+        created_at: Created Date
       vendor:
         id: Vendor ID
         name: Vendor Name
