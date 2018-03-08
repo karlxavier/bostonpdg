@@ -54,6 +54,8 @@ GEM
     administrate-field-paperclip (0.0.5)
       administrate (~> 0.4)
       rails (>= 4.2, < 6)
+    administrate-field-password (0.0.4)
+      administrate
     arel (8.0.0)
     autoprefixer-rails (8.0.0)
       execjs
@@ -241,6 +243,7 @@ PLATFORMS
 DEPENDENCIES
   administrate
   administrate-field-paperclip
+  administrate-field-password
   byebug
   cancancan
   capybara (~> 2.13)
