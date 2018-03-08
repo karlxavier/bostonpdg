@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class VendorDashboard < Administrate::BaseDashboard
+class BrandDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -42,10 +42,14 @@ class VendorDashboard < Administrate::BaseDashboard
     :name,
   ].freeze
 
-  # Overwrite this method to customize how vendors are displayed
+  # Overwrite this method to customize how brands are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(vendor)
-  #   "Vendor ##{vendor.id}"
+  # def display_resource(brand)
+  #   "Brand ##{brand.id}"
   # end
+
+  def display_resource(brand)
+    brand.name
+  end
 end

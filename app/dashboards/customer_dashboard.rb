@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class VendorDashboard < Administrate::BaseDashboard
+class CustomerDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,7 +9,13 @@ class VendorDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    name: Field::String,
+    first_name: Field::String,
+    last_name: Field::String,
+    billing_address: Field::String,
+    shipping_address: Field::String,
+    phone: Field::String,
+    brand: Field::BelongsTo.with_options(class_name: "Brand", foreign_key: "brand"),
+    admin: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -21,16 +27,22 @@ class VendorDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
-    :name,
-    :created_at,
-    :updated_at,
+    :first_name,
+    :last_name,
+    :billing_address,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
-    :name,
+    :first_name,
+    :last_name,
+    :billing_address,
+    :shipping_address,
+    :phone,
+    :brand,
+    :admin,
     :created_at,
     :updated_at,
   ].freeze
@@ -39,13 +51,19 @@ class VendorDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :name,
+    :first_name,
+    :last_name,
+    :billing_address,
+    :shipping_address,
+    :phone,
+    :brand,
+    :admin,
   ].freeze
 
-  # Overwrite this method to customize how vendors are displayed
+  # Overwrite this method to customize how customers are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(vendor)
-  #   "Vendor ##{vendor.id}"
+  # def display_resource(customer)
+  #   "Customer ##{customer.id}"
   # end
 end

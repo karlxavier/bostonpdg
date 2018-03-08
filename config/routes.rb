@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     resources :users
     resources :inventories
     resources :vendors
+    resources :products
+    resources :categories
+    resources :customers
+    resources :brands
     root to: "users#index" # <--- Root route
   end
   get 'static_pages/dashboard'
