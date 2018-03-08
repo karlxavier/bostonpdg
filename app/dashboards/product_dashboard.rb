@@ -17,7 +17,6 @@ class ProductDashboard < Administrate::BaseDashboard
     description: Field::String,
     base_product: Field::String,
     category: Field::BelongsTo.with_options(class_name: "Category", foreign_key: "category"),
-    product_references: Field::String,
     price: Field::String.with_options(searchable: false),
     picture: Field::Paperclip,
     variant_type: Field::String,
@@ -52,7 +51,6 @@ class ProductDashboard < Administrate::BaseDashboard
     :description,
     :base_product,
     :category,
-    :product_references,
     :price,
     :picture,
     :variant_type,
@@ -75,7 +73,6 @@ class ProductDashboard < Administrate::BaseDashboard
     :description,
     :base_product,
     :category,
-    :product_references,
     :price,
     :picture,
     :variant_type,
@@ -87,7 +84,7 @@ class ProductDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how products are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(product)
-  #   "Product ##{product.id}"
-  # end
+   def display_resource(product)
+     product.name
+   end
 end

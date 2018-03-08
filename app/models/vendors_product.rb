@@ -1,0 +1,2 @@
+class VendorsProduct < ApplicationRecord
+end

@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180307161409) do
+ActiveRecord::Schema.define(version: 20180307234646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.string "street_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "country"
+    t.string "phone"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
@@ -25,6 +38,7 @@ ActiveRecord::Schema.define(version: 20180307161409) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "parent"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -39,12 +53,20 @@ ActiveRecord::Schema.define(version: 20180307161409) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "inventories", force: :cascade do |t|
     t.integer "loc_id"
     t.integer "bin_id"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "aisle_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -56,7 +78,6 @@ ActiveRecord::Schema.define(version: 20180307161409) do
     t.string "description"
     t.string "base_product"
     t.integer "category"
-    t.string "product_references"
     t.decimal "price"
     t.string "picture_file_name"
     t.string "picture_content_type"
@@ -66,6 +87,15 @@ ActiveRecord::Schema.define(version: 20180307161409) do
     t.string "style"
     t.string "variants"
     t.boolean "force_in_stock"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "style_attributes", force: :cascade do |t|
+    t.integer "product_id"
+    t.string "name"
+    t.string "value"
+    t.string "default"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -85,15 +115,41 @@ ActiveRecord::Schema.define(version: 20180307161409) do
     t.datetime "updated_at", null: false
     t.integer "roles_mask"
     t.boolean "admin"
+    t.integer "billing_address"
+    t.integer "shipping_address"
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "users_brands", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "brand_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users_groups", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "vendors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email"
+    t.integer "lead_time"
+    t.string "country_origin"
+  end
+
+  create_table "vendors_products", force: :cascade do |t|
+    t.integer "vendor_id"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
