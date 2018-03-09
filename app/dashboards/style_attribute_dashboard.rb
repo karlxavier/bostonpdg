@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class InventoryDashboard < Administrate::BaseDashboard
+class StyleAttributeDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,11 +9,10 @@ class InventoryDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    loc_id: Field::Number,
-    bin_id: Field::Number,
-    bin_id: Field::Number,
-    aisle_id: Field::Number,
-    quantity: Field::Number,
+    product_id: Field::BelongsTo.with_options(class_name: "Product", foreign_key: "product_id"),
+    name: Field::String,
+    value: Field::String,
+    default: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -25,19 +24,19 @@ class InventoryDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
-    :loc_id,
-    :bin_id,
-    :quantity,
+    :product_id,
+    :name,
+    :value,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
-    :loc_id,
-    :bin_id,
-    :aisle_id,
-    :quantity,
+    :product_id,
+    :name,
+    :value,
+    :default,
     :created_at,
     :updated_at,
   ].freeze
@@ -46,16 +45,16 @@ class InventoryDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :loc_id,
-    :bin_id,
-    :aisle_id,
-    :quantity,
+    :product_id,
+    :name,
+    :value,
+    :default,
   ].freeze
 
-  # Overwrite this method to customize how inventories are displayed
+  # Overwrite this method to customize how style attributes are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(inventory)
-  #   "Inventory ##{inventory.id}"
+  # def display_resource(style_attribute)
+  #   "StyleAttribute ##{style_attribute.id}"
   # end
 end

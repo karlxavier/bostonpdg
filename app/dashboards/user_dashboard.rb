@@ -9,6 +9,10 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    first_name: Field::String,
+    last_name: Field::String,
+    billing_address: Field::BelongsTo.with_options(class_name: "Address", foreign_key: "billing_address"),
+    shipping_address: Field::BelongsTo.with_options(class_name: "Address", foreign_key: "shipping_address"),
     email: Field::String,
     password: Field::Password,
     password_confirmation: Field::Password,
@@ -22,7 +26,8 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
-    :email,
+    :first_name,
+    :last_name,
     :admin
   ].freeze
 
@@ -38,6 +43,10 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :first_name,
+    :last_name,
+    :billing_address,
+    :shipping_address,
     :email,
     :password,
     :password_confirmation,

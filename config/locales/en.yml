@@ -46,11 +46,40 @@ en:
         variants: Product Variants
         force_in_stock: Force in Stock
         created_at: Created Date
+        updated_at: Modified Date
       category:
         id: Category ID
         created_at: Created Date
+        updated_at: Modified Date
       vendor:
         id: Vendor ID
         name: Vendor Name
+        created_at: Created Date
+        updated_at: Modified Date
+      user:
+        id: User ID
+        created_at: Created Date
+        updated_at: Modified Date
+      inventory:
+        id: Inventory ID
+        loc_id: Loc ID
+        bin_id: Bin ID
+        aisle_id: Aisle ID
+        created_at: Created Date
+        updated_at: Modified Date
+      brand:
+        id: Brand ID
+        created_at: Created Date
+        updated_at: Modified Date
+      address:
+        id: Address ID
+        created_at: Created Date
+        updated_at: Modified Date
+      group:
+        id: Group ID
+        created_at: Created Date
+        updated_at: Modified Date
+      style_attribute:
+        id: Style ID
         created_at: Created Date
         updated_at: Modified Date

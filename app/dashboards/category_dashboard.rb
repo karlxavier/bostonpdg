@@ -10,6 +10,7 @@ class CategoryDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
       id: Field::Number,
       name: Field::String,
+      parent: Field::Number,
       created_at: Field::DateTime,
       updated_at: Field::DateTime,
   }.freeze
@@ -34,7 +35,8 @@ class CategoryDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-      :name
+      :name,
+      :parent
   ].freeze
 
   # Overwrite this method to customize how categories are displayed

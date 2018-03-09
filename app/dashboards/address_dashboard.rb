@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class InventoryDashboard < Administrate::BaseDashboard
+class AddressDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,11 +9,14 @@ class InventoryDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    loc_id: Field::Number,
-    bin_id: Field::Number,
-    bin_id: Field::Number,
-    aisle_id: Field::Number,
-    quantity: Field::Number,
+    street: Field::String,
+    street_2: Field::String,
+    city: Field::String,
+    state: Field::String,
+    zip: Field::String,
+    country: Field::String,
+    phone: Field::String,
+    email: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -25,19 +28,23 @@ class InventoryDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
-    :loc_id,
-    :bin_id,
-    :quantity,
+    :street,
+    :street_2,
+    :city,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
-    :loc_id,
-    :bin_id,
-    :aisle_id,
-    :quantity,
+    :street,
+    :street_2,
+    :city,
+    :state,
+    :zip,
+    :country,
+    :phone,
+    :email,
     :created_at,
     :updated_at,
   ].freeze
@@ -46,16 +53,20 @@ class InventoryDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :loc_id,
-    :bin_id,
-    :aisle_id,
-    :quantity,
+    :street,
+    :street_2,
+    :city,
+    :state,
+    :zip,
+    :country,
+    :phone,
+    :email,
   ].freeze
 
-  # Overwrite this method to customize how inventories are displayed
+  # Overwrite this method to customize how addresses are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(inventory)
-  #   "Inventory ##{inventory.id}"
-  # end
+   def display_resource(address)
+     address.street + ", " + address.city + " " + address.state + ", " + address.country
+   end
 end
