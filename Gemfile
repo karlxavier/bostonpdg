@@ -41,6 +41,7 @@ gem 'administrate'
 gem 'administrate-field-paperclip'
 gem "paperclip", "~> 5.2.1"
 gem 'administrate-field-password'
+gem 'seed_dump'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

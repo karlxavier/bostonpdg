@@ -10,6 +10,7 @@ class VendorDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     name: Field::String,
+    email: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -22,6 +23,7 @@ class VendorDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
+    :email,
     :created_at,
     :updated_at,
   ].freeze
@@ -31,6 +33,7 @@ class VendorDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :name,
+    :email,
     :created_at,
     :updated_at,
   ].freeze
@@ -40,6 +43,7 @@ class VendorDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
+    :email,
   ].freeze
 
   # Overwrite this method to customize how vendors are displayed
