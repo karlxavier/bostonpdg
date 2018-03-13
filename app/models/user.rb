@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  #belongs_to :shipping_address, :class_name => 'Address', :foreign_key => 'shipping_address'
+  #belongs_to :billing_address, :class_name => 'Address', :foreign_key => 'billing_address'
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

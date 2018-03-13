@@ -41,6 +41,7 @@ gem 'administrate'
 gem 'administrate-field-paperclip'
 gem "paperclip", "~> 5.2.1"
 gem 'administrate-field-password'
+gem 'administrate-field-collection_select'
 gem 'seed_dump'
 
 group :development, :test do

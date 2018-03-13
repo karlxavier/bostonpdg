@@ -51,6 +51,9 @@ GEM
       momentjs-rails (~> 2.8)
       sass-rails (~> 5.0)
       selectize-rails (~> 0.6)
+    administrate-field-collection_select (0.3.0)
+      administrate (~> 0.7)
+      rails (~> 5.0)
     administrate-field-paperclip (0.0.5)
       administrate (~> 0.4)
       rails (>= 4.2, < 6)
@@ -245,6 +248,7 @@ PLATFORMS
 
 DEPENDENCIES
   administrate
+  administrate-field-collection_select
   administrate-field-paperclip
   administrate-field-password
   byebug

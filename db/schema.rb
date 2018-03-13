@@ -153,4 +153,6 @@ ActiveRecord::Schema.define(version: 20180312155243) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "users", "addresses", column: "billing_address"
+  add_foreign_key "users", "addresses", column: "shipping_address"
 end

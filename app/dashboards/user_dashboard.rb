@@ -11,8 +11,24 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     first_name: Field::String,
     last_name: Field::String,
-    billing_address: Field::BelongsTo.with_options(class_name: "Address", foreign_key: "billing_address"),
-    shipping_address: Field::BelongsTo.with_options(class_name: "Address", foreign_key: "shipping_address"),
+    billing_address: Field::CollectionSelect.with_options(
+      collection: proc { Address.all },
+      value_method: :id,
+      text_method: :street,
+      options: {
+      include_blank: 'Please Select A/Some Address',
+      include_hidden: false,
+  }
+  ),
+    shipping_address: Field::CollectionSelect.with_options(
+      collection: proc { Address.all },
+      value_method: :id,
+      text_method: :street,
+      options: {
+      include_blank: 'Please Select A/Some Address',
+      include_hidden: false,
+  }
+  ),
     email: Field::String,
     password: Field::Password,
     password_confirmation: Field::Password,
@@ -28,6 +44,9 @@ class UserDashboard < Administrate::BaseDashboard
     :id,
     :first_name,
     :last_name,
+    :email,
+    :billing_address,
+    :shipping_address,
     :admin
   ].freeze
 
@@ -35,8 +54,12 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
+    :first_name,
+    :last_name,
     :email,
-    :admin,
+    :billing_address,
+    :shipping_address,
+    :admin
   ].freeze
 
   # FORM_ATTRIBUTES
