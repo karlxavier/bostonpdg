@@ -9,8 +9,16 @@ class InventoryDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    product_id:  Field::CollectionSelect.with_options(
+      collection: proc { Product.all },
+      value_method: :id,
+      text_method: :name,
+      options: {
+      include_blank: 'Please Select A/Some Product',
+      include_hidden: false,
+  }
+  ),
     loc_id: Field::Number,
-    bin_id: Field::Number,
     bin_id: Field::Number,
     aisle_id: Field::Number,
     quantity: Field::Number,
@@ -25,6 +33,7 @@ class InventoryDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
+    :product_id,
     :loc_id,
     :bin_id,
     :quantity,
@@ -34,6 +43,7 @@ class InventoryDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
+    :product_id,
     :loc_id,
     :bin_id,
     :aisle_id,
@@ -46,6 +56,7 @@ class InventoryDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :product_id,
     :loc_id,
     :bin_id,
     :aisle_id,

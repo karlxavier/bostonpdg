@@ -8,23 +8,31 @@ class ProductDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    id: Field::Number,
-    name: Field::String,
-    approval_status: Field::String,
-    online_date: Field::DateTime,
-    offline_date: Field::DateTime,
-    unit: Field::String,
-    description: Field::String,
-    base_product: Field::String,
-    category: Field::BelongsTo.with_options(class_name: "Category", foreign_key: "category"),
-    price: Field::String.with_options(searchable: false),
-    picture: Field::Paperclip,
-    variant_type: Field::String,
-    style: Field::String,
-    variants: Field::String,
-    force_in_stock: Field::Boolean,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+      id: Field::Number,
+      name: Field::String,
+      approval_status: Field::String,
+      online_date: Field::DateTime,
+      offline_date: Field::DateTime,
+      unit: Field::String,
+      description: Field::String,
+      base_product: Field::String,
+      category: Field::CollectionSelect.with_options(
+      collection: proc { Category.all },
+      value_method: :id,
+      text_method: :name,
+      options: {
+      include_blank: 'Please Select A Category',
+      include_hidden: false,
+  }
+  ),
+      price: Field::String.with_options(searchable: false),
+      picture: Field::Paperclip,
+      variant_type: Field::String,
+      style: Field::String,
+      variants: Field::String,
+      force_in_stock: Field::Boolean,
+      created_at: Field::DateTime,
+      updated_at: Field::DateTime,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -58,7 +66,7 @@ class ProductDashboard < Administrate::BaseDashboard
     :variants,
     :force_in_stock,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -78,13 +86,13 @@ class ProductDashboard < Administrate::BaseDashboard
     :variant_type,
     :style,
     :variants,
-    :force_in_stock,
+    :force_in_stock
   ].freeze
 
   # Overwrite this method to customize how products are displayed
   # across all pages of the admin dashboard.
   #
-   def display_resource(product)
-     product.name
-   end
+  def display_resource(product)
+    product.name
+  end
 end

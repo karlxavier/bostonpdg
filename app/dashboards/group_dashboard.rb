@@ -13,6 +13,7 @@ class GroupDashboard < Administrate::BaseDashboard
     description: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    user_id: Field::Number,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -51,4 +52,8 @@ class GroupDashboard < Administrate::BaseDashboard
   # def display_resource(group)
   #   "Group ##{group.id}"
   # end
+
+  def display_resource(group)
+    group.name
+  end
 end

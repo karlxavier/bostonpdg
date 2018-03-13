@@ -12,6 +12,7 @@ class BrandDashboard < Administrate::BaseDashboard
     name: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    user_id: Field::Number,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -45,10 +46,6 @@ class BrandDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how brands are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(brand)
-  #   "Brand ##{brand.id}"
-  # end
-
   def display_resource(brand)
     brand.name
   end

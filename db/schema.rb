@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180312155243) do
+ActiveRecord::Schema.define(version: 20180313141721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20180312155243) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_brands_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -58,6 +60,8 @@ ActiveRecord::Schema.define(version: 20180312155243) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
   create_table "inventories", force: :cascade do |t|
@@ -90,6 +94,8 @@ ActiveRecord::Schema.define(version: 20180312155243) do
     t.boolean "force_in_stock"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "vendor_id"
+    t.index ["vendor_id"], name: "index_products_on_vendor_id"
   end
 
   create_table "style_attributes", force: :cascade do |t|
@@ -120,7 +126,11 @@ ActiveRecord::Schema.define(version: 20180312155243) do
     t.integer "shipping_address"
     t.string "first_name"
     t.string "last_name"
+    t.bigint "brand_id"
+    t.bigint "group_id"
+    t.index ["brand_id"], name: "index_users_on_brand_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -144,6 +154,8 @@ ActiveRecord::Schema.define(version: 20180312155243) do
     t.datetime "updated_at", null: false
     t.integer "lead_time"
     t.string "country_origin"
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_vendors_on_product_id"
   end
 
   create_table "vendors_products", force: :cascade do |t|
@@ -155,4 +167,7 @@ ActiveRecord::Schema.define(version: 20180312155243) do
 
   add_foreign_key "users", "addresses", column: "billing_address"
   add_foreign_key "users", "addresses", column: "shipping_address"
+  add_foreign_key "users", "brands"
+  add_foreign_key "users", "groups"
+  add_foreign_key "vendors", "products"
 end
