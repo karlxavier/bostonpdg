@@ -9,7 +9,6 @@ class StyleAttributeDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    product_id: Field::BelongsTo.with_options(class_name: "Product", foreign_key: "product_id"),
     name: Field::String,
     value: Field::String,
     default: Field::String,
@@ -24,7 +23,6 @@ class StyleAttributeDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
-    :product_id,
     :name,
     :value,
   ].freeze
@@ -33,7 +31,6 @@ class StyleAttributeDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
-    :product_id,
     :name,
     :value,
     :default,
@@ -45,7 +42,6 @@ class StyleAttributeDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :product_id,
     :name,
     :value,
     :default,
@@ -57,4 +53,7 @@ class StyleAttributeDashboard < Administrate::BaseDashboard
   # def display_resource(style_attribute)
   #   "StyleAttribute ##{style_attribute.id}"
   # end
+  def display_resource(style_attribute)
+    style_attribute.name
+  end
 end

@@ -1,0 +1,109 @@
+<%#
+# Show
+
+This view is the template for the show page.
+It renders the attributes of a resource,
+as well as a link to its edit page.
+
+## Local variables:
+
+- `page`:
+  An instance of [Administrate::Page::Show][1].
+  Contains methods for accessing the resource to be displayed on the page,
+  as well as helpers for describing how each attribute of the resource
+  should be displayed.
+
+[1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Show
+%>
+
+<% content_for(:title) { t("administrate.actions.show_resource", name: page.page_title) } %>
+
+<header class="main-content__header" role="banner">
+  <h1 class="main-content__page-title">
+    <%= content_for(:title) %>
+  </h1>
+
+  <div>
+    <%= link_to(
+                t("administrate.actions.edit_resource", name: page.page_title),
+        [:edit, namespace, page.resource],
+        class: "button",
+        ) if valid_action?(:edit) && show_action?(:edit, page.resource) %>
+        </div>
+        </header>
+
+        <section class="main-content__body">
+          <%= page.to_json %>
+          <dl>
+            <% page.attributes.each do |attribute| %>
+                <dt class="attribute-label" id="<%= attribute.name %>">
+                  <%= t(
+                              "helpers.label.#{resource_name}.#{attribute.name}",
+                              default: attribute.name.titleize,
+                      ) %>
+                </dt>
+
+                <dd class="attribute-data attribute-data--<%=attribute.html_class%>"
+                ><%= render_field attribute %></dd>
+            <% end %>
+
+            <dt class="attribute-label" id="users">
+              Users
+            </dt>
+
+            <dd class="attribute-data attribute-data--has-many">
+              <% users = User.where("billing_address = '#{page.resource.id}' OR shipping_address = '#{page.resource.id}'") %>
+
+              <% if users.present? %>
+                  <table aria-labelledby="users">
+                    <thead>
+                    <tr>
+                      <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> User ID  </th>
+                      <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Name  </th>
+                      <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> E-mail  </th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <% users.each do |user| %>
+                        <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/users/<%= user.id %>">
+                          <td class="cell-data cell-data--number">
+                            <a href="/admin/users/<%= user.id %>" class="action-show">
+
+                              <%= user.id %>
+
+                            </a>
+                          </td>
+                          <td class="cell-data cell-data--number">
+                            <a href="/admin/users/<%= user.id %>" class="action-show">
+
+                              <%= user.first_name + " " + user.last_name %>
+
+                            </a>
+                          </td>
+
+                          <td class="cell-data cell-data--number">
+                            <a href="/admin/users/<%= user.id %>" class="action-show">
+
+                              <%= user.email %>
+
+                            </a>
+                          </td>
+
+                          <td><a class="action-edit" href="/admin/users/<%= user.id %>/edit">Edit</a></td>
+
+                          <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/users/<%= user.id %>">Destroy</a></td>
+                        </tr>
+                    <% end %>
+              <% else %>
+                  <dd class="attribute-data attribute-data--has-many">
+                    None
+                  </dd>
+              <% end %>
+              </tbody>
+              </table>
+            </dd>
+          </dl>
+        </section>
