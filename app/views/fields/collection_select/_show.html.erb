@@ -13,8 +13,12 @@ to be displayed on a resource's show page.
 [1]: http://www.rubydoc.info/gems/administrate/Administrate/Field/Select
 %>
 <% if field.data %>
-    <% address = Address.find(field.resource.billing_address) %>
-
-    <%= link_to address.street + ", " + address.city + " " + address.state + ", " + address.country, edit_admin_address_path(address) %>
-
+    <% if field.resource.has_attribute?(:billing_address) %>
+        <% address = Address.find(field.resource.billing_address) %>
+        <%= link_to address.street + ", " + address.city + " " + address.state + ", " + address.country, edit_admin_address_path(address) %>
+    <% end %>
+    <% if field.resource.has_attribute?(:product_id) %>
+        <% product = Product.find(field.resource.product_id) %>
+        <%= link_to product.name, edit_admin_product_path(product) %>
+    <% end %>
 <% end %>

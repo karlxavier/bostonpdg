@@ -58,6 +58,8 @@ en:
         updated_at: Modified Date
       user:
         id: User ID
+        brands: Brands
+        groups: Groups
         created_at: Created Date
         updated_at: Modified Date
       inventory:

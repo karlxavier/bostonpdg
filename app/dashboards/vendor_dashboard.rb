@@ -8,11 +8,13 @@ class VendorDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    products: Field::HasMany,
     id: Field::Number,
     name: Field::String,
-    lead_time: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    lead_time: Field::Number,
+    country_origin: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -23,9 +25,8 @@ class VendorDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
-    :lead_time,
+    :products,
     :created_at,
-    :updated_at,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -34,8 +35,10 @@ class VendorDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :lead_time,
+    :country_origin,
+    :products,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -43,7 +46,9 @@ class VendorDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
-    :lead_time
+    :lead_time,
+    :country_origin,
+    :products
   ].freeze
 
   # Overwrite this method to customize how vendors are displayed

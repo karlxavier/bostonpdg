@@ -8,10 +8,14 @@ class UserDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    id: Field::Number,
-    first_name: Field::String,
-    last_name: Field::String,
-    billing_address: Field::CollectionSelect.with_options(
+      brands: Field::HasMany,
+      groups: Field::HasMany,
+      id: Field::Number,
+      email: Field::String,
+      password: Field::Password,
+      password_confirmation: Field::Password,
+      admin: Field::Boolean,
+      billing_address: Field::CollectionSelect.with_options(
       collection: proc { Address.all },
       value_method: :id,
       text_method: :street,
@@ -20,7 +24,7 @@ class UserDashboard < Administrate::BaseDashboard
       include_hidden: false,
   }
   ),
-    shipping_address: Field::CollectionSelect.with_options(
+      shipping_address: Field::CollectionSelect.with_options(
       collection: proc { Address.all },
       value_method: :id,
       text_method: :street,
@@ -29,10 +33,8 @@ class UserDashboard < Administrate::BaseDashboard
       include_hidden: false,
   }
   ),
-    email: Field::String,
-    password: Field::Password,
-    password_confirmation: Field::Password,
-    admin: Field::Boolean,
+      first_name: Field::String,
+      last_name: Field::String,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -41,39 +43,45 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :id,
-    :first_name,
-    :last_name,
-    :email,
-    :billing_address,
-    :shipping_address,
-    :admin
+      :id,
+      :first_name,
+      :last_name,
+      :email,
+      :billing_address,
+      :shipping_address,
+      :brands,
+      :groups,
+      :admin
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :id,
-    :first_name,
-    :last_name,
-    :email,
-    :billing_address,
-    :shipping_address,
-    :admin
+      :id,
+      :first_name,
+      :last_name,
+      :email,
+      :billing_address,
+      :shipping_address,
+      :brands,
+      :groups,
+      :admin
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :first_name,
-    :last_name,
-    :billing_address,
-    :shipping_address,
-    :email,
-    :password,
-    :password_confirmation,
-    :admin
+      :first_name,
+      :last_name,
+      :billing_address,
+      :shipping_address,
+      :email,
+      :password,
+      :password_confirmation,
+      :admin,
+      :brands,
+      :groups
   ].freeze
 
   # Overwrite this method to customize how users are displayed
