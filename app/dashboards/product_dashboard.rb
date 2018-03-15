@@ -8,6 +8,7 @@ class ProductDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+      style_attributes: Field::HasMany,
       id: Field::Number,
       name: Field::String,
       approval_status: Field::String,
@@ -33,6 +34,8 @@ class ProductDashboard < Administrate::BaseDashboard
       force_in_stock: Field::Boolean,
       created_at: Field::DateTime,
       updated_at: Field::DateTime,
+      vendor_id: Field::Number,
+      style_attribute_id: Field::Number,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -41,57 +44,62 @@ class ProductDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :id,
-    :name,
-    :approval_status,
-    :online_date,
+      :style_attributes,
+      :id,
+      :name,
+      :approval_status,
+      :style_attributes
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :id,
-    :name,
-    :approval_status,
-    :online_date,
-    :offline_date,
-    :unit,
-    :description,
-    :base_product,
-    :category,
-    :price,
-    :picture,
-    :variant_type,
-    :style,
-    :variants,
-    :force_in_stock,
-    :created_at,
-    :updated_at
+      :id,
+      :name,
+      :approval_status,
+      :online_date,
+      :offline_date,
+      :unit,
+      :description,
+      :base_product,
+      :category,
+      :price,
+      :picture,
+      :style,
+      :variants,
+      :force_in_stock,
+      :created_at,
+      :updated_at,
+      :style_attributes
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :name,
-    :approval_status,
-    :online_date,
-    :offline_date,
-    :unit,
-    :description,
-    :base_product,
-    :category,
-    :price,
-    :picture,
-    :variant_type,
-    :style,
-    :variants,
-    :force_in_stock
+      :name,
+      :approval_status,
+      :online_date,
+      :offline_date,
+      :unit,
+      :description,
+      :base_product,
+      :category,
+      :price,
+      :picture,
+      :variant_type,
+      :style,
+      :variants,
+      :force_in_stock,
+      :style_attributes
   ].freeze
 
   # Overwrite this method to customize how products are displayed
   # across all pages of the admin dashboard.
   #
+  # def display_resource(product)
+  #   "Product ##{product.id}"
+  # end
   def display_resource(product)
     product.name
   end
