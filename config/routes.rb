@@ -31,6 +31,18 @@ Rails.application.routes.draw do
       resources :groups do
         get 'list', on: :collection
       end
+      resources :inventories do
+        get 'list', on: :collection
+      end
+      resources :products do
+        get 'list', on: :collection
+      end
+      resources :vendors do
+        get 'list', on: :collection
+      end
+      resources :style_attributes do
+        get 'list', on: :collection
+      end
     end
   end
   get 'static_pages/dashboard'
