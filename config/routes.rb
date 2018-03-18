@@ -16,6 +16,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :simple do
+      resources :users do
+        get 'list', on: :collection
+      end
+      resources :categories do
+        get 'list', on: :collection
+      end
       resources :addresses do
         get 'list', on: :collection
       end
