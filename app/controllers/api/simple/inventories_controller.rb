@@ -6,7 +6,6 @@ module Api
         inventories = Inventory.all
         render json: inventories.to_json
       end
-
     end
   end
 end
