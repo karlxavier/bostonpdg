@@ -43,6 +43,7 @@ gem "paperclip", "~> 5.2.1"
 gem 'administrate-field-password'
 gem 'administrate-field-collection_select'
 gem 'seed_dump'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
