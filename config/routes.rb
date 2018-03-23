@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       end
       resources :inventories do
         get 'list', on: :collection
+        get 'overall', on: :collection
       end
       resources :products do
         get 'list', on: :collection
