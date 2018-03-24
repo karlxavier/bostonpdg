@@ -7,6 +7,15 @@ module Api
         render json: inventories.map { |inventory| { id: inventory.id, quantity: inventory.quantity, product_name: Product.find(inventory.product_id).name, force_in_stock: Product.find(inventory.product_id).force_in_stock } }
       end
 
+      def index
+        if params[:category].present?
+          inventories = Inventory.where("product_id IN (SELECT id from products where category=?)", params[:category])
+        else
+          inventories = Inventory.all
+        end
+        render json: inventories.map { |inventory| { id: inventory.id, quantity: inventory.quantity, product_name: Product.find(inventory.product_id).name, force_in_stock: Product.find(inventory.product_id).force_in_stock } }
+      end
+
       def overall
         restock = Inventory.where("quantity < 10").count
         no_stock = Inventory.where("quantity = 0 OR quantity is null").count
