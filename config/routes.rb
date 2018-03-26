@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       end
       resources :brands do
         get 'list', on: :collection
+        get 'details', to: :display
       end
       resources :groups do
         get 'list', on: :collection
