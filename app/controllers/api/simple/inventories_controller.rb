@@ -23,6 +23,11 @@ module Api
         render json: {restock: restock, no_stock: no_stock}
 
       end
+
+      def show
+        inventory = Inventory.find(params[:id])
+        render json: inventory
+      end
     end
   end
 end

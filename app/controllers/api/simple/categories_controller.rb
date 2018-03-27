@@ -7,6 +7,11 @@ module Api
         render json: categories.map { |category| { id: category.id, name: category.name } }
       end
 
+      def show
+        category = Category.find(params[:id])
+        render json: category
+      end
+
     end
   end
 end
