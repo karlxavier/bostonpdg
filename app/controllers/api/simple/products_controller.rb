@@ -16,6 +16,11 @@ module Api
         render json: inventories.map { |inventory| { id: inventory.id, quantity: inventory.quantity, product_name: Product.find(inventory.product_id).name, force_in_stock: Product.find(inventory.product_id).force_in_stock, price: Product.find(inventory.product_id).price } }
       end
 
+      def show
+        product = Product.find(params[:id])
+        render json: product
+      end
+
     end
   end
 end
