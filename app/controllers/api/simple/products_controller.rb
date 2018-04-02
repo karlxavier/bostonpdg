@@ -21,6 +21,21 @@ module Api
         render json: product
       end
 
+      def save
+        @product = Product.new(products_params)
+        if @product.save
+          render json: @product
+        else
+          render nothing: true, status: :bad_request
+        end
+      end
+
+      protected
+
+      def products_params
+        params[:product]
+      end
+
     end
   end
 end

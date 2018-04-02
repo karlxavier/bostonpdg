@@ -12,6 +12,21 @@ module Api
         render json: category
       end
 
+      def save
+        @category = Category.new(categories_params)
+        if @category.save
+          render json: @category
+        else
+          render nothing: true, status: :bad_request
+        end
+      end
+
+      protected
+
+      def categories_params
+        params[:category]
+      end
+
     end
   end
 end
