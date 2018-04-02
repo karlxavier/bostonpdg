@@ -12,6 +12,21 @@ module Api
         render json: group
       end
 
+      def save
+        @group = Group.new(groups_params)
+        if @group.save
+          render json: @group
+        else
+          render nothing: true, status: :bad_request
+        end
+      end
+
+      protected
+
+      def groups_params
+        params[:group]
+      end
+
     end
   end
 end

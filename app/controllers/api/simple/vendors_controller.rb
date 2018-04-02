@@ -12,6 +12,21 @@ module Api
         render json: vendor
       end
 
+      def save
+        @vendor = Vendor.new(vendors_params)
+        if @vendor.save
+          render json: @vendor
+        else
+          render nothing: true, status: :bad_request
+        end
+      end
+
+      protected
+
+      def vendors_params
+        params[:vendor]
+      end
+
     end
   end
 end

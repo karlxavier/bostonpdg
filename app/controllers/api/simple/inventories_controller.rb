@@ -28,6 +28,21 @@ module Api
         inventory = Inventory.find(params[:id])
         render json: inventory
       end
+
+      def save
+        @inventory = Inventory.new(inventories_params)
+        if @inventory.save
+          render json: @inventory
+        else
+          render nothing: true, status: :bad_request
+        end
+      end
+
+      protected
+
+      def inventories_params
+        params[:inventory]
+      end
     end
   end
 end
