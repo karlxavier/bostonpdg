@@ -12,6 +12,21 @@ module Api
         render json: user
       end
 
+      def save
+        @user = User.new(users_params)
+        if @user.save
+          render json: @user
+        else
+          render nothing: true, status: :bad_request
+        end
+      end
+
+      protected
+
+      def users_params
+        params[:user]
+      end
+
     end
   end
 end
