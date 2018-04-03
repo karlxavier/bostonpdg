@@ -1,6 +1,7 @@
 module Api
   module Simple
     class GroupsController < ApplicationController
+      before_action :set_group, only: [:show, :update]
 
       def list
         groups = Group.all
@@ -12,7 +13,7 @@ module Api
         render json: group
       end
 
-      def save
+      def create
         @group = Group.new(groups_params)
         if @group.save
           render json: @group
@@ -21,7 +22,19 @@ module Api
         end
       end
 
+      def update
+        if @group.update_attributes(groups_params)
+          head :no_content
+        else
+          render json: { status: 'failed' }, status: :unprocessable_entity
+        end
+      end
+
       protected
+
+      def set_group
+        @group = Group.find(params[:id])
+      end
 
       def groups_params
         params[:group]

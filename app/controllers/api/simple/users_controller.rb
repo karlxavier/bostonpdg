@@ -1,6 +1,7 @@
 module Api
   module Simple
     class UsersController < ApplicationController
+      before_action :set_user, only: [:show, :update]
 
       def list
         users = User.all
@@ -12,7 +13,7 @@ module Api
         render json: user
       end
 
-      def save
+      def create
         @user = User.new(users_params)
         if @user.save
           render json: @user
@@ -21,7 +22,19 @@ module Api
         end
       end
 
+      def update
+        if @user.update_attributes(users_params)
+          head :no_content
+        else
+          render json: { status: 'failed' }, status: :unprocessable_entity
+        end
+      end
+
       protected
+
+      def set_user
+        @user = User.find(params[:id])
+      end
 
       def users_params
         params[:user]

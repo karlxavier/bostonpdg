@@ -1,7 +1,7 @@
 module Api
   module Simple
     class BrandsController < ApplicationController
-
+      before_action :set_brand, only: [:show, :update]
 
       def list
         brands = Brand.all
@@ -18,7 +18,7 @@ module Api
         render json: brand
       end
 
-      def save
+      def create
         @brand = Brand.new(brands_params)
         if @brand.save
           render json: @brand
@@ -27,7 +27,19 @@ module Api
         end
       end
 
+      def update
+        if @brand.update_attributes(brands_params)
+          head :no_content
+        else
+          render json: { status: 'failed' }, status: :unprocessable_entity
+        end
+      end
+
       protected
+
+      def set_brand
+        @brand = Brand.find(params[:id])
+      end
 
       def brands_params
         params[:brand]
