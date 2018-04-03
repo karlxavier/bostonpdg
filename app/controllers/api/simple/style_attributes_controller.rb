@@ -1,6 +1,6 @@
 module Api
   module Simple
-    class StyleAttributesController <
+    class StyleAttributesController < ApplicationController
         before_action :set_style_attribute, only: [:show, :update]
 
       def list
@@ -25,7 +25,11 @@ module Api
       end
     end
 
-      protected
+    def show
+      render json: @style_attribute
+    end
+
+    protected
 
     def set_style_attribute
       @style_attribute = StyleAttribute.find(params[:id])
