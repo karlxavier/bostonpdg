@@ -1,6 +1,7 @@
 module Api
   module Simple
     class CategoriesController < ApplicationController
+      before_action :set_category, only: [:show, :update]
 
       def list
         categories = Category.all
@@ -12,7 +13,7 @@ module Api
         render json: category
       end
 
-      def save
+      def create
         @category = Category.new(categories_params)
         if @category.save
           render json: @category
@@ -21,7 +22,19 @@ module Api
         end
       end
 
+      def update
+        if @category.update_attributes(categories_params)
+          head :no_content
+        else
+          render json: { status: 'failed' }, status: :unprocessable_entity
+        end
+      end
+
       protected
+
+      def set_category
+        @category = Category.find(params[:id])
+      end
 
       def categories_params
         params[:category]
