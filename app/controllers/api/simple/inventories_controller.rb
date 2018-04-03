@@ -1,6 +1,7 @@
 module Api
   module Simple
     class InventoriesController < ApplicationController
+      before_action :set_inventory, only: [:show, :update]
 
       def list
         inventories = Inventory.all
@@ -29,7 +30,7 @@ module Api
         render json: inventory
       end
 
-      def save
+      def create
         @inventory = Inventory.new(inventories_params)
         if @inventory.save
           render json: @inventory
@@ -38,7 +39,19 @@ module Api
         end
       end
 
+      def update
+        if @inventory.update_attributes(inventories_params)
+          head :no_content
+        else
+          render json: { status: 'failed' }, status: :unprocessable_entity
+        end
+      end
+
       protected
+
+      def set_inventory
+        @inventory = Inventory.find(params[:id])
+      end
 
       def inventories_params
         params[:inventory]

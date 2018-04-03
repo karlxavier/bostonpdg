@@ -1,6 +1,7 @@
 module Api
   module Simple
     class ProductsController < ApplicationController
+      before_action :set_product, only: [:show, :update]
 
       def list
         products = Product.all
@@ -21,7 +22,7 @@ module Api
         render json: product
       end
 
-      def save
+      def create
         @product = Product.new(products_params)
         if @product.save
           render json: @product
@@ -30,7 +31,19 @@ module Api
         end
       end
 
+      def update
+        if @product.update_attributes(products_params)
+          head :no_content
+        else
+          render json: { status: 'failed' }, status: :unprocessable_entity
+        end
+      end
+
       protected
+
+      def set_product
+        @product = Product.find(params[:id])
+      end
 
       def products_params
         params[:product]
