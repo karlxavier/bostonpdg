@@ -9,8 +9,7 @@ module Api
       end
 
       def show
-        vendor = Vendor.find(params[:id])
-        render json: vendor
+        render json: @vendor
       end
 
       def create

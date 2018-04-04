@@ -26,8 +26,7 @@ module Api
       end
 
       def show
-        inventory = Inventory.find(params[:id])
-        render json: inventory
+        render json: @inventory
       end
 
       def create
