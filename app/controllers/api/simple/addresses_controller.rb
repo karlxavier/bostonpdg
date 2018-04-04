@@ -25,6 +25,10 @@ module Api
         end
       end
 
+      def show
+        render json: @address
+      end
+
       protected
 
       def set_address

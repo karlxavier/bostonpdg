@@ -18,8 +18,7 @@ module Api
       end
 
       def show
-        product = Product.find(params[:id])
-        render json: product
+        render json: @product
       end
 
       def create

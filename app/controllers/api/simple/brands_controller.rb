@@ -9,8 +9,7 @@ module Api
       end
 
       def show
-        brand = Brand.find(params[:id])
-        render json: brand
+        render json: @brand
       end
 
       def index
