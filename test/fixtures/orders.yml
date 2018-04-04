@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  created_by: 1
+  status: MyString
+  customer: 1
+  delivery_address: 1
+  payment_address: 1
+  total_cost: 9.99
+  total_tax: 9.99
+  total_discount: 9.99
+  margin: 9.99
+  last_updated_by: 1
+  promise_date: 2018-04-04 21:54:59
+  notes: MyString
+  fulfillment_date: 2018-04-04 21:54:59
+
+two:
+  created_by: 1
+  status: MyString
+  customer: 1
+  delivery_address: 1
+  payment_address: 1
+  total_cost: 9.99
+  total_tax: 9.99
+  total_discount: 9.99
+  margin: 9.99
+  last_updated_by: 1
+  promise_date: 2018-04-04 21:54:59
+  notes: MyString
+  fulfillment_date: 2018-04-04 21:54:59
