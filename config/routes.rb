@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :addresses
     resources :groups
     resources :style_attributes
+    resources :orders
     root to: "users#index" # <--- Root route
   end
   #API Simple
