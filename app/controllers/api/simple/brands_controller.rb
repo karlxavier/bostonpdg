@@ -5,7 +5,7 @@ module Api
 
       def list
         brands = Brand.all
-        render json: brands.map { |brand| { id: brand.id, name: brand.name } }
+        render json: brands.map { |brand| { id: brand.id, name: brand.name, view: brand.name } }
       end
 
       def show

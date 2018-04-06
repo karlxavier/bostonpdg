@@ -42,6 +42,7 @@ gem 'administrate-field-paperclip'
 gem "paperclip", "~> 5.2.1"
 gem 'administrate-field-password'
 gem 'administrate-field-collection_select'
+gem 'administrate-field-hidden', '~> 0.0.3'
 gem 'seed_dump'
 gem 'rack-cors', :require => 'rack/cors'
 

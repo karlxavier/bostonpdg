@@ -1,0 +1,154 @@
+<%#
+# Show
+
+This view is the template for the show page.
+It renders the attributes of a resource,
+as well as a link to its edit page.
+
+## Local variables:
+
+- `page`:
+  An instance of [Administrate::Page::Show][1].
+  Contains methods for accessing the resource to be displayed on the page,
+  as well as helpers for describing how each attribute of the resource
+  should be displayed.
+
+[1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Show
+%>
+
+<% content_for(:title) { t("administrate.actions.show_resource", name: page.page_title) } %>
+
+<header class="main-content__header" role="banner">
+  <h1 class="main-content__page-title">
+    <%= content_for(:title) %>
+  </h1>
+
+  <div>
+    <%= link_to(
+      t("administrate.actions.edit_resource", name: page.page_title),
+      [:edit, namespace, page.resource],
+      class: "button",
+    ) if valid_action?(:edit) && show_action?(:edit, page.resource) %>
+  </div>
+</header>
+
+<section class="main-content__body">
+  <dl>
+    <% page.attributes.each do |attribute| %>
+      <dt class="attribute-label" id="<%= attribute.name %>">
+      <%= t(
+        "helpers.label.#{resource_name}.#{attribute.name}",
+        default: attribute.name.titleize,
+      ) %>
+      </dt>
+
+      <dd class="attribute-data attribute-data--<%=attribute.html_class%>"
+          ><%= render_field attribute %></dd>
+    <% end %>
+    <dt class="attribute-label" id="users">
+    Order Entries
+  </dt>
+
+    <dd class="attribute-data attribute-data--has-many">
+      <% order_entries = OrderEntry.where("order_id = '#{page.resource.id}'") %>
+      <%= link_to "Add Entry", new_admin_order_entry_path(:order_id => page.resource.id) %>
+      <% if order_entries.present? %>
+          <table aria-labelledby="users">
+            <thead>
+            <tr>
+              <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Entry ID  </th>
+              <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Product  </th>
+              <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Price  </th>
+              <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Cost  </th>
+              <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Tax  </th>
+              <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Quoted By  </th>
+              <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Quantity  </th>
+              <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Vendor  </th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% order_entries.each do |order_entry| %>
+                <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/order_entries/<%= order_entry.id %>">
+                  <td class="cell-data cell-data--number">
+                    <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+
+                      <%= order_entry.id %>
+
+                    </a>
+                  </td>
+
+                  <td class="cell-data cell-data--number">
+                    <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+                      <%  product = Product.find(order_entry.product_id)  %>
+                      <%= link_to product.name, admin_product_path(product) %>
+
+                    </a>
+                  </td>
+
+                  <td class="cell-data cell-data--number">
+                    <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+
+                      <%= order_entry.price %>
+
+                    </a>
+                  </td>
+
+                  <td class="cell-data cell-data--number">
+                    <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+
+                      <%= order_entry.cost %>
+
+                    </a>
+                  </td>
+
+                  <td class="cell-data cell-data--number">
+                    <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+
+                      <%= order_entry.tax %>
+
+                    </a>
+                  </td>
+
+                  <td class="cell-data cell-data--number">
+                    <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+                      <% user = User.find(order_entry.quoted_by) %>
+                      <%= link_to "#{user.first_name + ' ' + user.last_name}", admin_user_path(user) %>
+                    </a>
+                  </td>
+
+                  <td class="cell-data cell-data--number">
+                    <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+
+                      <%= order_entry.quantity %>
+
+                    </a>
+                  </td>
+
+                  <td class="cell-data cell-data--number">
+                    <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+
+                      <% vendor = Vendor.find(order_entry.vendor) %>
+                      <%= link_to vendor.name, admin_vendor_path(vendor) %>
+
+                    </a>
+                  </td>
+
+                  <td><a class="action-edit" href="/admin/order_entries/<%= order_entry.id %>/edit">Edit</a></td>
+
+                  <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/order_entries/<%= order_entry.id %>">Destroy</a></td>
+                </tr>
+            <% end %>
+      <% else %>
+          <dd class="attribute-data attribute-data--has-many">
+            None
+          </dd>
+      <% end %>
+      </tbody>
+      </table>
+    </dd>
+  </dl>
+</section>
+

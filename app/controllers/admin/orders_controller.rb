@@ -8,7 +8,7 @@ module Admin
     #   @resources = Order.
     #     page(params[:page]).
     #     per(10)
-    # end
+    #
 
     # Define a custom finder by overriding the `find_resource` method:
     # def find_resource(param)
