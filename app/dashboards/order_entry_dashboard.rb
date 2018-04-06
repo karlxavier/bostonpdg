@@ -9,7 +9,7 @@ class OrderEntryDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    order_id: Field::Number,
+    order_id: Field::Hidden,
     product_id: Field::CollectionSelect.with_options(
       collection: proc { Product.all },
       value_method: :id,

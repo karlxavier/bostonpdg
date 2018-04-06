@@ -10,6 +10,11 @@ module Admin
     #     per(10)
     # end
 
+    def new
+      super
+      @order_id = params[:order_id]
+    end
+
     # Define a custom finder by overriding the `find_resource` method:
     # def find_resource(param)
     #   OrderEntry.find_by!(slug: param)

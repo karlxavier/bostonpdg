@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 20180404135459) do
     t.integer "product_id"
   end
 
-<<<<<<< HEAD
   create_table "order_entries", force: :cascade do |t|
     t.integer "order_id"
     t.integer "product_id"
@@ -90,10 +89,8 @@ ActiveRecord::Schema.define(version: 20180404135459) do
     t.integer "vendor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
+end
 
-=======
->>>>>>> 87b58ff998a83bd9544b5f40a6a4c1b977130774
   create_table "orders", force: :cascade do |t|
     t.integer "created_by"
     t.string "status"
