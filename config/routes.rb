@@ -47,6 +47,12 @@ Rails.application.routes.draw do
       resources :style_attributes do
         get 'list', on: :collection
       end
+      resources :orders do
+        get 'list', on: :collection
+      end
+      resources :order_entries do
+        get 'list', on: :collection
+      end
     end
   end
   get 'static_pages/dashboard'
