@@ -1,0 +1,2 @@
+class VendorCategory < ApplicationRecord
+end
