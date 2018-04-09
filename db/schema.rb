@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20180404142256) do
-=======
-ActiveRecord::Schema.define(version: 20180404135459) do
->>>>>>> 87b58ff998a83bd9544b5f40a6a4c1b977130774
+ActiveRecord::Schema.define(version: 20180406184140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,7 +85,7 @@ ActiveRecord::Schema.define(version: 20180404135459) do
     t.integer "vendor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-end
+  end
 
   create_table "orders", force: :cascade do |t|
     t.integer "created_by"
@@ -182,6 +178,13 @@ end
   create_table "users_groups", force: :cascade do |t|
     t.integer "user_id"
     t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "vendor_categories", force: :cascade do |t|
+    t.integer "vendor_id"
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
