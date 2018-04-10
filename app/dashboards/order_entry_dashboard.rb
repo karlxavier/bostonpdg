@@ -32,6 +32,7 @@ class OrderEntryDashboard < Administrate::BaseDashboard
   }
   ),
     quantity: Field::Number,
+    status: Field::String.with_options(searchable: false),
     vendor: Field::CollectionSelect.with_options(
       collection: proc { Vendor.all },
       value_method: :id,
@@ -61,13 +62,13 @@ class OrderEntryDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
-    :order_id,
     :product_id,
     :price,
     :cost,
     :tax,
     :quoted_by,
     :quantity,
+    :status,
     :vendor,
     :created_at,
     :updated_at,
@@ -84,6 +85,7 @@ class OrderEntryDashboard < Administrate::BaseDashboard
     :tax,
     :quoted_by,
     :quantity,
+    :status,
     :vendor,
   ].freeze
 
