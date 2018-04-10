@@ -15,7 +15,11 @@ Rails.application.routes.draw do
     root to: "users#index" # <--- Root route
   end
   #API Simple
-
+  resources :orders do
+    collection do
+      get 'send_orders'
+    end
+  end
   namespace :api do
     namespace :simple do
       resources :users do
