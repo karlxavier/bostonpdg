@@ -62,7 +62,6 @@ class OrderEntryDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
-    :order_id,
     :product_id,
     :price,
     :cost,
