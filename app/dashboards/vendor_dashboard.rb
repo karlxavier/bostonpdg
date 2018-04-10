@@ -11,6 +11,7 @@ class VendorDashboard < Administrate::BaseDashboard
     products: Field::HasMany,
     id: Field::Number,
     name: Field::String,
+    email: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     lead_time: Field::Number,
@@ -25,6 +26,7 @@ class VendorDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
+    :email,
     :products,
     :created_at,
   ].freeze
@@ -34,6 +36,7 @@ class VendorDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :name,
+    :email,
     :lead_time,
     :country_origin,
     :products,
@@ -46,6 +49,7 @@ class VendorDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
+    :email,
     :lead_time,
     :country_origin,
     :products

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409114932) do
+ActiveRecord::Schema.define(version: 20180410122417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 20180409114932) do
     t.integer "lead_time"
     t.string "country_origin"
     t.bigint "product_id"
+    t.string "email"
     t.index ["product_id"], name: "index_vendors_on_product_id"
   end
 
