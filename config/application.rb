@@ -28,8 +28,8 @@ module RegencyApp
         :address              => "smtp.gmail.com",
         :port                 => 587,
         :domain               => "gmail.com",
-        :user_name            => "jerico@maddington.net",
-        :password             => "rambo0702",
+        :user_name            => "notifications@burningmidnight.com",
+        :password             => "Qazwsx123",
         :authentication       => :plain,
         :enable_starttls_auto => true
     }
