@@ -74,7 +74,7 @@ as well as a link to its edit page.
                       <% vendors = Vendor.where("id IN (#{vendor_list.map(&:inspect).join(',')})")%>
 
                       <% vendors.each do |vendor| %>
-                          <h2 style="font-size: 1.3em; padding-top: 3%; padding-bottom: 3%;margin-right:3%;display:inline;"><%= vendor.name %></h2>  <%= link_to "Send Order", send_orders_orders_path(:order_id => page.resource.id, :vendor_id => vendor.id), class: "button display-inline"%>
+                          <h2 style="font-size: 1.3em; padding-top: 3%; padding-bottom: 3%;margin-right:3%;display:inline;"><%= vendor.name %></h2>  <%= link_to "Send Order", send_orders_api_simple_orders_path(:order_id => page.resource.id, :vendor_id => vendor.id), class: "button display-inline"%>
                               <table style="margin-bottom: 2%;">
                                 <thead>
                                 <tr>

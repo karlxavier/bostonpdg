@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   has_many :brands
   has_many :groups
+  acts_as_messageable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -24,5 +25,20 @@ class User < ApplicationRecord
 
   def has_role?(role)
     roles.include?(role)
+  end
+
+  def mailboxer_email(object)
+    #Check if an email should be sent for that object
+    #if true
+    return "#{self.email}"
+    #if false
+    #return nil
+  end
+  def notification_email(object)
+    #Check if an email should be sent for that object
+    #if true
+    return "#{self.email}"
+    #if false
+    #return nil
   end
 end
