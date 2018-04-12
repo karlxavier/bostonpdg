@@ -32,7 +32,9 @@ class OrderEntryDashboard < Administrate::BaseDashboard
   }
   ),
     quantity: Field::Number,
-    status: Field::String.with_options(searchable: false),
+    status: Field::SelectBasic.with_options({
+            choices: ['New', 'Approved', 'In Progress', 'Complete']
+    }),
     vendor: Field::CollectionSelect.with_options(
       collection: proc { Vendor.all },
       value_method: :id,

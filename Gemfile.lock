@@ -62,6 +62,8 @@ GEM
       rails (>= 4.2, < 6)
     administrate-field-password (0.0.4)
       administrate
+    administrate-field-select (2.1.0)
+      administrate (~> 0.1, >= 0.1.5)
     arel (8.0.0)
     autoprefixer-rails (8.0.0)
       execjs
@@ -263,6 +265,7 @@ DEPENDENCIES
   administrate-field-hidden (~> 0.0.3)
   administrate-field-paperclip
   administrate-field-password
+  administrate-field-select (~> 2.0)
   byebug
   cancancan
   capybara (~> 2.13)
