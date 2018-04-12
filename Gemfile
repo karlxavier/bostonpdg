@@ -48,6 +48,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'mailboxer'
 gem 'administrate-field-select', '~> 2.0', require: 'administrate/field/select_basic'
 
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

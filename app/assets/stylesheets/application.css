@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+.display-block {
+    display: block;
+}
+.display-inline {
+    display: inline;
+}
+
