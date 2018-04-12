@@ -1,6 +1,5 @@
 class Vendor < ApplicationRecord
   has_many :products
-  acts_as_messageable
 
   def mailboxer_email(object)
     #Check if an email should be sent for that object
