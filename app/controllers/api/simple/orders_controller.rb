@@ -1,7 +1,7 @@
 module Api
   module Simple
     class OrdersController < ApplicationController
-<<<<<<< HEAD
+
       def update_status_entry
         entry = OrderEntry.find(params[:entry_id].to_i)
         if entry.update_attributes(:status => params[:status])
@@ -10,8 +10,7 @@ module Api
         end
       end
 
-=======
->>>>>>> 2c263ce7664c94f2c36b2b1b89d0ea08ce6549ef
+
       def send_orders
         @order = Order.find(params[:order_id].to_i)
         @vendor = Vendor.find( params[:vendor_id].to_i)
