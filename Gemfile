@@ -45,6 +45,8 @@ gem 'administrate-field-collection_select'
 gem 'administrate-field-hidden', '~> 0.0.3'
 gem 'seed_dump'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'mailboxer'
+gem 'administrate-field-select', '~> 2.0', require: 'administrate/field/select_basic'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
