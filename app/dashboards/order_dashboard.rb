@@ -18,8 +18,18 @@ class OrderDashboard < Administrate::BaseDashboard
       include_hidden: false,
   }
   ),
-    status: Field::String,
-    customer: Field::Number,
+    status: Field::SelectBasic.with_options({
+      choices: ['New', 'Approved', 'In Progress', 'Complete']
+  }),
+    customer: Field::CollectionSelect.with_options(
+      collection: proc { User.all },
+      value_method: :id,
+      text_method: :first_name,
+      options: {
+      include_blank: 'Please Select A Customer',
+      include_hidden: false,
+  }
+  ),
     delivery_address: Field::CollectionSelect.with_options(
       collection: proc { Address.all },
       value_method: :id,
@@ -52,7 +62,7 @@ class OrderDashboard < Administrate::BaseDashboard
   }
   ),
     promise_date: Field::DateTime,
-    notes: Field::String,
+    notes: Field::Text,
     fulfillment_date: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -68,6 +78,8 @@ class OrderDashboard < Administrate::BaseDashboard
     :created_by,
     :status,
     :customer,
+    :notes,
+    :last_updated_by
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

@@ -44,14 +44,17 @@ as well as a link to its edit page.
                 </dt>
 
                 <dd class="attribute-data attribute-data--<%=attribute.html_class%>">
-                  <% if attribute.name.to_s == "created_by" || attribute.name.to_s == "last_updated_by" %>
-                      <% user = User.find(attribute.data)%>
-                      <%= link_to "#{user.first_name + ' ' + user.last_name}", admin_user_path(user) %>
-                  <% elsif  attribute.name.to_s == "delivery_address" || attribute.name.to_s == "payment_address"%>
-                      <% address = Address.find(attribute.data)%>
-                      <%= link_to "#{address.state + ' - ' + address.city}", admin_address_path(address) %>
-                  <% else %>
-                      <%= render_field attribute %>
+
+                  <% if !attribute.data.nil? && attribute.data.present? && attribute.data != "" %>
+                      <% if attribute.name.to_s == "created_by" || attribute.name.to_s == "last_updated_by" || attribute.name.to_s == "customer" %>
+                          <% user = User.find(attribute.data)%>
+                          <%= link_to "#{user.first_name + ' ' + user.last_name}", admin_user_path(user) %>
+                      <% elsif  attribute.name.to_s == "delivery_address" || attribute.name.to_s == "payment_address"%>
+                          <% address = Address.find(attribute.data)%>
+                          <%= link_to "#{address.state + ' - ' + address.city}", admin_address_path(address) %>
+                      <% else %>
+                          <%= render_field attribute %>
+                      <% end %>
                   <% end %>
                 </dd>
             <% end %>
@@ -168,13 +171,13 @@ as well as a link to its edit page.
                                 </tbody>
                               </table>
                           <% end %>
+                      <% end %>
+                  <% else %>
+                      <dd class="attribute-data attribute-data--has-many">
+                        None
+                      </dd>
                   <% end %>
-              <% else %>
-                  <dd class="attribute-data attribute-data--has-many">
-                    None
                   </dd>
-              <% end %>
-              </dd>
-              </dl>
-        </section>
+                  </dl>
+                  </section>
 
