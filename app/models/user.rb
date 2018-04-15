@@ -4,7 +4,6 @@ class User < ApplicationRecord
 
   has_many :brands
   has_many :groups
-  acts_as_messageable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
