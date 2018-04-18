@@ -2,6 +2,11 @@ module Api
   module Simple
     class OrdersController < ApplicationController
 
+      def list
+        @orders = Order.order("created_at DESC")
+        render json: @orders,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date]
+      end
+
       def update_status_entry
         entry = OrderEntry.find(params[:entry_id].to_i)
         if entry.update_attributes(:status => params[:status])

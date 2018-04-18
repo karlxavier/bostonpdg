@@ -156,7 +156,7 @@
                         <br>
                         We’d like to recieve a quotation on the following items below with the listed specs. Attached are the mock ups and print ready files below. <br>
                         <br>
-                        Our due date for this project is <b><i><u><%= Date.today.to_s(:long) %></u></b></i>. Please get back to us before <b><i><u><%= (Date.today + 7.days).to_s(:long) %></u></b></i><br>
+                        Our due date for this project is <b><i><u><%= @order.promise_date.strftime('%B %e, %Y') %></u></b></i>. Please get back to us before <b><i><u><%= @order.fulfillment_date.strftime('%B %e, %Y') %></u></b></i><br>
                         <br>
                         Thanks,&nbsp;<br>
                         Yossi&nbsp;<br>
