@@ -4,7 +4,7 @@ module Api
       before_action :set_product, only: [:show, :update]
 
       def list
-        products = Product.all
+        products = Product.all.order("created_by DESC").limit(15)
         render json:  products.map { |product| { id: product.id, name: product.name } }
       end
 
