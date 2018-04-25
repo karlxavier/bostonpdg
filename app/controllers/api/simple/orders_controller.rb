@@ -1,10 +1,25 @@
 module Api
   module Simple
     class OrdersController < ApplicationController
+      before_action :set_order, only: [:show, :update]
 
       def list
         @orders = Order.order("created_at DESC")
         render json: @orders,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date]
+      end
+
+      def show
+        render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date]
+      end
+
+      def get_latest_order
+        @order = Order.all.order('created_by DESC').first
+        render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date]
+      end
+
+      def show_entries
+        @order_entries = OrderEntry.where("order_id = '#{params[:order_id]}'")
+        render json: @order_entries, methods: [:product_name]
       end
 
       def update_status_entry
@@ -23,6 +38,16 @@ module Api
         @user = User.where(:email => "notifications@burningmidnight.com").first
         OrderMailer.with(order: @order, vendor: @vendor, order_entries: @order_entries).send_order_entries.deliver_now
         redirect_to admin_order_path(@order)
+      end
+
+      protected
+
+      def set_order
+        @order = Order.find(params[:id])
+      end
+
+      def orders_params
+        params[:order]
       end
     end
   end
