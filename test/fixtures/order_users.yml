@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  regional: 1
+  comms: 1
+  art: 1
+  processor: 1
+  order_id: 1
+
+two:
+  regional: 1
+  comms: 1
+  art: 1
+  processor: 1
+  order_id: 1
