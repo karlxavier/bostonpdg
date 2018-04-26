@@ -59,6 +59,62 @@ as well as a link to its edit page.
                 </dd>
             <% end %>
             <dt class="attribute-label" id="users">
+              Users Assigned on Ticket
+            </dt>
+            <dd class="attribute-data attribute-data--has-many">
+              <% order_users = OrderUser.where("order_id = '#{page.resource.id}'") %>
+              <div style="display: block;padding-bottom:3%;">
+                <%= link_to "Assign Users", new_admin_order_user_path(:order_id => page.resource.id)%>
+              </div>
+               <% if order_users.present? %>
+              <table style="margin-bottom: 2%;">
+                <thead>
+                <tr>
+                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Regional Director  </th>
+                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Comms Director  </th>
+                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Art Director  </th>
+                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Processor  </th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <% order_users.each do |user| %>
+                    <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/order_users/<%= user.id %>">
+                      <td class="cell-data cell-data--number">
+                        <a href="/admin/order_users/<%= user.id %>" class="action-show">
+                          <%= user.regional_name %>
+                        </a>
+                      </td>
+                      <td class="cell-data cell-data--number">
+                        <a href="/admin/order_users/<%= user.id %>" class="action-show">
+                        <%= user.comms_name %>
+                        </a>
+                      </td>
+                      <td class="cell-data cell-data--number">
+                        <a href="/admin/order_users/<%= user.id %>" class="action-show">
+                        <%= user.art_name %>
+                        </a>
+                      </td>
+                      <td class="cell-data cell-data--number">
+                        <a href="/admin/order_users/<%= user.id %>" class="action-show">
+                        <%= user.processor_name %>
+                        </a>
+                      </td>
+
+                      <td><a class="action-edit" href="/admin/order_users/<%= user.id %>/edit">Edit</a></td>
+
+                      <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/order_users/<%= user.id %>">Destroy</a></td>
+
+                    </tr>
+                <% end %>
+                </tbody>
+              </table>
+
+              <% end %>
+            </dd>
+            <dt class="attribute-label" id="users">
               Order Entries
             </dt>
 
@@ -66,7 +122,9 @@ as well as a link to its edit page.
               <% order_entries = OrderEntry.where("order_id = '#{page.resource.id}'") %>
               <div style="display: block;padding-bottom:3%;">
                 <%= link_to "Add Entry", new_admin_order_entry_path(:order_id => page.resource.id)%>
+
               </div>
+
 
               <% if order_entries.present? %>
                   <% vendor_list = [] %>
