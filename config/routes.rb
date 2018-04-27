@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   namespace :admin do
     resources :users
+    resources :users_brands
+    resources :users_groups
     resources :inventories
     resources :vendors
     resources :products
@@ -20,12 +22,14 @@ Rails.application.routes.draw do
     namespace :simple do
       resources :users do
         get 'list', on: :collection
+        get 'branch_users', on: :collection
       end
       resources :categories do
         get 'list', on: :collection
       end
       resources :addresses do
         get 'list', on: :collection
+        get 'branches', on: :collection
       end
       resources :brands do
         get 'list', on: :collection
@@ -51,6 +55,7 @@ Rails.application.routes.draw do
         get 'list', on: :collection
         get 'send_orders', on: :collection
         get 'show_entries', on: :collection
+        get 'show_users', on: :collection
         get 'get_latest_order', on: :collection
       end
       resources :order_entries do
