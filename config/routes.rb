@@ -51,6 +51,7 @@ Rails.application.routes.draw do
         get 'list', on: :collection
         get 'send_orders', on: :collection
         get 'show_entries', on: :collection
+        get 'show_users', on: :collection
         get 'get_latest_order', on: :collection
       end
       resources :order_entries do
