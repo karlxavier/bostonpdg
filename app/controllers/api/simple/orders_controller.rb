@@ -22,6 +22,11 @@ module Api
         render json: @order_entries, methods: [:product_name]
       end
 
+      def show_users
+        @order_users = OrderUser.where("order_id = '#{params[:order_id]}'")
+        render json: @order_users, methods: [:regional_name, :comms_name, :art_name, :processor_name]
+      end
+
       def update_status_entry
         entry = OrderEntry.find(params[:entry_id].to_i)
         if entry.update_attributes(:status => params[:status])
