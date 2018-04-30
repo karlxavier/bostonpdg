@@ -8,8 +8,6 @@ class UserDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-      brands: Field::HasMany,
-      groups: Field::HasMany,
       id: Field::Number,
       email: Field::String,
       password: Field::Password,
@@ -49,8 +47,6 @@ class UserDashboard < Administrate::BaseDashboard
       :email,
       :billing_address,
       :shipping_address,
-      :brands,
-      :groups,
       :admin
   ].freeze
 
@@ -63,8 +59,6 @@ class UserDashboard < Administrate::BaseDashboard
       :email,
       :billing_address,
       :shipping_address,
-      :brands,
-      :groups,
       :admin
   ].freeze
 
@@ -79,9 +73,7 @@ class UserDashboard < Administrate::BaseDashboard
       :email,
       :password,
       :password_confirmation,
-      :admin,
-      :brands,
-      :groups
+      :admin
   ].freeze
 
   # Overwrite this method to customize how users are displayed

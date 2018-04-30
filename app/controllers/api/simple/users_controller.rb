@@ -8,6 +8,11 @@ module Api
         render json: users.map { |user| { id: user.id, name: user.first_name + " " + user.last_name, email: user.email } }
       end
 
+      def branch_users
+        users = User.where("id IN (SELECT user_id FROM users_brands WHERE brand_id = #{params[:brand_id]}) AND (billing_address IN (#{params[:addresses]}) OR shipping_address IN (#{params[:addresses]}))")
+        render json: users.map { |user| { id: user.id, name: user.first_name + " " + user.last_name, email: user.email } }
+      end
+
       def show
         render json: @user
       end

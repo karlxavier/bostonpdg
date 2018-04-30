@@ -8,6 +8,11 @@ module Api
         render json: addresses.map { |address| { id: address.id, state: address.state, city: address.city } }
       end
 
+      def branches
+        addresses = Address.where("id IN (SELECT billing_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{params[:brand_id]}))  OR id IN (SELECT shipping_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{params[:brand_id]}))")
+        render json: addresses.map { |address| { id: address.id, state: address.state, city: address.city } }
+      end
+
       def create
         @address = Address.new(addresses_params)
         if @address.save
