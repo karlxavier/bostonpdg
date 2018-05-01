@@ -13,6 +13,10 @@ module Admin
       super
       @order_id = params[:order_id]
     end
+    def create
+      super
+      Order.find(params[:order_user][:order_id]).update_attributes(:updated_at => DateTime.now)
+    end
 
     # Define a custom finder by overriding the `find_resource` method:
     # def find_resource(param)

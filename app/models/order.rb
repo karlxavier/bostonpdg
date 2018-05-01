@@ -19,4 +19,8 @@ class Order < ApplicationRecord
     self.created_at.strftime('%B %e, %Y')
   end
 
+  def updated_date
+    self.updated_at.strftime('%B %e, %Y')
+  end
+
 end

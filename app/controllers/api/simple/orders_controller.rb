@@ -4,17 +4,17 @@ module Api
       before_action :set_order, only: [:show, :update]
 
       def list
-        @orders = Order.order("created_at DESC")
+        @orders = Order.order("updated_at DESC")
         render json: @orders,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date]
       end
 
       def show
-        render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date]
+        render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date]
       end
 
       def get_latest_order
         @order = Order.all.order('created_by DESC').first
-        render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date]
+        render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date]
       end
 
       def show_entries
