@@ -4,7 +4,12 @@ module Api
       before_action :set_product, only: [:show, :update]
 
       def list
-        products = Product.all.order("created_by DESC").limit(15)
+        products = Product.all.order("created_at DESC").limit(50)
+        render json:  products.map { |product| { id: product.id, name: product.name } }
+      end
+
+      def get_item_list
+        products = Product.where("name LIKE '#{params[:name]}%'").order("created_at DESC").limit(50)
         render json:  products.map { |product| { id: product.id, name: product.name } }
       end
 

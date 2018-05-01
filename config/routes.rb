@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       end
       resources :products do
         get 'list', on: :collection
+        get 'get_item_list', on: :collection
       end
       resources :vendors do
         get 'list', on: :collection
