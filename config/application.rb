@@ -17,9 +17,10 @@ module RegencyApp
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options]
+        resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
       end
     end
+    config.action_controller.allow_forgery_protection = false
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.default_url_options = { host:'localhost:3000'}
     config.action_mailer.perform_deliveries = true
