@@ -9,7 +9,7 @@ as defined by the routes in the `admin/` namespace
 
 <nav class="navigation" role="navigation">
   <% Administrate::Namespace.new(namespace).resources.each do |resource| %>
-      <% if resource.resource != "order_entries" && resource.resource != "order_users" && resource.resource != "users_brands" && resource.resource != "users_groups" %>
+      <% if resource.resource != "order_entries" && resource.resource != "order_users" && resource.resource != "users_brands" && resource.resource != "users_groups" && resource.resource != "order_branches" %>
           <%= link_to(
                       display_resource_name(resource),
                       [namespace, resource_index_route_key(resource)],
