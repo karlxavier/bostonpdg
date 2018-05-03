@@ -52,6 +52,43 @@ as well as a link to its edit page.
                       <% elsif  attribute.name.to_s == "delivery_address" || attribute.name.to_s == "payment_address"%>
                           <% address = Address.find(attribute.data)%>
                           <%= link_to "#{address.state + ' - ' + address.city}", admin_address_path(address) %>
+                      <% elsif  attribute.name.to_s == "brand_id"%>
+                          <% brand = Brand.find(attribute.data)%>
+                          <%= link_to "#{brand.name}", admin_brand_path(brand) %>
+                          <br/>
+                          <br/>
+                          <% order_branch = OrderBranch.where("order_id = '#{page.resource.id}' AND brand_id = '#{attribute.data}'") %>
+                          <div style="display: block;padding-bottom:3%;">
+                            <%= link_to "Add Branch", new_admin_order_branch_path(:order_id => page.resource.id, :brand_id => attribute.data)%>
+                          </div>
+                          <% if order_branch.present? %>
+                              <table style="margin-bottom: 2%;">
+                                <thead>
+                                <tr>
+                                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Branch/es  </th>
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <% order_branch.each do |branch| %>
+                                    <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/order_branches/<%= branch.id %>">
+                                      <td class="cell-data cell-data--number">
+                                        <a href="/admin/order_branches/<%= branch.id %>" class="action-show">
+                                          <%= branch.state_and_city %>
+                                        </a>
+                                      </td>
+                                      <td></td>
+
+                                      <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/order_branches/<%= branch.id %>">Destroy</a></td>
+
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                              </table>
+
+                          <% end %>
                       <% else %>
                           <%= render_field attribute %>
                       <% end %>
