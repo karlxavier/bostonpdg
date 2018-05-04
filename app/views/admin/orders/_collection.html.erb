@@ -68,11 +68,15 @@ to display a collection of resources in an HTML table.
                  class="action-show"
                  >
                 <% if attribute.name.to_s == "created_by" || attribute.name.to_s == "last_updated_by" || attribute.name.to_s == "customer"%>
-                    <% user = User.find(attribute.data)%>
-                    <%= link_to "#{user.first_name + ' ' + user.last_name}", admin_user_path(user) %>
+                    <% if attribute.data.present? %>
+                        <% user = User.find(attribute.data)%>
+                        <%= link_to "#{user.first_name + ' ' + user.last_name}", admin_user_path(user) %>
+                    <% end %>
                 <% elsif  attribute.name.to_s == "delivery_address" || attribute.name.to_s == "payment_address"%>
-                    <% address = Address.find(attribute.data)%>
-                    <%= link_to "#{address.state + ' - ' + address.city}", admin_address_path(address) %>
+                    <% if attribute.data.present? %>
+                        <% address = Address.find(attribute.data)%>
+                        <%= link_to "#{address.state + ' - ' + address.city}", admin_address_path(address) %>
+                    <% end %>
                 <% else %>
                     <%= render_field attribute %>
                 <% end %>

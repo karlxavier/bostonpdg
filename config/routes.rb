@@ -59,6 +59,7 @@ Rails.application.routes.draw do
         get 'show_entries', on: :collection
         get 'show_users', on: :collection
         get 'get_latest_order', on: :collection
+        get 'show_branches', on: :collection
       end
       resources :order_entries do
         get 'list', on: :collection
