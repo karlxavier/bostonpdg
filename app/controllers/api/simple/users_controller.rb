@@ -5,7 +5,7 @@ module Api
 
       def list
         users = User.all
-        render json: users.map { |user| { id: user.id, name: user.first_name + " " + user.last_name, email: user.email } }
+        render json: users.map { |user| { id: user.id, name: user.first_name + " " + user.last_name, email: user.email, password: user.encrypted_password } }
       end
 
       def branch_users
@@ -32,6 +32,24 @@ module Api
         else
           render json: { status: 'failed' }, status: :unprocessable_entity
         end
+      end
+
+
+      def login
+        user = User.find_by_email(params[:email])
+        if user.present? && !user.nil?
+          if user.valid_password?(params[:password])
+            sign_in(user, scope: :user)
+            # puts "#{user.valid_password?(params[:password])}"
+            render :json => user, :status => :ok
+
+          else
+            render :json => {}, :status => :unauthorized
+          end
+        else
+          render :json => {}, :status => :not_found
+        end
+
       end
 
       protected
