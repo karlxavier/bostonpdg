@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
+
+
   namespace :admin do
     resources :users
     resources :users_brands
@@ -24,6 +26,7 @@ Rails.application.routes.draw do
       resources :users do
         get 'list', on: :collection
         get 'branch_users', on: :collection
+        get 'login', on: :collection
       end
       resources :categories do
         get 'list', on: :collection
@@ -63,6 +66,8 @@ Rails.application.routes.draw do
       end
       resources :order_entries do
         get 'list', on: :collection
+      end
+      resources :sessions do
       end
     end
   end
