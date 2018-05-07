@@ -27,6 +27,7 @@ Rails.application.routes.draw do
         get 'list', on: :collection
         get 'branch_users', on: :collection
         get 'login', on: :collection
+        get 'forgot_password', on: :collection
       end
       resources :categories do
         get 'list', on: :collection
