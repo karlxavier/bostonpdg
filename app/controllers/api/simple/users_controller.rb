@@ -52,6 +52,16 @@ module Api
 
       end
 
+      def forgot_password
+        @user = User.find_by_email(params[:email])
+        if @user.present?
+          @user.send_reset_password_instructions
+          render :json => @user, :status => :ok
+        else
+          render :json => {}, :status => :not_found
+        end
+      end
+
       protected
 
       def set_user
