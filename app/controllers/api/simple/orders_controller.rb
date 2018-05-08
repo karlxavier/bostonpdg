@@ -71,27 +71,25 @@ module Api
             end
           end
           if params[:order_user].present?
-            temp_length = []
             i = 0
             temp_order_user = params[:order_user]
-            temp_length << temp_order_user[:art].length
-            temp_length << temp_order_user[:comms].length
-            temp_length << temp_order_user[:processor].length
-            temp_length << temp_order_user[:regional].length
-            while i < temp_length.max
+            @temp_length = 1
+
+            if temp_order_user[:art].length > 0
+              @temp_length = temp_order_user[:art].length
+            end
+
+            while i < @temp_length
               order_user = OrderUser.new
               order_user.order_id = order.id
-              if temp_order_user[:art][i].present?
+              if i == 0
+                order_user.comms = temp_order_user[:comms]
+                order_user.processor = temp_order_user[:processor]
+                order_user.regional = temp_order_user[:regional]
                 order_user.art = temp_order_user[:art][i]
               end
-              if temp_order_user[:comms][i].present?
-                order_user.comms = temp_order_user[:comms][i]
-              end
-              if temp_order_user[:processor][i].present?
-                order_user.processor = temp_order_user[:processor][i]
-              end
-              if temp_order_user[:regional][i].present?
-                order_user.regional = temp_order_user[:regional][i]
+              if temp_order_user[:art][i].present?
+                order_user.art = temp_order_user[:art][i]
               end
               order_user.save
               i = i+1;
