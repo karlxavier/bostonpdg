@@ -83,9 +83,15 @@ module Api
               order_user = OrderUser.new
               order_user.order_id = order.id
               if i == 0
-                order_user.comms = temp_order_user[:comms]
-                order_user.processor = temp_order_user[:processor]
-                order_user.regional = temp_order_user[:regional]
+                if temp_order_user[:comms].present?
+                  order_user.comms = temp_order_user[:comms]
+                end
+                if temp_order_user[:processor].present?
+                  order_user.processor = temp_order_user[:processor]
+                end
+                if temp_order_user[:regional].present?
+                  order_user.regional = temp_order_user[:regional]
+                end
                 order_user.art = temp_order_user[:art][i]
               end
               if temp_order_user[:art][i].present?
