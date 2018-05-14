@@ -64,6 +64,7 @@ Rails.application.routes.draw do
         get 'show_users', on: :collection
         get 'get_latest_order', on: :collection
         get 'show_branches', on: :collection
+        post 'update_assign_user'
       end
       resources :order_entries do
         get 'list', on: :collection

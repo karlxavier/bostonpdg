@@ -155,6 +155,44 @@ module Api
         end
       end
 
+      def update_assign_user
+        @order = Order.find(params[:order_id])
+        if @order.present?
+          order_user = OrderUser.where(:order_id => @order.id).first
+          if order_user.present?
+            if params[:art].present?
+              order_user.update_attributes(:art =>  params[:art][:id])
+            end
+            if params[:comms].present?
+              order_user.update_attributes(:comms =>  params[:comms][:id])
+            end
+            if params[:processor].present?
+              order_user.update_attributes(:processor =>  params[:processor][:id])
+            end
+            if params[:regional].present?
+              order_user.update_attributes(:regional =>  params[:regional][:id])
+            end
+          else
+            order_user = OrderUser.new
+            order_user.order_id = @order.id
+            if params[:art].present?
+              order_user.art = params[:art][:id]
+            end
+            if params[:comms].present?
+              order_user.comms = params[:comms][:id]
+            end
+            if params[:processor].present?
+              order_user.processor = params[:processor][:id]
+            end
+            if params[:regional].present?
+              order_user.regional = params[:regional][:id]
+            end
+            order_user.save
+          end
+          render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date, :brand_name, :brand_branches, :art, :comms, :regional, :processor, :temp_brand]
+        end
+      end
+
       protected
 
       def set_order
