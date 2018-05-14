@@ -9,7 +9,7 @@ module Api
       end
 
       def show
-        render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date, :brand_name, :brand_branches, :art, :regional, :comms, :processor]
+        render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date, :brand_name, :brand_branches, :art, :regional, :comms, :processor, :temp_brand]
       end
 
       def get_latest_order
@@ -50,10 +50,39 @@ module Api
         redirect_to admin_order_path(@order)
       end
 
+      def update
+        temp_order = params[:order]
+        order = Order.new
+        order.brand_id = params[:temp_brand][:id]
+        order.lead_time = temp_order[:lead_time]
+        order.status = temp_order[:status]
+        order.total_budget = temp_order[:total_budget]
+        order.urgent = temp_order[:urget]
+
+        if @order.update_attributes(:brand_id => order.brand_id, :lead_time => order.lead_time, :status => order.status, :total_budget => order.total_budget, :urgent => order.urgent)
+          if params[:order_branch].present?
+            OrderBranch.where(:order_id => @order.id).destroy_all
+            temp_order_branch = params[:order_branch]
+            temp_order_branch.each do |ob|
+              order_branch = OrderBranch.new
+              order_branch.brand_id = order.brand_id
+              order_branch.order_id = order.id
+              order_branch.address_id = ob
+              order_branch.save
+            end
+          end
+          if params[:art].present? || params[:comms].present? || params[:processor].present? || params[:regional].present?
+            user = OrderUser.where(:order_id => @order.id).first
+            user.update_attributes(:art => params[:art][:id], :regional => params[:regional][:id], :processor => params[:processor][:id], :comms => params[:comms][:id])
+          end
+          render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date, :brand_name, :brand_branches, :art, :comms, :regional, :processor, :temp_brand]
+        end
+      end
+
       def create
         temp_order = params[:order]
         order = Order.new
-        order.brand_id = temp_order[:brand]
+        order.brand_id = params[:temp_brand][:id]
         order.lead_time = temp_order[:lead_time]
         order.status = temp_order[:status]
         order.total_budget = temp_order[:total_budget]
@@ -70,9 +99,28 @@ module Api
               order_branch.save
             end
           end
+          if params[:art].present? || params[:comms].present? || params[:processor].present? || params[:regional].present?
+            order_user = OrderUser.new
+            order_user.order_id = order.id
+            if params[:art].present?
+              order_user.art = params[:art][:id]
+            end
+            if params[:comms].present?
+              order_user.comms = params[:comms][:id]
+            end
+            if params[:processor].present?
+              order_user.processor = params[:processor][:id]
+            end
+            if params[:regional].present?
+              order_user.regional = params[:regional][:id]
+            end
+            order_user.save
+          end
+
+=begin
           if params[:order_user].present?
             i = 0
-            temp_order_user = params[:order_user]
+            #temp_order_user = params[:order_user]
             @temp_length = 1
 
             if temp_order_user[:art].length > 0
@@ -101,7 +149,9 @@ module Api
               i = i+1;
             end
           end
-            render json: order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date, :brand_name, :brand_branches]
+=end
+
+            render json: order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date, :brand_name, :brand_branches, :art, :comms, :regional, :processor, :temp_brand]
         end
       end
 

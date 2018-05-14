@@ -71,7 +71,6 @@ ActiveRecord::Schema.define(version: 20180502120749) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "aisle_id"
-    t.integer "product_id"
   end
 
   create_table "mailboxer_conversation_opt_outs", id: :serial, force: :cascade do |t|

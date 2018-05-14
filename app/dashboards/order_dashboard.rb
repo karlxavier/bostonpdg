@@ -87,11 +87,10 @@ class OrderDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
       :id,
-      :created_by,
+      :brand_id,
       :status,
-      :customer,
-      :notes,
-      :last_updated_by
+      :created_at,
+      :updated_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

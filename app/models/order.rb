@@ -55,6 +55,7 @@ class Order < ApplicationRecord
   end
 
   def art
+=begin
     art = []
     order_users = OrderUser.where(:order_id => self.id).order("created_at ASC")
     if order_users.present? && !order_users.nil?
@@ -65,9 +66,22 @@ class Order < ApplicationRecord
       end
     end
     art
+=end
+    obj = {}
+    order_users = OrderUser.where(:order_id => self.id).limit(1)
+    if order_users.present? && !order_users.nil?
+      order_users.each do |ou|
+        if ou.art.present? && !ou.art.nil?
+          user = User.find(ou.art)
+          obj = {:id => user.id, :name => user.full_name, :view => user.full_name}
+        end
+      end
+    end
+    obj
   end
 
   def regional
+=begin
     regional = []
     order_users = OrderUser.where(:order_id => self.id).order("created_at ASC")
     if order_users.present? && !order_users.nil?
@@ -78,9 +92,22 @@ class Order < ApplicationRecord
       end
     end
     regional
+=end
+    obj = {}
+    order_users = OrderUser.where(:order_id => self.id).limit(1)
+    if order_users.present? && !order_users.nil?
+      order_users.each do |ou|
+        if ou.regional.present? && !ou.regional.nil?
+          user = User.find(ou.regional)
+          obj = {:id => user.id, :name => user.full_name, :view => user.full_name}
+        end
+      end
+    end
+    obj
   end
 
   def comms
+=begin
     comms = []
     order_users = OrderUser.where(:order_id => self.id).order("created_at ASC")
     if order_users.present? && !order_users.nil?
@@ -91,9 +118,22 @@ class Order < ApplicationRecord
       end
     end
     comms
+=end
+    obj = {}
+    order_users = OrderUser.where(:order_id => self.id).limit(1)
+    if order_users.present? && !order_users.nil?
+      order_users.each do |ou|
+        if ou.comms.present? && !ou.comms.nil?
+          user = User.find(ou.comms)
+          obj = {:id => user.id, :name => user.full_name, :view => user.full_name}
+        end
+      end
+    end
+    obj
   end
 
   def processor
+=begin
     processor = []
     order_users = OrderUser.where(:order_id => self.id).order("created_at ASC")
     if order_users.present? && !order_users.nil?
@@ -104,8 +144,28 @@ class Order < ApplicationRecord
       end
     end
     processor
+=end
+    obj = {}
+    order_users = OrderUser.where(:order_id => self.id).limit(1)
+    if order_users.present? && !order_users.nil?
+      order_users.each do |ou|
+        if ou.processor.present? && !ou.processor.nil?
+          user = User.find(ou.processor)
+          obj = {:id => user.id, :name => user.full_name, :view => user.full_name}
+        end
+      end
+    end
+    obj
   end
 
+  def temp_brand
+    obj = {}
+    brand = Brand.find(self.brand_id)
+    if brand.present? && !brand.nil?
+      obj = {:id => brand.id, :name => brand.name, :view => brand.name}
+    end
+    obj
+  end
 
 
 end

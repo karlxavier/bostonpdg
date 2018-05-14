@@ -627,7 +627,7 @@ if !Vendor.all.present?
 end
 if !Inventory.all.present?
   Inventory.create!([
-                        {loc_id: 47, bin_id: 13, quantity: 0, aisle_id: 1, product_id: 1},
+      {loc_id: 47, bin_id: 13, quantity: 0, aisle_id: 1, product_id: 1},
       {loc_id: 16, bin_id: 0, quantity: 0, aisle_id: 0, product_id: 2},
       {loc_id: 17, bin_id: 0, quantity: 0, aisle_id: 0, product_id: 7},
       {loc_id: 17, bin_id: 0, quantity: 0, aisle_id: 0, product_id: 8},
