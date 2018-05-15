@@ -51,9 +51,11 @@ Rails.application.routes.draw do
       resources :products do
         get 'list', on: :collection
         get 'get_item_list', on: :collection
+        get 'get_products_category', on: :collection
       end
       resources :vendors do
         get 'list', on: :collection
+        get 'get_vendors_product', on: :collection
       end
       resources :style_attributes do
         get 'list', on: :collection
