@@ -43,6 +43,11 @@ module Api
         end
       end
 
+      def get_products_category
+        products = Product.where(:category => params[:category_id])
+        render json: products
+      end
+
       protected
 
       def set_product
