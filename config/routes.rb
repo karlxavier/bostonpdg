@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :order_entries
     resources :order_users
     resources :order_branches
+    resources :vendors_products
     root to: "users#index" # <--- Root route
   end
   #API Simple

@@ -73,6 +73,7 @@ class OrderDashboard < Administrate::BaseDashboard
       include_hidden: false,
   }
   ),
+
   promise_date: Field::DateTime,
       notes: Field::Text,
       fulfillment_date: Field::DateTime,

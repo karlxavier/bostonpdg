@@ -24,8 +24,8 @@ as well as a link to its edit page.
   </h1>
 
   <div>
-    <% order = Order.find(page.attributes[0].resource.order_id.to_i)%>
-    <%= link_to "Back to Order ##{order.id}", admin_order_path(order), class: "button"%>&nbsp;
+    <% vendor = Vendor.find(page.attributes[0].resource.vendor_id.to_i)%>
+    <%= link_to "Back to Vendor - #{vendor.name}", admin_vendor_path(vendor), class: "button"%>&nbsp;
     <%= link_to(
       t("administrate.actions.edit_resource", name: page.page_title),
       [:edit, namespace, page.resource],
@@ -44,20 +44,8 @@ as well as a link to its edit page.
       ) %>
       </dt>
 
-      <dd class="attribute-data attribute-data--<%=attribute.html_class%>">
-        <% if attribute.name.to_s == "quoted_by" %>
-            <% user = User.find(attribute.data)%>
-            <%= link_to "#{user.first_name + ' ' + user.last_name}", admin_user_path(user) %>
-        <% elsif  attribute.name.to_s == "vendor"%>
-            <% vendor = Vendor.find(attribute.data) %>
-            <%= link_to vendor.name, admin_vendor_path(vendor) %>
-        <% elsif  attribute.name.to_s == "category_id" || attribute.name.to_s == "category" %>
-            <% category = Category.find(attribute.data) %>
-            <%= link_to category.name, admin_category_path(category) %>
-        <% else %>
-            <%= render_field attribute %>
-        <% end %>
-      </dd>
+      <dd class="attribute-data attribute-data--<%=attribute.html_class%>"
+          ><%= render_field attribute %></dd>
     <% end %>
   </dl>
 </section>
