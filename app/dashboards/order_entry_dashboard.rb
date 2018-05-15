@@ -44,6 +44,15 @@ class OrderEntryDashboard < Administrate::BaseDashboard
       include_hidden: false,
   }
   ),
+      category_id: Field::CollectionSelect.with_options(
+      collection: proc { Category.all },
+      value_method: :id,
+      text_method: :name,
+      options: {
+      include_blank: 'Please Select a Category',
+      include_hidden: false,
+  }
+  ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -64,6 +73,7 @@ class OrderEntryDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
+    :category_id,
     :product_id,
     :price,
     :cost,
@@ -81,6 +91,7 @@ class OrderEntryDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :order_id,
+    :category_id,
     :product_id,
     :price,
     :cost,
