@@ -4,10 +4,11 @@ module Api
       before_action :set_order_entry, only: [:show, :update]
       def create
         @order_entry = OrderEntry.new()
-        @order_entry.vendor = params[:order_entry][:vendor]
-        @order_entry.product_id = params[:order_entry][:product_id]
         @order_entry.order_id = params[:order_entry][:order_id]
-        @order_entry.quoted_by = params[:order_entry][:quoted_by]
+        @order_entry.vendor = params[:vendor][:id]
+        @order_entry.product_id = params[:product][:id]
+        @order_entry.quoted_by = params[:quoted][:id]
+        @order_entry.category_id = params[:category][:id]
         @order_entry.price = params[:order_entry][:price]
         @order_entry.cost = params[:order_entry][:cost]
         @order_entry.tax = params[:order_entry][:tax]
@@ -29,14 +30,14 @@ module Api
         if params[:order_entry][:quoted_by] == ''
           params[:order_entry][:quoted_by] = @order_entry.quoted_by
         end
-        if @order_entry.update_attributes(:vendor => params[:order_entry][:vendor], :product_id => params[:order_entry][:product_id], :order_id => params[:order_entry][:order_id], :quoted_by => params[:order_entry][:quoted_by], :price => params[:order_entry][:price], :tax => params[:order_entry][:tax], :cost => params[:order_entry][:cost], :quantity => params[:order_entry][:quantity])
+        if @order_entry.update_attributes(:category_id => params[:category][:id], :vendor => params[:vendor][:id], :product_id => params[:product][:id], :order_id => params[:order_entry][:order_id], :quoted_by => params[:quoted][:id], :price => params[:order_entry][:price], :tax => params[:order_entry][:tax], :cost => params[:order_entry][:cost], :quantity => params[:order_entry][:quantity])
           render :json => @order_entry, :status => :ok
         else
           render json: { status: 'failed' }, status: :unprocessable_entity
         end
       end
       def show
-        render json: @order_entry,methods: [:vendor_name, :product_name, :quoted_name]
+        render json: @order_entry,methods: [:vendor_name, :product_name, :quoted_name, :category, :product, :vendor_obj, :quoted_by_obj]
       end
 
       private
