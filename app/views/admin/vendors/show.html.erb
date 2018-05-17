@@ -45,6 +45,42 @@ as well as a link to its edit page.
       <dd class="attribute-data attribute-data--<%=attribute.html_class%>"
           ><%= render_field attribute %></dd>
     <% end %>
+
+    <dt class="attribute-label" id="users">
+      Categories
+    </dt>
+    <dd class="attribute-data attribute-data--has-many">
+      <% categories = Category.where("id IN (SELECT category_id FROM vendor_categories WHERE vendor_id = #{page.resource.id})") %>
+      <div style="display: block;padding-bottom:3%;">
+        <%= link_to "Add Category", new_admin_category_path(:vendor_id => page.resource.id)%>&nbsp;
+        <%= link_to "Add Existing Category", new_admin_vendor_category_path(:vendor_id => page.resource.id)%>
+      </div>
+      <% if categories.present? %>
+          <table style="margin-bottom: 2%;">
+            <thead>
+            <tr>
+              <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Name/s  </th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% categories.each do |category| %>
+                <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/categories/<%= category.id %>">
+                  <td class="cell-data cell-data--number">
+                    <a href="/admin/categories/<%= category.id %>" class="action-show">
+                      <%= category.name %>
+                    </a>
+                  </td>
+                  <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/vendor_categories/<%= category.id %>">Remove</a></td>
+
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+      <% end %>
+    </dd>
+
+
     <dt class="attribute-label" id="users">
      Products
     </dt>

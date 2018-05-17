@@ -55,107 +55,127 @@ class Order < ApplicationRecord
   end
 
   def art
-=begin
-    art = []
-    order_users = OrderUser.where(:order_id => self.id).order("created_at ASC")
-    if order_users.present? && !order_users.nil?
-      order_users.each do |ou|
-        if ou.art.present? && !ou.art.nil?
-          art << ou.art
-        end
+    arr = []
+    arr_ids = []
+    order_user = OrderUser.where(:order_id => self.id)
+    order_user.each do |ou|
+      if ou.art.present? && !ou.art.nil?
+        arr_ids.push(ou.art)
       end
     end
-    art
-=end
-    obj = {}
-    order_users = OrderUser.where(:order_id => self.id).limit(1)
-    if order_users.present? && !order_users.nil?
-      order_users.each do |ou|
-        if ou.art.present? && !ou.art.nil?
-          user = User.find(ou.art)
-          obj = {:id => user.id, :name => user.full_name, :view => user.full_name}
+
+    if arr_ids.length > 0
+      select_users = User.where("id IN (#{arr_ids.join(',')})")
+      all_users = User.where("id NOT IN (#{arr_ids.join(',')})")
+
+      if select_users.present? && !select_users.nil?
+        select_users.each do |user|
+          arr << {:id => user.id, :name => user.full_name, :view => user.full_name, :selected => true}
         end
       end
+    else
+      all_users = User.all
     end
-    obj
+
+    if all_users.present? && !all_users.nil?
+      all_users.each do |user|
+        arr << {:id => user.id, :name => user.full_name, :view => user.full_name, :selected => false}
+      end
+    end
+    arr
   end
 
   def regional
-=begin
-    regional = []
-    order_users = OrderUser.where(:order_id => self.id).order("created_at ASC")
-    if order_users.present? && !order_users.nil?
-      order_users.each do |ou|
-        if ou.regional.present? && !ou.regional.nil?
-          regional << ou.regional
-        end
+    arr = []
+    arr_ids = []
+    order_user = OrderUser.where(:order_id => self.id)
+    order_user.each do |ou|
+      if ou.regional.present? && !ou.regional.nil?
+        arr_ids.push(ou.regional)
       end
     end
-    regional
-=end
-    obj = {}
-    order_users = OrderUser.where(:order_id => self.id).limit(1)
-    if order_users.present? && !order_users.nil?
-      order_users.each do |ou|
-        if ou.regional.present? && !ou.regional.nil?
-          user = User.find(ou.regional)
-          obj = {:id => user.id, :name => user.full_name, :view => user.full_name}
+
+    if arr_ids.length > 0
+      select_users = User.where("id IN (#{arr_ids.join(',')})")
+      all_users = User.where("id NOT IN (#{arr_ids.join(',')})")
+
+      if select_users.present? && !select_users.nil?
+        select_users.each do |user|
+          arr << {:id => user.id, :name => user.full_name, :view => user.full_name, :selected => true}
         end
       end
+    else
+      all_users = User.all
     end
-    obj
+
+    if all_users.present? && !all_users.nil?
+      all_users.each do |user|
+        arr << {:id => user.id, :name => user.full_name, :view => user.full_name, :selected => false}
+      end
+    end
+    arr
   end
 
   def comms
-=begin
-    comms = []
-    order_users = OrderUser.where(:order_id => self.id).order("created_at ASC")
-    if order_users.present? && !order_users.nil?
-      order_users.each do |ou|
-        if ou.comms.present? && !ou.comms.nil?
-          comms << ou.comms
-        end
+    arr = []
+    arr_ids = []
+    order_user = OrderUser.where(:order_id => self.id)
+    order_user.each do |ou|
+      if ou.comms.present? && !ou.comms.nil?
+        arr_ids.push(ou.comms)
       end
     end
-    comms
-=end
-    obj = {}
-    order_users = OrderUser.where(:order_id => self.id).limit(1)
-    if order_users.present? && !order_users.nil?
-      order_users.each do |ou|
-        if ou.comms.present? && !ou.comms.nil?
-          user = User.find(ou.comms)
-          obj = {:id => user.id, :name => user.full_name, :view => user.full_name}
+
+    if arr_ids.length > 0
+      select_users = User.where("id IN (#{arr_ids.join(',')})")
+      all_users = User.where("id NOT IN (#{arr_ids.join(',')})")
+
+      if select_users.present? && !select_users.nil?
+        select_users.each do |user|
+          arr << {:id => user.id, :name => user.full_name, :view => user.full_name, :selected => true}
         end
       end
+    else
+      all_users = User.all
     end
-    obj
+
+    if all_users.present? && !all_users.nil?
+      all_users.each do |user|
+        arr << {:id => user.id, :name => user.full_name, :view => user.full_name, :selected => false}
+      end
+    end
+    arr
   end
 
   def processor
-=begin
-    processor = []
-    order_users = OrderUser.where(:order_id => self.id).order("created_at ASC")
-    if order_users.present? && !order_users.nil?
-      order_users.each do |ou|
-        if ou.processor.present? && !ou.processor.nil?
-          processor << ou.processor
-        end
+    arr = []
+    arr_ids = []
+    order_user = OrderUser.where(:order_id => self.id)
+    order_user.each do |ou|
+      if ou.processor.present? && !ou.processor.nil?
+        arr_ids.push(ou.processor)
       end
     end
-    processor
-=end
-    obj = {}
-    order_users = OrderUser.where(:order_id => self.id).limit(1)
-    if order_users.present? && !order_users.nil?
-      order_users.each do |ou|
-        if ou.processor.present? && !ou.processor.nil?
-          user = User.find(ou.processor)
-          obj = {:id => user.id, :name => user.full_name, :view => user.full_name}
+
+    if arr_ids.length > 0
+      select_users = User.where("id IN (#{arr_ids.join(',')})")
+      all_users = User.where("id NOT IN (#{arr_ids.join(',')})")
+
+      if select_users.present? && !select_users.nil?
+        select_users.each do |user|
+          arr << {:id => user.id, :name => user.full_name, :view => user.full_name, :selected => true}
         end
       end
+    else
+      all_users = User.all
     end
-    obj
+
+    if all_users.present? && !all_users.nil?
+      all_users.each do |user|
+        arr << {:id => user.id, :name => user.full_name, :view => user.full_name, :selected => false}
+      end
+    end
+    arr
   end
 
   def temp_brand

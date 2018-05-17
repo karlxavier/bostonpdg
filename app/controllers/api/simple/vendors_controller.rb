@@ -29,9 +29,21 @@ module Api
         end
       end
 
+=begin
       def get_vendors_product
         vendors = Vendor.where("id IN (SELECT vendor_id FROM vendors_products WHERE product_id = #{params[:product_id]})")
         render json: vendors
+      end
+=end
+
+      def get_category_vendors
+        vendors = Vendor.where("id IN (SELECT vendor_id FROM vendor_categories WHERE category_id = #{params[:category_id]})")
+        render json: vendors
+      end
+
+      def get_vendors_products
+        products = Products.where("category = #{params[:category_id]} AND IN (SELECT product FROM vendors_products WHERE vendor_id = #{params[:vendor_id]})")
+        render json: products
       end
 
       protected
