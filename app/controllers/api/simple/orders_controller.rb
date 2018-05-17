@@ -99,22 +99,58 @@ module Api
               order_branch.save
             end
           end
-          if params[:art].present? || params[:comms].present? || params[:processor].present? || params[:regional].present?
+          regional = []
+          comms = []
+          art = []
+          processor = []
+          arr_count = []
+          i = 0
+          params[:regional].each do |user|
+            if user[:selected].to_s == 'true'
+              regional.push(user)
+            end
+          end
+
+          params[:comms].each do |user|
+            if user[:selected].to_s == 'true'
+              comms.push(user)
+            end
+          end
+
+          params[:art].each do |user|
+            if user[:selected].to_s == 'true'
+              art.push(user)
+            end
+          end
+
+          params[:processor].each do |user|
+            if user[:selected].to_s == 'true'
+              processor.push(user)
+            end
+          end
+
+          arr_count.push(regional.length)
+          arr_count.push(comms.length)
+          arr_count.push(art.length)
+          arr_count.push(processor.length)
+
+          while i < arr_count.max
             order_user = OrderUser.new
             order_user.order_id = order.id
-            if params[:art].present?
-              order_user.art = params[:art][:id]
+            if regional[i].present?
+              order_user.regional = regional[i][:id]
             end
-            if params[:comms].present?
-              order_user.comms = params[:comms][:id]
+            if comms[i].present?
+              order_user.comms = comms[i][:id]
             end
-            if params[:processor].present?
-              order_user.processor = params[:processor][:id]
+            if art[i].present?
+              order_user.art = art[i][:id]
             end
-            if params[:regional].present?
-              order_user.regional = params[:regional][:id]
+            if processor[i].present?
+              order_user.processor = processor[i][:id]
             end
             order_user.save
+            i = i + 1
           end
 
 =begin
@@ -157,38 +193,63 @@ module Api
 
       def update_assign_user
         @order = Order.find(params[:order_id])
+        regional = []
+        comms = []
+        art = []
+        processor = []
+        arr_count = []
+        i = 0
         if @order.present?
-          order_user = OrderUser.where(:order_id => @order.id).first
-          if order_user.present?
-            if params[:art].present?
-              order_user.update_attributes(:art =>  params[:art][:id])
+          OrderUser.where(:order_id => @order.id).destroy_all
+          params[:regional].each do |user|
+            if user[:selected].to_s == 'true'
+              regional.push(user)
             end
-            if params[:comms].present?
-              order_user.update_attributes(:comms =>  params[:comms][:id])
+          end
+
+          params[:comms].each do |user|
+            if user[:selected].to_s == 'true'
+              comms.push(user)
             end
-            if params[:processor].present?
-              order_user.update_attributes(:processor =>  params[:processor][:id])
+          end
+
+          params[:art].each do |user|
+            if user[:selected].to_s == 'true'
+              art.push(user)
             end
-            if params[:regional].present?
-              order_user.update_attributes(:regional =>  params[:regional][:id])
+          end
+
+          params[:processor].each do |user|
+            if user[:selected].to_s == 'true'
+              processor.push(user)
             end
-          else
+          end
+
+          arr_count.push(regional.length)
+          arr_count.push(comms.length)
+          arr_count.push(art.length)
+          arr_count.push(processor.length)
+
+          while i < arr_count.max
             order_user = OrderUser.new
             order_user.order_id = @order.id
-            if params[:art].present?
-              order_user.art = params[:art][:id]
+            if regional[i].present?
+              order_user.regional = regional[i][:id]
             end
-            if params[:comms].present?
-              order_user.comms = params[:comms][:id]
+            if comms[i].present?
+              order_user.comms = comms[i][:id]
             end
-            if params[:processor].present?
-              order_user.processor = params[:processor][:id]
+            if art[i].present?
+              order_user.art = art[i][:id]
             end
-            if params[:regional].present?
-              order_user.regional = params[:regional][:id]
+            if processor[i].present?
+              order_user.processor = processor[i][:id]
             end
             order_user.save
+            i = i + 1
           end
+
+
           render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date, :brand_name, :brand_branches, :art, :comms, :regional, :processor, :temp_brand]
         end
       end

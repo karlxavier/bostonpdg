@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :order_users
     resources :order_branches
     resources :vendors_products
+    resources :vendor_categories
     root to: "users#index" # <--- Root route
   end
   #API Simple
@@ -55,7 +56,8 @@ Rails.application.routes.draw do
       end
       resources :vendors do
         get 'list', on: :collection
-        get 'get_vendors_product', on: :collection
+        get 'get_vendors_products', on: :collection
+        get 'get_category_vendors', on: :collection
       end
       resources :style_attributes do
         get 'list', on: :collection
