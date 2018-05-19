@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180515094843) do
+ActiveRecord::Schema.define(version: 20180519192227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -216,6 +216,9 @@ ActiveRecord::Schema.define(version: 20180515094843) do
     t.string "default"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "height"
+    t.decimal "width"
+    t.string "finish"
     t.index ["product_id"], name: "index_style_attributes_on_product_id"
   end
 
