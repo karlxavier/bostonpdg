@@ -27,8 +27,21 @@ module Api
       end
 
       def create
-        @product = Product.new(products_params)
+        @product = Product.new
+        @product.name = params[:product][:name]
+        @product.category = params[:product][:category_id]
         if @product.save
+          @attributes = StyleAttribute.new
+          @attributes.name = params[:product][:name]
+          @attributes.height = params[:height]
+          @attributes.width = params[:width]
+          @attributes.finish = params[:finish]
+          @attributes.product_id = @product.id
+          @attributes.save
+
+          VendorCategory.new(:vendor_id => params[:vendor_id], :category_id =>  params[:product][:category_id]).save
+          VendorsProduct.new(:vendor_id => params[:vendor_id], :product_id => @product.id).save
+
           render json: @product
         else
           render nothing: true, status: :bad_request

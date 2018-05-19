@@ -8,12 +8,15 @@ class StyleAttributeDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    id: Field::Number,
-    name: Field::String,
-    value: Field::String,
-    default: Field::String,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+      id: Field::Number,
+      name: Field::String,
+      height: Field::Number,
+      width: Field::Number,
+      finish: Field::String,
+      value: Field::String,
+      default: Field::String,
+      created_at: Field::DateTime,
+      updated_at: Field::DateTime,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -22,29 +25,32 @@ class StyleAttributeDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :id,
-    :name,
-    :value,
+      :id,
+      :height,
+      :width,
+      :finish
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :id,
-    :name,
-    :value,
-    :default,
-    :created_at,
-    :updated_at,
+      :id,
+      :name,
+      :height,
+      :width,
+      :finish,
+      :created_at,
+      :updated_at,
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :name,
-    :value,
-    :default,
+      :name,
+      :height,
+      :width,
+      :finish
   ].freeze
 
   # Overwrite this method to customize how style attributes are displayed
