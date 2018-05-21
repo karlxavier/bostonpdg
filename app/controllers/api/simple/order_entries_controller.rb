@@ -40,6 +40,13 @@ module Api
         render json: @order_entry,methods: [:vendor_name, :product_name, :quoted_name, :category, :product, :vendor_obj, :quoted_by_obj]
       end
 
+      def destroy
+        order_entry = OrderEntry.find(params[:id])
+        if order_entry.destroy
+          head :no_content
+        end
+      end
+
       private
 
       def order_entry_params
