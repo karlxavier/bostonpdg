@@ -19,6 +19,13 @@ class OrderEntry < ApplicationRecord
       vendor.name
     end
   end
+
+  def category_name
+    if self.category_id.present?
+      category = Category.find(self.category_id)
+      category.name
+    end
+  end
   def category
     obj = {}
     if self.category_id.present?

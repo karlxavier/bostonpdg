@@ -4,22 +4,22 @@ module Api
       before_action :set_order, only: [:show, :update]
 
       def list
-        @orders = Order.order("updated_at DESC")
+        @orders = Order.order("updated_at, created_by DESC")
         render json: @orders,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :brand_name, :brand_branches]
       end
 
       def show
-        render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date, :brand_name, :brand_branches, :art, :regional, :comms, :processor, :temp_brand]
+        render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date, :brand_name, :brand_branches, :art, :regional, :comms, :processor, :temp_brand, :art_users, :regional_users, :comms_users, :processor_users]
       end
 
       def get_latest_order
-        @order = Order.all.order('created_by DESC').first
-        render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date, :brand_name, :brand_branches, :art, :regional, :comms, :processor]
+        @order = Order.all.order('updated_at, created_by DESC').first
+        render json: @order,methods: [:created_by_name, :customer_name, :last_updated_by_name, :created_date, :updated_date, :brand_name, :brand_branches, :art, :regional, :comms, :processor, :temp_brand, :art_users, :regional_users, :comms_users, :processor_users]
       end
 
       def show_entries
         @order_entries = OrderEntry.where("order_id = '#{params[:order_id]}'")
-        render json: @order_entries, methods: [:product_name]
+        render json: @order_entries, methods: [:product_name, :category_name]
       end
 
       def show_branches

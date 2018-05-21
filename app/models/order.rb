@@ -188,4 +188,91 @@ class Order < ApplicationRecord
   end
 
 
+
+
+  def regional_users
+    arr = []
+    arr_ids = []
+    order_user = OrderUser.where(:order_id => self.id)
+    order_user.each do |ou|
+      if ou.regional.present? && !ou.regional.nil?
+        arr_ids.push(ou.regional)
+      end
+    end
+
+    if arr_ids.length > 0
+      select_users = User.where("id IN (#{arr_ids.join(',')})")
+      if select_users.present? && !select_users.nil?
+        select_users.each do |user|
+          arr << {:id => user.id, :name => user.full_name, :view => user.full_name}
+        end
+      end
+    end
+    arr
+  end
+
+  def comms_users
+    arr = []
+    arr_ids = []
+    order_user = OrderUser.where(:order_id => self.id)
+    order_user.each do |ou|
+      if ou.comms.present? && !ou.comms.nil?
+        arr_ids.push(ou.comms)
+      end
+    end
+
+    if arr_ids.length > 0
+      select_users = User.where("id IN (#{arr_ids.join(',')})")
+      if select_users.present? && !select_users.nil?
+        select_users.each do |user|
+          arr << {:id => user.id, :name => user.full_name, :view => user.full_name}
+        end
+      end
+    end
+    arr
+  end
+
+  def art_users
+    arr = []
+    arr_ids = []
+    order_user = OrderUser.where(:order_id => self.id)
+    order_user.each do |ou|
+      if ou.art.present? && !ou.art.nil?
+        arr_ids.push(ou.art)
+      end
+    end
+
+    if arr_ids.length > 0
+      select_users = User.where("id IN (#{arr_ids.join(',')})")
+      if select_users.present? && !select_users.nil?
+        select_users.each do |user|
+          arr << {:id => user.id, :name => user.full_name, :view => user.full_name}
+        end
+      end
+    end
+    arr
+  end
+
+  def processor_users
+    arr = []
+    arr_ids = []
+    order_user = OrderUser.where(:order_id => self.id)
+    order_user.each do |ou|
+      if ou.processor.present? && !ou.processor.nil?
+        arr_ids.push(ou.processor)
+      end
+    end
+
+    if arr_ids.length > 0
+      select_users = User.where("id IN (#{arr_ids.join(',')})")
+      if select_users.present? && !select_users.nil?
+        select_users.each do |user|
+          arr << {:id => user.id, :name => user.full_name, :view => user.full_name}
+        end
+      end
+    end
+    arr
+  end
+
+
 end
