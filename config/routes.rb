@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  post 'vendors/import_csv'
 
 
   namespace :admin do
