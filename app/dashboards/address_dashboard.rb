@@ -67,6 +67,6 @@ class AddressDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
    def display_resource(address)
-     address.street + ", " + address.city + " " + address.state + ", " + address.country
+     (address.street.nil? ? '' : (address.street + ', ')) + (address.city.nil? ? '' : (address.city + ' ')) + (address.state.nil? ? '' : (address.state + ', ')) + (address.state.nil? ? '' : (address.state + ', ')) + (address.country.nil? ? '' : address.country)
    end
 end
