@@ -15,7 +15,16 @@ class VendorDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     lead_time: Field::Number,
-    country_origin: Field::String
+    country_origin: Field::String,
+  billing_address: Field::CollectionSelect.with_options(
+      collection: proc { Address.all },
+      value_method: :id,
+      text_method: :street,
+      options: {
+      include_blank: 'Please Select A/Some Address',
+      include_hidden: false,
+  }
+  )
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -38,6 +47,7 @@ class VendorDashboard < Administrate::BaseDashboard
     :name,
     :email,
     :lead_time,
+    :billing_address,
     :country_origin,
     :products,
     :created_at,
@@ -51,6 +61,7 @@ class VendorDashboard < Administrate::BaseDashboard
     :name,
     :email,
     :lead_time,
+    :billing_address,
     :country_origin,
     :products
   ].freeze
