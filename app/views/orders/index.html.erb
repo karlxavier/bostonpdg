@@ -1,0 +1,126 @@
+<div class="row" style="position:relative;">
+  <div id="left" class="col-lg-4 " style="height: {{screenHeight}}px; overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important;">
+    <div class="card text-white border-secondary bg-info mb-3" ng-repeat="sale in sales" >
+      <div class="card-body bg-light text-secondary">
+        <div class="row">
+          <div class="col">
+            <p class="lead">
+              {{sale.brand_branches}}
+            </p>
+            <h4>{{sale.brand_name}}</h4>
+            <p class="lead">
+              ORDER TICKET #{{sale.id}}
+            </p>
+          </div>
+          <div class="col-2 text-right">
+            <button class="btn btn-outline-dark" ng-click="viewOrders({{sale.id}})">View</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-footer" style="text-transform: uppercase;">
+        {{sale.created_date}} BY {{sale.created_by_name}}
+      </div>
+    </div>
+  </div>
+  <div class="col padding-left" style="height: {{screenHeight}}px; overflow-y: auto; overflow-x: hidden">
+    <div class="row">
+      <div class="col padding-left">
+        <p class="lead">
+          Updated {{order.updated_date}}
+        </p>
+        <h1>{{order.brand_name}}</h1>
+        <p class="lead">
+          {{order.brand_branches}}
+        </p>
+      </div>
+
+      <div class="col text-right">
+        <button class="btn btn-outline-dark" style="margin: 0% 1%;padding: .2% 5% !important;" ng-click="editOrder(order.id)">Edit</button>
+        <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" ng-click="newOrder()">Add</button>
+      </div>
+
+    </div>
+    <!--  <div class="row"  >
+          <div class="col padding-left text-center">
+              <button class="btn btn-default {{order.status == 'Pre-Sales' ? 'btn-success' : ''}}" style="margin: 0% 2%;padding: .2% 2%;">PRE-SALES</button>
+              <button class="btn btn-default {{order.status == 'Sales' ? 'btn-success' : ''}}" style="margin: 0% 2%;padding: .2% 2%;">SALES</button>
+              <button class="btn btn-default {{order.status == 'Design' ? 'btn-success' : ''}}" style="margin: 0% 2%;padding: .2% 2%;">DESIGN</button>
+              <button class="btn btn-default {{order.status == 'Processing' ? 'btn-success' : ''}}" style="margin: 0% 2%;padding: .2% 2%;">PROCESSING</button>
+              <button class="btn btn-default {{order.status == 'Shipping' ? 'btn-success' : ''}}" style="margin: 0% 2%;padding: .2% 2%;">SHIPPING</button>
+          </div>
+      </div>-->
+    <div class="row"  style="padding-bottom: 5%;">
+      <div class="col padding-left">
+        <div class="card text-secondary  bg-light mb-3" >
+          <div class="card-header"><b>USERS ASSIGNED TO THIS TICKET</b> <button class="btn btn-outline-info float-right" ng-click="editOrderUser(order.id);">Manage Users</button></div>
+          <div class="card-body bg-light text-secondary">
+            <label class="item item-input input-adjust-padding-right">
+              <span class="input-label force-gray-label">CLIENT CONTACTS</span>
+            </label>
+            <br>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">REGIONAL DIRECTOR</label>
+              <div class="col-sm-10">
+                <button class="btn btn-secondary btn-sm" ng-repeat="user in order.regional_users" disabled>{{user.view}}</button>&nbsp;
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">COMMS DIRECTOR</label>
+              <div class="col-sm-10">
+                <button class="btn btn-secondary btn-sm" ng-repeat="user in order.comms_users" disabled>{{user.view}}</button>&nbsp;
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">DESIGNERS</label>
+              <div class="col-sm-10">
+                <button class="btn btn-secondary btn-sm" ng-repeat="user in order.art_users" disabled>{{user.view}}</button>&nbsp;
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">PROCESSORS</label>
+              <div class="col-sm-10">
+                <button class="btn btn-secondary btn-sm" ng-repeat="user in order.processor_users" disabled>{{user.view}}</button>&nbsp;
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card text-white border-secondary bg-info mb-3" >
+          <div class="card-header"><b>PRE-SALES ORDER</b></div>
+          <div class="card-body bg-light text-secondary">
+            <div class="col text-right" style="padding-bottom: 2%;">
+              <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" ng-click="newEntry(order.id)">ADD AN ITEM</button>
+            </div>
+            <table class="table">
+              <thead class="table-light">
+              <tr>
+                <th scope="col">CATEGORY</th>
+                <th scope="col">ITEM + SKU</th>
+                <th scope="col">PCS</th>
+                <th scope="col">PER ITEM</th>
+                <th scope="col">TOTAL</th>
+                <th></th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="entry in entries | filter:searchText">
+
+                <td>{{entry.category_name}}</td>
+                <td>{{entry.product_name}}</td>
+                <td>{{entry.quantity }}</td>
+                <td>{{entry.price}}</td>
+                <td>{{entry.quantity * entry.price}}</td>
+                <td><button class="btn btn-nav-selected btn-nav-selected-circle" ng-click="editEntry(entry.id)"><i class="icon ion-edit"></i></button></td>
+                <td><button class="btn btn-danger btn-nav-selected-circle" ng-click="showConfirm(entry.id)"><i class="icon ion-trash-a"></i></button></td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

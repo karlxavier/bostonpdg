@@ -12,4 +12,14 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require jquery.min
+//= require popper.min
+//= require bootstrap.min
+//= require grasp_mobile_progress_circle-1.0.0.min
+//= require jquery.cookie
+//= require Chart.min
+//= require jquery.validate.min
+//= require jquery.mCustomScrollbar.concat.min
+//= require charts-home
+//= require front
 //= require_tree .

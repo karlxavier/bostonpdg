@@ -11,8 +11,13 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
- *= require foundation
- *= require foundation-emails
+ *= require bootstrap.min
+ *= require font-awesome.min
+ *= require fontastic
+ *= require grasp_mobile_progress_circle-1.0.0.min
+ *= require jquery.mCustomScrollbar
+ *= require style.default
+ *= require custom
  *= require_self
  */
 .display-block {
@@ -22,3 +27,14 @@
     display: inline;
 }
 
+.sidebar-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100px;
+    color: white;
+    text-align: center;
+    border-top: 2px solid #292929;
+    background: #393836 !important;
+    margin-bottom: 0 !important;
+}

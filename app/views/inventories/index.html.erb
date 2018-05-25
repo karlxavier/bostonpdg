@@ -1,0 +1,115 @@
+<div class="row"  >
+  <div class="col padding-left">
+    <h1>At a glance</h1>
+    <p class="lead">
+      WEEKLY SUMMARY
+    </p>
+  </div>
+  <div class="col">
+
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+                               <span>
+                                   <h2>{{inventories.restock}}</h2>
+                                   <p class="lead">
+                                     ITEMS TO RESTOCK
+                                   </p>
+                               </span>
+          </div>
+          <div class="col center-item-overall">
+                               <span>
+                                   <h2>0</h2>
+                                   <p class="lead">
+                                     PENDING SHIPMENTS
+                                   </p>
+                               </span>
+          </div>
+          <div class="col">
+                               <span>
+                                    <h2>{{inventories.no_stock}}</h2>
+                                   <p class="lead">
+                                     NO STOCKS
+                                   </p>
+                               </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h4 class="lead-2">Notifications</h4>
+        <p class="action-text">
+          You have <span class="lead-2">5 MESSAGES</span> tagged under Inventory
+        </p>
+        <p class="action-text">
+          <span class="lead-2">3 TICKETS</span> need to be resolved
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="float-left">Order this week</h3>
+                        <span class="float-right">
+                             <p class="lead text-right">
+                               TOTAL ORDERS
+                                 <h3 class="text-right adjust-margin-top">0</h3>
+                          </p>
+                        </span>
+        <div class="line-chart">
+          <canvas id="lineCahrt"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col padding-left">
+    <h1>Items</h1>
+    <p class="lead">
+      CURRENT INVENTORY
+    </p>
+    <p class="padding-top">
+      <button type="button" class="btn btn-nav" ng-click="add_products()">ADD AN ITEM</button>
+      <button class="btn btn-nav"  ng-click="view_stocks()">VIEW CURRENT STOCKS</button>
+      <button class="btn btn-nav" ng-click="manage_by_hotel()">MANAGE BY HOTEL</button>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col padding-left">
+    <h1>Vendors</h1>
+    <p class="lead">
+      MANAGE SUPPLIERS
+    </p>
+    <p class="padding-top">
+      <button class="btn btn-nav" ng-click="add_vendor()">ADD A VENDOR</button>
+      <button class="btn btn-nav" ng-click="list_vendors()">ADD ITEMS TO VENDOR</button>
+      <button class="btn btn-nav">ASSIGN SPECIALISTS TO VENDOR</button>
+      <button class="btn btn-nav">MANAGE PURCHASE ORDER</button>
+      <button class="btn btn-nav" ng-click="supplier_database()">SUPPLIER DATABASE</button>
+      <button class="btn btn-nav">MANAGE DELIVERIES</button>
+
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col padding-left">
+    <h1>Restock</h1>
+    <p class="lead">
+      MAKE A RE-PURCHASE
+    </p>
+    <p class="padding-top">
+      <button class="btn btn-nav">RE-ORDER ITEM</button>
+      <button class="btn btn-nav">VIEW ORDER HISTORY</button>
+
+    </p>
+  </div>
+</div>
