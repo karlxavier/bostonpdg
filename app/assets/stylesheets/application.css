@@ -38,3 +38,10 @@
     background: #393836 !important;
     margin-bottom: 0 !important;
 }
+.btn-yellow {
+    border-radius: 0 !important;
+    padding-left: 3% !important;
+    padding-right: 3% !important;
+    color: #ffffff !important;
+    background: #D3AD5D !important;
+}

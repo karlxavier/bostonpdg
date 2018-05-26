@@ -2344,9 +2344,37 @@ h6,
   color: inherit;
 }
 
-h1,
+h1 {
+    font-size: 54px;
+    color: #000000;
+
+}
+
+h2 {
+    font-size: 48px;
+    color: #9B9B9B;
+}
+
+
+h3 {
+    font-size: 36px;
+    color: #9B9B9B;
+    letter-spacing: 0;
+}
+
+h4 {
+    font-weight: bold;
+    font-size: 20px;
+    color: #989393;
+}
+
+h5 {
+    font-size: 20px;
+    color: #000;
+}
+/*h1,
 .h1 {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 }
 
 h2,
@@ -2367,7 +2395,7 @@ h4,
 h5,
 .h5 {
   font-size: 1rem;
-}
+}*/
 
 h6,
 .h6 {
@@ -2909,7 +2937,7 @@ a > code {
 
 .card-header {
   padding: 1rem 1.25rem;
-  background-color: #fff;
+  /*background-color: #fff;*/
   border-bottom: 1px solid #eee;
 }
 
@@ -2924,7 +2952,7 @@ a > code {
 
 .card-footer {
   padding: 1rem 1.25rem;
-  background-color: #f8f9fa;
+  /*background-color: #f8f9fa;*/
   border-top: 1px solid #eee;
 }
 
