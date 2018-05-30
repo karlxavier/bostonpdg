@@ -23,3 +23,12 @@
 //= require charts-home
 //= require front
 //= require_tree .
+
+$(function() {
+    $('.orders_and_order_form').css({'height': ($( window ).height() - 110)})
+    $(window).resize(function(){
+        var screenHeight = $( window ).height() - 110;
+        $('.orders_and_order_form').height(screenHeight)
+    })
+
+});

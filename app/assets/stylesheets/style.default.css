@@ -778,8 +778,8 @@ nav.navbar a.menu-btn:hover {
     margin-bottom: 30px;
   }
   .dashboard-header .card {
-    -webkit-box-shadow: none;
-    box-shadow: none;
+  /*  -webkit-box-shadow: none;
+    box-shadow: none;*/
     margin-bottom: 0;
   }
 }
