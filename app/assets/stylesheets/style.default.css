@@ -732,7 +732,7 @@ nav.navbar a.menu-btn:hover {
 .dashboard-header p {
   font-size: 0.75rem;
   font-weight: 400;
-  color: #888;
+  /*color: #888;*/
 }
 
 .dashboard-header li {
@@ -778,8 +778,8 @@ nav.navbar a.menu-btn:hover {
     margin-bottom: 30px;
   }
   .dashboard-header .card {
-  /*  -webkit-box-shadow: none;
-    box-shadow: none;*/
+    -webkit-box-shadow: none;
+    box-shadow: none;
     margin-bottom: 0;
   }
 }
