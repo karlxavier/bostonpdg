@@ -17,18 +17,7 @@
 //= require bootstrap.min
 //= require grasp_mobile_progress_circle-1.0.0.min
 //= require jquery.cookie
-//= require Chart.min
 //= require jquery.validate.min
 //= require jquery.mCustomScrollbar.concat.min
-//= require charts-home
 //= require front
-//= require_tree .
 
-$(function() {
-    $('.orders_and_order_form').css({'height': ($( window ).height() - 110)})
-    $(window).resize(function(){
-        var screenHeight = $( window ).height() - 110;
-        $('.orders_and_order_form').height(screenHeight)
-    })
-
-});
