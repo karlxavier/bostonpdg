@@ -156,3 +156,14 @@ p {
     color: #989393;
     letter-spacing: 6px;
 }
+
+@media (min-width: 992px) {
+    .modal-lg {
+        max-width: 80% !important;
+    }
+}
+
+.inline-text {
+    display: inline-block;
+    margin-right: 1%;
+}

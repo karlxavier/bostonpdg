@@ -2,7 +2,20 @@ Rails.application.routes.draw do
   devise_for :users
   post 'vendors/import_csv'
   resources :orders
-  resources :inventories
+  resources :inventories do
+    collection do
+      get   'add_item'
+      get   'manage_by_hotel'
+      get   'view_stocks'
+    end
+  end
+
+  resources :vendors do
+    collection do
+      get   'add'
+      get   'list'
+    end
+  end
 
 
   namespace :admin do
