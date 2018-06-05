@@ -10,8 +10,10 @@
   <%= csrf_meta_tags %>
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css" data-turbolinks-track="reload">
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <% if params[:controller] == 'inventories' %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js" data-turbolinks-track="reload"></script>
+  <% if params[:controller] == 'inventories' && params[:action] == 'index' %>
       <%= javascript_include_tag 'Chart.min', 'data-turbolinks-track': 'reload' %>
       <%= javascript_include_tag 'charts-home', 'data-turbolinks-track': 'reload' %>
   <% end %>
@@ -20,8 +22,13 @@
 <body>
 <%= render "layouts/static/sidebar_nav" %>
 <div class="page active" style="padding-bottom: 0;">
+  <% if  params[:action] != 'index' %>
+      <a href="javascript:history.back()" class="badge badge-secondary btn btn-nav btn-back">Back</a>
+  <% end %>
   <section class="dashboard-header section-padding">
     <div class="container-fluid">
+      <%= render "layouts/static/notification" %>
+
       <%= yield %>
     </div>
   </section>

@@ -21,3 +21,66 @@
 //= require jquery.mCustomScrollbar.concat.min
 //= require front
 
+function onSearchFilter() {
+    // Declare variables
+    var input, filter, div, buttons, btn, i;
+    input = document.getElementById("filterSearch");
+    filter = input.value.toUpperCase();
+    div = document.getElementsByClassName("item-list");
+    buttons = div[0].getElementsByTagName("button");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < buttons.length; i++) {
+        btn = buttons[i]
+        if (btn) {
+            if (btn.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                btn.style.display = "";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+    }
+}
+
+function submitForm(id) {
+    form_id = "#"+id;
+    $( form_id ).submit();
+}
+
+function showEditOrderEntries(id) {
+    $.ajax({
+        method: "GET",
+        url: "/api/simple/order_entries/"+id
+    }).done(function( data ) {
+        console.log(data);
+        console.log(data.category_id);
+        $('#edit_order_entry').find('#order_entry_id').val(data.id);
+        $('#edit_order_entry').find('#order_entry_category_id').val(data.category_id);
+        $('#edit_order_entry').find('#order_entry_vendor').val(data.vendor);
+        $('#edit_order_entry').find('#order_entry_product_id').val(data.product_id);
+        $('#edit_order_entry').find('#order_entry_quoted_by').val(data.quoted_by);
+        $('#edit_order_entry').find('#order_entry_price').val(data.price);
+        $('#edit_order_entry').find('#order_entry_cost').val(data.cost);
+        $('#edit_order_entry').find('#order_entry_tax').val(data.tax);
+        $('#edit_order_entry').find('#order_entry_quantity').val(data.quantity);
+        $('#editOrderEntries').modal('show');
+        $('.selectpicker').selectpicker('refresh')
+    });
+
+}
+
+function showEditOrder(id) {
+    $.ajax({
+        method: "GET",
+        url: "/api/simple/orders/"+id
+    }).done(function( data ) {
+        $('#edit_order').find('#order_id').val(data.id);
+        $('#edit_order').find('#order_status').val(data.status);
+        $('#edit_order').find('#order_brand_id').val(data.brand_id);
+        $('#edit_order').find('#order_total_budget').val(data.total_budget);
+        $('#edit_order').find('#order_lead_time').val(data.lead_time);
+        $('#editOrder').modal('show');
+        $('.selectpicker').selectpicker('refresh')
+    });
+
+}

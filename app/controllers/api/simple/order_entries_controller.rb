@@ -36,6 +36,7 @@ module Api
           render json: { status: 'failed' }, status: :unprocessable_entity
         end
       end
+
       def show
         render json: @order_entry,methods: [:vendor_name, :product_name, :quoted_name, :category, :product, :vendor_obj, :quoted_by_obj]
       end
@@ -46,6 +47,8 @@ module Api
           head :no_content
         end
       end
+
+
 
       private
 

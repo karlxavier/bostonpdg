@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users
   post 'vendors/import_csv'
-  resources :orders
+  resources :orders do
+    collection do
+      post  'update_assign_user'
+      post  'update_order'
+    end
+  end
   resources :inventories do
     collection do
       get   'add_item'
       get   'manage_by_hotel'
       get   'view_stocks'
+      get   'show_brand'
     end
   end
 
@@ -14,6 +20,12 @@ Rails.application.routes.draw do
     collection do
       get   'add'
       get   'list'
+    end
+  end
+
+  resources :order_entries do
+    collection do
+      post  'update_entry'
     end
   end
 

@@ -13,22 +13,17 @@
 <div class="row">
   <div class="col padding-left">
     <div class="input-group search-bar-padding">
-      <input ion-autocomplete type="text" readonly="readonly" class="ion-autocomplete form-control glow-input" autocomplete="off"
-             ng-model="model"
-             item-value-key="name"
-             item-view-value-key="view"
-             items-method="getItems(query,brands)"
-             items-method-value-key="items"
-             placeholder="Search for the brand name."
-             max-selected-items="1"/>
+      <input  type="text" autocomplete="off" placeholder="Search for the brand name." id="filterSearch" onkeyup="onSearchFilter();" class="form-control glow-input"/>
     </div>
   </div>
 </div>
 
-<div class="row">
+<div class="row" style="padding-top: 2%;">
   <div class="col search-bar-padding text-justify">
-    <p class="padding-top" ng-init="init()">
-      <button class="btn btn-nav" ng-repeat="brand in brands | filter:model" ng-click="show_brand({{brand.id}})">{{brand.name}}</button>
-    </p>
+    <% if @brands.present? %>
+        <% @brands.each do |brand| %>
+            <a class="btn btn-nav" href="<%= show_brand_inventories_path(:brand_id => brand.id) %>"><%= brand.name %></a>&nbsp;
+        <% end %>
+    <% end %>
   </div>
 </div>

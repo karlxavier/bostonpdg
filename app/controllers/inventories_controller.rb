@@ -5,15 +5,19 @@ class InventoriesController < ApplicationController
   end
 
   def add_item
-
+    @brands = Brand.all
   end
 
   def manage_by_hotel
-
+    @brands = Brand.all
   end
 
   def view_stocks
+    @categories = Category.all
+  end
 
+  def show_brand
+    @brand = Brand.find(params[:brand_id])
   end
 
 end

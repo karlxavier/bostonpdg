@@ -1,4 +1,8 @@
-<%= render "orders/modals/status" %>
+<%= render "orders/modals/add_order" %>
+<%= render "orders/modals/edit_order" %>
+<%= render "orders/modals/add_order_entries" %>
+<%= render "orders/modals/edit_order_entries" %>
+<%= render "orders/modals/manage_users" %>
 <div class="row" style="position:relative;">
   <div id="left" class="col-lg-4 orders_and_order_form" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important;">
     <% @orders.each do |order| %>
@@ -38,8 +42,8 @@
       </div>
 
       <div class="col text-right">
-        <button class="btn btn-outline-dark" style="margin: 0% 1%;padding: .2% 5% !important;" ng-click="editOrder(order.id)">Edit</button>
-        <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" ng-click="newOrder()" data-toggle="modal" data-target="#exampleModalCenter">Add</button>
+        <button class="btn btn-outline-dark" style="margin: 0% 1%;padding: .2% 5% !important;" onclick="showEditOrder(<%= @order.id %>)">Edit</button>
+        <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" data-toggle="modal" data-target="#addOrder">Add</button>
       </div>
 
     </div>
@@ -55,7 +59,7 @@
     <div class="row"  style="padding-bottom: 5%;">
       <div class="col padding-left">
         <div class="card text-secondary  bg-light mb-3" >
-          <div class="card-header"><b>USERS ASSIGNED TO THIS TICKET</b> <button class="btn btn-outline-info float-right" ng-click="editOrderUser(order.id);">Manage Users</button></div>
+          <div class="card-header"><b>USERS ASSIGNED TO THIS TICKET</b> <button class="btn btn-outline-info float-right" data-toggle="modal" data-target="#manageUsers">Manage Users</button></div>
           <div class="card-body bg-light text-secondary">
             <label class="item item-input input-adjust-padding-right">
               <span class="input-label force-gray-label">CLIENT CONTACTS</span>
@@ -107,7 +111,7 @@
           <div class="card-header"><b>PRE-SALES ORDER</b></div>
           <div class="card-body bg-light text-secondary">
             <div class="col text-right" style="padding-bottom: 2%;">
-              <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" ng-click="newEntry(order.id)">ADD AN ITEM</button>
+              <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" data-toggle="modal" data-target="#addOrderEntries">ADD AN ITEM</button>
             </div>
             <table class="table">
               <thead class="table-light">
@@ -129,8 +133,8 @@
                     <td><%= entry.quantity  %></td>
                     <td><%= entry.price %></td>
                     <td><%= (entry.quantity.nil? ? 0 : entry.quantity) * (entry.price.nil? ? 0 : entry.price) %></td>
-                    <td><button class="btn btn-nav-selected btn-nav-selected-circle" ng-click="editEntry(entry.id)"><i class="fa fa-pencil"></i></button></td>
-                    <td><button class="btn btn-danger btn-nav-selected-circle" ng-click="showConfirm(entry.id)"><i class="fa fa-trash"></i></button></td>
+                    <td><button class="btn btn-nav-selected btn-nav-selected-circle" onclick="showEditOrderEntries(<%= entry.id %>)"><i class="fa fa-pencil"></i></button></td>
+                    <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-danger btn-nav-selected-circle" ><i class="fa fa-trash"></i></a></td>
                   </tr>
 
               <% end %>
