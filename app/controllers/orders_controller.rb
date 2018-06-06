@@ -27,6 +27,14 @@ class OrdersController < ApplicationController
     @brands = Brand.all
   end
 
+  def new
+    @categories = Category.all
+    @vendors = Vendor.all
+    @products = Product.all
+    @users = User.all
+    @brands = Brand.all
+  end
+
   def update_assign_user
     @order = Order.find(params[:order_user][:order_id])
     if @order.present?

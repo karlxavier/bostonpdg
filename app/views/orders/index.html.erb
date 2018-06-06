@@ -43,7 +43,8 @@
 
       <div class="col text-right">
         <button class="btn btn-outline-dark" style="margin: 0% 1%;padding: .2% 5% !important;" onclick="showEditOrder(<%= @order.id %>)">Edit</button>
-        <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" data-toggle="modal" data-target="#addOrder">Add</button>
+       <!-- <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" data-toggle="modal" data-target="#addOrder">Add</button>-->
+        <a href="<%= new_order_path %>" class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;">Add</a>
       </div>
 
     </div>

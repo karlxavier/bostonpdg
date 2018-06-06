@@ -188,3 +188,12 @@ p {
     margin-top: .5%;
     margin-left: .5%;
 }
+.required label:before {
+    color: #e32;
+    content: '* ';
+    display:inline;
+}
+
+.col-form-label-right {
+    text-align: right !important;
+}
