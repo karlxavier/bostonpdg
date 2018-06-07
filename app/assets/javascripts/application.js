@@ -21,6 +21,26 @@
 //= require jquery.mCustomScrollbar.concat.min
 //= require front
 
+$(document).on('turbolinks:load', function() {
+    $('.selectpicker2').selectpicker();
+
+});
+
+var room = 1;
+function product_attributes() {
+    room++;
+    var objTo = document.getElementById('product_attributes')
+    var divtest = document.createElement("div");
+    divtest.setAttribute("class", "row form-group removeclass"+room);
+    var rdiv = 'removeclass'+room;
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[:field_name][]" name="order_field_name[]" value="" placeholder="Field Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[:field_value][]" name="order_field_value[]" value="" placeholder="Field Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+
+    objTo.appendChild(divtest)
+}
+function remove_education_fields(rid) {
+    $('.removeclass'+rid).remove();
+}
+
 function onSearchFilter() {
     // Declare variables
     var input, filter, div, buttons, btn, i;
@@ -84,3 +104,4 @@ function showEditOrder(id) {
     });
 
 }
+

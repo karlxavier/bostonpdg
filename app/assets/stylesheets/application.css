@@ -171,7 +171,7 @@ p {
 .glow-input {
     color: #989393 !important;
     box-shadow: 0 5px 15px rgba(33, 33, 33, .4);
-    padding-left: 1% !important;
+  /*  padding-left: 1% !important;*/
     border-radius: 0 !important;
     background-color: #FFFFFF !important;
 }
@@ -196,4 +196,19 @@ p {
 
 .col-form-label-right {
     text-align: right !important;
+}
+
+.stitched {
+    padding: 70px 20px;
+    margin: 10px;
+    background: #ffffff;
+    color: #9B9B9B;
+    font-size: 21px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.3em;
+    border: 2px dashed #9B9B9B;
+    border-radius: 2px;
+    text-shadow: -1px -1px #9B9B9B;
+    font-weight: normal;
 }

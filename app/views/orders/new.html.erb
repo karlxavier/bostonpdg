@@ -41,7 +41,7 @@
   <div class="form-group row required">
     <label class="col-sm-2 col-form-label label-form col-form-label-right">Regional Director</label>
     <div class="col-sm-10">
-      <select class="selectpicker form-control glow-input" data-live-search="true" name="order_user[regional][]" id="order_user_regional[]" multiple>
+      <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_user[regional][]" id="order_user_regional[]" multiple>
         <option></option>
         <% if @users.present? %>
             <% @users.each do |user| %>
@@ -55,7 +55,7 @@
   <div class="form-group row required">
     <label class="col-sm-2 col-form-label label-form col-form-label-right">Client Contacts</label>
     <div class="col-sm-10">
-      <select class="selectpicker form-control glow-input" data-live-search="true" name="order_user[client_contact][]" id="order_user_client_contact[]" multiple>
+      <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_user[client_contact][]" id="order_user_client_contact[]" multiple>
         <option></option>
         <% if @users.present? %>
             <% @users.each do |user| %>
@@ -69,7 +69,7 @@
   <div class="form-group row required">
     <label class="col-sm-2 col-form-label label-form col-form-label-right">Communications</label>
     <div class="col-sm-10">
-      <select class="selectpicker form-control glow-input" data-live-search="true" name="order_user[comms][]" id="order_user_comms[]" multiple>
+      <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_user[comms][]" id="order_user_comms[]" multiple>
         <option></option>
         <% if @users.present? %>
             <% @users.each do |user| %>
@@ -83,7 +83,7 @@
   <div class="form-group row required">
     <label class="col-sm-2 col-form-label label-form col-form-label-right">Art Director</label>
     <div class="col-sm-10">
-      <select class="selectpicker form-control glow-input" data-live-search="true" name="order_user[art][]" id="order_user_art[]" multiple>
+      <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_user[art][]" id="order_user_art[]" multiple>
         <option></option>
         <% if @users.present? %>
             <% @users.each do |user| %>
@@ -97,7 +97,7 @@
   <div class="form-group row required">
     <label class="col-sm-2 col-form-label label-form col-form-label-right">Designers</label>
     <div class="col-sm-10">
-      <select class="selectpicker form-control glow-input" data-live-search="true" name="order_user[designer][]" id="order_user_designer[]" multiple>
+      <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_user[designer][]" id="order_user_designer[]" multiple>
         <option></option>
         <% if @users.present? %>
             <% @users.each do |user| %>
@@ -111,7 +111,7 @@
   <div class="form-group row required">
     <label class="col-sm-2 col-form-label label-form col-form-label-right">Processor</label>
     <div class="col-sm-10">
-      <select class="selectpicker form-control glow-input" data-live-search="true" name="order_user[processor][]" id="order_user_processor[]" multiple>
+      <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_user[processor][]" id="order_user_processor[]" multiple>
         <option></option>
         <% if @users.present? %>
             <% @users.each do |user| %>
@@ -121,5 +121,92 @@
       </select>
     </div>
   </div>
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h3><b>Items</b></h3><br/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col padding-left padding-top-1">
+      <h5><b>Current Order</b></h5><br/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col padding-left">
+      <div class="stitched">
+
+        Empty
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h5><b>Add a New Item</b></h5><br/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col padding-left">
+      <h4>Product Name</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <input type="number" class="form-control glow-input" name="order[product_name]" id="order_product_name"/>
+      </div>
+    </div>
+  </div>
+  <!--Categories-->
+  <div class="row" style="padding-top: 4%;">
+    <div class="col padding-left">
+      <h4>Select Product Category</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <select class="selectpicker2 form-control glow-input" data-live-search="true" name="" id="">
+          <option></option>
+          <% if @categories.present? %>
+              <% @categories.each do |category| %>
+                  <option value="<%= category.id %>"><%= category.name %></option>
+              <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h4>Select Item Category</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <select class="selectpicker2 form-control glow-input" data-live-search="true" name="" id="">
+          <option></option>
+          <% if @categories.present? %>
+              <% @categories.each do |category| %>
+                  <option value="<%= category.id %>"><%= category.name %></option>
+              <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1" >
+      <span class="float-left"><h5>Attributes</h5></span>
+      <a class="btn btn-outline-dark float-right" onclick="product_attributes();" >Add Attributes</a>
+      <div class="padding-top-1" id="product_attributes" style="padding-top: 5%;">
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row" style="padding-top: 5%;">
+    <div class="col padding-left padding-top-1" style="padding-right: 5%; padding-left: 5%;">
+      <button class="btn btn-outline-dark" style="width: 100%;">Save this Item</button>
+    </div>
+  </div>
+
+
 
 </form>
