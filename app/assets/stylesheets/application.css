@@ -212,3 +212,20 @@ p {
     text-shadow: -1px -1px #9B9B9B;
     font-weight: normal;
 }
+
+.make-green {
+    color: #1EB980 !important;
+}
+
+.text-align-right {
+    text-align: right !important;
+
+}
+
+.text-align-left {
+    text-align: left;
+    color: #000;
+    text-shadow: none;
+    font-size: .8em;
+    padding-top: .5%;
+}

@@ -48,6 +48,19 @@ module Api
         end
       end
 
+      def create_item
+        @product = Product.new
+        @product.name = params[:product_name]
+        @product.category = params[:category_id]
+        @product.item_category_id = params[:item_category_id]
+        @product.dynamic_fields = params[:dynamic_fields].to_s
+        if @product.save
+          render json: @product
+        else
+          render nothing: true, status: :bad_request
+        end
+      end
+
       def update
         if @product.update_attributes(products_params)
           head :no_content

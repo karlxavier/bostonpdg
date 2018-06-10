@@ -1,7 +1,7 @@
 <form id="new_order" action="/orders" accept-charset="UTF-8" method="post">
   <div class="row" >
     <div class="col padding-left padding-top-1">
-      <h1><b>CREATE A NEW PROJECT</b></h1><br/>
+      <h1><b>EDIT THIS PROJECT #<%= @order.id %></b></h1><br/>
     </div>
   </div>
   <div class="row" style="padding-top: 2%;">
@@ -14,11 +14,11 @@
     <div class="col padding-left padding-top-1">
       <h5>Which brand is this for?</h5>
       <div class="input-group search-bar-padding">
-        <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order[brand_id]" id="order_brand_id" >
+        <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order[brand_id]" id="order_brand_id" value="<%= @order.brand_id %>">
           <option></option>
           <% if @brands.present? %>
               <% @brands.each do |brand| %>
-                  <option value="<%= brand.id %>"><%= brand.name %></option>
+                      <option value="<%= brand.id %>"<% if @order.brand_id == brand.id %> selected<% end %>><%= brand.name %></option>
               <% end %>
           <% end %>
         </select>
@@ -33,7 +33,17 @@
   </div>
   <div class="row" >
     <div class="col search-bar-padding text-justify item-list" id="brand-list">
-
+        <% if @addresses.present? %>
+            <% @addresses.each do |address| %>
+              <% @bol = false %>
+              <% @order_branches.each do |ob| %>
+                  <% if address.id == ob.address_id %>
+                    <% @bol = true %>
+                  <% end %>
+              <% end %>
+              <a class='btn btn-nav<% if @bol%> btn-yellow<% end %>' onclick='selectAndUnselect(<%= address.id %>, $(this))'> <%= address.state + " - " + address.city %></a>&nbsp;
+            <% end %>
+        <% end %>
     </div>
   </div>
   <!--Assign Users-->
@@ -49,7 +59,18 @@
         <option></option>
         <% if @users.present? %>
             <% @users.each do |user| %>
-                <option value="<%= user.id %>"><%= user.full_name %></option>
+                <% @bol = true %>
+                <% @order.regional.each do |regional|  %>
+                    <% if regional[:selected] %>
+                        <% if regional[:id] == user.id %>
+                            <option value="<%= user.id %>" selected><%= user.full_name %></option>
+                            <% @bol = false %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <% if @bol %>
+                    <option value="<%= user.id %>"><%= user.full_name %></option>
+                <% end %>
             <% end %>
         <% end %>
       </select>
@@ -63,7 +84,18 @@
         <option></option>
         <% if @users.present? %>
             <% @users.each do |user| %>
-                <option value="<%= user.id %>"><%= user.full_name %></option>
+                <% @bol = true %>
+                <% @order.client_contact.each do |client_contact|  %>
+                    <% if client_contact[:selected] %>
+                        <% if client_contact[:id] == user.id %>
+                            <option value="<%= user.id %>" selected><%= user.full_name %></option>
+                            <% @bol = false %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <% if @bol %>
+                    <option value="<%= user.id %>"><%= user.full_name %></option>
+                <% end %>
             <% end %>
         <% end %>
       </select>
@@ -77,7 +109,18 @@
         <option></option>
         <% if @users.present? %>
             <% @users.each do |user| %>
-                <option value="<%= user.id %>"><%= user.full_name %></option>
+                <% @bol = true %>
+                <% @order.comms.each do |comms|  %>
+                    <% if comms[:selected] %>
+                        <% if comms[:id] == user.id %>
+                            <option value="<%= user.id %>" selected><%= user.full_name %></option>
+                            <% @bol = false %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <% if @bol %>
+                    <option value="<%= user.id %>"><%= user.full_name %></option>
+                <% end %>
             <% end %>
         <% end %>
       </select>
@@ -92,7 +135,18 @@
         <option></option>
         <% if @users.present? %>
             <% @users.each do |user| %>
-                <option value="<%= user.id %>"><%= user.full_name %></option>
+                <% @bol = true %>
+                <% @order.art.each do |art|  %>
+                    <% if art[:selected] %>
+                        <% if art[:id] == user.id %>
+                            <option value="<%= user.id %>" selected><%= user.full_name %></option>
+                            <% @bol = false %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <% if @bol %>
+                    <option value="<%= user.id %>"><%= user.full_name %></option>
+                <% end %>
             <% end %>
         <% end %>
       </select>
@@ -106,7 +160,18 @@
         <option></option>
         <% if @users.present? %>
             <% @users.each do |user| %>
-                <option value="<%= user.id %>"><%= user.full_name %></option>
+                <% @bol = true %>
+                <% @order.designer.each do |designer|  %>
+                    <% if designer[:selected] %>
+                        <% if designer[:id] == user.id %>
+                            <option value="<%= user.id %>" selected><%= user.full_name %></option>
+                            <% @bol = false %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <% if @bol %>
+                    <option value="<%= user.id %>"><%= user.full_name %></option>
+                <% end %>
             <% end %>
         <% end %>
       </select>
@@ -120,7 +185,18 @@
         <option></option>
         <% if @users.present? %>
             <% @users.each do |user| %>
-                <option value="<%= user.id %>"><%= user.full_name %></option>
+                <% @bol = true %>
+                <% @order.processor.each do |processor|  %>
+                    <% if processor[:selected] %>
+                        <% if processor[:id] == user.id %>
+                            <option value="<%= user.id %>" selected><%= user.full_name %></option>
+                            <% @bol = false %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <% if @bol %>
+                    <option value="<%= user.id %>"><%= user.full_name %></option>
+                <% end %>
             <% end %>
         <% end %>
       </select>
@@ -142,11 +218,18 @@
   <div class="row">
     <div class="col padding-left">
       <div class="stitched row">
-        <div class="col">
 
-          Empty
-        </div>
-
+        <% @order_entries.each do |oe| %>
+            <div class='col-md-1 nopadding text-align-right row-button-<%= oe.product_id %>'>
+              <div class='form-group'>
+                <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(<%= oe.product_id %>);'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button>
+              </div>
+            </div>
+            <div class='col-md-11 nopadding text-align-left row-name-<%= oe.product_id %>'>
+              <div class='form-group'><%= oe.product_name %></div>
+            </div>
+            <div class='clear'></div>
+        <% end %>
 
       </div>
     </div>
@@ -249,7 +332,7 @@
 
   <div class="row" style="padding-top: 5%;">
     <div class="col padding-left padding-top-1" style="padding-right: 2%; padding-left: 2%;">
-      <a class="btn btn-success" style="width: 100%;" onclick="submitFormWithVal('new_order')">Save this Order</a>
+      <a class="btn btn-success" style="width: 100%;" >Save this Order</a>
     </div>
   </div>
 </form>
@@ -257,6 +340,15 @@
 <script>
   var address_list = [];
   var product_list = [];
+  <% @order_branches.each do |ob| %>
+        address_list.push(<%= ob.address_id %>);
+  <% end %>
+  <% @order_entries.each do |oe| %>
+    product_list.push(<%= oe.product_id %>);
+  <% end %>
+
+  $('.selectpicker').selectpicker('refresh');
+  $('.selectpicker2').selectpicker('refresh');
   function getAddress() {
       var id = $('#order_brand_id').val()
       $.ajax({
@@ -358,6 +450,7 @@
   }
 
   function removeOrderEntry(id) {
+      console.log(product_list);
       if (in_array(product_list, id)) {
           for(var i = product_list.length - 1; i >= 0; i--) {
               if(product_list[i] === id) {

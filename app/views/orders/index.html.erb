@@ -42,7 +42,7 @@
       </div>
 
       <div class="col text-right">
-        <button class="btn btn-outline-dark" style="margin: 0% 1%;padding: .2% 5% !important;" onclick="showEditOrder(<%= @order.id %>)">Edit</button>
+        <a class="btn btn-outline-dark" style="margin: 0% 1%;padding: .2% 5% !important;" href="<%= edit_order_path(@order) %>">Edit</a>
        <!-- <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" data-toggle="modal" data-target="#addOrder">Add</button>-->
         <a href="<%= new_order_path %>" class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;">Add</a>
       </div>
@@ -59,17 +59,25 @@
       </div>-->
     <div class="row"  style="padding-bottom: 5%;">
       <div class="col padding-left">
-        <div class="card text-secondary  bg-light mb-3" >
-          <div class="card-header"><b>USERS ASSIGNED TO THIS TICKET</b> <button class="btn btn-outline-info float-right" data-toggle="modal" data-target="#manageUsers">Manage Users</button></div>
+        <div class="card text-white bg-dark mb-3" >
+          <div class="card-header"><b>USERS ASSIGNED TO THIS TICKET</b> <button class="btn btn-outline-light float-right" data-toggle="modal" data-target="#manageUsers">Manage Users</button></div>
           <div class="card-body bg-light text-secondary">
-            <label class="item item-input input-adjust-padding-right">
-              <span class="input-label force-gray-label">CLIENT CONTACTS</span>
-            </label>
+
             <br>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">REGIONAL DIRECTOR</label>
               <div class="col-sm-8">
                 <% @order.regional.each do |user|  %>
+                    <% if user[:selected] %>
+                        <button class="btn btn-secondary btn-sm" disabled><%= user[:view] %></button>&nbsp;
+                    <% end %>
+                <% end %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">CLIENT CONTACTS</label>
+              <div class="col-sm-8">
+                <% @order.client_contact.each do |user|  %>
                     <% if user[:selected] %>
                         <button class="btn btn-secondary btn-sm" disabled><%= user[:view] %></button>&nbsp;
                     <% end %>
@@ -87,11 +95,21 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">DESIGNERS</label>
+              <label class="col-sm-4 col-form-label">ART</label>
               <div class="col-sm-8">
                 <% @order.art.each do |user|  %>
                     <% if user[:selected] %>
                     <button class="btn btn-secondary btn-sm" disabled><%= user[:view] %></button>&nbsp;
+                    <% end %>
+                <% end %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">DESIGNER</label>
+              <div class="col-sm-8">
+                <% @order.designer.each do |user|  %>
+                    <% if user[:selected] %>
+                        <button class="btn btn-secondary btn-sm" disabled><%= user[:view] %></button>&nbsp;
                     <% end %>
                 <% end %>
               </div>

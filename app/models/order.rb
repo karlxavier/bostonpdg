@@ -178,6 +178,68 @@ class Order < ApplicationRecord
     arr
   end
 
+  def designer
+    arr = []
+    arr_ids = []
+    order_user = OrderUser.where(:order_id => self.id)
+    order_user.each do |ou|
+      if ou.designer.present? && !ou.designer.nil?
+        arr_ids.push(ou.designer)
+      end
+    end
+
+    if arr_ids.length > 0
+      select_users = User.where("id IN (#{arr_ids.join(',')})")
+      all_users = User.where("id NOT IN (#{arr_ids.join(',')})")
+
+      if select_users.present? && !select_users.nil?
+        select_users.each do |user|
+          arr << {:id => user.id, :name => user.full_name, :view => user.full_name, :selected => true}
+        end
+      end
+    else
+      all_users = User.all
+    end
+
+    if all_users.present? && !all_users.nil?
+      all_users.each do |user|
+        arr << {:id => user.id, :name => user.full_name, :view => user.full_name, :selected => false}
+      end
+    end
+    arr
+  end
+
+  def client_contact
+    arr = []
+    arr_ids = []
+    order_user = OrderUser.where(:order_id => self.id)
+    order_user.each do |ou|
+      if ou.client_contact.present? && !ou.client_contact.nil?
+        arr_ids.push(ou.client_contact)
+      end
+    end
+
+    if arr_ids.length > 0
+      select_users = User.where("id IN (#{arr_ids.join(',')})")
+      all_users = User.where("id NOT IN (#{arr_ids.join(',')})")
+
+      if select_users.present? && !select_users.nil?
+        select_users.each do |user|
+          arr << {:id => user.id, :name => user.full_name, :view => user.full_name, :selected => true}
+        end
+      end
+    else
+      all_users = User.all
+    end
+
+    if all_users.present? && !all_users.nil?
+      all_users.each do |user|
+        arr << {:id => user.id, :name => user.full_name, :view => user.full_name, :selected => false}
+      end
+    end
+    arr
+  end
+
   def temp_brand
     obj = {}
     brand = Brand.find(self.brand_id)

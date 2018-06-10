@@ -81,6 +81,7 @@ Rails.application.routes.draw do
         get 'list', on: :collection
         get 'get_item_list', on: :collection
         get 'get_products_category', on: :collection
+        post 'create_item', on: :collection
       end
       resources :vendors do
         get 'list', on: :collection

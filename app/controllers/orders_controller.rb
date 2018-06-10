@@ -95,19 +95,96 @@ class OrdersController < ApplicationController
   end
 
   def create
-    temp_order = params[:order]
     @order = Order.new
-    @order.brand_id = temp_order[:brand_id]
-    @order.lead_time = temp_order[:lead_time]
-    @order.status = temp_order[:status]
-    @order.total_budget = temp_order[:total_budget]
-
+    @order.brand_id = params[:order][:brand_id]
     if @order.save
+      if params[:order_entries].present?
+        temp_order_entries = params[:order_entries]
+        temp_order_entries.each do |oe|
+          order_entry = OrderEntry.new
+          order_entry.order_id = @order.id
+          order_entry.product_id = oe
+          order_entry.save
+        end
+      end
+      if params[:order_branch].present?
+        temp_order_branch = params[:order_branch]
+        temp_order_branch.each do |ob|
+          order_branch = OrderBranch.new
+          order_branch.brand_id = @order.brand_id
+          order_branch.order_id = @order.id
+          order_branch.address_id = ob
+          order_branch.save
+        end
+      end
+      regional = params[:order_user][:regional]
+      comms = params[:order_user][:comms]
+      art = params[:order_user][:art]
+      processor = params[:order_user][:processor]
+      designer = params[:order_user][:designer]
+      client_contact = params[:order_user][:client_contact]
+      arr_count = []
+      i = 0
+
+      if params[:order_user][:regional].present?
+        arr_count.push(regional.length)
+      else
+        arr_count.push(0)
+      end
+      if params[:order_user][:comms].present?
+        arr_count.push(comms.length)
+      else
+        arr_count.push(0)
+      end
+      if params[:order_user][:art].present?
+        arr_count.push(art.length)
+      else
+        arr_count.push(0)
+      end
+      if params[:order_user][:processor].present?
+        arr_count.push(processor.length)
+      else
+        arr_count.push(0)
+      end
+      if params[:order_user][:designer].present?
+        arr_count.push(designer.length)
+      else
+        arr_count.push(0)
+      end
+      if params[:order_user][:client_contact].present?
+        arr_count.push(client_contact.length)
+      else
+        arr_count.push(0)
+      end
+
+      while i < arr_count.max
+        order_user = OrderUser.new
+        order_user.order_id = @order.id
+        if params[:order_user][:regional].present?
+          order_user.regional = regional[i]
+        end
+        if params[:order_user][:comms].present?
+          order_user.comms = comms[i]
+        end
+        if params[:order_user][:art].present?
+          order_user.art = art[i]
+        end
+        if params[:order_user][:processor].present?
+          order_user.processor = processor[i]
+        end
+        if params[:order_user][:designer].present?
+          order_user.designer = designer[i]
+        end
+        if params[:order_user][:client_contact].present?
+          order_user.client_contact = client_contact[i]
+        end
+        order_user.save
+        i = i + 1
+      end
       flash[:notice] = "Order Successfully Created"
     else
       flash[:error] = "Order Created Failed"
     end
-
     redirect_to orders_path(:id => @order.id)
   end
 
@@ -121,6 +198,20 @@ class OrdersController < ApplicationController
       flash[:error] = "Order Updated Failed"
     end
     redirect_to orders_path(:id => @order.id)
+  end
+
+
+  def edit
+    @categories = Category.all
+    @vendors = Vendor.all
+    @products = Product.all
+    @users = User.all
+    @brands = Brand.all
+    @order = Order.find(params[:id])
+    @order_entries = OrderEntry.where(:order_id => @order.id)
+    @order_users = OrderUser.where(:order_id => @order.id)
+    @order_branches = OrderBranch.where(:order_id => @order.id)
+    @addresses = Address.where("id IN (SELECT billing_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{@order.brand_id}))  OR id IN (SELECT shipping_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{@order.brand_id}))")
   end
 
 end
