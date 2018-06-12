@@ -24,6 +24,8 @@
 $(document).on('turbolinks:load', function() {
     $('.selectpicker2').selectpicker();
     $('.categories').selectpicker();
+    $('.brandpicker').selectpicker();
+    $('.clone_categories').selectpicker();
 
 });
 
@@ -35,6 +37,26 @@ function product_attributes() {
     divtest.setAttribute("class", "row form-group removeclass"+room);
     var rdiv = 'removeclass'+room;
     divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="order_field_name" value="" placeholder="Field Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="order_field_value" value="" placeholder="Field Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+
+    objTo.appendChild(divtest)
+}
+function clone_product_attributes() {
+    room++;
+    var objTo = document.getElementById('clone_product_attributes')
+    var divtest = document.createElement("div");
+    divtest.setAttribute("class", "row form-group removeclass"+room);
+    var rdiv = 'removeclass'+room;
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="clone_order_field_name" value="" placeholder="Field Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="clone_order_field_value" value="" placeholder="Field Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+
+    objTo.appendChild(divtest)
+}
+function clone_product_attributes_2(key, val) {
+    room++;
+    var objTo = document.getElementById('clone_product_attributes')
+    var divtest = document.createElement("div");
+    divtest.setAttribute("class", "row form-group removeclass"+room);
+    var rdiv = 'removeclass'+room;
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="clone_order_field_name" placeholder="Field Name" value="' + key + '"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="clone_order_field_value" placeholder="Field Value" value="' + val + '"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
     objTo.appendChild(divtest)
 }
@@ -63,9 +85,11 @@ function onSearchFilter() {
     }
 }
 
-function submitForm(id) {
+function submitForm(id, elem) {
     form_id = "#"+id;
     $( form_id ).submit();
+    $(elem).attr('disabled','disabled');
+    $(elem).html('Please Wait...');
 }
 
 function showEditOrderEntries(id) {

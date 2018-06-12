@@ -166,7 +166,9 @@ as well as a link to its edit page.
               <% if order_entries.present? %>
                   <% vendor_list = [] %>
                   <% order_entries.each do |order_entry| %>
-                      <% vendor_list.push(order_entry.vendor) %>
+                      <% if !order_entry.vendor.nil? %>
+                        <% vendor_list.push(order_entry.vendor) %>
+                      <% end %>
                   <% end %>
                   <% if vendor_list.length > 0 %>
                       <% vendors = Vendor.where("id IN (#{vendor_list.map(&:inspect).join(',')})")%>

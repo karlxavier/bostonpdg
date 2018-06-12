@@ -1,4 +1,6 @@
-<form id="new_order" action="/orders" accept-charset="UTF-8" method="post">
+<form id="edit_order" action="/orders/update_order" accept-charset="UTF-8" method="post">
+
+<input type="hidden" name="order[id]" id="order_id" value="<%= @order.id %>">
   <div class="row" >
     <div class="col padding-left padding-top-1">
       <h1><b>EDIT THIS PROJECT #<%= @order.id %></b></h1><br/>
@@ -14,7 +16,7 @@
     <div class="col padding-left padding-top-1">
       <h5>Which brand is this for?</h5>
       <div class="input-group search-bar-padding">
-        <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order[brand_id]" id="order_brand_id" value="<%= @order.brand_id %>">
+        <select class="brandpicker form-control glow-input" data-live-search="true" name="order[brand_id]" id="order_brand_id" value="<%= @order.brand_id %>">
           <option></option>
           <% if @brands.present? %>
               <% @brands.each do |brand| %>
@@ -22,7 +24,6 @@
               <% end %>
           <% end %>
         </select>
-        <a class="btn btn-secondary" onclick="getAddress();"> Search </a>
       </div>
     </div>
   </div>
@@ -222,7 +223,7 @@
         <% @order_entries.each do |oe| %>
             <div class='col-md-1 nopadding text-align-right row-button-<%= oe.product_id %>'>
               <div class='form-group'>
-                <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(<%= oe.product_id %>);'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button>
+                <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntryWithId(<%= oe.product_id %>, <%= oe.id %>);'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button>
               </div>
             </div>
             <div class='col-md-11 nopadding text-align-left row-name-<%= oe.product_id %>'>
@@ -240,13 +241,14 @@
   <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
       <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><h5><b>Add a New Item</b></h5></a>
+      <a class="nav-item nav-link" id="nav-clone-tab" data-toggle="tab" href="#nav-clone" role="tab" aria-controls="nav-profile" aria-selected="false"> <h5><b>Clone an existing item</b></h5></a>
       <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"> <h5><b>Add an existing item</b></h5></a>
     </div>
   </nav>
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-      <div class="row">
+      <div class="row" style="padding-top: 2%;">
         <div class="col padding-left">
           <h4>Product Name</h4>
           <div class="input-group search-bar-padding padding-top-1">
@@ -304,6 +306,82 @@
       </div>
 
     </div>
+
+    <div class="tab-pane fade" id="nav-clone" role="tabpanel" aria-labelledby="nav-clone-tab">
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left padding-top-1">
+          <h4>Select Product to Copy it's Attributes</h4>
+          <div class="input-group search-bar-padding padding-top-1">
+            <select class="clone_categories form-control glow-input" data-live-search="true" name="product_id" id="clone_product_id">
+              <option></option>
+              <% if @products.present? %>
+                  <% @products.each do |product| %>
+                      <option value="<%= product.id %>"><%= product.name %></option>
+                  <% end %>
+              <% end %>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left">
+          <h4>Product Name</h4>
+          <div class="input-group search-bar-padding padding-top-1">
+            <input type="text" class="form-control glow-input" name="product_name" id="clone_product_name"/>
+          </div>
+        </div>
+      </div>
+      <!--Categories-->
+      <div class="row" style="padding-top: 4%;">
+        <div class="col padding-left">
+          <h4>Select Product Category</h4>
+          <div class="input-group search-bar-padding padding-top-1">
+            <select class="clone_categories form-control glow-input" data-live-search="true" name="category_id" id="clone_category_id" >
+              <option></option>
+              <% if @categories.present? %>
+                  <% @categories.each do |category| %>
+                      <option value="<%= category.id %>"><%= category.name %></option>
+                  <% end %>
+              <% end %>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left padding-top-1">
+          <h4>Select Item Category</h4>
+          <div class="input-group search-bar-padding padding-top-1">
+            <select class="clone_categories form-control glow-input" data-live-search="true" name="item_category_id" id="clone_item_category_id">
+              <option></option>
+              <% if @categories.present? %>
+                  <% @categories.each do |category| %>
+                      <option value="<%= category.id %>"><%= category.name %></option>
+                  <% end %>
+              <% end %>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left padding-top-1" >
+          <span class="float-left"><h5>Attributes</h5></span>
+          <a class="btn btn-outline-dark float-right" onclick="clone_product_attributes();" >Add Attributes</a>
+          <div class="padding-top-1" id="clone_product_attributes" style="padding-top: 5%;">
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row" style="padding-top: 5%;">
+        <div class="col padding-left padding-top-1" style="padding-right: 5%; padding-left: 5%;">
+          <a class="btn btn-outline-dark" style="width: 100%;" onclick="submitNewClonedProduct();">Save this Item</a>
+        </div>
+      </div>
+    </div>
+
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
       <div class="row" style="padding-top: 2%;">
         <div class="col padding-left padding-top-1">
@@ -330,9 +408,10 @@
   </div>
 
 
+
   <div class="row" style="padding-top: 5%;">
     <div class="col padding-left padding-top-1" style="padding-right: 2%; padding-left: 2%;">
-      <a class="btn btn-success" style="width: 100%;" >Save this Order</a>
+      <a class="btn btn-success" style="width: 100%;" onclick="submitFormWithVal('edit_order', $(this));">Update this Order</a>
     </div>
   </div>
 </form>
@@ -340,12 +419,43 @@
 <script>
   var address_list = [];
   var product_list = [];
+  var entry_list = [];
   <% @order_branches.each do |ob| %>
         address_list.push(<%= ob.address_id %>);
   <% end %>
   <% @order_entries.each do |oe| %>
-    product_list.push(<%= oe.product_id %>);
+    entry_list.push(<%= oe.id %>);
   <% end %>
+
+  $(function() {
+
+      $('select.brandpicker').on('change', function(e){
+          /*console.log(this.value,
+           this.options[this.selectedIndex].value,
+           $(this).find("option:selected").val(),);*/
+          getAddress(this.value)
+      });
+
+      $('select.clone_categories').on('change', function(e){
+          $.ajax({
+              method: "GET",
+              url: "/api/simple/products/"+this.value
+          }).done(function( data ) {
+              $('#clone_product_name').val(data.name);
+              $('#clone_category_id').val(data.category);
+              $('#clone_item_category_id').val(data.item_category_id);
+              $('#clone_product_attributes').html('');
+              $('.clone_categories').selectpicker('refresh');
+              foo = JSON.parse(data.convert_dynamic_fields);
+              Object.keys(foo)
+                      .forEach(function eachKey(key) {
+                          clone_product_attributes_2(key, foo[key]);
+                      });
+          });
+      });
+
+
+  });
 
   $('.selectpicker').selectpicker('refresh');
   $('.selectpicker2').selectpicker('refresh');
@@ -386,19 +496,56 @@
       return false;
   }
 
-  function submitFormWithVal(id) {
+  function submitFormWithVal(id, elem) {
       form_id = "#"+id;
       var input = $("<input>")
               .attr("type", "hidden")
-              .attr("name", "order_branch[]").val(address_list);
+              .attr("name", "order_branch").val(address_list);
       var input2 = $("<input>")
               .attr("type", "hidden")
-              .attr("name", "order_entries[]").val(product_list);
+              .attr("name", "order_entries").val(product_list);
+      var input3 = $("<input>")
+              .attr("type", "hidden")
+              .attr("name", "existing_entries").val(entry_list);
       $(form_id).append($(input));
       $(form_id).append($(input2));
+      $(form_id).append($(input3));
       $( form_id ).submit();
+      $(elem).attr('disabled','disabled');
+      $(elem).addClass( "disabled" );
+      $(elem).html('Please Wait...');
   }
+  function submitNewClonedProduct() {
+      var product_name = $('#clone_product_name').val();
+      var category_id = $('#clone_category_id').val();
+      var item_category_id = $('#clone_item_category_id').val();
+      var dynamic_fields = {};
 
+      var field_names = $('input[name=clone_order_field_name]');
+      var field_values = $('input[name=clone_order_field_value]');
+
+      for(var i = field_names.length - 1; i >= 0; i--) {
+          dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
+      }
+      console.log(dynamic_fields)
+      $.ajax({
+          method: "POST",
+          url: "/api/simple/products/create_item",
+          data: {product_name: product_name, category_id: category_id, item_category_id: item_category_id, dynamic_fields: dynamic_fields}
+      }).done(function( data ) {
+          $('#clone_product_name').val('');
+          $('#clone_category_id').val('');
+          $('#clone_item_category_id').val('');
+          $('#clone_product_attributes').html('');
+          $('.clone_categories').selectpicker('refresh');
+          if (product_list.length === 0 && entry_list.length === 0) {
+              $('.stitched').html('')
+          }
+          product_list.push(data.id)
+          order_entries = $('.stitched').html();
+          $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
+      });
+  }
   function submitNewProduct() {
       var product_name = $('#product_name').val();
       var category_id = $('#category_id').val();
@@ -422,7 +569,7 @@
           $('#item_category_id').val('');
           $('#product_attributes').html('');
           $('.categories').selectpicker('refresh');
-          if (product_list.length === 0) {
+          if (product_list.length === 0 && entry_list.length === 0) {
               $('.stitched').html('')
           }
           product_list.push(data.id)
@@ -439,7 +586,7 @@
       }).done(function( data ) {
           $('#product_id').val('');
           $('.products').selectpicker('refresh');
-          if (product_list.length === 0) {
+          if (product_list.length === 0 && entry_list.length === 0) {
               $('.stitched').html('')
 
           }
@@ -457,6 +604,23 @@
                   product_list.splice(i, 1);
               }
           }
+          $('.row-button-'+id).remove();
+          $('.row-name-'+id).remove();
+
+          if (product_list.length === 0) {
+              $('.stitched').html("<div class='col'>Empty</div>")
+          }
+      }
+  }
+  function removeOrderEntryWithId(id, entry_id) {
+      console.log(entry_list);
+      if (entry_list.includes(entry_id)) {
+          for(var i = entry_list.length - 1; i >= 0; i--) {
+              if(entry_list[i] === entry_id) {
+                  entry_list.splice(i, 1);
+              }
+          }
+          console.log(entry_list);
           $('.row-button-'+id).remove();
           $('.row-name-'+id).remove();
 
