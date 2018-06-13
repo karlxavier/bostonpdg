@@ -311,9 +311,7 @@ class OrdersController < ApplicationController
     else
       flash[:error] = "Order Updated Failed"
     end
-=begin
     redirect_to orders_path(:id => @order.id)
-=end
   end
 
 
@@ -327,7 +325,9 @@ class OrdersController < ApplicationController
     @order_entries = OrderEntry.where(:order_id => @order.id)
     @order_users = OrderUser.where(:order_id => @order.id)
     @order_branches = OrderBranch.where(:order_id => @order.id)
-    @addresses = Address.where("id IN (SELECT billing_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{@order.brand_id}))  OR id IN (SELECT shipping_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{@order.brand_id}))")
+    if @order.brand_id.present? && !@order.brand_id.nil?
+      @addresses = Address.where("id IN (SELECT billing_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{@order.brand_id}))  OR id IN (SELECT shipping_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{@order.brand_id}))")
+    end
   end
 
 end

@@ -130,3 +130,30 @@ function showEditOrder(id) {
 
 }
 
+function itemDetails(id) {
+    $.ajax({
+        method: "GET",
+        url: "/api/simple/products/"+id
+    }).done(function( data ) {
+        $('#product-name-header').html("(" + data.name + ")");
+       /* $('#clone_category_id').html(data.category);
+        $('#clone_item_category_id').val(data.item_category_id);*/
+        if (data.specs != "" && data.specs != null && data.specs != undefined) {
+            $('#nav-specs').html(data.specs)
+        }
+        if (data.vendor_quote_prices != "" && data.vendor_quote_prices != null && data.vendor_quote_prices != undefined) {
+            $('#nav-quotes').html(data.vendor_quote_prices)
+        }
+        if (data.notes != "" && data.notes != null && data.notes != undefined) {
+            $('#nav-notes').html(data.notes)
+        }
+        foo = JSON.parse(data.convert_dynamic_fields);
+        Object.keys(foo)
+            .forEach(function eachKey(key) {
+                dynamic_attributes = $('#dynamic-attributes').html();
+                $('#dynamic-attributes').html(dynamic_attributes + "<tr style='margin-bottom: 2%'><td> <span class='float-left'>" + key + "</span> <span class='float-right'>" + foo[key] + "</span></td></tr>");
+            });
+        $('#viewProducts').modal('show');
+    });
+}
+

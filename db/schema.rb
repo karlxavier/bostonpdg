@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180610084038) do
+ActiveRecord::Schema.define(version: 20180613085131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,6 +209,9 @@ ActiveRecord::Schema.define(version: 20180610084038) do
     t.bigint "style_attribute_id"
     t.integer "item_category_id"
     t.string "dynamic_fields"
+    t.text "specs"
+    t.text "vendor_quote_prices"
+    t.text "notes"
     t.index ["style_attribute_id"], name: "index_products_on_style_attribute_id"
     t.index ["vendor_id"], name: "index_products_on_vendor_id"
   end

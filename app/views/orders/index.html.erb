@@ -1,8 +1,7 @@
-<%= render "orders/modals/add_order" %>
-<%= render "orders/modals/edit_order" %>
 <%= render "orders/modals/add_order_entries" %>
 <%= render "orders/modals/edit_order_entries" %>
 <%= render "orders/modals/manage_users" %>
+<%= render "orders/modals/item_details" %>
 <div class="row" style="position:relative;">
   <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 30% !important;">
     <% @orders.each do |order| %>
@@ -153,7 +152,7 @@
               <% @order_entries.each do |entry|%>
                   <tr>
                     <td><%= entry.category_name %></td>
-                    <td><%= entry.product_name %></td>
+                    <td> <a nohref style="cursor:pointer;color:#22773c;text-decoration:underline" onclick="itemDetails(<%= entry.product_id %>);"><%= entry.product_name %></a></td>
                     <td><%= entry.quantity  %></td>
                     <td><%= entry.price %></td>
                     <td><%= (entry.quantity.nil? ? 0 : entry.quantity) * (entry.price.nil? ? 0 : entry.price) %></td>

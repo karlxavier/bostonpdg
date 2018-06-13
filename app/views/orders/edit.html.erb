@@ -16,7 +16,7 @@
     <div class="col padding-left padding-top-1">
       <h5>Which brand is this for?</h5>
       <div class="input-group search-bar-padding">
-        <select class="brandpicker form-control glow-input" data-live-search="true" name="order[brand_id]" id="order_brand_id" value="<%= @order.brand_id %>">
+        <select class="brandpicker form-control glow-input" data-live-search="true" name="order[brand_id]" id="order_brand_id" value="<%= @order.brand_id %>" required>
           <option></option>
           <% if @brands.present? %>
               <% @brands.each do |brand| %>
@@ -238,174 +238,228 @@
 
   <br/>
   <br/>
-  <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><h5><b>Add a New Item</b></h5></a>
-      <a class="nav-item nav-link" id="nav-clone-tab" data-toggle="tab" href="#nav-clone" role="tab" aria-controls="nav-profile" aria-selected="false"> <h5><b>Clone an existing item</b></h5></a>
-      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"> <h5><b>Add an existing item</b></h5></a>
-    </div>
-  </nav>
-  <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><h5><b>Add a New Item</b></h5></a>
+    <a class="nav-item nav-link" id="nav-clone-tab" data-toggle="tab" href="#nav-clone" role="tab" aria-controls="nav-profile" aria-selected="false"> <h5><b>Clone an existing item</b></h5></a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"> <h5><b>Add an existing item</b></h5></a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-      <div class="row" style="padding-top: 2%;">
-        <div class="col padding-left">
-          <h4>Product Name</h4>
-          <div class="input-group search-bar-padding padding-top-1">
-            <input type="text" class="form-control glow-input" name="product_name" id="product_name"/>
-          </div>
-        </div>
-      </div>
-      <!--Categories-->
-      <div class="row" style="padding-top: 4%;">
-        <div class="col padding-left">
-          <h4>Select Product Category</h4>
-          <div class="input-group search-bar-padding padding-top-1">
-            <select class="categories form-control glow-input" data-live-search="true" name="category_id" id="category_id" >
-              <option></option>
-              <% if @categories.present? %>
-                  <% @categories.each do |category| %>
-                      <option value="<%= category.id %>"><%= category.name %></option>
-                  <% end %>
-              <% end %>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row" style="padding-top: 2%;">
-        <div class="col padding-left padding-top-1">
-          <h4>Select Item Category</h4>
-          <div class="input-group search-bar-padding padding-top-1">
-            <select class="categories form-control glow-input" data-live-search="true" name="item_category_id" id="item_category_id">
-              <option></option>
-              <% if @categories.present? %>
-                  <% @categories.each do |category| %>
-                      <option value="<%= category.id %>"><%= category.name %></option>
-                  <% end %>
-              <% end %>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="padding-top: 2%;">
-        <div class="col padding-left padding-top-1" >
-          <span class="float-left"><h5>Attributes</h5></span>
-          <a class="btn btn-outline-dark float-right" onclick="product_attributes();" >Add Attributes</a>
-          <div class="padding-top-1" id="product_attributes" style="padding-top: 5%;">
-
-          </div>
-        </div>
-
-      </div>
-
-      <div class="row" style="padding-top: 5%;">
-        <div class="col padding-left padding-top-1" style="padding-right: 5%; padding-left: 5%;">
-          <a class="btn btn-outline-dark" style="width: 100%;" onclick="submitNewProduct();">Save this Item</a>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="tab-pane fade" id="nav-clone" role="tabpanel" aria-labelledby="nav-clone-tab">
-      <div class="row" style="padding-top: 2%;">
-        <div class="col padding-left padding-top-1">
-          <h4>Select Product to Copy it's Attributes</h4>
-          <div class="input-group search-bar-padding padding-top-1">
-            <select class="clone_categories form-control glow-input" data-live-search="true" name="product_id" id="clone_product_id">
-              <option></option>
-              <% if @products.present? %>
-                  <% @products.each do |product| %>
-                      <option value="<%= product.id %>"><%= product.name %></option>
-                  <% end %>
-              <% end %>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="padding-top: 2%;">
-        <div class="col padding-left">
-          <h4>Product Name</h4>
-          <div class="input-group search-bar-padding padding-top-1">
-            <input type="text" class="form-control glow-input" name="product_name" id="clone_product_name"/>
-          </div>
-        </div>
-      </div>
-      <!--Categories-->
-      <div class="row" style="padding-top: 4%;">
-        <div class="col padding-left">
-          <h4>Select Product Category</h4>
-          <div class="input-group search-bar-padding padding-top-1">
-            <select class="clone_categories form-control glow-input" data-live-search="true" name="category_id" id="clone_category_id" >
-              <option></option>
-              <% if @categories.present? %>
-                  <% @categories.each do |category| %>
-                      <option value="<%= category.id %>"><%= category.name %></option>
-                  <% end %>
-              <% end %>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row" style="padding-top: 2%;">
-        <div class="col padding-left padding-top-1">
-          <h4>Select Item Category</h4>
-          <div class="input-group search-bar-padding padding-top-1">
-            <select class="clone_categories form-control glow-input" data-live-search="true" name="item_category_id" id="clone_item_category_id">
-              <option></option>
-              <% if @categories.present? %>
-                  <% @categories.each do |category| %>
-                      <option value="<%= category.id %>"><%= category.name %></option>
-                  <% end %>
-              <% end %>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="padding-top: 2%;">
-        <div class="col padding-left padding-top-1" >
-          <span class="float-left"><h5>Attributes</h5></span>
-          <a class="btn btn-outline-dark float-right" onclick="clone_product_attributes();" >Add Attributes</a>
-          <div class="padding-top-1" id="clone_product_attributes" style="padding-top: 5%;">
-
-          </div>
-        </div>
-
-      </div>
-
-      <div class="row" style="padding-top: 5%;">
-        <div class="col padding-left padding-top-1" style="padding-right: 5%; padding-left: 5%;">
-          <a class="btn btn-outline-dark" style="width: 100%;" onclick="submitNewClonedProduct();">Save this Item</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-      <div class="row" style="padding-top: 2%;">
-        <div class="col padding-left padding-top-1">
-          <h4>Select Existing Product</h4>
-          <div class="input-group search-bar-padding padding-top-1">
-            <select class="categories form-control glow-input" data-live-search="true" name="product_id" id="product_id">
-              <option></option>
-              <% if @products.present? %>
-                  <% @products.each do |product| %>
-                      <option value="<%= product.id %>"><%= product.name %></option>
-                  <% end %>
-              <% end %>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="padding-top: 5%;">
-        <div class="col padding-left padding-top-1" style="padding-right: 5%; padding-left: 5%;">
-          <a class="btn btn-outline-dark" style="width: 100%;" onclick="addExistingItem();">Add this Item</a>
-        </div>
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left">
+      <h4>Product Name</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <input type="text" class="form-control glow-input" name="product_name" id="product_name"/>
       </div>
     </div>
   </div>
+  <!--Categories-->
+  <div class="row" style="padding-top: 4%;">
+    <div class="col padding-left">
+      <h4>Select Product Category</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <select class="categories form-control glow-input" data-live-search="true" name="category_id" id="category_id" >
+          <option></option>
+          <% if @categories.present? %>
+              <% @categories.each do |category| %>
+                  <option value="<%= category.id %>"><%= category.name %></option>
+              <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h4>Select Item Category</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <select class="categories form-control glow-input" data-live-search="true" name="item_category_id" id="item_category_id">
+          <option></option>
+          <% if @categories.present? %>
+              <% @categories.each do |category| %>
+                  <option value="<%= category.id %>"><%= category.name %></option>
+              <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h4>Specifications</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <textarea class="form-control glow-input" id="specs" name="specs" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h4>Vendor Price Quotes</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <textarea class="form-control glow-input" id="vendor_quote_prices" name="vendor_quote_prices" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h4>Notes</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <textarea class="form-control glow-input" id="notes" name="notes" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1" >
+      <span class="float-left"><h5>Attributes</h5></span>
+      <a class="btn btn-outline-dark float-right" onclick="product_attributes();" >Add Attributes</a>
+      <div class="padding-top-1" id="product_attributes" style="padding-top: 5%;">
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row" style="padding-top: 5%;">
+    <div class="col padding-left padding-top-1" style="padding-right: 5%; padding-left: 5%;">
+      <a class="btn btn-outline-dark" style="width: 100%;" onclick="submitNewProduct();">Save this Item</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="tab-pane fade" id="nav-clone" role="tabpanel" aria-labelledby="nav-clone-tab">
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h4>Select Product to Copy it's Attributes</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <select class="clone_categories form-control glow-input" data-live-search="true" name="product_id" id="clone_product_id">
+          <option></option>
+          <% if @products.present? %>
+              <% @products.each do |product| %>
+                  <option value="<%= product.id %>"><%= product.name %></option>
+              <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left">
+      <h4>Product Name</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <input type="text" class="form-control glow-input" name="product_name" id="clone_product_name"/>
+      </div>
+    </div>
+  </div>
+  <!--Categories-->
+  <div class="row" style="padding-top: 4%;">
+    <div class="col padding-left">
+      <h4>Select Product Category</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <select class="clone_categories form-control glow-input" data-live-search="true" name="category_id" id="clone_category_id" >
+          <option></option>
+          <% if @categories.present? %>
+              <% @categories.each do |category| %>
+                  <option value="<%= category.id %>"><%= category.name %></option>
+              <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h4>Select Item Category</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <select class="clone_categories form-control glow-input" data-live-search="true" name="item_category_id" id="clone_item_category_id">
+          <option></option>
+          <% if @categories.present? %>
+              <% @categories.each do |category| %>
+                  <option value="<%= category.id %>"><%= category.name %></option>
+              <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h4>Specifications</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <textarea class="form-control glow-input" id="clone_specs" name="specs" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h4>Vendor Price Quotes</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <textarea class="form-control glow-input" id="clone_vendor_quote_prices" name="vendor_quote_prices" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h4>Notes</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <textarea class="form-control glow-input" id="clone_notes" name="notes" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1" >
+      <span class="float-left"><h5>Attributes</h5></span>
+      <a class="btn btn-outline-dark float-right" onclick="clone_product_attributes();" >Add Attributes</a>
+      <div class="padding-top-1" id="clone_product_attributes" style="padding-top: 5%;">
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row" style="padding-top: 5%;">
+    <div class="col padding-left padding-top-1" style="padding-right: 5%; padding-left: 5%;">
+      <a class="btn btn-outline-dark" style="width: 100%;" onclick="submitNewClonedProduct();">Save this Item</a>
+    </div>
+  </div>
+</div>
+
+<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left padding-top-1">
+      <h4>Select Existing Product</h4>
+      <div class="input-group search-bar-padding padding-top-1">
+        <select class="categories form-control glow-input" data-live-search="true" name="product_id" id="product_id">
+          <option></option>
+          <% if @products.present? %>
+              <% @products.each do |product| %>
+                  <option value="<%= product.id %>"><%= product.name %></option>
+              <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 5%;">
+    <div class="col padding-left padding-top-1" style="padding-right: 5%; padding-left: 5%;">
+      <a class="btn btn-outline-dark" style="width: 100%;" onclick="addExistingItem();">Add this Item</a>
+    </div>
+  </div>
+</div>
+</div>
 
 
 
@@ -444,6 +498,9 @@
               $('#clone_product_name').val(data.name);
               $('#clone_category_id').val(data.category);
               $('#clone_item_category_id').val(data.item_category_id);
+              $('#clone_specs').text(data.specs)
+              $('#clone_vendor_quote_prices').text(data.vendor_quote_prices)
+              $('#clone_notes').text(data.notes)
               $('#clone_product_attributes').html('');
               $('.clone_categories').selectpicker('refresh');
               foo = JSON.parse(data.convert_dynamic_fields);
@@ -519,37 +576,47 @@
       var product_name = $('#clone_product_name').val();
       var category_id = $('#clone_category_id').val();
       var item_category_id = $('#clone_item_category_id').val();
+      var specs =  $('#clone_specs').val();
+      var vendor_quote_prices = $('#clone_vendor_quote_prices').val();
+      var notes = $('#clone_notes').val();
       var dynamic_fields = {};
-
       var field_names = $('input[name=clone_order_field_name]');
       var field_values = $('input[name=clone_order_field_value]');
 
       for(var i = field_names.length - 1; i >= 0; i--) {
           dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
       }
-      console.log(dynamic_fields)
-      $.ajax({
-          method: "POST",
-          url: "/api/simple/products/create_item",
-          data: {product_name: product_name, category_id: category_id, item_category_id: item_category_id, dynamic_fields: dynamic_fields}
-      }).done(function( data ) {
-          $('#clone_product_name').val('');
-          $('#clone_category_id').val('');
-          $('#clone_item_category_id').val('');
-          $('#clone_product_attributes').html('');
-          $('.clone_categories').selectpicker('refresh');
-          if (product_list.length === 0 && entry_list.length === 0) {
-              $('.stitched').html('')
-          }
-          product_list.push(data.id)
-          order_entries = $('.stitched').html();
-          $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
-      });
+      if (product_name != '' && (category_id != '' || item_category_id != '')) {
+          $.ajax({
+              method: "POST",
+              url: "/api/simple/products/create_item",
+              data: {product_name: product_name, category_id: category_id, item_category_id: item_category_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes, dynamic_fields: dynamic_fields}
+          }).done(function( data ) {
+              $('#clone_product_name').val('');
+              $('#clone_category_id').val('');
+              $('#clone_item_category_id').val('');
+              $('#clone_specs').val('')
+              $('#clone_vendor_quote_prices').val('')
+              $('#clone_notes').val('')
+              $('#clone_product_attributes').html('');
+              $('.clone_categories').selectpicker('refresh');
+              if (product_list.length === 0) {
+                  $('.stitched').html('')
+              }
+              product_list.push(data.id)
+              order_entries = $('.stitched').html();
+              $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
+          });
+      }
+
   }
   function submitNewProduct() {
       var product_name = $('#product_name').val();
       var category_id = $('#category_id').val();
       var item_category_id = $('#item_category_id').val();
+      var specs =  $('#specs').val();
+      var vendor_quote_prices = $('#vendor_quote_prices').val();
+      var notes = $('#notes').val();
       var dynamic_fields = {};
 
       var field_names = $('input[name=order_field_name]');
@@ -558,24 +625,29 @@
       for(var i = field_names.length - 1; i >= 0; i--) {
           dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
       }
-      console.log(dynamic_fields)
-      $.ajax({
-          method: "POST",
-          url: "/api/simple/products/create_item",
-          data: {product_name: product_name, category_id: category_id, item_category_id: item_category_id, dynamic_fields: dynamic_fields}
-      }).done(function( data ) {
-          $('#product_name').val('');
-          $('#category_id').val('');
-          $('#item_category_id').val('');
-          $('#product_attributes').html('');
-          $('.categories').selectpicker('refresh');
-          if (product_list.length === 0 && entry_list.length === 0) {
-              $('.stitched').html('')
-          }
-          product_list.push(data.id)
-          order_entries = $('.stitched').html();
-          $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
-      });
+      if (product_name != '' && (category_id != '' || item_category_id != '')) {
+          $.ajax({
+              method: "POST",
+              url: "/api/simple/products/create_item",
+              data: {product_name: product_name, category_id: category_id, item_category_id: item_category_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes, dynamic_fields: dynamic_fields}
+          }).done(function( data ) {
+              $('#product_name').val('');
+              $('#category_id').val('');
+              $('#item_category_id').val('');
+              $('#specs').val('')
+              $('#vendor_quote_prices').val('')
+              $('#notes').val('')
+              $('#product_attributes').html('');
+              $('.categories').selectpicker('refresh');
+              if (product_list.length === 0) {
+                  $('.stitched').html('')
+              }
+              product_list.push(data.id)
+              order_entries = $('.stitched').html();
+              $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
+          });
+      }
+
   }
 
   function addExistingItem() {
