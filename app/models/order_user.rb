@@ -1,4 +1,26 @@
 class OrderUser < ApplicationRecord
+  belongs_to :order
+
+  scope :regional_users, -> (order_id) { User.select(:id, :first_name, :last_name).where("id IN (?)", regional(order_id)) }
+  scope :regional, -> (order_id) { select(:regional).where(order_id: order_id).where.not(regional: nil).pluck(:regional) }
+
+  scope :comms_users, -> (order_id) { User.select(:id, :first_name, :last_name).where("id IN (?)", comms(order_id)) }
+  scope :comms, -> (order_id) { select(:comms).where(order_id: order_id).where.not(comms: nil).pluck(:comms) }
+
+  scope :art_users, -> (order_id) { User.select(:id, :first_name, :last_name).where("id IN (?)", art(order_id)) }
+  scope :art, -> (order_id) { select(:art).where(order_id: order_id).where.not(art: nil).pluck(:art) }
+
+  scope :processor_users, -> (order_id) { User.select(:id, :first_name, :last_name).where("id IN (?)", processor(order_id)) }
+  scope :processor, -> (order_id) { select(:processor).where(order_id: order_id).where.not(processor: nil).pluck(:processor) }
+
+  scope :client_contact_users, -> (order_id) { User.select(:id, :first_name, :last_name).where("id IN (?)", client_contact(order_id)) }
+  scope :client_contact, -> (order_id) { select(:client_contact).where(order_id: order_id).where.not(client_contact: nil).pluck(:client_contact) }
+
+  scope :designer_users, -> (order_id) { User.select(:id, :first_name, :last_name).where("id IN (?)", designer(order_id)) }
+  scope :designer, -> (order_id) { select(:designer).where(order_id: order_id).where.not(designer: nil).pluck(:designer) }
+
+  scope :not_in_users, -> (user_ids) { User.select(:id, :first_name, :last_name).where("id NOT IN (?)", user_ids)}
+
   def regional_name
     if !self.regional.nil? && self.regional != ""
       user = User.find(self.regional)
