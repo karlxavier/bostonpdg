@@ -11,11 +11,16 @@ class OrderEntriesController < ApplicationController
     @order_entry.cost = params[:order_entry][:cost]
     @order_entry.tax = params[:order_entry][:tax]
     @order_entry.quantity = params[:order_entry][:quantity]
-    if @order_entry.save
-      flash[:notice] = "Order Entry Successfully Created"
+    if params[:order_entry][:order_id].present? && params[:order_entry][:vendor].present? && params[:order_entry][:product_id].present? && params[:order_entry][:quoted_by].present? && params[:order_entry][:price].present? && params[:order_entry][:cost].present? && params[:order_entry][:quantity].present?
+      if @order_entry.save
+        flash[:notice] = "Order Entry Successfully Created"
+      else
+        flash[:error] = "Order Entry Created Failed"
+      end
     else
       flash[:error] = "Order Entry Created Failed"
     end
+
     redirect_to orders_path(:id => @order_entry.order_id)
   end
 
@@ -31,8 +36,13 @@ class OrderEntriesController < ApplicationController
 
   def update_entry
     @order_entry = OrderEntry.find(params[:order_entry][:id])
-    if @order_entry.update_attributes(:category_id => params[:order_entry][:category_id], :vendor => params[:order_entry][:vendor], :product_id => params[:order_entry][:product_id], :order_id => params[:order_entry][:order_id], :quoted_by => params[:order_entry][:quoted_by], :price => params[:order_entry][:price], :tax => params[:order_entry][:tax], :cost => params[:order_entry][:cost], :quantity => params[:order_entry][:quantity])
-      flash[:notice] = "Order Entry Successfully Updated"
+    if params[:order_entry][:order_id].present? && params[:order_entry][:vendor].present? && params[:order_entry][:product_id].present? && params[:order_entry][:quoted_by].present? && params[:order_entry][:price].present? && params[:order_entry][:cost].present? && params[:order_entry][:quantity].present?
+
+      if @order_entry.update_attributes(:category_id => params[:order_entry][:category_id], :vendor => params[:order_entry][:vendor], :product_id => params[:order_entry][:product_id], :order_id => params[:order_entry][:order_id], :quoted_by => params[:order_entry][:quoted_by], :price => params[:order_entry][:price], :tax => params[:order_entry][:tax], :cost => params[:order_entry][:cost], :quantity => params[:order_entry][:quantity])
+        flash[:notice] = "Order Entry Successfully Updated"
+      else
+        flash[:error] = "Order Entry Updated Failed"
+      end
     else
       flash[:error] = "Order Entry Updated Failed"
     end
