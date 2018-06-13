@@ -19,6 +19,9 @@
 //= require jquery.cookie
 //= require jquery.validate.min
 //= require jquery.mCustomScrollbar.concat.min
+//= require ladda-spin
+//= require ladda.min
+//= require ladda.jquery
 //= require front
 
 $(document).on('turbolinks:load', function() {

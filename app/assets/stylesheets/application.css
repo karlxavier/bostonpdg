@@ -18,6 +18,7 @@
  *= require jquery.mCustomScrollbar
  *= require style.default
  *= require custom
+ *= require ladda.min
  *= require_self
  */
 .display-block {
