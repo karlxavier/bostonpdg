@@ -156,7 +156,11 @@
                         <br>
                         We’d like to recieve a quotation on the following items below with the listed specs. Attached are the mock ups and print ready files below. <br>
                         <br>
-                        Our due date for this project is <b><i><u><%= @order.promise_date.strftime('%B %e, %Y') %></u></b></i>. Please get back to us before <b><i><u><%= @order.fulfillment_date.strftime('%B %e, %Y') %></u></b></i><br>
+                        <% if !@order.promise_date.nil? && !@order.fulfillment_date.nil? %>
+                            Our due date for this project is <b><i><u><%= @order.promise_date.strftime('%B %e, %Y') %></u></b></i>. Please get back to us before <b><i><u><%= @order.fulfillment_date.strftime('%B %e, %Y') %></u></b></i><br>
+                      <% else %>
+                            Please get back to us before in a few days.
+                        <% end %>
                         <br>
                         Thanks,&nbsp;<br>
                         Yossi&nbsp;<br>

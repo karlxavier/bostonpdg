@@ -255,7 +255,7 @@
         <div class="col padding-left padding-top-1">
           <h4>Select Product to Copy it's Attributes</h4>
           <div class="input-group search-bar-padding padding-top-1">
-            <select class="clone_categories form-control glow-input" data-live-search="true" name="product_id" id="clone_product_id">
+            <select class="clone_products form-control glow-input" data-live-search="true" name="product_id" id="clone_product_id">
               <option></option>
               <% if @products.present? %>
                   <% @products.each do |product| %>
@@ -398,7 +398,7 @@
           getAddress(this.value)
       });
 
-      $('select.clone_categories').on('change', function(e){
+      $('select.clone_products').on('change', function(e){
           $.ajax({
               method: "GET",
               url: "/api/simple/products/"+this.value
@@ -406,9 +406,9 @@
               $('#clone_product_name').val(data.name);
               $('#clone_category_id').val(data.category);
               $('#clone_item_category_id').val(data.item_category_id);
-              $('#clone_specs').text(data.specs)
-              $('#clone_vendor_quote_prices').text(data.vendor_quote_prices)
-              $('#clone_notes').text(data.notes)
+              $('#clone_specs').val(data.specs)
+              $('#clone_vendor_quote_prices').val(data.vendor_quote_prices)
+              $('#clone_notes').val(data.notes)
               $('#clone_product_attributes').html('');
               $('.clone_categories').selectpicker('refresh');
               foo = JSON.parse(data.convert_dynamic_fields);
@@ -494,6 +494,7 @@
               url: "/api/simple/products/create_item",
               data: {product_name: product_name, category_id: category_id, item_category_id: item_category_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes, dynamic_fields: dynamic_fields}
           }).done(function( data ) {
+              $('#clone_product_id').val('');
               $('#clone_product_name').val('');
               $('#clone_category_id').val('');
               $('#clone_item_category_id').val('');
@@ -502,6 +503,7 @@
               $('#clone_notes').val('')
               $('#clone_product_attributes').html('');
               $('.clone_categories').selectpicker('refresh');
+              $('.clone_products').selectpicker('refresh');
               if (product_list.length === 0) {
                   $('.stitched').html('')
               }

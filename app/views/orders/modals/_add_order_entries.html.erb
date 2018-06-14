@@ -60,11 +60,9 @@
               <div class="col-sm-10">
                 <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[quoted_by]" id="order_entry_quoted_by" required="true">
                   <option></option>
-                  <% if @users.present? %>
-                      <% @users.each do |user| %>
+                      <% User.order('id DESC').each do |user| %>
                           <option value="<%= user.id %>"><%= user.full_name %></option>
                       <% end %>
-                  <% end %>
                 </select>
               </div>
             </div>
