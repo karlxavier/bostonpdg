@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  has_many :order_users
 
   def created_by_name
     if self.created_by.present?

@@ -49,6 +49,7 @@ gem 'administrate-field-select', '~> 2.0', require: 'administrate/field/select_b
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem 'devise_token_auth'
 gem 'roo'
+gem 'figaro'
 
 
 group :development, :test do

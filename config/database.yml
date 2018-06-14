@@ -4,3 +4,5 @@ development:
   database: regency_development
   pool:     5
   template: template0
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>

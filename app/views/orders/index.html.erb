@@ -71,60 +71,48 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">REGIONAL DIRECTOR</label>
               <div class="col-sm-8">
-                <% @order.regional.each do |user|  %>
-                    <% if user[:selected] %>
-                        <button class="btn btn-secondary btn-sm" disabled><%= user[:view] %></button>&nbsp;
-                    <% end %>
+                <% OrderUser.regional_users(@order.id).each do |user| %>
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">CLIENT CONTACTS</label>
               <div class="col-sm-8">
-                <% @order.client_contact.each do |user|  %>
-                    <% if user[:selected] %>
-                        <button class="btn btn-secondary btn-sm" disabled><%= user[:view] %></button>&nbsp;
-                    <% end %>
+                <% OrderUser.client_contact_users(@order.id).each do |user| %>
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">COMMS DIRECTOR</label>
               <div class="col-sm-8">
-                <% @order.comms.each do |user|  %>
-                    <% if user[:selected] %>
-                        <button class="btn btn-secondary btn-sm" disabled><%= user[:view] %></button>&nbsp;
-                    <% end %>
+                <% OrderUser.comms_users(@order.id).each do |user| %>
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">ART</label>
               <div class="col-sm-8">
-                <% @order.art.each do |user|  %>
-                    <% if user[:selected] %>
-                    <button class="btn btn-secondary btn-sm" disabled><%= user[:view] %></button>&nbsp;
-                    <% end %>
+                <% OrderUser.art_users(@order.id).each do |user| %>
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">DESIGNER</label>
               <div class="col-sm-8">
-                <% @order.designer.each do |user|  %>
-                    <% if user[:selected] %>
-                        <button class="btn btn-secondary btn-sm" disabled><%= user[:view] %></button>&nbsp;
-                    <% end %>
+                <% OrderUser.designer_users(@order.id).each do |user| %>
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">PROCESSORS</label>
               <div class="col-sm-8">
-                <% @order.processor.each do |user|  %>
-                    <% if user[:selected] %>
-                        <button class="btn btn-secondary btn-sm" disabled><%= user[:view] %></button>&nbsp;
-                    <% end %>
+                <% OrderUser.processor_users(@order.id).each do |user| %>
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>

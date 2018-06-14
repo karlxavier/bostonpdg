@@ -13,17 +13,17 @@ class OrdersController < ApplicationController
       if params[:id].present? && !params[:id].nil?
         @order = Order.find(params[:id])
         @order_entries = OrderEntry.where("order_id = '#{@order.id}'")
-        @order_users = OrderUser.where("order_id = '#{@order.id}'")
+        # @order_users = OrderUser.where("order_id = '#{@order.id}'")
       else
         @order = Order.order('updated_at DESC, created_by DESC').first
         @order_entries = OrderEntry.where("order_id = '#{@order.id}'")
-        @order_users = OrderUser.where("order_id = '#{@order.id}'")
+        # @order_users = OrderUser.where("order_id = '#{@order.id}'")
       end
     end
     @categories = Category.all
     @vendors = Vendor.all
     @products = Product.all
-    @users = User.all
+    # @users = User.all
     @brands = Brand.all
   end
 

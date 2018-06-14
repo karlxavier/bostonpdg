@@ -8,100 +8,105 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form class="form" id="new_order_entry" action="/order_entries" accept-charset="UTF-8" method="post">
-          <input type="hidden" name="order_entry[order_id]" id="order_entry_order_id" value="<%= @order.id %>">
-          <div class="form-group row required">
-            <label class="col-sm-2 col-form-label label-form">Category</label>
-            <div class="col-sm-10">
-              <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[category_id]" id="order_entry_category_id">
-                <option></option>
-                <% if @categories.present? %>
-                    <% @categories.each do |category| %>
-                        <option value="<%= category.id %>"><%= category.name%></option>
-                    <% end %>
-                <% end %>
-              </select>
+      <form class="form" id="new_order_entry" action="/order_entries" accept-charset="UTF-8" method="post">
+        <div class="modal-body">
+            <input type="hidden" name="order_entry[order_id]" id="order_entry_order_id" value="<%= @order.id %>">
+            <div class="form-group row required">
+              <label class="col-sm-2 col-form-label label-form">Category</label>
+              <div class="col-sm-10">
+                <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[category_id]" id="order_entry_category_id" required="true">
+                  <option></option>
+                  <% if @categories.present? %>
+                      <% @categories.each do |category| %>
+                          <option value="<%= category.id %>"><%= category.name%></option>
+                      <% end %>
+                  <% end %>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="form-group row required">
-            <label class="col-sm-2 col-form-label label-form">Vendor</label>
-            <div class="col-sm-10">
-              <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[vendor]" id="order_entry_vendor">
-                <option></option>
-                <% if @vendors.present? %>
-                    <% @vendors.each do |vendor| %>
-                        <option value="<%= vendor.id %>"><%= vendor.name %></option>
-                    <% end %>
-                <% end %>
-              </select>
+            <div class="form-group row required">
+              <label class="col-sm-2 col-form-label label-form">Vendor</label>
+              <div class="col-sm-10">
+                <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[vendor]" id="order_entry_vendor" required="true">
+                  <option></option>
+                  <% if @vendors.present? %>
+                      <% @vendors.each do |vendor| %>
+                          <option value="<%= vendor.id %>"><%= vendor.name %></option>
+                      <% end %>
+                  <% end %>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="form-group row required">
-            <label class="col-sm-2 col-form-label label-form">Product</label>
-            <div class="col-sm-9">
-              <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[product_id]" id="order_entry_product_id">
-                <option></option>
-                <% if @products.present? %>
-                    <% @products.each do |product| %>
-                        <option value="<%= product.id %>"><%= product.name %></option>
-                    <% end %>
-                <% end %>
-              </select>
+            <div class="form-group row required">
+              <label class="col-sm-2 col-form-label label-form">Product</label>
+              <div class="col-sm-9">
+                <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[product_id]" id="order_entry_product_id" required="true">
+                  <option></option>
+                  <% if @products.present? %>
+                      <% @products.each do |product| %>
+                          <option value="<%= product.id %>"><%= product.name %></option>
+                      <% end %>
+                  <% end %>
+                </select>
+              </div>
+              <div class="col-sm-1">
+                <button class="btn btn-outline-success" style="margin-left: -15px;" ng-click="newProduct();"><i class="icon ion-plus-round"></i>&nbsp;New</button>
+              </div>
             </div>
-            <div class="col-sm-1">
-              <button class="btn btn-outline-success" style="margin-left: -15px;" ng-click="newProduct();"><i class="icon ion-plus-round"></i>&nbsp;New</button>
-            </div>
-          </div>
 
 
-          <div class="form-group row required">
-            <label class="col-sm-2 col-form-label label-form">Quoted By</label>
-            <div class="col-sm-10">
-              <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[quoted_by]" id="order_entry_quoted_by">
-                <option></option>
-                <% if @users.present? %>
-                    <% @users.each do |user| %>
-                        <option value="<%= user.id %>"><%= user.full_name %></option>
-                    <% end %>
-                <% end %>
-              </select>
+            <div class="form-group row required">
+              <label class="col-sm-2 col-form-label label-form">Quoted By</label>
+              <div class="col-sm-10">
+                <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[quoted_by]" id="order_entry_quoted_by" required="true">
+                  <option></option>
+                  <% if @users.present? %>
+                      <% @users.each do |user| %>
+                          <option value="<%= user.id %>"><%= user.full_name %></option>
+                      <% end %>
+                  <% end %>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="form-group row required">
-            <label class="col-sm-2 col-form-label label-form">Price</label>
-            <div class="col-sm-10">
-              <input type="number"  class="form-control glow-input" name="order_entry[price]" id="order_entry_price"/>
+            <div class="form-group row required">
+              <label class="col-sm-2 col-form-label label-form">Price</label>
+              <div class="col-sm-10">
+                <input type="number"  class="form-control glow-input" name="order_entry[price]" id="order_entry_price" required/>
+              </div>
             </div>
-          </div>
-          <div class="form-group row required">
-            <label class="col-sm-2 col-form-label label-form">Cost</label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control glow-input" name="order_entry[cost]" id="order_entry_cost"/>
+            <div class="form-group row required">
+              <label class="col-sm-2 col-form-label label-form">Cost</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control glow-input" name="order_entry[cost]" id="order_entry_cost" required="true"/>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label label-form">Tax</label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control glow-input" name="order_entry[tax]" id="order_entry_tax"/>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label label-form">Tax</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control glow-input" name="order_entry[tax]" id="order_entry_tax"/>
+              </div>
             </div>
-          </div>
-          <div class="form-group row required">
-            <label class="col-sm-2 col-form-label label-form">Quantity</label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control glow-input" name="order_entry[quantity]" id="order_entry_quantity"/>
+            <div class="form-group row required">
+              <label class="col-sm-2 col-form-label label-form">Quantity</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control glow-input" name="order_entry[quantity]" id="order_entry_quantity" required="true"/>
+              </div>
             </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer" style="display: block;">
-        <div class="buttons pull-left">
-          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
         </div>
-        <div class="buttons pull-right">
-          <button type="button" class="btn btn-info" onclick="submitForm('new_order_entry', $(this))">Save</button>
+        <div class="modal-footer">
+          <div class="buttons pull-left">
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+          </div>
+          <div class="buttons pull-right">
+            <button type="submit" class="ladda-button btn btn-info" data-style="zoom-in">Save</button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function (){
+    Ladda.bind( '.ladda-button',{ timeout: 10000 });
+  })
+</script>
