@@ -28,11 +28,11 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @categories = Category.all
-    @vendors = Vendor.all
-    @products = Product.all.order('id DESC')
-    @users = User.all
-    @brands = Brand.all
+    @categories = Category.order('id DESC')
+    @vendors = Vendor.order('id DESC')
+    @products = Product.order('id DESC')
+    @users = User.order('id DESC')
+    @brands = Brand.order('id DESC')
   end
 
   def update_assign_user
@@ -121,6 +121,8 @@ class OrdersController < ApplicationController
         temp_order_entries.each do |oe|
           order_entry = OrderEntry.new
           order_entry.order_id = @order.id
+          product = Product.find(oe.to_i)
+          order_entry.category_id = product.item_category_id
           order_entry.product_id = oe
           order_entry.save
         end
@@ -224,6 +226,8 @@ class OrdersController < ApplicationController
         temp_order_entries.each do |oe|
             order_entry = OrderEntry.new
             order_entry.order_id = @order.id
+            product = Product.find(oe.to_i)
+            order_entry.category_id = product.item_category_id
             order_entry.product_id = oe
             order_entry.save
         end
@@ -316,11 +320,11 @@ class OrdersController < ApplicationController
 
 
   def edit
-    @categories = Category.all
-    @vendors = Vendor.all
-    @products = Product.all
-    @users = User.all
-    @brands = Brand.all
+    @categories = Category.order('id DESC')
+    @vendors = Vendor.order('id DESC')
+    @products = Product.order('id DESC')
+    @users = User.order('id DESC')
+    @brands = Brand.order('id DESC')
     @order = Order.find(params[:id])
     @order_entries = OrderEntry.where(:order_id => @order.id)
     @order_users = OrderUser.where(:order_id => @order.id)
