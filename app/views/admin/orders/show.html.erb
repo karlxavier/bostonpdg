@@ -157,6 +157,8 @@ as well as a link to its edit page.
 
             <dd class="attribute-data attribute-data--has-many">
               <% order_entries = OrderEntry.where("order_id = '#{page.resource.id}'") %>
+              <% order_entries_with_no_vendors = OrderEntry.where("order_id = '#{page.resource.id}' AND (vendor IS NULL OR vendor = 0)") %>
+
               <div style="display: block;padding-bottom:3%;">
                 <%= link_to "Add Entry", new_admin_order_entry_path(:order_id => page.resource.id)%>
 
@@ -205,8 +207,10 @@ as well as a link to its edit page.
 
                                           <td class="cell-data cell-data--number">
                                             <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-                                              <%  product = Product.find(order_entry.product_id)  %>
-                                              <%= link_to product.name, admin_product_path(product) %>
+                                              <% if order_entry.product_id.present? && !order_entry.product_id.nil? %>
+                                                  <%  product = Product.find(order_entry.product_id)  %>
+                                                  <%= link_to product.name, admin_product_path(product) %>
+                                              <% end %>
 
                                             </a>
                                           </td>
@@ -237,8 +241,10 @@ as well as a link to its edit page.
 
                                           <td class="cell-data cell-data--number">
                                             <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-                                              <% user = User.find(order_entry.quoted_by) %>
-                                              <%= link_to "#{user.first_name + ' ' + user.last_name}", admin_user_path(user) %>
+                                              <% if order_entry.quoted_by.present? && !order_entry.quoted_by.nil? %>
+                                                  <% user = User.find(order_entry.quoted_by) %>
+                                                  <%= link_to "#{user.first_name + ' ' + user.last_name}", admin_user_path(user) %>
+                                              <% end %>
                                             </a>
                                           </td>
 
@@ -269,11 +275,102 @@ as well as a link to its edit page.
                               </table>
                           <% end %>
                       <% end %>
-                  <% else %>
-                      <dd class="attribute-data attribute-data--has-many">
-                        None
-                      </dd>
                   <% end %>
+                <% if order_entries_with_no_vendors.present? %>
+                    <h2 style="font-size: 1.3em; padding-top: 3%; padding-bottom: 3%;margin-right:3%;display:inline;"> No Vendors</h2>
+                    <table style="margin-bottom: 2%;">
+                      <thead>
+                      <tr>
+                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Entry ID  </th>
+                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Product  </th>
+                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Price  </th>
+                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Cost  </th>
+                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Tax  </th>
+                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Quoted By  </th>
+                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Quantity  </th>
+                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Status  </th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                      </thead>
+
+                      <tbody>
+                      <% order_entries_with_no_vendors.each do |order_entry| %>
+                          <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/order_entries/<%= order_entry.id %>">
+                            <td class="cell-data cell-data--number">
+                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+
+                                <%= order_entry.id %>
+
+                              </a>
+                            </td>
+
+                            <td class="cell-data cell-data--number">
+                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+                                <% if order_entry.product_id.present? && !order_entry.product_id.nil? %>
+                                    <%  product = Product.find(order_entry.product_id)  %>
+                                    <%= link_to product.name, admin_product_path(product) %>
+                                <% end %>
+                              </a>
+                            </td>
+
+                            <td class="cell-data cell-data--number">
+                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+
+                                <%= order_entry.price %>
+
+                              </a>
+                            </td>
+
+                            <td class="cell-data cell-data--number">
+                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+
+                                <%= order_entry.cost %>
+
+                              </a>
+                            </td>
+
+                            <td class="cell-data cell-data--number">
+                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+
+                                <%= order_entry.tax %>
+
+                              </a>
+                            </td>
+
+                            <td class="cell-data cell-data--number">
+                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+                                <% if order_entry.quoted_by.present? && !order_entry.quoted_by.nil? %>
+                                <% user = User.find(order_entry.quoted_by) %>
+                                <%= link_to "#{user.first_name + ' ' + user.last_name}", admin_user_path(user) %>
+                                    <% end %>
+                              </a>
+                            </td>
+
+                            <td class="cell-data cell-data--number">
+                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+
+                                <%= order_entry.quantity %>
+
+                              </a>
+                            </td>
+
+                            <td class="cell-data cell-data--number">
+                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+
+                                <%= order_entry.status %>
+
+                              </a>
+                            </td>
+
+                            <td><a class="action-edit" href="/admin/order_entries/<%= order_entry.id %>/edit">Edit</a></td>
+
+                            <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/order_entries/<%= order_entry.id %>">Destroy</a></td>
+                          </tr>
+                      <% end %>
+                      </tbody>
+                    </table>
+                <% end %>
                   </dd>
                   </dl>
                   </section>

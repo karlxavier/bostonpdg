@@ -29,10 +29,12 @@
   </div>
   <div class="row" style="padding-top: 2%;">
     <div class="col padding-left padding-top-1">
-      <h4><b>Choose from the applicable branches</b></h4><br/>
+      <h4 class="inline-text"><b>Choose from the applicable branches</b></h4>
+      <a class="btn btn-outline-dark btn-padding-margin" style="padding: .2% 1% !important;" onclick="selectAllBranches();"> Select All </a>
+      <a class="btn btn-outline-dark btn-padding-margin" style="padding: .2% 1% !important;" onclick="unselectAllBranches();"> Unselect All </a>
     </div>
   </div>
-  <div class="row" >
+  <div class="row" style="padding-top: .8%;">
     <div class="col search-bar-padding text-justify item-list" id="brand-list">
         <% if @addresses.present? %>
             <% @addresses.each do |address| %>
@@ -42,7 +44,7 @@
                     <% @bol = true %>
                   <% end %>
               <% end %>
-              <a class='btn btn-nav<% if @bol%> btn-yellow<% end %>' onclick='selectAndUnselect(<%= address.id %>, $(this))'> <%= address.state + " - " + address.city %></a>&nbsp;
+              <a class='btn btn-nav select-items<% if @bol%> btn-yellow<% end %>' onclick='selectAndUnselect(<%= address.id %>, $(this))'> <%= address.state + " - " + address.city %></a>&nbsp;
             <% end %>
         <% end %>
     </div>
@@ -474,6 +476,12 @@
   var address_list = [];
   var product_list = [];
   var entry_list = [];
+  var all_address_list = [];
+
+  <% @addresses.each do |address| %>
+  all_address_list.push(<%= address.id %>);
+  <% end %>
+
   <% @order_branches.each do |ob| %>
         address_list.push(<%= ob.address_id %>);
   <% end %>
@@ -523,7 +531,9 @@
           url: "/api/simple/addresses/branches?brand_id="+id
       }).done(function( data ) {
           $('#brand-list').html('');
+          all_address_list = [];
           data.forEach(function (item, index, arr) {
+              all_address_list.push(item['id']);
               brand_list = $('#brand-list').html();
               $('#brand-list').html(brand_list + "<a class='btn btn-nav' onclick='selectAndUnselect(" + item['id'] + ", $(this) )'> " + item['state'] + " - " +  item['city'] + "</a>&nbsp;");
               console.log(item);
@@ -533,7 +543,7 @@
   }
   function selectAndUnselect(id, elem) {   // is li
       console.log(address_list);
-      if (in_array(address_list, id)) {
+      if (address_list.includes(id)) {
           for(var i = address_list.length - 1; i >= 0; i--) {
               if(address_list[i] === id) {
                   address_list.splice(i, 1);
@@ -544,6 +554,17 @@
           address_list.push(id);
           elem.addClass('btn-yellow');
       }
+  }
+
+  function selectAllBranches() {
+      $('.select-items').removeClass('btn-yellow');
+      $('.select-items').addClass('btn-yellow');
+      address_list = all_address_list;
+  }
+
+  function unselectAllBranches() {
+      $('.select-items').removeClass('btn-yellow');
+      address_list = [];
   }
 
   function in_array(array, id) {

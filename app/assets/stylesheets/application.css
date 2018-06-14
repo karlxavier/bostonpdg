@@ -69,21 +69,23 @@
     border-bottom-right-radius: 0 !important;
 }
 
+/*
 .modal-gray .fa {
     color: #ffffff;
 }
+*/
 
 .modal-gray h5 {
     color: #ffffff;
 }
 
-.modal-gray button span {
+/*.modal-gray button span {
     color: #ffffff;
 }
 
 .modal-gray button:hover {
     color: #ffffff;
-}
+}*/
 
 .modal-gray .badge {
     background-color: #00c851;
