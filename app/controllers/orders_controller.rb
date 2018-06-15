@@ -137,69 +137,65 @@ class OrdersController < ApplicationController
           order_branch.save
         end
       end
-      regional = params[:order_user][:regional]
-      comms = params[:order_user][:comms]
-      art = params[:order_user][:art]
-      processor = params[:order_user][:processor]
-      designer = params[:order_user][:designer]
-      client_contact = params[:order_user][:client_contact]
-      arr_count = []
-      i = 0
+      if params[:order_user].present?
+        arr_count = []
+        i = 0
 
-      if params[:order_user][:regional].present?
-        arr_count.push(regional.length)
-      else
-        arr_count.push(0)
-      end
-      if params[:order_user][:comms].present?
-        arr_count.push(comms.length)
-      else
-        arr_count.push(0)
-      end
-      if params[:order_user][:art].present?
-        arr_count.push(art.length)
-      else
-        arr_count.push(0)
-      end
-      if params[:order_user][:processor].present?
-        arr_count.push(processor.length)
-      else
-        arr_count.push(0)
-      end
-      if params[:order_user][:designer].present?
-        arr_count.push(designer.length)
-      else
-        arr_count.push(0)
-      end
-      if params[:order_user][:client_contact].present?
-        arr_count.push(client_contact.length)
-      else
-        arr_count.push(0)
-      end
-
-      while i < arr_count.max
-        order_user = OrderUser.new
-        order_user.order_id = @order.id
         if params[:order_user][:regional].present?
-          order_user.regional = regional[i]
+          arr_count.push(params[:order_user][:regional].length)
+        else
+          arr_count.push(0)
         end
         if params[:order_user][:comms].present?
-          order_user.comms = comms[i]
+          arr_count.push(params[:order_user][:comms].length)
+        else
+          arr_count.push(0)
         end
         if params[:order_user][:art].present?
-          order_user.art = art[i]
+          arr_count.push(params[:order_user][:art].length)
+        else
+          arr_count.push(0)
         end
         if params[:order_user][:processor].present?
-          order_user.processor = processor[i]
+          arr_count.push(params[:order_user][:processor].length)
+        else
+          arr_count.push(0)
         end
         if params[:order_user][:designer].present?
-          order_user.designer = designer[i]
+          arr_count.push(params[:order_user][:designer].length)
+        else
+          arr_count.push(0)
         end
         if params[:order_user][:client_contact].present?
-          order_user.client_contact = client_contact[i]
+          arr_count.push(params[:order_user][:client_contact].length)
+        else
+          arr_count.push(0)
         end
-        order_user.save
-        i = i + 1
+
+        while i < arr_count.max
+          order_user = OrderUser.new
+          order_user.order_id = @order.id
+          if params[:order_user][:regional].present?
+            order_user.regional = params[:order_user][:regional][i]
+          end
+          if params[:order_user][:comms].present?
+            order_user.comms = params[:order_user][:comms][i]
+          end
+          if params[:order_user][:art].present?
+            order_user.art = params[:order_user][:art][i]
+          end
+          if params[:order_user][:processor].present?
+            order_user.processor = params[:order_user][:processor][i]
+          end
+          if params[:order_user][:designer].present?
+            order_user.designer = params[:order_user][:designer][i]
+          end
+          if params[:order_user][:client_contact].present?
+            order_user.client_contact = params[:order_user][:client_contact][i]
+          end
+          order_user.save
+          i = i + 1
+        end
       end
       flash[:notice] = "Order Successfully Created"
     else
@@ -246,42 +242,36 @@ class OrdersController < ApplicationController
       end
       if params[:order_user].present?
         OrderUser.where(:order_id => @order.id).destroy_all
-        regional = params[:order_user][:regional]
-        comms = params[:order_user][:comms]
-        art = params[:order_user][:art]
-        processor = params[:order_user][:processor]
-        designer = params[:order_user][:designer]
-        client_contact = params[:order_user][:client_contact]
         arr_count = []
         i = 0
 
         if params[:order_user][:regional].present?
-          arr_count.push(regional.length)
+          arr_count.push(params[:order_user][:regional].length)
         else
           arr_count.push(0)
         end
         if params[:order_user][:comms].present?
-          arr_count.push(comms.length)
+          arr_count.push(params[:order_user][:comms].length)
         else
           arr_count.push(0)
         end
         if params[:order_user][:art].present?
-          arr_count.push(art.length)
+          arr_count.push(params[:order_user][:art].length)
         else
           arr_count.push(0)
         end
         if params[:order_user][:processor].present?
-          arr_count.push(processor.length)
+          arr_count.push(params[:order_user][:processor].length)
         else
           arr_count.push(0)
         end
         if params[:order_user][:designer].present?
-          arr_count.push(designer.length)
+          arr_count.push(params[:order_user][:designer].length)
         else
           arr_count.push(0)
         end
         if params[:order_user][:client_contact].present?
-          arr_count.push(client_contact.length)
+          arr_count.push(params[:order_user][:client_contact].length)
         else
           arr_count.push(0)
         end
@@ -290,22 +280,22 @@ class OrdersController < ApplicationController
           order_user = OrderUser.new
           order_user.order_id = @order.id
           if params[:order_user][:regional].present?
-            order_user.regional = regional[i]
+            order_user.regional = params[:order_user][:regional][i]
           end
           if params[:order_user][:comms].present?
-            order_user.comms = comms[i]
+            order_user.comms = params[:order_user][:comms][i]
           end
           if params[:order_user][:art].present?
-            order_user.art = art[i]
+            order_user.art = params[:order_user][:art][i]
           end
           if params[:order_user][:processor].present?
-            order_user.processor = processor[i]
+            order_user.processor = params[:order_user][:processor][i]
           end
           if params[:order_user][:designer].present?
-            order_user.designer = designer[i]
+            order_user.designer = params[:order_user][:designer][i]
           end
           if params[:order_user][:client_contact].present?
-            order_user.client_contact = client_contact[i]
+            order_user.client_contact = params[:order_user][:client_contact][i]
           end
           order_user.save
           i = i + 1
