@@ -65,6 +65,26 @@ function clone_product_attributes_2(key, val) {
 
     objTo.appendChild(divtest)
 }
+function add_product_attributes() {
+    room++;
+    var objTo = document.getElementById('add_product_attributes')
+    var divtest = document.createElement("div");
+    divtest.setAttribute("class", "row form-group removeclass"+room);
+    var rdiv = 'removeclass'+room;
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="add_order_field_name" value="" placeholder="Field Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="add_order_field_value" value="" placeholder="Field Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+
+    objTo.appendChild(divtest)
+}
+function add_product_attributes_2(key, val) {
+    room++;
+    var objTo = document.getElementById('add_product_attributes')
+    var divtest = document.createElement("div");
+    divtest.setAttribute("class", "row form-group removeclass"+room);
+    var rdiv = 'removeclass'+room;
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="add_order_field_name" placeholder="Field Name" value="' + key + '"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="add_order_field_value" placeholder="Field Value" value="' + val + '"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+
+    objTo.appendChild(divtest)
+}
 function remove_education_fields(rid) {
     $('.removeclass'+rid).remove();
 }
@@ -140,23 +160,29 @@ function itemDetails(id) {
         method: "GET",
         url: "/api/simple/products/"+id
     }).done(function( data ) {
-        $('#product-name-header').html("(" + data.name + ")");
+        $('#add_product_attributes').html('');
+        $('#add_product_id').val(data.id);
+        $('.product-name-header').html("(" + data.name + ")");
        /* $('#clone_category_id').html(data.category);
         $('#clone_item_category_id').val(data.item_category_id);*/
         if (data.specs != "" && data.specs != null && data.specs != undefined) {
             $('#nav-specs').html(data.specs)
+            $('#add_specs').val(data.specs);
         }
         if (data.vendor_quote_prices != "" && data.vendor_quote_prices != null && data.vendor_quote_prices != undefined) {
             $('#nav-quotes').html(data.vendor_quote_prices)
+            $('#add_vendor_quote_prices').val(data.vendor_quote_prices);
         }
         if (data.notes != "" && data.notes != null && data.notes != undefined) {
             $('#nav-notes').html(data.notes)
+            $('#add_notes').val(data.notes);
         }
         $('#dynamic-attributes').html('');
         if (data.convert_dynamic_fields != '' && data.convert_dynamic_fields != null && data.convert_dynamic_fields != undefined) {
             foo = JSON.parse(data.convert_dynamic_fields);
             Object.keys(foo)
                 .forEach(function eachKey(key) {
+                    add_product_attributes_2(key, foo[key]);
                     dynamic_attributes = $('#dynamic-attributes').html();
                     $('#dynamic-attributes').html(dynamic_attributes + "<tr style='margin-bottom: 2%'><td> <span class='float-left'>" + key + "</span> <span class='float-right'>" + foo[key] + "</span></td></tr>");
                 });
@@ -168,3 +194,55 @@ function itemDetails(id) {
     });
 }
 
+function openEditAttributes() {
+    $('#viewProducts').modal('hide');
+    $('#editAttributes').modal('show');
+}
+
+function openViewItems() {
+    $('#editFreeFlow').modal('hide');
+    $('#editAttributes').modal('hide');
+    $('#viewProducts').modal('show');
+}
+
+function openEditFreeFlow() {
+    $('#viewProducts').modal('hide');
+    $('#editFreeFlow').modal('show');
+}
+
+
+function submitEditAttributes() {
+    var product_id = $('#add_product_id').val();
+    var dynamic_fields = {};
+    var field_names = $('input[name=add_order_field_name]');
+    var field_values = $('input[name=add_order_field_value]');
+
+    for(var i = field_names.length - 1; i >= 0; i--) {
+        dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
+    }
+        $.ajax({
+            method: "POST",
+            url: "/api/simple/products/update_product",
+            data: {id: product_id, dynamic_fields: dynamic_fields}
+        }).done(function( data ) {
+            $('#editAttributes').modal('hide');
+            itemDetails(data.id)
+        });
+
+}
+
+function submitEditFreeFlow() {
+    var product_id = $('#add_product_id').val();
+    var specs =  $('#add_specs').val();
+    var vendor_quote_prices = $('#add_vendor_quote_prices').val();
+    var notes = $('#add_notes').val();
+    $.ajax({
+        method: "POST",
+        url: "/api/simple/products/update_product",
+        data: {id: product_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes}
+    }).done(function( data ) {
+        $('#editFreeFlow').modal('hide');
+        itemDetails(data.id)
+    });
+
+}

@@ -66,8 +66,89 @@ module Api
       end
 
       def update
-        if @product.update_attributes(products_params)
+        @temp_product = Product.new
+        if params[:product_name].present? && !params[:product_name].nil?
+          @temp_product.name = params[:product_name]
+        else
+          @temp_product.name = @product.name
+        end
+        if params[:category_id].present? && !params[:category_id].nil?
+          @temp_product.category = params[:category_id]
+        else
+          @temp_product.category = @product.category
+        end
+        if params[:item_category_id].present? && !params[:item_category_id].nil?
+          @temp_product.item_category_id = params[:item_category_id]
+        else
+          @temp_product.item_category_id = @product.item_category_id
+        end
+        if params[:specs].present? && !params[:specs].nil?
+          @temp_product.specs = params[:specs]
+        else
+          @temp_product.specs = @product.specs
+        end
+        if params[:vendor_quote_prices].present? && !params[:vendor_quote_prices].nil?
+          @temp_product.vendor_quote_prices = params[:vendor_quote_prices]
+        else
+          @temp_product.vendor_quote_prices = @product.vendor_quote_prices
+        end
+        if params[:notes].present? && !params[:notes].nil?
+          @temp_product.notes = params[:notes]
+        else
+          @temp_product.notes = @product.notes
+        end
+        if params[:dynamic_fields].present? && !params[:dynamic_fields].nil?
+          @temp_product.dynamic_fields = params[:dynamic_fields]
+        else
+          @temp_product.dynamic_fields = @product.dynamic_fields
+        end
+        if @product.update_attributes(:name => @temp_product.name, :category => @temp_product.category, :item_category_id => @temp_product.item_category_id, :specs => @temp_product.specs, :vendor_quote_prices => @temp_product.vendor_quote_prices, :notes => @temp_product.notes, :dynamic_fields => @temp_product.dynamic_fields)
           head :no_content
+        else
+          render json: { status: 'failed' }, status: :unprocessable_entity
+        end
+      end
+
+      def update_product
+        @product = Product.find(params[:id])
+        @temp_product = Product.new
+        if params[:product_name].present? && !params[:product_name].nil?
+          @temp_product.name = params[:product_name]
+        else
+          @temp_product.name = @product.name
+        end
+        if params[:category_id].present? && !params[:category_id].nil?
+          @temp_product.category = params[:category_id]
+        else
+          @temp_product.category = @product.category
+        end
+        if params[:item_category_id].present? && !params[:item_category_id].nil?
+          @temp_product.item_category_id = params[:item_category_id]
+        else
+          @temp_product.item_category_id = @product.item_category_id
+        end
+        if params[:specs].present? && !params[:specs].nil?
+          @temp_product.specs = params[:specs]
+        else
+          @temp_product.specs = @product.specs
+        end
+        if params[:vendor_quote_prices].present? && !params[:vendor_quote_prices].nil?
+          @temp_product.vendor_quote_prices = params[:vendor_quote_prices]
+        else
+          @temp_product.vendor_quote_prices = @product.vendor_quote_prices
+        end
+        if params[:notes].present? && !params[:notes].nil?
+          @temp_product.notes = params[:notes]
+        else
+          @temp_product.notes = @product.notes
+        end
+        if params[:dynamic_fields].present? && !params[:dynamic_fields].nil?
+          @temp_product.dynamic_fields = params[:dynamic_fields]
+        else
+          @temp_product.dynamic_fields = @product.dynamic_fields
+        end
+        if @product.update_attributes(:name => @temp_product.name, :category => @temp_product.category, :item_category_id => @temp_product.item_category_id, :specs => @temp_product.specs, :vendor_quote_prices => @temp_product.vendor_quote_prices, :notes => @temp_product.notes, :dynamic_fields => @temp_product.dynamic_fields)
+          render json: @product
         else
           render json: { status: 'failed' }, status: :unprocessable_entity
         end

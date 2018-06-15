@@ -3,12 +3,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">ITEM DETAILS</h5>
-        <h6 class="modal-title model-header-margin" id="product-name-header"></h6>
+        <h6 class="modal-title model-header-margin product-name-header" id="product-name-header"></h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        <input type="hidden" name="product_id" id="add_product_id" />
         <div class="row" style="padding-top: 2%;">
           <div class="col-4 padding-left">
             <img src="http://www.stampready.net/dashboard/editor/user_uploads/image_uploads/2018/04/17/R3H4Mxn2s0SmpFj9lvtXDBzNkP8bfJqQ.jpg" alt="features" border="0" width="100%"  style="display:block; border:none; outline:none; text-decoration:none;" class="features">
@@ -20,7 +21,7 @@
 
           <div class="col padding-left">
             <h4 class="inline-text" style="padding-top: 1%;"><b>Item Attributes</b></h4>
-            <button class="btn btn-outline-dark float-right">MODIFY ATTRIBUTES</button>
+            <button class="btn btn-outline-dark float-right" onclick="openEditAttributes();">MODIFY ATTRIBUTES</button>
             <br/>
             <br/>
             <table class="table table-bordered" id="dynamic-attributes">
@@ -34,6 +35,7 @@
             </table>
           </div>
         </div>
+        <button class="btn btn-outline-secondary float-right" onclick="openEditFreeFlow();">Edit</button>
         <div class="row" style="padding-top: 4%;">
           <div class="col">
             <nav>

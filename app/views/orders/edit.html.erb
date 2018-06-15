@@ -29,10 +29,12 @@
   </div>
   <div class="row" style="padding-top: 2%;">
     <div class="col padding-left padding-top-1">
-      <h4><b>Choose from the applicable branches</b></h4><br/>
+      <h4 class="inline-text"><b>Choose from the applicable branches</b></h4>
+      <a class="btn btn-outline-dark btn-padding-margin" style="padding: .2% 1% !important;" onclick="selectAllBranches();"> Select All </a>
+      <a class="btn btn-outline-dark btn-padding-margin" style="padding: .2% 1% !important;" onclick="unselectAllBranches();"> Unselect All </a>
     </div>
   </div>
-  <div class="row" >
+  <div class="row" style="padding-top: .8%;">
     <div class="col search-bar-padding text-justify item-list" id="brand-list">
         <% if @addresses.present? %>
             <% @addresses.each do |address| %>
@@ -42,7 +44,7 @@
                     <% @bol = true %>
                   <% end %>
               <% end %>
-              <a class='btn btn-nav<% if @bol%> btn-yellow<% end %>' onclick='selectAndUnselect(<%= address.id %>, $(this))'> <%= address.state + " - " + address.city %></a>&nbsp;
+              <a class='btn btn-nav select-items<% if @bol%> btn-yellow<% end %>' onclick='selectAndUnselect(<%= address.id %>, $(this))'> <%= address.state + " - " + address.city %></a>&nbsp;
             <% end %>
         <% end %>
     </div>
@@ -58,22 +60,12 @@
     <div class="col-sm-10">
       <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_user[regional][]" id="order_user_regional[]" multiple>
         <option></option>
-        <% if @users.present? %>
-            <% @users.each do |user| %>
-                <% @bol = true %>
-                <% @order.regional.each do |regional|  %>
-                    <% if regional[:selected] %>
-                        <% if regional[:id] == user.id %>
-                            <option value="<%= user.id %>" selected><%= user.full_name %></option>
-                            <% @bol = false %>
+                        <% OrderUser.regional_users(@order.id).each do |user|  %>
+                            <option value="<%= user.id %>" selected><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
-                    <% end %>
-                <% end %>
-                <% if @bol %>
-                    <option value="<%= user.id %>"><%= user.full_name %></option>
-                <% end %>
-            <% end %>
-        <% end %>
+                        <% OrderUser.not_in_users(OrderUser.regional(@order.id).empty? ? 0 : OrderUser.regional(@order.id)).each do |user| %>
+                          <option value="<%= user.id %>"><%= [user.first_name, user.last_name].join(' ') %></option>
+                        <% end %>
       </select>
     </div>
   </div>
@@ -83,22 +75,12 @@
     <div class="col-sm-10">
       <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_user[client_contact][]" id="order_user_client_contact[]" multiple>
         <option></option>
-        <% if @users.present? %>
-            <% @users.each do |user| %>
-                <% @bol = true %>
-                <% @order.client_contact.each do |client_contact|  %>
-                    <% if client_contact[:selected] %>
-                        <% if client_contact[:id] == user.id %>
-                            <option value="<%= user.id %>" selected><%= user.full_name %></option>
-                            <% @bol = false %>
+                        <% OrderUser.client_contact_users(@order.id).each do |user|  %>
+                            <option value="<%= user.id %>" selected><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
-                    <% end %>
-                <% end %>
-                <% if @bol %>
-                    <option value="<%= user.id %>"><%= user.full_name %></option>
-                <% end %>
-            <% end %>
-        <% end %>
+                        <% OrderUser.not_in_users(OrderUser.client_contact(@order.id).empty? ? 0 : OrderUser.client_contact(@order.id)).each do |user| %>
+                          <option value="<%= user.id %>"><%= [user.first_name, user.last_name].join(' ') %></option>
+                        <% end %>
       </select>
     </div>
   </div>
@@ -108,22 +90,12 @@
     <div class="col-sm-10">
       <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_user[comms][]" id="order_user_art[]" multiple>
         <option></option>
-        <% if @users.present? %>
-            <% @users.each do |user| %>
-                <% @bol = true %>
-                <% @order.comms.each do |comms|  %>
-                    <% if comms[:selected] %>
-                        <% if comms[:id] == user.id %>
-                            <option value="<%= user.id %>" selected><%= user.full_name %></option>
-                            <% @bol = false %>
+                        <% OrderUser.comms_users(@order.id).each do |user|  %>
+                            <option value="<%= user.id %>" selected><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
-                    <% end %>
-                <% end %>
-                <% if @bol %>
-                    <option value="<%= user.id %>"><%= user.full_name %></option>
-                <% end %>
-            <% end %>
-        <% end %>
+                        <% OrderUser.not_in_users(OrderUser.comms(@order.id).empty? ? 0 : OrderUser.comms(@order.id)).each do |user| %>
+                          <option value="<%= user.id %>"><%= [user.first_name, user.last_name].join(' ') %></option>
+                        <% end %>
       </select>
 
     </div>
@@ -134,22 +106,12 @@
     <div class="col-sm-10">
       <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_user[art][]" id="order_user_art[]" multiple>
         <option></option>
-        <% if @users.present? %>
-            <% @users.each do |user| %>
-                <% @bol = true %>
-                <% @order.art.each do |art|  %>
-                    <% if art[:selected] %>
-                        <% if art[:id] == user.id %>
-                            <option value="<%= user.id %>" selected><%= user.full_name %></option>
-                            <% @bol = false %>
+                        <% OrderUser.art_users(@order.id).each do |user|  %>
+                            <option value="<%= user.id %>" selected><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
-                    <% end %>
-                <% end %>
-                <% if @bol %>
-                    <option value="<%= user.id %>"><%= user.full_name %></option>
-                <% end %>
-            <% end %>
-        <% end %>
+                        <% OrderUser.not_in_users(OrderUser.art(@order.id).empty? ? 0 : OrderUser.art(@order.id)).each do |user| %>
+                          <option value="<%= user.id %>"><%= [user.first_name, user.last_name].join(' ') %></option>
+                        <% end %>
       </select>
     </div>
   </div>
@@ -159,22 +121,12 @@
     <div class="col-sm-10">
       <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_user[designer][]" id="order_user_designer[]" multiple>
         <option></option>
-        <% if @users.present? %>
-            <% @users.each do |user| %>
-                <% @bol = true %>
-                <% @order.designer.each do |designer|  %>
-                    <% if designer[:selected] %>
-                        <% if designer[:id] == user.id %>
-                            <option value="<%= user.id %>" selected><%= user.full_name %></option>
-                            <% @bol = false %>
+                        <% OrderUser.designer_users(@order.id).each do |user|  %>
+                            <option value="<%= user.id %>" selected><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
-                    <% end %>
-                <% end %>
-                <% if @bol %>
-                    <option value="<%= user.id %>"><%= user.full_name %></option>
-                <% end %>
-            <% end %>
-        <% end %>
+                        <% OrderUser.not_in_users(OrderUser.designer(@order.id).empty? ? 0 : OrderUser.designer(@order.id)).each do |user| %>
+                          <option value="<%= user.id %>"><%= [user.first_name, user.last_name].join(' ') %></option>
+                        <% end %>
       </select>
     </div>
   </div>
@@ -184,22 +136,12 @@
     <div class="col-sm-10">
       <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_user[processor][]" id="order_user_processor[]" multiple>
         <option></option>
-        <% if @users.present? %>
-            <% @users.each do |user| %>
-                <% @bol = true %>
-                <% @order.processor.each do |processor|  %>
-                    <% if processor[:selected] %>
-                        <% if processor[:id] == user.id %>
-                            <option value="<%= user.id %>" selected><%= user.full_name %></option>
-                            <% @bol = false %>
+                        <% OrderUser.processor_users(@order.id).each do |user|  %>
+                            <option value="<%= user.id %>" selected><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
-                    <% end %>
-                <% end %>
-                <% if @bol %>
-                    <option value="<%= user.id %>"><%= user.full_name %></option>
-                <% end %>
-            <% end %>
-        <% end %>
+                        <% OrderUser.not_in_users(OrderUser.processor(@order.id).empty? ? 0 : OrderUser.processor(@order.id)).each do |user| %>
+                          <option value="<%= user.id %>"><%= [user.first_name, user.last_name].join(' ') %></option>
+                        <% end %>
       </select>
     </div>
   </div>
@@ -261,7 +203,7 @@
     <div class="col padding-left">
       <h4>Select Product Category</h4>
       <div class="input-group search-bar-padding padding-top-1">
-        <select class="categories form-control glow-input" data-live-search="true" name="category_id" id="category_id" >
+        <select class="categories form-control glow-input" data-live-search="true" name="category_id" id="category_id">
           <option></option>
           <% if @categories.present? %>
               <% @categories.each do |category| %>
@@ -474,6 +416,12 @@
   var address_list = [];
   var product_list = [];
   var entry_list = [];
+  var all_address_list = [];
+
+  <% @addresses.each do |address| %>
+  all_address_list.push(<%= address.id %>);
+  <% end %>
+
   <% @order_branches.each do |ob| %>
         address_list.push(<%= ob.address_id %>);
   <% end %>
@@ -523,7 +471,9 @@
           url: "/api/simple/addresses/branches?brand_id="+id
       }).done(function( data ) {
           $('#brand-list').html('');
+          all_address_list = [];
           data.forEach(function (item, index, arr) {
+              all_address_list.push(item['id']);
               brand_list = $('#brand-list').html();
               $('#brand-list').html(brand_list + "<a class='btn btn-nav' onclick='selectAndUnselect(" + item['id'] + ", $(this) )'> " + item['state'] + " - " +  item['city'] + "</a>&nbsp;");
               console.log(item);
@@ -533,7 +483,7 @@
   }
   function selectAndUnselect(id, elem) {   // is li
       console.log(address_list);
-      if (in_array(address_list, id)) {
+      if (address_list.includes(id)) {
           for(var i = address_list.length - 1; i >= 0; i--) {
               if(address_list[i] === id) {
                   address_list.splice(i, 1);
@@ -544,6 +494,17 @@
           address_list.push(id);
           elem.addClass('btn-yellow');
       }
+  }
+
+  function selectAllBranches() {
+      $('.select-items').removeClass('btn-yellow');
+      $('.select-items').addClass('btn-yellow');
+      address_list = all_address_list;
+  }
+
+  function unselectAllBranches() {
+      $('.select-items').removeClass('btn-yellow');
+      address_list = [];
   }
 
   function in_array(array, id) {

@@ -233,8 +233,8 @@ class OrdersController < ApplicationController
         end
 
       end
+      OrderBranch.where(:order_id => @order.id).destroy_all
       if params[:order_branch].present?
-        OrderBranch.where(:order_id => @order.id).destroy_all
         temp_order_branch = params[:order_branch].split(",").map { |s| s.to_i }
         temp_order_branch.each do |ob|
           order_branch = OrderBranch.new
