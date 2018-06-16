@@ -251,9 +251,22 @@
                         <br>
                         <% if product.dynamic_fields.present? && !product.dynamic_fields.nil? %>
                             <%= product.get_html_safe_fields.html_safe %>
+                        <% else %>
+                            <i>No Attribute/s was available.</i>
+                            <br>
                         <% end %>
+                        <% if product.specs.present? %>
                         <br>
-                        Notes: <%= @order.notes %>&nbsp;<br>
+                            <b>Specifications</b>: <%= product.specs %>&nbsp;<br>
+                        <% end %>
+                        <% if product.vendor_quote_prices.present? %>
+                            <br>
+                            <b>Quote Price</b>: <%= product.vendor_quote_prices %>&nbsp;<br>
+                        <% end %>
+                        <% if product.notes.present? %>
+                            <br>
+                            <b>Notes</b>: <%= product.notes %>&nbsp;<br>
+                        <% end %>
                         <br>
                       </td>
                     </tr>
