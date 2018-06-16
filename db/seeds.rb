@@ -1,3 +1,6 @@
+User.destroy_all
+UsersBrand.destroy_all
+UsersGroup.destroy_all
 Address.destroy_all
 Brand.destroy_all
 Category.destroy_all
@@ -10,9 +13,7 @@ OrderEntry.destroy_all
 OrderUser.destroy_all
 Product.destroy_all
 StyleAttribute.destroy_all
-User.destroy_all
-UsersBrand.destroy_all
-UsersGroup.destroy_all
+
 Vendor.destroy_all
 VendorCategory.destroy_all
 VendorsProduct.destroy_all
