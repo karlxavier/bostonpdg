@@ -9,4 +9,10 @@ class Product < ApplicationRecord
     end
 
   end
+
+  def get_html_safe_fields
+    @dyna_fields = ''
+    eval(self.dynamic_fields).each {|key, value| @dyna_fields = @dyna_fields + "#{key}: #{value}<br/>" }
+    @dyna_fields
+  end
 end
