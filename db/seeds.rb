@@ -1,3 +1,46 @@
+Address.destroy_all
+Brand.destroy_all
+Category.destroy_all
+Customer.destroy_all
+Group.destroy_all
+Inventory.destroy_all
+Order.destroy_all
+OrderBranch.destroy_all
+OrderEntry.destroy_all
+OrderUser.destroy_all
+Product.destroy_all
+StyleAttribute.destroy_all
+User.destroy_all
+UsersBrand.destroy_all
+UsersGroup.destroy_all
+Vendor.destroy_all
+VendorCategory.destroy_all
+VendorsProduct.destroy_all
+
+Category.create!([
+    {name: 'Sample Category 1'},
+    {name: 'Sample Category 2'},
+    {name: 'Sample Category 3'},
+    {name: 'Sample Category 4'},
+    {name: 'Sample Category 5'}
+                 ])
+
+Brand.create!([
+    {name: 'Sample Brand 1'},
+    {name: 'Sample Brand 2'},
+    {name: 'Sample Brand 3'},
+    {name: 'Sample Brand 4'},
+    {name: 'Sample Brand 5'}
+              ])
+
+Group.create!([
+    {name: 'Sample Brand 1', description: 'Sample Description Brand 1'},
+    {name: 'Sample Brand 2', description: 'Sample Description Brand 2'},
+    {name: 'Sample Brand 3', description: 'Sample Description Brand 3'},
+    {name: 'Sample Brand 4', description: 'Sample Description Brand 4'},
+    {name: 'Sample Brand 5', description: 'Sample Description Brand 5'},
+              ])
+
 if !User.all.present?
   User.create!([
                    {email: "admin@regency.com",password: 'password', password_confirmation: 'password', first_name: "Regency", last_name: "Admin", admin: true},

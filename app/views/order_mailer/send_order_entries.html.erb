@@ -247,10 +247,11 @@
                           Quantity:</b>
                         <%= order_entry.quantity %> PCS.<br>
                         <b>
-                          Specs</b>
+                          Attributes</b>
                         <br>
-                        Height: <%= @order.margin %> inch<br>
-                        Width: <%= @order.margin %> inch<br>
+                        <% if product.dynamic_fields.present? && !product.dynamic_fields.nil? %>
+                            <%= product.get_html_safe_fields.html_safe %>
+                        <% end %>
                         <br>
                         Notes: <%= @order.notes %>&nbsp;<br>
                         <br>

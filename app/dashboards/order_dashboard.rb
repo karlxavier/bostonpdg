@@ -19,7 +19,7 @@ class OrderDashboard < Administrate::BaseDashboard
   }
   ),
       status: Field::SelectBasic.with_options({
-                                                  choices: ['Pre-Sales', 'Sales', 'Design', 'Processing', 'Shipping']
+                                                  choices: ['Quote', 'Sales', 'Design', 'Processing', 'Shipping']
   }),
       customer: Field::CollectionSelect.with_options(
       collection: proc { User.all },

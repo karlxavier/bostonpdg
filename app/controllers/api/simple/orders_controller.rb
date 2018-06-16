@@ -46,7 +46,12 @@ module Api
         @vendor = Vendor.find( params[:vendor_id].to_i)
         @order_entries = OrderEntry.where(:order_id => @order.id, :vendor => @vendor.id)
         @user = User.where(:email => "notifications@burningmidnight.com").first
-        OrderMailer.with(order: @order, vendor: @vendor, order_entries: @order_entries).send_order_entries.deliver_now
+        if @vendor.email.present? && !@vendor.email.nil?
+          OrderMailer.with(order: @order, vendor: @vendor, order_entries: @order_entries).send_order_entries.deliver_now
+          flash[:notice] = "Order has sent successfully."
+        else
+          flash[:error] = "Vendor doesn't have an email!"
+        end
         redirect_to admin_order_path(@order)
       end
 
