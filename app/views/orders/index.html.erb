@@ -1,35 +1,39 @@
-<%= render "orders/modals/add_order_entries" %>
-<%= render "orders/modals/edit_order_entries" %>
-<%= render "orders/modals/manage_users" %>
-<%= render "orders/modals/item_details" %>
-<%= render "orders/modals/edit_attributes" %>
-<%= render "orders/modals/edit_free_flowing_fields" %>
+<% if @order.present? %>
+    <%= render "orders/modals/add_order_entries" %>
+    <%= render "orders/modals/edit_order_entries" %>
+    <%= render "orders/modals/manage_users" %>
+    <%= render "orders/modals/item_details" %>
+    <%= render "orders/modals/edit_attributes" %>
+    <%= render "orders/modals/edit_free_flowing_fields" %>
+<% end %>
+<% if @order.present? && @orders.present? %>
 <div class="row" style="position:relative;">
   <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 30% !important;">
     <% @orders.each do |order| %>
-    <div class="card border-secondary mb-3" style="box-shadow: 0 5px 15px rgba(33, 33, 33, .4);" >
-      <div class="card-body bg-light text-secondary">
-        <div class="row">
-          <div class="col-8">
-            <p class="lead">
-              <%= order.brand_branches %>
-            </p>
-            <h4><%= order.brand_name %></h4>
-            <p class="lead">
-              ORDER TICKET #<%= order.id %>
-            </p>
+        <div class="card border-secondary mb-3" style="box-shadow: 0 5px 15px rgba(33, 33, 33, .4);" >
+          <div class="card-body bg-light text-secondary">
+            <div class="row">
+              <div class="col-8">
+                <p class="lead">
+                  <%= order.brand_branches %>
+                </p>
+                <h4><%= order.brand_name %></h4>
+                <p class="lead">
+                  ORDER TICKET #<%= order.id %>
+                </p>
+              </div>
+              <div class="col-4 text-right">
+                <a href="<%= orders_path(:id => order.id )%>" class="btn btn-outline-dark btn-padding-margin">View</a>
+              </div>
+            </div>
           </div>
-          <div class="col-4 text-right">
-            <a href="<%= orders_path(:id => order.id )%>" class="btn btn-outline-dark btn-padding-margin">View</a>
+          <div class="card-footer" style="text-transform: uppercase;">
+            <%= order.created_date %> BY <%= order.created_by_name %>
           </div>
         </div>
-      </div>
-      <div class="card-footer" style="text-transform: uppercase;">
-        <%= order.created_date %> BY <%= order.created_by_name %>
-      </div>
-    </div>
-        <% end %>
+    <% end %>
   </div>
+
   <div class="col padding-left orders_and_order_form" style="overflow-y: auto; overflow-x: hidden">
     <div class="row">
       <div class="col padding-left">
@@ -37,8 +41,8 @@
         <h1><%= @order.brand_name %></h1>
         <p class="text-secondary">
           <% if @order.brand_branches.present? && !@order.brand_branches.nil? %>
-             <span style="margin-right: 2%;">BRANCHES:</span>
-            <%= @order.brand_branches %>
+              <span style="margin-right: 2%;">BRANCHES:</span>
+              <%= @order.brand_branches %>
           <% end %>
         </p>
       </div>
@@ -49,7 +53,7 @@
           ORDER TICKET #<%= @order.id %>
         </span>
         <a class="btn btn-outline-dark btn-padding-margin"  href="<%= edit_order_path(@order) %>">Edit</a>
-       <!-- <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" data-toggle="modal" data-target="#addOrder">Add</button>-->
+        <!-- <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" data-toggle="modal" data-target="#addOrder">Add</button>-->
         <a href="<%= new_order_path %>" class="btn btn-dark btn-padding-margin" style="margin: 0% 1%;padding: .2% 5% !important;">Add</a>
       </div>
 
@@ -74,7 +78,7 @@
               <label class="col-sm-4 col-form-label">REGIONAL DIRECTOR</label>
               <div class="col-sm-8">
                 <% OrderUser.regional_users(@order.id).each do |user| %>
-                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                    <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
@@ -82,7 +86,7 @@
               <label class="col-sm-4 col-form-label">CLIENT CONTACTS</label>
               <div class="col-sm-8">
                 <% OrderUser.client_contact_users(@order.id).each do |user| %>
-                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                    <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
@@ -90,7 +94,7 @@
               <label class="col-sm-4 col-form-label">COMMS DIRECTOR</label>
               <div class="col-sm-8">
                 <% OrderUser.comms_users(@order.id).each do |user| %>
-                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                    <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
@@ -98,7 +102,7 @@
               <label class="col-sm-4 col-form-label">ART</label>
               <div class="col-sm-8">
                 <% OrderUser.art_users(@order.id).each do |user| %>
-                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                    <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
@@ -106,7 +110,7 @@
               <label class="col-sm-4 col-form-label">DESIGNER</label>
               <div class="col-sm-8">
                 <% OrderUser.designer_users(@order.id).each do |user| %>
-                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                    <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
@@ -114,7 +118,7 @@
               <label class="col-sm-4 col-form-label">PROCESSORS</label>
               <div class="col-sm-8">
                 <% OrderUser.processor_users(@order.id).each do |user| %>
-                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                    <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
@@ -161,7 +165,25 @@
 
     </div>
   </div>
+
+
 </div>
+<% else %>
+    <style>
+        #wrapper-div{width:100%; height:400px}
+        .sample{height:20px; position:relative; margin: -20px -50px; width:150px; top:50%; left:50%;}
+    </style>
+
+    <div class="row" style="position:relative;">
+      <div class="col padding-left orders_and_order_form" style="overflow-y: auto; overflow-x: hidden">
+        <div class="row">
+          <div class="col padding-left" id="wrapper-div">
+            <a href="<%= new_order_path %>" class="sample" style="text-align: center;"><i class="fa fa-plus-circle fa-5" aria-hidden="true" style="font-size: 5em;"></i><br/>Add New Quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
 <script>
     $(document).ready(function (){
         $('.orders_and_order_form').css({'height': ($( window ).height() - 110)})
