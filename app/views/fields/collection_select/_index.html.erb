@@ -20,8 +20,10 @@ to be displayed on a resource's index page.
     <% if field.resource.has_attribute?(:product_id) %>
 
         <% if field.resource.product_id.present? %>
+            <% if Product.where(:id => field.resource.product_id).present? %>
             <% product = Product.find(field.resource.product_id) %>
-            <%= product.name %>
+                <%= product.name %>
+            <% end %>
         <% end %>
     <% end %>
 

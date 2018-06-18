@@ -14,7 +14,7 @@
             <div class="form-group row">
               <label class="col-sm-2 col-form-label label-form">Category</label>
               <div class="col-sm-10">
-                <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[category_id]" id="order_entry_category_id">
+                <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_entry[category_id]" id="order_entry_category_id">
                   <option></option>
                   <% if @categories.present? %>
                       <% @categories.each do |category| %>
@@ -27,7 +27,7 @@
             <div class="form-group row">
               <label class="col-sm-2 col-form-label label-form">Vendor</label>
               <div class="col-sm-10">
-                <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[vendor]" id="order_entry_vendor">
+                <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_entry[vendor]" id="order_entry_vendor">
                   <option></option>
                   <% if @vendors.present? %>
                       <% @vendors.each do |vendor| %>
@@ -40,7 +40,7 @@
             <div class="form-group row required">
               <label class="col-sm-2 col-form-label label-form">Product</label>
               <div class="col-sm-9">
-                <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[product_id]" id="order_entry_product_id" required="true">
+                <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_entry[product_id]" id="order_entry_product_id" required="true">
                   <option></option>
                   <% if @products.present? %>
                       <% @products.each do |product| %>
@@ -58,7 +58,7 @@
             <div class="form-group row">
               <label class="col-sm-2 col-form-label label-form">Quoted By</label>
               <div class="col-sm-10">
-                <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[quoted_by]" id="order_entry_quoted_by">
+                <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_entry[quoted_by]" id="order_entry_quoted_by">
                   <option></option>
                       <% User.order('id DESC').each do |user| %>
                           <option value="<%= user.id %>"><%= user.full_name %></option>

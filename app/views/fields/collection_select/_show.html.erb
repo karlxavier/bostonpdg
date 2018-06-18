@@ -19,8 +19,11 @@ to be displayed on a resource's show page.
     <% end %>
     <% if field.resource.has_attribute?(:product_id) %>
         <% if field.resource.product_id.present? %>
-            <% product = Product.find(field.resource.product_id) %>
-            <%= link_to product.name, edit_admin_product_path(product) %>
+            <% if Product.where(:id => field.resource.product_id).present? %>
+                <% product = Product.find(field.resource.product_id) %>
+                <%= link_to product.name, edit_admin_product_path(product) %>
+            <% end %>
+
         <% end %>
 
     <% end %>
