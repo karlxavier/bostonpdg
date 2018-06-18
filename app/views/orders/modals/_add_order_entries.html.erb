@@ -69,25 +69,25 @@
             <div class="form-group row">
               <label class="col-sm-2 col-form-label label-form">Price</label>
               <div class="col-sm-10">
-                <input step=".01"  class="form-control glow-input" name="order_entry[price]" id="order_entry_price"/>
+                <input step=".01"  class="form-control glow-input onlyNumbers" name="order_entry[price]" id="order_entry_price"/>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label label-form">Cost</label>
               <div class="col-sm-10">
-                <input step=".01" class="form-control glow-input" name="order_entry[cost]" id="order_entry_cost"/>
+                <input step=".01" class="form-control glow-input onlyNumbers" name="order_entry[cost]" id="order_entry_cost"/>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label label-form">Tax</label>
               <div class="col-sm-10">
-                <input step=".01" class="form-control glow-input" name="order_entry[tax]" id="order_entry_tax"/>
+                <input step=".01" class="form-control glow-input onlyNumbers" name="order_entry[tax]" id="order_entry_tax"/>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label label-form">Quantity</label>
               <div class="col-sm-10">
-                <input step=".01" class="form-control glow-input" name="order_entry[quantity]" id="order_entry_quantity"/>
+                <input step=".01" class="form-control glow-input onlyNumbers" name="order_entry[quantity]" id="order_entry_quantity"/>
               </div>
             </div>
         </div>
@@ -106,5 +106,12 @@
 <script type="text/javascript">
   $(document).ready(function (){
     Ladda.bind( '.ladda-button',{ timeout: 10000 });
+
+    $(".onlyNumbers").on("keypress keyup blur",function (event) {
+      $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+      if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+          event.preventDefault();
+      }
+    });
   })
 </script>
