@@ -10,14 +10,14 @@
       </div>
       <form class="form" id="edit_order_entry" action="/order_entries/update_entry" accept-charset="UTF-8" method="post">
         <div class="modal-body">
-        
+
           <input type="hidden" name="order_entry[order_id]" id="order_entry_order_id" value="<%= @order.id %>">
           <input type="hidden" name="order_entry[id]" id="order_entry_id" >
 
-          <div class="form-group row required">
+          <div class="form-group row">
             <label class="col-sm-2 col-form-label label-form">Category</label>
             <div class="col-sm-10">
-              <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[category_id]" id="order_entry_category_id" required="true">
+              <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[category_id]" id="order_entry_category_id">
                 <option></option>
                 <% if @categories.present? %>
                     <% @categories.each do |category| %>
@@ -27,10 +27,10 @@
               </select>
             </div>
           </div>
-          <div class="form-group row required">
+          <div class="form-group row">
             <label class="col-sm-2 col-form-label label-form">Vendor</label>
             <div class="col-sm-10">
-              <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[vendor]" id="order_entry_vendor" required="true">
+              <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[vendor]" id="order_entry_vendor">
                 <option></option>
                 <% if @vendors.present? %>
                     <% @vendors.each do |vendor| %>
@@ -58,29 +58,27 @@
           </div>
 
 
-          <div class="form-group row required">
+          <div class="form-group row">
             <label class="col-sm-2 col-form-label label-form">Quoted By</label>
             <div class="col-sm-10">
               <select class="selectpicker form-control glow-input" data-live-search="true" name="order_entry[quoted_by]" id="order_entry_quoted_by">
                 <option></option>
-                <% if @users.present? %>
-                    <% @users.each do |user| %>
-                        <option value="<%= user.id %>"><%= user.full_name %></option>
-                    <% end %>
-                <% end %>
+                      <% User.order('id DESC').each do |user| %>
+                          <option value="<%= user.id %>"><%= user.full_name %></option>
+                      <% end %>
               </select>
             </div>
           </div>
-          <div class="form-group row required">
+          <div class="form-group row">
             <label class="col-sm-2 col-form-label label-form">Price</label>
             <div class="col-sm-10">
-              <input type="number"  class="form-control glow-input" name="order_entry[price]" id="order_entry_price" required="true"/>
+              <input type="number"  class="form-control glow-input" name="order_entry[price]" id="order_entry_price"/>
             </div>
           </div>
-          <div class="form-group row required">
+          <div class="form-group row">
             <label class="col-sm-2 col-form-label label-form">Cost</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control glow-input" name="order_entry[cost]" id="order_entry_cost" required="true"/>
+              <input type="number" class="form-control glow-input" name="order_entry[cost]" id="order_entry_cost"/>
             </div>
           </div>
           <div class="form-group row">
@@ -89,13 +87,13 @@
               <input type="number" class="form-control glow-input" name="order_entry[tax]" id="order_entry_tax" />
             </div>
           </div>
-          <div class="form-group row required">
+          <div class="form-group row">
             <label class="col-sm-2 col-form-label label-form">Quantity</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control glow-input" name="order_entry[quantity]" id="order_entry_quantity" required="true"/>
+              <input type="number" class="form-control glow-input" name="order_entry[quantity]" id="order_entry_quantity"/>
             </div>
           </div>
-        
+
         </div>
         <div class="modal-footer">
           <div class="buttons pull-left">
@@ -106,7 +104,7 @@
           </div>
         </div>
       </form>
-      
+
     </div>
   </div>
 </div>
