@@ -20,15 +20,17 @@
 </head>
 
 <body>
-<%= render "layouts/static/sidebar_nav" %>
+
+<% if current_user.present? %>
+  <%= render "layouts/static/sidebar_nav" %>
+<% end %>
 <div class="page active" style="padding-bottom: 0;">
-  <% if  params[:action] != 'index' %>
+  <% if current_user.present? && params[:action] != 'index' %>
       <a href="javascript:history.back()" class="badge badge-secondary btn btn-nav btn-back">Back</a>
   <% end %>
   <section class="dashboard-header section-padding">
     <div class="container-fluid">
       <%= render "layouts/static/notification" %>
-
       <%= yield %>
     </div>
   </section>

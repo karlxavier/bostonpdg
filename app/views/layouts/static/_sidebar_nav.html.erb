@@ -1,4 +1,5 @@
 <!-- Side Navbar -->
+
 <nav class="side-navbar shrink">
   <div class="side-navbar-wrapper ">
     <!-- Sidebar Navigation Menus-->
@@ -19,6 +20,7 @@
         <% if user_signed_in? %>
             <li><a href="<%= destroy_user_session_path %>" data-method="delete"> <i class="fa fa-sign-out"></i>LOGOUT</a></li>
         <% else %>
+            
             <li><a href="<%= new_user_session_path %>" > <i class="fa fa-sign-in"></i>LOGIN</a></li>
         <% end %>
 
