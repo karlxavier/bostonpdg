@@ -20,6 +20,7 @@ module RegencyApp
         resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
       end
     end
+    config.assets.paths << "#{Rails.root}/app/assets/fonts" 
     config.action_controller.allow_forgery_protection = false
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.default_url_options = { host:'afternoon-cove-37922.herokuapp.com'}
