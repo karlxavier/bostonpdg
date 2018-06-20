@@ -1,25 +1,44 @@
-<h2>Change your password</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+<div class="modal fade bd-example-modal-lg modal-gray" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="editPassword" style="background: #0C0C0C;">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center;">
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
-  </div>
+        <%= image_tag("logo.png", class: 'img-logo-login') %>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+            <h1 class="header-login">Forgot your password?</h1>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'form form-modal-padding' }) do |f| %>
+                <%= devise_error_messages! %>
+                <%= f.hidden_field :reset_password_token %>
 
-<%= render "devise/shared/links" %>
+                <div class="form-group row">
+                  <% if @minimum_password_length %>
+                      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+                  <% end %>
+                  <%= f.password_field :password, autofocus: true, autocomplete: "off", :class => 'form-control', placeholder: 'E-mail' %>
+                </div>
+
+                <div class="form-group row">
+                  <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control', placeholder: 'E-mail' %>
+                </div>
+
+                <div class="form-group row">
+                  <%= f.submit "Change my password", :class => 'btn btn-dark col' %>
+                </div>
+
+                <div class="form-group row">
+                  <%= render "devise/shared/links" %>
+                </div>
+
+            <% end %>
+            </div>
+            </div>
+            </div>
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#editPassword').modal({backdrop: 'static', keyboard: false})
+                });
+            </script>

@@ -245,3 +245,17 @@ p {
     margin: 0% 1% !important;
     padding: .2% 5% !important;
 }
+
+.form-modal-padding {
+    padding: 10%;
+}
+
+.img-logo-login {
+    margin-top: 3%;
+    width: 50%;
+}
+
+.header-login {
+    font-size: 2em;
+    margin-top: 10%;
+}
