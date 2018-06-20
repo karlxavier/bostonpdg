@@ -6,3 +6,12 @@ development:
   template: template0
   username: <%= ENV['DB_USER'] %>
   password: <%= ENV['DB_PASSWORD'] %>
+
+production:
+  adapter:  postgresql
+  encoding: unicode
+  database: regency_production
+  pool:     5
+  template: template0
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
