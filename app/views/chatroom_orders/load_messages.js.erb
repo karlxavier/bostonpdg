@@ -1,0 +1,12 @@
+$("div#chat_messages").html("<%= escape_javascript(render '/messages/messages', active_room: @chatroom, messages: @messages ) %>");
+$("div#chatroom_message").html("<%= escape_javascript(render 'chatroom_message', chatroom: @chatroom ) %>");
+$(function() {
+	var objDiv = document.getElementById("chat_messages");
+	objDiv.scrollTop = objDiv.scrollHeight;
+
+	// var badge = document.getElementById("badge-<%= @chatroom.id %>");
+	// badge.innerHTML = "";
+	// badge.classList.remove("badge");
+	// badge.classList.remove("badge-warning");
+
+})

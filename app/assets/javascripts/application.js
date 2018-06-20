@@ -22,7 +22,11 @@
 //= require ladda-spin
 //= require ladda.min
 //= require ladda.jquery
+//= require toastr.min
 //= require front
+//= require dropzone
+//= require chatbox_dropzone
+//= require cable
 
 $(document).on('turbolinks:load', function() {
     $('.selectpicker').selectpicker();

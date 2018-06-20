@@ -1,6 +1,15 @@
 class OrderUser < ApplicationRecord
   belongs_to :order
 
+  scope :chatroom_order_users, -> (order_id) { 
+      regional_users(order_id)
+      .or(comms_users(order_id))
+      .or(art_users(order_id))
+      .or(processor_users(order_id))
+      .or(client_contact_users(order_id))
+      .or(designer_users(order_id))
+  }
+
   scope :regional_users, -> (order_id) { User.select(:id, :first_name, :last_name).where("id IN (?)", regional(order_id)) }
   scope :regional, -> (order_id) { select(:regional).where(order_id: order_id).where.not(regional: nil).pluck(:regional) }
 

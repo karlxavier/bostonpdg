@@ -1,1 +1,44 @@
-/* your styles go here */
+.chat-discussion {
+    background: #eee;
+    padding: 15px;
+    height: 500px;
+    overflow-y: auto;
+}
+
+.chat-message {
+    padding: 10px 20px;
+}
+
+.chat-discussion .chat-message.left .message {
+    text-align: left;
+    margin-left: 5px;
+}
+.message {
+    background-color: #fff;
+    border: 1px solid #e7eaec;
+    text-align: left;
+    display: block;
+    padding: 10px 20px;
+    position: relative;
+    border-radius: 4px;
+}
+
+.chat-discussion .chat-message.left .message-date {
+    float: right;
+}
+
+.message-date {
+    font-size: 10px;
+    color: #888888;
+}
+
+.message-content {
+    display: block;
+    font-size: 10px;
+    margin-left: 20px;
+}
+
+.message-author {
+	color: #17a2b8 !important;
+	font-size: 10px;
+}

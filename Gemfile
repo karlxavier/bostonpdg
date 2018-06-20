@@ -51,6 +51,12 @@ gem 'devise_token_auth'
 gem 'roo'
 gem 'figaro'
 
+gem 'shrine', '~> 2.6'
+gem 'fastimage'
+gem 'image_processing'
+gem 'mini_magick'
+gem 'aws-sdk', '~> 3'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

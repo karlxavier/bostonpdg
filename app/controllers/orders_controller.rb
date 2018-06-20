@@ -109,6 +109,13 @@ class OrdersController < ApplicationController
       end
     end
 
+    if order_user.errors.any?
+          puts '******* ERRORS ********'
+          order_user.errors.full_messages.each do |message|
+            puts message
+          end
+        end
+
     redirect_to orders_path(:id => @order.id)
   end
 

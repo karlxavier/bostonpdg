@@ -1,0 +1,27 @@
+<div class="chat-message left" id="message-<%= message.id %>">
+  	<div class="message">
+      	<strong class="message-author"> <%= [message.user.first_name, message.user.last_name].join(' ') %> </strong>
+      	<span class="message-date"> <%= time_ago_in_words(message.created_at) %> ago </span>
+      	<span class="message-content">
+        	<%= message.body %>
+      	</span>
+      	<% if message.attachment_data? %>
+					<% 
+					attachment_data = JSON.parse(message.attachment_data, object_class: OpenStruct) 
+					mime_type = attachment_data.original.metadata.mime_type
+					%>
+      		<% if is_downloadable_file?(mime_type)%>
+						<div style="text-align: left;">
+							<br>
+							<%= file_icon(mime_type) %>
+							<%= link_to attachment_data.original.metadata.filename, message.attachment_url(:original), download: attachment_data.original.metadata.filename %>
+						</div>
+					<% else %>
+					<div style="text-align: center;">
+							<br>
+							<%= image_tag message.attachment_url(:original) ,style: "height: 50%; width: 50%;" %>	
+						</div>
+					<% end %>
+  		<% end %>
+  	</div>
+</div>

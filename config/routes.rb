@@ -29,6 +29,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :chatroom_orders do
+    resources :order_users
+    resources :messages
+    resources :dropfiles, only: :create
+    get 'load_messages/', :to => 'chatroom_orders#load_messages', as: 'load_messages'
+  end
+
 
   namespace :admin do
     resources :users
