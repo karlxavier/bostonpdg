@@ -1,26 +1,38 @@
-<h2>Log in</h2>
+<div class="modal fade bd-example-modal-lg modal-gray" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="newSession" style="background: #0C0C0C;">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center;">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+        <%= image_tag("logo.png", class: 'img-logo-login') %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+            <h1 class="header-login">Log in to my account</h1>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'form form-modal-padding'} ) do |f| %>
+
+        <div class="form-group row">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control', placeholder: 'E-mail' %>
+        </div>
+
+        <div class="form-group row">
+          <%= f.password_field :password, autocomplete: "off", :class => 'form-control', placeholder: 'Password' %>
+        </div>
+        <div class="form-group row">
+          <%= f.submit "Log in", :class => 'btn btn-dark col' %>
+        </div>
+
+        <div class="form-group row">
+          <%= render "devise/shared/links" %>
+        </div>
+
+        <% end %>
+      </div>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#newSession').modal({backdrop: 'static', keyboard: false})
+    });
+
+</script>
