@@ -16,7 +16,7 @@ class ChatroomOrder < Order
 									OR order_users.art = ? 
 									OR order_users.designer = ? 
 									OR order_users.client_contact = ? 
-									OR order_users.processor = ? ", 
+									OR order_users.processor = ? ",
 									user_id,user_id,user_id,user_id,user_id,user_id) 
 	}
 
