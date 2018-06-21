@@ -148,7 +148,8 @@ h2 {
 }
 
 .section-padding {
-  padding: 2rem 0;
+  padding: 2rem 0 0 0;
+
 }
 
 .section-no-padding-bottom {
@@ -162,7 +163,7 @@ section header {
 
 @media (min-width: 768px) {
   .container-fluid {
-    padding: 0 3rem;
+      padding: 0 1.5rem 0 3rem;
   }
 }
 
@@ -774,9 +775,9 @@ nav.navbar a.menu-btn:hover {
 }
 
 @media (min-width: 992px) {
-  .dashboard-header {
-    margin-bottom: 30px;
-  }
+  /*.dashboard-header {*/
+    /*margin-bottom: 30px;*/
+  /*}*/
   .dashboard-header .card {
     -webkit-box-shadow: none;
     box-shadow: none;

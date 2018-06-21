@@ -8,30 +8,46 @@
 <% end %>
 <% if @order.present? && @orders.present? %>
 <div class="row" style="position:relative;">
-  <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 30% !important;">
-    <% @orders.each do |order| %>
-        <div class="card border-secondary mb-3" style="box-shadow: 0 5px 15px rgba(33, 33, 33, .4);" >
-          <div class="card-body bg-light text-secondary">
-            <div class="row">
-              <div class="col-8">
-                <p class="lead">
-                  <%= order.brand_branches %>
-                </p>
-                <h4><%= order.brand_name %></h4>
-                <p class="lead">
-                  ORDER TICKET #<%= order.id %>
-                </p>
+  <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: hidden; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 30% !important;">
+    <div class="row" style="position:relative;">
+      <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
+        <% @orders.each do |order| %>
+            <div class="card border-secondary mb-3" style="box-shadow: 0 5px 15px rgba(33, 33, 33, .4);" >
+              <div class="card-body bg-light text-secondary">
+                <div class="row">
+                  <div class="col-8">
+                    <p class="lead">
+                      <%= order.brand_branches %>
+                    </p>
+                    <h4><%= order.brand_name %></h4>
+                    <p class="lead">
+                      ORDER TICKET #<%= order.id %>
+                    </p>
+                  </div>
+                  <div class="col-4 text-right">
+                    <a href="<%= orders_path(:id => order.id )%>" class="btn btn-outline-dark btn-padding-margin">View</a>
+                  </div>
+                </div>
               </div>
-              <div class="col-4 text-right">
-                <a href="<%= orders_path(:id => order.id )%>" class="btn btn-outline-dark btn-padding-margin">View</a>
+              <div class="card-footer" style="text-transform: uppercase;">
+                <%= order.created_date %> BY <%= order.created_by_name %>
               </div>
             </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="row" style="position:relative;margin-top:5%;">
+      <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
+        <div class="stitched row">
+          <div class="col">
+
+            COMMS HERE...
           </div>
-          <div class="card-footer" style="text-transform: uppercase;">
-            <%= order.created_date %> BY <%= order.created_by_name %>
-          </div>
+
+
         </div>
-    <% end %>
+      </div>
+    </div>
   </div>
 
   <div class="col padding-left orders_and_order_form" style="overflow-y: auto; overflow-x: hidden">
@@ -125,7 +141,7 @@
           </div>
         </div>
         <div class="card text-white border-secondary bg-info mb-3" >
-          <div class="card-header"><b>PRE-SALES ORDER</b></div>
+          <div class="card-header"><b>QUOTE REQUEST/S</b></div>
           <div class="card-body bg-light text-secondary">
             <div class="col text-right" style="padding-bottom: 2%;">
               <button class="btn btn-outline-secondary btn-padding-margin" data-toggle="modal" data-target="#addOrderEntries">ADD AN ITEM</button>
@@ -186,10 +202,13 @@
 <% end %>
 <script>
     $(document).ready(function (){
-        $('.orders_and_order_form').css({'height': ($( window ).height() - 110)})
+        $('.orders_and_order_form').css({'height': ($( window ).height() - 50)});
+        $('.orders_and_order_form_2').css({'height': (($( window ).height() - 80) / 2)});
         $(window).resize(function(){
-            var screenHeight = $( window ).height() - 110;
-            $('.orders_and_order_form').height(screenHeight)
+            var screenHeight = $( window ).height() - 50;
+            var screenHeight2 = $( window ).height() - 80;
+            $('.orders_and_order_form').height(screenHeight);
+            $('.orders_and_order_form_2').height(screenHeight2 / 2);
         })
     });
 </script>
