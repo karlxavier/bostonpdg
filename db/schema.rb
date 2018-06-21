@@ -112,7 +112,6 @@ ActiveRecord::Schema.define(version: 20180627161917) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "aisle_id"
-    t.integer "product_id"
   end
 
   create_table "item_messages", force: :cascade do |t|
@@ -180,6 +179,7 @@ ActiveRecord::Schema.define(version: 20180627161917) do
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
   end
 
+<<<<<<< HEAD
   create_table "messages", force: :cascade do |t|
     t.text "body"
     t.text "attachment_data"
@@ -190,6 +190,8 @@ ActiveRecord::Schema.define(version: 20180627161917) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+=======
+>>>>>>> initial commit for global search
   create_table "order_branches", force: :cascade do |t|
     t.integer "address_id"
     t.integer "brand_id"
@@ -373,11 +375,45 @@ ActiveRecord::Schema.define(version: 20180627161917) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
-  add_foreign_key "messages", "users"
   add_foreign_key "products", "style_attributes"
   add_foreign_key "users", "addresses", column: "billing_address"
   add_foreign_key "users", "addresses", column: "shipping_address"
   add_foreign_key "users", "brands"
   add_foreign_key "users", "groups"
   add_foreign_key "vendors", "products"
+
+  create_view "search_results",  sql_definition: <<-SQL
+      SELECT products.id AS searchable_id,
+      'Product'::text AS searchable_type,
+      (products.id)::text AS search_term
+     FROM products
+  UNION
+   SELECT products.id AS searchable_id,
+      'Product'::text AS searchable_type,
+      products.name AS search_term
+     FROM products
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
+      (orders.id)::text AS search_term
+     FROM orders
+  UNION
+   SELECT brands.id AS searchable_id,
+      'Brand'::text AS searchable_type,
+      brands.name AS search_term
+     FROM brands
+  UNION
+   SELECT order_entries.id AS searchable_id,
+      'OrderEntry'::text AS searchable_type,
+      (products.id)::text AS search_term
+     FROM (order_entries
+       JOIN products ON ((products.id = order_entries.product_id)))
+  UNION
+   SELECT order_entries.id AS searchable_id,
+      'OrderEntry'::text AS searchable_type,
+      products.name AS search_term
+     FROM (order_entries
+       JOIN products ON ((products.id = order_entries.product_id)));
+  SQL
+
 end
