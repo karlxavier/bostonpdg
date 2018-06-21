@@ -5,8 +5,8 @@ class User < ApplicationRecord
   has_many :brands
   has_many :groups
 
-  has_many :comms, class_name: 'OrderUser', primary_key: 'id', foreign_key: 'comms'
-  has_many :chatroom_orders, through: :comms
+  # has_many :comms, class_name: 'OrderUser', primary_key: 'id', foreign_key: 'comms'
+  # has_many :chatroom_orders, through: :comms
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
