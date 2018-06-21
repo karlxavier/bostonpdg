@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180621035147) do
+ActiveRecord::Schema.define(version: 20180621045120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,38 +41,6 @@ ActiveRecord::Schema.define(version: 20180621035147) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "parent"
-  end
-
-  create_table "chat_thread_users", force: :cascade do |t|
-    t.integer "chat_thread_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "chat_threads", force: :cascade do |t|
-    t.string "channel_id"
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "chatroom_users", force: :cascade do |t|
-    t.bigint "chatroom_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "last_read_at"
-    t.index ["chatroom_id"], name: "index_chatroom_users_on_chatroom_id"
-    t.index ["user_id"], name: "index_chatroom_users_on_user_id"
-  end
-
-  create_table "chatrooms", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "order_id"
-    t.index ["order_id"], name: "index_chatrooms_on_order_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -166,7 +134,6 @@ ActiveRecord::Schema.define(version: 20180621035147) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "chatroom_order_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
@@ -201,7 +168,6 @@ ActiveRecord::Schema.define(version: 20180621035147) do
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "chatroom_order_id"
     t.integer "client_contact"
     t.integer "designer"
   end
@@ -226,7 +192,6 @@ ActiveRecord::Schema.define(version: 20180621035147) do
     t.decimal "total_budget"
     t.boolean "urgent"
     t.integer "brand_id"
-    t.string "chatroom_name"
   end
 
   create_table "products", force: :cascade do |t|
@@ -340,9 +305,6 @@ ActiveRecord::Schema.define(version: 20180621035147) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "chatroom_users", "chatrooms"
-  add_foreign_key "chatroom_users", "users"
-  add_foreign_key "chatrooms", "orders"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
