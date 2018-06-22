@@ -179,7 +179,6 @@ ActiveRecord::Schema.define(version: 20180627161917) do
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
   end
 
-<<<<<<< HEAD
   create_table "messages", force: :cascade do |t|
     t.text "body"
     t.text "attachment_data"
@@ -190,8 +189,6 @@ ActiveRecord::Schema.define(version: 20180627161917) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-=======
->>>>>>> initial commit for global search
   create_table "order_branches", force: :cascade do |t|
     t.integer "address_id"
     t.integer "brand_id"
