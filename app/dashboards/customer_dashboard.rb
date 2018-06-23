@@ -9,12 +9,22 @@ class CustomerDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    name: Field::String,
+    email: Field::String,
     first_name: Field::String,
     last_name: Field::String,
     billing_address: Field::String,
     shipping_address: Field::String,
     phone: Field::String,
-    brand: Field::BelongsTo.with_options(class_name: "Brand", foreign_key: "brand"),
+      brand: Field::CollectionSelect.with_options(
+      collection: proc { Brand.all },
+      value_method: :id,
+      text_method: :name,
+      options: {
+      include_blank: 'Please Select A Brand',
+      include_hidden: false,
+  }
+  ),
     admin: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -27,15 +37,18 @@ class CustomerDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
-    :first_name,
-    :last_name,
+    :name,
+    :email,
     :billing_address,
+    :shipping_address,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
+    :name,
+    :email,
     :first_name,
     :last_name,
     :billing_address,
@@ -51,8 +64,10 @@ class CustomerDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :name,
     :first_name,
     :last_name,
+    :email,
     :billing_address,
     :shipping_address,
     :phone,
