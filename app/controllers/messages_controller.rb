@@ -8,7 +8,7 @@ def create
 	message.user = current_user
 	
 	message.save
-	MessageRelayJob.perform_later(message, current_user.id)
+	MessageRelayJob.perform_later(message, current_user)
 end
 
 private

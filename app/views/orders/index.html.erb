@@ -38,13 +38,10 @@
     </div>
     <div class="row" style="position:relative;margin-top:5%;">
       <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
-        <div class="stitched row">
+        <div class="stitched row" style="padding: 10px; text-shadow: none;">
           <div class="col">
-
-            COMMS HERE...
+            
           </div>
-
-
         </div>
       </div>
     </div>
@@ -181,8 +178,6 @@
 
     </div>
   </div>
-
-
 </div>
 <% else %>
     <style>
@@ -200,6 +195,32 @@
       </div>
     </div>
 <% end %>
+
+<div class="small-chat-box fadeInRight animated">
+  <div class="heading" draggable="true">
+      Order-<%= @order.id %>
+  </div>
+
+    <div class="content" >
+      <% if @chatroom_order.present? %>
+        <div class="dropzonable" id="chat_messages" style="height: 200px;"> 
+          <%= render '/messages/messages', active_room: @chatroom_order, messages: @chatroom_order.messages.order(created_at: :desc).limit(100).reverse %>
+        </div>
+      <% end %>
+    </div>
+
+  <div class="form-chat">
+    <div class="chat-message-form" id="chatroom_message">
+      <%= render '/chatroom_orders/chatroom_message', chatroom: @chatroom_order %>
+    </div>
+  </div>
+</div>
+<div id="small-chat">
+    <a class="open-small-chat">
+        <i class="fa fa-remove"></i>
+    </a>
+</div>
+
 <script>
     $(document).ready(function (){
         $('.orders_and_order_form').css({'height': ($( window ).height() - 50)});
@@ -210,5 +231,16 @@
             $('.orders_and_order_form').height(screenHeight);
             $('.orders_and_order_form_2').height(screenHeight2 / 2);
         })
+
+        $('.open-small-chat').on('click', function () {
+            $(this).children().toggleClass('fa-comments').toggleClass('fa-remove');
+            $('.small-chat-box').toggleClass('active');
+        });
+
+        $('.small-chat-box .content').slimScroll({
+            height: '234px',
+            railOpacity: 0.4,
+            start: 'bottom',
+        });
     });
 </script>

@@ -24,6 +24,7 @@
 //= require ladda.jquery
 //= require toastr.min
 //= require front
+//= require slimscroll
 //= require dropzone
 //= require chatbox_dropzone
 //= require cable

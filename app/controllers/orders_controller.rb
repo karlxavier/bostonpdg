@@ -20,6 +20,7 @@ class OrdersController < ApplicationController
         # @order_users = OrderUser.where("order_id = '#{@order.id}'")
       end
     end
+    @chatroom_order = ChatroomOrder.find(@order.id)
     @categories = Category.all
     @vendors = Vendor.all
     @products = Product.all

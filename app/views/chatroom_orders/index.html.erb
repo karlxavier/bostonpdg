@@ -50,7 +50,8 @@
 </div>
   <script type="text/javascript">
     $(function() {
-      var objDiv = document.getElementById("chat_messages");
-      objDiv.scrollTop = objDiv.scrollHeight;
+        var chat_messages = document.getElementById('chat_messages');
+        var height = chat_messages.scrollHeight;
+        $(chat_messages).scrollTop(height);
     })
   </script>
