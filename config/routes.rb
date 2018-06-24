@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   post 'vendors/import_csv'
+  post 'customers/import_csv'
   resources :orders do
     collection do
       post  'update_assign_user'
@@ -41,6 +42,7 @@ Rails.application.routes.draw do
     resources :users
     resources :users_brands
     resources :users_groups
+    resources :customers
     resources :inventories
     resources :vendors
     resources :products
