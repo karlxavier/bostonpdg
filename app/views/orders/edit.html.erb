@@ -430,13 +430,6 @@
   <% end %>
 
   $(function() {
-      $(".dropdown").bind('keydown', function(event) {
-          var keyChar = String.fromCharCode(event.keyCode);
-          if (event.keyCode === 13 || event.keyCode === 9) {
-              $(this).find('.selectpicker2').selectpicker('toggle');
-          }
-      });
-
       $('select.brandpicker').on('change', function(e){
           /*console.log(this.value,
            this.options[this.selectedIndex].value,

@@ -36,7 +36,22 @@ $(document).on('turbolinks:load', function() {
     $('.clone_categories').selectpicker();
     $('.clone_products').selectpicker();
 
+
+    $(function() {
+        $(".dropdown").bind('keydown', function (event) {
+            if (event.keyCode === 13 || event.keyCode === 9) {
+                $(this).find('.selectpicker').selectpicker('toggle');
+                $(this).find('.selectpicker2').selectpicker('toggle');
+                $(this).find('.categories').selectpicker('toggle');
+                $(this).find('.brandpicker').selectpicker('toggle');
+                $(this).find('.clone_categories').selectpicker('toggle');
+                $(this).find('.clone_products').selectpicker('toggle');
+            }
+        });
+    });
+
 });
+
 
 var room = 1;
 function product_attributes() {
