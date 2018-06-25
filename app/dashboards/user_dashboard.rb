@@ -33,6 +33,8 @@ class UserDashboard < Administrate::BaseDashboard
   ),
       first_name: Field::String,
       last_name: Field::String,
+      mobile: Field::String,
+      notes: Field::Text,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -66,14 +68,16 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+      :email,
+      :password,
+      :password_confirmation,
       :first_name,
       :last_name,
       :billing_address,
       :shipping_address,
-      :email,
-      :password,
-      :password_confirmation,
-      :admin
+      :mobile,
+      :admin,
+      :notes
   ].freeze
 
   # Overwrite this method to customize how users are displayed
