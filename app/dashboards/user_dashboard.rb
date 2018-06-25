@@ -35,6 +35,11 @@ class UserDashboard < Administrate::BaseDashboard
       last_name: Field::String,
       mobile: Field::String,
       notes: Field::Text,
+      active: Field::Boolean,
+      title: Field::SelectBasic.with_options({
+                                                  choices: ['Mr', 'Mrs/Ms']
+  }),
+      phone: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -71,12 +76,15 @@ class UserDashboard < Administrate::BaseDashboard
       :email,
       :password,
       :password_confirmation,
+      :title,
       :first_name,
       :last_name,
       :billing_address,
       :shipping_address,
       :mobile,
+      :phone,
       :admin,
+      :active,
       :notes
   ].freeze
 

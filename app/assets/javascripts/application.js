@@ -40,7 +40,7 @@ $(document).on('turbolinks:load', function() {
 
     $(function() {
         $(".dropdown").bind('keydown', function (event) {
-            if (event.keyCode === 13 || event.keyCode === 9) {
+            if (event.keyCode === 9) {
                 $(this).find('.selectpicker').selectpicker('toggle');
                 $(this).find('.selectpicker2').selectpicker('toggle');
                 $(this).find('.categories').selectpicker('toggle');
