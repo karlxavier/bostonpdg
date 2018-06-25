@@ -10,11 +10,27 @@ as defined by the routes in the `admin/` namespace
 <nav class="navigation" role="navigation">
   <% Administrate::Namespace.new(namespace).resources.each do |resource| %>
       <% if resource.resource != "order_entries" && resource.resource != "order_users" && resource.resource != "users_brands" && resource.resource != "users_groups" && resource.resource != "order_branches" && resource.resource != "vendors_products" && resource.resource != "vendor_categories" %>
-          <%= link_to(
-                      display_resource_name(resource),
-                      [namespace, resource_index_route_key(resource)],
-                      class: "navigation__link navigation__link--#{nav_link_state(resource)}"
-                      ) %>
+
+          <% if resource.resource == "customers" %>
+              <%= link_to(
+                          'Hotels / Customers',
+                          [namespace, resource_index_route_key(resource)],
+                          class: "navigation__link navigation__link--#{nav_link_state(resource)}"
+                          ) %>
+              <% elsif resource.resource == "users" %>
+                  <%= link_to(
+                              'Contacts / Users',
+                              [namespace, resource_index_route_key(resource)],
+                              class: "navigation__link navigation__link--#{nav_link_state(resource)}"
+                              ) %>
+              <% else %>
+                  <%= link_to(
+                              display_resource_name(resource),
+                              [namespace, resource_index_route_key(resource)],
+                              class: "navigation__link navigation__link--#{nav_link_state(resource)}"
+                              ) %>
+                  <% end %>
+
+              <% end %>
           <% end %>
-      <% end %>
-      </nav>
+          </nav>
