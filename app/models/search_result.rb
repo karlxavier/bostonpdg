@@ -3,12 +3,19 @@ class SearchResult < ActiveRecord::Base
   belongs_to :searchable, polymorphic: true
 
   def initialize(args)
-    @query = args[:query]
+    @query = case args[:query]
+    when /\+/
+      args[:query].split('+').map(&:strip).join('|')
+    when /\,/
+      args[:query].split(',').map(&:strip).join('|')
+    else
+      args[:query].strip
+    end
   end
 
   def results
     if @query.present?
-      self.class.basic_search(@query).preload(:searchable).map(&:searchable).uniq
+      self.class.advanced_search(@query).preload(:searchable).map(&:searchable).uniq
     else
       SearchResult.none
     end

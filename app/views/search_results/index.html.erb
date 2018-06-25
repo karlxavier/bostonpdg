@@ -1,3 +1,17 @@
+<div class="row mb-4" style="position:relative;">
+  <div class="col-5">
+    <%= form_with url: search_results_path, method: :get, local: true, class: 'col' do |f| %>
+      <div class="input-group">
+        <%= f.text_field :search_term, class: 'form-control', placeholder: 'Enter a search term...' %>
+        <div class="input-group-append">
+          <%= f.button class: 'btn border-0 btn-dark', style: 'right: 0px;' do %>
+            Search <i class="fa fa-search"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 <div class="row">
   <div class="col">
     <% if  @results.each do |result| %>
