@@ -9,7 +9,7 @@
 <% if @order.present? && @orders.present? %>
 <div class="row mb-4" style="position:relative;">
   <div class="col-5">
-    <%= form_with url: search_results_path, method: :get, local: true, class: 'col' do |f| %>
+    <%= form_with url: search_results_path, method: :get, local: true do |f| %>
       <div class="input-group">
         <%= f.text_field :search_term, class: 'form-control', placeholder: 'Enter a search term...' %>
         <div class="input-group-append">
@@ -53,7 +53,7 @@
       <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
         <div class="stitched row" style="padding: 10px; text-shadow: none;">
           <div class="col">
-            
+
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
     <%= render 'show_order', order: @order, chatroom_order: @chatroom_order, order_entries: @order_entries %>
   </div>
 </div>
-  
+
 </div>
 <% else %>
     <style>
@@ -85,6 +85,6 @@
 <% end %>
 <script type="text/javascript">
   $(function(){
-    $("div#order-<%= @order.id %>").addClass('orange-left'); 
+    $("div#order-<%= @order.id %>").addClass('orange-left');
   });
 </script>
