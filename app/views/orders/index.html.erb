@@ -7,20 +7,7 @@
     <%= render "orders/modals/edit_free_flowing_fields" %>
 <% end %>
 <% if @order.present? && @orders.present? %>
-<div class="row mb-4" style="position:relative;">
-  <div class="col-5">
-    <%= form_with url: search_results_path, method: :get, local: true, html: { autocomplete: "off" } do |f| %>
-      <div class="input-group">
-        <%= f.text_field :search_term, class: 'form-control', placeholder: 'Enter a search term...' %>
-        <div class="input-group-append">
-          <%= f.button class: 'btn border-0 btn-dark', style: 'right: 0px;' do %>
-            Search <i class="fa fa-search"></i>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+<%= render "search_results/form" %>
 <div class="row" style="position:relative;">
   <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: hidden; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 30% !important;">
     <div class="row" style="position:relative;">
