@@ -1,0 +1,8 @@
+<div data-behavior='messages' data-item-chatroom-id='<%= product.id %>'>
+	<ul class="list-group elements-list">
+		<% messages.each do |message| %>
+		 	<%= render '/item_messages/item_message', item_message: message %>
+		<% end %>
+	</ul>
+	<input type="hidden" id="current_user_id" value="<%= current_user.id %>">
+</div>

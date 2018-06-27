@@ -1,0 +1,90 @@
+<div class="modal inmodal in bd-example-modal-lg modal-yellow" id="modal-shows" tabindex="-1" role="dialog" aria-hidden="true" style="display: block; padding-right: 15px;">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"><%= order_entry.product_name %></h5>
+                    <h6 class="modal-title model-header-margin product-name-header" id="product-name-header"></h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <input type="hidden" name="product_id" id="add_product_id" />
+                    <div class="row" style="padding-top: 2%;">
+                      <div class="col-4 padding-left">
+                        <img src="http://www.stampready.net/dashboard/editor/user_uploads/image_uploads/2018/04/17/R3H4Mxn2s0SmpFj9lvtXDBzNkP8bfJqQ.jpg" alt="features" border="0" width="100%"  style="display:block; border:none; outline:none; text-decoration:none;" class="features">
+                        <div id="buttons" style="padding-top: 2%;">
+                          <button class="btn btn-outline-secondary float-left">VIEW ITEM HISTORY</button>
+                          <button class="btn btn-outline-secondary float-right"><i class="fa fa-upload" aria-hidden="true"></i></button>
+                          <button class="btn btn-outline-secondary float-right" onclick="openEditFreeFlow();">Edit</button>
+                        </div>
+                      </div>
+
+                      <div class="col padding-left">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <h4 class="inline-text" style="padding-top: 1%;"><b>Item Attributes</b></h4>
+                                <button class="btn btn-outline-dark float-right" onclick="openEditAttributes();">MODIFY ATTRIBUTES</button>
+                                <br/>
+                                <br/>
+                                <table class="table table-bordered" id="dynamic-attributes">
+                                </table>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="fh-column">
+                                    <div class="item-chat">
+                                        <% if messages.present? %>
+                                            <%= render '/item_messages/messages', messages: messages, product: product %>
+                                        <% end %>
+                                    </div>
+                                    <%= render '/item_messages/message_form', order: order, product: product %>
+                                </div>
+                                
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" style="padding-top: 4%;">
+                      <div class="col">
+                        <nav>
+                          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-specs-tab" data-toggle="tab" href="#nav-specs" role="tab" aria-controls="nav-home" aria-selected="true">Specs</a>
+                            <a class="nav-item nav-link" id="nav-quotes-tab" data-toggle="tab" href="#nav-quotes" role="tab" aria-controls="nav-profile" aria-selected="false">Quotes</a>
+                            <a class="nav-item nav-link" id="nav-notes-tab" data-toggle="tab" href="#nav-notes" role="tab" aria-controls="nav-contact" aria-selected="false">Notes</a>
+                          </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                          <div class="tab-pane fade show active padding-top-1" id="nav-specs" role="tabpanel" aria-labelledby="nav-specs-tab">No Available Specs</div>
+                          <div class="tab-pane fade padding-top-1" id="nav-quotes" role="tabpanel" aria-labelledby="nav-quotes-tab">No Available Quotes</div>
+                          <div class="tab-pane fade padding-top-1" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">No Available Notes</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" style="padding-top: 4%;">
+                      <div class="col">
+                        <div class="stitched row">
+                          <div class="col">
+
+                            COMMS HERE...
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function (){
+            $('.item-chat').slimScroll({
+                height: '320px',
+                railOpacity: 0.4,
+                start: 'bottom',
+            });
+        });
+    </script>
+</div>

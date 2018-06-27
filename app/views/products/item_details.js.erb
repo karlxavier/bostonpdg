@@ -1,0 +1,2 @@
+$('div#modal-shows').replaceWith("<%= escape_javascript(render 'item_details', order_entry: @order_entry, messages: @messages, product: @product, order: @order ) %>");
+$('#modal-shows').modal('show');

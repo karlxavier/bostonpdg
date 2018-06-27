@@ -1,0 +1,11 @@
+<div class="form-group">
+  <%= form_for [order, product, ItemMessage.new], format: 'js', remote: true do |f| %>
+  	<div class="input-group">
+  		<%= f.text_field :body, rows: 1, class: "form-control", autofocus: true, placeholder: "Enter message text", autocomplete: "off" %>
+      <%= f.hidden_field :product_id, value: product.id %>
+  		<span class="input-group-btn"> 
+	        <%= f.submit "Send", class: "btn btn-primary" %>
+        </span>
+    </div>
+  <% end %>
+</div>

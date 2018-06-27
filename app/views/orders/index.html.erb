@@ -159,11 +159,16 @@
               <% @order_entries.each do |entry|%>
                   <tr>
                     <td><%= entry.category_name %></td>
-                    <td> <a nohref style="cursor:pointer;color:#22773c;text-decoration:underline" onclick="itemDetails(<%= entry.product_id %>);"><%= entry.product_name %></a></td>
+                    <td><%= entry.product_name %></td>
                     <td><%= entry.quantity  %></td>
                     <td><%= number_to_currency(entry.price, unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
                     <td><%= number_to_currency((entry.quantity.nil? ? 0 : entry.quantity) * (entry.price.nil? ? 0 : entry.price), unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
                     <td><button class="btn btn-outline-dark btn-nav-selected-circle" onclick="showEditOrderEntries(<%= entry.id %>)"><i class="fa fa-pencil"></i></button></td>
+                    <td>
+                      <%= link_to order_item_details_path(@order.id, entry.id), class: "btn btn-outline-dark btn-nav-selected-circle", remote: true do %>
+                        <i class="fa fa-comments"></i>
+                      <% end %>
+                    </td>
                     <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-outline-danger btn-nav-selected-circle" ><i class="fa fa-trash"></i></a></td>
                   </tr>
 

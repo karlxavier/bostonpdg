@@ -1,0 +1,10 @@
+<li class="list-group-item">
+    <small class="pull-right text-muted"> <%= time_ago_in_words(item_message.created_at) %> ago</small>
+    <strong><%= [item_message.user.first_name, item_message.user.last_name].join(' ') %> </strong>
+    <div class="small m-t-xs">
+        <p style="font-size: 11px;">
+            <%= item_message.body %>
+        	<br>
+        </p>
+    </div>
+</li>

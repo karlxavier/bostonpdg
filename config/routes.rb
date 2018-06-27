@@ -37,6 +37,13 @@ Rails.application.routes.draw do
     get 'load_messages/', :to => 'chatroom_orders#load_messages', as: 'load_messages'
   end
 
+  resources :orders do
+    resources :products do
+      resources :item_messages
+    end
+    get 'item_details/:id', :to => 'products#item_details', as: 'item_details'
+  end
+
 
   namespace :admin do
     resources :users

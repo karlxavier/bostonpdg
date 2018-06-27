@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180625221608) do
+ActiveRecord::Schema.define(version: 20180627161917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,17 @@ ActiveRecord::Schema.define(version: 20180625221608) do
     t.datetime "updated_at", null: false
     t.integer "aisle_id"
     t.integer "product_id"
+  end
+
+  create_table "item_messages", force: :cascade do |t|
+    t.text "body"
+    t.text "attachment_data"
+    t.bigint "user_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_item_messages_on_product_id"
+    t.index ["user_id"], name: "index_item_messages_on_user_id"
   end
 
   create_table "mailboxer_conversation_opt_outs", id: :serial, force: :cascade do |t|
@@ -357,6 +368,8 @@ ActiveRecord::Schema.define(version: 20180625221608) do
   add_foreign_key "chatroom_users", "chatrooms"
   add_foreign_key "chatroom_users", "users"
   add_foreign_key "chatrooms", "orders"
+  add_foreign_key "item_messages", "products"
+  add_foreign_key "item_messages", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
@@ -368,4 +381,3 @@ ActiveRecord::Schema.define(version: 20180625221608) do
   add_foreign_key "users", "groups"
   add_foreign_key "vendors", "products"
 end
-

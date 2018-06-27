@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   has_many :style_attributes
+  has_many :item_messages
 
   def convert_dynamic_fields
     if self.dynamic_fields.present? && !self.dynamic_fields.nil?
