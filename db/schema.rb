@@ -368,3 +368,4 @@ ActiveRecord::Schema.define(version: 20180625221608) do
   add_foreign_key "users", "groups"
   add_foreign_key "vendors", "products"
 end
+

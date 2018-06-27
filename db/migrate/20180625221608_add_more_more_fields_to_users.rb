@@ -4,3 +4,4 @@ class AddMoreMoreFieldsToUsers < ActiveRecord::Migration[5.1]
     add_column :users, :phone, :string
   end
 end
+

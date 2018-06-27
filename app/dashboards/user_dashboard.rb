@@ -18,7 +18,7 @@ class UserDashboard < Administrate::BaseDashboard
       value_method: :id,
       text_method: :street,
       options: {
-      include_blank: 'Please Select A/Some Address',
+      include_blank: 'Please Select A Address',
       include_hidden: false,
   }
   ),
@@ -27,7 +27,7 @@ class UserDashboard < Administrate::BaseDashboard
       value_method: :id,
       text_method: :street,
       options: {
-      include_blank: 'Please Select A/Some Address',
+      include_blank: 'Please Select A Address',
       include_hidden: false,
   }
   ),
