@@ -35,6 +35,30 @@
     </div>
   </section>
 </div>
+<<<<<<< HEAD
 <div id="modal-shows"></div>
+=======
+
+<%= render "search_results/full_screen_search" %>
+<script type="text/javascript">
+  $(function() {
+    $('a[href="#search"]').on("click", function(event) {
+      event.preventDefault();
+      $("#search").addClass("open");
+      $('#search > form > input[type="search"]').focus();
+    });
+
+    $("#search, #search button.close, #search i.close").on("click keyup", function(event) {
+      if (
+        event.target == this ||
+        event.target.className.includes("close") ||
+        event.keyCode == 27
+      ) {
+        $(this).removeClass("open");
+      }
+    });
+  });
+</script>
+>>>>>>> UI update
 </body>
 </html>

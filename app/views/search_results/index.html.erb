@@ -1,4 +1,9 @@
 <%= render "form" %>
+<div class="row mb-4">
+  <div class="col">
+    <strong class="text-muted">Result for: <%= params[:search_term] %></strong>
+  </div>
+</div>
 <div class="row">
   <div class="col">
     <% if  @results.each do |result| %>

@@ -1,0 +1,17 @@
+<div id="search">
+  <button type="button" class="close"><i class="fa fa-close close"></i></button>
+  <%=
+    form_with url: search_results_path,
+    id: 'search_form',
+    method: :get,
+    local: true,
+    html: { autocomplete: "off" } do |f| %>
+      <%=
+        f.text_field :search_term,
+        placeholder: 'Enter a search term...' %>
+
+      <%= f.button class: 'btn btn-dark', style: 'right: 0px;' do %>
+        Search <i class="fa fa-search"></i>
+      <% end %>
+  <% end %>
+</div>
