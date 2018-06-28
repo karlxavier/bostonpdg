@@ -131,6 +131,7 @@ class OrdersController < ApplicationController
           order_entry.order_id = @order.id
           product = Product.find(oe.to_i)
           order_entry.category_id = product.item_category_id
+          order_entry.vendor = product.vendor_id
           order_entry.product_id = oe
           order_entry.save
         end
@@ -232,6 +233,7 @@ class OrdersController < ApplicationController
             order_entry.order_id = @order.id
             product = Product.find(oe.to_i)
             order_entry.category_id = product.item_category_id
+            order_entry.vendor = product.vendor_id
             order_entry.product_id = oe
             order_entry.save
         end

@@ -58,6 +58,7 @@ module Api
         @product.vendor_quote_prices = params[:vendor_quote_prices]
         @product.notes = params[:notes]
         @product.dynamic_fields = params[:dynamic_fields].to_s
+        @product.vendor_id = params[:vendor_id]
         if @product.save
           render json: @product
         else
@@ -102,7 +103,13 @@ module Api
         else
           @temp_product.dynamic_fields = @product.dynamic_fields
         end
-        if @product.update_attributes(:name => @temp_product.name, :category => @temp_product.category, :item_category_id => @temp_product.item_category_id, :specs => @temp_product.specs, :vendor_quote_prices => @temp_product.vendor_quote_prices, :notes => @temp_product.notes, :dynamic_fields => @temp_product.dynamic_fields)
+
+        if params[:vendor_id].present? && !params[:vendor_id].nil?
+          @temp_product.vendor_id = params[:vendor_id]
+        else
+          @temp_product.vendor_id = @product.vendor_id
+        end
+        if @product.update_attributes(:name => @temp_product.name, :category => @temp_product.category, :item_category_id => @temp_product.item_category_id, :specs => @temp_product.specs, :vendor_quote_prices => @temp_product.vendor_quote_prices, :notes => @temp_product.notes, :dynamic_fields => @temp_product.dynamic_fields, :vendor_id => @temp_product.vendor_id)
           head :no_content
         else
           render json: { status: 'failed' }, status: :unprocessable_entity
@@ -147,7 +154,12 @@ module Api
         else
           @temp_product.dynamic_fields = @product.dynamic_fields
         end
-        if @product.update_attributes(:name => @temp_product.name, :category => @temp_product.category, :item_category_id => @temp_product.item_category_id, :specs => @temp_product.specs, :vendor_quote_prices => @temp_product.vendor_quote_prices, :notes => @temp_product.notes, :dynamic_fields => @temp_product.dynamic_fields)
+        if params[:vendor_id].present? && !params[:vendor_id].nil?
+          @temp_product.vendor_id = params[:vendor_id]
+        else
+          @temp_product.vendor_id = @product.vendor_id
+        end
+        if @product.update_attributes(:name => @temp_product.name, :category => @temp_product.category, :item_category_id => @temp_product.item_category_id, :specs => @temp_product.specs, :vendor_quote_prices => @temp_product.vendor_quote_prices, :notes => @temp_product.notes, :dynamic_fields => @temp_product.dynamic_fields, :vendor_id => @temp_product.vendor_id)
           render json: @product
         else
           render json: { status: 'failed' }, status: :unprocessable_entity
