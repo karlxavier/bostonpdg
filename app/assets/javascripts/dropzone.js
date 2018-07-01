@@ -1191,7 +1191,7 @@ var Dropzone = function (_Emitter) {
         this.element.setAttribute("enctype", "multipart/form-data");
       }
 
-      if (this.element.classList.contains("dropzone") && !this.element.querySelector(".dz-message")) {
+      if (this.element.classList.contains("dropzonable") && !this.element.querySelector(".dz-message")) {
         this.element.appendChild(Dropzone.createElement("<div class=\"dz-default dz-message\"><span>" + this.options.dictDefaultMessage + "</span></div>"));
       }
 

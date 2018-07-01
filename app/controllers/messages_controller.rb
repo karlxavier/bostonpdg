@@ -11,6 +11,18 @@ before_action :set_chatroom
 		MessageRelayJob.perform_later(message, current_user)
 	end
 
+	# def show
+ #      	message = Message.find(params[:id])
+ #      	respond_to do |format|
+	#         format.pdf do
+	#         	send_file message.attachment.path
+	#         end
+	#         format.html do
+	#         	render :show
+	#         end
+ #      	end
+ #    end
+
 	private
 
 		def message_params

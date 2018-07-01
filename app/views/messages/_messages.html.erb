@@ -1,4 +1,4 @@
-<div data-behavior='messages' data-chatroom-id='<%= active_room.id %>'>
+<div class="dropzonable" data-behavior='messages' data-chatroom-id='<%= active_room.id %>' id="chatroom_msgs-<%= active_room.id %>">
 	<% messages.each do |message| %>
 	 	<%= render '/messages/message', message: message, current_user_id: current_user.id %>
 	<% end %>

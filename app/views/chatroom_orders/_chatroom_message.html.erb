@@ -11,4 +11,15 @@
         </span>
     </div>
   <% end %>
+
+  <script type="text/javascript">
+    document.getElementById('new_message').addEventListener('keypress', function(event) {
+        if (event.keyCode == 13) {
+          event.preventDefault();
+        } else if (event.keyCode == 17 && event.keyCode == 13) {
+          $(this).trigger('submit');
+        }
+    });
+  </script>
+
 </div>

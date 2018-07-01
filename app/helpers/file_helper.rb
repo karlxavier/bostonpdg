@@ -56,11 +56,11 @@ module FileHelper
   end
 
   def file_spreadsheet_icon
-    content_tag :i, nil, class: 'fa fa-file-excel'
+    content_tag :i, nil, class: 'fa fa-file-excel-o'
   end
 
   def file_word_icon
-    content_tag :i, nil, class: 'fa fa-file-word'
+    content_tag :i, nil, class: 'fa fa-file-word-o'
   end
 
   def file_presentation_icon
@@ -68,6 +68,6 @@ module FileHelper
   end
 
   def file_pdf_icon
-    content_tag :i, nil, class: 'fa fa-file-pdf'
+    content_tag :i, nil, class: 'fa fa-file-pdf-o'
   end
 end
