@@ -1,5 +1,11 @@
 $("div#show_order").html("<%= escape_javascript(render 'show_order', order: @order, chatroom_order: @chatroom_order, order_entries: @order_entries ) %>");
 
+if ($(".card").hasClass("orange-left")){
+    $(".card").removeClass("orange-left")
+}
+
+$("div#order-<%= @order.id %>").addClass('orange-left');
+
 $(function() {
 	var objDiv = document.getElementById("chat_messages");
 	objDiv.scrollTop = objDiv.scrollHeight;

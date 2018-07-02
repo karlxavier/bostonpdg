@@ -205,3 +205,25 @@ b, strong {
 .small, small {
     font-size: 85%;
 }
+
+.orange-left {
+  border-left: 3px solid #f8ac59!important;
+}
+
+.order-link {
+  width: 100%;
+}
+
+.label-warning, .badge-warning {
+    background-color: #f8ac59;
+    color: #FFFFFF;
+}
+
+.label {
+    color: #FFFFFF;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 3px 8px;
+    text-shadow: none;
+}
