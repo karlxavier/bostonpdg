@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :set_order, only: [:index, :show]
+
   def send_orders
     @order = Order.find(params[:order_id].to_i)
     @vendor = Vendor.find(params[:vendor_id].to_i)
@@ -8,17 +10,25 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.order("updated_at DESC, created_by DESC")
+    @orders = Order.order(updated_at: :desc, created_at: :desc)
     if @orders.present? && !@orders.nil?
-      if params[:id].present? && !params[:id].nil?
-        @order = Order.find(params[:id])
-        @order_entries = OrderEntry.where("order_id = '#{@order.id}'")
-        # @order_users = OrderUser.where("order_id = '#{@order.id}'")
+      # if params[:id].present? && !params[:id].nil?
+      #   @order = Order.find(params[:id])
+      #   @order_entries = OrderEntry.where("order_id = '#{@order.id}'")
+      #   # @order_users = OrderUser.where("order_id = '#{@order.id}'")
+      # else
+      #   @order = Order.order('updated_at DESC, created_by DESC').first
+      #   @order_entries = OrderEntry.where("order_id = '#{@order.id}'")
+      #   # @order_users = OrderUser.where("order_id = '#{@order.id}'")
+      # end
+
+      if @order.present?
+        @order_entries = @order.order_entries
       else
-        @order = Order.order('updated_at DESC, created_by DESC').first
-        @order_entries = OrderEntry.where("order_id = '#{@order.id}'")
-        # @order_users = OrderUser.where("order_id = '#{@order.id}'")
+        @order = Order.order(updated_at: :desc, created_at: :desc).first
+        @order_entries = @order.order_entries
       end
+
     end
     @chatroom_order = ChatroomOrder.find(@order.id)
     @categories = Category.all
@@ -26,6 +36,15 @@ class OrdersController < ApplicationController
     @products = Product.all
     # @users = User.all
     @brands = Brand.all
+  end
+
+  def show
+    respond_to do |format|
+      @chatroom_order = ChatroomOrder.find(@order.id)
+      @order_entries = @order.order_entries
+
+      format.js
+    end
   end
 
   def new
@@ -333,5 +352,13 @@ class OrdersController < ApplicationController
       @addresses = Address.where("id IN (SELECT billing_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{@order.brand_id}))  OR id IN (SELECT shipping_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{@order.brand_id}))")
     end
   end
+
+  private
+
+    def set_order
+      if params[:id].present? && !params[:id].nil?
+        @order = Order.find(params[:id])
+      end
+    end
 
 end

@@ -1,4 +1,5 @@
 class OrderEntry < ApplicationRecord
+  belongs_to :order
 
   def product_name
     if self.product_id.present?

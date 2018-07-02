@@ -1,0 +1,174 @@
+
+  <div class="row">
+    <div class="col padding-left">
+
+      <h1><%= order.brand_name %></h1>
+      <p class="text-secondary">
+        <% if order.brand_branches.present? && !order.brand_branches.nil? %>
+            <span style="margin-right: 2%;">BRANCHES:</span>
+            <%= order.brand_branches %>
+        <% end %>
+      </p>
+    </div>
+
+    <div class="col text-right">
+      <span style="margin-right: 2%;">
+        <span class="text-secondary"><%= order.updated_date %></span><br/>
+        ORDER TICKET #<%= order.id %>
+      </span>
+      <a class="btn btn-outline-dark btn-padding-margin"  href="<%= edit_order_path(order) %>">Edit a Project</a>
+      <!-- <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" data-toggle="modal" data-target="#addOrder">Add</button>-->
+      <a href="<%= new_order_path %>" class="btn btn-dark btn-padding-margin" style="margin: 0% 1%;padding: .2% 5% !important;">Add a Project</a>
+    </div>
+  </div>
+
+  <div class="row"  style="padding-bottom: 5%;">
+    <div class="col padding-left">
+      <div class="card text-white bg-dark mb-3" >
+        <div class="card-header"><b>USERS ASSIGNED TO THIS TICKET</b> <button class="btn btn-outline-light float-right btn-padding-margin" data-toggle="modal" data-target="#manageUsers">Manage Users</button></div>
+        <div class="card-body bg-light text-secondary">
+
+          <br>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">REGIONAL DIRECTOR</label>
+            <div class="col-sm-8">
+              <% OrderUser.regional_users(order.id).each do |user| %>
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+              <% end %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">CLIENT CONTACTS</label>
+            <div class="col-sm-8">
+              <% OrderUser.client_contact_users(order.id).each do |user| %>
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+              <% end %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">COMMS DIRECTOR</label>
+            <div class="col-sm-8">
+              <% OrderUser.comms_users(order.id).each do |user| %>
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+              <% end %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">ART</label>
+            <div class="col-sm-8">
+              <% OrderUser.art_users(order.id).each do |user| %>
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+              <% end %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">DESIGNER</label>
+            <div class="col-sm-8">
+              <% OrderUser.designer_users(order.id).each do |user| %>
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+              <% end %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">PROCESSORS</label>
+            <div class="col-sm-8">
+              <% OrderUser.processor_users(order.id).each do |user| %>
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card text-white border-secondary bg-info mb-3" >
+        <div class="card-header"><b>QUOTE REQUEST/S</b></div>
+        <div class="card-body bg-light text-secondary">
+          <div class="col text-right" style="padding-bottom: 2%;">
+            <button class="btn btn-outline-secondary btn-padding-margin" data-toggle="modal" data-target="#addOrderEntries">ADD AN ITEM</button>
+          </div>
+          <table class="table">
+            <thead class="table-light">
+            <tr>
+              <th scope="col">CATEGORY</th>
+              <th scope="col">ITEM + SKU</th>
+              <th scope="col">PCS</th>
+              <th scope="col">PER ITEM</th>
+              <th scope="col">TOTAL</th>
+              <th></th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% order_entries.each do |entry|%>
+                <tr>
+                  <td><%= entry.category_name %></td>
+                  <td><%= entry.product_name %></td>
+                  <td><%= entry.quantity  %></td>
+                  <td><%= number_to_currency(entry.price, unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
+                  <td><%= number_to_currency((entry.quantity.nil? ? 0 : entry.quantity) * (entry.price.nil? ? 0 : entry.price), unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
+                  <td><button class="btn btn-outline-dark btn-nav-selected-circle" onclick="showEditOrderEntries(<%= entry.id %>)"><i class="fa fa-pencil"></i></button></td>
+                  <td>
+                    <%= link_to order_item_details_path(order.id, entry.id), class: "btn btn-outline-dark btn-nav-selected-circle", remote: true do %>
+                      <i class="fa fa-comments"></i>
+                    <% end %>
+                  </td>
+                  <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-outline-danger btn-nav-selected-circle" ><i class="fa fa-trash"></i></a></td>
+                </tr>
+
+            <% end %>
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="small-chat-box fadeInRight animated">
+  <div class="heading" draggable="true">
+      Order-<%= order.id %>
+  </div>
+
+    <div class="content" >
+      <% if chatroom_order.present? %>
+        <div class="dropzonable" id="chat_messages" style="height: 200px;"> 
+          <%= render '/messages/messages', active_room: chatroom_order, messages: chatroom_order.messages.order(created_at: :desc).limit(100).reverse %>
+        </div>
+      <% end %>
+    </div>
+
+  <div class="form-chat">
+    <div class="chat-message-form" id="chatroom_message">
+      <%= render '/chatroom_orders/chatroom_message', chatroom: chatroom_order %>
+    </div>
+  </div>
+</div>
+<div id="small-chat">
+    <a class="open-small-chat">
+        <i class="fa fa-remove"></i>
+    </a>
+</div>
+<script>
+    $(document).ready(function (){
+      $('.orders_and_order_form').css({'height': ($( window ).height() - 50)});
+      $('.orders_and_order_form_2').css({'height': (($( window ).height() - 80) / 2)});
+      $(window).resize(function(){
+          var screenHeight = $( window ).height() - 50;
+          var screenHeight2 = $( window ).height() - 80;
+          $('.orders_and_order_form').height(screenHeight);
+          $('.orders_and_order_form_2').height(screenHeight2 / 2);
+      })
+
+      $('.open-small-chat').on('click', function () {
+          $(this).children().toggleClass('fa-comments').toggleClass('fa-remove');
+          $('.small-chat-box').toggleClass('active');
+      });
+
+      $('.small-chat-box .content').slimScroll({
+          height: '234px',
+          railOpacity: 0.4,
+          start: 'bottom',
+      });
+    });
+</script>
