@@ -1,30 +1,37 @@
 <div class="modal fade bd-example-modal-lg modal-gray" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="newSession" style="background: #0C0C0C;">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 60% !important">
     <div class="modal-content">
-      <div class="modal-body" style="text-align: center;">
+      <div class="modal-body" style="text-align: center; padding: 0 !important;">
+        <div class="row">
+          <div class="col-5">
+            <%= image_tag("login-img.png", class: 'width-inherit') %>
+          </div>
+          <div class="col">
+            <%= image_tag("logo.png", class: 'img-logo-login') %>
 
-        <%= image_tag("logo.png", class: 'img-logo-login') %>
+                <h1 class="header-login">Log in to my account</h1>
 
-            <h1 class="header-login">Log in to my account</h1>
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'form form-modal-padding padding-bottom-0'} ) do |f| %>
 
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'form form-modal-padding'} ) do |f| %>
+                <div class="form-group row">
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control', placeholder: 'E-mail' %>
+                </div>
 
-        <div class="form-group row">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control', placeholder: 'E-mail' %>
+                <div class="form-group row">
+                  <%= f.password_field :password, autocomplete: "off", :class => 'form-control', placeholder: 'Password' %>
+                </div>
+                <div class="form-group row">
+                  <%= f.submit "Log in", :class => 'btn btn-dark col' %>
+                </div>
+
+                <div class="form-group row">
+                  <%= render "devise/shared/links" %>
+                </div>
+
+                <% end %>
+          </div>
         </div>
 
-        <div class="form-group row">
-          <%= f.password_field :password, autocomplete: "off", :class => 'form-control', placeholder: 'Password' %>
-        </div>
-        <div class="form-group row">
-          <%= f.submit "Log in", :class => 'btn btn-dark col' %>
-        </div>
-
-        <div class="form-group row">
-          <%= render "devise/shared/links" %>
-        </div>
-
-        <% end %>
       </div>
     </div>
   </div>

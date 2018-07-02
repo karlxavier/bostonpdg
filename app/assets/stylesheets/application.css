@@ -260,3 +260,11 @@ p {
     font-size: 2em;
     margin-top: 10%;
 }
+
+.width-inherit {
+    width: inherit;
+}
+
+.padding-bottom-0 {
+    padding-bottom: 0;
+}

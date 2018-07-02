@@ -1,3 +1,9 @@
+
+<%= render "orders/modals/item_details" %>
+<%= render "orders/modals/edit_attributes" %>
+<%= render "orders/modals/edit_free_flowing_fields" %>
+
+
 <form id="edit_order" action="/orders/update_order" accept-charset="UTF-8" method="post">
 
 <input type="hidden" name="order[id]" id="order_id" value="<%= @order.id %>">
