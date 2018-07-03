@@ -135,9 +135,9 @@
       <% end %>
     </div>
 
-  <div class="form-chat">
+  <div class="form-chat" style="padding-bottom: 0;">
     <div class="chat-message-form" id="chatroom_message">
-      <%= render '/chatroom_orders/chatroom_message', chatroom: chatroom_order %>
+      <%= render 'orders/partials/chatroom_form', chatroom: chatroom_order %>
     </div>
   </div>
 </div>

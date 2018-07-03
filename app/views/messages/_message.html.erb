@@ -3,7 +3,7 @@
       	<strong class="message-author"> <%= [message.user.first_name, message.user.last_name].join(' ') %> </strong>
       	<span class="message-date pull-right"> <%= time_ago_in_words(message.created_at) %> ago </span>
       	<span class="message-content">
-        	<%= message.body %>
+        	<%= simple_format(message.body) %>
       	</span>
       	<% if message.attachment_data? %>
 					<% 

@@ -43,6 +43,38 @@ ActiveRecord::Schema.define(version: 20180627161917) do
     t.integer "parent"
   end
 
+  create_table "chat_thread_users", force: :cascade do |t|
+    t.integer "chat_thread_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chat_threads", force: :cascade do |t|
+    t.string "channel_id"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chatroom_users", force: :cascade do |t|
+    t.bigint "chatroom_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "last_read_at"
+    t.index ["chatroom_id"], name: "index_chatroom_users_on_chatroom_id"
+    t.index ["user_id"], name: "index_chatroom_users_on_user_id"
+  end
+
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_chatrooms_on_order_id"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -189,6 +221,7 @@ ActiveRecord::Schema.define(version: 20180627161917) do
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "chatroom_order_id"
     t.integer "client_contact"
     t.integer "designer"
   end
@@ -213,6 +246,7 @@ ActiveRecord::Schema.define(version: 20180627161917) do
     t.decimal "total_budget"
     t.boolean "urgent"
     t.integer "brand_id"
+    t.string "chatroom_name"
   end
 
   create_table "products", force: :cascade do |t|
