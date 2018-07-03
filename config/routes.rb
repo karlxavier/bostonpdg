@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   post 'vendors/import_csv'
   post 'customers/import_csv'
+  resources :search_results, only: :index
   resources :orders do
     collection do
       post  'update_assign_user'

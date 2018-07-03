@@ -21,6 +21,7 @@
  *= require ladda.min
  *= require toastr
  *= require animate
+ *= require search
  *= require_self
  */
 .display-block {
