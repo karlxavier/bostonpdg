@@ -50,6 +50,7 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem 'devise_token_auth'
 gem 'roo'
 gem 'figaro'
+gem 'feathericon-rails'
 
 gem 'shrine', '~> 2.6'
 gem 'fastimage'

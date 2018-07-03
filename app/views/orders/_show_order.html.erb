@@ -10,11 +10,12 @@
     </p>
   </div>
 
-  <div class="col text-right">
+  <div class="col text-right" style="margin-bottom: 1%">
     <span style="margin-right: 2%;">
       <span class="text-secondary"><%= order.updated_date %></span><br/>
       ORDER TICKET #<%= order.id %>
     </span>
+    <br/>
     <a class="btn btn-outline-dark btn-padding-margin"  href="<%= edit_order_path(order) %>">Edit a Project</a>
     <!-- <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" data-toggle="modal" data-target="#addOrder">Add</button>-->
     <a href="<%= new_order_path %>" class="btn btn-dark btn-padding-margin" style="margin: 0% 1%;padding: .2% 5% !important;">Add a Project</a>
@@ -99,7 +100,7 @@
           <% order_entries.each do |entry|%>
               <tr>
                 <td><%= entry.category_name %></td>
-                <td><%= entry.product_name %></td>
+                <td> <a nohref style="cursor:pointer;color:#22773c;text-decoration:underline" onclick="itemDetails(<%= entry.product_id %>);"><%= entry.product_name %></a></td>
                 <td><%= entry.quantity  %></td>
                 <td><%= number_to_currency(entry.price, unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
                 <td><%= number_to_currency((entry.quantity.nil? ? 0 : entry.quantity) * (entry.price.nil? ? 0 : entry.price), unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
