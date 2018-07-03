@@ -34,7 +34,7 @@
         return 0; 
       }
 
-      $('textarea').keyup(function (event) {
+      $('textarea').keypress(function (event) {
        if (event.keyCode == 13 && event.ctrlKey) {
            var content = this.value;
            var caret = getCaret(this);
@@ -43,7 +43,8 @@
            
         }else if(event.keyCode == 13)
         {
-            $('form').submit();
+            event.preventDefault();
+            $('#new_message').submit();
         }
       });
 

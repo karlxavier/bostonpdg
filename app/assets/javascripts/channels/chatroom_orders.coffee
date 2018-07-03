@@ -7,10 +7,17 @@ App.chatroom_orders = App.cable.subscriptions.create "ChatroomOrdersChannel",
 
   received: (data) ->
     console.log 'message received'
+    $("#new_message")[0].reset()
     active_chatroom = $("[data-behavior='messages'][data-chatroom-id='#{data.chatroom_id}']")
 
     if active_chatroom.length > 0
       active_chatroom.append(data.message)
+
+      chat_messages = $("#chat_messages")[0]
+      if chat_messages
+        height = chat_messages.scrollHeight
+        $(chat_messages).scrollTop(height)
+
     else
       chatroom_badge = $("[data-behavior='chatroom-badge'][data-chatroom-id='#{data.chatroom_id}']")
       if chatroom_badge[0]

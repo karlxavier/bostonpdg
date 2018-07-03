@@ -127,9 +127,9 @@
       Order-<%= order.id %>
   </div>
 
-    <div class="content" >
+    <div class="content" id="chat_box">
       <% if chatroom_order.present? %>
-        <div class="dropzonable" id="chat_messages" style="height: 200px;"> 
+        <div class="dropzonable" id="chat_messages"> 
           <%= render '/messages/messages', active_room: chatroom_order, messages: chatroom_order.messages.order(created_at: :desc).limit(100).reverse %>
         </div>
       <% end %>
@@ -146,8 +146,8 @@
         <i class="fa fa-remove"></i>
     </a>
 </div>
-<script>
-    $(document).ready(function (){
+<script type="text/javascript">
+      $(function (){
       $('.orders_and_order_form').css({'height': ($( window ).height() - 50)});
       $('.orders_and_order_form_2').css({'height': (($( window ).height() - 80) / 2)});
       $(window).resize(function(){
@@ -162,10 +162,17 @@
           $('.small-chat-box').toggleClass('active');
       });
 
-      $('.small-chat-box .content').slimScroll({
-          height: '234px',
+      var chat_messages = document.getElementById('chat_box');
+        var height = chat_messages.scrollHeight;
+        $(chat_messages).scrollTop(height);
+
+      $('#chat_box').slimScroll({
           railOpacity: 0.4,
           start: 'bottom',
+          scrollTo: '9098px',
+          alwaysVisible: true,
       });
     });
 </script>
+
+

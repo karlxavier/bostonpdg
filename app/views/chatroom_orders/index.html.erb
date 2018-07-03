@@ -7,7 +7,7 @@
     </div>
     <% @chatroom_orders.each do |chatroom| %>
       <div class="card text-secondary  bg-light mb-3" >
-        <div class="card-header" data-behavior='chatroom-link' data-chatroom-id="<%= chatroom.id %>" style="text-transform: uppercase; overflow-y: auto; overflow-x: hidden;">
+        <div id="chatroom-<%= chatroom.id %>" class="card-header" data-behavior='chatroom-link' data-chatroom-id="<%= chatroom.id %>" style="text-transform: uppercase; overflow-y: auto; overflow-x: hidden;">
           <div id="chatroom_badge" class="pull-right">
           </div>
           <a class="btn btn-sm pull-right" aria-expand="true" data-toggle="collapse" data-parent="#accordion", data-target="#chatroom-<%= chatroom.id %>">
