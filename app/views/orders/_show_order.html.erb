@@ -131,7 +131,7 @@
     <div class="content" id="chat_box">
       <% if chatroom_order.present? %>
         <div class="dropzonable" id="chat_messages"> 
-          <%= render '/messages/messages', active_room: chatroom_order, messages: chatroom_order.messages.order(created_at: :desc).limit(100).reverse %>
+          <%= render 'orders/partials/messages', active_room: chatroom_order, messages: chatroom_order.messages.order(created_at: :desc).limit(100).reverse %>
         </div>
       <% end %>
     </div>

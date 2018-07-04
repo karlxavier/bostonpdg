@@ -11,17 +11,13 @@ before_action :set_chatroom
 		MessageRelayJob.perform_later(message, current_user)
 	end
 
-	# def show
- #      	message = Message.find(params[:id])
- #      	respond_to do |format|
-	#         format.pdf do
-	#         	send_file message.attachment.path
-	#         end
-	#         format.html do
-	#         	render :show
-	#         end
- #      	end
- #    end
+	def show
+		if current_user.admin?
+	    	@chatroom_orders = ChatroomOrder.order(id: :desc)
+	    else
+	    	@chatroom_orders = ChatroomOrder.only_my_chatrooms(current_user.id).order(id: :desc)
+	    end
+	end
 
 	private
 
