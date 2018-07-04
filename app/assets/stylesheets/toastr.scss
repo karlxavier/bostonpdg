@@ -1,13 +1,15 @@
 .toast-title {
-    font-weight: 700
+    font-weight: 700;
 }
 
 .toast-message {
     -ms-word-wrap: break-word;
-    word-wrap: break-word
+    word-wrap: break-word;
+    font-size: 13px;
 }
 
 .toast-message a, .toast-message label {
+    font-size: 13px;
     color: #fff
 }
 

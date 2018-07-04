@@ -1,5 +1,6 @@
 $("div#chat_messages").html("<%= escape_javascript(render '/messages/messages', active_room: @chatroom, messages: @messages ) %>");
 $("div#chatroom_message").html("<%= escape_javascript(render 'chatroom_message', chatroom: @chatroom ) %>");
+$("div#chatroom_title").html("<%= escape_javascript(render 'chatroom_title', chatroom: @chatroom ) %>");
 $(function() {
 	var objDiv = document.getElementById("chat_messages");
 	objDiv.scrollTop = objDiv.scrollHeight;

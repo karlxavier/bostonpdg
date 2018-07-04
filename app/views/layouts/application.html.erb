@@ -25,7 +25,7 @@
   <%= render "layouts/static/sidebar_nav" %>
 <% end %>
 <div class="page active" style="padding-bottom: 0;">
-  <% if current_user.present? && params[:action] != 'index' %>
+  <% if current_user.present? && params[:action] != 'index' && params[:action] != 'show' %>
       <a href="javascript:history.back()" class="badge badge-secondary btn btn-nav btn-back">Back</a>
   <% end %>
   <section class="dashboard-header section-padding">
