@@ -273,3 +273,17 @@ p {
 .col-form-label {
     font-size: .9em;
 }
+
+.feather {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+.feather-width-15 {
+    width: 15px !important;
+    height: 15px !important;
+}

@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css" data-turbolinks-track="reload">
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js" data-turbolinks-track="reload"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
   <% if params[:controller] == 'inventories' && params[:action] == 'index' %>
       <%= javascript_include_tag 'Chart.min', 'data-turbolinks-track': 'reload' %>
       <%= javascript_include_tag 'charts-home', 'data-turbolinks-track': 'reload' %>
@@ -56,6 +57,9 @@
       }
     });
   });
+</script>
+<script>
+    feather.replace()
 </script>
 </body>
 </html>
