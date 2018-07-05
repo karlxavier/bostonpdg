@@ -1,35 +1,27 @@
 <div class="row" style="position:relative; height: 100%;">
   <div class="col-md-4">
-    <div class="wrapper">
-      <% @chatroom_orders.each do |chatroom| %>
-        <%= link_to chatroom_order_load_messages_path(chatroom), style: "width: 100%", remote: true do %>
-          <div class="vote-item">
-              <div class="row">
-                  <div class="col-md-12">
-                      <span class="vote-title">
-                        <%= "Order-#{chatroom.id}" %>
-                      </span>
-                      <div class="vote-info">
-                        <div class="row">
-                          <div class="col-md-4">
-                            <i class="fa fa-comments-o"></i> <span class="count"> <%= chatroom.messages.count %></span> 
-                          </div>
-                          <div class="col-md-5">
-                            <i class="fa fa-clock-o"></i> <span class="count"> <%= chatroom.messages.last.created_at.strftime("%d-%m-%Y") %></span> 
-                          </div>
-                          <div class="col-md-3">
-                            <i class="fa fa-user"></i> <span class="count"> <%= chatroom.order_users.count %></span>
-                          </div>
-                        </div>
-                      </div>
+    <div class="gray-bg ibox">
+      <div class="ibox-title">
+          <h5>Order Chatrooms</h5>
+      </div>
+      <div class="ibox-content">
+        <ul class="sortable-list connectList agile-list ui-sortable">
+          <% @chatroom_orders.each do |chatroom| %>
+            <%= link_to chatroom_order_load_messages_path(chatroom), style: "width: 100%; color: #676a6c;", remote: true do %>
+              <li class="info-element" id="task1">
+                  <%= "Order-#{chatroom.id}" %>
+                  <div class="agile-detail">
+                      <i class="fa fa-clock-o"></i><small> <%= chatroom.messages.last.created_at.strftime("%d-%m-%Y") %></small> 
+                      <i class="fa fa-commenting-o" style="margin-left: 10px;"></i> <%= chatroom.messages.count %>
                   </div>
-              </div>
-          </div>
-        <% end %>
-      <% end %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
     </div>
-
   </div>
+
   <div class="col-md-8">
     <div class="gray-bg ibox" style=" background-color: #f3f3f4!important;">
       <div class="ibox-title">
