@@ -490,11 +490,7 @@ a:hover {
     width: 310px;
     min-width: 0;
 }
-@media (min-width: 768px)
-.navbar-right .dropdown-menu {
-    right: 0;
-    left: auto;
-}
+
 .open>.dropdown-menu {
     display: block;
 }
