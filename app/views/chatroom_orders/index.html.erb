@@ -11,7 +11,7 @@
               <li class="info-element" id="task1">
                   <%= "Order-#{chatroom.id}" %>
                   <div class="agile-detail">
-                      <i class="fa fa-clock-o"></i><small> <%= chatroom.messages.last.created_at.strftime("%d-%m-%Y") %></small> 
+                      <i class="fa fa-clock-o"></i><small> <%= chatroom.messages.presence ? chatroom.messages.last.created_at.strftime("%d-%m-%Y") : 'None' %></small> 
                       <i class="fa fa-commenting-o" style="margin-left: 10px;"></i> <%= chatroom.messages.count %>
                   </div>
               </li>
