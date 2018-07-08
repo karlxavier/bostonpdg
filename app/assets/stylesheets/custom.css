@@ -550,7 +550,7 @@ a:hover {
     background-color: #e5e5e5;
 }
 
-..dropdown-toggle::after {
+.dropdown-toggle::after {
   display: none!important;
   content: none!important;
 }
