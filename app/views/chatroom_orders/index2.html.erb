@@ -1,0 +1,57 @@
+<div class="row" style="position:relative;">
+  <div id="left" class="col-lg-4 orders_and_order_form" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important;">
+    <div class="card text-white border-secondary bg-info mb-3" >
+      <div class="card-header">
+        <b>Chatrooms</b> 
+      </div>
+    </div>
+    <% @chatroom_orders.each do |chatroom| %>
+      <div class="card text-secondary  bg-light mb-3" >
+        <div id="chatroom-<%= chatroom.id %>" class="card-header" data-behavior='chatroom-link' data-chatroom-id="<%= chatroom.id %>" style="text-transform: uppercase; overflow-y: auto; overflow-x: hidden;">
+          <div id="chatroom_badge" class="pull-right">
+          </div>
+          <a class="btn btn-sm pull-right" aria-expand="true" data-toggle="collapse" data-parent="#accordion" data-target="#chatroom-<%= chatroom.id %>">
+              <i class="fa fa-users"></i>
+          </a>
+          <%= link_to chatroom_order_load_messages_path(chatroom), class: "chatroom-link", remote: true do %>
+            <%= "Order-#{chatroom.id}" %>
+          <% end %>
+        </div>
+      </div>
+      <div id="chatroom-<%= chatroom.id %>" class="card text-secondary  bg-light mb-3 collapse in" aria-expanded="true">
+        <div class="card-header">
+          <div class="row">
+              <div class="col-md-10">
+                  <% OrderUser.chatroom_order_users(chatroom.id).each do |user| %>
+                    <button class="btn btn-secondary btn-sm" style="margin: 5px;" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                    <br>
+                  <% end %>
+              </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-8 col padding-left orders_and_order_form" style="overflow-y: auto; overflow-x: hidden">
+    <div class="row">
+      <div class="col padding-left">
+        <% if @chatroom_orders.first.present? %>
+          <div class="chat-discussion" id="chat_messages"> 
+            <%= render '/messages/messages', active_room: @chatroom_orders.first, messages: @chatroom_orders.first.messages.order(created_at: :desc).limit(100).reverse %>
+          </div>
+          <div class="chat-message-form" id="chatroom_message">
+            <%= render 'chatroom_message', chatroom: @chatroom_orders.first %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+  </div>
+</div>
+  <script type="text/javascript">
+    $(function() {
+        var chat_messages = document.getElementById('chat_messages');
+        var height = chat_messages.scrollHeight;
+        $(chat_messages).scrollTop(height);
+    })
+  </script>

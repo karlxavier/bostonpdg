@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180703225841) do
+ActiveRecord::Schema.define(version: 20180709140925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,6 +247,14 @@ ActiveRecord::Schema.define(version: 20180703225841) do
     t.boolean "urgent"
     t.integer "brand_id"
     t.string "chatroom_name"
+  end
+
+  create_table "product_category_vendors", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "category_id"
+    t.integer "vendor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|
