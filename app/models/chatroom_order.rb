@@ -3,6 +3,9 @@ class ChatroomOrder < Order
 	has_many :users, through: :order_users
 	has_many :messages, dependent: :destroy
 
+	has_many :order_entries, class_name: 'OrderEntry', primary_key: 'id', foreign_key: 'order_id'
+	has_many :products, through: :order_entries
+
 	scope :chatroom_id_not_nil, -> { includes(:order_users, :messages).order(id: :desc)  }
 	scope :order_with_users, -> { joins(:order_users).where("order_users.regional IS NULL OR order_users.comms IS NULL OR order_users.art IS NULL OR order_users.processor IS NULL").ids }
 

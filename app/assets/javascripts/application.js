@@ -27,6 +27,7 @@
 //= require slimscroll
 //= require dropzone
 //= require chatbox_dropzone
+//= require nestable
 //= require cable
 
 $(document).on('turbolinks:load', function() {

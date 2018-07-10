@@ -11,6 +11,7 @@ class ChatroomOrdersController < ApplicationController
   end
 
   def load_messages
+    puts '************ load_messages'
       respond_to do |format|
         # @chatroom = Chatroom.find(params[:chatroom_id])
         @messages = @chatroom.messages.order(created_at: :desc).limit(100).reverse

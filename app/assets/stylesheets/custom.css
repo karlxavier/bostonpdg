@@ -447,7 +447,7 @@ a:hover {
 
 .agile-list li {
     background: #FAFAFB;
-    border: 1px solid #e7eaec;
+    /*border: 1px solid #e7eaec;*/
     margin: 0 0 10px 0;
     padding: 10px;
     border-radius: 2px;
@@ -464,17 +464,17 @@ a:hover {
 
 .agile-list li {
     background: #FAFAFB;
-    border: 1px solid #e7eaec;
+    /*border: 1px solid #e7eaec;*/
     margin: 0 0 10px 0;
     padding: 10px;
     border-radius: 2px;
 }
 
-.agile-list li:hover {
+/*.agile-list li:hover {
     cursor: pointer;
     background: #fff;
     border-left: 3px solid #f8ac59;
-}
+}*/
 
 .dropdown-menu {
     margin-top: 0;
@@ -553,4 +553,135 @@ a:hover {
 .dropdown-toggle::after {
   display: none!important;
   content: none!important;
+}
+
+#nestable2 .ddd-handle {
+    color: inherit;
+    border: 1px dashed #e7eaec;
+    background: #f3f3f4;
+    padding: 10px;
+}
+
+.ddd-handle {
+    display: block;
+    margin: 5px 0;
+    padding: 5px 10px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #e7eaec;
+    background: #f5f5f5;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.dd {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.dd-item, .dd-empty, .dd-placeholder {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 20px;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+#nestable2 .dd-item > button {
+    font-family: FontAwesome;
+    height: 43px;
+    width: 33px;
+    color: #c1c1c1;
+}
+.dd-item > button {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    float: left;
+    width: 25px;
+    height: 20px;
+    margin: 5px 0;
+    padding: 0;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 0;
+    background: transparent;
+    font-size: 12px;
+    line-height: 1;
+    text-align: center;
+    font-weight: bold;
+}
+
+#nestable2 span.label {
+    margin-right: 10px;
+}
+
+.nav .label, .ibox .label {
+    font-size: 10px;
+}
+.ddd-handle span {
+    font-weight: bold;
+}
+
+.dd-list .dd-list {
+    padding-left: 30px;
+}
+
+.dd-list {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.dd-item, .dd-empty, .dd-placeholder {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 20px;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+#nestable2 .dd-item > button[data-action="collapse"]:before {
+    content: "\f068";
+}
+
+#nestable2 .dd-item > button:before {
+    content: "\f067";
+}
+.dd-item > button[data-action="collapse"]:before {
+    content: '-';
+}
+.dd-item > button:before {
+    content: '+';
+    display: block;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    text-indent: 0;
+}
+
+.label-info, .badge-info {
+    background-color: #23c6c8;
+    color: #FFFFFF;
+}
+
+.ddd-handle:hover {
+    background: #f0f0f0;
+    /*cursor: pointer;*/
+    color: #f8ac59!important;
+    font-weight: bold;
 }

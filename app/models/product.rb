@@ -2,6 +2,11 @@ class Product < ApplicationRecord
   has_many :style_attributes
   has_many :item_messages
 
+  has_many :order_entries
+  has_many :orders, through: :order_entries
+
+  has_many :chatroom_orders, through: :order_entries
+
   def convert_dynamic_fields
     if self.dynamic_fields.present? && !self.dynamic_fields.nil?
       self.dynamic_fields.gsub("=>", ":")
