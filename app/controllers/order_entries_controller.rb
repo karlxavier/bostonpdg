@@ -1,7 +1,7 @@
 class OrderEntriesController < ApplicationController
 
   def create
-    @order_entry = OrderEntry.new()
+    @order_entry = OrderEntry.new
     @order_entry.order_id = params[:order_entry][:order_id]
     @order_entry.vendor = params[:order_entry][:vendor]
     @order_entry.product_id = params[:order_entry][:product_id]

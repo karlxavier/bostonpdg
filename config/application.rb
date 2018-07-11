@@ -20,6 +20,7 @@ module RegencyApp
         resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
       end
     end
+    config.active_record.belongs_to_required_by_default = false
     config.action_controller.allow_forgery_protection = false
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.default_url_options = { host:'afternoon-cove-37922.herokuapp.com'}
