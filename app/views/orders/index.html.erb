@@ -7,44 +7,75 @@
     <%= render "orders/modals/edit_free_flowing_fields" %>
 <% end %>
 <% if @order.present? && @orders.present? %>
-<div class="row" style="position:relative;">
-  <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: hidden; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 30% !important;">
     <div class="row" style="position:relative;">
-      <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
-        <% @orders.each do |order| %>
-          <%= link_to order_path(order), class: "order-link", remote: true do %>
-            <div id="order-<%= order.id %>" class="card mb-3" style="box-shadow: 0 5px 15px rgba(33, 33, 33, .4);" >
-              <div class="card-body bg-light text-secondary">
-                <div class="row">
-                  <div class="col-12">
-                    <p class="lead">
-                      <%= order.brand_branches %>
-                    </p>
-                    <h4><%= order.brand_name %></h4>
-                    <p class="lead">
-                      ORDER TICKET #<%= order.id %>
-                    </p>
+      <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: hidden; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 30% !important;">
+        <div style="margin-bottom: 2%; text-align: right;">
+          <a href="<%= new_order_path %>" class="btn btn-dark btn-padding-margin" style="margin: 0% 1%;padding: .2% 3% !important;">ADD A PROJECT</a>
+          <a href="#" class="btn btn-outline-dark btn-padding-margin" style="margin: 0% 1%;padding: .2% 3% !important;"><i data-feather="filter"></i>&nbsp;SORT BY LATEST</a>
+        </div>
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-orders-tab" data-toggle="tab" href="#nav-orders" role="tab" aria-controls="nav-home" aria-selected="true">Orders</a>
+            <a class="nav-item nav-link" id="nav-messages-tab" data-toggle="tab" href="#nav-messages" role="tab" aria-controls="nav-profile" aria-selected="false">Messages</a>
+            <a class="nav-item nav-link" id="nav-notifications-tab" data-toggle="tab" href="#nav-notifications" role="tab" aria-controls="nav-contact" aria-selected="false">Notifications</a>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active padding-top-1" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
+            <div class="row">
+              <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
+                <% @orders.each do |order| %>
+                    <%= link_to order_path(order), class: "order-link", remote: true do %>
+                        <div id="order-<%= order.id %>" class="card mb-3" style="box-shadow: 0 5px 15px rgba(33, 33, 33, .4);" >
+                          <div class="card-body bg-light text-secondary">
+                            <div class="row">
+                              <div class="col-12">
+                                <p class="lead">
+                                  <%= order.brand_branches %>
+                                </p>
+                                <h4><%= order.brand_name %></h4>
+                                <p class="lead">
+                                  ORDER TICKET #<%= order.id %>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-footer" style="text-transform: uppercase;">
+                            <%= order.created_date %> BY <%= order.created_by_name %>
+                          </div>
+                        </div>
+                    <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade padding-top-1" id="nav-messages" role="tabpanel" aria-labelledby="nav-messages-tab">
+            <div class="row">
+              <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
+                <div class="stitched row" style="padding: 10px; text-shadow: none;">
+                  <div class="col">
+
                   </div>
                 </div>
               </div>
-              <div class="card-footer" style="text-transform: uppercase;">
-                <%= order.created_date %> BY <%= order.created_by_name %>
+            </div>
+          </div>
+          <div class="tab-pane fade padding-top-1" id="nav-notifications" role="tabpanel" aria-labelledby="nav-notifications-tab">
+            <div class="row">
+              <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
+                <div class="stitched row" style="padding: 10px; text-shadow: none;">
+                  <div class="col">
+
+                  </div>
+                </div>
               </div>
             </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="row" style="position:relative;margin-top:5%;">
-      <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
-        <div class="stitched row" style="padding: 10px; text-shadow: none;">
-          <div class="col">
-
           </div>
         </div>
+
+
+
       </div>
-    </div>
-  </div>
 
 <div class="col padding-left orders_and_order_form" style="overflow-y: auto; overflow-x: hidden">
   <div id="show_order">
