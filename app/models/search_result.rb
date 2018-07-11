@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: search_results
+#
+#  searchable_id   :bigint(8)
+#  searchable_type :text
+#  search_term     :string
+#
+
 class SearchResult < ActiveRecord::Base
   extend Textacular
   belongs_to :searchable, polymorphic: true

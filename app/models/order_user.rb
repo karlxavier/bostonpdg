@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: order_users
+#
+#  id             :bigint(8)        not null, primary key
+#  regional       :integer
+#  comms          :integer
+#  art            :integer
+#  processor      :integer
+#  order_id       :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  client_contact :integer
+#  designer       :integer
+#
+
 class OrderUser < ApplicationRecord
   belongs_to :order
 
