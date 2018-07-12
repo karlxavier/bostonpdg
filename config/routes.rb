@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     collection do
       post  'update_assign_user'
       post  'update_order'
+      get   'send_orders'
     end
   end
   resources :inventories do

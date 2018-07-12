@@ -83,6 +83,7 @@
       <div class="card-body bg-light text-secondary">
         <div class="col text-right" style="padding-bottom: 2%;">
           <button class="btn btn-outline-secondary btn-padding-margin" data-toggle="modal" data-target="#addOrderEntries">ADD AN ITEM</button>
+          <a href="<%= send_orders_orders_path(:order_id => @order.id) %>" class="btn btn-dark btn-padding-margin" >REQUEST QUOTE</a>
         </div>
         <table class="table">
           <thead class="table-light">

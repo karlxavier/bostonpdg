@@ -120,11 +120,11 @@ class OrdersController < ApplicationController
     end
 
     if order_user.errors.any?
-          puts '******* ERRORS ********'
-          order_user.errors.full_messages.each do |message|
-            puts message
-          end
-        end
+      puts '******* ERRORS ********'
+      order_user.errors.full_messages.each do |message|
+        puts message
+      end
+    end
 
     redirect_to orders_path(:id => @order.id)
   end
@@ -238,13 +238,13 @@ class OrdersController < ApplicationController
         end
         temp_order_entries = params[:order_entries].split(",").map { |s| s.to_i }
         temp_order_entries.each do |oe|
-            order_entry = OrderEntry.new
-            order_entry.order_id = @order.id
-            product = Product.find(oe.to_i)
-            order_entry.category_id = product.item_category_id
-            order_entry.vendor = product.vendor_id
-            order_entry.product_id = oe
-            order_entry.save
+          order_entry = OrderEntry.new
+          order_entry.order_id = @order.id
+          product = Product.find(oe.to_i)
+          order_entry.category_id = product.item_category_id
+          order_entry.vendor = product.vendor_id
+          order_entry.product_id = oe
+          order_entry.save
         end
 
       end
@@ -343,12 +343,33 @@ class OrdersController < ApplicationController
     end
   end
 
-  private
-
-    def set_order
-      if params[:id].present? && !params[:id].nil?
-        @order = Order.find(params[:id])
+  def send_orders
+    @order = Order.find(params[:order_id].to_i)
+    @user = User.where(:email => "notifications@burningmidnight.com").first
+    @vendor_list = OrderEntry.where(:order_id => @order.id).select(:vendor).distinct
+    if @vendor_list.length > 0
+      @vendor_list.each do |vl|
+        if !vl.vendor.nil? && vl.vendor != 'null'
+          @vendor = Vendor.find( vl.vendor )
+          @order_entries = OrderEntry.where(:order_id => @order.id, :vendor => @vendor.id)
+          if @vendor.email.present? && !@vendor.email.nil?
+            OrderMailer.with(order: @order, vendor: @vendor, order_entries: @order_entries).send_order_entries.deliver_now
+            flash[:notice] = "Order has sent successfully."
+          else
+            flash[:error] = "Vendor doesn't have an email!"
+          end
+        end
       end
     end
+    redirect_to orders_path(@order)
+  end
+
+  private
+
+  def set_order
+    if params[:id].present? && !params[:id].nil?
+      @order = Order.find(params[:id])
+    end
+  end
 
 end
