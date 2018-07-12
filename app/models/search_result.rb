@@ -15,6 +15,8 @@ class SearchResult < ActiveRecord::Base
     @query = case args[:query]
     when /\+/
       args[:query].split('+').map(&:strip).join('|')
+    when /[!&|]/
+      args[:query].gsub(/[!&|]/, '')
     else
       args[:query].strip
     end
