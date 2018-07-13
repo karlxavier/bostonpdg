@@ -587,11 +587,11 @@ ActiveRecord::Schema.define(version: 20180718082751) do
        JOIN order_entries ON ((order_entries.order_id = orders.id)))
        JOIN vendors ON ((vendors.id = order_entries.vendor)))
   UNION
-   SELECT orders.id AS searchable_id,
-      'Order'::text AS searchable_type,
+   SELECT messages.id AS searchable_id,
+      'Message'::text AS searchable_type,
       messages.body AS search_term
-     FROM (messages
-       JOIN orders ON ((messages.chatroom_order_id = orders.id)))
+     FROM messages
+    WHERE ((messages.body IS NOT NULL) AND (COALESCE(messages.body, ''::text) <> ''::text))
   UNION
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
@@ -599,7 +599,8 @@ ActiveRecord::Schema.define(version: 20180718082751) do
      FROM (((item_messages
        JOIN products ON ((item_messages.product_id = products.id)))
        JOIN order_entries ON ((order_entries.product_id = products.id)))
-       JOIN orders ON ((orders.id = order_entries.order_id)));
+       JOIN orders ON ((orders.id = order_entries.order_id)))
+    WHERE ((item_messages.body IS NOT NULL) AND (COALESCE(item_messages.body, ''::text) <> ''::text));
   SQL
 
 end

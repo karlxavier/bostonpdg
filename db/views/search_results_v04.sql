@@ -302,11 +302,10 @@ JOIN vendors ON vendors.id = order_entries.vendor
 UNION
 
 SELECT
-  orders.id AS searchable_id,
-  'Order' AS search_term,
+  messages.id AS searchable_id,
+  'Message' AS search_term,
   messages.body AS search_term
 FROM messages
-JOIN orders ON messages.chatroom_order_id = orders.id
 WHERE messages.body IS NOT NULL AND coalesce(messages.body, '') != ''
 
 UNION

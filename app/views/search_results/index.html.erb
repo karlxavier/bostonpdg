@@ -1,33 +1,9 @@
 <%= render "form" %>
-<div class="row mb-4">
-  <div class="col">
-    <strong class="text-muted">Result for: <%= params[:search_term] %></strong>
-  </div>
-</div>
 <div class="row">
   <div class="col">
-    <% if  @results.each do |result| %>
-      <div class="card border-secondary mb-3" style="box-shadow: 0 5px 15px rgba(33, 33, 33, .4);" >
-        <div class="card-body bg-light text-secondary">
-          <div class="row">
-            <div class="col-8">
-              <p class="lead">
-                <%= result.brand_branches %>
-              </p>
-              <h4><%= result.brand_name %></h4>
-              <p class="lead">
-                ORDER TICKET #<%= result.id %>
-              </p>
-            </div>
-            <div class="col-4 text-right">
-              <a href="<%= orders_path(:id => result.id )%>" class="btn btn-outline-dark btn-padding-margin">View</a>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer" style="text-transform: uppercase;">
-          <%= result.created_date %> BY <%= result.created_by_name %>
-        </div>
-      </div>
+    <% if  @results.each do |key, results| %>
+      <strong><%= key.to_s.pluralize(results.size) %> that match "<%= params[:search_term] %>"</strong>
+      <%= render "#{key.downcase}_result", results: results %>
     <% end.empty? %>
       Nothing found
     <% end %>
