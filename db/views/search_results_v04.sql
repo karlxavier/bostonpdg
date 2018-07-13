@@ -302,20 +302,32 @@ JOIN vendors ON vendors.id = order_entries.vendor
 UNION
 
 SELECT
+  users.id AS searchable_id,
+  'User' AS searchable_type,
+  users.email AS search_term
+FROM users
+
+UNION
+
+SELECT
+  users.id AS searchable_id,
+  'User' AS searchable_type,
+  users.first_name AS search_term
+FROM users
+
+UNION
+
+SELECT
+  users.id AS searchable_id,
+  'User' AS searchable_type,
+  users.last_name AS search_term
+FROM users
+
+UNION
+
+SELECT
   messages.id AS searchable_id,
   'Message' AS search_term,
   messages.body AS search_term
 FROM messages
 WHERE messages.body IS NOT NULL AND coalesce(messages.body, '') != ''
-
-UNION
-
-SELECT
-  orders.id AS searchable_id,
-  'Order' AS search_term,
-  item_messages.body AS search_term
-FROM item_messages
-JOIN products ON item_messages.product_id = products.id
-JOIN order_entries ON order_entries.product_id = products.id
-JOIN orders ON orders.id = order_entries.order_id
-WHERE item_messages.body IS NOT NULL AND coalesce(item_messages.body, '') != ''

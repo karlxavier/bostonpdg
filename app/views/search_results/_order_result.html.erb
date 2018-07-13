@@ -1,23 +1,33 @@
-<% results.each do |result| %>
-  <div class="card border-secondary mb-3" style="box-shadow: 0 5px 15px rgba(33, 33, 33, .4);" >
-      <div class="card-body bg-light text-secondary">
-          <div class="row">
-              <div class="col-8">
-                  <p class="lead">
-                      <%= result.brand_branches %>
+<div class="row">
+  <% results.each do |result| %>
+    <%= link_to order_path(result), class: "col-md-4", remote: false do %>
+        <div class="card flex-column mb-4 box-shadow h-md-250" style="box-shadow: 0 5px 15px rgba(33, 33, 33, .4);" >
+            <div class="card-body d-flex flex-column align-items-start">
+              <div class="card-body d-flex flex-column w-100 p-0">
+                  <div class="d-flex justify-content-between w-100">
+                      <div>
+                          <%= result.brand_name %>
+                      </div>
+                      <div>
+                          <%= time_ago_in_words(result.updated_at) %> ago.
+                      </div>
+                  </div>
+                  <div class="mb-1 text-muted">
+                      Lorem ipsum dolor
+                  </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="d-flex justify-content-between w-100">
+                  <p class="card-text mb-auto">
+                    <%= "Created on #{result.created_at.strftime('%m/%d/%Y')} by #{result.created_by_name}" %>
                   </p>
-                  <h4><%= result.brand_name %></h4>
-                  <p class="lead">
-                  ORDER TICKET #<%= result.id %>
+                  <p>
+                      <%= "Ticket ##{result.id}" %>
                   </p>
               </div>
-              <div class="col-4 text-right">
-                  <a href="<%= orders_path(:id => result.id )%>" class="btn btn-outline-dark btn-padding-margin">View</a>
-              </div>
-          </div>
-      </div>
-      <div class="card-footer" style="text-transform: uppercase;">
-          <%= result.created_date %> BY <%= result.created_by_name %>
-      </div>
-  </div>
-<% end %>
+            </div>
+        </div>
+    <% end %>
+  <% end %>
+</div>

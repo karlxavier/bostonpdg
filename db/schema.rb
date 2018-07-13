@@ -360,9 +360,6 @@ ActiveRecord::Schema.define(version: 20180718082751) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "chatroom_users", "chatrooms"
-  add_foreign_key "chatroom_users", "users"
-  add_foreign_key "chatrooms", "orders"
   add_foreign_key "item_messages", "order_entries"
   add_foreign_key "item_messages", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
@@ -587,20 +584,26 @@ ActiveRecord::Schema.define(version: 20180718082751) do
        JOIN order_entries ON ((order_entries.order_id = orders.id)))
        JOIN vendors ON ((vendors.id = order_entries.vendor)))
   UNION
+   SELECT users.id AS searchable_id,
+      'User'::text AS searchable_type,
+      users.email AS search_term
+     FROM users
+  UNION
+   SELECT users.id AS searchable_id,
+      'User'::text AS searchable_type,
+      users.first_name AS search_term
+     FROM users
+  UNION
+   SELECT users.id AS searchable_id,
+      'User'::text AS searchable_type,
+      users.last_name AS search_term
+     FROM users
+  UNION
    SELECT messages.id AS searchable_id,
       'Message'::text AS searchable_type,
       messages.body AS search_term
      FROM messages
-    WHERE ((messages.body IS NOT NULL) AND (COALESCE(messages.body, ''::text) <> ''::text))
-  UNION
-   SELECT orders.id AS searchable_id,
-      'Order'::text AS searchable_type,
-      item_messages.body AS search_term
-     FROM (((item_messages
-       JOIN products ON ((item_messages.product_id = products.id)))
-       JOIN order_entries ON ((order_entries.product_id = products.id)))
-       JOIN orders ON ((orders.id = order_entries.order_id)))
-    WHERE ((item_messages.body IS NOT NULL) AND (COALESCE(item_messages.body, ''::text) <> ''::text));
+    WHERE ((messages.body IS NOT NULL) AND (COALESCE(messages.body, ''::text) <> ''::text));
   SQL
 
 end
