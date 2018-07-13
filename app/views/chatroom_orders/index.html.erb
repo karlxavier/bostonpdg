@@ -15,11 +15,11 @@
                   <% end %>
                 <% if chatroom.products.present? %>
                   <ol class="dd-list">
-                      <% chatroom.products.each do |product| %>
+                      <% chatroom.order_entries.each do |oe| %>
                         <li class="dd-item" style="padding-top: 0;">
-                            <div class="ddd-handle">
-                                <%= product.name %>
-                            </div>
+                            <%= link_to chatroom_order_order_entry_load_item_messages_path(chatroom_order_id: chatroom, order_entry_id: oe), class: "ddd-handle", style: "width: 100%;", remote: true do %>
+                                <%= oe.product[:name] %>
+                            <% end %>
                         </li>
                       <% end %>
                   </ol>
@@ -41,11 +41,9 @@
       </div>
       <% if @chatroom_orders.first.present? %>
         <div class="ibox-content" id="chat_messages">
-          
-            <div class="feed-activity-list" >
-              <%= render '/messages/messages', active_room: @chatroom_orders.first, messages: @chatroom_orders.first.messages.order(created_at: :desc).limit(100).reverse %>
-            </div>
-          
+          <div class="feed-activity-list" >
+            <%= render '/messages/messages', active_room: @chatroom_orders.first, messages: @chatroom_orders.first.messages.order(created_at: :desc).limit(100).reverse %>
+          </div>
         </div>
       <% end %>
     </div>

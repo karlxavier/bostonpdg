@@ -11,7 +11,6 @@ class ChatroomOrdersController < ApplicationController
   end
 
   def load_messages
-    puts '************ load_messages'
       respond_to do |format|
         # @chatroom = Chatroom.find(params[:chatroom_id])
         @messages = @chatroom.messages.order(created_at: :desc).limit(100).reverse
@@ -21,6 +20,18 @@ class ChatroomOrdersController < ApplicationController
         # chatroom_user.update_attributes(last_read_at: Time.zone.now)
 
         format.js
+      end
+  end
+
+  def load_item_messages
+      if params[:order_entry_id].present?
+        @order_entry = OrderEntry.find(params[:order_entry_id])
+        respond_to do |format|
+          @messages = ItemMessage.where(order_entry_id: @order_entry.id)
+          @product = Product.find(@order_entry.product_id)
+
+          format.js
+        end
       end
   end
 

@@ -32,11 +32,19 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :chatroom_orders do
+  resources :chatroom_orders, only: :index do
     resources :order_users
     resources :messages
     resources :dropfiles, only: :create
     get 'load_messages/', :to => 'chatroom_orders#load_messages', as: 'load_messages'
+
+    resources :order_entries, only: :load_item_messages do
+      get 'load_item_messages/', :to => 'chatroom_orders#load_item_messages', as: 'load_item_messages'
+    end
+
+    resources :order_entries, only: :index do
+      resources :item_messages, only: [:create, :new]
+    end
   end
 
   resources :orders do

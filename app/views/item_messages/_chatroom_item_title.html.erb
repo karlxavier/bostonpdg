@@ -1,0 +1,64 @@
+<h5 style="color: #f8ac59;">
+	<strong style="color: #000;">Product:</strong><%= " #{product.name}" %>		
+</h5>
+<div class="pull-right" style="margin-left: 10px;">
+	<a class="count-info" data-toggle="dropdown" id="#users" href="#" aria-expanded="true">
+        <i class="fa fa-users" style="color: #999c9e;"></i>
+    </a>
+
+    <ul class="dropdown-menu dropdown-messages" aria-labelledby="users"> 
+    	<% OrderUser.chatroom_order_users(chatroom.id).each do |user| %>
+			<li>
+		        <div class="dropdown-messages-box">
+		            <div class="media-body">
+		                <strong><%= [user.first_name, user.last_name].join(' ') %></strong> <br>
+		                <small class="text-muted">Last logged in at <%= user.updated_at.strftime("%d-%m-%Y") %></small>
+		            </div>
+		        </div>
+		    </li>
+		    <li class="divider"></li>
+	    <% end %>
+	</ul>
+</div>
+<div class="pull-right">
+	<a class="count-info" data-toggle="dropdown" id="#attachments" href="#" aria-expanded="false">
+        <i class="fa fa-paperclip" style="color: #999c9e; margin-left: 10px;"></i>
+    </a>
+	<ul id="msg_attachments" class="dropdown-menu dropdown-messages" aria-labelledby="attachments" style="margin-left: 10px;"> 
+    	<% messages.each do |message| %>
+    		<% if message.attachment_data? %>
+				<li>
+			        <div class="dropdown-messages-box">
+			        	<div class="media-body">
+			        		<small class="text-muted">Uploaded by <strong><%= message.user.first_name %></strong> </small><br>
+			        		<small class="text-muted">Uploaded at <%= message.created_at.strftime("%d-%m-%Y") %></small>
+			        		<strong>
+						        <% if message.attachment_data? %>
+									<% 
+									attachment_data = JSON.parse(message.attachment_data, object_class: OpenStruct) 
+									mime_type = attachment_data.original.metadata.mime_type
+									%>
+						      		<% if is_downloadable_file?(mime_type)%>
+										<div style="text-align: left;">
+											<br>
+											<%= file_icon(mime_type) %>
+											<%= link_to attachment_data.original.metadata.filename, message.attachment_url(:original), download: attachment_data.original.metadata.filename %>
+										</div>
+									<% else %>
+										<div class="feed-photo">
+											<br>
+											<%= image_tag message.attachment_url(:original), style: "width: 290px;" %>	
+										</div>
+									<% end %>
+						  		<% end %>
+						  	</strong>
+					  	</div>
+					</div>
+			    </li>
+			    <li class="divider"></li>
+			<% end %>
+	    <% end %>
+	</ul>
+</div>
+
+	

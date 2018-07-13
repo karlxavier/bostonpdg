@@ -1,0 +1,39 @@
+$("div#chat_messages").html("<%= escape_javascript(render '/item_messages/messages', product: @product, messages: @messages ) %>");
+$("div#chatroom_message").html("<%= escape_javascript(render '/item_messages/message_form', chatroom: @chatroom, order_entry: @order_entry ) %>");
+$("div#chatroom_title").html("<%= escape_javascript(render '/item_messages/chatroom_item_title', product: @product, chatroom: @chatroom, messages: @messages ) %>");
+$(function() {
+	var objDiv = document.getElementById("chat_messages");
+	objDiv.scrollTop = objDiv.scrollHeight;
+
+	const zone = document.querySelector('.dropzonable')
+	  const input = document.querySelector('#message-attachment')
+	  const form = document.querySelector('#new_item_message')
+
+	  if (zone) {
+	    const dropzone = new Dropzone(zone, { 
+	      url: form.action.replace('messages.js', 'dropfiles'),
+	      error: function(file, errorMessage, xhr) {
+	        console.log(errorMessage)
+	        toastr.options = {
+	            closeButton: true,
+	            progressBar: true,
+	            showMethod: 'slideDown',
+	            positionClass: 'toast-bottom-left',
+	            timeOut: 7000
+	        }
+
+	        toastr.error(errorMessage.error)
+	      }
+	    })
+
+	    dropzone.on("complete", function(file) {
+	      dropzone.removeFile(file);
+	    });
+	  }
+
+	// var badge = document.getElementById("badge-<%= @chatroom.id %>");
+	// badge.innerHTML = "";
+	// badge.classList.remove("badge");
+	// badge.classList.remove("badge-warning");
+
+})

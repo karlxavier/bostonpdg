@@ -4,20 +4,31 @@ before_action :authenticate_user!
 before_action :set_item
 
 def create
-	message = @item.item_messages.new(message_params)
+	# message = @item.item_messages.new(message_params)
+	message = @order_entry.item_messages.new(message_params)
 	message.user = current_user
 	
 	message.save
-	ItemMessageJob.perform_later(message, current_user)
+	ItemMessageJob.perform_later(message, current_user, @order_entry.product_id)
+
+	if message.errors.any?
+	    message.errors.full_messages.each do |message|
+	    	puts '******** message ERRORS ********'
+	    	puts message
+	    end
+	end
 end
 
 private
 
 	def message_params
-		params.require(:item_message).permit(:body, :attachment, :product_id)
+		params.require(:item_message).permit(:body, :attachment, :order_entry_id)
 	end
 
 	def set_item
-		@item = Product.find(params[:product_id])
+		if params[:order_entry_id].present?
+			@order_entry = OrderEntry.find(params[:order_entry_id])
+			# @item = Product.find(order_entry.product_id)
+		end
 	end
 end
