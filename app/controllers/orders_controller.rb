@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
 
     end
     @chatroom_order = ChatroomOrder.find(@order.id)
+    @chatroom_orders = ChatroomOrder.order(id: :desc)
     @categories = Category.all
     @vendors = Vendor.all
     @products = Product.all
