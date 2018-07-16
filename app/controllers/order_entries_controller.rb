@@ -36,7 +36,7 @@ class OrderEntriesController < ApplicationController
 
   def update_entry
     @order_entry = OrderEntry.find(params[:order_entry][:id])
-     if params[:order_entry][:order_id].present? && params[:order_entry][:product_id].present?
+    if params[:order_entry][:order_id].present? && params[:order_entry][:product_id].present?
       if @order_entry.update_attributes(:category_id => params[:order_entry][:category_id], :vendor => params[:order_entry][:vendor], :product_id => params[:order_entry][:product_id], :order_id => params[:order_entry][:order_id], :quoted_by => params[:order_entry][:quoted_by], :price => params[:order_entry][:price], :tax => params[:order_entry][:tax], :cost => params[:order_entry][:cost], :quantity => params[:order_entry][:quantity])
         flash[:notice] = "Order Entry Successfully Updated"
       else
@@ -46,6 +46,40 @@ class OrderEntriesController < ApplicationController
       flash[:error] = "Order Entry Updated Failed"
     end
     redirect_to orders_path(:id => @order_entry.order_id)
+  end
+
+  def change_status
+    @order_entry = OrderEntry.find(params[:id])
+    if params[:status].present? && !params[:status].nil? && params[:status] != 0 && params[:status] != ""
+      if @order_entry.update_attributes(:status => params[:status])
+        flash[:notice] = "Item Status Successfully Updated"
+      else
+        flash[:error] = "Item Status Updated Failed"
+      end
+    else
+      flash[:error] = "Item Status Updated Failed"
+    end
+    redirect_to orders_path(:id => @order_entry.order_id)
+  end
+
+  def change_status_on_checklist
+    if params[:item_ids].present? && !params[:item_ids].nil?
+      if params[:item_ids].size > 0
+        params[:item_ids].each do |id|
+          @order_entry = OrderEntry.find(id)
+          if @order_entry.update_attributes(:status => 2)
+            flash[:notice] = "Item Statuses Successfully Updated"
+          else
+            flash[:error] = "Item Statuses Updated Failed"
+          end
+        end
+      else
+        flash[:error] = "No Item has been checked"
+      end
+    else
+      flash[:error] = "No Item has been checked"
+    end
+    redirect_to orders_path(:id => params[:id])
   end
 
 end

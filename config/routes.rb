@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   resources :order_entries do
     collection do
       post  'update_entry'
+      post   'change_status'
+      post   'change_status_on_checklist'
     end
   end
 
