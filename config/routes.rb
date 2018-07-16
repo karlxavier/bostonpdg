@@ -52,6 +52,8 @@ Rails.application.routes.draw do
       resources :item_messages
     end
     get 'item_details/:id', :to => 'products#item_details', as: 'item_details'
+    resources :messages
+    get 'load_messages/:chatroom_id', :to => 'orders#load_messages', as: 'load_messages', on: :collection
   end
 
 

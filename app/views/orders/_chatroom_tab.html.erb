@@ -1,0 +1,17 @@
+<div class="gray-bg ibox" style=" background-color: #f3f3f4!important;">
+  <div class="ibox-title">
+    <div  id="chatroom_title">
+      <%= render '/chatroom_orders/chatroom_title', chatroom: chatroom %>
+    </div>
+  </div>
+  <% if chatroom.present? %>
+    <div class="ibox-content" id="chat_messages">
+      <div class="feed-activity-list" >
+        <%= render '/messages/messages', active_room: chatroom, messages: chatroom.messages.order(created_at: :desc).limit(100).reverse %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="chat-message-form" id="chatroom_message">
+  <%= render '/chatroom_orders/chatroom_message', chatroom: chatroom %>
+</div>

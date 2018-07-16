@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:index, :show]
+  before_action :set_chatroom, only: [:load_messages]
 
   def send_orders
     @order = Order.find(params[:order_id].to_i)
@@ -365,11 +366,25 @@ class OrdersController < ApplicationController
     redirect_to orders_path(@order)
   end
 
+  def load_messages
+    respond_to do |format|
+        @messages = @chatroom.messages.order(created_at: :desc).limit(100).reverse
+
+        format.js
+      end
+  end
+
   private
 
   def set_order
     if params[:id].present? && !params[:id].nil?
       @order = Order.find(params[:id])
+    end
+  end
+
+  def set_chatroom
+    if params[:chatroom_id].present?
+      @chatroom = ChatroomOrder.find(params[:chatroom_id])
     end
   end
 

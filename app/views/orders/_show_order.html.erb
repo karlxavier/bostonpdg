@@ -106,11 +106,6 @@
                 <td><%= number_to_currency(entry.price, unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
                 <td><%= number_to_currency((entry.quantity.nil? ? 0 : entry.quantity) * (entry.price.nil? ? 0 : entry.price), unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
                 <td><button class="btn btn-outline-dark btn-nav-selected-circle" onclick="showEditOrderEntries(<%= entry.id %>)"><i data-feather="edit" class="feather-width-15"></i></button></td>
-                <td>
-                  <%= link_to order_item_details_path(order.id, entry.id), class: "btn btn-outline-dark btn-nav-selected-circle", remote: true do %>
-                      <i data-feather="message-circle" class="feather-width-15"></i>
-                  <% end %>
-                </td>
                 <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-outline-danger btn-nav-selected-circle" ><i data-feather="trash-2" class="feather-width-15"></i></a></td>
               </tr>
 
@@ -124,30 +119,7 @@
   </div>
 </div>
 
-<div class="small-chat-box fadeInRight animated">
-  <div class="heading" draggable="true">
-      Order-<%= order.id %>
-  </div>
 
-    <div class="content" id="chat_box">
-      <% if chatroom_order.present? %>
-        <div class="dropzonable" id="chat_messages"> 
-          <%= render 'orders/partials/messages', active_room: chatroom_order, messages: chatroom_order.messages.order(created_at: :desc).limit(100).reverse %>
-        </div>
-      <% end %>
-    </div>
-
-  <div class="form-chat" style="padding-bottom: 0;">
-    <div class="chat-message-form" id="chatroom_message">
-      <%= render 'orders/partials/chatroom_form', chatroom: chatroom_order %>
-    </div>
-  </div>
-</div>
-<div id="small-chat">
-    <a class="open-small-chat">
-        <i class="fa fa-remove"></i>
-    </a>
-</div>
 <script type="text/javascript">
     $(function (){
         $('.orders_and_order_form').css({'height': ($( window ).height() - 50)});
@@ -158,21 +130,6 @@
             $('.orders_and_order_form').height(screenHeight);
             $('.orders_and_order_form_2').height(screenHeight2 - 50);
         });
-      $('.open-small-chat').on('click', function () {
-          $(this).children().toggleClass('fa-comments').toggleClass('fa-remove');
-          $('.small-chat-box').toggleClass('active');
-      });
-
-      var chat_messages = document.getElementById('chat_box');
-        var height = chat_messages.scrollHeight;
-        $(chat_messages).scrollTop(height);
-
-      $('#chat_box').slimScroll({
-          railOpacity: 0.4,
-          start: 'bottom',
-          scrollTo: '9098px',
-          alwaysVisible: true,
-      });
     });
 </script>
 
