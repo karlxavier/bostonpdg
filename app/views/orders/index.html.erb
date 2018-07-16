@@ -52,34 +52,32 @@
           <div class="tab-pane fade padding-top-1" id="nav-messages" role="tabpanel" aria-labelledby="nav-messages-tab">
             <div class="row">
               <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
-                <div class="stitched row" style="padding: 10px; text-shadow: none; text-align: left;">
-                  <div class="col">
-                    <div class="dd" id="nestable2">
-                      <ol class="dd-list">
+                <div class="col">
+                  <div class="dd" id="nestable2">
+                    <ol class="dd-list">
 
-                        <% @chatroom_orders.each do |chatroom| %>
+                      <% @chatroom_orders.each do |chatroom| %>
                           <li class="dd-item no-drag" data-id="<%= chatroom.id %>">
-                              
+
                             <%= link_to load_messages_orders_path(chatroom), class: "ddd-handle", style: "width: 100%;", remote: true do %>
                                 <span class="label label-info"><i class="fa fa-cog"></i></span>
                                 <%= "Order-#{chatroom.id}" %>
                             <% end %>
                             <% if chatroom.products.present? %>
-                              <ol class="dd-list">
+                                <ol class="dd-list">
                                   <% chatroom.order_entries.each do |oe| %>
-                                    <li class="dd-item" style="padding-top: 0;">
+                                      <li class="dd-item" style="padding-top: 0;">
                                         <%= link_to chatroom_order_order_entry_load_item_messages_path(chatroom_order_id: chatroom, order_entry_id: oe), class: "ddd-handle", style: "width: 100%;", remote: true do %>
                                             <%= oe.product[:name] %>
                                         <% end %>
-                                    </li>
+                                      </li>
                                   <% end %>
-                              </ol>
+                                </ol>
                             <% end %>
                           </li>
-                        <% end %>
+                      <% end %>
 
-                      </ol>
-                    </div>
+                    </ol>
                   </div>
                 </div>
               </div>
@@ -102,13 +100,13 @@
 
       </div>
 
-<div class="col padding-left orders_and_order_form" style="overflow-y: auto; overflow-x: hidden">
-  <div id="show_order">
-    <%= render 'show_order', order: @order, chatroom_order: @chatroom_order, order_entries: @order_entries %>
-  </div>
-</div>
+      <div class="col padding-left orders_and_order_form" style="overflow-y: auto; overflow-x: hidden">
+        <div id="show_order">
+          <%= render 'show_order', order: @order, chatroom_order: @chatroom_order, order_entries: @order_entries %>
+        </div>
+      </div>
 
-</div>
+    </div>
 <% else %>
     <style>
         #wrapper-div{width:100%; height:400px}
@@ -126,10 +124,10 @@
     </div>
 <% end %>
 <script type="text/javascript">
-  $(function(){
-    $("div#order-<%= @order.id %>").addClass('orange-left');
+    $(function(){
+        $("div#order-<%= @order.id %>").addClass('orange-left');
 
-    $('#nestable2').nestable({});
-    $('#nestable2').nestable('collapseAll');
-  });
+        $('#nestable2').nestable({});
+        $('#nestable2').nestable('collapseAll');
+    });
 </script>
