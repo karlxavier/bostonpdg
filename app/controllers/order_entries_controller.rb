@@ -13,6 +13,7 @@ class OrderEntriesController < ApplicationController
     @order_entry.quantity = params[:order_entry][:quantity]
     if params[:order_entry][:order_id].present? && params[:order_entry][:product_id].present?
       if @order_entry.save
+        OrderHistory.create(:order_id => @order_entry.order_id, :order_entry_id => @order_entry.id, :description => 'has been Added', :user_id => current_user.id)
         flash[:notice] = "Order Entry Successfully Created"
       else
         flash[:error] = "Order Entry Created Failed"
@@ -27,6 +28,7 @@ class OrderEntriesController < ApplicationController
   def destroy
     order_entry = OrderEntry.find(params[:id])
     if order_entry.destroy
+      OrderHistory.create(:order_id => order_entry.order_id, :product_id => order_entry.product_id, :description => 'has been Removed', :user_id => current_user.id)
       flash[:notice] = "Order Entry Successfully Deleted"
     else
       flash[:error] = "Order Entry Deleted Failed"
@@ -52,6 +54,7 @@ class OrderEntriesController < ApplicationController
     @order_entry = OrderEntry.find(params[:id])
     if params[:status].present? && !params[:status].nil? && params[:status] != 0 && params[:status] != ""
       if @order_entry.update_attributes(:status => params[:status])
+        OrderHistory.create(:order_id => @order_entry.order_id, :order_entry_id => @order_entry.id, :description => 'has changed to Ordered', :user_id => current_user.id)
         flash[:notice] = "Item Status Successfully Updated"
       else
         flash[:error] = "Item Status Updated Failed"
@@ -68,6 +71,7 @@ class OrderEntriesController < ApplicationController
         params[:item_ids].each do |id|
           @order_entry = OrderEntry.find(id)
           if @order_entry.update_attributes(:status => 2)
+            OrderHistory.create(:order_id => @order_entry.order_id, :order_entry_id => @order_entry.id, :description => 'has changed to Ordered', :user_id => current_user.id)
             flash[:notice] = "Item Statuses Successfully Updated"
           else
             flash[:error] = "Item Statuses Updated Failed"

@@ -65,11 +65,22 @@
           <div class="tab-pane fade padding-top-1" id="nav-notifications" role="tabpanel" aria-labelledby="nav-notifications-tab">
             <div class="row">
               <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
-                <div class="stitched row" style="padding: 10px; text-shadow: none;">
-                  <div class="col">
+                <table class="table table-striped">
+                  <tbody>
+                    <% if @order_histories.present? %>
+                        <% @order_histories.each do |history| %>
+                          <tr>
+                            <th><%= generate_history_information(history) %></th>
+                          </tr>
+                        <% end %>
+                    <% else %>
+                        <tr>
+                          <th><b>No Notifications Yet.</b></th>
+                        </tr>
+                    <% end %>
 
-                  </div>
-                </div>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

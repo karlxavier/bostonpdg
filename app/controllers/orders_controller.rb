@@ -28,6 +28,7 @@ class OrdersController < ApplicationController
     @vendors = Vendor.all
     @products = Product.all
     @brands = Brand.all
+    @order_histories = OrderHistory.where(:order_id => @order.id)
   end
 
   def show
@@ -135,6 +136,7 @@ class OrdersController < ApplicationController
     @order = Order.new
     @order.brand_id = params[:order][:brand_id]
     if @order.save
+      OrderHistory.create(:order_id => @order.order_id, :description => 'has been Created', :user_id => current_user.id)
       if params[:order_entries].present?
         temp_order_entries = params[:order_entries].split(",").map { |s| s.to_i }
         temp_order_entries.each do |oe|
@@ -144,7 +146,9 @@ class OrdersController < ApplicationController
           order_entry.category_id = product.item_category_id
           order_entry.vendor = product.vendor_id
           order_entry.product_id = oe
-          order_entry.save
+          if order_entry.save
+            OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => 'has been Added', :user_id => current_user.id)
+          end
         end
       end
       if params[:order_branch].present?
@@ -155,6 +159,9 @@ class OrdersController < ApplicationController
           order_branch.order_id = @order.id
           order_branch.address_id = ob
           order_branch.save
+          if order_entry.save
+            OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => 'has been Added', :user_id => current_user.id)
+          end
         end
       end
       if params[:order_user].present?
@@ -235,7 +242,10 @@ class OrdersController < ApplicationController
           temp_existing_entries = params[:existing_entries].split(",").map { |s| s.to_i }
 
           if !temp_existing_entries.include? oe.id
-            OrderEntry.find(oe.id).destroy
+            order_entry = OrderEntry.find(oe.id)
+            if order_entry.destroy
+              OrderHistory.create(:order_id => order_entry.order_id, :product_id => order_entry.product_id, :description => 'has been Removed', :user_id => current_user.id)
+            end
           end
         end
         temp_order_entries = params[:order_entries].split(",").map { |s| s.to_i }
@@ -247,6 +257,9 @@ class OrdersController < ApplicationController
           order_entry.vendor = product.vendor_id
           order_entry.product_id = oe
           order_entry.save
+          if order_entry.save
+            OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => 'has been Added', :user_id => current_user.id)
+          end
         end
 
       end
