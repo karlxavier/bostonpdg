@@ -161,17 +161,6 @@
             $(this).children().toggleClass('fa-comments').toggleClass('fa-remove');
             $('.small-chat-box').toggleClass('active');
         });
-
-        var chat_messages = document.getElementById('chat_box');
-        var height = chat_messages.scrollHeight;
-        $(chat_messages).scrollTop(height);
-
-        $('#chat_box').slimScroll({
-            railOpacity: 0.4,
-            start: 'bottom',
-            scrollTo: '9098px',
-            alwaysVisible: true,
-        });
     });
 </script>
 

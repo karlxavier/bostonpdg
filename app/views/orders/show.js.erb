@@ -1,4 +1,5 @@
 $("div#show_order").html("<%= escape_javascript(render 'show_order', order: @order, chatroom_order: @chatroom_order, order_entries: @order_entries ) %>");
+$("div#order_messages").html("<%= escape_javascript(render 'chatroom_tab', chatroom: @chatroom_order ) %>");
 
 if ($(".card").hasClass("orange-left")){
     $(".card").removeClass("orange-left")
@@ -33,5 +34,12 @@ $(function() {
 	      dropzone.removeFile(file);
 	    });
 	  }
+
+	  var order_messages = document.getElementById('order_messages');
+	  if (order_messages) {
+	  	var height = order_messages.scrollHeight;
+      	$(order_messages).scrollTop(height);
+	  }
+      
 
 })

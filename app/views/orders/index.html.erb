@@ -53,32 +53,11 @@
             <div class="row">
               <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
                 <div class="col">
-                  <div class="dd" id="nestable2">
-                    <ol class="dd-list">
-
-                      <% @chatroom_orders.each do |chatroom| %>
-                          <li class="dd-item no-drag" data-id="<%= chatroom.id %>">
-
-                            <%= link_to load_messages_orders_path(chatroom), class: "ddd-handle", style: "width: 100%;", remote: true do %>
-                                <span class="label label-info"><i class="fa fa-cog"></i></span>
-                                <%= "Order-#{chatroom.id}" %>
-                            <% end %>
-                            <% if chatroom.products.present? %>
-                                <ol class="dd-list">
-                                  <% chatroom.order_entries.each do |oe| %>
-                                      <li class="dd-item" style="padding-top: 0;">
-                                        <%= link_to chatroom_order_order_entry_load_item_messages_path(chatroom_order_id: chatroom, order_entry_id: oe), class: "ddd-handle", style: "width: 100%;", remote: true do %>
-                                            <%= oe.product[:name] %>
-                                        <% end %>
-                                      </li>
-                                  <% end %>
-                                </ol>
-                            <% end %>
-                          </li>
-                      <% end %>
-
-                    </ol>
+                  
+                  <div id="order_messages">
+                    <%= render 'chatroom_tab', chatroom: @chatroom_order  %>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -95,8 +74,6 @@
             </div>
           </div>
         </div>
-
-
 
       </div>
 
@@ -127,7 +104,6 @@
     $(function(){
         $("div#order-<%= @order.id %>").addClass('orange-left');
 
-        $('#nestable2').nestable({});
-        $('#nestable2').nestable('collapseAll');
+
     });
 </script>
