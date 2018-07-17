@@ -78,6 +78,7 @@ Rails.application.routes.draw do
     resources :order_branches
     resources :vendors_products
     resources :vendor_categories
+    resources :default_attributes
     root to: "users#index" # <--- Root route
   end
   #API Simple

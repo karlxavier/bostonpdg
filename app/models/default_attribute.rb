@@ -1,0 +1,2 @@
+class DefaultAttribute < ApplicationRecord
+end
