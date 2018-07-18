@@ -2,17 +2,16 @@ require "administrate/base_dashboard"
 
 class DefaultAttributeDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
-  # a hash that describes the type of each of the model's fields.
+  # a hash that describes the input_type of each of the model's fields.
   #
-  # Each different type represents an Administrate::Field object,
+  # Each different input_type represents an Administrate::Field object,
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     field_name: Field::String,
-    field_id: Field::String,
     description: Field::String,
-    type: Field::SelectBasic.with_options({
+    input_type: Field::SelectBasic.with_options({
         choices: ['Text', 'Number', 'Date', 'File', 'Checkbox', 'Radio', 'Image', 'Password']
   }),
     user_id: Field::Hidden,
@@ -28,7 +27,7 @@ class DefaultAttributeDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :field_name,
-    :field_id,
+    :input_type,
     :description,
   ].freeze
 
@@ -37,9 +36,8 @@ class DefaultAttributeDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :field_name,
-    :field_id,
     :description,
-    :type,
+    :input_type,
     :user_id,
     :created_at,
     :updated_at,
@@ -50,9 +48,8 @@ class DefaultAttributeDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :field_name,
-    :field_id,
     :description,
-    :type,
+    :input_type,
     :user_id,
   ].freeze
 

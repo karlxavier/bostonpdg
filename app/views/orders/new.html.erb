@@ -258,7 +258,32 @@
         <div class="col padding-left" >
           <span class="float-left"><h5>Attributes</h5></span>
           <a class="btn btn-outline-dark float-right" onclick="product_attributes();" >Add Attributes</a>
-          <div class="padding-top-1" id="product_attributes" style="padding-top: 5%;">
+          <% if DefaultAttribute.all.size > 0 %>
+              <div class="padding-top-1" id="default_product_attributes" style="padding-top: 5%;">
+                <% DefaultAttribute.all.each do |da| %>
+                    <div class="row form-group">
+                      <div class="col-md-4 nopadding">
+                        <div class="form-group">
+                          <input type="hidden" class="form-control" id="order[field_name][]" name="order_field_name" value="<%= da.field_name %>" />
+                          <b><%= da.field_name %></b>
+                        </div>
+                      </div>
+                      <div class="col-md-6 nopadding">
+                        <div class="form-group">
+                          <input type="<%= da.input_type.downcase %>" class="form-control default_attributes" id="order[field_value][]" name="order_field_value" value="" placeholder="Field Value">
+                        </div>
+                      </div>
+                      <div class="col-md-2 nopadding">
+                        <div class="form-group">
+                          <!--<button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button>-->
+                        </div>
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                <% end %>
+              </div>
+          <% end %>
+          <div class="padding-top-1" id="product_attributes">
 
           </div>
         </div>
@@ -597,9 +622,10 @@
               $('#category_id').val('');
               $('#item_category_id').val('');
               $('#vendor_id').val('');
-              $('#specs').val('')
-              $('#vendor_quote_prices').val('')
-              $('#notes').val('')
+              $('#specs').val('');
+              $('#vendor_quote_prices').val('');
+              $('#notes').val('');
+              $('.default_attributes').val('');
               $('#product_attributes').html('');
               $('.categories').selectpicker('refresh');
               if (product_list.length === 0) {
