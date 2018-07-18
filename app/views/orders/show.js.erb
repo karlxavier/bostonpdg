@@ -1,5 +1,7 @@
 $("div#show_order").html("<%= escape_javascript(render 'show_order', order: @order, chatroom_order: @chatroom_order, order_entries: @order_entries ) %>");
 $("div#order_messages").html("<%= escape_javascript(render 'chatroom_tab', chatroom: @chatroom_order ) %>");
+$("div#chatroom_message").html("<%= escape_javascript(render '/chatroom_orders/chatroom_message', chatroom: @chatroom_order ) %>");
+$("div#message_items").html("<%= escape_javascript(render 'message_items', order: @order, chatroom: @chatroom_order ) %>");
 
 if ($(".card").hasClass("orange-left")){
     $(".card").removeClass("orange-left")

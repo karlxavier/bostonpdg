@@ -1,12 +1,8 @@
-
 <% if chatroom.present? %>
-  <div class="ibox-content" id="order_messages" style="border: none;">
     <div class="feed-activity-list" >
       <%= render '/messages/messages', active_room: chatroom, messages: chatroom.messages.order(created_at: :desc).limit(100).reverse %>
     </div>
-  </div>
 <% end %>
 
-<div class="chat-message-form" id="chatroom_message">
-  <%= render '/chatroom_orders/chatroom_message', chatroom: chatroom %>
-</div>
+
+

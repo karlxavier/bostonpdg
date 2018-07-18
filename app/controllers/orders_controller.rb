@@ -382,8 +382,22 @@ class OrdersController < ApplicationController
   def load_messages
     respond_to do |format|
         @messages = @chatroom.messages.order(created_at: :desc).limit(100).reverse
+        @order = Order.find(@chatroom.id)
 
         format.js
+      end
+  end
+
+  def load_item_messages
+      if params[:order_entry_id].present?
+        @order_entry = OrderEntry.find(params[:order_entry_id])
+        respond_to do |format|
+          @messages = ItemMessage.where(order_entry_id: @order_entry.id)
+          @product = Product.find(@order_entry.product_id)
+          @chatroom = ChatroomOrder.find(@order_entry.order_id)
+
+          format.js
+        end
       end
   end
 

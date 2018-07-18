@@ -16,6 +16,8 @@ App.item_messages = App.cable.subscriptions.create "ItemMessagesChannel",
       if chat_messages
         height = chat_messages.scrollHeight
         $(chat_messages).scrollTop(height)
+
+      $("#new_item_message")[0].reset()
     else
       chatroom_badge = $("[data-behavior='chatroom-badge'][data-item-chatroom-id='#{data.item_id}']")
       if chatroom_badge[0]
