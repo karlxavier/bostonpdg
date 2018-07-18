@@ -124,11 +124,16 @@
 <script type="text/javascript">
     $(function(){
         $("div#order-<%= @order.id %>").addClass('orange-left');
-
-      $('.ibox-content').slimScroll({
-        railOpacity: 0.4,
-        start: 'bottom',
-        height: '500px',
-      });
+        $('.ibox-content').slimScroll({
+          railOpacity: 0.4,
+          start: 'bottom',
+          height: '500px',
+        });
+        
+        $("div#order-<%= params[:order_id] %>").click();
+        $("#order-<%= params[:order_id] %>")[0].scrollIntoView({
+            behavior: "smooth", // or "auto" or "instant"
+            block: "start" // or "end"
+        });
     });
 </script>

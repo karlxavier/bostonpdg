@@ -462,6 +462,13 @@ ActiveRecord::Schema.define(version: 20180718082751) do
   UNION
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
+     FROM ((orders
+       JOIN order_users ON ((order_users.order_id = orders.id)))
+       JOIN users ON ((order_users.regional = users.id)))
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
       users.email AS search_term
      FROM ((orders
        JOIN order_users ON ((order_users.order_id = orders.id)))
@@ -483,6 +490,13 @@ ActiveRecord::Schema.define(version: 20180718082751) do
   UNION
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
+     FROM ((orders
+       JOIN order_users ON ((order_users.order_id = orders.id)))
+       JOIN users ON ((order_users.comms = users.id)))
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
       users.email AS search_term
      FROM ((orders
        JOIN order_users ON ((order_users.order_id = orders.id)))
@@ -498,6 +512,13 @@ ActiveRecord::Schema.define(version: 20180718082751) do
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
       users.last_name AS search_term
+     FROM ((orders
+       JOIN order_users ON ((order_users.order_id = orders.id)))
+       JOIN users ON ((order_users.art = users.id)))
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
      FROM ((orders
        JOIN order_users ON ((order_users.order_id = orders.id)))
        JOIN users ON ((order_users.art = users.id)))
@@ -519,6 +540,13 @@ ActiveRecord::Schema.define(version: 20180718082751) do
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
       users.last_name AS search_term
+     FROM ((orders
+       JOIN order_users ON ((order_users.order_id = orders.id)))
+       JOIN users ON ((order_users.processor = users.id)))
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
      FROM ((orders
        JOIN order_users ON ((order_users.order_id = orders.id)))
        JOIN users ON ((order_users.processor = users.id)))
@@ -540,6 +568,13 @@ ActiveRecord::Schema.define(version: 20180718082751) do
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
       users.last_name AS search_term
+     FROM ((orders
+       JOIN order_users ON ((order_users.order_id = orders.id)))
+       JOIN users ON ((order_users.designer = users.id)))
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
      FROM ((orders
        JOIN order_users ON ((order_users.order_id = orders.id)))
        JOIN users ON ((order_users.designer = users.id)))
@@ -561,6 +596,13 @@ ActiveRecord::Schema.define(version: 20180718082751) do
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
       users.last_name AS search_term
+     FROM ((orders
+       JOIN order_users ON ((order_users.order_id = orders.id)))
+       JOIN users ON ((order_users.client_contact = users.id)))
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
      FROM ((orders
        JOIN order_users ON ((order_users.order_id = orders.id)))
        JOIN users ON ((order_users.client_contact = users.id)))
@@ -603,7 +645,18 @@ ActiveRecord::Schema.define(version: 20180718082751) do
       'Message'::text AS searchable_type,
       messages.body AS search_term
      FROM messages
-    WHERE ((messages.body IS NOT NULL) AND (COALESCE(messages.body, ''::text) <> ''::text));
+    WHERE ((messages.body IS NOT NULL) AND (COALESCE(messages.body, ''::text) <> ''::text))
+  UNION
+   SELECT item_messages.id AS searchable_id,
+      'ItemMessage'::text AS searchable_type,
+      item_messages.body AS search_term
+     FROM item_messages
+    WHERE ((item_messages.body IS NOT NULL) AND (COALESCE(item_messages.body, ''::text) <> ''::text))
+  UNION
+   SELECT users.id AS searchable_id,
+      'User'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
+     FROM users;
   SQL
 
 end
