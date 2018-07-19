@@ -1,4 +1,5 @@
 <strong>Orders with "<%= params[:search_term] %>"</strong>
+<%= render "see_more", filter_by: "order" if show_see_more %>
 <div class="row">
   <% results.each_with_index do |result, index| %>
     <% gradiant_border = (index + 1) % 2 == 0 ? "green" : "orange" %%>

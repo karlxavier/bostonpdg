@@ -408,3 +408,27 @@ SELECT
   'User' AS searchable_type,
   concat(users.first_name, ' ',users.last_name) AS search_term
 FROM users
+
+UNION
+
+SELECT
+  products.id AS searchable_id,
+  'Product' AS searchable_type,
+  products.name AS search_term
+FROM products
+
+UNION
+
+SELECT
+  categories.id AS searchable_id,
+  'Category' AS searchable_type,
+  categories.name AS search_term
+FROM categories
+
+UNION
+
+SELECT
+  brands.id AS searchable_id,
+  'Brand' AS searchable_type,
+  brands.name AS search_term
+FROM brands

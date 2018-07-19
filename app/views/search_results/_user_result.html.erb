@@ -1,4 +1,5 @@
 <strong>Users that match "<%= params[:search_term] %>"</strong>
+<%= render "see_more", filter_by: "user" if show_see_more %>
 <div class="row">
   <% results.each do |result| %>
     <div class="col-md-4">

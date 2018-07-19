@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180718082751) do
+ActiveRecord::Schema.define(version: 20180719064203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -656,7 +656,22 @@ ActiveRecord::Schema.define(version: 20180718082751) do
    SELECT users.id AS searchable_id,
       'User'::text AS searchable_type,
       concat(users.first_name, ' ', users.last_name) AS search_term
-     FROM users;
+     FROM users
+  UNION
+   SELECT products.id AS searchable_id,
+      'Product'::text AS searchable_type,
+      products.name AS search_term
+     FROM products
+  UNION
+   SELECT categories.id AS searchable_id,
+      'Category'::text AS searchable_type,
+      categories.name AS search_term
+     FROM categories
+  UNION
+   SELECT brands.id AS searchable_id,
+      'Brand'::text AS searchable_type,
+      brands.name AS search_term
+     FROM brands;
   SQL
 
 end
