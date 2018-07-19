@@ -9,7 +9,11 @@
           <ol class="dd-list">
             <% @chatroom_orders.each do |chatroom| %>
               <li class="dd-item no-drag" data-id="<%= chatroom.id %>">
-                  <%= link_to chatroom_order_load_messages_path(chatroom), class: "ddd-handle", style: "width: 100%;", remote: true do %>
+                  <%= link_to chatroom_order_load_messages_path(chatroom),
+                    id: "chatroom_id_#{chatroom.id}",
+                    class: "ddd-handle", 
+                    style: "width: 100%;", 
+                    remote: true do %>
                       <span class="label label-info"><i class="fa fa-cog"></i></span>
                       <%= "Order-#{chatroom.id}" %>
                   <% end %>
@@ -17,7 +21,11 @@
                   <ol class="dd-list">
                       <% chatroom.order_entries.each do |oe| %>
                         <li class="dd-item" style="padding-top: 0;">
-                            <%= link_to chatroom_order_order_entry_load_item_messages_path(chatroom_order_id: chatroom, order_entry_id: oe), class: "ddd-handle", style: "width: 100%;", remote: true do %>
+                            <%= link_to chatroom_order_order_entry_load_item_messages_path(chatroom_order_id: chatroom, order_entry_id: oe),
+                              id: "order_entry_id_#{oe.id}",
+                              class: "ddd-handle", 
+                              style: "width: 100%;", 
+                              remote: true do %>
                                 <%= oe.product[:name] %>
                             <% end %>
                         </li>
@@ -54,6 +62,7 @@
 </div>
 <script type="text/javascript">
   $(function() {
+
       $('.ibox-content').slimScroll({
           railOpacity: 0.4,
           start: 'bottom',
@@ -66,6 +75,12 @@
 
     $('#nestable2').nestable({});
     $('#nestable2').nestable('collapseAll');
+    <% if params[:order_id].present? %>
+      $("#chatroom_id_<%= params[:order_id] %>")[0].click();
+    <% end %>
 
+    <% if params[:order_entry_id].present? %>
+      $("#order_entry_id_<%= params[:order_entry_id] %>")[0].click();
+    <% end %>
   })
 </script>

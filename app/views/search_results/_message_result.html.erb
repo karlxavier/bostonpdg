@@ -1,0 +1,29 @@
+<strong>Messages that match "<%= params[:search_term] %>"</strong>
+<%= render "see_more", filter_by: "message" if show_see_more %>
+<div class="row">
+  <% results.each do |result| %>
+    <%= link_to "/chatroom_orders?order_id=#{result.chatroom_order_id}", class: "col-md-7 d-flex flex-row", remote: false do %>
+      <img class="rounded-circle flex-auto d-none d-lg-block mr-3" src="/assets/avatar-1.jpg" height="91" width="91" />
+      <div class="card text-dark flex-row mb-4 box-shadow h-md-250" style="box-shadow: 0 5px 15px rgba(33, 33, 33, .4);  width: 490px; min-height: 80px;" >
+          <div class="card-body d-flex flex-row align-items-start">
+            <div class="col">
+              <strong class="d-flex text-12">
+                <span class="col-4 pl-0">
+                  <%= result.user.full_name %>
+                </span>
+                <span>
+                  <%= result.created_at.strftime('%I:%M %p %m/%d')%>
+                </span>
+              </strong>
+              <p class="mt-1">
+                <%= truncate(result.body, length: 100) %>
+              </p>
+              <div class="px-0 text-12" style="text-transform: uppercase; text-align: right;">
+                <%= "Conversation in order #{result.chatroom_order_id}" %>
+              </div>
+            </div>            
+          </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

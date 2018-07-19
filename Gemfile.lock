@@ -64,6 +64,9 @@ GEM
       administrate
     administrate-field-select (2.1.0)
       administrate (~> 0.1, >= 0.1.5)
+    annotate (2.7.4)
+      activerecord (>= 3.2, < 6.0)
+      rake (>= 10.4, < 13.0)
     arel (8.0.0)
     autoprefixer-rails (8.0.0)
       execjs
@@ -870,6 +873,7 @@ DEPENDENCIES
   administrate-field-paperclip
   administrate-field-password
   administrate-field-select (~> 2.0)
+  annotate
   aws-sdk (~> 3)
   bcrypt (~> 3.1, >= 3.1.11)
   byebug

@@ -1,0 +1,36 @@
+<strong>Orders with "<%= params[:search_term] %>"</strong>
+<%= render "see_more", filter_by: "order" if show_see_more %>
+<div class="row">
+  <% results.each_with_index do |result, index| %>
+    <% gradiant_border = (index + 1) % 2 == 0 ? "green" : "orange" %%>
+    <%= link_to root_path(order_id: result.id), class: "col-md-4", remote: false do %>
+        <div class="card text-dark flex-column mb-4 box-shadow h-md-250 card__border--gradiant-<%= gradiant_border %>" style="box-shadow: 0 5px 15px rgba(33, 33, 33, .4);" >
+            <div class="card-body d-flex flex-column align-items-start">
+              <div class="card-body d-flex flex-column w-100 p-0">
+                  <div class="d-flex justify-content-between w-100 text-16">
+                      <div>
+                          <%= result.brand_name %>
+                      </div>
+                      <div>
+                          <%= time_ago_in_words(result.updated_at) %> ago.
+                      </div>
+                  </div>
+                  <div class="mb-1 text-muted text-12">
+                      Lorem ipsum dolor
+                  </div>
+              </div>
+            </div>
+            <div class="card-footer py-0 text-12">
+              <div class="d-flex justify-content-between w-100">
+                  <p class="card-text mb-auto">
+                    <%= "Created on #{result.created_at.strftime('%m/%d/%Y')} by #{result.created_by_name}" %>
+                  </p>
+                  <p>
+                      <%= "Ticket ##{result.id}" %>
+                  </p>
+              </div>
+            </div>
+        </div>
+    <% end %>
+  <% end %>
+</div>

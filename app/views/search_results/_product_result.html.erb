@@ -1,0 +1,16 @@
+<strong>Products that match "<%= params[:search_term] %>"</strong>
+<%= render "see_more", filter_by: "item" if show_see_more %>
+<div class="row">
+  <% results.each do |result| %>
+    <div class="col-md-4">
+      <div class="card flex-row mb-4 h-md-250">
+        <img class="card-img-left flex-auto d-none d-lg-block" src="http://www.stampready.net/dashboard/editor/user_uploads/image_uploads/2018/04/17/R3H4Mxn2s0SmpFj9lvtXDBzNkP8bfJqQ.jpg" height="91" width="91" />
+          <div class="card-body d-flex flex-column align-items-start">
+            <div class="col">
+              <strong><%= result.name %></strong>
+            </div>
+          </div>
+      </div>
+    </div>
+  <% end %>
+</div>

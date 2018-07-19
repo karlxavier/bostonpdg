@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180718082751) do
+ActiveRecord::Schema.define(version: 20180719064203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,38 +41,6 @@ ActiveRecord::Schema.define(version: 20180718082751) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "parent"
-  end
-
-  create_table "chat_thread_users", force: :cascade do |t|
-    t.integer "chat_thread_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "chat_threads", force: :cascade do |t|
-    t.string "channel_id"
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "chatroom_users", force: :cascade do |t|
-    t.bigint "chatroom_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "last_read_at"
-    t.index ["chatroom_id"], name: "index_chatroom_users_on_chatroom_id"
-    t.index ["user_id"], name: "index_chatroom_users_on_user_id"
-  end
-
-  create_table "chatrooms", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "order_id"
-    t.index ["order_id"], name: "index_chatrooms_on_order_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -240,7 +208,6 @@ ActiveRecord::Schema.define(version: 20180718082751) do
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "chatroom_order_id"
     t.integer "client_contact"
     t.integer "designer"
   end
@@ -265,7 +232,6 @@ ActiveRecord::Schema.define(version: 20180718082751) do
     t.decimal "total_budget"
     t.boolean "urgent"
     t.integer "brand_id"
-    t.string "chatroom_name"
   end
 
   create_table "product_category_vendors", force: :cascade do |t|
@@ -394,9 +360,6 @@ ActiveRecord::Schema.define(version: 20180718082751) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "chatroom_users", "chatrooms"
-  add_foreign_key "chatroom_users", "users"
-  add_foreign_key "chatrooms", "orders"
   add_foreign_key "item_messages", "order_entries"
   add_foreign_key "item_messages", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
@@ -499,6 +462,13 @@ ActiveRecord::Schema.define(version: 20180718082751) do
   UNION
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
+     FROM ((orders
+       JOIN order_users ON ((order_users.order_id = orders.id)))
+       JOIN users ON ((order_users.regional = users.id)))
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
       users.email AS search_term
      FROM ((orders
        JOIN order_users ON ((order_users.order_id = orders.id)))
@@ -520,6 +490,13 @@ ActiveRecord::Schema.define(version: 20180718082751) do
   UNION
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
+     FROM ((orders
+       JOIN order_users ON ((order_users.order_id = orders.id)))
+       JOIN users ON ((order_users.comms = users.id)))
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
       users.email AS search_term
      FROM ((orders
        JOIN order_users ON ((order_users.order_id = orders.id)))
@@ -535,6 +512,13 @@ ActiveRecord::Schema.define(version: 20180718082751) do
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
       users.last_name AS search_term
+     FROM ((orders
+       JOIN order_users ON ((order_users.order_id = orders.id)))
+       JOIN users ON ((order_users.art = users.id)))
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
      FROM ((orders
        JOIN order_users ON ((order_users.order_id = orders.id)))
        JOIN users ON ((order_users.art = users.id)))
@@ -556,6 +540,13 @@ ActiveRecord::Schema.define(version: 20180718082751) do
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
       users.last_name AS search_term
+     FROM ((orders
+       JOIN order_users ON ((order_users.order_id = orders.id)))
+       JOIN users ON ((order_users.processor = users.id)))
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
      FROM ((orders
        JOIN order_users ON ((order_users.order_id = orders.id)))
        JOIN users ON ((order_users.processor = users.id)))
@@ -577,6 +568,13 @@ ActiveRecord::Schema.define(version: 20180718082751) do
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
       users.last_name AS search_term
+     FROM ((orders
+       JOIN order_users ON ((order_users.order_id = orders.id)))
+       JOIN users ON ((order_users.designer = users.id)))
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
      FROM ((orders
        JOIN order_users ON ((order_users.order_id = orders.id)))
        JOIN users ON ((order_users.designer = users.id)))
@@ -598,6 +596,13 @@ ActiveRecord::Schema.define(version: 20180718082751) do
    SELECT orders.id AS searchable_id,
       'Order'::text AS searchable_type,
       users.last_name AS search_term
+     FROM ((orders
+       JOIN order_users ON ((order_users.order_id = orders.id)))
+       JOIN users ON ((order_users.client_contact = users.id)))
+  UNION
+   SELECT orders.id AS searchable_id,
+      'Order'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
      FROM ((orders
        JOIN order_users ON ((order_users.order_id = orders.id)))
        JOIN users ON ((order_users.client_contact = users.id)))
@@ -619,7 +624,54 @@ ActiveRecord::Schema.define(version: 20180718082751) do
       vendors.name AS search_term
      FROM ((orders
        JOIN order_entries ON ((order_entries.order_id = orders.id)))
-       JOIN vendors ON ((vendors.id = order_entries.vendor)));
+       JOIN vendors ON ((vendors.id = order_entries.vendor)))
+  UNION
+   SELECT users.id AS searchable_id,
+      'User'::text AS searchable_type,
+      users.email AS search_term
+     FROM users
+  UNION
+   SELECT users.id AS searchable_id,
+      'User'::text AS searchable_type,
+      users.first_name AS search_term
+     FROM users
+  UNION
+   SELECT users.id AS searchable_id,
+      'User'::text AS searchable_type,
+      users.last_name AS search_term
+     FROM users
+  UNION
+   SELECT messages.id AS searchable_id,
+      'Message'::text AS searchable_type,
+      messages.body AS search_term
+     FROM messages
+    WHERE ((messages.body IS NOT NULL) AND (COALESCE(messages.body, ''::text) <> ''::text))
+  UNION
+   SELECT item_messages.id AS searchable_id,
+      'ItemMessage'::text AS searchable_type,
+      item_messages.body AS search_term
+     FROM item_messages
+    WHERE ((item_messages.body IS NOT NULL) AND (COALESCE(item_messages.body, ''::text) <> ''::text))
+  UNION
+   SELECT users.id AS searchable_id,
+      'User'::text AS searchable_type,
+      concat(users.first_name, ' ', users.last_name) AS search_term
+     FROM users
+  UNION
+   SELECT products.id AS searchable_id,
+      'Product'::text AS searchable_type,
+      products.name AS search_term
+     FROM products
+  UNION
+   SELECT categories.id AS searchable_id,
+      'Category'::text AS searchable_type,
+      categories.name AS search_term
+     FROM categories
+  UNION
+   SELECT brands.id AS searchable_id,
+      'Brand'::text AS searchable_type,
+      brands.name AS search_term
+     FROM brands;
   SQL
 
 end
