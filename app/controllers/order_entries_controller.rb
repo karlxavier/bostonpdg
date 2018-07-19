@@ -52,9 +52,9 @@ class OrderEntriesController < ApplicationController
 
   def change_status
     @order_entry = OrderEntry.find(params[:id])
-    if params[:status].present? && !params[:status].nil? && params[:status] != 0 && params[:status] != ""
+    if params[:status].present? && !params[:status].nil? && params[:status] != ""
       if @order_entry.update_attributes(:status => params[:status])
-        OrderHistory.create(:order_id => @order_entry.order_id, :order_entry_id => @order_entry.id, :description => 'has changed to Ordered', :user_id => current_user.id)
+        OrderHistory.create(:order_id => @order_entry.order_id, :order_entry_id => @order_entry.id, :description => "has changed to #{@order_entry.get_status}", :user_id => current_user.id)
         flash[:notice] = "Item Status Successfully Updated"
       else
         flash[:error] = "Item Status Updated Failed"

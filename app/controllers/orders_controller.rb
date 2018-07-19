@@ -15,10 +15,10 @@ class OrdersController < ApplicationController
     if @orders.present? && !@orders.nil?
 
       if @order.present?
-        @order_entries = @order.order_entries
+        @order_entries = @order.order_entries.order('updated_at DESC')
       else
         @order = Order.order(updated_at: :desc, created_at: :desc).first
-        @order_entries = @order.order_entries
+        @order_entries = @order.order_entries.order('updated_at DESC')
       end
 
     end
@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
     @vendors = Vendor.all
     @products = Product.all
     @brands = Brand.all
-    @order_histories = OrderHistory.where(:order_id => @order.id)
+    @order_histories = OrderHistory.where(:order_id => @order.id).order('created_at DESC')
   end
 
   def show

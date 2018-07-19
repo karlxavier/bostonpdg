@@ -96,52 +96,54 @@
         <button class="btn btn-outline-light float-right btn-padding-margin" data-toggle="modal" data-target="#addOrderEntries">ADD AN ITEM</button>
       </div>
       <div class="card-body bg-light text-secondary">
-        <%= form_tag(change_status_on_checklist_order_entries_path(:id => @order.id), method: :post, id: 'form_order_checklist') do %>
-            <div class="col text-right" style="padding-bottom: 2%;">
-              <%= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin" %>
-              <a href="<%= send_orders_orders_path(:order_id => @order.id) %>" class="btn btn-dark btn-padding-margin" >REQUEST QUOTE</a>
-            </div>
-            <table class="table">
-              <thead class="table-light">
-              <tr>
-                <th scope="col">ITEM + SKU</th>
-                <th scope="col">STATUS</th>
-                <th scope="col">PCS</th>
-                <th scope="col">PER ITEM</th>
-                <th scope="col">TOTAL</th>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-              </thead>
-              <tbody>
-              <% order_entries.each do |entry|%>
+        <form id="form_order_checklist" action="/order_entries/change_status_on_checklist?order_id=2" data-remote="true" method="post">
+          <div class="col text-right" style="padding-bottom: 2%;">
+            <%= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin" %>
+                <a href="<%= send_orders_orders_path(:order_id => @order.id) %>" class="btn btn-dark btn-padding-margin" >REQUEST QUOTE</a>
+                </div>
+                <table class="table">
+                  <thead class="table-light">
                   <tr>
-                    <td> <a nohref style="cursor:pointer;color:#22773c;text-decoration:underline" onclick="itemDetails(<%= entry.product_id %>, '<%= entry.category_name %>');"><%= entry.product_name %></a></td>
-                    <td>
-                      <%= form_tag(change_status_order_entries_path(:id => entry.id), method: :post) do %>
-                      <%= select_tag "status", options_for_select([["None" , 0 ], ["Quoted", 1], ["Ordered", 2], ["Pending", 3], ["Shipped", 4]], entry.status), :onchange => "this.form.submit();" %>
+                    <th scope="col">ITEM + SKU</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">PCS</th>
+                    <th scope="col">PER ITEM</th>
+                    <th scope="col">TOTAL</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <%= form_tag(change_status_order_entries_path, method: :post, remote: true, id: "form_order_status") do %>
               <% end %>
-              </td>
-              <td><%= entry.quantity  %></td>
-              <td><%= number_to_currency(entry.price, unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
-              <td><%= number_to_currency((entry.quantity.nil? ? 0 : entry.quantity) * (entry.price.nil? ? 0 : entry.price), unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
-              <td><button class="btn btn-outline-dark btn-nav-selected-circle" onclick="showEditOrderEntries(<%= entry.id %>)"><i data-feather="edit" class="feather-width-15"></i></button></td>
-              <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-outline-danger btn-nav-selected-circle" ><i data-feather="trash-2" class="feather-width-15"></i></a></td>
-              <td>
-                <% if entry.status == 1 %>
-                    <input type="checkbox" name="item_ids[]" value="<%= entry.id %>"/>
-                <% end %>
-              </td>
-              </tr>
+                  <% order_entries.each do |entry|%>
 
-        <% end %>
+                      <tr>
+                        <td> <a nohref style="cursor:pointer;color:#22773c;text-decoration:underline" onclick="itemDetails(<%= entry.product_id %>, '<%= entry.category_name %>');"><%= entry.product_name %></a></td>
+                        <td>
+                          <%= form_tag(change_status_order_entries_path(:id => entry.id), method: :post, remote: true, id: "form_order_status-#{entry.id}") do %>
+                          <%= select_tag "status", options_for_select([["None" , 0 ], ["Quoted", 1], ["Ordered", 2], ["Pending", 3], ["Shipped", 4]], entry.status), :onchange => "this.form.submit();" %>
+                  <% end %>
+                  </td>
+                  <td><%= entry.quantity  %></td>
+                  <td><%= number_to_currency(entry.price, unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
+                  <td><%= number_to_currency((entry.quantity.nil? ? 0 : entry.quantity) * (entry.price.nil? ? 0 : entry.price), unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
+                  <td><button class="btn btn-outline-dark btn-nav-selected-circle" onclick="showEditOrderEntries(<%= entry.id %>)"><i data-feather="edit" class="feather-width-15"></i></button></td>
+                  <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-outline-danger btn-nav-selected-circle" ><i data-feather="trash-2" class="feather-width-15"></i></a></td>
+                  <td>
+                    <% if entry.status == 1 %>
+                        <input type="checkbox" name="item_ids[]" value="<%= entry.id %>"/>
+                    <% end %>
+                  </td>
+                  </tr>
+
+            <% end %>
 
 
-        </tbody>
-        </table>
-
-        <% end %>
+            </tbody>
+            </table>
+            </form>
       </div>
     </div>
   </div>

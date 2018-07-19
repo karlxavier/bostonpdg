@@ -29,4 +29,20 @@ module ApplicationHelper
     end
     @str_text
   end
+
+  def get_status status
+    @txt = ''
+    if status == 0
+      @txt = 'None'
+    elsif status == 1
+      @txt = 'Quoted'
+    elsif status == 2
+      @txt = 'Ordered'
+    elsif status == 3
+      @txt = 'Pending'
+    elsif status == 4
+      @txt = 'Shipped'
+    end
+    @txt
+  end
 end

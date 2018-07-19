@@ -62,4 +62,21 @@ class OrderEntry < ApplicationRecord
     end
     obj
   end
+
+  def get_status
+    @txt = ''
+    status = self.status
+    if status == 0
+      @txt = 'None'
+    elsif status == 1
+      @txt = 'Quoted'
+    elsif status == 2
+      @txt = 'Ordered'
+    elsif status == 3
+      @txt = 'Pending'
+    elsif status == 4
+      @txt = 'Shipped'
+    end
+    @txt
+  end
 end
