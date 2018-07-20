@@ -1,8 +1,10 @@
 class SearchResultsController < ApplicationController
   def index
-    @results = SearchResult.
-      new(search_params).
-      results.group_by { |result| result.class.name }
+    if params[:search_term]
+      @results = SearchResult.
+        new(search_params).
+        results.group_by { |result| result.class.name }
+    end
   end
 
   private
