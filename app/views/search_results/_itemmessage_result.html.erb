@@ -1,5 +1,5 @@
 <strong>Item messages that match "<%= params[:search_term] %>"</strong>
-<%= render "see_more", filter_by: "itemmessage" if show_see_more %>
+<%= render "see_more", filter_by: "item message" if show_see_more %>
 <div class="row">
   <% results.each do |result| %>
     <%= link_to "/chatroom_orders?order_entry_id=#{result.order_entry_id}", class: "col-md-7 d-flex flex-row", remote: false do %>
