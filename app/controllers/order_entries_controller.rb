@@ -86,4 +86,9 @@ class OrderEntriesController < ApplicationController
     redirect_to orders_path(:id => params[:id])
   end
 
+  def history
+    @order_histories = OrderHistory.where(:order_entry_id => params[:id])
+    render :layout => false
+  end
+
 end

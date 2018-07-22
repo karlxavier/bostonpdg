@@ -176,7 +176,7 @@ function showEditOrder(id) {
 
 }
 
-function itemDetails(id) {
+function itemDetails(id, entry_id) {
     $.ajax({
         method: "GET",
         url: "/api/simple/products/"+id
@@ -211,7 +211,14 @@ function itemDetails(id) {
             $('#dynamic-attributes').html('No Attributes Available');
         }
 
-        $('#viewProducts').modal('show');
+        $.ajax({
+            method: "GET",
+            url: "/order_entries/history?id="+entry_id
+        }).done(function( data ) {
+            $('#order_entry_histories').html('');
+            $('#order_entry_histories').html(data);
+            $('#viewProducts').modal('show');
+        });
     });
 }
 

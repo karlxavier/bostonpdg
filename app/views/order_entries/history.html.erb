@@ -1,0 +1,16 @@
+<table class="table table-striped">
+  <tbody>
+  <% if @order_histories.present? %>
+      <% @order_histories.each do |history| %>
+          <tr>
+            <th><%= generate_history_information(history) %></th>
+          </tr>
+      <% end %>
+  <% else %>
+      <tr>
+        <th><b>No Notifications Yet.</b></th>
+      </tr>
+  <% end %>
+
+  </tbody>
+</table>
