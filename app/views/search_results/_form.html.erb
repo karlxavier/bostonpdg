@@ -21,7 +21,8 @@
             SearchResult::FILTERABLE.collect { |f| [f.capitalize, f] }, 
             { include_blank: true, selected: params[:filter_by] },
             class: 'form-control form-control-sm border-0 col ml-1',
-            style: 'height: 25px;'
+            style: 'height: 25px;',
+            onchange: "this.form.submit()"
           %>
         </div>
         <div class="col-4 d-flex flex-row">
@@ -30,7 +31,8 @@
             ['Most Recent', 'Oldest'].collect { |f| [f, f.parameterize.underscore] }, 
             { include_blank: true, selected: params[:sort_by] },
             class: 'form-control form-control-sm border-0 col ml-1',
-            style: 'height: 25px;'
+            style: 'height: 25px;',
+            onchange: "this.form.submit()"
           %>
         </div>
       </div>
