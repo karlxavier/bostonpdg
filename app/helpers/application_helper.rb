@@ -18,10 +18,10 @@ module ApplicationHelper
     @str_text = "#{history.created_at.strftime('%B %e, %Y')}: "
     @user = User.find(history.user_id)
     if history.order_entry_id.present? && !history.order_entry_id.nil? && history.order_entry_id != ""
-      order_entry = OrderEntry.find_by_id(history.order_entry_id)
+      order_entry = OrderEntry.where(id: history.order_entry_id).first #OrderEntry.find_by_id(history.order_entry_id)
 
       if order_entry.present?
-        Product.find_by_id(order_entry.product_id)
+        Product.where(id: order_entry.product_id).first
       end  
       #product = Product.where(id: order_entry.product_id).first#Product.find_by_id(order_entry.product_id)
       if order_entry.present? && product.present?
