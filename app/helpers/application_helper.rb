@@ -19,7 +19,7 @@ module ApplicationHelper
     @user = User.find(history.user_id)
     if history.order_entry_id.present? && !history.order_entry_id.nil? && history.order_entry_id != ""
       order_entry = OrderEntry.find_by_id(history.order_entry_id)
-      product = Product.find_by_id(order_entry.product_id)
+      product = Product.where(id: order_entry.product_id).first#Product.find_by_id(order_entry.product_id)
       @str_text = @str_text + "#{product.name} #{history.description} by #{@user.full_name}"
     elsif history.product_id.present? && !history.product_id.nil? && history.product_id != ""
       product = Product.find(history.product_id)
