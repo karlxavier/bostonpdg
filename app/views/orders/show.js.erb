@@ -43,5 +43,22 @@ $(function() {
       	$(order_messages).scrollTop(height);
 	  }
       
+	  var modal = document.getElementById('msg_preview');
+      var imgs = document.getElementsByClassName('msg_image');
+      var modalImg = document.getElementById("img01");
+
+      [].forEach.call(imgs, function (img) {
+        img.onclick = function(){
+          modal.style.display = "block";
+          modalImg.src = this.src;
+        }
+      });
+
+      var span = document.getElementsByClassName("close_preview")[0];
+
+      span.onclick = function() { 
+          modal.style.display = "none";
+      }
+
 
 })
