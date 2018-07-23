@@ -19,10 +19,11 @@ module ApplicationHelper
     @user = User.find(history.user_id)
     if history.order_entry_id.present? && !history.order_entry_id.nil? && history.order_entry_id != ""
       order_entry = OrderEntry.where(id: history.order_entry_id).first #OrderEntry.find_by_id(history.order_entry_id)
-
+      Rails.logger "order_entry ============> #{order_entry.inspect}"
       if order_entry.present?
-        Product.where(id: order_entry.product_id).first
+        product = Product.where(id: order_entry.product_id).first
       end  
+       Rails.logger "product ============> #{product.inspect}"
       #product = Product.where(id: order_entry.product_id).first#Product.find_by_id(order_entry.product_id)
       if order_entry.present? && product.present?
          @str_text = @str_text + "#{product.name} #{history.description} by #{@user.full_name}"
