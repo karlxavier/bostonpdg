@@ -79,11 +79,11 @@
                 <table class="table table-striped">
                   <tbody>
                     <% if @order_histories.present? %>
-                        <% @order_histories.each do |history| %>
+                        <%# @order_histories.each do |history| %>
                           <tr>
-                            <th><%= generate_history_information(history) %></th>
+                            <th><%#= generate_history_information(history) %></th>
                           </tr>
-                        <% end %>
+                        <%# end %>
                     <% else %>
                         <tr>
                           <th><b>No Notifications Yet.</b></th>
