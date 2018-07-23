@@ -685,3 +685,14 @@ a:hover {
     color: #f8ac59!important;
     font-weight: bold;
 }
+
+ .dropdown_scroll { 
+    background-color:lightgray;height: auto;
+    max-height: 400px;
+    overflow-x:hidden;
+    overflow-y:scroll; 
+    min-width: 150px;
+    margin-top: 0px; 
+    top: 0!important;
+    left: -100px!important;
+   }
