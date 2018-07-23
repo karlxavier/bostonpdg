@@ -20,7 +20,12 @@ module ApplicationHelper
     if history.order_entry_id.present? && !history.order_entry_id.nil? && history.order_entry_id != ""
       order_entry = OrderEntry.find_by_id(history.order_entry_id)
       product = Product.where(id: order_entry.product_id).first#Product.find_by_id(order_entry.product_id)
-      @str_text = @str_text + "#{product.name} #{history.description} by #{@user.full_name}"
+      if order_entry.present? && product.present?
+         @str_text = @str_text + "#{product.name} #{history.description} by #{@user.full_name}"
+      else
+         @str_text = "#{history.created_at.strftime('%B %e, %Y')}: "
+      end  
+     
     elsif history.product_id.present? && !history.product_id.nil? && history.product_id != ""
       product = Product.find(history.product_id)
       @str_text = @str_text + "#{product.name} #{history.description} from Order ##{history.order_id} by #{@user.full_name}"

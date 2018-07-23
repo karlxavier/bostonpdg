@@ -29,6 +29,7 @@ class OrdersController < ApplicationController
     @products = Product.all
     @brands = Brand.all
     @order_histories = OrderHistory.where(:order_id => @order.id).order('created_at DESC')
+    puts "@order_histories ==========> #{@order_histories.inspect}"
   end
 
   def show
