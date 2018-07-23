@@ -5,7 +5,7 @@
         <i class="fa fa-tasks"></i>
         Items
       </a>
-      <ul id="msg_items" class="dropdown_scroll dropdown-menu dropdown-messages" aria-labelledby="msg_items" style="margin-left: 10px;"> 
+      <ul id="msg_items" class="dropdown_scroll2 dropdown-menu dropdown-messages" aria-labelledby="msg_items" style="margin-left: 10px;"> 
         <% if order.order_entries.present? %>
           <% order.order_entries.each do |oe| %>
             <li>
@@ -24,11 +24,11 @@
     </div>
 
     <div style="float: left; margin-left: 2px;">
-      <a class="btn btn-default" data-toggle="dropdown" id="#attachments" href="#" aria-expanded="false" style="background-color: white; color: #212529;">
+      <a class="btn btn-default" data-toggle="dropdown" id="attachments" href="#" aria-expanded="false" style="background-color: white; color: #212529;">
         <i class="fa fa-paperclip"></i>
         Attachments
       </a>
-      <ul id="attachments" class="dropdown_scroll dropdown-menu dropdown-messages" aria-labelledby="attachments" style="margin-left: 10px; left: -100px;"> 
+      <ul id="msg_attachments" class="dropdown_scroll dropdown-menu dropdown-messages" aria-labelledby="attachments" style="margin-left: 10px; left: -100px;"> 
           <% chatroom.messages.each do |message| %>
             <% if message.attachment_data? %>
             <li>
@@ -38,10 +38,10 @@
                       <small class="text-muted">Uploaded at <%= message.created_at.strftime("%d-%m-%Y") %></small>
                       <strong>
                         <% if message.attachment_data? %>
-                      <% 
-                      attachment_data = JSON.parse(message.attachment_data, object_class: OpenStruct) 
-                      mime_type = attachment_data.original.metadata.mime_type
-                      %>
+                          <% 
+                          attachment_data = JSON.parse(message.attachment_data, object_class: OpenStruct) 
+                          mime_type = attachment_data.original.metadata.mime_type
+                          %>
                           <% if is_downloadable_file?(mime_type)%>
                             <div style="text-align: left;">
                               <br>
@@ -64,5 +64,4 @@
         <% end %>
       </ul>
     </div>
-  
 </div>
