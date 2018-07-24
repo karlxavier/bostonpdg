@@ -775,3 +775,7 @@ a:hover {
     text-decoration: none;
     cursor: pointer;
 }
+
+.text-link {
+    color: #1c84c6;
+}

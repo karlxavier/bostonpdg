@@ -1,0 +1,1 @@
+$("div#msg_body_<%= @message.id %>").html("<%= escape_javascript(render '/messages/message_edit', chatroom: @chatroom, message: @message ) %>");

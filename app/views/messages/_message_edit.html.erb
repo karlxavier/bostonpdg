@@ -1,0 +1,65 @@
+<div class="chat-message-form" id="chatroom_message">
+	<div class="form-group">
+	  	<%= form_for [chatroom, message], format: 'js', remote: true do |f| %>
+		  	<div class="input-group">
+		  		<%= f.text_area :body, rows: 1, class: "form-control message-body", autofocus: true, placeholder: "Enter message text", autocomplete: "off" %>
+
+		    </div>
+		    <div class="pull-right" style="cursor: pointer;">
+		    	<a class="btn btn-sm btn-white"> <small>Cancel</small></a>
+		    	<%= button_tag(type: "submit", class: "btn btn-sm btn-white") do %>
+		            <small class="text-link">Update</small>
+		        <% end %>
+		    </div>
+	  	<% end %>
+
+  	<script type="text/javascript">
+      function getCaret(el) { 
+        if (el.selectionStart) { 
+          return el.selectionStart; 
+        } else if (document.selection) { 
+          el.focus(); 
+
+          var r = document.selection.createRange(); 
+          if (r == null) { 
+            return 0; 
+          } 
+
+          var re = el.createTextRange(), 
+              rc = re.duplicate(); 
+          re.moveToBookmark(r.getBookmark()); 
+          rc.setEndPoint('EndToStart', re); 
+
+          return rc.text.length; 
+        }  
+        return 0; 
+      }
+
+      $('textarea').keypress(function (event) {
+       if (event.keyCode == 13 && event.ctrlKey) {
+           var content = this.value;
+           var caret = getCaret(this);
+           this.value = content.substring(0,caret)+"\n"+content.substring(caret,content.length);
+           event.stopPropagation();
+           
+        }else if(event.keyCode == 13)
+        {
+            event.preventDefault();
+            $('#new_message').submit();
+        }
+      });
+
+      function expandTextarea(id) {
+          var $element = $('.message-body').get(0);  
+          
+          $element.addEventListener('keyup', function() {
+              this.style.height = 0;
+              this.style.height = this.scrollHeight + 'px';
+          }, false);
+      }
+
+      expandTextarea('txtarea');
+  	</script>
+
+	</div>
+</div>

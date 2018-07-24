@@ -1,0 +1,24 @@
+<div id="msg_body_<%= message.id %>">
+    <div class="well">
+        <%= simple_format(message.body , style: "margin-bottom: 0;") %>
+    
+        <% if message.attachment_data? %>
+					<% 
+					attachment_data = JSON.parse(message.attachment_data, object_class: OpenStruct) 
+					mime_type = attachment_data.original.metadata.mime_type
+					%>
+      		<% if is_downloadable_file?(mime_type)%>
+						<div style="text-align: left;">
+							<br>
+							<%= file_icon(mime_type) %>
+							<%= link_to attachment_data.original.metadata.filename, message.attachment_url(:original), download: attachment_data.original.metadata.filename %>
+						</div>
+					<% else %>
+					<div class="feed-photo">
+							<br>
+							<%= image_tag message.attachment_url(:original), class: "msg_image" %>	
+						</div>
+					<% end %>
+  		<% end %>
+  	</div>
+</div>
