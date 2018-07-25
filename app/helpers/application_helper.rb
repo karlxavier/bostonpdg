@@ -27,12 +27,16 @@ module ApplicationHelper
       if order_entry.present? && product.present?
          @str_text = @str_text + "#{product.name} #{history.description} by #{@user.full_name}"
       else
-         @str_text = "#{history.created_at.strftime('%B %e, %Y')}: "
+         @str_text = ""
       end  
      
     elsif history.product_id.present? && !history.product_id.nil? && history.product_id != ""
-      product = Product.find(history.product_id)
-      @str_text = @str_text + "#{product.name} #{history.description} from Order ##{history.order_id} by #{@user.full_name}"
+      product = Product.where(id: history.product_id).first
+      if product.present?
+        @str_text = @str_text + "#{product.name} #{history.description} from Order ##{history.order_id} by #{@user.full_name}"
+      else
+        @str_text = ""
+      end
     else
       @str_text = @str_text + "Order ##{history.order_id} #{history.description} by #{@user.full_name}"
     end
@@ -53,5 +57,10 @@ module ApplicationHelper
       @txt = 'Shipped'
     end
     @txt
+  end
+
+  def check_picture_url entry
+    product = Product.find(entry.product_id)
+    product.picture_url
   end
 end

@@ -22,6 +22,12 @@ class OrdersController < ApplicationController
       end
 
     end
+    if params[:product_id].present?
+      @product_id =  params[:product_id]
+    end
+    if params[:order_entry_id].present?
+      @order_entry_id =  params[:order_entry_id]
+    end
     @chatroom_order = ChatroomOrder.find(@order.id)
     @chatroom_orders = ChatroomOrder.order(id: :desc)
     @categories = Category.all

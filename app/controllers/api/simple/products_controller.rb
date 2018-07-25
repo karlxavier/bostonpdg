@@ -23,8 +23,7 @@ module Api
       end
 
       def show
-        render json: @product,methods: [:convert_dynamic_fields]
-
+        render json: @product,methods: [:convert_dynamic_fields, :picture_url]
       end
 
       def create

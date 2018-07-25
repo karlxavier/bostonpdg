@@ -184,6 +184,9 @@ function itemDetails(id, entry_id) {
     }).done(function( data ) {
         $('#add_product_attributes').html('');
         $('#add_product_id').val(data.id);
+        $('#add_product_id_2').val(data.id);
+        $('#order_entry_id_2').val(entry_id);
+        $("#pic1").attr("src", data.picture_url);
         $('.product-name-header').html("(" + data.name + ")");
        /* $('#clone_category_id').html(data.category);
         $('#clone_item_category_id').val(data.item_category_id);*/

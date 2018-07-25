@@ -123,6 +123,7 @@
     </div>
 <% end %>
 
+
 <script type="text/javascript">
     $(function(){
         $("div#order-<%= @order.id %>").addClass('orange-left');
@@ -139,3 +140,9 @@
         });
     });
 </script>
+
+<% if @product_id.present? && @order_entry_id.present? %>
+    <script type="text/javascript">
+        itemDetails(<%= @product_id %>, '<%= @order_entry_id %>');
+    </script>
+<% end %>
