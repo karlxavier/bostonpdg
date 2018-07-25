@@ -14,7 +14,7 @@
           <div class="col-4 padding-left">
             <img id="pic1" alt="features" border="0" width="100%"  style="display:block; border:none; outline:none; text-decoration:none;" class="features">
             <div id="buttons" style="padding-top: 2%;">
-              <button class="btn btn-outline-secondary float-left"  data-toggle="modal" data-target="#viewHistories">VIEW ITEM HISTORY</button>
+              <button class="btn btn-outline-secondary float-left"  id="view_history">VIEW ITEM HISTORY</button>
               <form action="<%= change_picture_products_path %>" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="order_entry_id" id="order_entry_id_2"  />
                 <input type="hidden" name="product_id" id="add_product_id_2" />

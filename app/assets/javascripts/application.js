@@ -51,7 +51,15 @@ $(document).on('turbolinks:load', function() {
                 $(this).find('.clone_products').selectpicker('toggle');
             }
         });
+        $("#view_history").click(function () {
+//            $('#viewProducts').modal('hide');
+            $('#viewHistories').modal('show');
+        });
+       /* $('#viewHistories').on('hidden.bs.modal', function (e) {
+            $('#viewProducts').modal('show');
+        })*/
     });
+
 
 });
 
