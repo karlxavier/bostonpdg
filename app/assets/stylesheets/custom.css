@@ -706,7 +706,7 @@ a:hover {
 .msg_image:hover {opacity: 0.7;}
 
 /* The Modal (background) */
-.modal {
+.msg_modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -721,7 +721,7 @@ a:hover {
 }
 
 /* Modal Content (image) */
-.modal-content {
+.msg_modal-content {
     margin: auto;
     display: block;
     width: 80%;
@@ -778,4 +778,37 @@ a:hover {
 
 .text-link {
     color: #1c84c6;
+}
+
+.msg_edit {
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.feed-element:hover .msg_edit {
+    visibility: visible;
+}
+
+.alert-dismissable .close, .alert-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit;
+}
+button.close {
+    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+}
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
 }

@@ -1,16 +1,37 @@
 <div class="chat-message-form" id="chatroom_message">
 	<div class="form-group">
 	  	<%= form_for [chatroom, message], format: 'js', remote: true do |f| %>
-		  	<div class="input-group">
-		  		<%= f.text_area :body, rows: 1, class: "form-control message-body", autofocus: true, placeholder: "Enter message text", autocomplete: "off" %>
-
-		    </div>
-		    <div class="pull-right" style="cursor: pointer;">
-		    	<a class="btn btn-sm btn-white"> <small>Cancel</small></a>
-		    	<%= button_tag(type: "submit", class: "btn btn-sm btn-white") do %>
-		            <small class="text-link">Update</small>
-		        <% end %>
-		    </div>
+        <div class="input-group">
+           <% if message.attachment_data? %>
+              <% 
+              attachment_data = JSON.parse(message.attachment_data, object_class: OpenStruct) 
+              mime_type = attachment_data.original.metadata.mime_type
+              %>
+              <% if is_downloadable_file?(mime_type)%>
+                <div style="text-align: left;">
+                  <br>
+                  <%= file_icon(mime_type) %>
+                  <%= link_to attachment_data.original.metadata.filename, message.attachment_url(:original), download: attachment_data.original.metadata.filename %>
+                </div>
+              <% else %>
+              <div class="feed-photo  alert alert-danger alert-dismissable">
+                  <br>
+                  <%= image_tag message.attachment_url(:original), class: "msg_image" %>  
+                </div>
+              <% end %>
+          <% end %>
+        </div>
+        <div class="input-group">
+          <%= f.text_area :body, rows: 1, class: "form-control message-body", autofocus: true, placeholder: "Enter message text", autocomplete: "off" %>
+        </div>
+		    <div class="pull-right">
+          <%= link_to cancel_msg_update_orders_path(message), class: "btn btn-outline btn-link", remote: true do %>
+            <small style="cursor: pointer;">Cancel</small>
+          <% end %>
+          <%= button_tag(type: "submit", class: "btn btn-outline btn-link") do %>
+                <small class="text-link" style="cursor: pointer;">Update</small>
+            <% end %>
+        </div>
 	  	<% end %>
 
   	<script type="text/javascript">

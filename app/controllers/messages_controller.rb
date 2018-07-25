@@ -1,8 +1,8 @@
 class MessagesController < ApplicationController
 skip_before_action :verify_authenticity_token
 before_action :authenticate_user!
-before_action :set_chatroom, except: [:edit, :update]
-before_action :set_message_edit, only: [:edit, :update]
+before_action :set_chatroom, except: [:edit, :update, :cancel_msg_update]
+before_action :set_message_edit, only: [:edit, :update, :cancel_msg_update]
 
 	def create
 		message = @chatroom.messages.new(message_params)
@@ -27,6 +27,14 @@ before_action :set_message_edit, only: [:edit, :update]
 	def update
 		@message.update_attributes(message_params)
 		respond_to do |format|
+			format.js
+		end
+	end
+
+	def cancel_msg_update
+		respond_to do |format|
+
+			@chatroom = ChatroomOrder.find(@message.chatroom_order_id)
 			format.js
 		end
 	end
