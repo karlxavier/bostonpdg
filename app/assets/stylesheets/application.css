@@ -287,3 +287,13 @@ p {
     width: 15px !important;
     height: 15px !important;
 }
+
+#send_to_vendors {
+    float: left;
+    width: 70%;
+    padding-bottom: 2%;
+}
+
+.margin-top-1 {
+    margin-top: 1% !important;
+}

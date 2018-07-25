@@ -96,10 +96,25 @@
         <button class="btn btn-outline-light float-right btn-padding-margin" data-toggle="modal" data-target="#addOrderEntries">ADD AN ITEM</button>
       </div>
       <div class="card-body bg-light text-secondary">
+        <form id="send_to_vendors" action="<%= send_orders_to_vendors_orders_path %>" method="POST" >
+          <input type="hidden" name="order_id" value="<%= @order.id %>">
+          <select class="selectpicker2 glow-input" data-live-search="true" name="vendors[]" id="vendors[]" multiple>
+            <option></option>
+            <% if @vendors.present? %>
+                <% @vendors.each do |vendor| %>
+                    <option value="<%= vendor.id %>"><%= vendor.name %></option>
+                <% end %>
+            <% end %>
+          </select>
+
+          <%= submit_tag "REQUEST QUOTE", class: "btn btn-dark btn-padding-margin" %>
+              </form>
         <form id="form_order_checklist" action="/order_entries/change_status_on_checklist?order_id=2" data-remote="true" method="post">
           <div class="col text-right" style="padding-bottom: 2%;">
-            <%= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin" %>
-                <a href="<%= send_orders_orders_path(:order_id => @order.id) %>" class="btn btn-dark btn-padding-margin" >REQUEST QUOTE</a>
+
+
+            <%= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin float-right margin-top-1" %>
+            <!--<a href="<%#= send_orders_orders_path(:order_id => @order.id) %>" class="btn btn-dark btn-padding-margin" >REQUEST QUOTE</a>-->
                 </div>
                 <table class="table">
                   <thead class="table-light">

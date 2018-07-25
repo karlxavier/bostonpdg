@@ -386,6 +386,28 @@ class OrdersController < ApplicationController
     redirect_to orders_path(@order)
   end
 
+  def send_orders_to_vendors
+    if params[:vendors].present? && params[:order_id].present?
+      if params[:vendors].length > 0
+        params[:vendors].each do |id|
+          @vendor = Vendor.find( id.to_i )
+          @order = Order.find(params[:order_id].to_i)
+          @user = User.where(:email => "notifications@burningmidnight.com").first
+          @order_entries = OrderEntry.where(:order_id => params[:order_id].to_i)
+          if @vendor.email.present? && !@vendor.email.nil?
+            OrderMailer.with(order: @order, vendor: @vendor, order_entries: @order_entries).send_order_entries.deliver_now
+            flash[:notice] = "Order has sent successfully."
+          else
+            flash[:error] = "Vendor doesn't have an email!"
+          end
+        end
+      end
+    else
+      flash[:error] = "No Vendor/s Selected"
+    end
+    redirect_to orders_path(:id => params[:order_id])
+  end
+
   def load_messages
     respond_to do |format|
         @messages = @chatroom.messages.order(created_at: :desc).limit(100).reverse

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post  'update_assign_user'
       post  'update_order'
       get   'send_orders'
+      post  'send_orders_to_vendors'
     end
   end
   resources :products do
@@ -62,8 +63,7 @@ Rails.application.routes.draw do
     get 'item_details/:id', :to => 'products#item_details', as: 'item_details'
     resources :messages
     get 'load_messages/:chatroom_id', :to => 'orders#load_messages', as: 'load_messages', on: :collection
-    get 'cancel_msg_update/:id', :to => 'messages#cancel_msg_update', as: 'cancel_msg_update', on: :collection
-    
+
   end
 
   resources :order_entries, only: :load_item_messages do
