@@ -125,7 +125,7 @@
                         <td> <a nohref style="cursor:pointer;color:#22773c;text-decoration:underline" onclick="itemDetails(<%= entry.product_id %>, '<%= entry.id %>');"><%= entry.product_name %></a></td>
                         <td>
                           <%= form_tag(change_status_order_entries_path(:id => entry.id), method: :post, remote: true, id: "form_order_status-#{entry.id}") do %>
-                          <%= select_tag "status", options_for_select([["None" , 0 ], ["Quoted", 1], ["Ordered", 2], ["Pending", 3], ["Shipped", 4]], entry.status), :onchange => "this.form.submit();" %>
+                          <%= select_tag "status", options_for_select([["New" , 0 ], ["Quoting", 1], ["Pending Approval", 2], ["Ready to Process", 3], ["In Production", 4], ["Shipped", 5], ["Delivered", 6]], entry.status), :onchange => "this.form.submit();" %>
                   <% end %>
                   </td>
                   <td><%= entry.quantity  %></td>
