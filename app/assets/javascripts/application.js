@@ -29,6 +29,7 @@
 //= require chatbox_dropzone
 //= require nestable
 //= require cable
+//= require watcher
 
 $(document).on('turbolinks:load', function() {
     $('.selectpicker').selectpicker();
