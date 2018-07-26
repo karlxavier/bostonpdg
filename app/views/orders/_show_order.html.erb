@@ -146,7 +146,7 @@
                   <td><%= entry.quantity  %></td>
                   <td><%= number_to_currency(entry.price, unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
                   <td><%= number_to_currency((entry.quantity.nil? ? 0 : entry.quantity) * (entry.price.nil? ? 0 : entry.price), unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
-                  <td><button class="btn btn-outline-dark btn-nav-selected-circle" onclick="showEditOrderEntries(<%= entry.id %>)"><i data-feather="edit" class="feather-width-15"></i></button></td>
+                  <td><a href="javascript:void(0)" class="btn btn-outline-dark btn-nav-selected-circle" onclick="showEditOrderEntries(<%= entry.id %>)"><i data-feather="edit" class="feather-width-15"></i></a></td>
                   <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-outline-danger btn-nav-selected-circle" ><i data-feather="trash-2" class="feather-width-15"></i></a></td>
                   <td>
                     <% if entry.status == 1 %>
