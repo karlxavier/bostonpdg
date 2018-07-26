@@ -63,7 +63,7 @@ Rails.application.routes.draw do
     get 'item_details/:id', :to => 'products#item_details', as: 'item_details'
     resources :messages
     get 'load_messages/:chatroom_id', :to => 'orders#load_messages', as: 'load_messages', on: :collection
-
+    get 'cancel_msg_update/:id', :to => 'messages#cancel_msg_update', as: 'cancel_msg_update', on: :collection
   end
 
   resources :order_entries, only: :load_item_messages do

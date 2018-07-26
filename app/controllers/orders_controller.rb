@@ -424,7 +424,7 @@ class OrdersController < ApplicationController
   def load_messages
     respond_to do |format|
         @messages = @chatroom.messages.order(created_at: :desc).limit(100).reverse
-        @order = Order.find(@chatroom.id)
+        # @order = ChatroomOrder.find(@chatroom.id)
 
         format.js
       end

@@ -6,13 +6,19 @@
         Items
       </a>
       <ul id="msg_items" class="dropdown_scroll2 dropdown-menu dropdown-messages" aria-labelledby="msg_items" style="margin-left: 10px;"> 
+        <li>
+          <%= link_to load_messages_orders_path(order), remote: true do %>
+            <strong>Order Ticket <%= order.id %></strong>
+          <% end %>
+        </li>
+        <li class="divider"></li>
         <% if order.order_entries.present? %>
           <% order.order_entries.each do |oe| %>
             <li>
               <div class="dropdown-messages-box">
                 <div class="media-body">
                   <%= link_to order_entry_load_item_messages_path(chatroom_order_id: order, order_entry_id: oe), remote: true do %>
-                    <strong><%= oe.product[:name] %></strong>
+                    <strong style="color: #f8ac59;"><%= oe.product[:name] %></strong>
                   <% end %>
                 </div>
               </div>
