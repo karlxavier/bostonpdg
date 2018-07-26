@@ -98,4 +98,12 @@ class OrderEntry < ApplicationRecord
     end
     @txt
   end
+
+  def vendor_list
+    @ids = []
+    OrderEntryVendor.where(:order_entry_id => self.id).each do |oev|
+      @ids.push(oev.vendor_id)
+    end
+    @ids
+  end
 end

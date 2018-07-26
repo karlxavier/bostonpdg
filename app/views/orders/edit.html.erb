@@ -240,7 +240,7 @@
     <div class="col padding-left">
       <h4>Select Vendor</h4>
       <div class="input-group search-bar-padding">
-        <select class="categories form-control glow-input" data-live-search="true" name="vendor_id" id="vendor_id">
+        <select class="categories form-control glow-input" data-live-search="true" name="vendor_id[]" id="vendor_id" multiple>
           <option></option>
           <% if @vendors.present? %>
               <% @vendors.each do |vendor| %>
@@ -384,7 +384,7 @@
     <div class="col padding-left">
       <h4>Select Vendor</h4>
       <div class="input-group search-bar-padding">
-        <select class="clone_categories form-control glow-input" data-live-search="true" name="vendor_id" id="clone_vendor_id">
+        <select class="clone_categories form-control glow-input" data-live-search="true" name="vendor_id[]" id="clone_vendor_id" multiple>
           <option></option>
           <% if @vendors.present? %>
               <% @vendors.each do |vendor| %>

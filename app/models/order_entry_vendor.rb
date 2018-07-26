@@ -1,0 +1,2 @@
+class OrderEntryVendor < ApplicationRecord
+end

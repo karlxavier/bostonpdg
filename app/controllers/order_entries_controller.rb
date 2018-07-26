@@ -3,7 +3,7 @@ class OrderEntriesController < ApplicationController
   def create
     @order_entry = OrderEntry.new
     @order_entry.order_id = params[:order_entry][:order_id]
-    @order_entry.vendor = params[:order_entry][:vendor]
+    # @order_entry.vendor = params[:order_entry][:vendor]
     @order_entry.product_id = params[:order_entry][:product_id]
     @order_entry.quoted_by = params[:order_entry][:quoted_by]
     @order_entry.category_id = params[:order_entry][:category_id]
@@ -13,6 +13,13 @@ class OrderEntriesController < ApplicationController
     @order_entry.quantity = params[:order_entry][:quantity]
     if params[:order_entry][:order_id].present? && params[:order_entry][:product_id].present?
       if @order_entry.save
+        if params[:order_entry][:vendor].present?
+          if params[:order_entry][:vendor].length > 0
+            params[:order_entry][:vendor].each do |id|
+              OrderEntryVendor.create(:order_entry_id => @order_entry.id, :product_id => @order_entry.product_id, :vendor_id => id.to_i)
+            end
+          end
+        end
         OrderHistory.create(:order_id => @order_entry.order_id, :order_entry_id => @order_entry.id, :description => 'has been Added', :user_id => current_user.id)
         flash[:notice] = "Order Entry Successfully Created"
       else
@@ -28,6 +35,7 @@ class OrderEntriesController < ApplicationController
   def destroy
     order_entry = OrderEntry.find(params[:id])
     if order_entry.destroy
+      OrderEntryVendor.where(:order_entry_id => params[:id]).destroy_all
       OrderHistory.create(:order_id => order_entry.order_id, :product_id => order_entry.product_id, :description => 'has been Removed', :user_id => current_user.id)
       flash[:notice] = "Order Entry Successfully Deleted"
     else
@@ -39,7 +47,26 @@ class OrderEntriesController < ApplicationController
   def update_entry
     @order_entry = OrderEntry.find(params[:order_entry][:id])
     if params[:order_entry][:order_id].present? && params[:order_entry][:product_id].present?
-      if @order_entry.update_attributes(:category_id => params[:order_entry][:category_id], :vendor => params[:order_entry][:vendor], :product_id => params[:order_entry][:product_id], :order_id => params[:order_entry][:order_id], :quoted_by => params[:order_entry][:quoted_by], :price => params[:order_entry][:price], :tax => params[:order_entry][:tax], :cost => params[:order_entry][:cost], :quantity => params[:order_entry][:quantity])
+      if @order_entry.update_attributes(:category_id => params[:order_entry][:category_id], :product_id => params[:order_entry][:product_id], :order_id => params[:order_entry][:order_id], :quoted_by => params[:order_entry][:quoted_by], :price => params[:order_entry][:price], :tax => params[:order_entry][:tax], :cost => params[:order_entry][:cost], :quantity => params[:order_entry][:quantity])
+        if params[:order_entry][:vendor].present?
+          if params[:order_entry][:vendor].length > 0
+            temp_existing_vendors = params[:order_entry][:vendor]
+            puts "#{temp_existing_vendors}"
+            order_entry_vendors = OrderEntryVendor.where(:order_entry_id => @order_entry.id)
+            order_entry_vendors.each do |oe|
+              if !temp_existing_vendors.include? oe.vendor_id.to_s
+                oe.destroy
+              end
+            end
+            temp_existing_vendors.each do |vl|
+              if OrderEntryVendor.where(:order_entry_id => @order_entry.id, :vendor_id => vl.to_i).length == 0
+                OrderEntryVendor.create(:order_entry_id => @order_entry.id, :product_id => @order_entry.product_id, :vendor_id => vl.to_i)
+              end
+            end
+          end
+        else
+          OrderEntryVendor.where(:order_entry_id => @order_entry.id).destroy_all
+        end
         flash[:notice] = "Order Entry Successfully Updated"
       else
         flash[:error] = "Order Entry Updated Failed"

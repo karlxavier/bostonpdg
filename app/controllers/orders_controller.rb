@@ -151,9 +151,14 @@ class OrdersController < ApplicationController
           order_entry.order_id = @order.id
           product = Product.find(oe.to_i)
           order_entry.category_id = product.item_category_id
-          order_entry.vendor = product.vendor_id
           order_entry.product_id = oe
           if order_entry.save
+            vendors = OrderEntryVendor.where(:product_id => oe)
+            if vendors.present? && !vendors.nil?
+              vendors.each do |vendor|
+                vendor.update_attributes(:order_entry_id => order_entry.id)
+              end
+            end
             OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => 'has been Added', :user_id => current_user.id)
           end
         end
@@ -251,6 +256,7 @@ class OrdersController < ApplicationController
           if !temp_existing_entries.include? oe.id
             order_entry = OrderEntry.find(oe.id)
             if order_entry.destroy
+              OrderEntryVendor.where(:order_entry_id => oe.id).destroy_all
               OrderHistory.create(:order_id => order_entry.order_id, :product_id => order_entry.product_id, :description => 'has been Removed', :user_id => current_user.id)
             end
           end
@@ -261,10 +267,15 @@ class OrdersController < ApplicationController
           order_entry.order_id = @order.id
           product = Product.find(oe.to_i)
           order_entry.category_id = product.item_category_id
-          order_entry.vendor = product.vendor_id
           order_entry.product_id = oe
           order_entry.save
           if order_entry.save
+            vendors = OrderEntryVendor.where(:product_id => oe)
+            if vendors.present? && !vendors.nil?
+              vendors.each do |vendor|
+                vendor.update_attributes(:order_entry_id => order_entry.id)
+              end
+            end
             OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => 'has been Added', :user_id => current_user.id)
           end
         end
@@ -368,12 +379,14 @@ class OrdersController < ApplicationController
   def send_orders
     @order = Order.find(params[:order_id].to_i)
     @user = User.where(:email => "notifications@burningmidnight.com").first
-    @vendor_list = OrderEntry.where(:order_id => @order.id).select(:vendor).distinct
+    # @vendor_list = OrderEntry.where(:order_id => @order.id).select(:vendor).distinct
+    @order_entry_list = OrderEntryVendor.where("order_entry_id IN (SELECT id FROM order_entries WHERE order_id = #{@order.id})")
+    @vendor_list = @order_entry_list.select(:vendor_id).distinct
     if @vendor_list.length > 0
       @vendor_list.each do |vl|
-        if !vl.vendor.nil? && vl.vendor != 'null'
-          @vendor = Vendor.find( vl.vendor )
-          @order_entries = OrderEntry.where(:order_id => @order.id, :vendor => @vendor.id)
+        if !vl.vendor_id.nil? && vl.vendor_id != 'null'
+          @vendor = Vendor.find( vl.vendor_id )
+          @order_entries = OrderEntry.where("order_id = #{@order.id} AND id IN (SELECT order_entry_id FROM order_entry_vendors WHERE vendor_id = #{vl.vendor_id})")
           if @vendor.email.present? && !@vendor.email.nil?
             OrderMailer.with(order: @order, vendor: @vendor, order_entries: @order_entries).send_order_entries.deliver_now
             flash[:notice] = "Order has sent successfully."

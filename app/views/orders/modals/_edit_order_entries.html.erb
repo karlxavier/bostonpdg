@@ -30,7 +30,7 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label label-form col-form-label-right">Vendor</label>
             <div class="col-sm-10">
-              <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_entry[vendor]" id="order_entry_vendor">
+              <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_entry[vendor][]" id="order_entry_vendor" multiple>
                 <option></option>
                 <% if @vendors.present? %>
                     <% @vendors.each do |vendor| %>

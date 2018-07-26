@@ -156,7 +156,7 @@ function showEditOrderEntries(id) {
         console.log(data.category_id);
         $('#edit_order_entry').find('#order_entry_id').val(data.id);
         $('#edit_order_entry').find('#order_entry_category_id').val(data.category_id);
-        $('#edit_order_entry').find('#order_entry_vendor').val(data.vendor);
+        $('#edit_order_entry').find('#order_entry_vendor').val(data.vendor_list);
         $('#edit_order_entry').find('#order_entry_product_id').val(data.product_id);
         $('#edit_order_entry').find('#order_entry_quoted_by').val(data.quoted_by);
         $('#edit_order_entry').find('#order_entry_price').val(data.price);
@@ -164,6 +164,7 @@ function showEditOrderEntries(id) {
         $('#edit_order_entry').find('#order_entry_tax').val(data.tax);
         $('#edit_order_entry').find('#order_entry_quantity').val(data.quantity);
         $('#editOrderEntries').modal('show');
+        $('.selectpicker2').selectpicker('refresh')
         $('.selectpicker').selectpicker('refresh')
     });
 

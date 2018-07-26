@@ -57,8 +57,16 @@ module Api
         @product.vendor_quote_prices = params[:vendor_quote_prices]
         @product.notes = params[:notes]
         @product.dynamic_fields = params[:dynamic_fields].to_s
-        @product.vendor_id = params[:vendor_id]
+        # @product.vendor_id = params[:vendor_id]
         if @product.save
+          #Add Vendor on List
+          if params[:vendor_id].present?
+            if params[:vendor_id].length > 0
+              params[:vendor_id].each do |id|
+                OrderEntryVendor.create(:product_id => @product.id, :vendor_id => id)
+              end
+            end
+          end
           render json: @product
         else
           render nothing: true, status: :bad_request
