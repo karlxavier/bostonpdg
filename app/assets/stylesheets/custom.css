@@ -754,7 +754,7 @@ a:hover {
 }
 
 .close_preview:hover,
-.close_preview:focus
+.close_preview:focus{
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
