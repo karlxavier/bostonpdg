@@ -1,8 +1,8 @@
 <div class="chat-message-form" id="chatroom_message">
 	<div class="form-group">
 	  	<%= form_for [chatroom, message], format: 'js', remote: true do |f| %>
-        <div class="input-group">
-           <% if message.attachment_data? %>
+        <div style="text-align: center;">
+            <% if message.attachment_data? %>
               <% 
               attachment_data = JSON.parse(message.attachment_data, object_class: OpenStruct) 
               mime_type = attachment_data.original.metadata.mime_type
@@ -14,14 +14,15 @@
                   <%= link_to attachment_data.original.metadata.filename, message.attachment_url(:original), download: attachment_data.original.metadata.filename %>
                 </div>
               <% else %>
-              <div class="feed-photo  alert alert-danger alert-dismissable">
+                <div class="feed-photo">
                   <br>
                   <%= image_tag message.attachment_url(:original), class: "msg_image" %>  
                 </div>
               <% end %>
+              <button id="remove_img" type="button" class="btn btn-default btn-xs">Remove</button>
           <% end %>
         </div>
-        <div class="input-group">
+        <div class="input-group" style="margin-top: 15px;">
           <%= f.text_area :body, rows: 1, class: "form-control message-body", autofocus: true, placeholder: "Enter message text", autocomplete: "off" %>
         </div>
 		    <div class="pull-right">
@@ -80,7 +81,7 @@
       }
 
       expandTextarea('txtarea');
-  	</script>
 
+  	</script>
 	</div>
 </div>
