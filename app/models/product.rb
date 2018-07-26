@@ -43,6 +43,16 @@ class Product < ApplicationRecord
   has_attached_file :picture, styles: { small: "64x64", med: "100x100", large: "200x200" }
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
 
+  def specs_html
+    self.specs.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
+  end
+  def vendor_quote_prices_html
+    self.specs.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
+  end
+  def notes_html
+    self.specs.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
+  end
+
   def convert_dynamic_fields
     if self.dynamic_fields.present? && !self.dynamic_fields.nil?
       self.dynamic_fields.gsub("=>", ":")

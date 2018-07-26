@@ -170,6 +170,10 @@ module Api
         render json: products
       end
 
+      def show
+        render json: @product,methods: [:convert_dynamic_fields, :picture_url, :specs_html, :vendor_quote_prices_html, :notes_html]
+      end
+
       protected
 
       def set_product

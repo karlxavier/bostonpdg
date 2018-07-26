@@ -199,16 +199,16 @@ function itemDetails(id, entry_id) {
        /* $('#clone_category_id').html(data.category);
         $('#clone_item_category_id').val(data.item_category_id);*/
         if (data.specs != "" && data.specs != null && data.specs != undefined) {
-            $('#nav-specs').html(data.specs)
-            $('#add_specs').val(data.specs);
+            $('#nav-specs').html(data.specs_html)
+            $('#add_specs').val(data.specs_html);
         }
         if (data.vendor_quote_prices != "" && data.vendor_quote_prices != null && data.vendor_quote_prices != undefined) {
-            $('#nav-quotes').html(data.vendor_quote_prices)
-            $('#add_vendor_quote_prices').val(data.vendor_quote_prices);
+            $('#nav-quotes').html(data.vendor_quote_prices_html)
+            $('#add_vendor_quote_prices').val(data.vendor_quote_prices_html);
         }
         if (data.notes != "" && data.notes != null && data.notes != undefined) {
-            $('#nav-notes').html(data.notes)
-            $('#add_notes').val(data.notes);
+            $('#nav-notes').html(data.notes_html)
+            $('#add_notes').val(data.notes_html);
         }
         $('#dynamic-attributes').html('');
         if (data.convert_dynamic_fields != '' && data.convert_dynamic_fields != null && data.convert_dynamic_fields != undefined) {
