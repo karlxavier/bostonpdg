@@ -195,6 +195,7 @@ function itemDetails(id, entry_id) {
         $('#add_product_id').val(data.id);
         $('#add_product_id_2').val(data.id);
         $('#order_entry_id_2').val(entry_id);
+        $('#order_entry_id_3').val(entry_id);
         $("#pic1").attr("src", data.picture_url);
         $('.product-name-header').html("(" + data.name + ")");
        /* $('#clone_category_id').html(data.category);
@@ -254,6 +255,7 @@ function openEditFreeFlow() {
 
 function submitEditAttributes() {
     var product_id = $('#add_product_id').val();
+    var entry_id = $('#order_entry_id_3').val();
     var dynamic_fields = {};
     var field_names = $('input[name=add_order_field_name]');
     var field_values = $('input[name=add_order_field_value]');
@@ -267,13 +269,14 @@ function submitEditAttributes() {
             data: {id: product_id, dynamic_fields: dynamic_fields}
         }).done(function( data ) {
             $('#editAttributes').modal('hide');
-            itemDetails(data.id)
+            itemDetails(data.id, entry_id);
         });
 
 }
 
 function submitEditFreeFlow() {
     var product_id = $('#add_product_id').val();
+    var entry_id = $('#order_entry_id_3').val();
     var specs =  $('#add_specs').val();
     var vendor_quote_prices = $('#add_vendor_quote_prices').val();
     var notes = $('#add_notes').val();
@@ -283,7 +286,7 @@ function submitEditFreeFlow() {
         data: {id: product_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes}
     }).done(function( data ) {
         $('#editFreeFlow').modal('hide');
-        itemDetails(data.id)
+        itemDetails(data.id, entry_id);
     });
 
 }
