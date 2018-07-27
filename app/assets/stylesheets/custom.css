@@ -761,7 +761,7 @@ a:hover {
 }
 
 .msg_edit {
-    visibility: hidden!important;
+    visibility: hidden;
     cursor: pointer;
 }
 
