@@ -12,7 +12,7 @@
                 <h1 class="header-login" style="font-size: 1.7em;">Log in to my account</h1>
 
                 <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'form form-modal-padding padding-bottom-0'} ) do |f| %>
-
+                <%= render 'layouts/static/error_messages' %>
                 <div class="form-group row">
                   <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control', placeholder: 'E-mail' %>
                 </div>
