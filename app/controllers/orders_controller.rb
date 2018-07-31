@@ -35,13 +35,12 @@ class OrdersController < ApplicationController
     @products = Product.all
     @brands = Brand.all
     @order_histories = OrderHistory.where(:order_id => @order.id).order('created_at DESC')
-    puts "@order_histories ==========> #{@order_histories.inspect}"
   end
 
   def show
     respond_to do |format|
       @chatroom_order = ChatroomOrder.find(@order.id)
-      @order_entries = @order.order_entries
+      @order_entries = @order.order_entries.order('updated_at DESC')
 
       format.js
     end
@@ -424,7 +423,7 @@ class OrdersController < ApplicationController
   def load_messages
     respond_to do |format|
         @messages = @chatroom.messages.order(created_at: :desc).limit(100).reverse
-        # @order = ChatroomOrder.find(@chatroom.id)
+        @order = Order.find(@chatroom.id)
 
         format.js
       end
