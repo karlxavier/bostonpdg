@@ -30,6 +30,7 @@
 //= require nestable
 //= require cable
 //= require watcher
+//= require chosen
 
 $(document).on('turbolinks:load', function() {
     $('.selectpicker').selectpicker();

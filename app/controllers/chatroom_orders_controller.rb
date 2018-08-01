@@ -1,6 +1,6 @@
 class ChatroomOrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_chatroom, except: [:index]
+  before_action :set_chatroom, except: [:index, :update]
 
   def index
     if current_user.admin?
@@ -23,6 +23,20 @@ class ChatroomOrdersController < ApplicationController
       end
   end
 
+  def update
+    respond_to do |format|
+      order_user_ids = OrderUser.chatroom_order_users(params[:id]).ids
+      params[:chatroom_order][:ids].each do |id|
+        if !order_user_ids.to_s.include?(id)
+          OrderUser.create(regional: id, order_id: params[:id])
+        end
+      end
+
+      @chatroom = ChatroomOrder.find(params[:id])
+      format.js
+    end
+  end
+
   def load_item_messages
       if params[:order_entry_id].present?
         @order_entry = OrderEntry.find(params[:order_entry_id])
@@ -38,6 +52,10 @@ class ChatroomOrdersController < ApplicationController
   private
       def set_chatroom
         @chatroom = ChatroomOrder.find(params[:chatroom_order_id])
+      end
+
+      def chatroom_user_params
+        params.require(:chatroom_order).permit( ids: [] )
       end
 
 end

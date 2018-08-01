@@ -1,0 +1,13 @@
+<div id="title_user">
+	<% OrderUser.chatroom_order_users(chatroom.id).each do |user| %>
+		<li>
+		    <div class="dropdown-messages-box">
+		        <div class="media-body">
+		            <strong><%= [user.first_name, user.last_name].join(' ') %></strong> <br>
+		            <small class="text-muted">Last logged in at <%= user.updated_at.strftime("%d-%m-%Y") %></small>
+		        </div>
+		    </div>
+		</li>
+		<li class="divider"></li>	
+	<% end %>
+</div>

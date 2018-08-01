@@ -2,26 +2,34 @@
 	<%= "Order-#{chatroom.id}" %>
 </h5>
 <div class="pull-right" style="margin-left: 10px;">
-	<a class="count-info" data-toggle="dropdown" id="#add-users" href="#" aria-expanded="true">
-        <i class="fa fa-user-plus" style="color: #999c9e;"></i>
-    </a>
-</div>
-<div class="pull-right" style="margin-left: 10px;">
 	<a class="count-info" data-toggle="dropdown" id="#users" href="#" aria-expanded="true">
         <i class="fa fa-users" style="color: #999c9e;"></i>
     </a>
-    <ul class="dropdown-menu dropdown-messages" aria-labelledby="users"> 
-    	<% OrderUser.chatroom_order_users(chatroom.id).each do |user| %>
-			<li>
-		        <div class="dropdown-messages-box">
-		            <div class="media-body">
-		                <strong><%= [user.first_name, user.last_name].join(' ') %></strong> <br>
-		                <small class="text-muted">Last logged in at <%= user.updated_at.strftime("%d-%m-%Y") %></small>
-		            </div>
-		        </div>
-		    </li>
-		    <li class="divider"></li>
-	    <% end %>
+    <ul class="dropdown-menu dropdown-messages" aria-labelledby="users" id="div-add-users"> 
+    	<a data-toggle="collapse" data-parent="#accordion" href="#acc_add_users" class="collapsed btn btn-primary btn-sm" aria-expanded="false">
+    		<small>
+    			Update Users	
+    		</small>
+    	</a>
+    	<br>
+    	<div id="acc_add_users" aria-expanded="false" class="collapse">
+	    	<%= form_for chatroom, remote: true do |f| %>
+	    		<div class="form-group">
+
+	                <%= collection_select(:chatroom_order, :ids, 
+	                  User.order(:email),:id,:email, 
+	                  {selected: OrderUser.chatroom_order_users(chatroom.id).ids, include_hidden: false}, 
+	                  {class: "chosen-select", required: true, multiple: true}) 
+	                %>
+
+	            </div>
+	            <div class="actions">
+	              <%= f.submit :Save, class: "btn btn-block btn-primary btn-sm" %>
+	            </div>
+	    	<% end %>
+    	</div>
+    	<li class="divider"></li>	
+		<%= render 'chatroom_title_user', chatroom: chatroom %>
 	</ul>
 </div>
 <div class="pull-right">
@@ -64,4 +72,13 @@
 	    <% end %>
 	</ul>
 </div>
+<script type="text/javascript">
+	$(function(){
+		$(document).on('click', '#div-add-users.dropdown-menu', function (e) {
+		  e.stopPropagation();
+		});
+
+		$('.chosen-select').chosen({width: "100%"});
+	})
+</script>
 	

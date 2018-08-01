@@ -23,6 +23,7 @@
  *= require animate
  *= require search
  *= require feathericon
+ *= require chosen
  *= require_self
  */
 .display-block {
