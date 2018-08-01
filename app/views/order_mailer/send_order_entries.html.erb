@@ -212,7 +212,11 @@
                     <tr>
                       <td width="187" height="116" align="center">
                         <a href="#">
-                          <img src="http://www.stampready.net/dashboard/editor/user_uploads/image_uploads/2018/04/17/R3H4Mxn2s0SmpFj9lvtXDBzNkP8bfJqQ.jpg" alt="features" border="0" width="187" height="116" style="display:block; border:none; outline:none; text-decoration:none;" class="features">
+                          <% if product.picture.exists? %>
+                              <img src="<%= attachments["#{order_entry.id}.png"].url %>" alt="features" border="0" width="187" height="116" style="display:block; border:none; outline:none; text-decoration:none;" class="features">
+                          <% else %>
+                              <img src="http://www.stampready.net/dashboard/editor/user_uploads/image_uploads/2018/04/17/R3H4Mxn2s0SmpFj9lvtXDBzNkP8bfJqQ.jpg" alt="features" border="0" width="187" height="116" style="display:block; border:none; outline:none; text-decoration:none;" class="features">
+                          <% end %>
                         </a>
                       </td>
                     </tr>

@@ -106,4 +106,13 @@ class OrderEntry < ApplicationRecord
     end
     @ids
   end
+
+  def picture_url
+    product = Product.find(self.product_id)
+    @url = ""
+    if product.picture.exists?
+      @url = product.picture.path(:original)
+    end
+    @url
+  end
 end

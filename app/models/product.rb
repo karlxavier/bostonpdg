@@ -47,10 +47,10 @@ class Product < ApplicationRecord
     self.specs.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
   end
   def vendor_quote_prices_html
-    self.specs.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
+    self.vendor_quote_prices.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
   end
   def notes_html
-    self.specs.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
+    self.notes.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
   end
 
   def convert_dynamic_fields

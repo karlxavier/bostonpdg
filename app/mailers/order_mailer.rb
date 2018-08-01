@@ -7,6 +7,11 @@ class OrderMailer < ApplicationMailer
     @order_entries = params[:order_entries]
     @products = Product.all
     attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/logo.png")
+    @order_entries.each do |oe|
+      if oe.picture_url != ""
+        attachments.inline["#{oe.id}.png"] = File.read(oe.picture_url)
+      end
+    end
     mail(
         :from => "jerico@maddington.net",
         :to => @vendor.email,
