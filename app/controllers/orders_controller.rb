@@ -141,103 +141,107 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new
     @order.brand_id = params[:order][:brand_id]
-    if @order.save
-      OrderHistory.create(:order_id => @order.order_id, :description => 'has been Created', :user_id => current_user.id)
-      if params[:order_entries].present?
-        temp_order_entries = params[:order_entries].split(",").map { |s| s.to_i }
-        temp_order_entries.each do |oe|
-          order_entry = OrderEntry.new
-          order_entry.order_id = @order.id
-          product = Product.find(oe.to_i)
-          order_entry.category_id = product.item_category_id
-          order_entry.product_id = oe
-          if order_entry.save
-            vendors = OrderEntryVendor.where(:product_id => oe)
-            if vendors.present? && !vendors.nil?
-              vendors.each do |vendor|
-                vendor.update_attributes(:order_entry_id => order_entry.id)
+    if params[:order][:brand_id] != "" || params[:order_entries].present? || params[:order_branch].present? || params[:order_user].present?
+      if @order.save
+        OrderHistory.create(:order_id => @order.id, :description => 'has been Created', :user_id => current_user.id)
+        if params[:order_entries].present?
+          temp_order_entries = params[:order_entries].split(",").map { |s| s.to_i }
+          temp_order_entries.each do |oe|
+            order_entry = OrderEntry.new
+            order_entry.order_id = @order.id
+            product = Product.find(oe.to_i)
+            order_entry.category_id = product.item_category_id
+            order_entry.product_id = oe
+            if order_entry.save
+              vendors = OrderEntryVendor.where(:product_id => oe)
+              if vendors.present? && !vendors.nil?
+                vendors.each do |vendor|
+                  vendor.update_attributes(:order_entry_id => order_entry.id)
+                end
               end
+              OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => 'has been Added', :user_id => current_user.id)
             end
-            OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => 'has been Added', :user_id => current_user.id)
           end
         end
-      end
-      if params[:order_branch].present?
-        temp_order_branch = params[:order_branch].split(",").map { |s| s.to_i }
-        temp_order_branch.each do |ob|
-          order_branch = OrderBranch.new
-          order_branch.brand_id = @order.brand_id
-          order_branch.order_id = @order.id
-          order_branch.address_id = ob
-          order_branch.save
-          if order_entry.save
-            OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => 'has been Added', :user_id => current_user.id)
+        if params[:order_branch].present?
+          temp_order_branch = params[:order_branch].split(",").map { |s| s.to_i }
+          temp_order_branch.each do |ob|
+            order_branch = OrderBranch.new
+            order_branch.brand_id = @order.brand_id
+            order_branch.order_id = @order.id
+            order_branch.address_id = ob
+            order_branch.save
+            if order_entry.save
+              OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => 'has been Added', :user_id => current_user.id)
+            end
           end
         end
-      end
-      if params[:order_user].present?
-        arr_count = []
-        i = 0
+        if params[:order_user].present?
+          arr_count = []
+          i = 0
 
-        if params[:order_user][:regional].present?
-          arr_count.push(params[:order_user][:regional].length)
-        else
-          arr_count.push(0)
-        end
-        if params[:order_user][:comms].present?
-          arr_count.push(params[:order_user][:comms].length)
-        else
-          arr_count.push(0)
-        end
-        if params[:order_user][:art].present?
-          arr_count.push(params[:order_user][:art].length)
-        else
-          arr_count.push(0)
-        end
-        if params[:order_user][:processor].present?
-          arr_count.push(params[:order_user][:processor].length)
-        else
-          arr_count.push(0)
-        end
-        if params[:order_user][:designer].present?
-          arr_count.push(params[:order_user][:designer].length)
-        else
-          arr_count.push(0)
-        end
-        if params[:order_user][:client_contact].present?
-          arr_count.push(params[:order_user][:client_contact].length)
-        else
-          arr_count.push(0)
-        end
-
-        while i < arr_count.max
-          order_user = OrderUser.new
-          order_user.order_id = @order.id
           if params[:order_user][:regional].present?
-            order_user.regional = params[:order_user][:regional][i]
+            arr_count.push(params[:order_user][:regional].length)
+          else
+            arr_count.push(0)
           end
           if params[:order_user][:comms].present?
-            order_user.comms = params[:order_user][:comms][i]
+            arr_count.push(params[:order_user][:comms].length)
+          else
+            arr_count.push(0)
           end
           if params[:order_user][:art].present?
-            order_user.art = params[:order_user][:art][i]
+            arr_count.push(params[:order_user][:art].length)
+          else
+            arr_count.push(0)
           end
           if params[:order_user][:processor].present?
-            order_user.processor = params[:order_user][:processor][i]
+            arr_count.push(params[:order_user][:processor].length)
+          else
+            arr_count.push(0)
           end
           if params[:order_user][:designer].present?
-            order_user.designer = params[:order_user][:designer][i]
+            arr_count.push(params[:order_user][:designer].length)
+          else
+            arr_count.push(0)
           end
           if params[:order_user][:client_contact].present?
-            order_user.client_contact = params[:order_user][:client_contact][i]
+            arr_count.push(params[:order_user][:client_contact].length)
+          else
+            arr_count.push(0)
           end
-          order_user.save
-          i = i + 1
+
+          while i < arr_count.max
+            order_user = OrderUser.new
+            order_user.order_id = @order.id
+            if params[:order_user][:regional].present?
+              order_user.regional = params[:order_user][:regional][i]
+            end
+            if params[:order_user][:comms].present?
+              order_user.comms = params[:order_user][:comms][i]
+            end
+            if params[:order_user][:art].present?
+              order_user.art = params[:order_user][:art][i]
+            end
+            if params[:order_user][:processor].present?
+              order_user.processor = params[:order_user][:processor][i]
+            end
+            if params[:order_user][:designer].present?
+              order_user.designer = params[:order_user][:designer][i]
+            end
+            if params[:order_user][:client_contact].present?
+              order_user.client_contact = params[:order_user][:client_contact][i]
+            end
+            order_user.save
+            i = i + 1
+          end
         end
+        flash[:notice] = "Order Successfully Created"
+      else
+        flash[:error] = "Order Created Failed"
       end
-      flash[:notice] = "Order Successfully Created"
     else
-      flash[:error] = "Order Created Failed"
+      flash[:error] = "All Empty Fields! Please Input ANY."
     end
     redirect_to orders_path(:id => @order.id)
   end
@@ -422,24 +426,24 @@ class OrdersController < ApplicationController
 
   def load_messages
     respond_to do |format|
-        @messages = @chatroom.messages.order(created_at: :desc).limit(100).reverse
-        @order = Order.find(@chatroom.id)
+      @messages = @chatroom.messages.order(created_at: :desc).limit(100).reverse
+      @order = Order.find(@chatroom.id)
 
-        format.js
-      end
+      format.js
+    end
   end
 
   def load_item_messages
-      if params[:order_entry_id].present?
-        @order_entry = OrderEntry.find(params[:order_entry_id])
-        respond_to do |format|
-          @messages = ItemMessage.where(order_entry_id: @order_entry.id)
-          @product = Product.find(@order_entry.product_id)
-          @chatroom = ChatroomOrder.find(@order_entry.order_id)
+    if params[:order_entry_id].present?
+      @order_entry = OrderEntry.find(params[:order_entry_id])
+      respond_to do |format|
+        @messages = ItemMessage.where(order_entry_id: @order_entry.id)
+        @product = Product.find(@order_entry.product_id)
+        @chatroom = ChatroomOrder.find(@order_entry.order_id)
 
-          format.js
-        end
+        format.js
       end
+    end
   end
 
   private

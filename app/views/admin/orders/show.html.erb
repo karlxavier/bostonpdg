@@ -156,8 +156,16 @@ as well as a link to its edit page.
             </dt>
 
             <dd class="attribute-data attribute-data--has-many">
-              <% order_entries = OrderEntry.where("order_id = '#{page.resource.id}'") %>
-              <% order_entries_with_no_vendors = OrderEntry.where("order_id = '#{page.resource.id}' AND (vendor IS NULL OR vendor = 0)") %>
+              <% order_entry_list = OrderEntryVendor.where("order_entry_id IN (SELECT id FROM order_entries WHERE order_id = #{page.resource.id})") %>
+
+              <% temp_order_entry_list = order_entry_list.select(:order_entry_id).distinct%>
+              <% order_entry_list2 = [] %>
+              <% temp_order_entry_list.each do |toel| %>
+                <% if !toel.order_entry_id.nil? %>
+                    <% order_entry_list2.push(toel.order_entry_id) %>
+                <% end %>
+            <% end %>
+              <% order_entries_with_no_vendors = OrderEntry.where("id NOT IN (#{order_entry_list2.map(&:inspect).join(',')})").where("order_id = #{page.resource.id}") %>
 
               <div style="display: block;padding-bottom:3%;">
                 <%= link_to "Add Entry", new_admin_order_entry_path(:order_id => page.resource.id)%>
@@ -165,15 +173,16 @@ as well as a link to its edit page.
               </div>
 
 
-              <% if order_entries.present? %>
+              <% if order_entry_list.present? %>
+                  <% temp_vendor_list = order_entry_list.select(:vendor_id).distinct%>
                   <% vendor_list = [] %>
-                  <% order_entries.each do |order_entry| %>
-                      <% if !order_entry.vendor.nil? %>
-                        <% vendor_list.push(order_entry.vendor) %>
+                  <% temp_vendor_list.each do |tvl| %>
+                      <% if !tvl.vendor_id.nil? %>
+                        <% vendor_list.push(tvl.vendor_id) %>
                       <% end %>
                   <% end %>
                   <% if vendor_list.length > 0 %>
-                      <% vendors = Vendor.where("id IN (#{vendor_list.map(&:inspect).join(',')})")%>
+                      <% vendors = Vendor.where("id IN (#{vendor_list.map(&:inspect).join(',')})").order("name ASC")%>
 
                       <% vendors.each do |vendor| %>
                           <h2 style="font-size: 1.3em; padding-top: 3%; padding-bottom: 3%;margin-right:3%;display:inline;"><%= vendor.name %></h2>  <%= link_to "Send Order", send_orders_api_simple_orders_path(:order_id => page.resource.id, :vendor_id => vendor.id), class: "button display-inline"%>
@@ -194,8 +203,7 @@ as well as a link to its edit page.
                                 </thead>
 
                                 <tbody>
-                                <% order_entries.each do |order_entry| %>
-                                    <% if order_entry.vendor == vendor.id %>
+                                <% OrderEntry.where("order_id = #{page.resource.id} AND id IN (SELECT order_entry_id FROM order_entry_vendors WHERE vendor_id = #{vendor.id})").each do |order_entry| %>
                                         <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/order_entries/<%= order_entry.id %>">
                                           <td class="cell-data cell-data--number">
                                             <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
@@ -268,8 +276,6 @@ as well as a link to its edit page.
 
                                           <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/order_entries/<%= order_entry.id %>">Destroy</a></td>
                                         </tr>
-
-                                    <% end %>
                                 <% end %>
                                 </tbody>
                               </table>
