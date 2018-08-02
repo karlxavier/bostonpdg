@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
+  devise_scope :user do
+    authenticated :user do
+      root 'orders#index', as: :authenticated_root
+    end
+
+    unauthenticated do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
   post 'vendors/import_csv'
   post 'customers/import_csv'
   resources :search_results, only: :index
@@ -151,7 +160,6 @@ Rails.application.routes.draw do
     end
   end
   get 'static_pages/dashboard'
-  root 'orders#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

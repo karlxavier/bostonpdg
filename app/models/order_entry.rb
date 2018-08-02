@@ -83,18 +83,22 @@ class OrderEntry < ApplicationRecord
   end
 
   def get_status
-    @txt = ''
     status = self.status
+    @txt = ''
     if status == 0
-      @txt = 'None'
+      @txt = 'New'
     elsif status == 1
-      @txt = 'Quoted'
+      @txt = 'Quoting'
     elsif status == 2
-      @txt = 'Ordered'
+      @txt = 'Pending Approval'
     elsif status == 3
-      @txt = 'Pending'
+      @txt = 'Ready to Process'
     elsif status == 4
+      @txt = 'In Production'
+    elsif status == 5
       @txt = 'Shipped'
+    elsif status == 6
+      @txt = 'Delivered'
     end
     @txt
   end
