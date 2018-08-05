@@ -82,24 +82,24 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
-    resources :users_brands
-    resources :users_groups
-    resources :customers
-    resources :inventories
-    resources :vendors
-    resources :products
-    resources :categories
-    resources :brands
-    resources :addresses
-    resources :groups
-    resources :style_attributes
-    resources :orders
-    resources :order_entries
-    resources :order_users
-    resources :order_branches
-    resources :vendors_products
-    resources :vendor_categories
-    resources :default_attributes
+    # resources :users_brands
+    # resources :users_groups
+    # resources :customers
+    # resources :inventories
+    # resources :vendors
+    # resources :products
+    # resources :categories
+    # resources :brands
+    # resources :addresses
+    # resources :groups
+    # resources :style_attributes
+    # resources :orders
+    # resources :order_entries
+    # resources :order_users
+    # resources :order_branches
+    # resources :vendors_products
+    # resources :vendor_categories
+    # resources :default_attributes
     root to: "users#index" # <--- Root route
   end
   #API Simple
