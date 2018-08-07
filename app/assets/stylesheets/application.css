@@ -303,3 +303,8 @@ p {
     padding-left: 3%;
     padding-right: 20%;
 }
+
+.table .thead-yellow th{
+    background: #D4AD5C !important;
+    border-color:#D4AD5C !important;
+}
