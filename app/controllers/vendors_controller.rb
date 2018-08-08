@@ -6,11 +6,15 @@ class VendorsController < ApplicationController
     redirect_to admin_vendors_path
   end
 
-  def add
+  def new
 
   end
 
   def list
+
+  end
+
+  def add_item
 
   end
 end

@@ -36,8 +36,8 @@ Rails.application.routes.draw do
 
   resources :vendors do
     collection do
-      get   'add'
       get   'list'
+      get   'add_item'
     end
   end
 

@@ -90,8 +90,8 @@
       MANAGE SUPPLIERS
     </p>
     <p class="padding-top">
-      <a href="<%= add_vendors_path %>" class="btn btn-nav">ADD A VENDOR</a>
-      <button class="btn btn-nav" ng-click="list_vendors()">ADD ITEMS TO VENDOR</button>
+      <a href="<%= new_vendor_path %>" class="btn btn-nav">ADD A VENDOR</a>
+      <a href="<%= add_item_vendors_path %>" class="btn btn-nav">ADD ITEMS TO VENDOR</a>
       <button class="btn btn-nav">ASSIGN SPECIALISTS TO VENDOR</button>
       <button class="btn btn-nav">MANAGE PURCHASE ORDER</button>
       <button class="btn btn-nav" ng-click="supplier_database()">SUPPLIER DATABASE</button>
@@ -107,8 +107,8 @@
       MAKE A RE-PURCHASE
     </p>
     <p class="padding-top">
-      <button class="btn btn-nav">RE-ORDER ITEM</button>
-      <button class="btn btn-nav">VIEW ORDER HISTORY</button>
+      <a href="<%= orders_path %>" class="btn btn-nav">RE-ORDER ITEM</a>
+      <!--<button class="btn btn-nav">VIEW ORDER HISTORY</button>-->
 
     </p>
   </div>

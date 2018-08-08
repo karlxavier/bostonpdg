@@ -1,0 +1,53 @@
+<div class="row" >
+  <div class="col padding-left">
+    <h1><b>ADD ITEMS TO AN EXISTING VENDOR</b></h1><br/>
+  </div>
+</div>
+<div class="row">
+  <div class="col padding-left">
+    <h3 class="make-green"><b>Add items to Existing Vendor</b></h3><br/>
+  </div>
+</div>
+<!--Categories-->
+<div class="row" style="padding-top: 2%;">
+  <div class="col padding-left">
+    <h4>Vendor:</h4>
+    <div class="input-group search-bar-padding">
+      <select class="categories form-control glow-input" data-live-search="true" name="vendor_id" id="vendor_id">
+        <option></option>
+        <% Vendor.all.each do |vendor| %>
+            <option value="<%= vendor.id %>"><%= vendor.name %></option>
+        <% end %>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="padding-top: 4%;">
+  <div class="col padding-left">
+    <table class="table">
+      <thead class="thead-dark thead-yellow">
+      <tr>
+        <th scope="col">#</th>
+        <th></th>
+        <th scope="col">Name</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="product in products | filter:searchText">
+        <th scope="row">1
+        <td class="float-right"><img src="http://www.stampready.net/dashboard/editor/user_uploads/image_uploads/2018/04/17/R3H4Mxn2s0SmpFj9lvtXDBzNkP8bfJqQ.jpg"  alt="features" border="0" width="64px"  style="display:block; border:none; outline:none; text-decoration:none;" class="features"></td>
+        <td>Sample</td>
+        <td>10</td>
+        <td>$10</td>
+        <td></td>
+        <!--<td><button class="btn btn-nav-selected btn-nav-selected-circle" ng-click="orderDetails()"><i class="icon ion-plus-round"></i></button></td>-->
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
