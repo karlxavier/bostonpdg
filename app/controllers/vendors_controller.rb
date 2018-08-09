@@ -17,4 +17,8 @@ class VendorsController < ApplicationController
   def add_item
 
   end
+
+  def supplier
+
+  end
 end

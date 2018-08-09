@@ -13,4 +13,8 @@
 #
 
 class Inventory < ApplicationRecord
+
+  def product
+    Product.find(self.product_id)
+  end
 end

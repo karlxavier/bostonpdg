@@ -1,52 +1,30 @@
+
 <div class="row" >
   <div class="col padding-left">
-    <h1><b> VIEW ALL CURRENT ITEMS AND SHELLS</b></h1><br/>
+    <h1><b>SUPPLIER DATABASE</b></h1><br/>
   </div>
 </div>
 <div class="row">
   <div class="col padding-left">
-    <h3 class="make-green"><b>Current Stocks</b></h3><br/>
+    <h3 class="make-green"><b>LIST OF VENDORS</b></h3><br/>
   </div>
 </div>
-
-<!--Categories-->
-<!--<div class="row" >
-  <div class="col padding-left">
-    <h4>Search for the Category Name:</h4>
-    <div class="input-group search-bar-padding">
-      <select class="categories form-control glow-input" data-live-search="true" name="category_id[]" id="category_id" multiple>
-        <option></option>
-        <%# Category.all.each do |category| %>
-            <option value="<%#= category.id %>"><%#= category.name %></option>
-        <%# end %>
-      </select>
-    </div>
-  </div>
-</div>-->
-
-
 <div class="row" style="padding-top: 1%;">
   <div class="col padding-left">
-    <table class="table" id="example">
+    <table class="table" id="example2">
       <thead class="thead-dark thead-yellow">
       <tr>
         <th scope="col">#</th>
-        <th></th>
         <th scope="col">Name</th>
-        <th scope="col">Stock</th>
-        <th scope="col">Price</th>
-        <th scope="col"></th>
+        <th scope="col">Email</th>
       </tr>
       </thead>
       <tbody>
-      <% Inventory.order('id DESC').each do |invent|%>
+      <% Vendor.order('id DESC').each do |vendor|%>
           <tr>
-            <th scope="row"><%= invent.id %></th>
-            <td><img src="<%= check_picture_url(invent) %>" alt="features" border="0" width="64px"  style="display:block; border:none; outline:none; text-decoration:none;" class="features"></td>
-            <td><%= invent.product.name %></td>
-            <td><%= invent.quantity %></td>
-            <td><%= invent.product.price %></td>
-            <td></td>
+            <th scope="row"><%= vendor.id %></th>
+            <td><%= vendor.name %></td>
+            <td><%= vendor.email %></td>
             <!--<td><button class="btn btn-nav-selected btn-nav-selected-circle" ng-click="orderDetails()"><i class="icon ion-plus-round"></i></button></td>-->
           </tr>
       <% end %>
@@ -59,7 +37,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#example').DataTable( {
+        $('#example2').DataTable( {
             initComplete: function () {
                 this.api().columns().every( function () {
                     var column = this;

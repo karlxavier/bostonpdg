@@ -14,6 +14,7 @@ class InventoriesController < ApplicationController
 
   def view_stocks
     @categories = Category.all
+    @inventories = Inventory.all
   end
 
   def show_brand
