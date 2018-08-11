@@ -1,0 +1,98 @@
+
+
+<div class="row" >
+  <div class="col padding-left">
+    <h1><b>CREATE A NEW VENDOR</b></h1><br/>
+  </div>
+</div>
+<div class="row">
+  <div class="col padding-left">
+    <h3 class="make-green"><b>Initial Information</b></h3><br/>
+  </div>
+</div>
+<form class="form" id="new_vendor" action="/vendors" accept-charset="UTF-8" method="post">
+  <!--Categories-->
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left">
+      <h4>Product Category</h4>
+      <div class="input-group search-bar-padding">
+        <select class="categories form-control glow-input" data-live-search="true" name="category_id[]" id="category_id" multiple>
+          <option></option>
+          <% Category.all.each do |category| %>
+              <option value="<%= category.id %>"><%= category.name %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left">
+      <h4>Vendor Name</h4>
+      <div class="input-group search-bar-padding">
+        <input type="text" class="form-control glow-input" name="name" id="name"/>
+      </div>
+    </div>
+  </div>
+
+  <!--<div class="row" style="padding-top: 2%;">-->
+  <!--<div class="col padding-left">-->
+  <!--<h4>Primary Contact Name</h4>-->
+  <!--<div class="input-group search-bar-padding">-->
+  <!--<input type="text" class="form-control glow-input" name="contact_name" id="contact_name"/>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="row" style="padding-top: 2%;">-->
+  <!--<div class="col padding-left">-->
+  <!--<h4>Primary Contact Number</h4>-->
+  <!--<div class="input-group search-bar-padding">-->
+  <!--<input type="text" class="form-control glow-input" name="contact_number" id="contact_number"/>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left">
+      <h4>E-mail Address</h4>
+      <div class="input-group search-bar-padding">
+        <input type="email" class="form-control glow-input" name="email" id="email"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left">
+      <h4>Vendor Address</h4>
+      <div class="input-group search-bar-padding">
+        <select class="categories form-control glow-input" data-live-search="true" name="address" id="address">
+          <option></option>
+          <% Address.all.each do |address| %>
+              <option value="<%= address.id %>"><%= (address.street.nil? ? '' : (address.street + ', ')) + (address.city.nil? ? '' : (address.city + ' ')) + (address.state.nil? ? '' : (address.state + ', ')) + (address.state.nil? ? '' : (address.state + ', ')) + (address.country.nil? ? '' : address.country) %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left">
+      <h4>Country of Origin</h4>
+      <div class="input-group search-bar-padding">
+        <input type="text" class="form-control glow-input" name="country" id="country"/>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="row" style="padding-top: 2%;">
+    <div class="col padding-left">
+      <label class="item float-right">
+        <input type="submit" class="btn btn-outline-primary" value="Save"/>
+      </label>
+    </div>
+  </div>
+</form>
