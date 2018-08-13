@@ -26,6 +26,38 @@ before_action :set_product, only: [:show, :edit, :item_details]
     redirect_to orders_path(:id => params[:order_id], :product_id => params[:product_id], :order_entry_id => params[:order_entry_id])
   end
 
+  def create
+    @product = Product.new
+    @product.name = params[:product_name]
+    @product.category = params[:category_id]
+    # @product.item_category_id = params[:item_category_id]
+    @product.specs = params[:specs]
+    @product.vendor_quote_prices = params[:vendor_quote_prices]
+    @product.notes = params[:notes]
+    @product.dynamic_fields = params[:dynamic_fields].to_s
+    # @product.vendor_id = params[:vendor_id]
+    if @product.save
+      #Add Vendor on List
+      if params[:vendor_id].present?
+        if params[:vendor_id].length > 0
+          params[:vendor_id].each do |id|
+            VendorsProduct.create(:product_id => @product.id, :vendor_id => id)
+          end
+        end
+      end
+      if params[:quantity].present?
+        Inventory.create(:product_id => @product.id, :quantity => params[:quantity].to_i)
+      else
+        Inventory.create(:product_id => @product.id, :quantity => 0)
+      end
+      flash[:notice] = "Product Item has saved successfully."
+    else
+      flash[:error] = "Product Item save Failed!"
+    end
+
+    redirect_to inventories_path
+  end
+
 	private
 
 		def set_product
