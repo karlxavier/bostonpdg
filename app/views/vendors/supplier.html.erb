@@ -38,6 +38,11 @@
 <script>
     $(document).ready(function() {
         $('#example2').DataTable( {
+            "order": [[ 0, "desc" ]],
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
             initComplete: function () {
                 this.api().columns().every( function () {
                     var column = this;

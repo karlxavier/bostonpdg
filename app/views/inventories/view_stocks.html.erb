@@ -39,7 +39,7 @@
       </tr>
       </thead>
       <tbody>
-      <% Inventory.order('id DESC').each do |invent|%>
+      <% @inventories.each do |invent|%>
           <tr>
             <th scope="row"><%= invent.id %></th>
             <td><img src="<%= check_picture_url(invent) %>" alt="features" border="0" width="64px"  style="display:block; border:none; outline:none; text-decoration:none;" class="features"></td>
@@ -60,6 +60,11 @@
 <script>
     $(document).ready(function() {
         $('#example').DataTable( {
+            "order": [[ 0, "desc" ]],
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
             initComplete: function () {
                 this.api().columns().every( function () {
                     var column = this;
