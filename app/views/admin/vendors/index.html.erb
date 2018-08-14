@@ -21,6 +21,17 @@
         <div class="ibox-title">
                     <h5></h5>
                     <div class="ibox-tools">
+                        <a data-toggle="dropdown" id="#upload-vendors" href="#" aria-expanded="false" class="btn btn-primary btn-sm"> Upload Vendors</a>
+                        <ul id="upload-vendors" class="dropdown-menu dropdown-messages2" aria-labelledby="upload-vendors">
+                            <%= form_tag vendors_import_csv_path, multipart: true do %>
+                                <div class="form-group">
+                                  <label for="exampleFormControlFile1">Import Here:</label>
+                                  <%= file_field_tag :file %>
+                                  <br><br>
+                                  <%= submit_tag 'Import File', class: "btn btn-primary btn-sm" %>
+                                </div>
+                            <% end %>
+                        </ul>
                         <%= link_to 'Create New Vendor', new_admin_vendor_path, class: "btn btn-primary btn-sm" %>
                     </div>
                 </div>
@@ -87,6 +98,10 @@
                 }
             ]
 
+        });
+
+        $(document).on('click', '#upload-vendors', function (e) {
+          e.stopPropagation();
         });
 
     });
