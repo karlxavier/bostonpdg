@@ -10,4 +10,5 @@
 #
 
 class Brand < ApplicationRecord
+	has_many :orders
 end

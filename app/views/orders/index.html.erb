@@ -31,15 +31,15 @@
             </div>
           </div>
         </div>
-        <nav>
+        <nav style="margin-top: 15px;">
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-orders-tab" data-toggle="tab" href="#nav-orders" role="tab" aria-controls="nav-home" aria-selected="true">Orders</a>
-            <a class="nav-item nav-link" id="nav-messages-tab" data-toggle="tab" href="#nav-messages" role="tab" aria-controls="nav-profile" aria-selected="false">Messages</a>
-            <a class="nav-item nav-link" id="nav-notifications-tab" data-toggle="tab" href="#nav-notifications" role="tab" aria-controls="nav-contact" aria-selected="false">Notifications</a>
+            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-orders">Orders</a>
+            <a class="nav-item nav-link" data-toggle="tab" href="#nav-messages">Messages</a>
+            <a class="nav-item nav-link" data-toggle="tab" href="#nav-notifications">Notifications</a>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active padding-top-1" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
+          <div class="tab-pane active" id="nav-orders">
             <div class="row">
               <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
                 <% @orders.each do |order| %>
@@ -67,7 +67,7 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane fade padding-top-1" id="nav-messages" role="tabpanel" aria-labelledby="nav-messages-tab">
+          <div class="tab-pane" id="nav-messages">
             <div class="row">
               
                 <div class="ibox" style="padding: 15px; width: 100%;">
@@ -90,7 +90,7 @@
                 
             </div>
           </div>
-          <div class="tab-pane fade padding-top-1" id="nav-notifications" role="tabpanel" aria-labelledby="nav-notifications-tab">
+          <div class="tab-pane" id="nav-notifications">
             <div class="row">
               <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
                 <table class="table table-striped">

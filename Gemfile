@@ -37,15 +37,18 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 gem 'cancancan'
-gem 'administrate'
-gem 'administrate-field-paperclip'
+
+# gem 'administrate'
+# gem 'administrate-field-paperclip'
+# gem 'administrate-field-password'
+# gem 'administrate-field-collection_select'
+# gem 'administrate-field-hidden', '~> 0.0.3'
+# gem 'administrate-field-select', '~> 2.0', require: 'administrate/field/select_basic'
+
 gem "paperclip", "~> 5.2.1"
-gem 'administrate-field-password'
-gem 'administrate-field-collection_select'
-gem 'administrate-field-hidden', '~> 0.0.3'
 gem 'seed_dump'
 gem 'rack-cors', :require => 'rack/cors'
-gem 'administrate-field-select', '~> 2.0', require: 'administrate/field/select_basic'
+
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem 'devise_token_auth'
 gem 'roo'

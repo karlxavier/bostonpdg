@@ -10,4 +10,8 @@
 #
 
 class VendorCategory < ApplicationRecord
+	belongs_to :vendor
+	belongs_to :category
+
+	validates :vendor_id, :category_id, presence: true
 end

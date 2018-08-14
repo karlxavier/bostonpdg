@@ -57,14 +57,14 @@ class OrderEntry < ApplicationRecord
     end
     obj
   end
-  def product
-    obj = {}
-    if self.product_id.present?
-      product = Product.find(self.product_id)
-      obj = {:id => product.id, :name => product.name, :view => product.name}
-    end
-    obj
-  end
+  # def product
+  #   obj = {}
+  #   if self.product_id.present?
+  #     product = Product.find(self.product_id)
+  #     obj = {:id => product.id, :name => product.name, :view => product.name}
+  #   end
+  #   obj
+  # end
   def vendor_obj
     obj = {}
     if self.vendor.present?

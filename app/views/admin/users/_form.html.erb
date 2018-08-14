@@ -1,45 +1,100 @@
-<%#
-# Form Partial
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        
+        <%= form_for [:admin, @user], html: { class: "form-horizontal" } do |f| %>
 
-This partial is rendered on a resource's `new` and `edit` pages,
-and renders all form fields for a resource's editable attributes.
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Email</label>
+              <div class="col-sm-10">
+                <%= f.text_field :email, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
 
-## Local variables:sss
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Password</label>
+              <div class="col-sm-10">
+                <%= f.text_field :password, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
 
-- `page`:
-  An instance of [Administrate::Page::Form][1].
-  Contains helper methods to display a form,
-  and knows which attributes should be displayed in the resource's form.
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Confirm Password</label>
+              <div class="col-sm-10">
+                <%= f.text_field :password, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
 
-[1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Form
-%>
+          <div class="form-group">
+              <label class="col-sm-2 control-label">First Name</label>
+              <div class="col-sm-10">
+                <%= f.text_field :first_name, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
 
-<%= form_for([namespace, page.resource], html: { class: "form" }) do |f| %>
-  <% if page.resource.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= t(
-          "administrate.form.errors",
-          pluralized_errors: pluralize(page.resource.errors.count, t("administrate.form.error")),
-          resource_name: display_resource_name(page.resource_name)
-        ) %>
-      </h2>
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Last Name</label>
+              <div class="col-sm-10">
+                <%= f.text_field :last_name, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
 
-      <ul>
-        <% page.resource.errors.full_messages.each do |message| %>
-          <li class="flash-error"><%= message %></li>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Billing Address</label>
+            <div class="col-sm-10">
+               <%= f.collection_select( :billing_address, Address.all, :id, :full_address, {include_blank: true}, {id: "manage_by_selection", class: "chosen-select"})%>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Shipping Address</label>
+            <div class="col-sm-10">
+               <%= f.collection_select( :shipping_address, Address.all, :id, :full_address, {include_blank: true}, {id: "manage_by_selection", class: "chosen-select"})%>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Mobile</label>
+              <div class="col-sm-10">
+                <%= f.text_field :mobile, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Phone</label>
+              <div class="col-sm-10">
+                <%= f.text_field :phone, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                  <%= link_to 'Cancel', admin_users_path, class: "btn btn-white" %>
+                  <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
+                    Save changes
+                  <% end %> 
+              </div>
+          </div>
+
         <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <% page.attributes.each do |attribute| -%>
-    <div class="field-unit field-unit--<%= attribute.html_class %>">
-      <%= render_field attribute, f: f %>
+      </div>
     </div>
-  <% end -%>
-
-  <div class="form-actions">
-    <%= f.submit %>
   </div>
-<% end %>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.chosen-select').chosen({width: "100%"});
+  })
+</script>

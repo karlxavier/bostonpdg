@@ -1,0 +1,20 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Orders</h2>
+        <ol class="breadcrumb">
+            <li>
+                <%= link_to 'Dashboard', admin_root_path %>
+            </li>
+            <li>
+                <%= link_to 'Orders List', admin_orders_path %>
+            </li>
+            <li class="active">
+                <strong>Create New Order</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<%= render 'form' %>

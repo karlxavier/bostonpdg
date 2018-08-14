@@ -1,54 +1,175 @@
-<%#
-# Form Partial
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        
+        <%= form_for [:admin, @product], html: { class: "form-horizontal" } do |f| %>
 
-This partial is rendered on a resource's `new` and `edit` pages,
-and renders all form fields for a resource's editable attributes.
-
-## Local variables:
-
-- `page`:
-  An instance of [Administrate::Page::Form][1].
-  Contains helper methods to display a form,
-  and knows which attributes should be displayed in the resource's form.
-
-[1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Form
-%>
-
-<%= form_for([namespace, page.resource], html: { class: "form" }) do |f| %>
-  <% if page.resource.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= t(
-          "administrate.form.errors",
-          pluralized_errors: pluralize(page.resource.errors.count, t("administrate.form.error")),
-          resource_name: display_resource_name(page.resource_name)
-        ) %>
-      </h2>
-
-      <ul>
-        <% page.resource.errors.full_messages.each do |message| %>
-          <li class="flash-error"><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% page.attributes.each do |attribute| -%>
-        <% if params[:action] == "new" && params[:vendor_id].present? && !params[:vendor_id].nil?%>
-            <div class="field-unit field-unit--hidden">
-
-              <div class="field-unit__field">
-                <input type="hidden" name="product[vendor_id]" id="product_vendor_id" value="<%= params[:vendor_id] %>">
+          <div class="form-group">
+              <div class="col-sm-10 col-sm-offset-2">
+                <% if @product.image_data? %>
+                  <%= image_tag @product.image_url(:original), class: "img-circle circle-border m-b-md", style: "height: 150px; width: 150px; margin-bottom: 5px;" %>  
+                <% else %>
+                  <%= image_tag 'default-product.png', class: "img-circle circle-border m-b-md", style: "height: 150px; width: 150px; margin-bottom: 5px;" %>  
+                <% end %>
+                <br>
+                 <label class="btn btn-w-m btn-link btn-xs btn-file" style="margin-left: 15px;">
+                    Upload Image
+                    <%= f.file_field :image, id: 'message-attachment', style: "display: none;", title: "Image upload" %>
+                </label>
               </div>
+          </div>
+          <div class="hr-line-dashed"></div>
 
-            </div>
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Name</label>
+              <div class="col-sm-10">
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Approval</label>
+              <div class="col-sm-10">
+                <%= f.text_field :approval_status, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Online Date</label>
+              <div class="col-sm-10">
+               <div class="input-group date">
+                  <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </span>
+                  <%= f.text_field :online_date, class: "form-control", value: @product.online_date.present? ? @product.online_date.strftime("%d-%m-%Y") : '', autocomplete: :off %>
+                </div> 
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Offline Date</label>
+              <div class="col-sm-10">
+               <div class="input-group date">
+                  <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </span>
+                  <%= f.text_field :offline_date, class: "form-control", value: @product.offline_date.present? ? @product.offline_date.strftime("%d-%m-%Y") : '', autocomplete: :off %>
+                </div> 
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Sales Unit</label>
+              <div class="col-sm-10">
+                <%= f.text_field :unit, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Description</label>
+              <div class="col-sm-10">
+                <%= f.text_field :description, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Base Product</label>
+              <div class="col-sm-10">
+                <%= f.text_field :base_product, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group"><label class="col-sm-2 control-label">Category</label>
+              <div class="col-sm-10">
+                 <%= f.collection_select( :category, Category.all, :id, :name, {include_blank: true}, {id: "category_selection", class: "chosen-select"})%>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Price Class</label>
+              <div class="col-sm-10">
+                <%= f.text_field :price, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Product Variant Type</label>
+              <div class="col-sm-10">
+                <%= f.text_field :variant_type, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Style</label>
+              <div class="col-sm-10">
+                <%= f.text_field :style, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Product Variants</label>
+              <div class="col-sm-10">
+                <%= f.text_field :variants, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Product Variants</label>
+              <div class="col-sm-10">
+                <%= f.text_field :variants, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Force in Stock</label>
+              <div class="col-sm-10">
+                <%= f.check_box :force_in_stock, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                  <%= link_to 'Cancel', admin_products_path, class: "btn btn-white" %>
+                  <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
+                    Save changes
+                  <% end %> 
+              </div>
+          </div>
+
         <% end %>
-    <div class="field-unit field-unit--<%= attribute.html_class %>">
-      <%= render_field attribute, f: f %>
-    </div>
-  <% end -%>
 
-  <div class="form-actions">
-    <%= f.submit %>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.chosen-select').chosen({width: "100%"});
+
+    $('.input-group.date').datepicker({
+      format: 'dd-mm-yyyy',
+      todayBtn: "linked",
+      keyboardNavigation: false,
+      forceParse: false,
+      calendarWeeks: true,
+      autoclose: true
+    });
+
+  })
+</script>

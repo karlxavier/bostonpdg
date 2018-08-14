@@ -5,7 +5,7 @@
 	<a class="count-info" data-toggle="dropdown" id="#users" href="#" aria-expanded="true">
         <i class="fa fa-users" style="color: #999c9e;"></i>
     </a>
-    <ul class="dropdown-menu dropdown-messages" aria-labelledby="users" id="div-add-users"> 
+    <ul class="dropdown-menu dropdown-messages2" aria-labelledby="users" id="div-add-users"> 
     	<a data-toggle="collapse" data-parent="#accordion" href="#acc_add_users" class="collapsed btn btn-primary btn-sm" aria-expanded="false">
     		<small>
     			Update Users	
@@ -36,7 +36,7 @@
 	<a class="count-info" data-toggle="dropdown" id="#attachments" href="#" aria-expanded="false">
         <i class="fa fa-paperclip" style="color: #999c9e; margin-left: 10px;"></i>
     </a>
-	<ul id="msg_attachments" class="dropdown-menu dropdown-messages" aria-labelledby="attachments" style="margin-left: 10px;"> 
+	<ul id="msg_attachments" class="dropdown-menu dropdown-messages2" aria-labelledby="attachments" style="margin-left: 10px;"> 
     	<% chatroom.messages.each do |message| %>
     		<% if message.attachment_data? %>
 				<li>

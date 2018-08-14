@@ -1,21 +1,48 @@
-module Admin
-  class InventoriesController < Admin::ApplicationController
-    # To customize the behavior of this controller,
-    # you can overwrite any of the RESTful actions. For example:
-    #
-    # def index
-    #   super
-    #   @resources = Inventory.
-    #     page(params[:page]).
-    #     per(10)
-    # end
+class Admin::InventoriesController < ApplicationController
+    before_action :set_inventory, only: [:edit, :update]
 
-    # Define a custom finder by overriding the `find_resource` method:
-    # def find_resource(param)
-    #   Inventory.find_by!(slug: param)
-    # end
+    def index
+        @inventories = Inventory.all
+    end
 
-    # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
-    # for more information
-  end
+    def new
+        @inventory = Inventory.new
+    end
+
+    def create
+        @inventory = Inventory.new(inventory_params)
+
+        respond_to do |format|
+           if @inventory.save
+                format.html { redirect_to admin_inventories_path }
+            else
+                format.html { render 'new' }
+            end
+        end
+    end
+
+    def edit
+    end
+
+    def update
+        respond_to do |format|
+            if @inventory.update_attributes(inventory_params)
+                format.html { redirect_to admin_inventories_path }
+            else
+                format.html { render 'edit' }
+            end
+        end
+    end
+
+    private
+
+        def inventory_params
+            params.require(:inventory).permit(:loc_id, :bin_id, :quantity, :aisle_id, :product_id)
+        end
+
+        def set_inventory
+            @inventory = Inventory.find(params[:id])
+        end
+
 end
+

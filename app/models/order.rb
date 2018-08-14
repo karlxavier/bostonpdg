@@ -30,6 +30,10 @@ class Order < ApplicationRecord
   has_many :products, through: :order_entries
   belongs_to :brand
 
+  belongs_to :order_status
+  belongs_to :customer
+
+
   def created_by_name
     if self.created_by.present?
       user = User.find(self.created_by)

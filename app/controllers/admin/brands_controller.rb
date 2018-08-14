@@ -1,21 +1,47 @@
-module Admin
-  class BrandsController < Admin::ApplicationController
-    # To customize the behavior of this controller,
-    # you can overwrite any of the RESTful actions. For example:
-    #
-    # def index
-    #   super
-    #   @resources = Brand.
-    #     page(params[:page]).
-    #     per(10)
-    # end
+class Admin::BrandsController < ApplicationController
+    before_action :set_brand, only: [:edit, :update]
 
-    # Define a custom finder by overriding the `find_resource` method:
-    # def find_resource(param)
-    #   Brand.find_by!(slug: param)
-    # end
+    def index
+        @brands = Brand.all
+    end
 
-    # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
-    # for more information
-  end
+    def new
+        @brand = Brand.new
+    end
+
+    def create
+        @brand = Brand.new(brand_params)
+
+        respond_to do |format|
+           if @brand.save
+                format.html { redirect_to admin_brands_path }
+            else
+                format.html { render 'new' }
+            end
+        end
+    end
+
+    def edit
+    end
+
+    def update
+        respond_to do |format|
+            if @brand.update_attributes(brand_params)
+                format.html { redirect_to admin_brands_path }
+            else
+                format.html { render 'edit' }
+            end
+        end
+    end
+
+    private
+
+        def brand_params
+            params.require(:brand).permit(:name)
+        end
+
+        def set_brand
+            @brand = Brand.find(params[:id])
+        end
+
 end

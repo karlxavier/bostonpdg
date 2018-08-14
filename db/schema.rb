@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180726170004) do
+ActiveRecord::Schema.define(version: 20180809172531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,6 +240,12 @@ ActiveRecord::Schema.define(version: 20180726170004) do
     t.integer "product_id"
   end
 
+  create_table "order_statuses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "order_users", force: :cascade do |t|
     t.integer "regional"
     t.integer "comms"
@@ -255,8 +261,8 @@ ActiveRecord::Schema.define(version: 20180726170004) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "created_by"
-    t.string "status"
-    t.integer "customer"
+    t.integer "order_status_id"
+    t.integer "customer_id"
     t.integer "delivery_address"
     t.integer "payment_address"
     t.decimal "total_cost"
@@ -311,6 +317,7 @@ ActiveRecord::Schema.define(version: 20180726170004) do
     t.text "specs"
     t.text "vendor_quote_prices"
     t.text "notes"
+    t.text "image_data"
     t.index ["style_attribute_id"], name: "index_products_on_style_attribute_id"
     t.index ["vendor_id"], name: "index_products_on_vendor_id"
   end

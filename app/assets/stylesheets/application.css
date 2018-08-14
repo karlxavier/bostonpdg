@@ -24,6 +24,8 @@
  *= require search
  *= require feathericon
  *= require chosen
+ *= require datatables.min
+ *= require datepicker
  *= require_self
  */
 .display-block {

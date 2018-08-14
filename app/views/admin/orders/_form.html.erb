@@ -1,0 +1,175 @@
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        
+        <%= form_for [:admin, @order], html: { class: "form-horizontal" } do |f| %>
+
+          <div class="form-group"><label class="col-sm-2 control-label">Created By</label>
+              <div class="col-sm-10">
+                 <%= f.collection_select( :created_by, User.all, :id, :full_name, {include_blank: true}, {id: "created_by_selection", class: "chosen-select"})%>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Status</label>
+            <div class="col-sm-10">
+               <%= f.collection_select( :order_status_id, OrderStatus.all, :id, :name, {include_blank: true}, {id: "order_status_id_selection", class: "chosen-select"})%>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Customer</label>
+            <div class="col-sm-10">
+               <%= f.collection_select( :customer_id, Customer.all, :id, :customer_fullname, {include_blank: true}, {id: "order_status_id_selection", class: "chosen-select"})%>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Delivery Address</label>
+            <div class="col-sm-10">
+               <%= f.collection_select( :delivery_address, Address.all, :id, :full_address, {include_blank: true}, {id: "order_status_id_selection", class: "chosen-select"})%>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Delivery Address</label>
+            <div class="col-sm-10">
+               <%= f.collection_select( :payment_address, Address.all, :id, :full_address, {include_blank: true}, {id: "order_status_id_selection", class: "chosen-select"})%>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Total Cost</label>
+              <div class="col-sm-10">
+                <%= f.text_field :total_cost, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Total Tax</label>
+              <div class="col-sm-10">
+                <%= f.text_field :total_tax, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Total Discount</label>
+              <div class="col-sm-10">
+                <%= f.text_field :total_discount, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Lead Time</label>
+              <div class="col-sm-10">
+                <%= f.text_field :lead_time, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Total Budget</label>
+              <div class="col-sm-10">
+                <%= f.text_field :total_budget, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Urgent</label>
+              <div class="col-sm-10">
+                <%= f.check_box :urgent, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Brand</label>
+            <div class="col-sm-10">
+               <%= f.collection_select( :brand_id, Brand.all, :id, :name, {include_blank: true}, {id: "brand_selection", class: "chosen-select"})%>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Margin</label>
+              <div class="col-sm-10">
+                <%= f.text_field :margin, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Promise Date</label>
+              <div class="col-sm-10">
+               <div class="input-group date">
+                  <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </span>
+                  <%= f.text_field :promise_date, class: "form-control", value: @order.promise_date.present? ? @order.promise_date.strftime("%d-%m-%Y") : '', autocomplete: :off %>
+                </div> 
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Fulfillment Date</label>
+              <div class="col-sm-10">
+               <div class="input-group date">
+                  <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </span>
+                  <%= f.text_field :fulfillment_date, class: "form-control", value: @order.fulfillment_date.present? ? @order.fulfillment_date.strftime("%d-%m-%Y") : '', autocomplete: :off %>
+                </div> 
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Notes</label>
+              <div class="col-sm-10">
+                <%= f.text_field :notes, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                  <%= link_to 'Cancel', admin_orders_path, class: "btn btn-white" %>
+                  <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
+                    Save changes
+                  <% end %> 
+              </div>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.chosen-select').chosen({width: "100%"});
+
+    $('.input-group.date').datepicker({
+      format: 'dd-mm-yyyy',
+      todayBtn: "linked",
+      keyboardNavigation: false,
+      forceParse: false,
+      calendarWeeks: true,
+      autoclose: true
+    });
+
+  })
+</script>

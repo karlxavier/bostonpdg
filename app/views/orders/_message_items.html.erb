@@ -5,7 +5,7 @@
         <i class="fa fa-tasks"></i>
         Items
       </a>
-      <ul id="msg_items" class="dropdown_scroll2 dropdown-menu dropdown-messages" aria-labelledby="msg_items" style="margin-left: 10px;"> 
+      <ul id="msg_items" class="dropdown_scroll2 dropdown-menu dropdown-messages2" aria-labelledby="msg_items" style="margin-left: 10px;"> 
         <li>
           <%= link_to load_messages_orders_path(order), remote: true do %>
             <strong>Order Ticket <%= order.id %></strong>
@@ -34,7 +34,7 @@
         <i class="fa fa-paperclip"></i>
         Attachments
       </a>
-      <ul id="msg_attachments" class="dropdown_scroll dropdown-menu dropdown-messages" aria-labelledby="attachments" style="margin-left: 10px; left: -100px;"> 
+      <ul id="msg_attachments" class="dropdown_scroll dropdown-menu dropdown-messages2" aria-labelledby="attachments" style="margin-left: 10px; left: -100px;"> 
           <% chatroom.messages.each do |message| %>
             <% if message.attachment_data? %>
             <li>

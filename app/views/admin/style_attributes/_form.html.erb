@@ -1,0 +1,94 @@
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        
+        <%= form_for [:admin, @style_attribute], html: { class: "form-horizontal" } do |f| %>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Name</label>
+              <div class="col-sm-10">
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+            <label class="col-sm-2 control-label">Product</label>
+            <div class="col-sm-10">
+               <%= f.collection_select( :product_id, Product.all, :id, :name, {include_blank: true}, {id: "product_selection", class: "chosen-select"})%>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Value</label>
+              <div class="col-sm-10">
+                <%= f.text_field :value, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Default</label>
+              <div class="col-sm-10">
+                <%= f.text_field :default, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Height</label>
+              <div class="col-sm-10">
+                <%= f.text_field :height, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Width</label>
+              <div class="col-sm-10">
+                <%= f.text_field :width, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Finish</label>
+              <div class="col-sm-10">
+                <%= f.text_field :finish, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                  <%= link_to 'Cancel', admin_style_attributes_path, class: "btn btn-white" %>
+                  <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
+                    Save changes
+                  <% end %> 
+              </div>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.chosen-select').chosen({width: "100%"});
+
+    $('.input-group.date').datepicker({
+      format: 'dd-mm-yyyy',
+      todayBtn: "linked",
+      keyboardNavigation: false,
+      forceParse: false,
+      calendarWeeks: true,
+      autoclose: true
+    });
+
+  })
+</script>
