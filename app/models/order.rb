@@ -28,6 +28,7 @@ class Order < ApplicationRecord
   has_many :order_users
   has_many :order_entries
   has_many :products, through: :order_entries
+  belongs_to :brand
 
   def created_by_name
     if self.created_by.present?

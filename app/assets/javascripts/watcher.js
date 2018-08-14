@@ -1,15 +1,17 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   var targetToObserve = document.body;
 
   var observerConfig = {
-    attributes: true, 
-    childList: true, 
-    characterData: true 
+    attributes: true,
+    childList: true,
+    characterData: true
   };
 
-  var observer = new MutationObserver(function(mutations) {
+  var observer = new MutationObserver(function (mutations) {
     mutations.forEach(mutataion => {
-        feather.replace();
+      feather.replace({
+        class: 'align-middle'
+      });
     });
   });
 

@@ -10,9 +10,26 @@
 <% if @order.present? && @orders.present? %>
     <div class="row" style="position:relative;">
       <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: hidden; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 30% !important;">
-        <div style="margin-bottom: 2%; text-align: right;">
-          <a href="<%= new_order_path %>" class="btn btn-dark btn-padding-margin" style="margin: 0% 1%;padding: .2% 3% !important;">ADD A PROJECT</a>
-          <a href="#" class="btn btn-outline-dark btn-padding-margin" style="margin: 0% 1%;padding: .2% 3% !important;"><i data-feather="filter"></i>&nbsp;SORT BY LATEST</a>
+        <div class="d-flex flex-row justify-content-center">
+          <div class="btn__add--project mr-3">
+            <a href="<%= new_order_path %>" class="btn btn-dark btn-padding-margin" style="margin: 0% 1%;padding: .2% 3% !important;">
+              ADD A PROJECT
+            </a>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-outline-dark btn-padding-margin dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="align-middle" data-feather="filter"></i>SORT BY</a>
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to 'Latest', { sort: 'created_at', direction: 'desc'}, class: 'dropdown-item' %>
+              <%= link_to 'Oldest', { sort: 'created_at', direction: 'asc'}, class: 'dropdown-item' %>
+              <%= link_to 'Ticket # Asc', { sort: 'id', direction: 'asc'}, class: 'dropdown-item' %>
+              <%= link_to 'Ticket # Desc', { sort: 'id', direction: 'desc'}, class: 'dropdown-item' %>
+              <%= link_to 'Brand', { sort: 'brand', direction: 'asc'}, class: 'dropdown-item' %>
+              <%= link_to 'Update Date', { sort: 'updated_at', direction: 'desc'}, class: 'dropdown-item' %>
+            </div>
+          </div>
         </div>
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">

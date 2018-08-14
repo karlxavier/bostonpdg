@@ -11,22 +11,20 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.order(updated_at: :desc, created_at: :desc)
+    @orders = Order.joins(:brand).order("#{sort_column} #{sort_direction}")
     if @orders.present? && !@orders.nil?
-
       if @order.present?
-        @order_entries = @order.order_entries.order('updated_at DESC')
+        @order_entries = @order.order_entries.order("updated_at DESC")
       else
         @order = Order.order(updated_at: :desc, created_at: :desc).first
-        @order_entries = @order.order_entries.order('updated_at DESC')
+        @order_entries = @order.order_entries.order("updated_at DESC")
       end
-
     end
     if params[:product_id].present?
-      @product_id =  params[:product_id]
+      @product_id = params[:product_id]
     end
     if params[:order_entry_id].present?
-      @order_entry_id =  params[:order_entry_id]
+      @order_entry_id = params[:order_entry_id]
     end
     @chatroom_order = ChatroomOrder.find(@order.id)
     @chatroom_orders = ChatroomOrder.order(id: :desc)
@@ -34,24 +32,24 @@ class OrdersController < ApplicationController
     @vendors = Vendor.all
     @products = Product.all
     @brands = Brand.all
-    @order_histories = OrderHistory.where(:order_id => @order.id).order('created_at DESC')
+    @order_histories = OrderHistory.where(:order_id => @order.id).order("created_at DESC")
   end
 
   def show
     respond_to do |format|
       @chatroom_order = ChatroomOrder.find(@order.id)
-      @order_entries = @order.order_entries.order('updated_at DESC')
+      @order_entries = @order.order_entries.order("updated_at DESC")
 
       format.js
     end
   end
 
   def new
-    @categories = Category.order('id DESC')
-    @vendors = Vendor.order('id DESC')
-    @products = Product.order('id DESC')
-    @users = User.order('id DESC')
-    @brands = Brand.order('id DESC')
+    @categories = Category.order("id DESC")
+    @vendors = Vendor.order("id DESC")
+    @products = Product.order("id DESC")
+    @users = User.order("id DESC")
+    @brands = Brand.order("id DESC")
   end
 
   def update_assign_user
@@ -129,7 +127,7 @@ class OrdersController < ApplicationController
     end
 
     if order_user.errors.any?
-      puts '******* ERRORS ********'
+      puts "******* ERRORS ********"
       order_user.errors.full_messages.each do |message|
         puts message
       end
@@ -143,7 +141,7 @@ class OrdersController < ApplicationController
     @order.brand_id = params[:order][:brand_id]
     if params[:order][:brand_id] != "" || params[:order_entries].present? || params[:order_branch].present? || params[:order_user].present?
       if @order.save
-        OrderHistory.create(:order_id => @order.id, :description => 'has been Created', :user_id => current_user.id)
+        OrderHistory.create(:order_id => @order.id, :description => "has been Created", :user_id => current_user.id)
         if params[:order_entries].present?
           temp_order_entries = params[:order_entries].split(",").map { |s| s.to_i }
           temp_order_entries.each do |oe|
@@ -159,7 +157,7 @@ class OrdersController < ApplicationController
                   vendor.update_attributes(:order_entry_id => order_entry.id)
                 end
               end
-              OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => 'has been Added', :user_id => current_user.id)
+              OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => "has been Added", :user_id => current_user.id)
             end
           end
         end
@@ -172,7 +170,7 @@ class OrdersController < ApplicationController
             order_branch.address_id = ob
             order_branch.save
             if order_entry.save
-              OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => 'has been Added', :user_id => current_user.id)
+              OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => "has been Added", :user_id => current_user.id)
             end
           end
         end
@@ -260,7 +258,7 @@ class OrdersController < ApplicationController
             order_entry = OrderEntry.find(oe.id)
             if order_entry.destroy
               OrderEntryVendor.where(:order_entry_id => oe.id).destroy_all
-              OrderHistory.create(:order_id => order_entry.order_id, :product_id => order_entry.product_id, :description => 'has been Removed', :user_id => current_user.id)
+              OrderHistory.create(:order_id => order_entry.order_id, :product_id => order_entry.product_id, :description => "has been Removed", :user_id => current_user.id)
             end
           end
         end
@@ -279,10 +277,9 @@ class OrdersController < ApplicationController
                 vendor.update_attributes(:order_entry_id => order_entry.id)
               end
             end
-            OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => 'has been Added', :user_id => current_user.id)
+            OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => "has been Added", :user_id => current_user.id)
           end
         end
-
       end
       OrderBranch.where(:order_id => @order.id).destroy_all
       if params[:order_branch].present?
@@ -363,13 +360,12 @@ class OrdersController < ApplicationController
     redirect_to orders_path(:id => @order.id)
   end
 
-
   def edit
-    @categories = Category.order('id DESC')
-    @vendors = Vendor.order('id DESC')
-    @products = Product.order('id DESC')
-    @users = User.order('id DESC')
-    @brands = Brand.order('id DESC')
+    @categories = Category.order("id DESC")
+    @vendors = Vendor.order("id DESC")
+    @products = Product.order("id DESC")
+    @users = User.order("id DESC")
+    @brands = Brand.order("id DESC")
     @order = Order.find(params[:id])
     @order_entries = OrderEntry.where(:order_id => @order.id)
     @order_users = OrderUser.where(:order_id => @order.id)
@@ -387,8 +383,8 @@ class OrdersController < ApplicationController
     @vendor_list = @order_entry_list.select(:vendor_id).distinct
     if @vendor_list.length > 0
       @vendor_list.each do |vl|
-        if !vl.vendor_id.nil? && vl.vendor_id != 'null'
-          @vendor = Vendor.find( vl.vendor_id )
+        if !vl.vendor_id.nil? && vl.vendor_id != "null"
+          @vendor = Vendor.find(vl.vendor_id)
           @order_entries = OrderEntry.where("order_id = #{@order.id} AND id IN (SELECT order_entry_id FROM order_entry_vendors WHERE vendor_id = #{vl.vendor_id})")
           if @vendor.email.present? && !@vendor.email.nil?
             OrderMailer.with(order: @order, vendor: @vendor, order_entries: @order_entries).send_order_entries.deliver_now
@@ -406,7 +402,7 @@ class OrdersController < ApplicationController
     if params[:vendors].present? && params[:order_id].present?
       if params[:vendors].length > 0
         params[:vendors].each do |id|
-          @vendor = Vendor.find( id.to_i )
+          @vendor = Vendor.find(id.to_i)
           @order = Order.find(params[:order_id].to_i)
           @user = User.where(:email => "notifications@burningmidnight.com").first
           @order_entries = OrderEntry.where(:order_id => params[:order_id].to_i)
@@ -460,4 +456,15 @@ class OrdersController < ApplicationController
     end
   end
 
+  def sort_column
+    if params[:sort] != "brand"
+      Order.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    else
+      "brands.name"
+    end
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+  end
 end
