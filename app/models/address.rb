@@ -21,4 +21,9 @@ class Address < ApplicationRecord
   def state_and_city
     self.state + " - " + self.city
   end
+
+  def full_address
+  	"#{street} #{street_2}, #{city} #{state}, #{country}"
+  end
+
 end

@@ -1,82 +1,93 @@
-<%#
-# Index
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Vendors</h2>
+        <ol class="breadcrumb">
+            <li>
+                <%= link_to 'Dashboard', admin_root_path %>
+            </li>
+            <li>
+              <%= link_to 'Vendors List', admin_vendors_path %>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
 
-This view is the template for the index page.
-It is responsible for rendering the search bar, header and pagination.
-It renders the `_table` partial to display details about the resources.
-
-## Local variables:
-
-- `page`:
-  An instance of [Administrate::Page::Collection][1].
-  Contains helper methods to help display a table,
-  and knows which attributes should be displayed in the resource's table.
-- `resources`:
-  An instance of `ActiveRecord::Relation` containing the resources
-  that match the user's search criteria.
-  By default, these resources are passed to the table partial to be displayed.
-- `search_term`:
-  A string containing the term the user has searched for, if any.
-- `show_search_bar`:
-  A boolean that determines if the search bar should be shown.
-
-[1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Collection
-%>
-
-<% content_for(:title) do %>
-  <%= display_resource_name(page.resource_name) %>
-<% end %>
-
-<header class="main-content__header" role="banner">
-  <h1 class="main-content__page-title" id="page-title">
-    <%= content_for(:title) %>
-  </h1>
-
-  <% if show_search_bar %>
-    <%= render(
-      "search",
-      search_term: search_term,
-      resource_name: display_resource_name(page.resource_name)
-    ) %>
-  <% end %>
-
-  <div>
-    <%= link_to(
-      t(
-        "administrate.actions.new_resource",
-        name: page.resource_name.titleize.downcase
-      ),
-      [:new, namespace, page.resource_path],
-      class: "button",
-    ) if valid_action?(:new) && show_action?(:new, new_resource) %>
-  </div>
-</header>
-
-<section class="main-content__body main-content__body--flush">
-  <div class="pull-right" style="padding-bottom: 2%;">
-    <div class="card">
-      <div class="card-body" style=" padding: 5%; border: 1px solid #6d6d6d; border-radius: .3em; margin-right: 5%; ">
-
-        <%= form_tag vendors_import_csv_path, multipart: true do %>
-            <div class="form-group">
-              <label for="exampleFormControlFile1">Import Here:</label>
-              <%= file_field_tag :file %>
-              <br>
-              <%= submit_tag 'Import File' %>
-            </div>
-        <% end %>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins" style="font-size: 13px;">
+        <div class="ibox-title">
+                    <h5></h5>
+                    <div class="ibox-tools">
+                        <%= link_to 'Create New Vendor', new_admin_vendor_path, class: "btn btn-primary btn-sm" %>
+                    </div>
+                </div>
+        <div class="ibox-content">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover dataTables-list dataTable">
+              <thead>
+                          <tr role="row">
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Country Origin</th>
+                            <th>Lead Time</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                          <% @vendors.each do |vendor| %>
+                            <tr>
+                                <td><%= vendor.id %></td>
+                                <td>
+                                    <%= link_to vendor.name, admin_vendor_path(vendor) %>
+                                </td>
+                                <td><%= vendor.email %></td>
+                                <td><%= vendor.country_origin %></td>
+                                <td><%= vendor.lead_time %></td>
+                                <td>
+                                  <div class="btn-group">
+                                        <%= link_to 'Edit', edit_admin_vendor_path(vendor), class: "btn btn-xs btn-white" %>
+                                        <%= link_to 'Show', admin_vendor_path(vendor), class: "btn btn-xs btn-white" %>
+                                        <button class="btn btn-xs btn-danger" type="button">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                          <% end %>
+                        </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
-  <br>
-  <br>
-  <%= render(
-    "collection",
-    collection_presenter: page,
-    resources: resources,
-    table_title: "page-title"
-  ) %>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.dataTables-list').DataTable({
+            pageLength: 25,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [
+                { extend: 'copy'},
+                {extend: 'csv'},
+                {extend: 'excel', title: 'ExampleFile'},
+                {extend: 'pdf', title: 'ExampleFile'},
 
-  <%= paginate resources %>
-</section>
+                {extend: 'print',
+                 customize: function (win){
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
+
+                        $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                }
+                }
+            ]
+
+        });
+
+    });
+</script>

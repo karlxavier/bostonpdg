@@ -1,21 +1,48 @@
-module Admin
-  class AddressesController < Admin::ApplicationController
-    # To customize the behavior of this controller,
-    # you can overwrite any of the RESTful actions. For example:
-    #
-    # def index
-    #   super
-    #   @resources = Address.
-    #     page(params[:page]).
-    #     per(10)
-    # end
+class Admin::AddressesController < ApplicationController
+    before_action :set_address, only: [:edit, :update]
 
-    # Define a custom finder by overriding the `find_resource` method:
-    # def find_resource(param)
-    #   Address.find_by!(slug: param)
-    # end
+    def index
+        @addresses = Address.all
+    end
 
-    # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
-    # for more information
-  end
+    def edit
+    end 
+
+    def update
+        respond_to do |format|
+            if @address.update_attributes(address_params)
+                format.html { redirect_to admin_addresses_path }
+            else
+                format.html { render 'edit' }
+            end
+        end
+    end
+
+    def new
+        @address = Address.new
+    end
+
+    def create
+        @address = Address.new(address_params)
+
+        respond_to do |format|
+           if @address.save
+                format.html { redirect_to admin_addresses_path }
+            else
+                format.html { render 'new' }
+            end
+        end
+    end
+
+    private
+
+        def address_params
+            params.require(:address).permit(:street, :street_2, :city, :state, :zip, :country)
+        end
+
+        def set_address
+            @address = Address.find(params[:id])
+        end
+
+
 end

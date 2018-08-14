@@ -15,4 +15,5 @@
 #
 
 class StyleAttribute < ApplicationRecord
+	belongs_to :product
 end

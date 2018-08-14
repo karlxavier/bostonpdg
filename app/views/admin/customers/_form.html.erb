@@ -1,0 +1,148 @@
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        
+        <%= form_for [:admin, @customer], html: { class: "form-horizontal" } do |f| %>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">First Name</label>
+              <div class="col-sm-10">
+                <%= f.text_field :first_name, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Last Name</label>
+              <div class="col-sm-10">
+                <%= f.text_field :last_name, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Email</label>
+              <div class="col-sm-10">
+                <%= f.text_field :email, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Phone</label>
+              <div class="col-sm-10">
+                <%= f.text_field :phone, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Website</label>
+              <div class="col-sm-10">
+                <%= f.text_field :website, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Status</label>
+              <div class="col-sm-10">
+                <%= f.text_field :status, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Brand</label>
+            <div class="col-sm-10">
+               <%= f.collection_select( :brand, Brand.all, :id, :name, {include_blank: true}, {id: "brand_selection", class: "chosen-select"})%>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Owned By</label>
+            <div class="col-sm-10">
+               <%= f.collection_select( :owned_by, User.all, :id, :full_name, {include_blank: true}, {id: "owned_by_selection", class: "chosen-select"})%>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Manage By</label>
+            <div class="col-sm-10">
+               <%= f.collection_select( :manage_by, User.all, :id, :full_name, {include_blank: true}, {id: "manage_by_selection", class: "chosen-select"})%>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Billing Address</label>
+              <div class="col-sm-10">
+                <%= f.text_field :billing_address, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Shipping Address</label>
+              <div class="col-sm-10">
+                <%= f.text_field :shipping_address, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">PO Required</label>
+              <div class="col-sm-10">
+                <%= f.check_box :po_required, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Admin</label>
+              <div class="col-sm-10">
+                <%= f.check_box :admin, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Payment Terms</label>
+              <div class="col-sm-10">
+                <%= f.text_field :payment_terms, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Notes</label>
+              <div class="col-sm-10">
+                <%= f.text_field :notes, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                  <%= link_to 'Cancel', admin_customers_path, class: "btn btn-white" %>
+                  <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
+                    Save changes
+                  <% end %> 
+              </div>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.chosen-select').chosen({width: "100%"});
+  })
+</script>

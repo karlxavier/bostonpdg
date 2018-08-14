@@ -25,25 +25,11 @@
 
 <body>
 
-<% if current_user.present? %>
-  <%= render "layouts/static/sidebar_nav" %>
-<% end %>
-<div class="page active <% if (params[:controller] == 'inventories' && params[:action] != 'index') || params[:controller] == 'vendors'%>body-margin<% end %>" style="padding-bottom: 0;">
-  <% if current_user.present? && params[:action] != 'index' && params[:action] != 'show' %>
-      <a href="javascript:history.back()" class="badge badge-secondary btn btn-nav btn-back">Back</a>
+  <% if ["Admin"].exclude? controller.class.name.split("::").first %>
+    <%= render "layouts/user" %>
+  <% else %>
+    <%= render "layouts/admin" %>
   <% end %>
-  <section class="dashboard-header section-padding">
-    <div class="container-fluid">
-      <%= render "layouts/static/notification" %>
-      <%= yield %>
-    </div>
-  </section>
-</div>
-<div id="modal-shows"></div>
-<div id="msg_preview" class="msg_modal">
-  <span class="close_preview">&times;</span>
-  <img class="msg_modal-content" id="img01">
-</div>
 
 <%= render "search_results/full_screen_search" %>
 <script type="text/javascript">
@@ -68,6 +54,7 @@
 <script>
     feather.replace()
 </script>
+
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>

@@ -11,8 +11,8 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require jquery.min
+//= require turbolinks
 //= require popper.min
 //= require bootstrap.min
 //= require grasp_mobile_progress_circle-1.0.0.min
@@ -31,6 +31,8 @@
 //= require cable
 //= require watcher
 //= require chosen
+//= require metisMenu
+//= require datepicker
 
 $(document).on('turbolinks:load', function() {
     $('.selectpicker').selectpicker();

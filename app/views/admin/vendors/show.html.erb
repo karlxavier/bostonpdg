@@ -1,120 +1,143 @@
-<%#
-# Show
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Vendors</h2>
+        <ol class="breadcrumb">
+            <li>
+                <%= link_to 'Dashboard', admin_root_path %>
+            </li>
+            <li>
+                <%= link_to 'Vendors List', admin_vendors_path %>
+            </li>
+            <li class="active">
+                <strong><%= @vendor.name %></strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+                <div class="col-lg-12">
 
-This view is the template for the show page.
-It renders the attributes of a resource,
-as well as a link to its edit page.
+                    <div class="ibox product-detail">
+                        <div class="ibox-content">
 
-## Local variables:
+                            <div class="row">
+                                <div class="col-md-4">
 
-- `page`:
-  An instance of [Administrate::Page::Show][1].
-  Contains methods for accessing the resource to be displayed on the page,
-  as well as helpers for describing how each attribute of the resource
-  should be displayed.
+                                    <h2 class="font-bold m-b-xs">
+                                        <%= @vendor.name %>
+                                    </h2>
+                                    <small><%= @vendor.email %></small><br>
+                                    <hr>
 
-[1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Show
-%>
+                                    <h4>Vendor Details</h4>
 
-<% content_for(:title) { t("administrate.actions.show_resource", name: page.page_title) } %>
+                                    <dl class="dl-horizontal m-t-md small">
+                                        <dt>Address</dt>
+                                        <dd><%= @vendor.billing_address.present? ? Address.find(@vendor.billing_address).street : 'N/A' %></dd>
 
-<header class="main-content__header" role="banner">
-  <h1 class="main-content__page-title">
-    <%= content_for(:title) %>
-  </h1>
+                                        <dt>Lead Time</dt>
+                                        <dd><%= @vendor.lead_time %></dd>
 
-  <div>
-    <%= link_to(
-      t("administrate.actions.edit_resource", name: page.page_title),
-      [:edit, namespace, page.resource],
-      class: "button",
-    ) if valid_action?(:edit) && show_action?(:edit, page.resource) %>
-  </div>
-</header>
+                                        <dt>Country of Origin</dt>
+                                        <dd><%= @vendor.country_origin %></dd>
+                                    </dl>
 
-<section class="main-content__body">
-  <dl>
-    <% page.attributes.each do |attribute| %>
-      <dt class="attribute-label" id="<%= attribute.name %>">
-      <%= t(
-        "helpers.label.#{resource_name}.#{attribute.name}",
-        default: attribute.name.titleize,
-      ) %>
-      </dt>
+                                    <hr>
 
-      <dd class="attribute-data attribute-data--<%=attribute.html_class%>"
-          ><%= render_field attribute %></dd>
-    <% end %>
+                                    <div>
+                                        <div class="btn-group">
+                                            <%= link_to edit_admin_vendor_path(@vendor), class: "btn btn-primary btn-sm" do %>
+                                                <i class="fa fa-pencil"></i> Edit Vendor
+                                            <% end %>
+                                            <%= link_to admin_vendors_path, class: "btn btn-white btn-sm" do %>
+                                                <i class="fa fa-bars"></i> Back to List
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="tabs-container">
+                                        <div class="nav nav-tabs" role="tablist">
+                                            <a class="nav-item nav-link active" data-toggle="tab" href="#tab-1"> Products</a>
+                                            <a class="nav-item nav-link" data-toggle="tab" href="#tab-2"> Categories</a>
+                                            <a class="nav-item nav-link" data-toggle="tab" href="#tab-3"> Products</a>
+                                        </div>
+                                        <div class="tab-content">
+                                            <div id="tab-1" class="tab-pane active">
+                                                <div class="panel-body">
+                                                    <div class="table-responsive" style="overflow: visible;">
+                                                        <%= form_for [:admin, @vendors_product], remote: true do |f| %>
+                                                            <dl class="dl-horizontal">
+                                                                <dt>
+                                                                    <small>Attach Product</small> 
+                                                                </dt>
+                                                                <dd>
+                                                                    <%= f.collection_select( :product_id, Product.all, :id, :name, {include_blank: true}, {id: "product_selection", class: "chosen-select"})%>
+                                                                </dd>
+                                                                <dd>
+                                                                    <%= f.hidden_field :vendor_id, value: @vendor.id %>
+                                                                    <button class="btn btn-primary btn-sm pull-right">Save</button>     
+                                                                </dd>
+                                                                
+                                                            </dl>
+                                                        <% end %>
+                                                        
+                                                        <%= render 'vendor_product', vendor: @vendor %>    
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tab-2" class="tab-pane">
+                                                <div class="panel-body">
+                                                    <div class="table-responsive" style="overflow: visible;">
+                                                        <%= form_for [:admin, @vendor_category], remote: true do |f| %>
+                                                            <dl class="dl-horizontal">
+                                                                <dt>
+                                                                    <small>Attach Category</small> 
+                                                                </dt>
+                                                                <dd>
+                                                                    <%= f.collection_select( :category_id, Category.all, :id, :name, {include_blank: true}, {id: "category_selection", class: "chosen-select"})%>
+                                                                </dd>
+                                                                <dd>
+                                                                    <%= f.hidden_field :vendor_id, value: @vendor.id %>
+                                                                    <button class="btn btn-primary btn-sm pull-right">Save</button>     
+                                                                </dd>
+                                                                
+                                                            </dl>
+                                                        <% end %>
+                                                        
+                                                        <%= render 'vendor_category', vendor: @vendor %>    
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tab-3" class="tab-pane">
+                                                <div class="panel-body">
+                                                    <h1>Prodcuts 2</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-    <dt class="attribute-label" id="users">
-      Categories
-    </dt>
-    <dd class="attribute-data attribute-data--has-many">
-      <% categories = Category.where("id IN (SELECT category_id FROM vendor_categories WHERE vendor_id = #{page.resource.id})") %>
-      <div style="display: block;padding-bottom:3%;">
-        <%= link_to "Add Category", new_admin_category_path(:vendor_id => page.resource.id)%>&nbsp;
-        <%= link_to "Add Existing Category", new_admin_vendor_category_path(:vendor_id => page.resource.id)%>
-      </div>
-      <% if categories.present? %>
-          <table style="margin-bottom: 2%;">
-            <thead>
-            <tr>
-              <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Name/s  </th>
-              <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% categories.each do |category| %>
-                <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/categories/<%= category.id %>">
-                  <td class="cell-data cell-data--number">
-                    <a href="/admin/categories/<%= category.id %>" class="action-show">
-                      <%= category.name %>
-                    </a>
-                  </td>
-                  <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/vendor_categories/<%= category.id %>">Remove</a></td>
+                        </div>
+                        <div class="ibox-footer">
+                            <span class="pull-right">
+                                Created at - <i class="fa fa-clock-o"></i> <%= @vendor.created_at %>
+                            </span>
+                            -
+                        </div>
+                    </div>
 
-                </tr>
-            <% end %>
-            </tbody>
-          </table>
-      <% end %>
-    </dd>
-
-
-    <dt class="attribute-label" id="users">
-     Products
-    </dt>
-    <dd class="attribute-data attribute-data--has-many">
-      <% products = Product.where("id IN (SELECT product_id FROM vendors_products WHERE vendor_id = #{page.resource.id})") %>
-      <div style="display: block;padding-bottom:3%;">
-        <%= link_to "Add Products", new_admin_product_path(:vendor_id => page.resource.id)%>&nbsp;
-        <%= link_to "Add Existing Product", new_admin_vendors_product_path(:vendor_id => page.resource.id)%>
-      </div>
-      <% if products.present? %>
-          <table style="margin-bottom: 2%;">
-            <thead>
-            <tr>
-              <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Name/s  </th>
-              <th scope="col"></th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <% products.each do |product| %>
-                <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/products/<%= product.id %>">
-                  <td class="cell-data cell-data--number">
-                    <a href="/admin/products/<%= product.id %>" class="action-show">
-                      <%= product.name %>
-                    </a>
-                  </td>
-                  <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/products/<%= product.id %>">Destroy</a></td>
-
-                </tr>
-            <% end %>
-            </tbody>
-          </table>
-
-      <% end %>
-    </dd>
-  </dl>
-</section>
+                </div>
+            </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('.chosen-select').chosen({width: "100%"});
+    })
+</script>

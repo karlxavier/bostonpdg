@@ -15,7 +15,12 @@
 
 class Vendor < ApplicationRecord
   require 'csv'
-  has_many :products
+  
+  has_many :vendors_products
+  has_many :products, through: :vendors_products
+
+  has_many :vendor_categories
+  has_many :categories, through: :vendor_categories
 
   def mailboxer_email(object)
     #Check if an email should be sent for that object

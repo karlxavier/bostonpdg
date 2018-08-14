@@ -80,10 +80,7 @@ class User < ApplicationRecord
   end
 
   def full_name
-    if self.first_name.present? && self.last_name.present?
-      self.first_name + " " + self.last_name
-    else
-      'NIL'
-    end
+    "#{first_name} #{last_name}"
   end
+
 end

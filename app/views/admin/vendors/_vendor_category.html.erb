@@ -1,0 +1,16 @@
+<div id="vendor_category">
+	<% if vendor.vendor_categories.present? %>
+		<table class="table table-striped table-hover">
+			<tbody>
+				<% vendor.vendor_categories.each do |vc| %>
+					<tr>
+					    <td><%= vc.category.name %></td>
+					    <td class="client-status">
+					    	<%= link_to 'Destroy', admin_vendor_category_path(vc.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs", remote: true %>
+					    </td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	<% end %>
+</div>
