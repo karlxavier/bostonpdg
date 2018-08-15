@@ -38,12 +38,12 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'cancancan'
 
-# gem 'administrate'
-# gem 'administrate-field-paperclip'
-# gem 'administrate-field-password'
-# gem 'administrate-field-collection_select'
-# gem 'administrate-field-hidden', '~> 0.0.3'
-# gem 'administrate-field-select', '~> 2.0', require: 'administrate/field/select_basic'
+gem 'administrate'
+gem 'administrate-field-paperclip'
+gem 'administrate-field-password'
+gem 'administrate-field-collection_select'
+gem 'administrate-field-hidden', '~> 0.0.3'
+gem 'administrate-field-select', '~> 2.0', require: 'administrate/field/select_basic'
 
 gem "paperclip", "~> 5.2.1"
 gem 'seed_dump'
