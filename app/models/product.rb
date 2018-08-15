@@ -34,23 +34,14 @@
 class Product < ApplicationRecord
   has_many :style_attributes
   has_many :item_messages
-  has_many :inventories
-  belongs_to :vendor
 
-  has_many :order_entries, class_name: 'OrderEntry', primary_key: 'id', foreign_key: 'order_id'
+  has_many :order_entries
   has_many :orders, through: :order_entries
 
   has_many :chatroom_orders, through: :order_entries
 
-  has_many :vendors_products
-  has_many :vendors, through: :vendors_products
-
-  include ProductImageUploader[:image]
-
-  validates :name, presence: true
-
-  # has_attached_file :picture, styles: { small: "64x64", med: "100x100", large: "200x200" }
-  # validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
+  has_attached_file :picture, styles: { small: "64x64", med: "100x100", large: "200x200" }
+  validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
 
   def specs_html
     self.specs.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
@@ -77,10 +68,16 @@ class Product < ApplicationRecord
   end
 
   def picture_url
-    @url = ActionController::Base.helpers.image_path("default-product.png")
-    if self.image_data?
-      @url = self.image_url(:original)
+    @url = "http://www.stampready.net/dashboard/editor/user_uploads/image_uploads/2018/04/17/R3H4Mxn2s0SmpFj9lvtXDBzNkP8bfJqQ.jpg"
+    if self.picture.exists?
+      @url = self.picture.url
     end
     @url
+  end
+
+  def category_name
+    if self.category.present?
+      Category.find(self.category).name
+    end
   end
 end

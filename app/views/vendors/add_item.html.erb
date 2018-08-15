@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<div class="row" style="padding-top: 4%;">
+<div class="row" style="padding-top: 4%;" id="item-vendor-list">
   <div class="col padding-left">
     <table class="table">
       <thead class="thead-dark thead-yellow">
@@ -51,3 +51,24 @@
     </table>
   </div>
 </div>
+
+
+<script>
+
+    $(function() {
+        $('select.categories').on('change', function(e){
+            getItems(this.value)
+        });
+
+        function getItems(id){
+            $.ajax({
+                method: "GET",
+                url: "/vendors/products?id="+id
+            }).done(function( data ) {
+                $('#item-vendor-list').html('');
+                $('#item-vendor-list').html(data);
+            });
+        }
+    })
+
+</script>

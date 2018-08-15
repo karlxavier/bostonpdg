@@ -1,0 +1,29 @@
+<div class="col padding-left">
+  <table class="table">
+    <thead class="thead-dark thead-yellow">
+    <tr>
+      <th scope="col">#</th>
+      <th></th>
+      <th scope="col">Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">Price</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @products.present? %>
+        <% @products.each do |product|%>
+    <tr >
+      <th scope="row"><%= product.id %></th>
+      <td class="float-right"><img src="<%= product.picture_url %>"  alt="features" border="0" width="64px"  style="display:block; border:none; outline:none; text-decoration:none;" class="features"></td>
+      <td><%= product.category_name%></td>
+      <td><%= product.price%></td>
+      <td></td>
+      <!--<td><button class="btn btn-nav-selected btn-nav-selected-circle" ng-click="orderDetails()"><i class="icon ion-plus-round"></i></button></td>-->
+    </tr>
+    <% end %>
+    <% else %>
+    <% end %>
+    </tbody>
+  </table>
+</div>

@@ -40,4 +40,9 @@ class VendorsController < ApplicationController
   def supplier
 
   end
+
+  def products
+    @product = Product.where(:vendor_id => params[:id])
+    render :layout => false
+  end
 end
