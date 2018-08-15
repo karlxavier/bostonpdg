@@ -19,6 +19,7 @@
 
 class OrderEntry < ApplicationRecord
   belongs_to :order
+  belongs_to :chatroom_order, class_name: 'Order'
   belongs_to :product
   has_many :item_messages
 
@@ -57,14 +58,14 @@ class OrderEntry < ApplicationRecord
     end
     obj
   end
-  # def product
-  #   obj = {}
-  #   if self.product_id.present?
-  #     product = Product.find(self.product_id)
-  #     obj = {:id => product.id, :name => product.name, :view => product.name}
-  #   end
-  #   obj
-  # end
+  def product_hash
+    obj = {}
+    if self.product_id.present?
+      product = Product.find(self.product_id)
+      obj = {:id => product.id, :name => product.name, :view => product.name}
+    end
+    obj
+  end
   def vendor_obj
     obj = {}
     if self.vendor.present?

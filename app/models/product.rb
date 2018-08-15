@@ -37,7 +37,7 @@ class Product < ApplicationRecord
   has_many :inventories
   belongs_to :vendor
 
-  has_many :order_entries
+  has_many :order_entries, class_name: 'OrderEntry', primary_key: 'id', foreign_key: 'order_id'
   has_many :orders, through: :order_entries
 
   has_many :chatroom_orders, through: :order_entries
@@ -46,6 +46,8 @@ class Product < ApplicationRecord
   has_many :vendors, through: :vendors_products
 
   include ProductImageUploader[:image]
+
+  validates :name, presence: true
 
   # has_attached_file :picture, styles: { small: "64x64", med: "100x100", large: "200x200" }
   # validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/

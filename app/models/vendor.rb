@@ -22,6 +22,8 @@ class Vendor < ApplicationRecord
   has_many :vendor_categories
   has_many :categories, through: :vendor_categories
 
+  validates :name, presence: true
+
   def mailboxer_email(object)
     #Check if an email should be sent for that object
     #if true
