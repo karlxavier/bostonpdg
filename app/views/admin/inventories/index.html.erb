@@ -40,7 +40,7 @@
 		                    	<% @inventories.each do |inventory| %>
 			                    	<tr>
 				                        <td><%= inventory.id %></td>
-				                        <td><%= inventory.product.name %></td>
+				                        <td><%= inventory.product.present? ? inventory.product.name : "No Product #{inventory.product_id}" %></td>
 				                        <td><%= inventory.loc_id %></td>
 				                        <td><%= inventory.bin_id %></td>
 				                        <td><%= inventory.quantity %></td>

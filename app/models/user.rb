@@ -47,6 +47,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :email, presence: true
+
   ROLES = %i[admin product_manager sales_manager views_only]
 
   def roles=(roles)

@@ -6,7 +6,7 @@
         <i class="fa fa-users" style="color: #999c9e;"></i>
     </a>
 
-    <ul class="dropdown-menu dropdown-messages" aria-labelledby="users"> 
+    <ul class="dropdown-menu dropdown-messages2" aria-labelledby="users"> 
     	<% OrderUser.chatroom_order_users(chatroom.id).each do |user| %>
 			<li>
 		        <div class="dropdown-messages-box">
@@ -24,7 +24,7 @@
 	<a class="count-info" data-toggle="dropdown" id="#attachments" href="#" aria-expanded="false">
         <i class="fa fa-paperclip" style="color: #999c9e; margin-left: 10px;"></i>
     </a>
-	<ul id="msg_attachments" class="dropdown-menu dropdown-messages" aria-labelledby="attachments" style="margin-left: 10px;"> 
+	<ul id="msg_attachments" class="dropdown-menu dropdown-messages2" aria-labelledby="attachments" style="margin-left: 10px;"> 
     	<% messages.each do |message| %>
     		<% if message.attachment_data? %>
 				<li>

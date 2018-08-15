@@ -33,6 +33,7 @@ class Order < ApplicationRecord
   belongs_to :order_status
   belongs_to :customer
 
+  validates :order_status_id, :customer_id, :total_cost, presence: true
 
   def created_by_name
     if self.created_by.present?

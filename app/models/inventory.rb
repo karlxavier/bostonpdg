@@ -14,10 +14,12 @@
 
 class Inventory < ApplicationRecord
 
-  def product
-    Product.find(self.product_id)
-  end
+  # def product
+  #   Product.find(self.product_id)
+  # end
 
 	belongs_to :product
+
+	validates :product_id, presence: true
 
 end

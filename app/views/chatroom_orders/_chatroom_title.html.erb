@@ -42,7 +42,7 @@
 				<li>
 			        <div class="dropdown-messages-box">
 			        	<div class="media-body">
-			        		<small class="text-muted">Uploaded by <strong><%= message.user.first_name %></strong> </small><br>
+			        		<small class="text-muted">Uploaded by <strong><%= message.user.present? ? message.user.first_name : "No User #{message.user_id}" %></strong> </small><br>
 			        		<small class="text-muted">Uploaded at <%= message.created_at.strftime("%d-%m-%Y") %></small>
 			        		<strong>
 						        <% if message.attachment_data? %>

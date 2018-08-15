@@ -18,6 +18,8 @@
 class Address < ApplicationRecord
   #has_many :users
 
+  validates :street, presence: true
+
   def state_and_city
     self.state + " - " + self.city
   end

@@ -1,7 +1,7 @@
 <div class="feed-element" id="message-<%= message.id %>">
     <div class="media-body ">
         <small class="pull-right"><%= time_ago_in_words(message.created_at) %> ago</small>
-        <strong><%= [message.user.first_name, message.user.last_name].join(' ') %> </strong> <br>
+        <strong><%= message.user.present? ? [message.user.first_name, message.user.last_name].join(' ') : "No User #{message.user_id}" %> </strong> <br>
         <%= link_to edit_order_message_path(order_id: message.chatroom_order_id, id: message.id), class: "msg_edit pull-right", remote: true do %>
         	<small class="text-link" style="cursor: pointer;">Edit</small>
         <% end %>

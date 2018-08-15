@@ -44,7 +44,7 @@
 			                    	<tr>
 				                        <td><%= style_attribute.id %></td>
 				                        <td><%= style_attribute.name %></td>
-				                        <td><%= style_attribute.product.name %></td>
+				                        <td><%= style_attribute.product.present? ? style_attribute.product.name : "No Product #{style_attribute.product_id}" %></td>
                                         <td><%= style_attribute.value %></td>
                                         <td><%= style_attribute.default %></td>
                                         <td><%= style_attribute.height %></td>
