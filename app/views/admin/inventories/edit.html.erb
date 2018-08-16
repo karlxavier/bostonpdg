@@ -9,7 +9,7 @@
                 <%= link_to 'Invetory List', admin_inventories_path %>
             </li>
             <li class="active">
-                <strong><%= [@inventory.id, @inventory.product.name].join(' - ') %></strong>
+                <strong><%= @inventory.product.present? ? [@inventory.id, @inventory.product.name].join(' - ') : "No Product ID #{@inventory.product_id}" %></strong>
             </li>
         </ol>
     </div>
