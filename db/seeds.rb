@@ -14,13 +14,15 @@
 # OrderUser.destroy_all
 # Product.destroy_all
 # StyleAttribute.destroy_all
-OrderStatus.destroy_all
+# OrderStatus.destroy_all
 
-OrderStatus.create(name: 'Quote Request')
-OrderStatus.create(name: 'Sales')
-OrderStatus.create(name: 'Design')
-OrderStatus.create(name: 'Processing')
-OrderStatus.create(name: 'Shipping')
+# OrderStatus.create(name: 'Quote Request')
+# OrderStatus.create(name: 'Sales')
+# OrderStatus.create(name: 'Design')
+# OrderStatus.create(name: 'Processing')
+# OrderStatus.create(name: 'Shipping')
+
+OrderEntry.where(product_id: 809).destroy_all 
 
 
 # Vendor.destroy_all
