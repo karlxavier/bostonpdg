@@ -26,9 +26,9 @@ class SearchResult < ActiveRecord::Base
     case 
     when @query.present? && @filter.present?
       self.class.where('lower(searchable_type) = ?', @filter).
-        advanced_search(@query).preload(:searchable).map(&:searchable).uniq.sort { |a, b| (a.updated_at <=> b.updated_at) == @sort ? -1 : 1 }
+        advanced_search(@query).preload(:searchable).map(&:searchable).uniq.sort { |a, b| (a.created_at <=> b.created_at) == @sort ? -1 : 1 }
     when @query.present?
-      self.class.advanced_search(@query).preload(:searchable).map(&:searchable).uniq.sort { |a, b| (a.updated_at <=> b.updated_at) == @sort ? -1 : 1 }
+      self.class.advanced_search(@query).preload(:searchable).map(&:searchable).uniq.sort { |a, b| (a.created_at <=> b.created_at) == @sort ? -1 : 1 }
     else
       SearchResult.none
     end

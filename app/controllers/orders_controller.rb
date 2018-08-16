@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:index, :show]
+  before_action :set_search, only: :index
   before_action :set_chatroom, only: [:load_messages]
 
   def send_orders
@@ -11,7 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.joins(:brand).order("#{sort_column} #{sort_direction}")
+    @orders = OrderSearchService.call(query: @search.term, sort_column: sort_column, sort_direction: sort_direction)
     if @orders.present? && !@orders.nil?
       if @order.present?
         @order_entries = @order.order_entries.order("updated_at DESC")
@@ -466,5 +467,9 @@ class OrdersController < ApplicationController
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+  end
+
+  def set_search
+    @search = OpenStruct.new(params[:search])
   end
 end

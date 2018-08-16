@@ -11,24 +11,38 @@
     <div class="row" style="position:relative;">
       <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: hidden; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 30% !important;">
         <div class="d-flex flex-row justify-content-center">
-          <div class="btn__add--project mr-3">
+          <div class="btn__add--project mr-3 d-none">
             <a href="<%= new_order_path %>" class="btn btn-dark btn-padding-margin" style="margin: 0% 1%;padding: .2% 3% !important;">
               ADD A PROJECT
             </a>
           </div>
-          <div class="dropdown">
-            <button class="btn btn-outline-dark btn-padding-margin dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="align-middle" data-feather="filter"></i>SORT BY</a>
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <%= link_to 'Latest', { sort: 'created_at', direction: 'desc'}, class: 'dropdown-item' %>
-              <%= link_to 'Oldest', { sort: 'created_at', direction: 'asc'}, class: 'dropdown-item' %>
-              <%= link_to 'Ticket # Asc', { sort: 'id', direction: 'asc'}, class: 'dropdown-item' %>
-              <%= link_to 'Ticket # Desc', { sort: 'id', direction: 'desc'}, class: 'dropdown-item' %>
-              <%= link_to 'Brand', { sort: 'brand', direction: 'asc'}, class: 'dropdown-item' %>
-              <%= link_to 'Update Date', { sort: 'updated_at', direction: 'desc'}, class: 'dropdown-item' %>
-            </div>
+          <div class="search-box">
+            <%= form_for :search, url: { action: :index }, html: { method: :get }, remote: false do |f| %>
+              <div class="input-group mb-3">
+                <%= f.search_field :term, class: 'form-control', placedholder: 'Search...' %>
+                <div class="input-group-append">
+                  <div class="btn-group">
+                    <%= f.button class: 'btn btn-dark' do %>
+                      <i data-feather="search"></i>
+                    <% end %>
+                    <div class="btn-group">
+                      <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="align-middle" data-feather="filter"></i>SORT BY</a>
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <%= link_to 'Latest', { sort: 'created_at', direction: 'desc', search: { term: @search.term } }, class: 'dropdown-item' %>
+                        <%= link_to 'Oldest', { sort: 'created_at', direction: 'asc', search: { term: @search.term } }, class: 'dropdown-item' %>
+                        <%= link_to 'Ticket # Asc', { sort: 'id', direction: 'asc', search: { term: @search.term } }, class: 'dropdown-item' %>
+                        <%= link_to 'Ticket # Desc', { sort: 'id', direction: 'desc', search: { term: @search.term } }, class: 'dropdown-item' %>
+                        <%= link_to 'Brand', { sort: 'brand', direction: 'asc', search: { term: @search.term } }, class: 'dropdown-item' %>
+                        <%= link_to 'Update Date', { sort: 'updated_at', direction: 'desc', search: { term: @search.term } }, class: 'dropdown-item' %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
         <nav style="margin-top: 15px;">
