@@ -26,6 +26,13 @@
                     </div>
                 </li>
                 <li>
+                    <%= link_to admin_notifications_path do %>
+                        <i class="fa fa-bell"></i> 
+                        <span class="nav-label">Notifications </span>
+                        <span class="label label-warning pull-right"><%= Audit.count %></span>
+                    <% end %>
+                </li>
+                <li>
                     <%= link_to admin_orders_path do %>
                         <i class="fa fa-shopping-cart"></i> 
                         <span class="nav-label">Orders</span>

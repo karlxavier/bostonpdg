@@ -46,6 +46,7 @@ class Product < ApplicationRecord
   has_many :vendors, through: :vendors_products
 
   include ProductImageUploader[:image]
+  audited
 
   validates :name, presence: true
 

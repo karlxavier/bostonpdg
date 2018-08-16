@@ -14,6 +14,9 @@ class Admin::ProductsController < ApplicationController
 
   def update
     respond_to do |format|
+        
+        @product.audit_comment = "Updated product #{@product.id}-#{params[:name]}"
+
         if @product.update_attributes(product_params)
             format.html { redirect_to admin_products_path }
         else

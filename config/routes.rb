@@ -82,6 +82,7 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
+    resources :notifications
     resources :users
     resources :users_brands
     resources :users_groups

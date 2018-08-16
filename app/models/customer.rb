@@ -25,6 +25,7 @@
 
 class Customer < ApplicationRecord
   has_many :orders
+  audited
 
   validates :first_name, :last_name, :email, presence: true
 

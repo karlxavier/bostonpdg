@@ -78,7 +78,7 @@ h5 {
   margin-right: 0;
 }
 .navbar-top-links li a {
-  padding: 20px 10px;
+  /*padding: 20px 10px;*/
   min-height: 50px;
 }
 .dropdown-menu {
@@ -8553,4 +8553,8 @@ body.md-skin {
   #page-wrapper {
     margin: 0;
   }
+
+.navbar-right {
+    float: right!important;
+    margin-right: -15px;
 }

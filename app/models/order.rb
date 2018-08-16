@@ -25,6 +25,7 @@
 #
 
 class Order < ApplicationRecord
+  audited
   has_many :order_users
   has_many :order_entries
   has_many :products, through: :order_entries

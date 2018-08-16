@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180809172531) do
+ActiveRecord::Schema.define(version: 20180816161501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,28 @@ ActiveRecord::Schema.define(version: 20180809172531) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "audits", force: :cascade do |t|
+    t.integer "auditable_id"
+    t.string "auditable_type"
+    t.integer "associated_id"
+    t.string "associated_type"
+    t.integer "user_id"
+    t.string "user_type"
+    t.string "username"
+    t.string "action"
+    t.jsonb "audited_changes"
+    t.integer "version", default: 0
+    t.string "comment"
+    t.string "remote_address"
+    t.string "request_uuid"
+    t.datetime "created_at"
+    t.index ["associated_type", "associated_id"], name: "associated_index"
+    t.index ["auditable_type", "auditable_id"], name: "auditable_index"
+    t.index ["created_at"], name: "index_audits_on_created_at"
+    t.index ["request_uuid"], name: "index_audits_on_request_uuid"
+    t.index ["user_id", "user_type"], name: "user_index"
+  end
+
   create_table "brands", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -41,6 +63,38 @@ ActiveRecord::Schema.define(version: 20180809172531) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "parent"
+  end
+
+  create_table "chat_thread_users", force: :cascade do |t|
+    t.integer "chat_thread_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chat_threads", force: :cascade do |t|
+    t.string "channel_id"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chatroom_users", force: :cascade do |t|
+    t.bigint "chatroom_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "last_read_at"
+    t.index ["chatroom_id"], name: "index_chatroom_users_on_chatroom_id"
+    t.index ["user_id"], name: "index_chatroom_users_on_user_id"
+  end
+
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_chatrooms_on_order_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -103,7 +157,7 @@ ActiveRecord::Schema.define(version: 20180809172531) do
     t.index ["user_id"], name: "index_item_messages_on_user_id"
   end
 
-  create_table "mailboxer_conversation_opt_outs", id: :serial, force: :cascade do |t|
+  create_table "mailboxer_conversation_opt_outs", id: :integer, default: nil, force: :cascade do |t|
     t.string "unsubscriber_type"
     t.integer "unsubscriber_id"
     t.integer "conversation_id"
@@ -111,13 +165,13 @@ ActiveRecord::Schema.define(version: 20180809172531) do
     t.index ["unsubscriber_id", "unsubscriber_type"], name: "index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type"
   end
 
-  create_table "mailboxer_conversations", id: :serial, force: :cascade do |t|
+  create_table "mailboxer_conversations", id: :integer, default: nil, force: :cascade do |t|
     t.string "subject", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "mailboxer_notifications", id: :serial, force: :cascade do |t|
+  create_table "mailboxer_notifications", id: :integer, default: nil, force: :cascade do |t|
     t.string "type"
     t.text "body"
     t.string "subject", default: ""
@@ -140,7 +194,7 @@ ActiveRecord::Schema.define(version: 20180809172531) do
     t.index ["type"], name: "index_mailboxer_notifications_on_type"
   end
 
-  create_table "mailboxer_receipts", id: :serial, force: :cascade do |t|
+  create_table "mailboxer_receipts", id: :integer, default: nil, force: :cascade do |t|
     t.string "receiver_type"
     t.integer "receiver_id"
     t.integer "notification_id", null: false
@@ -246,6 +300,7 @@ ActiveRecord::Schema.define(version: 20180809172531) do
     t.decimal "total_budget"
     t.boolean "urgent"
     t.integer "brand_id"
+    t.string "chatroom_name"
   end
 
   create_table "product_category_vendors", force: :cascade do |t|
@@ -375,15 +430,14 @@ ActiveRecord::Schema.define(version: 20180809172531) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "chatroom_users", "chatrooms"
+  add_foreign_key "chatroom_users", "users"
+  add_foreign_key "chatrooms", "orders"
   add_foreign_key "item_messages", "order_entries"
-  add_foreign_key "item_messages", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
-  add_foreign_key "messages", "users"
   add_foreign_key "products", "style_attributes"
-  add_foreign_key "users", "addresses", column: "billing_address"
-  add_foreign_key "users", "addresses", column: "shipping_address"
   add_foreign_key "users", "brands"
   add_foreign_key "users", "groups"
   add_foreign_key "vendors", "products"

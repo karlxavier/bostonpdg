@@ -35,7 +35,7 @@
 class User < ApplicationRecord
   #belongs_to :shipping_address, :class_name => 'Address', :foreign_key => 'shipping_address'
   #belongs_to :billing_address, :class_name => 'Address', :foreign_key => 'billing_address'
-
+  audited
   has_many :brands
   has_many :groups
 

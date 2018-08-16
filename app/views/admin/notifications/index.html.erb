@@ -1,0 +1,68 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Notifications</h2>
+        <ol class="breadcrumb">
+            <li>
+                <%= link_to 'Dashboard', admin_root_path %>
+            </li>
+            <li>
+              <%= link_to 'Notifications List', admin_notifications_path %>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-content">
+                    <div class="activity-stream">
+
+                        <% @audits.each do |audit| %>
+                            <div class="stream">
+                                <div class="stream-badge">
+                                    <% if audit.action == 'update' %>
+                                        <i class="fa fa-pencil bg-primary""></i>
+                                    <% elsif audit.action =='create' %>
+                                        <i class="fa fa-file-o bg-warning""></i>
+                                    <% end %>
+                                </div>
+                                <div class="stream-panel" style="font-size: 13px;">
+                                    <div class="stream-info">
+                                        <a href="#">
+                                            <span><%= [audit.user.first_name, audit.user.last_name].join(' ') %></span>
+                                            <br>
+                                            <span class="date"><%= audit.created_at.strftime("%d-%b-%C %I:%M %P") %></span>
+                                        </a>
+                                    </div>
+                                    <% if audit.action == 'update' %>
+                                        Updated <strong class="text-info"><%= audit.auditable_type %></strong> values:<br>
+                                        <a data-toggle="collapse" href="#more-details-<%= audit.id %>" class="btn btn-default btn-xs" aria-expanded="false">More Details</a>
+                                        <div id="more-details-<%= audit.id %>" class="panel-collapse collapse text-muted" style="margin-left: 20px; margin-top: 10px;" aria-expanded="false">
+                                            <% audit.audited_changes.each do |key, vals| %>
+                                                <%= key.humanize %>
+                                                <ul>
+                                                    <% vals.each do |val| %>
+                                                        <li>
+                                                            <%= val %>
+                                                        </li>
+                                                    <% end %>
+                                                </ul>
+                                            <% end %>    
+                                        </div>
+                                    <% elsif audit.action == 'create' %>
+                                        Created new <strong class="text-info"><%= audit.auditable_type %></strong><br>
+                                    <% end %>
+                                </div>
+                            </div>
+                        <% end %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

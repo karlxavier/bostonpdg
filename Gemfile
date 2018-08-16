@@ -61,6 +61,9 @@ gem 'image_processing'
 gem 'mini_magick'
 gem 'aws-sdk', '~> 3'
 
+# for crm log audits
+gem "audited", "~> 4.7"
+
 # global search
 gem 'scenic'
 gem 'textacular', '~> 5.0'
