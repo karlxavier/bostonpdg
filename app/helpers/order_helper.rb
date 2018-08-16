@@ -2,8 +2,8 @@ module OrderHelper
 
 	def check_image_url entry 
 		if entry.product.present?
-			if entry.product.image.url.present?
-			   entry.product.image.url(:original)
+			if entry.product.picture.url.present?
+			   entry.product.picture.url(:original)
 			else
 			  nil
 			end	
