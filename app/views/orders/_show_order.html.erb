@@ -140,7 +140,7 @@
                       <tr>
                           <td>
                             <% if entry.product.image_data? %>
-                              <%= image_tag check_image_url(entry), class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;" %>  
+                              <%= image_tag entry.product.image_url(:original), class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;" %>
                             <% else %>
                               <%= image_tag 'default-product.png', class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;" %>  
                             <% end %>
