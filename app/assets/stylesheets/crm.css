@@ -41,6 +41,10 @@ h5 {
 .nav.navbar-right > li > a {
   color: #999c9e;
 }
+.navbar-right {
+  float: right!important;
+  margin-right: -15px;
+}
 .nav > li.active > a {
   color: #ffffff;
 }
@@ -78,7 +82,6 @@ h5 {
   margin-right: 0;
 }
 .navbar-top-links li a {
-  /*padding: 20px 10px;*/
   min-height: 50px;
 }
 .dropdown-menu {
@@ -8537,24 +8540,5 @@ body.md-skin {
     display: inline-block;
   }
 }
-/* Only demo */
-@media (max-width: 1000px) {
-  .welcome-message {
-    display: none;
-  }
-}
-@media print {
-  nav.navbar-static-side {
-    display: none;
-  }
-  body {
-    overflow: visible !important;
-  }
-  #page-wrapper {
-    margin: 0;
-  }
 
-.navbar-right {
-    float: right!important;
-    margin-right: -15px;
-}
+
