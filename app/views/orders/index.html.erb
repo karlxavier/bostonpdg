@@ -6,6 +6,7 @@
     <%= render "orders/modals/edit_attributes" %>
     <%= render "orders/modals/entry_history" %>
     <%= render "orders/modals/edit_free_flowing_fields" %>
+    <%= render "orders/modals/file_upload" %>
 <% end %>
 <% if @order.present? && @orders.present? %>
     <div class="row" style="position:relative;">
@@ -156,6 +157,16 @@
 
 
 <script type="text/javascript">
+    Dropzone.options.pictureUpload = {
+        success: function(file, response) {
+            $('#pictureUpload').modal('hide')
+            this.removeFile(file);
+            var order_entry_id = $('#order_entry_id_2').val();
+            var pic_id = 'pic' + order_entry_id + response.id
+            $("#pic1").attr("src",response.picture_url);
+            $("#"+pic_id).attr("src",response.picture_url);
+        }
+    };
     $(function(){
         $("div#order-<%= @order.id %>").addClass('orange-left');
         $('.ibox-content').slimScroll({

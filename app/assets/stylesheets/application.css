@@ -310,3 +310,8 @@ p {
     background: #D4AD5C !important;
     border-color:#D4AD5C !important;
 }
+.dropzone {
+    border: 2px dashed rgba(0, 0, 0, 0.3) !important;
+    background-color: #f8f8f8;
+    text-align: center;
+}

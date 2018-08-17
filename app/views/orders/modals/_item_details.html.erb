@@ -17,12 +17,14 @@
 
             <div id="buttons" style="padding-top: 2%;">
               <button class="btn btn-outline-secondary float-left"  id="view_history">VIEW ITEM HISTORY</button>
-              <form action="<%= change_picture_products_path %>" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="order_entry_id" id="order_entry_id_2"  />
-                <input type="hidden" name="product_id" id="add_product_id_2" />
-                <input type="hidden" name="order_id" value="<%= @order.id %>"  />
-                <label class="btn btn-outline-secondary float-right"><i class="fa fa-upload" aria-hidden="true"></i><input type="file" name="picture" onchange="javascript:this.form.submit();" hidden></label>
-              </form>
+
+              <button class="btn btn-outline-secondary float-right" data-toggle="modal" data-target="#pictureUpload"><i class="fa fa-upload" aria-hidden="true"></i></button>
+              <!--<form action="<%#= change_picture_products_path %>" method="POST" enctype="multipart/form-data">-->
+                <!--<input type="hidden" name="order_entry_id" id="order_entry_id_2"  />-->
+                <!--<input type="hidden" name="product_id" id="add_product_id_2" />-->
+                <!--<input type="hidden" name="order_id" value="<%#= @order.id %>"  />-->
+                <!--<label class="btn btn-outline-secondary float-right"><i class="fa fa-upload" aria-hidden="true"></i><input type="file" name="picture" onchange="javascript:this.form.submit();" hidden></label>-->
+              <!--</form>-->
             </div>
           </div>
 

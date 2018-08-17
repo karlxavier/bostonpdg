@@ -15,15 +15,14 @@ before_action :set_product, only: [:show, :edit, :item_details]
   def change_picture
     if params[:product_id].present? && !params[:product_id].nil?
       @product = Product.find(params[:product_id])
-      if @product.update_attributes(:picture => params[:picture])
-        flash[:notice] = "Product Picture Successfully Updated"
+      if @product.update_attributes(:picture => (params[:picture].nil? ? params[:file] : params[:picture]))
+        render json: @product,methods: [:convert_dynamic_fields, :picture_url]
       else
-        flash[:error] = "Product Picture Updated Failed"
+        render nothing: true, status: :bad_request
       end
     else
-      flash[:error] = "Product Doesn't Exist"
+      render nothing: true, status: :bad_request
     end
-    redirect_to orders_path(:id => params[:order_id], :product_id => params[:product_id], :order_entry_id => params[:order_entry_id])
   end
 
   def create

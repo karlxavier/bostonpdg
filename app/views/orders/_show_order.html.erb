@@ -139,10 +139,11 @@
 
                       <tr>
                           <td>
-                            <% if entry.product.image_data? %>
-                              <%= image_tag entry.product.image_url(:original), class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;" %>
+                            <% if entry.product.picture.exists? %>
+                                <% @pic_id = 'pic' + entry.id.to_s + '' + entry.product.id.to_s %>
+                              <%= image_tag check_image_url(entry), id: @pic_id, class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;"%>
                             <% else %>
-                              <%= image_tag 'default-product.png', class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;" %>  
+                              <%= image_tag 'default-product.png', id: @pic_id, class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;" %>
                             <% end %>
                           </td>
                 
@@ -177,6 +178,7 @@
 
 <script type="text/javascript">
     $(function (){
+        console.log(Dropzone.options.my);
         $('.orders_and_order_form').css({'height': ($( window ).height() - 50)});
         $('.orders_and_order_form_2').css({'height': (($( window ).height() - 80) - 50)});
         $(window).resize(function(){

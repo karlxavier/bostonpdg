@@ -23,12 +23,18 @@ class OrderEntry < ApplicationRecord
   belongs_to :product
   has_many :item_messages
 
+  def product
+    if self.product_id.present?
+      Product.find(self.product_id)
+    end
+  end
+
   def product_name
     if self.product_id.present?
       product = Product.find(self.product_id)
       product.name
     end
-  end
+end
 
   def quoted_name
     if self.quoted_by.present?
