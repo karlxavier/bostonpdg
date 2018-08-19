@@ -157,7 +157,17 @@
 
 
 <script type="text/javascript">
+
+    $('#new_order_entry').submit(function() {
+        return setAttributesOnForm($(this));
+    });
+
+    $('#edit_order_entry').submit(function() {
+        return setAttributesOnForm($(this));
+    });
+
     Dropzone.options.pictureUpload = {
+        maxFiles:1,
         success: function(file, response) {
             $('#pictureUpload').modal('hide')
             this.removeFile(file);

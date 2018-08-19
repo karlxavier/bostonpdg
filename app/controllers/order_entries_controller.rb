@@ -3,7 +3,6 @@ class OrderEntriesController < ApplicationController
   def create
     @order_entry = OrderEntry.new
     @order_entry.order_id = params[:order_entry][:order_id]
-    # @order_entry.vendor = params[:order_entry][:vendor]
     @order_entry.product_id = params[:order_entry][:product_id]
     @order_entry.quoted_by = params[:order_entry][:quoted_by]
     @order_entry.category_id = params[:order_entry][:category_id]
@@ -11,6 +10,10 @@ class OrderEntriesController < ApplicationController
     @order_entry.cost = params[:order_entry][:cost]
     @order_entry.tax = params[:order_entry][:tax]
     @order_entry.quantity = params[:order_entry][:quantity]
+    @order_entry.specs = params[:order_entry][:specs]
+    @order_entry.vendor_quote_prices = params[:order_entry][:vendor_quote_prices]
+    @order_entry.notes = params[:order_entry][:notes]
+    @order_entry.dynamic_fields = params[:order_entry][:dynamic_fields].to_s
     if params[:order_entry][:order_id].present? && params[:order_entry][:product_id].present?
       if @order_entry.save
         if params[:order_entry][:vendor].present?

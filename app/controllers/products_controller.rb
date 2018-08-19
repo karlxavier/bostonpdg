@@ -29,12 +29,6 @@ before_action :set_product, only: [:show, :edit, :item_details]
     @product = Product.new
     @product.name = params[:product_name]
     @product.category = params[:category_id]
-    # @product.item_category_id = params[:item_category_id]
-    @product.specs = params[:specs]
-    @product.vendor_quote_prices = params[:vendor_quote_prices]
-    @product.notes = params[:notes]
-    @product.dynamic_fields = params[:dynamic_fields].to_s
-    # @product.vendor_id = params[:vendor_id]
     if @product.save
       #Add Vendor on List
       if params[:vendor_id].present?
