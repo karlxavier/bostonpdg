@@ -112,7 +112,7 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label label-form col-form-label-right">Attributes</label>
             <div class="col-sm-10">
-              <a class="btn btn-outline-dark float-right" onclick="product_attributes();" >Add Attributes</a>
+              <a class="btn btn-outline-dark float-right" onclick="add_attribute($('#new_order_entry').find('#product_attributes'));" >Add Attributes</a>
               <div class="col-sm-12">
                 <% if DefaultAttribute.all.size > 0 %>
                     <div class="padding-top-1" id="default_product_attributes" style="padding-top: 5%;">

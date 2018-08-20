@@ -66,6 +66,7 @@ $(document).on('turbolinks:load', function () {
 
 var room = 1;
 
+
 function product_attributes() {
     room++;
     var objTo = document.getElementById('product_attributes')
@@ -110,15 +111,24 @@ function add_product_attributes() {
     objTo.appendChild(divtest)
 }
 
-function add_product_attributes_2(key, val) {
+function generate_attributes(key, val, element) {
     room++;
-    var objTo = document.getElementById('add_product_attributes')
     var divtest = document.createElement("div");
     divtest.setAttribute("class", "row form-group removeclass" + room);
     var rdiv = 'removeclass' + room;
     divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="add_order_field_name" placeholder="Attribute Name" value="' + key + '"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="add_order_field_value" placeholder="Attribute Value" value="' + val + '"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
-    objTo.appendChild(divtest)
+    $(element).append(divtest);
+}
+
+function add_attribute(element) {
+    room++;
+    var divtest = document.createElement("div");
+    divtest.setAttribute("class", "row form-group removeclass" + room);
+    var rdiv = 'removeclass' + room;
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+
+    $(element).append(divtest)
 }
 
 function remove_education_fields(rid) {
@@ -153,27 +163,8 @@ function submitForm(id, elem) {
     $(elem).html('Please Wait...');
 }
 
-function showEditOrderEntries(id) {
-    $.ajax({
-        method: "GET",
-        url: "/api/simple/order_entries/" + id
-    }).done(function (data) {
-        console.log(data);
-        console.log(data.category_id);
-        $('#edit_order_entry').find('#order_entry_id').val(data.id);
-        $('#edit_order_entry').find('#order_entry_category_id').val(data.category_id);
-        $('#edit_order_entry').find('#order_entry_vendor').val(data.vendor_list);
-        $('#edit_order_entry').find('#order_entry_product_id').val(data.product_id);
-        $('#edit_order_entry').find('#order_entry_quoted_by').val(data.quoted_by);
-        $('#edit_order_entry').find('#order_entry_price').val(data.price);
-        $('#edit_order_entry').find('#order_entry_cost').val(data.cost);
-        $('#edit_order_entry').find('#order_entry_tax').val(data.tax);
-        $('#edit_order_entry').find('#order_entry_quantity').val(data.quantity);
-        $('#editOrderEntries').modal('show');
-        $('.selectpicker2').selectpicker('refresh')
-        $('.selectpicker').selectpicker('refresh')
-    });
-
+function showEditOrderEntries() {
+    $('#editOrderEntries').modal('show');
 }
 
 function showEditOrder(id) {
@@ -191,7 +182,30 @@ function showEditOrder(id) {
     });
 
 }
-
+function setFormValues(data, form) {
+    $(form).find('#order_entry_id').val(data.id);
+    $(form).find('#order_entry_category_id').val(data.category_id);
+    $(form).find('#order_entry_vendor').val(data.vendor_list);
+    $(form).find('#order_entry_product_id').val(data.product_id);
+    $(form).find('#order_entry_quoted_by').val(data.quoted_by);
+    $(form).find('#order_entry_price').val(data.price);
+    $(form).find('#order_entry_cost').val(data.cost);
+    $(form).find('#order_entry_tax').val(data.tax);
+    $(form).find('#order_entry_quantity').val(data.quantity);
+    $(form).find('#order_entry_specs').val(data.specs);
+    $(form).find('#order_entry_vendor_quote_prices').val(data.vendor_quote_prices);
+    $(form).find('#order_entry_notes').val(data.notes);
+    var element = $(form).find('#product_attributes');
+    if (data.convert_dynamic_fields != '' && data.convert_dynamic_fields != null && data.convert_dynamic_fields != undefined) {
+        foo = JSON.parse(data.convert_dynamic_fields);
+        Object.keys(foo)
+            .forEach(function eachKey(key) {
+                generate_attributes(key, foo[key], element);
+            });
+    }
+    $('.selectpicker2').selectpicker('refresh')
+    $('.selectpicker').selectpicker('refresh')
+}
 function itemDetails(id, entry_id) {
     $.ajax({
         method: "GET",
@@ -205,6 +219,7 @@ function itemDetails(id, entry_id) {
         $("#pic1").attr("src", data.product_picture);
         $('.product-name-header').html("(" + data.product.name + ")");
 
+        $('#order-entry-details').html('');
         checkDataValue('Product', data.product.name);
         checkDataValue('Category', data.category.name);
         checkDataValue('Vendor', data.vendor_name);
@@ -212,6 +227,7 @@ function itemDetails(id, entry_id) {
         checkDataValue('Vendor Cost', data.cost);
         checkDataValue('Tax', data.tax);
         checkDataValue('Quantity', data.quantity);
+        setFormValues(data, $('#edit_order_entry'))
 
         if (data.specs != "" && data.specs != null && data.specs != undefined) {
             $('#nav-specs').html(data.specs_html)
@@ -230,7 +246,6 @@ function itemDetails(id, entry_id) {
             foo = JSON.parse(data.convert_dynamic_fields);
             Object.keys(foo)
                 .forEach(function eachKey(key) {
-                    add_product_attributes_2(key, foo[key]);
                     dynamic_attributes = $('#dynamic-attributes').html();
                     $('#dynamic-attributes').html(dynamic_attributes + generateTableRow(key, foo[key]));
                 });

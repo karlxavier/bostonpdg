@@ -50,7 +50,7 @@ class OrderEntriesController < ApplicationController
   def update_entry
     @order_entry = OrderEntry.find(params[:order_entry][:id])
     if params[:order_entry][:order_id].present? && params[:order_entry][:product_id].present?
-      if @order_entry.update_attributes(:category_id => params[:order_entry][:category_id], :product_id => params[:order_entry][:product_id], :order_id => params[:order_entry][:order_id], :quoted_by => params[:order_entry][:quoted_by], :price => params[:order_entry][:price], :tax => params[:order_entry][:tax], :cost => params[:order_entry][:cost], :quantity => params[:order_entry][:quantity])
+      if @order_entry.update_attributes(:category_id => params[:order_entry][:category_id], :product_id => params[:order_entry][:product_id], :order_id => params[:order_entry][:order_id], :quoted_by => params[:order_entry][:quoted_by], :price => params[:order_entry][:price], :tax => params[:order_entry][:tax], :cost => params[:order_entry][:cost], :quantity => params[:order_entry][:quantity], :specs => params[:order_entry][:specs], :vendor_quote_prices => params[:order_entry][:vendor_quote_prices], :notes => params[:order_entry][:notes], :dynamic_fields => params[:order_entry][:dynamic_fields].to_s )
         if params[:order_entry][:vendor].present?
           if params[:order_entry][:vendor].length > 0
             temp_existing_vendors = params[:order_entry][:vendor]
