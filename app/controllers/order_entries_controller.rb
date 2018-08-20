@@ -77,7 +77,7 @@ class OrderEntriesController < ApplicationController
     else
       flash[:error] = "Order Entry Updated Failed"
     end
-    redirect_to orders_path(:id => @order_entry.order_id)
+    redirect_to orders_path(:id => @order_entry.order_id, :product_id => @order_entry.product_id, :order_entry_id => @order_entry.id)
   end
 
   def change_status
