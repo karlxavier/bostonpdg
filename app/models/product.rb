@@ -53,30 +53,6 @@ class Product < ApplicationRecord
   has_attached_file :picture, styles: { small: "64x64", med: "100x100", large: "200x200" }
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
 
-  def specs_html
-    self.specs.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
-  end
-  def vendor_quote_prices_html
-    self.vendor_quote_prices.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
-  end
-  def notes_html
-    self.notes.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
-  end
-
-  def convert_dynamic_fields
-    if self.dynamic_fields.present? && !self.dynamic_fields.nil?
-      self.dynamic_fields.gsub("=>", ":")
-    else
-      ''
-    end
-  end
-
-  def get_html_safe_fields
-    @dyna_fields = ''
-    eval(self.dynamic_fields).each {|key, value| @dyna_fields = @dyna_fields + "#{key}: #{value}<br/>" }
-    @dyna_fields
-  end
-
   def picture_url
     @url = "http://www.stampready.net/dashboard/editor/user_uploads/image_uploads/2018/04/17/R3H4Mxn2s0SmpFj9lvtXDBzNkP8bfJqQ.jpg"
     if self.picture.exists?

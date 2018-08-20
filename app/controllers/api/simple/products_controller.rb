@@ -179,7 +179,7 @@ module Api
       end
 
       def show
-        render json: @product,methods: [:convert_dynamic_fields, :picture_url, :specs_html, :vendor_quote_prices_html, :notes_html]
+        render json: @product,methods: [:picture_url]
       end
 
       protected

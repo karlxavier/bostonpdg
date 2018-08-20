@@ -55,12 +55,8 @@ $(document).on('turbolinks:load', function() {
             }
         });
         $("#view_history").click(function () {
-//            $('#viewProducts').modal('hide');
             $('#viewHistories').modal('show');
         });
-       /* $('#viewHistories').on('hidden.bs.modal', function (e) {
-            $('#viewProducts').modal('show');
-        })*/
     });
 
 
@@ -192,17 +188,24 @@ function showEditOrder(id) {
 function itemDetails(id, entry_id) {
     $.ajax({
         method: "GET",
-        url: "/api/simple/products/"+id
+        url: "/api/simple/order_entries/"+entry_id
     }).done(function( data ) {
         $('#add_product_attributes').html('');
-        $('#add_product_id').val(data.id);
-        $('#add_product_id_2').val(data.id);
+        $('#add_product_id').val(data.product_id);
+        $('#add_product_id_2').val(data.product_id);
         $('#order_entry_id_2').val(entry_id);
         $('#order_entry_id_3').val(entry_id);
-        $("#pic1").attr("src", data.picture_url);
-        $('.product-name-header').html("(" + data.name + ")");
-       /* $('#clone_category_id').html(data.category);
-        $('#clone_item_category_id').val(data.item_category_id);*/
+        $("#pic1").attr("src", data.product_picture);
+        $('.product-name-header').html("(" + data.product.name + ")");
+
+        checkDataValue('Product', data.product.name);
+        checkDataValue('Category', data.category.name);
+        checkDataValue('Vendor', data.vendor_name);
+        checkDataValue('Hotel Price', data.price);
+        checkDataValue('Vendor Cost', data.cost);
+        checkDataValue('Tax', data.tax);
+        checkDataValue('Quantity', data.quantity);
+
         if (data.specs != "" && data.specs != null && data.specs != undefined) {
             $('#nav-specs').html(data.specs_html)
             $('#add_specs').val(data.specs_html);
@@ -222,7 +225,7 @@ function itemDetails(id, entry_id) {
                 .forEach(function eachKey(key) {
                     add_product_attributes_2(key, foo[key]);
                     dynamic_attributes = $('#dynamic-attributes').html();
-                    $('#dynamic-attributes').html(dynamic_attributes + "<tr style='margin-bottom: 2%'><td> <span class='float-left'>" + key + "</span> <span class='float-right'>" + foo[key] + "</span></td></tr>");
+                    $('#dynamic-attributes').html(dynamic_attributes + generateTableRow(key, foo[key]));
                 });
         }else{
             $('#dynamic-attributes').html('No Attributes Available');
@@ -237,6 +240,18 @@ function itemDetails(id, entry_id) {
             $('#viewProducts').modal('show');
         });
     });
+}
+
+function generateTableRow(key, value){
+    return  "<tr style='margin-bottom: 2%'><td> <span class='float-left'>" + key + "</span> <span class='float-right'>" + value + "</span></td></tr>"
+}
+
+function checkDataValue(key, value){
+    if (value != 'null' && value != '' && value != null && value != undefined) {
+        $('#order-entry-details').html($('#order-entry-details').html() + generateTableRow(key, value));
+    }else{
+        $('#order-entry-details').html($('#order-entry-details').html() + generateTableRow(key, ''));
+    }
 }
 
 function openEditAttributes() {

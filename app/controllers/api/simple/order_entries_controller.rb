@@ -38,7 +38,7 @@ module Api
       end
 
       def show
-        render json: @order_entry,methods: [:vendor_name, :product_name, :quoted_name, :category, :product, :vendor_obj, :quoted_by_obj, :vendor_list]
+        render json: @order_entry,methods: [:vendor_name, :product_name, :quoted_name, :category, :product, :vendor_obj, :quoted_by_obj, :vendor_list, :product_picture, :convert_dynamic_fields, :specs_html, :vendor_quote_prices_html, :notes_html]
       end
 
       def destroy

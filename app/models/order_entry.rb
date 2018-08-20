@@ -29,6 +29,39 @@ class OrderEntry < ApplicationRecord
     end
   end
 
+  def product_picture
+    if self.product_id.present?
+      product = Product.find(self.product_id)
+      product.picture_url
+    end
+  end
+
+  def specs_html
+    self.specs.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
+  end
+
+  def vendor_quote_prices_html
+    self.vendor_quote_prices.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
+  end
+
+  def notes_html
+    self.notes.to_s.gsub("\n", "<").gsub("<", "<br/>").html_safe
+  end
+
+  def convert_dynamic_fields
+    if self.dynamic_fields.present? && !self.dynamic_fields.nil?
+      self.dynamic_fields.gsub("=>", ":")
+    else
+      ''
+    end
+  end
+
+  def get_html_safe_fields
+    @dyna_fields = ''
+    eval(self.dynamic_fields).each {|key, value| @dyna_fields = @dyna_fields + "#{key}: #{value}<br/>" }
+    @dyna_fields
+  end
+
   def product_name
     if self.product_id.present?
       product = Product.find(self.product_id)
