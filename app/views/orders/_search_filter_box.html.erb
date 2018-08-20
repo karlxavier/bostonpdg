@@ -1,0 +1,26 @@
+<%= form_with scope: :search, url: orders_path(format: :js), html: { method: :get, id: 'search_form' } do |f| %>
+  <div class="input-group mb-3">
+    <%= f.search_field :term, class: 'form-control', placedholder: 'Search...' %>
+    <div class="input-group-append">
+      <div class="btn-group">
+        <%= f.button class: 'btn btn-dark' do %>
+          <i data-feather="search"></i>
+        <% end %>
+        <div class="btn-group">
+          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="align-middle" data-feather="filter"></i>SORT BY</a>
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-menu sort-by-dropdown" aria-labelledby="dropdownMenuButton">
+            <%= link_to 'Latest', { sort: 'created_at', direction: 'desc', search: { term: @search.term }, format: :js }, class: 'dropdown-item', remote: true %>
+            <%= link_to 'Oldest', { sort: 'created_at', direction: 'asc', search: { term: @search.term }, format: :js }, class: 'dropdown-item', remote: true %>
+            <%= link_to 'Ticket # Asc', { sort: 'id', direction: 'asc', search: { term: @search.term }, format: :js }, class: 'dropdown-item' ,remote: true %>
+            <%= link_to 'Ticket # Desc', { sort: 'id', direction: 'desc', search: { term: @search.term }, format: :js }, class: 'dropdown-item', remote: true %>
+            <%= link_to 'Brand', { sort: 'brand', direction: 'asc', search: { term: @search.term }, format: :js }, class: 'dropdown-item' ,remote: true %>
+            <%= link_to 'Update Date', { sort: 'updated_at', direction: 'desc', search: { term: @search.term }, format: :js }, class: 'dropdown-item', remote: true %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

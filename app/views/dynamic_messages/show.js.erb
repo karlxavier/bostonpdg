@@ -1,0 +1,7 @@
+$("div#order_messages").html("<%= escape_javascript(render 'orders/chatroom_tab', chatroom: @chatroom_order ) %>");
+$("div#chatroom_message").html("<%= escape_javascript(render '/chatroom_orders/chatroom_message', chatroom: @chatroom_order ) %>");
+$("div#message_items").html("<%= escape_javascript(render 'orders/message_items', order: @order, chatroom: @chatroom_order ) %>");
+$("input#order_entry_order_id").val("<%= @order.id %>");
+$("input#order_user_order_id").val("<%= @order.id %>");
+$(".feed-activity-list").html("<%= j render '/messages/messages', active_room: @chatroom_order, messages: @messages %>")
+dropzoneInit();

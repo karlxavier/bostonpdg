@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:index, :show]
   before_action :set_search, only: :index
   before_action :set_chatroom, only: [:load_messages]
+  respond_to :js, only: :index
 
   def send_orders
     @order = Order.find(params[:order_id].to_i)

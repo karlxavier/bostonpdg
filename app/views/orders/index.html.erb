@@ -12,73 +12,22 @@
     <div class="row" style="position:relative;">
       <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: hidden; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 30% !important;">
         <div class="d-flex flex-row justify-content-center">
-          <div class="btn__add--project mr-3 d-none">
-            <a href="<%= new_order_path %>" class="btn btn-dark btn-padding-margin" style="margin: 0% 1%;padding: .2% 3% !important;">
-              ADD A PROJECT
-            </a>
-          </div>
           <div class="search-box">
-            <%= form_for :search, url: { action: :index }, html: { method: :get }, remote: false do |f| %>
-              <div class="input-group mb-3">
-                <%= f.search_field :term, class: 'form-control', placedholder: 'Search...' %>
-                <div class="input-group-append">
-                  <div class="btn-group">
-                    <%= f.button class: 'btn btn-dark' do %>
-                      <i data-feather="search"></i>
-                    <% end %>
-                    <div class="btn-group">
-                      <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="align-middle" data-feather="filter"></i>SORT BY</a>
-                        <i class="fa fa-caret-down"></i>
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <%= link_to 'Latest', { sort: 'created_at', direction: 'desc', search: { term: @search.term } }, class: 'dropdown-item' %>
-                        <%= link_to 'Oldest', { sort: 'created_at', direction: 'asc', search: { term: @search.term } }, class: 'dropdown-item' %>
-                        <%= link_to 'Ticket # Asc', { sort: 'id', direction: 'asc', search: { term: @search.term } }, class: 'dropdown-item' %>
-                        <%= link_to 'Ticket # Desc', { sort: 'id', direction: 'desc', search: { term: @search.term } }, class: 'dropdown-item' %>
-                        <%= link_to 'Brand', { sort: 'brand', direction: 'asc', search: { term: @search.term } }, class: 'dropdown-item' %>
-                        <%= link_to 'Update Date', { sort: 'updated_at', direction: 'desc', search: { term: @search.term } }, class: 'dropdown-item' %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <% end %>
+            <%= render 'search_filter_box' %>
           </div>
         </div>
         <nav style="margin-top: 15px;">
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-orders">Orders</a>
-            <a class="nav-item nav-link" data-toggle="tab" href="#nav-messages">Messages</a>
-            <a class="nav-item nav-link" data-toggle="tab" href="#nav-notifications">Notifications</a>
+            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-orders" data-name="orders">Orders</a>
+            <a class="nav-item nav-link" data-toggle="tab" href="#nav-messages" data-name="messages">Messages</a>
+            <a class="nav-item nav-link" data-toggle="tab" href="#nav-notifications" data-name="notifications">Notifications</a>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane active" id="nav-orders">
             <div class="row">
-              <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
-                <% @orders.each do |order| %>
-                    <%= link_to order_path(order), class: "order-link", remote: true do %>
-                        <div id="order-<%= order.id %>" class="card mb-3" style="box-shadow: 0 5px 15px rgba(33, 33, 33, .4);" >
-                          <div class="card-body bg-light text-secondary">
-                            <div class="row">
-                              <div class="col-12">
-                                <p class="lead">
-                                  <%= order.brand_branches %>
-                                </p>
-                                <h4><%= order.brand_name %></h4>
-                                <p class="lead">
-                                  ORDER TICKET #<%= order.id %>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="card-footer" style="text-transform: uppercase;">
-                            <%= order.created_date %> BY <%= order.created_by_name %>
-                          </div>
-                        </div>
-                    <% end %>
-                <% end %>
+              <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;" id="order_list">
+                <%= render @orders %>
               </div>
             </div>
           </div>
@@ -157,6 +106,15 @@
 
 
 <script type="text/javascript">
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      var name = e.target.dataset.name;
+      var order_id = document.querySelector('#chatroom_msgs').dataset.chatroomId;
+      if (name === 'messages') {
+        $('#search_form').attr('action', '/dynamic_messages/' + order_id + '.js');
+      } else if (name === 'orders') {
+        $('#search_form').attr('action', '/orders.js');
+      }
+    });
 
     $('#new_order_entry').submit(function() {
         return setAttributesOnForm($(this));

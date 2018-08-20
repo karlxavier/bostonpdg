@@ -12,6 +12,7 @@
 #
 
 class Message < ApplicationRecord
+	extend Textacular
 	belongs_to :chatroom_order
   	belongs_to :user
 
@@ -21,4 +22,8 @@ class Message < ApplicationRecord
 
 	scope :unread_count, -> (user_id, chatroom_id, last_read_at){ where('user_id = ? AND chatroom_id = ? AND created_at > ?', user_id, chatroom_id, last_read_at).count }
 
+	def self.search(query:)
+		return self.all if query.blank?
+		self.basic_search(query)
+	end
 end

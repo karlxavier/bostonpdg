@@ -33,8 +33,9 @@
 //= require chosen
 //= require metisMenu
 //= require datepicker
+//= require dropzone_initializer
 
-$(document).on('turbolinks:load', function() {
+$(document).on('turbolinks:load', function () {
     $('.selectpicker').selectpicker();
     $('.selectpicker2').selectpicker();
     $('.categories').selectpicker();
@@ -43,7 +44,7 @@ $(document).on('turbolinks:load', function() {
     $('.clone_products').selectpicker();
 
 
-    $(function() {
+    $(function () {
         $(".dropdown").bind('keydown', function (event) {
             if (event.keyCode === 9) {
                 $(this).find('.selectpicker').selectpicker('toggle');
@@ -64,58 +65,64 @@ $(document).on('turbolinks:load', function() {
 
 
 var room = 1;
+
 function product_attributes() {
     room++;
     var objTo = document.getElementById('product_attributes')
     var divtest = document.createElement("div");
-    divtest.setAttribute("class", "row form-group removeclass"+room);
-    var rdiv = 'removeclass'+room;
-    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+    divtest.setAttribute("class", "row form-group removeclass" + room);
+    var rdiv = 'removeclass' + room;
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
     objTo.appendChild(divtest)
 }
+
 function clone_product_attributes() {
     room++;
     var objTo = document.getElementById('clone_product_attributes')
     var divtest = document.createElement("div");
-    divtest.setAttribute("class", "row form-group removeclass"+room);
-    var rdiv = 'removeclass'+room;
-    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="clone_order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="clone_order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+    divtest.setAttribute("class", "row form-group removeclass" + room);
+    var rdiv = 'removeclass' + room;
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="clone_order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="clone_order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
     objTo.appendChild(divtest)
 }
+
 function clone_product_attributes_2(key, val) {
     room++;
     var objTo = document.getElementById('clone_product_attributes')
     var divtest = document.createElement("div");
-    divtest.setAttribute("class", "row form-group removeclass"+room);
-    var rdiv = 'removeclass'+room;
-    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="clone_order_field_name" placeholder="Attribute Name" value="' + key + '"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="clone_order_field_value" placeholder="Attribute Value" value="' + val + '"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+    divtest.setAttribute("class", "row form-group removeclass" + room);
+    var rdiv = 'removeclass' + room;
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="clone_order_field_name" placeholder="Attribute Name" value="' + key + '"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="clone_order_field_value" placeholder="Attribute Value" value="' + val + '"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
     objTo.appendChild(divtest)
 }
+
 function add_product_attributes() {
     room++;
     var objTo = document.getElementById('add_product_attributes')
     var divtest = document.createElement("div");
-    divtest.setAttribute("class", "row form-group removeclass"+room);
-    var rdiv = 'removeclass'+room;
-    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="add_order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="add_order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+    divtest.setAttribute("class", "row form-group removeclass" + room);
+    var rdiv = 'removeclass' + room;
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="add_order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="add_order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
     objTo.appendChild(divtest)
 }
+
 function add_product_attributes_2(key, val) {
     room++;
     var objTo = document.getElementById('add_product_attributes')
     var divtest = document.createElement("div");
-    divtest.setAttribute("class", "row form-group removeclass"+room);
-    var rdiv = 'removeclass'+room;
-    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="add_order_field_name" placeholder="Attribute Name" value="' + key + '"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="add_order_field_value" placeholder="Attribute Value" value="' + val + '"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+    divtest.setAttribute("class", "row form-group removeclass" + room);
+    var rdiv = 'removeclass' + room;
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="add_order_field_name" placeholder="Attribute Name" value="' + key + '"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="add_order_field_value" placeholder="Attribute Value" value="' + val + '"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
     objTo.appendChild(divtest)
 }
+
 function remove_education_fields(rid) {
-    $('.removeclass'+rid).remove();
+    $('.removeclass' + rid).remove();
 }
 
 function onSearchFilter() {
@@ -140,17 +147,17 @@ function onSearchFilter() {
 }
 
 function submitForm(id, elem) {
-    form_id = "#"+id;
-    $( form_id ).submit();
-    $(elem).attr('disabled','disabled');
+    form_id = "#" + id;
+    $(form_id).submit();
+    $(elem).attr('disabled', 'disabled');
     $(elem).html('Please Wait...');
 }
 
 function showEditOrderEntries(id) {
     $.ajax({
         method: "GET",
-        url: "/api/simple/order_entries/"+id
-    }).done(function( data ) {
+        url: "/api/simple/order_entries/" + id
+    }).done(function (data) {
         console.log(data);
         console.log(data.category_id);
         $('#edit_order_entry').find('#order_entry_id').val(data.id);
@@ -172,8 +179,8 @@ function showEditOrderEntries(id) {
 function showEditOrder(id) {
     $.ajax({
         method: "GET",
-        url: "/api/simple/orders/"+id
-    }).done(function( data ) {
+        url: "/api/simple/orders/" + id
+    }).done(function (data) {
         $('#edit_order').find('#order_id').val(data.id);
         $('#edit_order').find('#order_status').val(data.status);
         $('#edit_order').find('#order_brand_id').val(data.brand_id);
@@ -188,8 +195,8 @@ function showEditOrder(id) {
 function itemDetails(id, entry_id) {
     $.ajax({
         method: "GET",
-        url: "/api/simple/order_entries/"+entry_id
-    }).done(function( data ) {
+        url: "/api/simple/order_entries/" + entry_id
+    }).done(function (data) {
         $('#add_product_attributes').html('');
         $('#add_product_id').val(data.product_id);
         $('#add_product_id_2').val(data.product_id);
@@ -227,14 +234,14 @@ function itemDetails(id, entry_id) {
                     dynamic_attributes = $('#dynamic-attributes').html();
                     $('#dynamic-attributes').html(dynamic_attributes + generateTableRow(key, foo[key]));
                 });
-        }else{
+        } else {
             $('#dynamic-attributes').html('No Attributes Available');
         }
 
         $.ajax({
             method: "GET",
-            url: "/order_entries/history?id="+entry_id
-        }).done(function( data ) {
+            url: "/order_entries/history?id=" + entry_id
+        }).done(function (data) {
             $('#order_entry_histories').html('');
             $('#order_entry_histories').html(data);
             $('#viewProducts').modal('show');
@@ -242,14 +249,14 @@ function itemDetails(id, entry_id) {
     });
 }
 
-function generateTableRow(key, value){
-    return  "<tr style='margin-bottom: 2%'><td> <span class='float-left'>" + key + "</span> <span class='float-right'>" + value + "</span></td></tr>"
+function generateTableRow(key, value) {
+    return "<tr style='margin-bottom: 2%'><td> <span class='float-left'>" + key + "</span> <span class='float-right'>" + value + "</span></td></tr>"
 }
 
-function checkDataValue(key, value){
+function checkDataValue(key, value) {
     if (value != 'null' && value != '' && value != null && value != undefined) {
         $('#order-entry-details').html($('#order-entry-details').html() + generateTableRow(key, value));
-    }else{
+    } else {
         $('#order-entry-details').html($('#order-entry-details').html() + generateTableRow(key, ''));
     }
 }
@@ -278,31 +285,39 @@ function submitEditAttributes() {
     var field_names = $('input[name=add_order_field_name]');
     var field_values = $('input[name=add_order_field_value]');
 
-    for(var i = field_names.length - 1; i >= 0; i--) {
+    for (var i = field_names.length - 1; i >= 0; i--) {
         dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
     }
-        $.ajax({
-            method: "POST",
-            url: "/api/simple/products/update_product",
-            data: {id: product_id, dynamic_fields: dynamic_fields}
-        }).done(function( data ) {
-            $('#editAttributes').modal('hide');
-            itemDetails(data.id, entry_id);
-        });
+    $.ajax({
+        method: "POST",
+        url: "/api/simple/products/update_product",
+        data: {
+            id: product_id,
+            dynamic_fields: dynamic_fields
+        }
+    }).done(function (data) {
+        $('#editAttributes').modal('hide');
+        itemDetails(data.id, entry_id);
+    });
 
 }
 
 function submitEditFreeFlow() {
     var product_id = $('#add_product_id').val();
     var entry_id = $('#order_entry_id_3').val();
-    var specs =  $('#add_specs').val();
+    var specs = $('#add_specs').val();
     var vendor_quote_prices = $('#add_vendor_quote_prices').val();
     var notes = $('#add_notes').val();
     $.ajax({
         method: "POST",
         url: "/api/simple/products/update_product",
-        data: {id: product_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes}
-    }).done(function( data ) {
+        data: {
+            id: product_id,
+            specs: specs,
+            vendor_quote_prices: vendor_quote_prices,
+            notes: notes
+        }
+    }).done(function (data) {
         $('#editFreeFlow').modal('hide');
         itemDetails(data.id, entry_id);
     });
@@ -313,10 +328,10 @@ function submitEditFreeFlow() {
 function setAttributesOnForm(element) {
     var dynamic_fields = {};
 
-    var field_names =  $(element).find('input[name=order_field_name]');
+    var field_names = $(element).find('input[name=order_field_name]');
     var field_values = $(element).find('input[name=order_field_value]');
 
-    for(var i = field_names.length - 1; i >= 0; i--) {
+    for (var i = field_names.length - 1; i >= 0; i--) {
         dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
     }
 
