@@ -29,7 +29,9 @@
                     <%= link_to admin_notifications_path do %>
                         <i class="fa fa-bell"></i> 
                         <span class="nav-label">Notifications </span>
-                        <span class="label label-warning pull-right"><%= Audit.count %></span>
+                        <% if user_notification_count > 0 %>
+                            <span class="label label-warning pull-right"><%= user_notification_count %></span>
+                        <% end %>
                     <% end %>
                 </li>
                 <li>
