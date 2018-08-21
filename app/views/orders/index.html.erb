@@ -95,11 +95,26 @@
 
 
 <script type="text/javascript">
+    $('#search_form').on('submit', function() {
+      var filters = document.querySelectorAll('.filter-link');
+      var input = document.querySelector('.search-form-field');
+      if (input.value) {
+        $.each(filters, function(i, el) {
+          var url = new URL(el.href);
+          url.searchParams.set('search[term]', input.value);
+          el.href = url.href;
+        });
+      }
+    });
+
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       var name = e.target.dataset.name;
+      var input = document.querySelector('.search-form-field');
       var order_id = document.querySelector('#chatroom_msgs').dataset.chatroomId;
       var hiddenOnMsgs = document.querySelectorAll('.hidden-on-msg');
       var linkToModify = document.querySelectorAll('.link-to-modify');
+
+      input.value = null;
       if (name === 'messages') {
         $('#search_form').attr('action', '/dynamic_messages/' + order_id + '.js');
         $.each(hiddenOnMsgs, function(index, value) {
@@ -115,6 +130,7 @@
         });
         $.each(linkToModify, function(index, value) {
           value.href = value.href.replace('/dynamic_messages/' + order_id + '.js', '/orders.js');
+          value.href = value.href.replace('/filter_notifications/' + order_id + '.js', '/orders.js');
         });
       } else if (name === 'notifications') {
         $('#search_form').attr('action', '/filter_notifications/' + order_id + '.js');
