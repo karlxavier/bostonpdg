@@ -109,10 +109,24 @@
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       var name = e.target.dataset.name;
       var order_id = document.querySelector('#chatroom_msgs').dataset.chatroomId;
+      var hiddenOnMsgs = document.querySelectorAll('.hidden-on-msg');
+      var linkToModify = document.querySelectorAll('.link-to-modify');
       if (name === 'messages') {
         $('#search_form').attr('action', '/dynamic_messages/' + order_id + '.js');
+        $.each(hiddenOnMsgs, function(index, value) {
+          value.classList.add('d-none');
+        });
+        $.each(linkToModify, function(index, value) {
+          value.href = value.href.replace('/orders.js', '/dynamic_messages/' + order_id + '.js');
+        });
       } else if (name === 'orders') {
         $('#search_form').attr('action', '/orders.js');
+        $.each(hiddenOnMsgs, function(index, value) {
+          value.classList.remove('d-none');
+        });
+        $.each(linkToModify, function(index, value) {
+          value.href = value.href.replace('/dynamic_messages/' + order_id + '.js', '/orders.js');
+        });
       }
     });
 

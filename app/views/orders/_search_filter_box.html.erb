@@ -12,12 +12,12 @@
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-menu sort-by-dropdown" aria-labelledby="dropdownMenuButton">
-            <%= link_to 'Latest', { sort: 'created_at', direction: 'desc', search: { term: @search.term }, format: :js }, class: 'dropdown-item', remote: true %>
-            <%= link_to 'Oldest', { sort: 'created_at', direction: 'asc', search: { term: @search.term }, format: :js }, class: 'dropdown-item', remote: true %>
-            <%= link_to 'Ticket # Asc', { sort: 'id', direction: 'asc', search: { term: @search.term }, format: :js }, class: 'dropdown-item' ,remote: true %>
-            <%= link_to 'Ticket # Desc', { sort: 'id', direction: 'desc', search: { term: @search.term }, format: :js }, class: 'dropdown-item', remote: true %>
-            <%= link_to 'Brand', { sort: 'brand', direction: 'asc', search: { term: @search.term }, format: :js }, class: 'dropdown-item' ,remote: true %>
-            <%= link_to 'Update Date', { sort: 'updated_at', direction: 'desc', search: { term: @search.term }, format: :js }, class: 'dropdown-item', remote: true %>
+            <%= link_to 'Latest', { sort: 'created_at', direction: 'desc', search: { term: @search.term }, format: :js }, class: 'dropdown-item link-to-modify', remote: true %>
+            <%= link_to 'Oldest', { sort: 'created_at', direction: 'asc', search: { term: @search.term }, format: :js }, class: 'dropdown-item link-to-modify', remote: true %>
+            <%= link_to 'Ticket # Asc', { sort: 'id', direction: 'asc', search: { term: @search.term }, format: :js }, class: 'dropdown-item hidden-on-msg' ,remote: true %>
+            <%= link_to 'Ticket # Desc', { sort: 'id', direction: 'desc', search: { term: @search.term }, format: :js }, class: 'dropdown-item hidden-on-msg', remote: true %>
+            <%= link_to 'Brand', { sort: 'brand', direction: 'asc', search: { term: @search.term }, format: :js }, class: 'dropdown-item hidden-on-msg' ,remote: true %>
+            <%= link_to 'Update Date', { sort: 'updated_at', direction: 'desc', search: { term: @search.term }, format: :js }, class: 'dropdown-item link-to-modify', remote: true %>
           </div>
         </div>
       </div>

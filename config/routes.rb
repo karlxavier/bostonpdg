@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'customers/import_csv'
   resources :search_results, only: :index
   resources :dynamic_messages, only: :show
+  resources :dynamic_item_messages, only: :show
   resources :orders do
     collection do
       post  'update_assign_user'
