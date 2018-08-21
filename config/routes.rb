@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :search_results, only: :index
   resources :dynamic_messages, only: :show
   resources :dynamic_item_messages, only: :show
+  resources :filter_notifications, only: :show
   resources :orders do
     collection do
       post  'update_assign_user'

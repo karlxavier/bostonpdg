@@ -4,8 +4,8 @@
 #
 #  id               :bigint(8)        not null, primary key
 #  created_by       :integer
-#  status           :string
-#  customer         :integer
+#  order_status_id  :integer
+#  customer_id      :integer
 #  delivery_address :integer
 #  payment_address  :integer
 #  total_cost       :decimal(, )

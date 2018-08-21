@@ -30,6 +30,7 @@
 #  phone                  :string
 #  customer_id            :integer
 #  vendor_id              :integer
+#  last_notified          :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

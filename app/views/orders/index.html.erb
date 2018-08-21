@@ -58,19 +58,8 @@
             <div class="row">
               <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
                 <table class="table table-striped">
-                  <tbody>
-                    <% if @order_histories.present? %>
-                        <% @order_histories.each do |history| %>
-                          <tr>
-                            <th><%= generate_history_information(history) %></th>
-                          </tr>
-                        <% end %>
-                    <% else %>
-                        <tr>
-                          <th><b>No Notifications Yet.</b></th>
-                        </tr>
-                    <% end %>
-
+                  <tbody id="notification_entry">
+                    <%= render 'order_histories', order_histories: @order_histories %>
                   </tbody>
                 </table>
               </div>
@@ -126,6 +115,14 @@
         });
         $.each(linkToModify, function(index, value) {
           value.href = value.href.replace('/dynamic_messages/' + order_id + '.js', '/orders.js');
+        });
+      } else if (name === 'notifications') {
+        $('#search_form').attr('action', '/filter_notifications/' + order_id + '.js');
+        $.each(hiddenOnMsgs, function(index, value) {
+          value.classList.add('d-none');
+        });
+        $.each(linkToModify, function(index, value) {
+          value.href = value.href.replace('/orders.js', '/filter_notifications/' + order_id + '.js');
         });
       }
     });

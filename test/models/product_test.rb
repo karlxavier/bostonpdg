@@ -25,10 +25,7 @@
 #  vendor_id            :integer
 #  style_attribute_id   :bigint(8)
 #  item_category_id     :integer
-#  dynamic_fields       :string
-#  specs                :text
-#  vendor_quote_prices  :text
-#  notes                :text
+#  image_data           :text
 #
 
 require 'test_helper'
