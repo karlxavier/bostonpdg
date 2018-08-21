@@ -11,6 +11,8 @@
 
 class Brand < ApplicationRecord
 	has_many :orders
+	has_many :hotels
 
 	validates :name, presence: true
+	validates :name, uniqueness: true
 end

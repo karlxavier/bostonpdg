@@ -1,0 +1,101 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Hotels</h2>
+        <ol class="breadcrumb">
+            <li>
+                <%= link_to 'Dashboard', admin_root_path %>
+            </li>
+            <li>
+                <%= link_to 'Hotels List', admin_hotels_path %>
+            </li>
+            <li class="active">
+                <strong><%= @hotel.name %></strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="ibox product-detail">
+                        <div class="ibox-content">
+
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                    <h2 class="font-bold m-b-xs">
+                                        <%= @hotel.name %>
+                                    </h2>
+                                    <small><%= link_to @hotel.brand.name, edit_admin_brand_path(@hotel.brand_id) %></small><br>
+                                    <small><%= @hotel.email %></small><br>
+                                    <hr>
+
+                                    <h4>Hotel Details</h4>
+
+                                    <dl class="dl-horizontal m-t-md small">
+                                        <dt>Address</dt>
+                                        <dd><%= @hotel.address.present? ? Address.find(@hotel.address_id).full_address : 'N/A' %></dd>
+
+                                        <dt>Shipping Address</dt>
+                                        <dd><%= @hotel.shipping_address.present? ? Address.find(@hotel.shipping_address).full_address : 'N/A' %></dd>
+
+                                        <dt>Contact Number</dt>
+                                        <dd><%= @hotel.contact_number.present? ? @hotel.contact_number : 'N/A' %></dd>
+
+                                    </dl>
+
+                                    <hr>
+
+                                    <div>
+                                        <div class="btn-group">
+                                            <%= link_to edit_admin_hotel_path(@hotel), class: "btn btn-primary btn-sm" do %>
+                                                <i class="fa fa-pencil"></i> Edit Hotel
+                                            <% end %>
+                                            <%= link_to admin_hotels_path, class: "btn btn-white btn-sm" do %>
+                                                <i class="fa fa-bars"></i> Back to List
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="tabs-container">
+                                        <div class="nav nav-tabs" role="tablist">
+                                            <a class="nav-item nav-link active" data-toggle="tab" href="#tab-1"> Orders</a>
+                                            <a class="nav-item nav-link" data-toggle="tab" href="#tab-2"> Users</a>
+                                        </div>
+                                        <div class="tab-content">
+                                            <div id="tab-1" class="tab-pane active">
+                                                <div class="panel-body">
+                                           
+                                                </div>
+                                            </div>
+                                            <div id="tab-2" class="tab-pane">
+                                                <div class="panel-body">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="ibox-footer">
+                            <span class="pull-right">
+                                Created at - <i class="fa fa-clock-o"></i> <%= @hotel.created_at %>
+                            </span>
+                            -
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('.chosen-select').chosen({width: "100%"});
+    })
+</script>

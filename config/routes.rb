@@ -105,6 +105,7 @@ Rails.application.routes.draw do
     resources :vendors_products
     resources :vendor_categories
     resources :default_attributes
+    resources :hotels
     root to: "users#index" # <--- Root route
   end
   #API Simple
