@@ -1,5 +1,5 @@
 class Admin::BrandsController < ApplicationController
-    before_action :set_brand, only: [:edit, :update]
+    before_action :set_brand, only: [:edit, :update, :show]
 
     def index
         @brands = Brand.all
@@ -22,6 +22,10 @@ class Admin::BrandsController < ApplicationController
     end
 
     def edit
+    end
+
+    def show
+        @users_brand = UsersBrand.new
     end
 
     def update

@@ -10,6 +10,11 @@
 #
 
 class UsersBrand < ApplicationRecord
+	belongs_to :brand
+	belongs_to :user
+
+	validates :user_id, :brand_id, presence: true
+
   def name
     brand = Brand.find(self.brand_id)
     brand.name

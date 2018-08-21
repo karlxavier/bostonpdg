@@ -1,25 +1,45 @@
-module Admin
-  class UsersBrandsController < Admin::ApplicationController
-    # To customize the behavior of this controller,
-    # you can overwrite any of the RESTful actions. For example:
-    #
-    # def index
-    #   super
-    #   @resources = UsersBrand.
-    #     page(params[:page]).
-    #     per(10)
-    # end
+class Admin::UsersBrandsController < ApplicationController
 
-    # Define a custom finder by overriding the `find_resource` method:
-    # def find_resource(param)
-    #   UsersBrand.find_by!(slug: param)
-    # end
+    def create
+        @users_brand = UsersBrand.new(ub_params)
 
-    # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
-    # for more information
-    def new
-      super
-      @user_id = params[:user_id]
+        respond_to do |format|
+            if @users_brand.save
+
+                @brand = @users_brand.brand
+                format.js
+            end
+        end
     end
-  end
+
+    def destroy
+        @users_brand = UsersBrand.find(params[:id])
+        @brand = @users_brand.brand
+        respond_to do |format|
+            @users_brand.destroy
+
+            format.js
+        end
+    end
+
+    def update
+        @users_brand = UsersBrand.find(params[:id])
+        @brand = @users_brand.brand
+        respond_to do |format|
+            if @users_brand.main_contact == true
+                @users_brand.update(main_contact: false)
+            else
+                @users_brand.update(main_contact: true)
+            end
+            
+            format.js
+        end
+    end
+
+    private
+
+    def ub_params
+        params.require(:users_brand).permit(:user_id, :brand_id, :main_contact)
+    end
+
 end

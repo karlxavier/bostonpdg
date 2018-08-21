@@ -94,7 +94,6 @@ Rails.application.routes.draw do
     resources :vendors
     resources :products
     resources :categories
-    resources :brands
     resources :addresses
     resources :groups
     resources :style_attributes
@@ -105,7 +104,11 @@ Rails.application.routes.draw do
     resources :vendors_products
     resources :vendor_categories
     resources :default_attributes
-    resources :hotels
+    resources :brands do
+      resources :hotels, only: [:show]
+    end
+    resources :hotels, except: [:show]  
+    
     root to: "users#index" # <--- Root route
   end
   #API Simple

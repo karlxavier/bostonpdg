@@ -40,7 +40,7 @@
                           <% @hotels.each do |hotel| %>
                             <tr>
                                 <td><%= hotel.id %></td>
-                                <td><%= link_to hotel.name, admin_hotel_path(hotel) %></td>
+                                <td><%= link_to hotel.name, admin_brand_hotel_path(hotel.brand_id, hotel) %></td>
                                 <td><%= hotel.email %></td>
                                 <td><%= hotel.brand.name %></td>
                                 <td><%= hotel.address.street %></td>
