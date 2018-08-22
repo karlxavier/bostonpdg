@@ -18,7 +18,6 @@
     </span>
     <br/>
     <a class="btn btn-outline-dark btn-padding-margin"  href="<%= edit_order_path(order) %>">Edit a Project</a>
-    <!-- <button class="btn btn-default btn-yellow" style="margin: 0% 1%;padding: .2% 5% !important;" data-toggle="modal" data-target="#addOrder">Add</button>-->
     <a href="<%= new_order_path %>" class="btn btn-dark btn-padding-margin" style="margin: 0% 1%;padding: .2% 5% !important;">Add a Project</a>
   </div>
 </div>
@@ -116,7 +115,8 @@
 
             <%#= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin float-right margin-top-1" %>
             <%= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin float-right" %>
-            <a href="<%= send_orders_orders_path(:order_id => @order.id) %>" class="btn btn-dark btn-padding-margin" >REQUEST QUOTE</a>
+                <a class="btn btn-dark btn-padding-margin" data-toggle="modal" data-target="#requestQuote">REQUEST QUOTE</a>
+            <!--<a href="<%#= send_orders_orders_path(:order_id => @order.id) %>" class="btn btn-dark btn-padding-margin" >REQUEST QUOTE</a>-->
                 </div>
                 <table class="table">
                   <thead class="table-light">

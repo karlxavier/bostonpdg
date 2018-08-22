@@ -1,0 +1,46 @@
+<div class="modal fade bd-example-modal-lg modal-gray" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="requestQuote">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">E-mail Preview</h5>
+        <h6 class="modal-title model-header-margin">(Edit E-mail Format)</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form" id="edit_order_entry" action="" accept-charset="UTF-8" method="post">
+        <div class="modal-body">
+
+          <input type="hidden" name="order_entry[order_id]" id="order_entry_order_id" value="<%= @order.id %>">
+          <input type="hidden" name="order_entry[id]" id="order_entry_id" >
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label label-form col-form-label-right">From:</label>
+            <div class="col-sm-10">
+              <input type="text" value="<%= current_user.email %>" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label label-form col-form-label-right">To <i>(Recipients)</i>:</label>
+            <div class="col-sm-10">
+              <input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label label-form col-form-label-right">CC:</label>
+            <div class="col-sm-10">
+              <input type="text" value=<%=User.where("id IN (SELECT regional FROM order_users WHERE order_id = #{@order.id}) OR id IN (SELECT comms FROM order_users WHERE order_id = #{@order.id}) OR id IN (SELECT art FROM order_users WHERE order_id = #{@order.id}) OR id IN (SELECT processor FROM order_users WHERE order_id = #{@order.id}) OR id IN (SELECT designer FROM order_users WHERE order_id = #{@order.id}) OR id IN (SELECT client_contact FROM order_users WHERE order_id = #{@order.id})").pluck(:email).map(&:inspect).join(',').gsub!('"', '')%> data-role="tagsinput" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label label-form col-form-label-right">Message:</label>
+            <div class="col-sm-10">
+             <textarea class="textarea-format" rows="100" class="form-control"></textarea>
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

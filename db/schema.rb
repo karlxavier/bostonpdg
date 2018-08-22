@@ -293,6 +293,7 @@ ActiveRecord::Schema.define(version: 20180821175110) do
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "chatroom_order_id"
     t.integer "client_contact"
     t.integer "designer"
   end

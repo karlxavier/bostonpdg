@@ -1,11 +1,10 @@
 <% if @order.present? %>
+    <%= render "orders/modals/email_form" %>
     <%= render "orders/modals/add_order_entries" %>
     <%= render "orders/modals/manage_users" %>
     <%= render "orders/modals/item_details" %>
     <%= render "orders/modals/edit_order_entries" %>
-    <%= render "orders/modals/edit_attributes" %>
     <%= render "orders/modals/entry_history" %>
-    <%= render "orders/modals/edit_free_flowing_fields" %>
     <%= render "orders/modals/file_upload" %>
 <% end %>
 <% if @order.present? && @orders.present? %>
@@ -163,6 +162,7 @@
         }
     };
     $(function(){
+        $(".textarea-format").jqte({remove: false,rule: false,unlink: false});
         $("div#order-<%= @order.id %>").addClass('orange-left');
         $('.ibox-content').slimScroll({
           railOpacity: 0.4,

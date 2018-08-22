@@ -35,6 +35,8 @@
 //= require metisMenu
 //= require datepicker
 //= require dropzone_initializer
+//= require jquery-te-1.4.0.min
+//= require tagsinput
 
 $(document).on('turbolinks:load', function () {
     $('.selectpicker').selectpicker();
