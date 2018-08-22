@@ -37,6 +37,13 @@ class Admin::HotelsController < ApplicationController
         end
     end
 
+    def compose_email
+        respond_to do |format|
+            @hotel = Hotel.find(params[:hotel_id])
+            format.js
+        end
+    end
+
     private
 
         def hotel_params

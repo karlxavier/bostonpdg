@@ -3580,7 +3580,7 @@ video {
   padding: 15px;
 }
 .note-editor.note-frame {
-  border: none;
+  border: none!important;
 }
 .note-editor.panel {
   margin-bottom: 0;
@@ -5131,8 +5131,8 @@ a.compose-mail {
   background: #ffffff;
 }
 .mail-body {
-  border-top: 1px solid #e7eaec;
-  padding: 20px;
+  /*border-top: 1px solid #e7eaec;
+  padding: 20px;*/
 }
 .mail-text {
   border-top: 1px solid #e7eaec;

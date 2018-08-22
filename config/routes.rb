@@ -107,7 +107,9 @@ Rails.application.routes.draw do
     resources :brands do
       resources :hotels, only: [:show]
     end
-    resources :hotels, except: [:show]  
+    resources :hotels, except: [:show] do
+      get 'compose_email', :to => 'hotels#compose_email', as: 'compose_email'
+    end  
     
     root to: "users#index" # <--- Root route
   end

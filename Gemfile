@@ -63,6 +63,7 @@ gem 'aws-sdk', '~> 3'
 
 # for crm log audits
 gem "audited", "~> 4.7"
+gem 'summernote-rails', '~> 0.8.10.0'
 
 # global search
 gem 'scenic'
