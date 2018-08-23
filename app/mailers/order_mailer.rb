@@ -1,5 +1,4 @@
 class OrderMailer < ApplicationMailer
-  default from: 'jerico@maddington.net'
 
   def send_order_entries
     @vendor = params[:vendor]
@@ -16,6 +15,23 @@ class OrderMailer < ApplicationMailer
         :from => "jerico@maddington.net",
         :to => @vendor.email,
         :subject => "Order Ticket ##{@order.id}"
+    )
+  end
+
+  def send_request_quote(email_template, to_user)
+    @email_template = email_template
+    order_entry_ids = EmailTemplateOrderEntry.where(:email_template_id => email_template.id).pluck(:order_entry_id)
+    if order_entry_ids.length > 0
+      @order_entries = OrderEntry.where("id IN (#{order_entry_ids.map(&:inspect).join(',')})")
+    end
+    @cc = EmailTemplateUser.where(:email_template_id => email_template.id, :user_type => 'cc').pluck(:email)
+    @sender = EmailTemplateUser.where(:email_template_id => email_template.id, :user_type => 'sender').first
+    @subject = "Order Ticket ##{email_template.id}"
+    mail(
+        :from => @sender.email,
+        :to => to_user,
+        :cc => @cc,
+        :subject => @subject
     )
   end
 

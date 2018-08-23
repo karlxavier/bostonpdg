@@ -38,7 +38,7 @@ module Api
       end
 
       def show
-        render json: @order_entry,methods: [:vendor_name, :product_name, :quoted_name, :category, :product, :vendor_obj, :quoted_by_obj, :vendor_list, :product_picture, :convert_dynamic_fields, :specs_html, :vendor_quote_prices_html, :notes_html]
+        render json: @order_entry,methods: [:vendor_name, :product_name, :quoted_name, :category, :product, :vendor_obj, :quoted_by_obj, :vendor_list, :product_picture, :convert_dynamic_fields, :specs_html, :vendor_quote_prices_html, :notes_html, :vendor_email]
       end
 
       def destroy
@@ -46,6 +46,21 @@ module Api
         if order_entry.destroy
           head :no_content
         end
+      end
+
+      def vendor_email_list
+        if params[:item_ids].present?
+          vendor_list = OrderEntryVendor.where("order_entry_id IN (#{params[:item_ids].map(&:inspect).join(',').gsub!('"', '')})").distinct.pluck(:vendor_id)
+          if vendor_list.length > 0
+            vendor_email = Vendor.where("id IN (#{vendor_list.map(&:inspect).join(',')}) AND email IS NOT NULL").distinct.pluck(:email)
+            render :json => [vendor_email, params[:item_ids]], :status => :ok
+          else
+            render :json => [[], params[:item_ids]], :status => :ok
+          end
+        else
+          render :json => [[], params[:item_ids]], :status => :ok
+        end
+
       end
 
 

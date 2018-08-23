@@ -155,6 +155,11 @@ end
     @ids
   end
 
+  def vendor_email
+    vendor_list = OrderEntryVendor.where(:order_entry_id => self.id).pluck(:vendor_id).join(',')
+    Vendor.where("id IN (#{vendor_list})").pluck(:email).map(&:inspect).join(',').gsub!('"', '')
+  end
+
   def picture_url
     product = Product.find(self.product_id)
     @url = ""

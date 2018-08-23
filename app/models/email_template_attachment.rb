@@ -1,0 +1,2 @@
+class EmailTemplateAttachment < ApplicationRecord
+end

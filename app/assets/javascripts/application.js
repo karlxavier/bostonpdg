@@ -48,6 +48,7 @@ $(document).on('turbolinks:load', function () {
 
 
     $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
         $(".dropdown").bind('keydown', function (event) {
             if (event.keyCode === 9) {
                 $(this).find('.selectpicker').selectpicker('toggle');
@@ -208,6 +209,29 @@ function setFormValues(data, form) {
     }
     $('.selectpicker2').selectpicker('refresh')
     $('.selectpicker').selectpicker('refresh')
+}
+
+function setVendors(){
+    if ($('.item_ids').is(":checked")) {
+        var formData = $('#form_order_checklist').serialize();
+        $.ajax({
+            type: "GET",
+            url: "/api/simple/order_entries/vendor_email_list",
+            data: formData
+        }).done(function (data) {
+            console.log(data);
+            var arr = data[0];
+            $('#new_email_template').find('#email_template_to').tagsinput('removeAll');
+            jQuery.each( arr, function( i, val ) {
+                $('#new_email_template').find('#email_template_to').tagsinput('add', val);
+                console.log(val);
+            });
+            $('#new_email_template').find('#email_template_order_entry_ids').val(data[1]);
+            $('#requestQuote').modal('show');
+
+        });
+    }
+
 }
 function itemDetails(id, entry_id) {
     $.ajax({

@@ -115,7 +115,7 @@
 
             <%#= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin float-right margin-top-1" %>
             <%= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin float-right" %>
-                <a class="btn btn-dark btn-padding-margin" data-toggle="modal" data-target="#requestQuote">REQUEST QUOTE</a>
+                <a class="btn btn-dark btn-padding-margin" data-toggle="tooltip" data-placement="top" title="Select Line Item/s below." onclick="setVendors();">REQUEST QUOTE</a>
             <!--<a href="<%#= send_orders_orders_path(:order_id => @order.id) %>" class="btn btn-dark btn-padding-margin" >REQUEST QUOTE</a>-->
                 </div>
                 <table class="table">
@@ -160,7 +160,7 @@
                   <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-outline-danger btn-nav-selected-circle" ><i class="fa fa-trash-o" aria-hidden="true"></i></td>
                   <td>
                     <% if entry.status == 1 %>
-                        <input type="checkbox" name="item_ids[]" value="<%= entry.id %>"/>
+                        <input type="checkbox" name="item_ids[]" value="<%= entry.id %>" class="item_ids"/>
                     <% end %>
                   </td>
                   </tr>

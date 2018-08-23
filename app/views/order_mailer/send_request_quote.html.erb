@@ -1,0 +1,30 @@
+From: <b><a href="mailto:<%= @sender.email %>?subject=RE:<%= @subject %>" target="_blank"><%= @sender.email %></a></b>
+
+<br/>
+
+<p><%= @email_template.content %>></p>
+
+<br/>
+
+<% if @order_entries.present? %>
+<h3>Items to Quote: </h3>
+<br/>
+<p>
+  <table>
+    <thead>
+      <th class="font-weight: bold;">Name</th>
+      <th class="font-weight: bold;">Quantity (pcs)</th>
+      <th class="font-weight: bold;">Attribute</th>
+    </thead>
+    <tbody>
+      <% @order_entries.each do |order_entry| %>
+        <tr>
+          <td><%= order_entry.product.name %></td>
+          <td><%= order_entry.quantity %></td>
+          <td><%= order_entry.dynamic_fields %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>
+<% end %>

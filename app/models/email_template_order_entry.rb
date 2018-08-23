@@ -1,0 +1,2 @@
+class EmailTemplateOrderEntry < ApplicationRecord
+end

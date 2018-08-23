@@ -1,0 +1,2 @@
+class EmailTemplateUser < ApplicationRecord
+end

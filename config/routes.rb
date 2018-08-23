@@ -55,6 +55,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :email_templates
+
   resources :chatroom_orders do
     resources :order_users
     resources :messages
@@ -166,6 +168,7 @@ Rails.application.routes.draw do
       end
       resources :order_entries do
         get 'list', on: :collection
+        get 'vendor_email_list',  on: :collection
       end
       resources :sessions do
       end
