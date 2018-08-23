@@ -4,8 +4,8 @@
 			<tbody>
 				<% vendor.vendors_products.each do |vp| %>
 					<tr>
-					    <td><%= vp.product.name %></td>
-					    <td><%= vp.product.price %></td>
+					    <td><%= vp.product.present? ? vp.product.name : "No product #{vp.product_id}" %></td>
+					    <td><%= vp.product.present? ? vp.product.price : "No product #{vp.product_id}" %></td>
 					    <td class="client-status">
 					    	<%= link_to 'Destroy', admin_vendors_product_path(vp.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs", remote: true %>
 					    </td>

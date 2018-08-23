@@ -42,17 +42,21 @@
                                         <dd><%= @vendor.lead_time %></dd>
 
                                         <dt>Country of Origin</dt>
-                                        <dd><%= @vendor.country_origin %></dd>
+                                        <dd>
+                                            <span class="<%= @vendor.country_name == 'China' ? 'label label-danger' : 'label label-primary' %>">
+                                                <%= @vendor.country_name %>    
+                                            </span>
+                                        </dd>
                                     </dl>
 
                                     <hr>
 
                                     <div>
                                         <div class="btn-group">
-                                            <%= link_to edit_admin_vendor_path(@vendor), class: "btn btn-primary btn-sm" do %>
+                                            <%= link_to edit_admin_vendor_path(@vendor), class: "btn btn-primary btn-xs" do %>
                                                 <i class="fa fa-pencil"></i> Edit Vendor
                                             <% end %>
-                                            <%= link_to admin_vendors_path, class: "btn btn-white btn-sm" do %>
+                                            <%= link_to admin_vendors_path, class: "btn btn-white btn-xs" do %>
                                                 <i class="fa fa-bars"></i> Back to List
                                             <% end %>
                                         </div>
@@ -121,9 +125,89 @@
                         </div>
                         <div class="ibox-footer">
                             <span class="pull-right">
-                                Created at - <i class="fa fa-clock-o"></i> <%= @vendor.created_at %>
+                                Created at - <i class="fa fa-clock-o"></i> <%= @vendor.created_at.strftime("%d-%b-%C %I:%M%P") %>
                             </span>
                             -
+                        </div>
+                    </div>
+
+                    <div class="ibox">
+                        <div class="ibox-title text-info">
+                            Associated Projects
+                        </div>
+                        <div class="ibox-content">
+                            <div class="table-responsive" style="overflow: visible;">
+                                <table class="table table-hover issue-tracker">
+                                    <tbody>
+                                        <% @vendor.order_entries.each do |oe| %>
+                                            <% if oe.order.present? %>
+                                                <tr>
+                                                    <td class="issue-info" style="width: 10%;">
+                                                        <a href="#">
+                                                            <%= "Order-#{oe.order.id}" %>
+                                                        </a>
+
+                                                        <small>
+                                                            <%= oe.order.created_at.strftime("%d-%b-%C %I:%M%P") %>
+                                                        </small>
+                                                    </td>
+                                                    <td class="issue-info" style="width: 15%;">
+                                                        <small>
+                                                            <strong>
+                                                                <a href="#">
+                                                                    <%= oe.order.customer.present? ? oe.order.customer.customer_fullname : 'N/A' %>
+                                                                </a>
+                                                            </strong>
+                                                        </small>
+                                                        <small>
+                                                            Customer
+                                                        </small>
+                                                    </td>
+                                                    <td class="issue-info" style="width: 15%;">
+                                                        <a href="#">
+                                                            <small>
+                                                                <% if oe.product.image_data? %>
+                                                                    <%= image_tag oe.product.image_url(:original), class: "img-circle m-b-md", style: "height: 30px; width: 30px; margin-bottom: 5px;" %>  
+                                                                <% else %>
+                                                                    <%= image_tag 'default-product.png', class: "img-circle m-b-md", style: "height: 30px; width: 30px; margin-bottom: 5px;" %>  
+                                                                <% end %>
+                                                            
+                                                                <%= oe.product.name %>
+                                                            </small>
+                                                        </a>
+                                                    </td>
+                                                    <td class="issue-info" style="width: 5%;">
+                                                        <a href="#">
+                                                            <%= number_to_currency(oe.quantity, unit: "", :precision => 2, :delimiter => ',') %>
+                                                        </a>
+                                                        <small>
+                                                            Quantity
+                                                        </small>
+                                                    </td>
+                                                    <td class="issue-info" style="width: 5%;">
+                                                        <a href="#">
+                                                            <%= number_to_currency(oe.price, unit: "$ ", :precision => 2, :delimiter => ',') %>
+                                                        </a>
+                                                        <small>
+                                                            Price
+                                                        </small>
+                                                    </td>
+                                                    <td class="issue-info" style="width: 5%;">
+                                                        <a href="#">
+                                                            <strong>
+                                                                <%= number_to_currency((oe.price.nil? ? 0 : oe.price) * (oe.quantity.nil? ? 0 : oe.quantity), unit: "$ ", :precision => 2, :delimiter => ',') %>
+                                                            </strong>
+                                                        </a>
+                                                        <small>
+                                                            Total
+                                                        </small>
+                                                    </td>
+                                                </tr>
+                                            <% end %>
+                                        <% end %>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 

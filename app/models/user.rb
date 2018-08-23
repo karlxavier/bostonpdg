@@ -37,7 +37,7 @@ class User < ApplicationRecord
   #belongs_to :shipping_address, :class_name => 'Address', :foreign_key => 'shipping_address'
   #belongs_to :billing_address, :class_name => 'Address', :foreign_key => 'billing_address'
   
-  audited except: [:last_notified, :updated_at, :last_notified, :last_sign_in_at, :last_sign_in_ip]
+  audited except: [:last_notified, :updated_at, :last_notified, :last_sign_in_at, :last_sign_in_ip, :sign_in_count, :current_sign_in_at, :current_sign_in_ip]
 
   has_many :brands
   has_many :groups

@@ -18,13 +18,24 @@ class Vendor < ApplicationRecord
   require 'csv'
   
   has_many :vendors_products
-  has_many :products, through: :vendors_products
+  # has_many :products, through: :vendors_products
+  has_many :products
+  has_many :order_entries, through: :products
 
   has_many :vendor_categories
   has_many :categories, through: :vendor_categories
 
   validates :name, presence: true
   validates :name, uniqueness: true
+
+  def country_name
+    if country_origin.nil?
+      country = ISO3166::Country[country_origin]
+      country.translations[I18n.locale.to_s] || country.name
+    else
+      'N/A'
+    end
+  end
 
   def mailboxer_email(object)
     #Check if an email should be sent for that object
