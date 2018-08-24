@@ -93,7 +93,9 @@ Rails.application.routes.draw do
     resources :users_groups
     resources :customers
     resources :inventories
-    resources :vendors
+    resources :vendors do
+      resources :vendor_reviews
+    end
     resources :products
     resources :categories
     resources :addresses

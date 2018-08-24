@@ -1,0 +1,2 @@
+$("div#reviews").html("<%= escape_javascript(render '/admin/vendor_reviews/reviews', reviews: @vendor.vendor_reviews.order(id: :desc) ) %>");
+$('.collapse').toggle();

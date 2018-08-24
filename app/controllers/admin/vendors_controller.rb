@@ -8,6 +8,7 @@ class Admin::VendorsController < ApplicationController
     def show
         @vendors_product = VendorsProduct.new
         @vendor_category = VendorCategory.new
+        @vendor_review = VendorReview.new
     end
 
     def new

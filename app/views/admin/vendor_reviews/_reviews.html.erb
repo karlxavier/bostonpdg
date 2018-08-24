@@ -1,0 +1,13 @@
+<div id="reviews">
+	<% reviews.each do |review| %>
+		<div class="vertical-timeline-content" style="margin: 5px 0 5px 0;">
+            <h2><%= review.user.full_name %></h2>
+            <p>
+            	<%= review.review %>
+            </p>
+            <span class="vertical-date">
+                <small><%= review.created_at.strftime("%d-%b-%Y %I:%M%P") %></small>
+            </span>
+        </div>
+	<% end %>
+</div>

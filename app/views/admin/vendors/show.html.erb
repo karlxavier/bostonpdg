@@ -125,7 +125,7 @@
                         </div>
                         <div class="ibox-footer">
                             <span class="pull-right">
-                                Created at - <i class="fa fa-clock-o"></i> <%= @vendor.created_at.strftime("%d-%b-%C %I:%M%P") %>
+                                Created at - <i class="fa fa-clock-o"></i> <%= @vendor.created_at.strftime("%d-%b-%Y %I:%M%P") %>
                             </span>
                             -
                         </div>
@@ -211,6 +211,38 @@
                         </div>
                     </div>
 
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="ibox">
+                            <div class="ibox-title text-info">
+                                Vendor Reviews
+                                <a href="#new_review" data-toggle="collapse" aria-expanded="false" class="btn btn-xs btn-success pull-right"> Create New Review </a>
+                            </div>
+                            <div class="ibox-content" style="background-color: #dee2e6;">
+                                <div id="new_review" class="panel-collapse collapse" aria-expanded="false">
+                                    
+                                    <%= form_for [:admin, @vendor, @vendor_review], remote: true, html: { class: "form-horizontal"} do |f| %>
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <div class="input-group">
+                                                    <%= f.text_field :review, class: "form-control" %> 
+                                                    <span class="input-group-btn"> 
+                                                        <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
+                                                            Save
+                                                        <% end %> 
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% end %>
+
+                                </div>
+                                <div>
+                                    <%= render '/admin/vendor_reviews/reviews', reviews: @vendor.vendor_reviews.order(id: :desc) %>    
+                                </div>
+                            </div>
+                    </div>
                 </div>
             </div>
 </div>
