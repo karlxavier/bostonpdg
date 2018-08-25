@@ -27,6 +27,11 @@ class OrderMailer < ApplicationMailer
     @cc = EmailTemplateUser.where(:email_template_id => email_template.id, :user_type => 'cc').pluck(:email)
     @sender = EmailTemplateUser.where(:email_template_id => email_template.id, :user_type => 'sender').first
     @subject = "Order Ticket ##{email_template.id}"
+    EmailTemplateAttachment.where(:email_template_id => email_template.id).each do |eta|
+      if eta.attachment_file.path(:original) != ""
+        attachments.inline["#{eta.attachment_file.original_filename}"] = File.read(eta.attachment_file.path(:original))
+      end
+    end
     mail(
         :from => @sender.email,
         :to => to_user,

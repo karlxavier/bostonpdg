@@ -30,16 +30,19 @@ class EmailTemplatesController < ApplicationController
         EmailTemplateOrderEntry.create(:email_template_id => @email_template.id, :order_entry_id => id.to_i)
       end
 
-
       #Email Template Attachment
       # Attachments:
-      # parse_template[:attachment_file].each do |attachment_file|
-      #   EmailTemplateAttachment.create(:email_template_id => @email_template.id, :attachment_file => attachment_file)
-      # end
+      parse_template[:attachment_file].each do |attachment_file|
+        email_template_attachment = EmailTemplateAttachment.new
+        email_template_attachment.email_template_id = @email_template.id
+        email_template_attachment.attachment_file = attachment_file
+        email_template_attachment.save
+      end
 
       EmailTemplateUser.where(:email_template_id => @email_template.id, :user_type => "to").pluck(:email).each do |email|
         OrderMailer.send_request_quote(@email_template, email).deliver_now
       end
+
       flash[:notice] = "Request Quote Successfully Sent."
     else
       flash[:error] = "Request Quote Sent Failure!"

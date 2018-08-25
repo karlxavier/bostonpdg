@@ -2,7 +2,7 @@ From: <b><a href="mailto:<%= @sender.email %>?subject=RE:<%= @subject %>" target
 
 <br/>
 
-<p><%= @email_template.content %>></p>
+<p><%= @email_template.content.html_safe %></p>
 
 <br/>
 
