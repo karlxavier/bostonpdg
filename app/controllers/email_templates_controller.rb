@@ -10,13 +10,18 @@ class EmailTemplatesController < ApplicationController
     if @email_template.save
       # Email Template Users
       # Order User or Additional Emails:
-      parse_template[:cc].split(',').each do |email|
-        EmailTemplateUser.create(:email_template_id => @email_template.id, :email => email, :user_type => "cc")
+      if parse_template[:cc].present?
+        parse_template[:cc].split(',').each do |email|
+          EmailTemplateUser.create(:email_template_id => @email_template.id, :email => email, :user_type => "cc")
+        end
       end
       # Vendors or Additional Emails:
-      parse_template[:to].split(',').each do |email|
-        EmailTemplateUser.create(:email_template_id => @email_template.id, :email => email, :user_type => "to")
+      if parse_template[:to].present?
+        parse_template[:to].split(',').each do |email|
+          EmailTemplateUser.create(:email_template_id => @email_template.id, :email => email, :user_type => "to")
+        end
       end
+
       # Sender:
       if parse_template[:sender].present?
         EmailTemplateUser.create(:email_template_id => @email_template.id, :email => parse_template[:sender], :user_type => "sender")
@@ -26,17 +31,21 @@ class EmailTemplatesController < ApplicationController
 
       #Email Template Order Entry (Items)
       # Order Entries:
-      parse_template[:order_entry_ids].split(',').each do |id|
-        EmailTemplateOrderEntry.create(:email_template_id => @email_template.id, :order_entry_id => id.to_i)
+      if parse_template[:order_entry_ids].present?
+        parse_template[:order_entry_ids].split(',').each do |id|
+          EmailTemplateOrderEntry.create(:email_template_id => @email_template.id, :order_entry_id => id.to_i)
+        end
       end
 
       #Email Template Attachment
       # Attachments:
-      parse_template[:attachment_file].each do |attachment_file|
-        email_template_attachment = EmailTemplateAttachment.new
-        email_template_attachment.email_template_id = @email_template.id
-        email_template_attachment.attachment_file = attachment_file
-        email_template_attachment.save
+      if parse_template[:attachment_file].present?
+        parse_template[:attachment_file].each do |attachment_file|
+          email_template_attachment = EmailTemplateAttachment.new
+          email_template_attachment.email_template_id = @email_template.id
+          email_template_attachment.attachment_file = attachment_file
+          email_template_attachment.save
+        end
       end
 
       EmailTemplateUser.where(:email_template_id => @email_template.id, :user_type => "to").pluck(:email).each do |email|
