@@ -34,6 +34,28 @@ class Admin::OrdersController < ApplicationController
         end
     end
 
+    def duplicate_order
+        @order = Order.find(params[:order_id])
+        
+        respond_to do |format|
+            if @order.amoeba_dup.save
+                @order = Order.last
+                format.js
+            end
+        end
+    end
+
+    def archive_order
+        @order = Order.find(params[:order_id])
+        
+        respond_to do |format|
+            if @order.update(order_status_id: 6)
+                
+                format.js
+            end
+        end
+    end
+
     private
 
         def order_params

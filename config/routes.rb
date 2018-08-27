@@ -101,7 +101,11 @@ Rails.application.routes.draw do
     resources :addresses
     resources :groups
     resources :style_attributes
-    resources :orders
+    resources :orders do
+      get 'duplicate_order', :to => 'orders#duplicate_order', as: 'duplicate_order'
+      get 'archive_order', :to => 'orders#archive_order', as: 'archive_order'
+    end
+    resources :archive_orders, only: [:index]
     resources :order_entries
     resources :order_users
     resources :order_branches

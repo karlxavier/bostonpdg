@@ -33,7 +33,7 @@
                                 <div class="stream-panel" style="font-size: 13px;">
                                     <div class="stream-info">
                                         <a href="#">
-                                            <span><%= [audit.user.first_name, audit.user.last_name].join(' ') %></span>
+                                            <span><%= audit.user.present? ? [audit.user.first_name, audit.user.last_name].join(' ') : 'N/A' %></span>
                                             <br>
                                             <span class="date"><%= audit.created_at.strftime("%d-%b-%C %I:%M %P") %></span>
                                         </a>

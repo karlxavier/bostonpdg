@@ -38,7 +38,7 @@ class Admin::CustomersController < ApplicationController
 
         def customer_params
             params.require(:customer).permit(:first_name, :last_name, :billing_address, :shipping_address, 
-                                            :phone, :brand, :admin, :email, :status, :manage_by, :owned_by, 
+                                            :phone, :brand_id, :admin, :email, :status, :manage_by, :owned_by, 
                                             :po_required, :payment_terms, :notes, :website)
         end
 

@@ -25,9 +25,10 @@
 
 class Customer < ApplicationRecord
   has_many :orders
+  belongs_to :brand
   audited
 
-  validates :first_name, :last_name, :email, presence: true
+  validates :first_name, :last_name, :email, :brand_id, presence: true
 
   def customer_fullname
     "#{first_name} #{last_name}"

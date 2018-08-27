@@ -164,7 +164,7 @@
                                                         </small>
                                                     </td>
                                                     <td class="issue-info" style="width: 15%;">
-                                                        <a href="#">
+                                                        <%= link_to admin_product_path(oe.product_id) do %>
                                                             <small>
                                                                 <% if oe.product.image_data? %>
                                                                     <%= image_tag oe.product.image_url(:original), class: "img-circle m-b-md", style: "height: 30px; width: 30px; margin-bottom: 5px;" %>  
@@ -174,7 +174,7 @@
                                                             
                                                                 <%= oe.product.name %>
                                                             </small>
-                                                        </a>
+                                                        <% end %>
                                                     </td>
                                                     <td class="issue-info" style="width: 5%;">
                                                         <a href="#">

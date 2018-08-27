@@ -36,38 +36,44 @@
                     </div>
                 </div>
         <div class="ibox-content">
-          <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover dataTables-list dataTable">
-              <thead>
-                          <tr role="row">
-                            <th>Id</th>
-                            <th>Fullname</th>
-                            <th>Billing Address</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Website</th>
-                            <th></th>
-                        </thead>
-                        <tbody>
-                          <% @customers.each do |customer| %>
-                            <tr>
-                                <td><%= customer.id %></td>
-                                <td><%= [customer.first_name, customer.last_name].join(' ') %></td>
-                                <td><%= customer.billing_address %></td>
-                                <td><%= customer.phone %></td>
-                                <td><%= customer.email %></td>
-                                <td><%= customer.website %></td>
-                                <td>
-                                  <div class="btn-group">
-                                        <%= link_to 'Edit', edit_admin_customer_path(customer), class: "btn btn-xs btn-white" %>
-                                        <button class="btn btn-xs btn-danger" type="button">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                          <% end %>
-                        </tbody>
-            </table>
-          </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover dataTables-list dataTable">
+                    <thead>
+                      <tr role="row">
+                        <th>Id</th>
+                        <th>Fullname</th>
+                        <th>Billing Address</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Brand</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                      <% @customers.each do |customer| %>
+                        <tr>
+                            <td><%= customer.id %></td>
+                            <td><%= [customer.first_name, customer.last_name].join(' ') %></td>
+                            <td><%= customer.billing_address %></td>
+                            <td><%= customer.phone %></td>
+                            <td><%= customer.email %></td>
+                            <td>
+                                <% if customer.brand.present? %>
+                                    <%= link_to customer.brand.name, admin_brand_path(customer.brand_id) %>
+                                <% else %>
+                                    N/A
+                                <% end %>
+                            </td>
+                            <td>
+                              <div class="btn-group">
+                                    <%= link_to 'Edit', edit_admin_customer_path(customer), class: "btn btn-xs btn-white" %>
+                                    <button class="btn btn-xs btn-danger" type="button">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                </table>
+            </div>
         </div>
       </div>
     </div>

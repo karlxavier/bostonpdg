@@ -65,6 +65,7 @@ gem 'aws-sdk', '~> 3'
 gem "audited", "~> 4.7"
 gem 'summernote-rails', '~> 0.8.10.0'
 gem 'country_select', '~> 3.1'
+gem 'amoeba'
 
 # global search
 gem 'scenic'

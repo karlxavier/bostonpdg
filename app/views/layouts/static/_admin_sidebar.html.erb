@@ -35,10 +35,19 @@
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to admin_orders_path do %>
-                        <i class="fa fa-shopping-cart"></i> 
+                    <a href="#">
+                        <i class="fa fa-bar-chart-o"></i> 
                         <span class="nav-label">Orders</span>
-                    <% end %>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <%= link_to 'Orders', admin_orders_path %>
+                        </li>
+                        <li>
+                            <%= link_to 'Archive Orders', admin_archive_orders_path %>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <%= link_to admin_customers_path do %>

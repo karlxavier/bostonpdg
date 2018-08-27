@@ -13,6 +13,7 @@ class Brand < ApplicationRecord
 	has_many :orders
 	has_many :hotels
 	has_many :users_brands
+	has_many :customers
 
 	validates :name, presence: true
 	validates :name, uniqueness: true
