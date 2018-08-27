@@ -139,10 +139,13 @@
 
                       <tr>
                           <td>
-                            <% if entry.product.picture.exists? %>
-                                <% @pic_id = 'pic' + entry.id.to_s + '' + entry.product.id.to_s %>
-                              <%= image_tag check_image_url(entry), id: @pic_id, class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;"%>
-                            <% else %>
+
+                            <% @pic_id = 'pic' + entry.id.to_s + '' + entry.product.id.to_s %>
+                            <% if entry.product.image_data? %>
+                              <%= image_tag entry.product.image_url(:original), id: @pic_id, class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;"%>
+                            <% elsif entry.product.picture.exists? %>
+                              <%= image_tag entry.product.picture.url, id: @pic_id, class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;"%>
+                          <% else %>
                               <%= image_tag 'default-product.png', id: @pic_id, class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;" %>
                             <% end %>
                           </td>

@@ -16,7 +16,7 @@ before_action :set_product, only: [:show, :edit, :item_details]
     if params[:product_id].present? && !params[:product_id].nil?
       @product = Product.find(params[:product_id])
       if @product.update_attributes(:picture => (params[:picture].nil? ? params[:file] : params[:picture]))
-        render json: @product,methods: [:convert_dynamic_fields, :picture_url]
+        render json: @product,methods: [:picture_url]
       else
         render nothing: true, status: :bad_request
       end

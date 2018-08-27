@@ -51,8 +51,10 @@ class Product < ApplicationRecord
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
 
   def picture_url
-    @url = "http://www.stampready.net/dashboard/editor/user_uploads/image_uploads/2018/04/17/R3H4Mxn2s0SmpFj9lvtXDBzNkP8bfJqQ.jpg"
-    if self.picture.exists?
+    @url = "#{ActionController::Base.helpers.asset_path('default-product.png')}"
+    if self.image_data?
+      @url = self.image_url(:original)
+    elsif self.picture.exists?
       @url = self.picture.url
     end
     @url

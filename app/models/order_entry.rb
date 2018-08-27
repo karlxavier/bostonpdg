@@ -36,7 +36,13 @@ class OrderEntry < ApplicationRecord
   def product_picture
     if self.product_id.present?
       product = Product.find(self.product_id)
-      product.picture_url
+      @url = "#{ActionController::Base.helpers.asset_path('default-product.png')}"
+      if product.image_data?
+        @url = product.image_url(:original)
+      elsif product.picture.exists?
+        @url = product.picture.url
+      end
+      @url
     end
   end
 
@@ -162,9 +168,11 @@ end
 
   def picture_url
     product = Product.find(self.product_id)
-    @url = ""
-    if product.picture.exists?
-      @url = product.picture.path(:original)
+    @url = "#{ActionController::Base.helpers.asset_path('default-product.png')}"
+    if product.image_data?
+      @url = product.image_url(:original)
+    elsif product.picture.exists?
+      @url = product.picture.url
     end
     @url
   end
