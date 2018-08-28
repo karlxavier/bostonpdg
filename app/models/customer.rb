@@ -26,9 +26,11 @@
 class Customer < ApplicationRecord
   has_many :orders
   belongs_to :brand
-  audited
+  # audited
 
-  validates :first_name, :last_name, :email, :brand_id, presence: true
+  # validates :first_name, :last_name, :email, presence: true
+
+  scope :customer_with_brands, -> { includes(:brand) }
 
   def customer_fullname
     "#{first_name} #{last_name}"
@@ -39,69 +41,132 @@ class Customer < ApplicationRecord
   def self.import(file)
 
     spreadsheet= open_spreadsheet(file)
-    header=spreadsheet.row(1)
-    (2..spreadsheet.last_row).each do |i|
-      row=Hash[[header,spreadsheet.row(i)].transpose]
-      temp_customer = Customer.find_by_name(row['Customer'])
-      if !temp_customer.present?
+    # spreadsheet = CSV.new(file.path)
+    spreadsheet.default_sheet = spreadsheet.sheets[0]
+    # header=spreadsheet.row(1)
 
-        @customer = Customer.new
+    headers = Hash.new
+    spreadsheet.row(1).each_with_index {|header,i|headers[header] = i}
+    ((spreadsheet.first_row + 1)..spreadsheet.last_row).each do |row|
+      
+      customer = spreadsheet.row(row)[headers['Customer']]
+      company = spreadsheet.row(row)[headers['Company']]
+      phone = spreadsheet.row(row)[headers['Main Phone']]
+      fax = spreadsheet.row(row)[headers['Fax']]
+      email = spreadsheet.row(row)[headers['Main Email']]
+      balance = spreadsheet.row(row)[headers['Balance']]
+      balance_total = spreadsheet.row(row)[headers['Balance Total']]
+      bill_1 = spreadsheet.row(row)[headers['Bill to 1']]
+      bill_2 = spreadsheet.row(row)[headers['Bill to 2']]
+      bill_3 = spreadsheet.row(row)[headers['Bill to 3']]
+      bill_4 = spreadsheet.row(row)[headers['Bill to 4']]
+      bill_5 = spreadsheet.row(row)[headers['Bill to 5']]
+      ship_1 = spreadsheet.row(row)[headers['Ship to 1']]
+      ship_2 = spreadsheet.row(row)[headers['Ship to 2']]
+      ship_3 = spreadsheet.row(row)[headers['Ship to 3']]
+      ship_4 = spreadsheet.row(row)[headers['Ship to 4']]
+      ship_5 = spreadsheet.row(row)[headers['Ship to 5']]
+      terms = spreadsheet.row(row)[headers['Terms']]
+      rep = spreadsheet.row(row)[headers['Rep']]
+      sales_tax_code = spreadsheet.row(row)[headers['Sales Tax Code']]
+      tax_item = spreadsheet.row(row)[headers['Tax item']]
 
-        if row['Company'].present? && row['Company'] != ''
-          brand = Brand.find_by_name(row['Company'])
-          if !brand.present?
-            brand = Brand.new
-            brand.name = row['Company']
-            if brand.save
-              @customer.brand = brand.id
-          end
-          else
-            @customer.brand = brand.id
-          end
+      cust = Customer.new
 
-        end
-        if row['Customer'].present? && row['Customer'] != ''
-          @customer.name = row['Customer']
-        end
-        if row['First Name'].present? && row['First Name'] != ''
-          @customer.first_name = row['First Name']
-        end
-        if row['Last Name'].present? && row['Last Name'] != ''
-          @customer.last_name = row['Last Name']
-        end
-        if row['Bill to 1'].present? && row['Bill to 1'] != ''
-          @customer.billing_address =  row['Bill to 1']
-        end
-        if row['Bill to 2'].present? && row['Bill to 2'] != ''
-          @customer.billing_address = @customer.billing_address + ' ' + row['Bill to 2']
-        end
-        if row['Bill to 3'].present? && row['Bill to 3'] != ''
-          @customer.billing_address = @customer.billing_address + ' ' + row['Bill to 3']
-        end
-        if row['Ship to 1'].present? && row['Ship to 1'] != ''
-          @customer.shipping_address = row['Ship to 1']
-        end
-        if row['Ship to 2'].present? && row['Ship to 2'] != ''
-          @customer.shipping_address = @customer.shipping_address + ' ' + row['Ship to 2']
-        end
-        if row['Ship to 3'].present? && row['Ship to 3'] != ''
-          @customer.shipping_address = @customer.shipping_address + ' ' + row['Ship to 3']
-        end
-        if row['Main Phone'].present? && row['Main Phone'] != ''
-          @customer.phone = row['Main Phone']
-        end
-        if row['Main Email'].present? && row['Main Email'] != ''
-          @customer.email = row['Main Email']
-        end
-
-        @customer.save
+      brand = Brand.find_by_name(company)
+      if !brand.present? && !company.nil?
+        Brand.create(name: company)
+        cust.brand_id = Brand.last
+      elsif brand.present?
+        cust.brand_id = brand.id
       end
+
+      cust.name = customer
+      cust.phone = phone
+      cust.fax = fax
+      cust.email = email
+      cust.balance = balance
+      cust.balance_total = balance_total
+      cust.bill_1 = bill_1
+      cust.bill_2 = bill_2
+      cust.bill_3 = bill_3
+      cust.bill_4 = bill_4
+      cust.bill_5 = bill_5
+      cust.ship_1 = ship_1
+      cust.ship_2 = ship_2
+      cust.ship_3 = ship_3
+      cust.ship_4 = ship_4
+      cust.ship_5 = ship_5
+      cust.terms = terms
+      cust.rep = rep
+      cust.sales_tax_code = sales_tax_code
+      cust.tax_item = tax_item
+
+      cust.save
     end
+
+    # (2..spreadsheet.last_row).each do |i|
+    #   row=Hash[[header,spreadsheet.row(i)].transpose]
+    #   temp_customer = Customer.find_by_name(row['Customer'])
+    #   if !temp_customer.present?
+
+    #     @customer = Customer.new
+
+    #     if row['Company'].present? && row['Company'] != ''
+    #       brand = Brand.find_by_name(row['Company'])
+    #       if !brand.present?
+    #         brand = Brand.new
+    #         brand.name = row['Company']
+    #         if brand.save
+    #           @customer.brand = brand.id
+    #       end
+    #       else
+    #         @customer.brand = brand.id
+    #       end
+
+    #     end
+    #     if row['Customer'].present? && row['Customer'] != ''
+    #       @customer.name = row['Customer']
+    #     end
+    #     if row['First Name'].present? && row['First Name'] != ''
+    #       @customer.first_name = row['First Name']
+    #     end
+    #     if row['Last Name'].present? && row['Last Name'] != ''
+    #       @customer.last_name = row['Last Name']
+    #     end
+    #     if row['Bill to 1'].present? && row['Bill to 1'] != ''
+    #       @customer.billing_address =  row['Bill to 1']
+    #     end
+    #     if row['Bill to 2'].present? && row['Bill to 2'] != ''
+    #       @customer.billing_address = @customer.billing_address + ' ' + row['Bill to 2']
+    #     end
+    #     if row['Bill to 3'].present? && row['Bill to 3'] != ''
+    #       @customer.billing_address = @customer.billing_address + ' ' + row['Bill to 3']
+    #     end
+    #     if row['Ship to 1'].present? && row['Ship to 1'] != ''
+    #       @customer.shipping_address = row['Ship to 1']
+    #     end
+    #     if row['Ship to 2'].present? && row['Ship to 2'] != ''
+    #       @customer.shipping_address = @customer.shipping_address + ' ' + row['Ship to 2']
+    #     end
+    #     if row['Ship to 3'].present? && row['Ship to 3'] != ''
+    #       @customer.shipping_address = @customer.shipping_address + ' ' + row['Ship to 3']
+    #     end
+    #     if row['Main Phone'].present? && row['Main Phone'] != ''
+    #       @customer.phone = row['Main Phone']
+    #     end
+    #     if row['Main Email'].present? && row['Main Email'] != ''
+    #       @customer.email = row['Main Email']
+    #     end
+
+    #     @customer.save
+    #   end
+    # end
   end
 
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
-      when ".csv" then Roo::Csv.new (file.path nil, :ignore)
+      when ".csv" then Roo::CSV.new(file.path)
       when ".xls" then Roo::Excel.new (file.path)
       when ".xlsx" then Roo::Excelx.new(file.path)
       else raise "Unknown file type: #{file.original_filename}"

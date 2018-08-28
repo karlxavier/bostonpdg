@@ -41,21 +41,17 @@
                     <thead>
                       <tr role="row">
                         <th>Id</th>
-                        <th>Fullname</th>
-                        <th>Billing Address</th>
+                        <th>Name</th>
+                        <th>Brand</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Brand</th>
                         <th></th>
                     </thead>
                     <tbody>
                       <% @customers.each do |customer| %>
                         <tr>
                             <td><%= customer.id %></td>
-                            <td><%= [customer.first_name, customer.last_name].join(' ') %></td>
-                            <td><%= customer.billing_address %></td>
-                            <td><%= customer.phone %></td>
-                            <td><%= customer.email %></td>
+                            <td><%= customer.name %></td>
                             <td>
                                 <% if customer.brand.present? %>
                                     <%= link_to customer.brand.name, admin_brand_path(customer.brand_id) %>
@@ -63,6 +59,8 @@
                                     N/A
                                 <% end %>
                             </td>
+                            <td><%= customer.phone %></td>
+                            <td><%= customer.email %></td>
                             <td>
                               <div class="btn-group">
                                     <%= link_to 'Edit', edit_admin_customer_path(customer), class: "btn btn-xs btn-white" %>

@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20180828132442) do
+=======
+ActiveRecord::Schema.define(version: 20180828175930) do
+>>>>>>> CRM - Customer CSV upload
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +121,24 @@ ActiveRecord::Schema.define(version: 20180828132442) do
     t.text "payment_terms"
     t.text "notes"
     t.string "website"
+    t.decimal "balance"
+    t.decimal "balance_total"
+    t.string "bill_1"
+    t.string "bill_2"
+    t.string "bill_3"
+    t.string "bill_4"
+    t.string "bill_5"
+    t.string "ship_1"
+    t.string "ship_2"
+    t.string "ship_3"
+    t.string "ship_4"
+    t.string "ship_5"
+    t.string "terms"
+    t.string "rep"
+    t.string "sales_tax_code"
+    t.string "tax_item"
+    t.boolean "active", default: true
+    t.string "fax"
   end
 
   create_table "default_attributes", force: :cascade do |t|

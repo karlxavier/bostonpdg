@@ -14,6 +14,7 @@ class Brand < ApplicationRecord
 	has_many :hotels
 	has_many :users_brands
 	has_many :customers
+	# audited
 
 	validates :name, presence: true
 	validates :name, uniqueness: true

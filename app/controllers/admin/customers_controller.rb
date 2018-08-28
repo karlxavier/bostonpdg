@@ -2,7 +2,7 @@ class Admin::CustomersController < ApplicationController
     before_action :set_customer, only: [:edit, :update]
 
     def index
-        @customers = Customer.all
+        @customers = Customer.customer_with_brands
     end
 
     def new
@@ -39,7 +39,10 @@ class Admin::CustomersController < ApplicationController
         def customer_params
             params.require(:customer).permit(:first_name, :last_name, :billing_address, :shipping_address, 
                                             :phone, :brand_id, :admin, :email, :status, :manage_by, :owned_by, 
-                                            :po_required, :payment_terms, :notes, :website)
+                                            :po_required, :payment_terms, :notes, :website, :name, :bill_1,
+                                            :bill_2, :bill_3, :bill_4, :bill_5, :ship_1, :ship_2, :ship_3,
+                                            :ship_4, :ship_5, :terms, :rep, :sales_tax_code, :tax_item,
+                                            :active, :fax)
         end
 
         def set_customer
