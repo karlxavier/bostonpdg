@@ -46,6 +46,7 @@
                         <th>Phone</th>
                         <th>Email</th>
                         <th></th>
+                        <th></th>
                     </thead>
                     <tbody>
                       <% @customers.each do |customer| %>
@@ -61,6 +62,13 @@
                             </td>
                             <td><%= customer.phone %></td>
                             <td><%= customer.email %></td>
+                            <td>
+                                <% if customer.active? %>
+                                    <span class="label label-primary">Active</span>
+                                <% else %>
+                                    <span class="label label-warning">Inctive</span>
+                                <% end %>
+                            </td>
                             <td>
                               <div class="btn-group">
                                     <%= link_to 'Edit', edit_admin_customer_path(customer), class: "btn btn-xs btn-white" %>
