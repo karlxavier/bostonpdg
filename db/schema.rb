@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180827152437) do
+ActiveRecord::Schema.define(version: 20180828132442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(version: 20180827152437) do
     t.index ["user_id"], name: "index_item_messages_on_user_id"
   end
 
-  create_table "mailboxer_conversation_opt_outs", id: :integer, default: nil, force: :cascade do |t|
+  create_table "mailboxer_conversation_opt_outs", id: :serial, force: :cascade do |t|
     t.string "unsubscriber_type"
     t.integer "unsubscriber_id"
     t.integer "conversation_id"
@@ -212,13 +212,13 @@ ActiveRecord::Schema.define(version: 20180827152437) do
     t.index ["unsubscriber_id", "unsubscriber_type"], name: "index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type"
   end
 
-  create_table "mailboxer_conversations", id: :integer, default: nil, force: :cascade do |t|
+  create_table "mailboxer_conversations", id: :serial, force: :cascade do |t|
     t.string "subject", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "mailboxer_notifications", id: :integer, default: nil, force: :cascade do |t|
+  create_table "mailboxer_notifications", id: :serial, force: :cascade do |t|
     t.string "type"
     t.text "body"
     t.string "subject", default: ""
@@ -241,7 +241,7 @@ ActiveRecord::Schema.define(version: 20180827152437) do
     t.index ["type"], name: "index_mailboxer_notifications_on_type"
   end
 
-  create_table "mailboxer_receipts", id: :integer, default: nil, force: :cascade do |t|
+  create_table "mailboxer_receipts", id: :serial, force: :cascade do |t|
     t.string "receiver_type"
     t.integer "receiver_id"
     t.integer "notification_id", null: false
@@ -295,6 +295,16 @@ ActiveRecord::Schema.define(version: 20180827152437) do
     t.text "notes"
   end
 
+  create_table "order_entry_attachments", force: :cascade do |t|
+    t.integer "order_entry_id"
+    t.string "attachment_file_file_name"
+    t.string "attachment_file_content_type"
+    t.integer "attachment_file_file_size"
+    t.datetime "attachment_file_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "order_entry_vendors", force: :cascade do |t|
     t.integer "order_entry_id"
     t.integer "vendor_id"
@@ -327,6 +337,7 @@ ActiveRecord::Schema.define(version: 20180827152437) do
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "chatroom_order_id"
     t.integer "client_contact"
     t.integer "designer"
   end
@@ -491,10 +502,14 @@ ActiveRecord::Schema.define(version: 20180827152437) do
   add_foreign_key "chatroom_users", "users"
   add_foreign_key "chatrooms", "orders"
   add_foreign_key "item_messages", "order_entries"
+  add_foreign_key "item_messages", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "messages", "users"
   add_foreign_key "products", "style_attributes"
+  add_foreign_key "users", "addresses", column: "billing_address"
+  add_foreign_key "users", "addresses", column: "shipping_address"
   add_foreign_key "users", "brands"
   add_foreign_key "users", "groups"
   add_foreign_key "vendors", "products"

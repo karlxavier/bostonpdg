@@ -64,7 +64,25 @@ $(document).on('turbolinks:load', function () {
         });
     });
 
+    $(".onlyNumbers").on("keypress keyup blur",function (event) {
+        var charCode = (event.which) ? event.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && !(charCode == 46 || charCode == 8))
+            event.preventDefault();
+        else {
+            var len = $(this).val().length;
+            var index = $(this).val().indexOf('.');
+            if (index > 0 && charCode == 46) {
+                event.preventDefault();
+            }
+            if (index > 0) {
+                var CharAfterdot = (len + 1) - index;
+                if (CharAfterdot > 3 && !(charCode == 46 || charCode == 8)) {
+                    event.preventDefault();
+                }
+            }
 
+        }
+    });
 });
 
 

@@ -1,0 +1,2 @@
+class OrderEntryAttachment < ApplicationRecord
+end

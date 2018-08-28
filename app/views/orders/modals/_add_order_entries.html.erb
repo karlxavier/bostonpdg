@@ -163,11 +163,11 @@
     $(document).ready(function (){
         Ladda.bind( '.ladda-button',{ timeout: 10000 });
 
-        $(".onlyNumbers").on("keypress keyup blur",function (event) {
+        /*$(".onlyNumbers").on("keypress keyup blur",function (event) {
             $(this).val($(this).val().replace(/[^0-9\.]/g,''));
             if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
                 event.preventDefault();
             }
-        });
+        });*/
     })
 </script>

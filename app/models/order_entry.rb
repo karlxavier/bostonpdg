@@ -163,7 +163,11 @@ end
 
   def vendor_email
     vendor_list = OrderEntryVendor.where(:order_entry_id => self.id).pluck(:vendor_id).join(',')
-    Vendor.where("id IN (#{vendor_list})").pluck(:email).map(&:inspect).join(',').gsub!('"', '')
+    if vendor_list != ""
+      Vendor.where("id IN (#{vendor_list})").pluck(:email).map(&:inspect).join(',').gsub!('"', '')
+    else
+      ""
+    end
   end
 
   def picture_url

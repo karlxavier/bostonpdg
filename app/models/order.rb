@@ -33,7 +33,6 @@ class Order < ApplicationRecord
   belongs_to :brand
   belongs_to :order_status
   belongs_to :customer
-
   validates :brand_id, presence: true
 
   amoeba do
