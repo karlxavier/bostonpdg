@@ -10,11 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
+
 ActiveRecord::Schema.define(version: 20180828132442) do
-=======
-ActiveRecord::Schema.define(version: 20180828175930) do
->>>>>>> CRM - Customer CSV upload
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -510,6 +507,17 @@ ActiveRecord::Schema.define(version: 20180828175930) do
     t.bigint "product_id"
     t.string "email"
     t.integer "billing_address"
+    t.integer "brand_id"
+    t.decimal "balance", precision: 12, scale: 3
+    t.decimal "balance_total", precision: 12, scale: 3
+    t.string "bill_from_1"
+    t.string "bill_from_2"
+    t.string "bill_from_3"
+    t.string "bill_from_4"
+    t.string "bill_from_5"
+    t.string "phone"
+    t.string "fax"
+    t.boolean "active", default: true
     t.index ["product_id"], name: "index_vendors_on_product_id"
   end
 

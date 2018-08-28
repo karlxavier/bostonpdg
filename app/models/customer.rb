@@ -41,9 +41,7 @@ class Customer < ApplicationRecord
   def self.import(file)
 
     spreadsheet= open_spreadsheet(file)
-    # spreadsheet = CSV.new(file.path)
     spreadsheet.default_sheet = spreadsheet.sheets[0]
-    # header=spreadsheet.row(1)
 
     headers = Hash.new
     spreadsheet.row(1).each_with_index {|header,i|headers[header] = i}
@@ -76,7 +74,7 @@ class Customer < ApplicationRecord
       brand = Brand.find_by_name(company)
       if !brand.present? && !company.nil?
         Brand.create(name: company)
-        cust.brand_id = Brand.last
+        cust.brand_id = Brand.last.id
       elsif brand.present?
         cust.brand_id = brand.id
       end

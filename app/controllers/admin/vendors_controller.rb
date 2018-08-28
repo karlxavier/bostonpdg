@@ -2,7 +2,7 @@ class Admin::VendorsController < ApplicationController
     before_action :set_vendor, only: [:show, :edit, :update]
 
     def index
-        @vendors = Vendor.all
+        @vendors = Vendor.vendors_with_brands
     end
 
     def show
@@ -43,7 +43,10 @@ class Admin::VendorsController < ApplicationController
     private
 
         def vendor_params
-            params.require(:vendor).permit(:name, :lead_time, :country_origin, :email, :billing_address)
+            params.require(:vendor).permit(:name, :lead_time, :country_origin, :email, :billing_address,
+                                            :brand_id, :balance, :balance_total, :bill_from_1,
+                                            :bill_from_2, :bill_from_3, :bill_from_4, :bill_from_5,
+                                            :phone, :fax, :active)
         end
 
         def set_vendor

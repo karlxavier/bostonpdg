@@ -23,7 +23,11 @@
 # OrderStatus.create(name: 'Shipping')
 
 #OrderEntry.where(product_id: 809).destroy_all 
-OrderStatus.create(name: "Archive")
+# OrderStatus.create(name: "Archive")
+
+# Brand.destroy_all
+# Customer.destroy_all
+# Vendor.destroy_all
 
 # Vendor.destroy_all
 # VendorCategory.destroy_all
