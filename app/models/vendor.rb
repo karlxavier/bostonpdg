@@ -83,15 +83,8 @@ class Vendor < ApplicationRecord
 
       vend = Vendor.new
 
-      brand = Brand.find_by_name(company)
-      if !brand.present? && !company.nil?
-        Brand.create(name: company)
-        vend.brand_id = Brand.last.id
-      elsif brand.present?
-        vend.brand_id = brand.id
-      end
-
       vend.name = name
+      vend.company = company
       vend.phone = phone
       vend.fax = fax
       vend.balance = balance

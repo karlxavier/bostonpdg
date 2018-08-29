@@ -44,7 +44,7 @@ class Admin::VendorsController < ApplicationController
 
         def vendor_params
             params.require(:vendor).permit(:name, :lead_time, :country_origin, :email, :billing_address,
-                                            :brand_id, :balance, :balance_total, :bill_from_1,
+                                            :company, :balance, :balance_total, :bill_from_1,
                                             :bill_from_2, :bill_from_3, :bill_from_4, :bill_from_5,
                                             :phone, :fax, :active)
         end

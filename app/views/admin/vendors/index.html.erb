@@ -42,9 +42,9 @@
                           <tr role="row">
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Brand</th>
+                            <th>Company</th>
                             <th>Country Origin</th>
-                            <th>Lead Time</th>
+                            <th>Total Balance</th>
                             <th></th>
                             <th></th>
                         </thead>
@@ -56,14 +56,10 @@
                                     <%= link_to vendor.name, admin_vendor_path(vendor) %>
                                 </td>
                                 <td>
-                                    <% if vendor.brand.present? %>
-                                        <%= link_to vendor.brand.name, admin_brand_path(vendor.brand_id) %>
-                                    <% else %>
-                                        <%= "N/A #{vendor.brand_id}" %>
-                                    <% end %>
+                                    <%= vendor.company %>
                                 </td>
                                 <td><%= vendor.country_origin %></td>
-                                <td><%= vendor.lead_time %></td>
+                                <td><%= vendor.balance_total %></td>
                                 <td>
                                     <% if vendor.active? %>
                                         <span class="label label-primary">Active</span>
