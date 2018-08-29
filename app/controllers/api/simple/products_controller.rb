@@ -67,6 +67,11 @@ module Api
               end
             end
           end
+          if params[:file].present?
+            params[:file].each do |attachment_file|
+              OrderEntryAttachment.create(:product_id => @product.id, :attachment_file => params[:file]["#{attachment_file}"])
+            end
+          end
           render json: @product
         else
           render nothing: true, status: :bad_request

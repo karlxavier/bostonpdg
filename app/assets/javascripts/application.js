@@ -398,3 +398,17 @@ function setAttributesOnForm(element) {
     $(element).find('#dynamic_fields').val(JSON.stringify(dynamic_fields));
     return true;
 }
+
+function setCloneAttributesOnForm(element) {
+    var dynamic_fields = {};
+
+    var field_names = $(element).find('input[name=clone_order_field_name]');
+    var field_values = $(element).find('input[name=clone_order_field_value]');
+
+    for (var i = field_names.length - 1; i >= 0; i--) {
+        dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
+    }
+
+    $(element).find('#clone_dynamic_fields').val(JSON.stringify(dynamic_fields));
+    return true;
+}

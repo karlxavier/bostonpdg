@@ -47,11 +47,7 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @categories = Category.order("id DESC")
-    @vendors = Vendor.order("id DESC")
-    @products = Product.order("id DESC")
-    @users = User.order("id DESC")
-    @brands = Brand.order("id DESC")
+
   end
 
   def update_assign_user
@@ -250,8 +246,9 @@ class OrdersController < ApplicationController
     temp_order = params[:order]
     @order = Order.find(temp_order[:id])
 
-    if @order.update_attributes(:brand_id => temp_order[:brand_id], :lead_time => temp_order[:lead_time], :status => temp_order[:status], :total_budget => temp_order[:total_budget])
-      if params[:order_entries].present? || params[:existing_entries].present?
+    # if @order.update_attributes(:brand_id => temp_order[:brand_id], :lead_time => temp_order[:lead_time], :status => temp_order[:status], :total_budget => temp_order[:total_budget])
+    if @order.update_attributes(:brand_id => temp_order[:brand_id])
+    if params[:order_entries].present? || params[:existing_entries].present?
         order_entries = OrderEntry.where(:order_id => @order.id)
         order_entries.each do |oe|
           temp_existing_entries = params[:existing_entries].split(",").map { |s| s.to_i }
@@ -363,18 +360,7 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @categories = Category.order("id DESC")
-    @vendors = Vendor.order("id DESC")
-    @products = Product.order("id DESC")
-    @users = User.order("id DESC")
-    @brands = Brand.order("id DESC")
     @order = Order.find(params[:id])
-    @order_entries = OrderEntry.where(:order_id => @order.id)
-    @order_users = OrderUser.where(:order_id => @order.id)
-    @order_branches = OrderBranch.where(:order_id => @order.id)
-    if @order.brand_id.present? && !@order.brand_id.nil?
-      @addresses = Address.where("id IN (SELECT billing_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{@order.brand_id}))  OR id IN (SELECT shipping_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{@order.brand_id}))")
-    end
   end
 
   def send_orders
