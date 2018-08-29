@@ -162,9 +162,7 @@
                   <td><a href="javascript:void(0)" class="btn btn-outline-dark btn-nav-selected-circle" onclick="itemDetails(<%= entry.product_id %>, '<%= entry.id %>');"><i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i></a></td>
                   <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-outline-danger btn-nav-selected-circle" ><i class="fa fa-trash-o" aria-hidden="true"></i></td>
                   <td>
-                    <% if entry.status == 1 %>
-                        <input type="checkbox" name="item_ids[]" value="<%= entry.id %>" class="item_ids"/>
-                    <% end %>
+                    <input type="checkbox" name="item_ids[]" value="<%= entry.id %>" class="item_ids"/>
                   </td>
                   </tr>
 
