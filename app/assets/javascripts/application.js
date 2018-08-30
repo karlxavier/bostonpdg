@@ -309,6 +309,17 @@ function itemDetails(id, entry_id) {
     });
 }
 
+function generateAttachments(order_entry_id) {
+    $.ajax({
+        method: "GET",
+        url: "/order_entries/attachment?id=" + order_entry_id
+    }).done(function (data) {
+        $('#order_entry_attachments').html('');
+        $('#order_entry_attachments').html(data);
+        $('#viewAttachments').modal('show');
+    });
+}
+
 function generateTableRow(key, value) {
     return "<tr style='margin-bottom: 2%'><td> <span class='float-left'>" + key + "</span> <span class='float-right'>" + value + "</span></td></tr>"
 }

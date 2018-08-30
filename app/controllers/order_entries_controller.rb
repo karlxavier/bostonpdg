@@ -23,6 +23,11 @@ class OrderEntriesController < ApplicationController
             end
           end
         end
+        if params[:file].present?
+          params[:file].each do |attachment_file|
+            OrderEntryAttachment.create(:order_entry_id => @order_entry.id, :product_id => @order_entry.product_id, :attachment_file => params[:file]["#{attachment_file}"])
+          end
+        end
         OrderHistory.create(:order_id => @order_entry.order_id, :order_entry_id => @order_entry.id, :description => 'has been Added', :user_id => current_user.id)
         flash[:notice] = "Order Entry Successfully Created"
       else
@@ -69,6 +74,15 @@ class OrderEntriesController < ApplicationController
           end
         else
           OrderEntryVendor.where(:order_entry_id => @order_entry.id).destroy_all
+        end
+
+        if params[:file].present?
+          OrderEntryAttachment.where(:order_entry_id => @order_entry.id).destroy_all
+          params[:file].each do |attachment_file|
+            OrderEntryAttachment.create(:order_entry_id => @order_entry.id, :product_id => @order_entry.product_id, :attachment_file => params[:file]["#{attachment_file}"])
+          end
+        else
+          OrderEntryAttachment.where(:order_entry_id => @order_entry.id).destroy_all
         end
         flash[:notice] = "Order Entry Successfully Updated"
       else
@@ -118,6 +132,11 @@ class OrderEntriesController < ApplicationController
 
   def history
     @order_histories = OrderHistory.where(:order_entry_id => params[:id])
+    render :layout => false
+  end
+
+  def attachment
+    @order_entry_attachments = OrderEntryAttachment.where(:order_entry_id => params[:id])
     render :layout => false
   end
 

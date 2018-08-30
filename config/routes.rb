@@ -52,6 +52,7 @@ Rails.application.routes.draw do
       post  'change_status'
       post  'change_status_on_checklist'
       get   'history'
+      get   'attachment'
     end
   end
 

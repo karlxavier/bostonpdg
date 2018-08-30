@@ -8,7 +8,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form class="form" id="new_order_entry" action="/order_entries" accept-charset="UTF-8" method="post">
+      <form class="form" id="new_order_entry" action="/order_entries" accept-charset="UTF-8" method="post"  method="POST" enctype="multipart/form-data">
         <input type="hidden"  name="order_entry[dynamic_fields]" id="dynamic_fields"/>
         <div class="modal-body">
           <input type="hidden" name="order_entry[order_id]" id="order_entry_order_id" value="<%= @order.id %>">
@@ -17,11 +17,9 @@
             <div class="col-sm-10">
               <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_entry[category_id]" id="order_entry_category_id">
                 <option></option>
-                <% if @categories.present? %>
-                    <% @categories.each do |category| %>
+                    <% Category.order('id DESC').each do |category| %>
                         <option value="<%= category.id %>"><%= category.name%></option>
                     <% end %>
-                <% end %>
               </select>
             </div>
           </div>
@@ -30,11 +28,9 @@
             <div class="col-sm-10">
               <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_entry[vendor][]" id="order_entry_vendor" multiple>
                 <option></option>
-                <% if @vendors.present? %>
-                    <% @vendors.each do |vendor| %>
+                    <% Vendor.order('id DESC').each do |vendor| %>
                         <option value="<%= vendor.id %>"><%= vendor.name %></option>
                     <% end %>
-                <% end %>
               </select>
             </div>
           </div>
@@ -43,11 +39,9 @@
             <div class="col-sm-10">
               <select class="selectpicker2 form-control glow-input" data-live-search="true" name="order_entry[product_id]" id="order_entry_product_id" required="true">
                 <option></option>
-                <% if @products.present? %>
-                    <% @products.each do |product| %>
+                    <% Product.order('id DESC').each do |product| %>
                         <option value="<%= product.id %>"><%= product.name %></option>
                     <% end %>
-                <% end %>
               </select>
             </div>
             <!--<div class="col-sm-1">-->
@@ -110,6 +104,14 @@
             </div>
           </div>
           <div class="form-group row">
+            <label class="col-sm-2 col-form-label label-form col-form-label-right">Attachment</label>
+            <div class="col-sm-10 dropzone">
+              <div id="dropzoneAddPreview" class="dropzone-previews form-control dz-clickable">
+                <div class="dz-message">Drag&drop</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
             <label class="col-sm-2 col-form-label label-form col-form-label-right">Attributes</label>
             <div class="col-sm-10">
               <a class="btn btn-outline-dark float-right" onclick="add_attribute($('#new_order_entry').find('#product_attributes'));" >Add Attributes</a>
@@ -163,11 +165,5 @@
     $(document).ready(function (){
         Ladda.bind( '.ladda-button',{ timeout: 10000 });
 
-        /*$(".onlyNumbers").on("keypress keyup blur",function (event) {
-            $(this).val($(this).val().replace(/[^0-9\.]/g,''));
-            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-                event.preventDefault();
-            }
-        });*/
-    })
+    });
 </script>

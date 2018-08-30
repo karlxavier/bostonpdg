@@ -148,7 +148,15 @@ class OrdersController < ApplicationController
             product = Product.find(oe.to_i)
             order_entry.category_id = product.item_category_id
             order_entry.product_id = oe
+            order_entry.specs = product.specs
+            order_entry.notes = product.notes
+            order_entry.vendor_quote_prices = product.vendor_quote_prices
+            order_entry.dynamic_fields = product.dynamic_fields
             if order_entry.save
+              order_entry_attachment = OrderEntryAttachment.where(:product_id => product.id).where('order_entry_id IS NULL').first
+              if order_entry_attachment.present?
+                order_entry_attachment.update_attributes(:order_entry_id => order_entry.id)
+              end
               vendors = OrderEntryVendor.where(:product_id => oe)
               if vendors.present? && !vendors.nil?
                 vendors.each do |vendor|
@@ -257,6 +265,7 @@ class OrdersController < ApplicationController
             order_entry = OrderEntry.find(oe.id)
             if order_entry.destroy
               OrderEntryVendor.where(:order_entry_id => oe.id).destroy_all
+              OrderEntryAttachment.where(:order_entry_id => oe.id).destroy_all
               OrderHistory.create(:order_id => order_entry.order_id, :product_id => order_entry.product_id, :description => "has been Removed", :user_id => current_user.id)
             end
           end
@@ -268,8 +277,16 @@ class OrdersController < ApplicationController
           product = Product.find(oe.to_i)
           order_entry.category_id = product.item_category_id
           order_entry.product_id = oe
+          order_entry.specs = product.specs
+          order_entry.notes = product.notes
+          order_entry.vendor_quote_prices = product.vendor_quote_prices
+          order_entry.dynamic_fields = product.dynamic_fields
           order_entry.save
           if order_entry.save
+            order_entry_attachment = OrderEntryAttachment.where(:product_id => product.id).where('order_entry_id IS NULL').first
+            if order_entry_attachment.present?
+              order_entry_attachment.update_attributes(:order_entry_id => order_entry.id)
+            end
             vendors = OrderEntryVendor.where(:product_id => oe)
             if vendors.present? && !vendors.nil?
               vendors.each do |vendor|

@@ -5,8 +5,8 @@
     <h1><%= order.brand_name %></h1>
     <p class="text-secondary">
       <% if order.brand_branches.present? && !order.brand_branches.nil? %>
-          <span style="margin-right: 2%;">BRANCHES:</span>
-          <%= order.brand_branches %>
+        <span style="margin-right: 2%;">BRANCHES:</span>
+        <%= order.brand_branches %>
       <% end %>
     </p>
   </div>
@@ -42,7 +42,7 @@
               <label class="col-sm-4 col-form-label">REGIONAL DIRECTOR</label>
               <div class="col-sm-8">
                 <% OrderUser.regional_users(order.id).each do |user| %>
-                    <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
@@ -50,7 +50,7 @@
               <label class="col-sm-4 col-form-label">CLIENT CONTACTS</label>
               <div class="col-sm-8">
                 <% OrderUser.client_contact_users(order.id).each do |user| %>
-                    <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
@@ -58,7 +58,7 @@
               <label class="col-sm-4 col-form-label">COMMS DIRECTOR</label>
               <div class="col-sm-8">
                 <% OrderUser.comms_users(order.id).each do |user| %>
-                    <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
@@ -66,7 +66,7 @@
               <label class="col-sm-4 col-form-label">ART</label>
               <div class="col-sm-8">
                 <% OrderUser.art_users(order.id).each do |user| %>
-                    <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
@@ -74,7 +74,7 @@
               <label class="col-sm-4 col-form-label">DESIGNER</label>
               <div class="col-sm-8">
                 <% OrderUser.designer_users(order.id).each do |user| %>
-                    <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
@@ -82,7 +82,7 @@
               <label class="col-sm-4 col-form-label">PROCESSORS</label>
               <div class="col-sm-8">
                 <% OrderUser.processor_users(order.id).each do |user| %>
-                    <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
+                  <button class="btn btn-secondary btn-sm" disabled><%= [user.first_name, user.last_name].join(' ') %></button>&nbsp;
                 <% end %>
               </div>
             </div>
@@ -96,7 +96,7 @@
         <button class="btn btn-outline-light float-right btn-padding-margin" data-toggle="modal" data-target="#addOrderEntries">ADD AN ITEM</button>
       </div>
       <div class="card-body bg-light text-secondary">
-       <!-- <form id="send_to_vendors" action="<%= send_orders_to_vendors_orders_path %>" method="POST" >
+        <!-- <form id="send_to_vendors" action="<%= send_orders_to_vendors_orders_path %>" method="POST" >
           <input type="hidden" name="order_id" value="<%= @order.id %>">
           <select class="selectpicker2 glow-input" data-live-search="true" name="vendors[]" id="vendors[]" multiple>
             <option></option>
@@ -115,63 +115,62 @@
 
             <%#= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin float-right margin-top-1" %>
             <%= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin float-right" %>
-                <a class="btn btn-dark btn-padding-margin" data-toggle="tooltip" data-placement="top" title="Select Line Item/s below." onclick="setVendors();">REQUEST QUOTE</a>
+            <a class="btn btn-dark btn-padding-margin" data-toggle="tooltip" data-placement="top" title="Select Line Item/s below." onclick="setVendors();">REQUEST QUOTE</a>
             <!--<a href="<%#= send_orders_orders_path(:order_id => @order.id) %>" class="btn btn-dark btn-padding-margin" >REQUEST QUOTE</a>-->
-                </div>
-                <table class="table">
-                  <thead class="table-light">
-                  <tr>
-                    <th scope="col"></th>
-                    <th scope="col">ITEM + SKU</th>
-                    <th scope="col">STATUS</th>
-                    <th scope="col">PCS</th>
-                    <th scope="col">PER ITEM</th>
-                    <th scope="col">TOTAL</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <%= form_tag(change_status_order_entries_path, method: :post, remote: true, id: "form_order_status") do %>
-              <% end %>
-                  <% order_entries.each do |entry|%>
+          </div>
+          <table class="table">
+            <thead class="table-light">
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">ITEM + SKU</th>
+              <th scope="col">STATUS</th>
+              <th scope="col">PCS</th>
+              <th scope="col">PER ITEM</th>
+              <th scope="col">TOTAL</th>
+              <th colspan="4" style="text-align: center;">ACTIONS</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%= form_tag(change_status_order_entries_path, method: :post, remote: true, id: "form_order_status") do %>
+            <% end %>
+            <% order_entries.each do |entry|%>
 
-                      <tr>
-                          <td>
+              <tr>
+                <td>
 
-                            <% @pic_id = 'pic' + entry.id.to_s + '' + entry.product.id.to_s %>
-                            <% if entry.product.image_data? %>
-                              <%= image_tag entry.product.image_url(:original), id: @pic_id, class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;"%>
-                            <% elsif entry.product.picture.exists? %>
-                              <%= image_tag entry.product.picture.url, id: @pic_id, class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;"%>
-                          <% else %>
-                              <%= image_tag 'default-product.png', id: @pic_id, class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;" %>
-                            <% end %>
-                          </td>
-                
-                        <td> <a nohref style="cursor:pointer;color:#22773c;text-decoration:underline" onclick="itemDetails(<%= entry.product_id %>, '<%= entry.id %>');"><%= entry.product_name %></a></td>
-                        <td>
-                          <%= form_tag(change_status_order_entries_path(:id => entry.id), method: :post, remote: true, id: "form_order_status-#{entry.id}") do %>
-                          <%= select_tag "status", options_for_select([["New" , 0 ], ["Quoting", 1], ["Pending Approval", 2], ["Ready to Process", 3], ["In Production", 4], ["Shipped", 5], ["Delivered", 6]], entry.status), :onchange => "this.form.submit();" %>
+                  <% @pic_id = 'pic' + entry.id.to_s + '' + entry.product.id.to_s %>
+                  <% if entry.product.image_data? %>
+                    <%= image_tag entry.product.image_url(:original), id: @pic_id, class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;"%>
+                  <% elsif entry.product.picture.exists? %>
+                    <%= image_tag entry.product.picture.url, id: @pic_id, class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;"%>
+                  <% else %>
+                    <%= image_tag 'default-product.png', id: @pic_id, class: "img-circle circle-border m-b-md", style: "height: 50px; width: 50px; margin-bottom: 5px; border: 2px solid #FFFFFF;" %>
                   <% end %>
-                  </td>
-                  <td><%= entry.quantity  %></td>
-                  <td><%= number_to_currency(entry.price, unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
-                  <td><%= number_to_currency((entry.quantity.nil? ? 0 : entry.quantity) * (entry.price.nil? ? 0 : entry.price), unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
-                  <td><a href="javascript:void(0)" class="btn btn-outline-dark btn-nav-selected-circle" onclick="itemDetails(<%= entry.product_id %>, '<%= entry.id %>');"><i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i></a></td>
-                  <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-outline-danger btn-nav-selected-circle" ><i class="fa fa-trash-o" aria-hidden="true"></i></td>
-                  <td>
-                    <input type="checkbox" name="item_ids[]" value="<%= entry.id %>" class="item_ids"/>
-                  </td>
-                  </tr>
+                </td>
+
+                <td> <a nohref style="cursor:pointer;color:#22773c;text-decoration:underline" onclick="itemDetails(<%= entry.product_id %>, '<%= entry.id %>');"><%= entry.product_name %></a></td>
+                <td>
+                  <%= form_tag(change_status_order_entries_path(:id => entry.id), method: :post, remote: true, id: "form_order_status-#{entry.id}") do %>
+                    <%= select_tag "status", options_for_select([["New" , 0 ], ["Quoting", 1], ["Pending Approval", 2], ["Ready to Process", 3], ["In Production", 4], ["Shipped", 5], ["Delivered", 6]], entry.status), :onchange => "this.form.submit();" %>
+                  <% end %>
+                </td>
+                <td><%= entry.quantity  %></td>
+                <td><%= number_to_currency(entry.price, unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
+                <td><%= number_to_currency((entry.quantity.nil? ? 0 : entry.quantity) * (entry.price.nil? ? 0 : entry.price), unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
+                <td><a href="javascript:void(0)" class="btn btn-outline-success btn-nav-selected-circle" onclick="itemDetails(<%= entry.product_id %>, '<%= entry.id %>');" data-toggle="tooltip" data-placement="top" title="Item Details"><i class="fa fa-eye fa-2" aria-hidden="true"></i></a></td>
+                <td><a href="javascript:void(0)" class="btn btn-outline-info btn-nav-selected-circle" onclick="generateAttachments(<%= entry.id %>);" data-toggle="tooltip" data-placement="top" title="Show Attachments"><i class="fa fa-paperclip fa-2" aria-hidden="true" ></i></a></td>
+                <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-outline-danger btn-nav-selected-circle" data-toggle="tooltip" data-placement="top" title="Delete Item"><i class="fa fa-trash-o" aria-hidden="true"></i></td>
+                <td>
+                  <input type="checkbox" name="item_ids[]" value="<%= entry.id %>" class="item_ids"/>
+                </td>
+              </tr>
 
             <% end %>
 
 
             </tbody>
-            </table>
-            </form>
+          </table>
+        </form>
       </div>
     </div>
   </div>
