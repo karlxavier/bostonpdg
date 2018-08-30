@@ -21,7 +21,6 @@ class Vendor < ApplicationRecord
   # has_many :products, through: :vendors_products
   has_many :products
   has_many :order_entries, through: :products
-  belongs_to :brand
 
   has_many :vendor_categories
   has_many :categories, through: :vendor_categories
@@ -30,8 +29,6 @@ class Vendor < ApplicationRecord
 
   validates :name, presence: true
   validates :name, uniqueness: true
-
-  scope :vendors_with_brands, -> { includes(:brand) }
 
   def country_name
     if !country_origin.nil?

@@ -2,7 +2,7 @@ class Admin::VendorsController < ApplicationController
     before_action :set_vendor, only: [:show, :edit, :update]
 
     def index
-        @vendors = Vendor.vendors_with_brands
+        @vendors = Vendor.all
     end
 
     def show
