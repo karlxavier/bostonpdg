@@ -176,6 +176,7 @@ Rails.application.routes.draw do
       resources :order_entries do
         get 'list', on: :collection
         get 'vendor_email_list',  on: :collection
+        post 'destroy_attachment', on: :collection
       end
       resources :sessions do
       end

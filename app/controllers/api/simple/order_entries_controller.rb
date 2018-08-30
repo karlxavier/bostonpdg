@@ -38,7 +38,7 @@ module Api
       end
 
       def show
-        render json: @order_entry,methods: [:vendor_name, :product_name, :quoted_name, :category, :product, :vendor_obj, :quoted_by_obj, :vendor_list, :product_picture, :convert_dynamic_fields, :specs_html, :vendor_quote_prices_html, :notes_html, :vendor_email]
+        render json: @order_entry,methods: [:vendor_name, :product_name, :quoted_name, :category, :product, :vendor_obj, :quoted_by_obj, :vendor_list, :product_picture, :convert_dynamic_fields, :specs_html, :vendor_quote_prices_html, :notes_html, :vendor_email, :attachments]
       end
 
       def destroy
@@ -60,13 +60,19 @@ module Api
         else
           render :json => [[], params[:item_ids]], :status => :ok
         end
-
       end
 
+      def destroy_attachment
+        if params[:id].present? && params[:id] != ''
+          attachment = OrderEntryAttachment.find(params[:id])
+          if attachment.destroy
+            head :no_content
+          end
+        else
+          head :no_content
+        end
 
-
-
-
+      end
       private
 
       def order_entry_params

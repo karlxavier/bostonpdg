@@ -27,6 +27,14 @@ class OrderEntry < ApplicationRecord
   belongs_to :product
   has_many :item_messages
 
+  def attachments
+    @urls = []
+    OrderEntryAttachment.where(:order_entry_id => self.id).order('id DESC').each do |attachment|
+      @urls.push({:id => attachment.id, :file_name => attachment.attachment_file_file_name, :file_size => attachment.attachment_file_file_size, :updated_at => attachment.attachment_file_updated_at, :url_path =>  attachment.attachment_file.url})
+    end
+    @urls
+  end
+
   def product
     if self.product_id.present?
       Product.find(self.product_id)

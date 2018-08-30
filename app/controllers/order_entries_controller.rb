@@ -44,6 +44,7 @@ class OrderEntriesController < ApplicationController
     order_entry = OrderEntry.find(params[:id])
     if order_entry.destroy
       OrderEntryVendor.where(:order_entry_id => params[:id]).destroy_all
+      OrderEntryAttachment.where(:order_entry_id => params[:id]).destroy_all
       OrderHistory.create(:order_id => order_entry.order_id, :product_id => order_entry.product_id, :description => 'has been Removed', :user_id => current_user.id)
       flash[:notice] = "Order Entry Successfully Deleted"
     else

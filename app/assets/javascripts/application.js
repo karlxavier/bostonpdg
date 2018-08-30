@@ -274,6 +274,72 @@ function itemDetails(id, entry_id) {
         checkDataValue('Quantity', data.quantity);
         setFormValues(data, $('#edit_order_entry'))
 
+        var editProductDropzone = new Dropzone("#edit_order_entry", {
+            url: '/order_entries/update_entry',
+            addRemoveLinks: true,
+            autoProcessQueue: false,
+            uploadMultiple: true,
+            parallelUploads: 10,
+            maxFiles: 10,
+            previewsContainer: '#dropzoneEditPreview',
+            clickable: '#dropzoneEditPreview',
+
+            // The setting up of the dropzone
+            init: function () {
+                var myDropzone = this;
+                myDropzone = this; // closure
+                $.each(data.attachments, function (i, currAttachment) {
+                    var mockFile = { name: currAttachment.file_name, size: parseInt(currAttachment.file_size), id: currAttachment.id };
+                    console.log('Working...');
+                    myDropzone.emit("addedfile", mockFile);
+                    myDropzone.emit("complete", mockFile);
+                    myDropzone.files.push(mockFile)
+                });
+                this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+                    // Make sure that the form isn't actually being sent.
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (myDropzone.getQueuedFiles().length === 0) {
+                        $('#edit_order_entry').submit();
+                    }
+                    else {
+                        setAttributesOnForm($('#edit_order_entry'));
+                        myDropzone.processQueue();
+
+                    }
+                });
+                $('#editOrderEntries').on('hidden.bs.modal', function (e) {
+                    console.log("working");
+                    myDropzone.destroy();
+                });
+                $('#viewProducts').on('hidden.bs.modal', function (e) {
+                    console.log("working");
+                    myDropzone.destroy();
+                })
+                this.on("successmultiple", function(files, response) {
+                    // Gets triggered when the files have successfully been sent.
+                    // Redirect user or notify of success.
+                    var data = response;
+                    location.reload(true);
+
+                });
+            },
+            removedfile: function (file) {
+                console.log(file);
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/simple/order_entries/destroy_attachment',
+                    data: {id: file.id}
+                }).done(function (data) {
+                });
+                var ref;
+                return (ref = file.previewElement) != null ? ref.parentNode.removeChild(file.previewElement) : void 0;
+            },
+        });
+
+
+
+
         if (data.specs != "" && data.specs != null && data.specs != undefined) {
             $('#nav-specs').html(data.specs_html)
             $('#add_specs').val(data.specs_html);
