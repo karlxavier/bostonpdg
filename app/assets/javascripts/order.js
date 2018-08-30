@@ -29,7 +29,7 @@ $(function() {
     $('.selectpicker').selectpicker('refresh');
     $('.selectpicker2').selectpicker('refresh');
     var addNewProductDropzone = new Dropzone("#add-new-product", {
-        url: '/api/simple/products/create_item',
+        url: '/order_entries',
         autoProcessQueue: false,
         uploadMultiple: true,
         parallelUploads: 10,
@@ -315,7 +315,7 @@ function addExistingItem() {
 }
 
 function removeOrderEntry(id) {
-    if (in_array(product_list, id)) {
+    if (product_list.includes(id)) {
         for(var i = product_list.length - 1; i >= 0; i--) {
             if(product_list[i] === id) {
                 product_list.splice(i, 1);
