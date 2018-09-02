@@ -8,8 +8,8 @@ class EmailTemplatesController < ApplicationController
     @email_template.content = parse_template[:content]
 
     if @email_template.save
-      # Email Template Users
-      # Order User or Additional Emails:
+      Email Template Users
+      Order User or Additional Emails:
       if parse_template[:cc].present?
         parse_template[:cc].split(',').each do |email|
           EmailTemplateUser.create(:email_template_id => @email_template.id, :email => email, :user_type => "cc")
@@ -39,12 +39,26 @@ class EmailTemplatesController < ApplicationController
 
       #Email Template Attachment
       # Attachments:
-      if parse_template[:attachment_file].present?
-        parse_template[:attachment_file].each do |attachment_file|
+      if params[:file].present?
+        params[:file].each do |attachment_file|
           email_template_attachment = EmailTemplateAttachment.new
           email_template_attachment.email_template_id = @email_template.id
           email_template_attachment.attachment_file = attachment_file
           email_template_attachment.save
+        end
+      end
+      if parse_template[:order_entry_ids].present?
+        attachment_list = OrderEntryAttachment.where("order_entry_id IN (#{parse_template[:order_entry_ids]})")
+        if parse_template[:removed_attachments].present? && parse_template[:removed_attachments] != ''
+          attachment_list = attachment_list.where("id NOT IN (#{parse_template[:removed_attachments]})")
+        end
+        if attachment_list.length > 0
+          attachment_list.each do |attachment|
+            email_template_attachment = EmailTemplateAttachment.new
+            email_template_attachment.email_template_id = @email_template.id
+            email_template_attachment.attachment_file = attachment.attachment_file
+            email_template_attachment.save
+          end
         end
       end
 

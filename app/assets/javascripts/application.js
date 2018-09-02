@@ -248,6 +248,64 @@ function setVendors(){
             $('#requestQuote').modal('show');
 
         });
+        $.ajax({
+            type: "GET",
+            url: "/api/simple/order_entries/attachment_list",
+            data: formData
+        }).done(function (data) {
+            console.log(data);
+            var removedItems = [];
+            var emailPreviewDropzone = new Dropzone("#new_email_template", {
+                url: '/email_templates',
+                addRemoveLinks: true,
+                autoProcessQueue: false,
+                uploadMultiple: true,
+                parallelUploads: 10,
+                maxFiles: 10,
+                previewsContainer: '#dropzoneEmailPreview',
+                clickable: '#dropzoneEmailPreview',
+
+                // The setting up of the dropzone
+                init: function () {
+                    var myDropzone = this;
+                    myDropzone = this; // closure
+                    $.each(data, function (i, currAttachment) {
+                        var mockFile = { name: currAttachment.attachment_file_file_name, size: parseInt(currAttachment.attachment_file_file_size), id: currAttachment.id };
+                        myDropzone.emit("addedfile", mockFile);
+                        myDropzone.emit("complete", mockFile);
+                        myDropzone.files.push(mockFile)
+                    });
+                    this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+                        // Make sure that the form isn't actually being sent.
+                        e.preventDefault();
+                        e.stopPropagation();
+                        $('#email_template_removed_attachments').val(removedItems);
+                        if (myDropzone.getQueuedFiles().length === 0) {
+                            $('#new_email_template').submit();
+                        }
+                        else {
+                            myDropzone.processQueue();
+
+                        }
+                    });
+                    $('#requestQuote').on('hidden.bs.modal', function (e) {
+                        myDropzone.destroy();
+                    });
+                    this.on("successmultiple", function(files, response) {
+                        var data = response;
+                        location.reload(true);
+
+                    });
+                },
+                removedfile: function (file) {
+                    console.log(file);
+                    removedItems.push(file.id);
+                    var ref;
+                    return (ref = file.previewElement) != null ? ref.parentNode.removeChild(file.previewElement) : void 0;
+                },
+            });
+
+        });
     }
 
 }
@@ -290,7 +348,6 @@ function itemDetails(id, entry_id) {
                 myDropzone = this; // closure
                 $.each(data.attachments, function (i, currAttachment) {
                     var mockFile = { name: currAttachment.file_name, size: parseInt(currAttachment.file_size), id: currAttachment.id };
-                    console.log('Working...');
                     myDropzone.emit("addedfile", mockFile);
                     myDropzone.emit("complete", mockFile);
                     myDropzone.files.push(mockFile)

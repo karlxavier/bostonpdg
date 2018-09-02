@@ -3,6 +3,6 @@ class OrderEntryAttachment < ApplicationRecord
   do_not_validate_attachment_file_type :attachment_file
 
   def attachment_url
-    self.attachment.url
+    self.attachment_file.url
   end
 end

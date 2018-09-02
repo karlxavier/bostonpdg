@@ -62,6 +62,19 @@ module Api
         end
       end
 
+      def attachment_list
+        if params[:item_ids].present?
+          attachment_list = OrderEntryAttachment.where("order_entry_id IN (#{params[:item_ids].map(&:inspect).join(',').gsub!('"', '')})")
+          if attachment_list.present?
+            render json: attachment_list,methods: [:attachment_url]
+          else
+            render :json => {}, :status => :ok
+          end
+        else
+          render :json => {}, :status => :ok
+        end
+      end
+
       def destroy_attachment
         if params[:id].present? && params[:id] != ''
           attachment = OrderEntryAttachment.find(params[:id])

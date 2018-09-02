@@ -78,12 +78,9 @@ class OrderEntriesController < ApplicationController
         end
 
         if params[:file].present?
-          OrderEntryAttachment.where(:order_entry_id => @order_entry.id).destroy_all
           params[:file].each do |attachment_file|
             OrderEntryAttachment.create(:order_entry_id => @order_entry.id, :product_id => @order_entry.product_id, :attachment_file => params[:file]["#{attachment_file}"])
           end
-        else
-          OrderEntryAttachment.where(:order_entry_id => @order_entry.id).destroy_all
         end
         flash[:notice] = "Order Entry Successfully Updated"
       else
