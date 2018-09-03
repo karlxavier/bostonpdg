@@ -90,6 +90,23 @@
                         </div>
                     </div>
 
+                    <div class="ibox">
+                        <div class="ibox-title text-info">
+                            Associated Hotels
+                        </div>
+                        <div class="ibox-content">
+                            <div class="table-responsive" style="overflow: visible;">
+                                <table class="table table-hover issue-tracker">
+                                    <tbody id="tbody_orders">
+                                        <% @brand.hotels.each do |hotel| %> 
+                                           <%= render '/admin/hotels/hotel', hotel: hotel %>
+                                        <% end %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 </div>
