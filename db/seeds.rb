@@ -34,6 +34,7 @@ Vendor.destroy_all
 Vendor.destroy_all
 VendorCategory.destroy_all
 VendorsProduct.destroy_all
+Audit.destroy_all
 
 Category.create!([
     {name: 'Sample Category 1'},
@@ -195,8 +196,6 @@ if !Vendor.all.present?
       {name: "Double U Paper"}
   ])
 end
-if !Inventory.all.present?
   Order.create!([
       {brand_id: Brand.first.id}
   ])
-end
