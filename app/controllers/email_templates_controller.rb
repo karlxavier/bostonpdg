@@ -8,8 +8,8 @@ class EmailTemplatesController < ApplicationController
     @email_template.content = parse_template[:content]
 
     if @email_template.save
-      Email Template Users
-      Order User or Additional Emails:
+      # Email Template Users
+      # Order User or Additional Emails:
       if parse_template[:cc].present?
         parse_template[:cc].split(',').each do |email|
           EmailTemplateUser.create(:email_template_id => @email_template.id, :email => email, :user_type => "cc")
