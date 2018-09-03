@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   post 'vendors/import_csv'
   post 'customers/import_csv'
+  post 'admin/hotels/import_csv'
   resources :search_results, only: :index
   resources :dynamic_messages, only: :show
   resources :dynamic_item_messages, only: :show
@@ -116,7 +117,7 @@ Rails.application.routes.draw do
     resources :brands do
       resources :hotels, only: [:show]
     end
-    resources :hotels, except: [:show] do
+    resources :hotels do
       get 'compose_email', :to => 'hotels#compose_email', as: 'compose_email'
     end  
     

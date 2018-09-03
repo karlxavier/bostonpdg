@@ -21,6 +21,17 @@
         <div class="ibox-title">
                     <h5></h5>
                     <div class="ibox-tools">
+                        <a data-toggle="dropdown" id="#upload-hotels" href="#" aria-expanded="false" class="btn btn-primary btn-sm"> Upload Hotels</a>
+                        <ul id="upload-hotels" class="dropdown-menu dropdown-messages2" aria-labelledby="upload-hotels">
+                            <%= form_tag admin_hotels_import_csv_path, multipart: true do %>
+                                <div class="form-group">
+                                  <label for="exampleFormControlFile1">Import Here:</label>
+                                  <%= file_field_tag :file %>
+                                  <br><br>
+                                  <%= submit_tag 'Import File', class: "btn btn-primary btn-sm" %>
+                                </div>
+                            <% end %>
+                        </ul>
                         <%= link_to 'Create New Hotel', new_admin_hotel_path, class: "btn btn-primary btn-sm" %>
                     </div>
                 </div>
@@ -42,8 +53,14 @@
                                 <td><%= hotel.id %></td>
                                 <td><%= link_to hotel.name, admin_brand_hotel_path(hotel.brand_id, hotel) %></td>
                                 <td><%= hotel.email %></td>
-                                <td><%= hotel.brand.present? ? hotel.brand.name : 'N/A' %></td>
-                                <td><%= hotel.address.street %></td>
+                                <td>
+                                    <% if hotel.brand.present? %>
+                                        <%= link_to hotel.brand.name, admin_brand_path(hotel.brand) %>
+                                    <% else %>
+                                        N/A
+                                    <% end %>
+                                </td>
+                                <td><%= hotel.address.present? ? hotel.address.street : '' %></td>
                                 <td>
                                   <div class="btn-group">
                                         <%= link_to 'Edit', edit_admin_hotel_path(hotel), class: "btn btn-xs btn-white" %>
@@ -86,6 +103,10 @@
                 ]
             });
         }
+
+        $(document).on('click', '#upload-hotels', function (e) {
+          e.stopPropagation();
+        });
 
     });
 </script>

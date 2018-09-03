@@ -44,6 +44,11 @@ class Admin::HotelsController < ApplicationController
         end
     end
 
+    def import_csv
+        Hotel.import(params[:file])
+        redirect_to admin_hotels_path
+    end
+
     private
 
         def hotel_params

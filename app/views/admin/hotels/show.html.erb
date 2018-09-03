@@ -33,7 +33,13 @@
                                         <%= @hotel.name %>
                                     </h2>
                                     <small><%= link_to @hotel.brand.name, admin_brand_path(@hotel.brand_id) %></small><br>
-                                    <small><%= link_to @hotel.email, admin_hotel_compose_email_path(@hotel), class: "text-info", remote: true %></small><br>
+                                    <small>
+                                        <% if @hotel.email.present? %>
+                                            <%= link_to @hotel.email, admin_hotel_compose_email_path(@hotel), class: "text-info", remote: true %>
+                                        <% else %>
+                                            N/A
+                                        <% end %>
+                                    </small><br>
                                     <hr>
 
                                     <h4>Hotel Details</h4>
