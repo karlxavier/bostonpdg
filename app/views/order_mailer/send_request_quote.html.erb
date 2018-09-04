@@ -14,17 +14,20 @@ From: <b><a href="mailto:<%= @sender.email %>?subject=RE:<%= @subject %>" target
     <thead>
       <th class="font-weight: bold;">Name</th>
       <th class="font-weight: bold;">Quantity (pcs)</th>
-      <th class="font-weight: bold;">Attribute</th>
+      <th class="font-weight: bold;">Attribute/s</th>
+      <th class="font-weight: bold;">Specifications</th>
     </thead>
     <tbody>
       <% @order_entries.each do |order_entry| %>
         <tr>
           <td><%= order_entry.product.name %></td>
           <td><%= order_entry.quantity %></td>
-          <td><%= order_entry.dynamic_fields %></td>
+          <td><%= order_entry.get_html_safe_fields.html_safe %></td>
+          <td><%= order_entry.specs %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </p>
 <% end %>
+

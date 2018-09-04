@@ -395,8 +395,6 @@ function itemDetails(id, entry_id) {
         });
 
 
-
-
         if (data.specs != "" && data.specs != null && data.specs != undefined) {
             $('#nav-specs').html(data.specs_html)
             $('#add_specs').val(data.specs_html);
