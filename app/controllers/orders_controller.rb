@@ -41,6 +41,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       @chatroom_order = ChatroomOrder.find(@order.id)
       @order_entries = @order.order_entries.order("updated_at DESC")
+      @order_histories = OrderHistory.where(:order_id => @order.id).order("created_at DESC")
 
       format.js
     end
