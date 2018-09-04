@@ -114,8 +114,9 @@
 
 
             <%#= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin float-right margin-top-1" %>
-            <%= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin float-right" %>
-            <a class="btn btn-dark btn-padding-margin" data-toggle="tooltip" data-placement="top" title="Select Line Item/s below." onclick="setVendors();">REQUEST QUOTE</a>
+            <%#= submit_tag "CREATE ORDER", class: "btn btn-outline-secondary btn-padding-margin float-right" %>
+            <a class="btn btn-outline-secondary btn-padding-margin float-right" data-toggle="tooltip" data-placement="top" title="Select Line Item/s below." onclick="setVendors('create_order');">CREATE ORDER</a>
+            <a class="btn btn-dark btn-padding-margin" data-toggle="tooltip" data-placement="top" title="Select Line Item/s below." onclick="setVendors('request_quote');">REQUEST QUOTE</a>
             <!--<a href="<%#= send_orders_orders_path(:order_id => @order.id) %>" class="btn btn-dark btn-padding-margin" >REQUEST QUOTE</a>-->
           </div>
           <table class="table">

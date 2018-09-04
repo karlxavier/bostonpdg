@@ -229,7 +229,7 @@ function setFormValues(data, form) {
     $('.selectpicker').selectpicker('refresh')
 }
 
-function setVendors(){
+function setVendors(btn_type){
     if ($('.item_ids').is(":checked")) {
         var formData = $('#form_order_checklist').serialize();
         $.ajax({
@@ -237,7 +237,7 @@ function setVendors(){
             url: "/api/simple/order_entries/vendor_email_list",
             data: formData
         }).done(function (data) {
-            console.log(data);
+            $('#email_template_btn_type').val(btn_type);
             var arr = data[0];
             $('#new_email_template').find('#email_template_to').tagsinput('removeAll');
             jQuery.each( arr, function( i, val ) {

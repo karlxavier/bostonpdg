@@ -85,7 +85,7 @@ class OrderEntry < ApplicationRecord
       product = Product.find(self.product_id)
       product.name
     end
-end
+  end
 
   def quoted_name
     if self.quoted_by.present?
@@ -95,10 +95,11 @@ end
   end
 
   def vendor_name
-    if self.vendor.present?
-      vendor = Vendor.find(self.vendor)
-      vendor.name
+    @names = []
+    Vendor.where("id IN (SELECT vendor_id FROM order_entry_vendors WHERE order_entry_id = #{self.id})").each do |vendor|
+      @names.push(vendor.name)
     end
+    @names.map(&:inspect).join(', ').gsub!('"', '')
   end
 
   def category_name
