@@ -2,7 +2,7 @@ class Admin::HotelsController < ApplicationController
     before_action :set_hotel, only: [:edit, :update, :show]
 
     def index
-        @hotels = Hotel.all
+        @hotels = Hotel.hotel_with_brands
     end
 
     def new

@@ -5,6 +5,8 @@ class Hotel < ApplicationRecord
 	validates :name, :brand_id, presence: true
 	validates :name, uniqueness: true
 
+	scope :hotel_with_brands, -> { includes(:brand) }
+
 	require 'csv'
 
   	def self.import(file)
