@@ -1,4 +1,4 @@
-<div class="modal fade   modal-gray" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="pictureUpload">
+<div class="modal fade   modal-gray" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="pictureUpload" data-backdrop="static">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,11 +8,15 @@
         </button>
       </div>
       <div class="modal-body" >
-        <form action="<%= change_picture_products_path %>" method="POST" enctype="multipart/form-data" class="dropzone" id="picture-upload">
-          <div class="dz-message"><b>Drop/Click Here</b></div>
+        <form action="<%= change_picture_products_path %>" method="POST" enctype="multipart/form-data" id="picture_upload">
           <input type="hidden" name="order_entry_id" id="order_entry_id_2"  />
           <input type="hidden" name="product_id" id="add_product_id_2" />
           <input type="hidden" name="order_id" value="<%= @order.id %>"  />
+          <div class="dropzone">
+            <div id="dropzonePictureUploadPreview" class="dropzone-previews form-control dz-clickable">
+              <div class="dz-message">Drag&drop</div>
+            </div>
+          </div>
         </form>
       </div>
 

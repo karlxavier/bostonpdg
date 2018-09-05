@@ -256,7 +256,7 @@ class OrdersController < ApplicationController
     @order = Order.find(temp_order[:id])
 
     # if @order.update_attributes(:brand_id => temp_order[:brand_id], :lead_time => temp_order[:lead_time], :status => temp_order[:status], :total_budget => temp_order[:total_budget])
-    if @order.update_attributes(:brand_id => temp_order[:brand_id])
+    if @order.update_attributes(:brand_id => temp_order[:brand_id], :updated_at => Time.now)
     if params[:order_entries].present? || params[:existing_entries].present?
         order_entries = OrderEntry.where(:order_id => @order.id)
         order_entries.each do |oe|

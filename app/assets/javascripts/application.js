@@ -218,6 +218,7 @@ function setFormValues(data, form) {
     $(form).find('#order_entry_vendor_quote_prices').val(data.vendor_quote_prices);
     $(form).find('#order_entry_notes').val(data.notes);
     var element = $(form).find('#product_attributes');
+    element.html('');
     if (data.convert_dynamic_fields != '' && data.convert_dynamic_fields != null && data.convert_dynamic_fields != undefined) {
         foo = JSON.parse(data.convert_dynamic_fields);
         Object.keys(foo)

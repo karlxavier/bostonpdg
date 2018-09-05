@@ -151,18 +151,25 @@
         return setAttributesOnForm($(this));
     });
 
-    Dropzone.options.pictureUpload = {
-        maxFiles:1,
+
+    var pictureUploadDropzone = new Dropzone("#picture_upload", {
+        url: '/products/change_picture',
+        uploadMultiple: false,
+        parallelUploads: 1,
+        maxFiles: 1,
         acceptedFiles: '.png,.jpg',
+        previewsContainer: '#dropzonePictureUploadPreview',
+        clickable: '#dropzonePictureUploadPreview',
         success: function(file, response) {
-            $('#pictureUpload').modal('hide')
-            this.removeFile(file);
             var order_entry_id = $('#order_entry_id_2').val();
+            $('#pictureUpload').modal('hide');
+            this.removeFile(file);
             var pic_id = 'pic' + order_entry_id + response.id
             $("#pic1").attr("src",response.picture_url);
             $("#"+pic_id).attr("src",response.picture_url);
         }
-    };
+    });
+
     var addNewProductDropzone = new Dropzone("#new_order_entry", {
         url: '/order_entries',
         addRemoveLinks: true,
@@ -202,6 +209,16 @@
     });
 
     $(function(){
+        $("#pictureUpload, #editOrderEntries, #viewHistories").on('hidden.bs.modal', function (e) {
+            // Load up a new modal...
+            $('#viewProducts').modal('show');
+            $("body").addClass("modal-open");
+        });
+        $("#viewProducts").on('hidden.bs.modal', function (e) {
+            $("body").addClass("modal-open");
+        })
+
+
         var textContent = "Estimate Request<br/><br/>Hello<br/><br/>We’d like to recieve a quotation on the following items below with the listed specs. Attached are the mock ups and print ready files below.<br/><br/>Please get back to us before in a few days.<br/><br/>Thanks,<br/><%= current_user.first_name + " " + current_user.last_name %><br/>Regency Management"
         $(".textarea-format").jqte({remove: false,rule: false,unlink: false, });
         $(".textarea-format").jqteVal(textContent);
