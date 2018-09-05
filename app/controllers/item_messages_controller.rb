@@ -4,7 +4,7 @@ before_action :authenticate_user!
 before_action :set_item
 
 def create
-	# message = @item.item_messages.new(message_params)
+	message = @item.item_messages.new(message_params)
 	message = @order_entry.item_messages.new(message_params)
 	message.user = current_user
 	

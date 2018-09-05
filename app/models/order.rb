@@ -35,6 +35,8 @@ class Order < ApplicationRecord
   belongs_to :customer
   validates :brand_id, presence: true
 
+  scope :item_messages, -> { includes(:products) }
+
   amoeba do
     enable
     include_association :order_entries
