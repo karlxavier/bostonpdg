@@ -453,6 +453,8 @@ class OrdersController < ApplicationController
   def set_order
     if params[:id].present? && !params[:id].nil?
       @order = Order.find(params[:id])
+    else
+      @order = Order.last
     end
   end
 

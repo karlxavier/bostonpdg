@@ -1,0 +1,2 @@
+class ProductAccount < ApplicationRecord
+end
