@@ -22,4 +22,8 @@ class Inventory < ApplicationRecord
 
 	validates :product_id, presence: true
 
+	def _quantity
+    	quantity || 0
+  	end
+
 end

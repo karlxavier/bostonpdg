@@ -1,3 +1,39 @@
+ProductType.destroy_all
+ProductType.create!([
+  {name: 'Discount'},
+  {name: 'Group'},
+  {name: 'Inventory Assembly'},
+  {name: 'Inventory Part'},
+  {name: 'Non Inventory Part'},
+  {name: 'Other Charge'},
+  {name: 'Sales Tax Item'},
+  {name: 'Service'}
+])
+
+ProductAccount.destroy_all
+ProductAccount.create!([
+  {name: 'Bad Debt'},
+  {name: 'Loans & Exchanges'},
+  {name: 'Professional Fees'},
+  {name: 'Purchase'},
+  {name: 'Shareholder Distribution'},
+  {name: 'Taxes Payable'}
+])
+
+ProductCog.destroy_all
+ProductCog.create!([
+  {name: 'Purchase'},
+  {name: 'Sales'},
+  {name: 'Cost of Goods Sold'}
+])
+
+ProductAssetAccount.destroy_all
+ProductAssetAccount.create!([
+  {name: 'Inventory Asset'},
+  {name: 'Purchase'}
+])
+
+=begin
 User.destroy_all
 Message.destroy_all
 UsersBrand.destroy_all
@@ -15,7 +51,7 @@ OrderUser.destroy_all
 Product.destroy_all
 StyleAttribute.destroy_all
 OrderStatus.destroy_all
-=begin
+
 
 OrderStatus.create(name: 'Quote Request')
 OrderStatus.create(name: 'Sales')
@@ -25,7 +61,7 @@ OrderStatus.create(name: 'Shipping')
 
 OrderEntry.where(product_id: 809).destroy_all
 OrderStatus.create(name: "Archive")
-=end
+
 
 Brand.destroy_all
 Customer.destroy_all
@@ -199,3 +235,4 @@ end
   Order.create!([
       {brand_id: Brand.first.id}
   ])
+=end

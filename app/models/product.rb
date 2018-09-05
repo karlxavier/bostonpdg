@@ -33,6 +33,10 @@ class Product < ApplicationRecord
   has_many :item_messages
   has_many :inventories
   belongs_to :vendor
+  belongs_to :product_type
+  belongs_to :product_account
+  belongs_to :product_cog
+  belongs_to :product_asset_account
 
   has_many :order_entries
   has_many :orders, through: :order_entries
@@ -65,4 +69,77 @@ class Product < ApplicationRecord
       Category.find(self.category).name
     end
   end
+
+  def _cost
+    cost || 0
+  end
+
+  def _purchase_price
+    purchase_price || 0
+  end
+
+  def _price
+    price || 0
+  end
+
+  require 'csv'
+
+  def self.import(file)
+    spreadsheet= open_spreadsheet(file)
+    spreadsheet.default_sheet = spreadsheet.sheets[0]
+
+    headers = Hash.new
+    spreadsheet.row(1).each_with_index {|header,i|headers[header] = i}
+    ((spreadsheet.first_row + 1)..spreadsheet.last_row).each do |row|
+      
+      active = spreadsheet.row(row)[headers['Active Status']]
+      product_type = spreadsheet.row(row)[headers['Type']]
+      name = spreadsheet.row(row)[headers['Item']]
+      sales_tax = spreadsheet.row(row)[headers['Sales Tax Code']]
+      product_account = spreadsheet.row(row)[headers['Account']]
+      product_cog = spreadsheet.row(row)[headers['COGS Account']]
+      product_asset_account = spreadsheet.row(row)[headers['Asset Account']]
+      purchase_description = spreadsheet.row(row)[headers['Purchase Description']]
+      quantity = spreadsheet.row(row)[headers['Quantity On Hand']]
+      purchase_price = spreadsheet.row(row)[headers['Cost']]
+      vendor = spreadsheet.row(row)[headers['Preferred Vendor']]
+      price = spreadsheet.row(row)[headers['Price']]
+
+      product = Product.new
+
+      product.name = name
+      product.active = active || 'Active'
+      product.product_type_id = ProductType.find_by_name(product_type).present? ? ProductType.find_by_name(product_type).id : 0
+      product.sales_tax = sales_tax || 'Tax'
+      product.product_account_id = ProductAccount.find_by_name(product_account).present? ? ProductAccount.find_by_name(product_account).id : 0
+      product.product_cog_id = ProductCog.find_by_name(product_cog).present? ? ProductCog.find_by_name(product_cog).id : 0
+      product.product_asset_account_id = ProductAssetAccount.find_by_name(product_asset_account).present? ? ProductAssetAccount.find_by_name(product_asset_account).id : 0
+      product.purchase_description = purchase_description
+      product.vendor_id = Vendor.find_by_name(vendor).present? ? Vendor.find_by_name(vendor).id : 0
+      product.price = price
+      product.purchase_price = purchase_price
+      product.cost = purchase_price
+      product.specs = purchase_description
+
+      product.save
+
+      inv = Inventory.new
+      inv.product_id = Product.last.id
+      inv.quantity = quantity
+      inv.save
+
+    end
+  
+  end
+  
+
+  def self.open_spreadsheet(file)
+    case File.extname(file.original_filename)
+      when ".csv" then Roo::CSV.new(file.path)
+      when ".xls" then Roo::Excel.new (file.path)
+      when ".xlsx" then Roo::Excelx.new(file.path)
+      else raise "Unknown file type: #{file.original_filename}"
+    end
+  end
+
 end

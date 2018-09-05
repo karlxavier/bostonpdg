@@ -37,13 +37,21 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
+  def import_csv
+        Product.import(params[:file])
+        redirect_to admin_products_path
+    end
+
   private
 
     def product_params
       params.require(:product).permit(:name, :approval_status, :online_date, :offline_date, 
                                       :unit, :description, :base_product, :category, :price, 
                                       :variant_type, :style, :force_in_stock, :style_attribute_ids,
-                                      :image)
+                                      :image, :cost, :active, :product_type_id, :sales_tax, :product_account_id,
+                                      :product_cog_id, :product_asset_account_id, :depreciation,
+                                      :purchase_description, :purchase_price, :specs, :vendor_id
+                                      )
     end
 
     def set_product

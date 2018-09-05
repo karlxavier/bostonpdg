@@ -21,6 +21,17 @@
         <div class="ibox-title">
                     <h5></h5>
                     <div class="ibox-tools">
+                        <a data-toggle="dropdown" id="#upload-products" href="#" aria-expanded="false" class="btn btn-primary btn-sm"> Upload Products</a>
+                        <ul id="upload-products" class="dropdown-menu dropdown-messages2" aria-labelledby="upload-products">
+                            <%= form_tag admin_products_import_csv_path, multipart: true do %>
+                                <div class="form-group">
+                                  <label for="exampleFormControlFile1">Import Here:</label>
+                                  <%= file_field_tag :file %>
+                                  <br><br>
+                                  <%= submit_tag 'Import File', class: "btn btn-primary btn-sm" %>
+                                </div>
+                            <% end %>
+                        </ul>
                         <%= link_to 'Create New Product', new_admin_product_path, class: "btn btn-primary btn-sm" %>
                     </div>
                 </div>
@@ -29,21 +40,29 @@
             <table class="table table-striped table-bordered table-hover dataTables-list dataTable">
               <thead>
                           <tr role="row">
-                            <th>Id</th>
+                            <th>ID</th>
+                            <th>Status</th>
                             <th>Name</th>
-                            <th>Vendor</th>
-                            <th>Price</th>
-                            <th>Category</th>
+                            <th>Purchase Price</th>
+                            <th>Selling Price</th>
+                            <th>Inventory</th>
                             <th></th>
                         </thead>
                         <tbody>
-                          <% @products.each do |product| %>
+                          <% @products.order(name: :asc).each do |product| %>
                             <tr>
                                 <td><%= product.id %></td>
+                                <td style="text-align: center;">
+                                    <% if product.active? %>
+                                        <span class="label label-primary">Active</span>
+                                    <% else %>
+                                        <span class="label label-warning">Not Active</span>
+                                    <% end %>
+                                </td>
                                 <td><%= product.name %></td>
-                                <td><%= product.vendor.present? ? product.vendor.name : '' %></td>
-                                <td><%= product.price %></td>
-                                <td><%= product.category %></td>
+                                <td><%= number_to_currency(product._purchase_price, unit: '$', :precision => 2, :delimiter => ',') %></td>
+                                <td><%= number_to_currency(product._price, unit: '$', :precision => 2, :delimiter => ',') %></td>
+                                <td><%= product.inventories.present? ? number_with_precision(product.inventories.first._quantity, :precision => 2, :delimiter => ',') : '0' %></td>
                                 <td>
                                   <div class="btn-group">
                                         <%= link_to 'Edit', edit_admin_product_path(product), class: "btn btn-xs btn-white" %>
@@ -86,6 +105,10 @@
                 ]
             });
         }
+
+        $(document).on('click', '#upload-products', function (e) {
+          e.stopPropagation();
+        });
 
     });
 </script>
