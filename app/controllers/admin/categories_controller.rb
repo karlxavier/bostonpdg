@@ -34,6 +34,11 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
+  def import_csv
+      Category.import(params[:file])
+      redirect_to admin_categories_path
+  end
+
   private
 
   def category_params

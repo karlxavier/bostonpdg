@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'customers/import_csv'
   post 'admin/hotels/import_csv'
   post 'admin/products/import_csv'
+  post 'admin/categories/import_csv'
   resources :search_results, only: :index
   resources :dynamic_messages, only: :show
   resources :dynamic_item_messages, only: :show
