@@ -105,26 +105,26 @@ class Product < ApplicationRecord
       vendor = spreadsheet.row(row)[headers['Preferred Vendor']]
       price = spreadsheet.row(row)[headers['Price']]
 
-      product = Product.new
+      prod = Product.new
 
-      product.name = name
-      product.active = active || 'Active'
-      product.product_type_id = ProductType.find_by_name(product_type).present? ? ProductType.find_by_name(product_type).id : 0
-      product.sales_tax = sales_tax || 'Tax'
-      product.product_account_id = ProductAccount.find_by_name(product_account).present? ? ProductAccount.find_by_name(product_account).id : 0
-      product.product_cog_id = ProductCog.find_by_name(product_cog).present? ? ProductCog.find_by_name(product_cog).id : 0
-      product.product_asset_account_id = ProductAssetAccount.find_by_name(product_asset_account).present? ? ProductAssetAccount.find_by_name(product_asset_account).id : 0
-      product.purchase_description = purchase_description
-      product.vendor_id = Vendor.find_by_name(vendor).present? ? Vendor.find_by_name(vendor).id : 0
-      product.price = price
-      product.purchase_price = purchase_price
-      product.cost = purchase_price
-      product.specs = purchase_description
+      prod.name = name
+      prod.active = active || 'Active'
+      prod.product_type_id = ProductType.find_by_name(product_type).present? ? ProductType.find_by_name(product_type).id : 0
+      prod.sales_tax = sales_tax || 'Tax'
+      prod.product_account_id = ProductAccount.find_by_name(product_account).present? ? ProductAccount.find_by_name(product_account).id : 0
+      prod.product_cog_id = ProductCog.find_by_name(product_cog).present? ? ProductCog.find_by_name(product_cog).id : 0
+      prod.product_asset_account_id = ProductAssetAccount.find_by_name(product_asset_account).present? ? ProductAssetAccount.find_by_name(product_asset_account).id : 0
+      prod.purchase_description = purchase_description
+      prod.vendor_id = Vendor.find_by_name(vendor).present? ? Vendor.find_by_name(vendor).id : 0
+      prod.price = price
+      prod.purchase_price = purchase_price
+      prod.cost = purchase_price
+      prod.specs = purchase_description
 
-      product.save
+      prod.save
 
       inv = Inventory.new
-      inv.product_id = Product.last.id
+      inv.product = Product.last
       inv.quantity = quantity
       inv.save
 
