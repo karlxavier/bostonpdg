@@ -33,7 +33,6 @@ ProductAssetAccount.create!([
   {name: 'Purchase'}
 ])
 
-=begin
 User.destroy_all
 Message.destroy_all
 UsersBrand.destroy_all
@@ -235,4 +234,3 @@ end
   Order.create!([
       {brand_id: Brand.first.id}
   ])
-=end

@@ -76,10 +76,18 @@ class EmailTemplatesController < ApplicationController
       EmailTemplateUser.where(:email_template_id => @email_template.id, :user_type => "to").pluck(:email).each do |email|
         OrderMailer.send_request_quote(@email_template, email).deliver_now
       end
+      if parse_template[:btn_type] == 'create_order'
+        flash[:notice] = "Create Order Successfully Sent."
+      else
+        flash[:notice] = "Request Quote Successfully Sent."
+      end
 
-      flash[:notice] = "Request Quote Successfully Sent."
     else
-      flash[:error] = "Request Quote Sent Failure!"
+      if parse_template[:btn_type] == 'create_order'
+        flash[:notice] = "Create Order Sent Failure!"
+      else
+        flash[:error] = "Request Quote Sent Failure!"
+      end
     end
     @order = Order.find(parse_template[:order_id])
     redirect_to orders_path(@order)

@@ -70,7 +70,7 @@ $(function() {
                 $('#notes').val('')
                 $('#product_attributes').html('');
                 $('.categories').selectpicker('refresh');
-                if (product_list.length === 0) {
+                if (product_list.length === 0 && entry_list.length === 0) {
                     $('.stitched').html('')
                 }
                 product_list.push(data.id)
@@ -243,7 +243,7 @@ function submitNewClonedProduct() {
             $('#clone_product_attributes').html('');
             $('.clone_categories').selectpicker('refresh');
             $('.clone_products').selectpicker('refresh');
-            if (product_list.length === 0) {
+            if (product_list.length === 0 && entry_list.length === 0) {
                 $('.stitched').html('')
             }
             product_list.push(data.id)
@@ -285,7 +285,7 @@ function submitNewProduct() {
             $('#notes').val('')
             $('#product_attributes').html('');
             $('.categories').selectpicker('refresh');
-            if (product_list.length === 0) {
+            if (product_list.length === 0 && entry_list.length === 0) {
                 $('.stitched').html('')
             }
             product_list.push(data.id)
