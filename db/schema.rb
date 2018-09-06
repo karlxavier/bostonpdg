@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180905165157) do
+ActiveRecord::Schema.define(version: 20180906115237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -500,7 +500,6 @@ ActiveRecord::Schema.define(version: 20180905165157) do
     t.integer "vendor_id"
     t.datetime "last_notified"
     t.index ["brand_id"], name: "index_users_on_brand_id"
-    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -569,10 +568,14 @@ ActiveRecord::Schema.define(version: 20180905165157) do
   add_foreign_key "chatroom_users", "users"
   add_foreign_key "chatrooms", "orders"
   add_foreign_key "item_messages", "order_entries"
+  add_foreign_key "item_messages", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "messages", "users"
   add_foreign_key "products", "style_attributes"
+  add_foreign_key "users", "addresses", column: "billing_address"
+  add_foreign_key "users", "addresses", column: "shipping_address"
   add_foreign_key "users", "brands"
   add_foreign_key "users", "groups"
   add_foreign_key "vendors", "products"
