@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ItemMessagesChannel</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="ItemMessagesChannel">
+
+  
+
+    <meta name="keywords" content="ItemMessagesChannel class">
+  
+    <meta name="keywords" content="subscribed, unsubscribed">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            ItemMessagesChannel
+            
+                <span class="parent">&lt;
+                    
+                    <a href="ApplicationCable/Channel.html">ApplicationCable::Channel</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/app/channels/item_messages_channel_rb.html">app/channels/item_messages_channel.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-subscribed">subscribed</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-unsubscribed">unsubscribed</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-subscribed">
+            
+              <b>subscribed</b>()
+            
+            <a href="../classes/ItemMessagesChannel.html#method-i-subscribed" name="method-i-subscribed" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-subscribed_source')" id="l_method-i-subscribed_source">show</a>
+                
+              </p>
+              <div id="method-i-subscribed_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/channels/item_messages_channel.rb, line 2</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subscribed</span>
+          <span class="ruby-comment"># if current_user.admin?</span>
+          <span class="ruby-comment">#   ChatroomOrder.all.each do |chatroom|</span>
+     <span class="ruby-comment">#                   stream_from &quot;items:#{chatroom.id}&quot;</span>
+     <span class="ruby-comment">#   end</span>
+          <span class="ruby-comment"># else</span>
+     <span class="ruby-comment">#   ChatroomOrder.broadcast_chatrooms(current_user.id).each do |chatroom|</span>
+     <span class="ruby-comment">#                   stream_from &quot;items:#{chatroom.id}&quot;</span>
+     <span class="ruby-comment">#   end</span>
+     <span class="ruby-comment">#  end</span>
+     
+<span class="ruby-comment"># Order.item_messages.each do |product|</span>
+<span class="ruby-comment">#   stream_from &quot;items:#{product.id}&quot;</span>
+<span class="ruby-comment"># end</span>
+
+<span class="ruby-constant">Product</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">product</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">stream_from</span> <span class="ruby-node">&quot;items:#{product.id}&quot;</span>
+<span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-unsubscribed">
+            
+              <b>unsubscribed</b>()
+            
+            <a href="../classes/ItemMessagesChannel.html#method-i-unsubscribed" name="method-i-unsubscribed" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-unsubscribed_source')" id="l_method-i-unsubscribed_source">show</a>
+                
+              </p>
+              <div id="method-i-unsubscribed_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/channels/item_messages_channel.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unsubscribed</span>
+<span class="ruby-identifier">stop_all_streams</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

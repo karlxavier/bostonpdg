@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>application.js</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            application.js
+        </h1>
+        <ul class="files">
+            <li>app/assets/javascripts/application.js</li>
+            <li>Last modified: 2018-09-06 19:14:43 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>// This is a manifest file that&#39;ll be compiled into application.js,
+which will include all the files // listed below. // // Any
+JavaScript/Coffee file within this directory, lib/assets/javascripts, or
+any plugin&#39;s // vendor/assets/javascripts directory can be referenced
+here using a relative path. // // It&#39;s not advisable to add code
+directly here, but if you do, it&#39;ll appear at the bottom of the //
+compiled file. JavaScript code in this file should be added after the last
+require_* statement. // // Read Sprockets <a
+href="../../../README_md.html">README</a> (<a
+href="https://github.com/rails/sprockets#sprockets-directives">github.com/rails/sprockets#sprockets-directives</a>)
+for details // about supported directives. // //= require rails-ujs //=
+require jquery.min //= require turbolinks //= require popper.min //=
+require bootstrap.min //= require summernote/summernote-bs4.min //= require
+grasp_mobile_progress_circle-1.0.0.min //= require jquery.cookie //=
+require jquery.validate.min //= require jquery.mCustomScrollbar.concat.min
+//= require ladda-spin //= require ladda.min //= require ladda.jquery //=
+require toastr.min //= require front //= require slimscroll //= require
+dropzone //= require chatbox_dropzone //= require nestable //= require
+cable //= require watcher //= require chosen //= require metisMenu //=
+require datepicker //= require dropzone_initializer //= require
+jquery-te-1.4.0.min //= require tagsinput</p>
+
+<p>$(document).on(&#39;turbolinks:load&#39;, function () {</p>
+
+<pre><code>$(&#39;.selectpicker&#39;).selectpicker();
+$(&#39;.selectpicker2&#39;).selectpicker();
+$(&#39;.categories&#39;).selectpicker();
+$(&#39;.brandpicker&#39;).selectpicker();
+$(&#39;.clone_categories&#39;).selectpicker();
+$(&#39;.clone_products&#39;).selectpicker();
+
+$(function () {
+    $(&#39;[data-toggle=&quot;tooltip&quot;]&#39;).tooltip();
+    $(&quot;.dropdown&quot;).bind(&#39;keydown&#39;, function (event) {
+        if (event.keyCode === 9) {
+            $(this).find(&#39;.selectpicker&#39;).selectpicker(&#39;toggle&#39;);
+            $(this).find(&#39;.selectpicker2&#39;).selectpicker(&#39;toggle&#39;);
+            $(this).find(&#39;.categories&#39;).selectpicker(&#39;toggle&#39;);
+            $(this).find(&#39;.brandpicker&#39;).selectpicker(&#39;toggle&#39;);
+            $(this).find(&#39;.clone_categories&#39;).selectpicker(&#39;toggle&#39;);
+            $(this).find(&#39;.clone_products&#39;).selectpicker(&#39;toggle&#39;);
+        }
+    });
+    $(&quot;#view_history&quot;).click(function () {
+        $(&#39;#viewHistories&#39;).modal(&#39;show&#39;);
+    });
+});
+
+$(&quot;.onlyNumbers&quot;).on(&quot;keypress keyup blur&quot;,function (event) {
+    var charCode = (event.which) ? event.which : event.keyCode
+    if (charCode &gt; 31 &amp;&amp; (charCode &lt; 48 || charCode &gt; 57) &amp;&amp; !(charCode == 46 || charCode == 8))
+        event.preventDefault();
+    else {
+        var len = $(this).val().length;
+        var index = $(this).val().indexOf(&#39;.&#39;);
+        if (index &gt; 0 &amp;&amp; charCode == 46) {
+            event.preventDefault();
+        }
+        if (index &gt; 0) {
+            var CharAfterdot = (len + 1) - index;
+            if (CharAfterdot &gt; 3 &amp;&amp; !(charCode == 46 || charCode == 8)) {
+                event.preventDefault();
+            }
+        }
+
+    }
+});</code></pre>
+
+<p>});</p>
+
+<p>var room = 1;</p>
+
+<p>function product_attributes() {</p>
+
+<pre><code>room++;
+var objTo = document.getElementById(&#39;product_attributes&#39;)
+var divtest = document.createElement(&quot;div&quot;);
+divtest.setAttribute(&quot;class&quot;, &quot;row form-group removeclass&quot; + room);
+var rdiv = &#39;removeclass&#39; + room;
+divtest.innerHTML = &#39;&lt;div class=&quot;col-md-4 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;order[field_name][]&quot; name=&quot;order_field_name&quot; value=&quot;&quot; placeholder=&quot;Attribute Name&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-md-6 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;order[field_value][]&quot; name=&quot;order_field_value&quot; value=&quot;&quot; placeholder=&quot;Attribute Value&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-md-2 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;button class=&quot;btn btn-outline-danger&quot; type=&quot;button&quot; onclick=&quot;remove_education_fields(&#39; + room + &#39;);&quot;&gt; &lt;span class=&quot;fa fa-trash-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; &lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;&#39;
+
+objTo.appendChild(divtest)</code></pre>
+
+<p>}</p>
+
+<p>function clone_product_attributes() {</p>
+
+<pre><code>room++;
+var objTo = document.getElementById(&#39;clone_product_attributes&#39;)
+var divtest = document.createElement(&quot;div&quot;);
+divtest.setAttribute(&quot;class&quot;, &quot;row form-group removeclass&quot; + room);
+var rdiv = &#39;removeclass&#39; + room;
+divtest.innerHTML = &#39;&lt;div class=&quot;col-md-4 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;order[field_name][]&quot; name=&quot;clone_order_field_name&quot; value=&quot;&quot; placeholder=&quot;Attribute Name&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-md-6 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;order[field_value][]&quot; name=&quot;clone_order_field_value&quot; value=&quot;&quot; placeholder=&quot;Attribute Value&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-md-2 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;button class=&quot;btn btn-outline-danger&quot; type=&quot;button&quot; onclick=&quot;remove_education_fields(&#39; + room + &#39;);&quot;&gt; &lt;span class=&quot;fa fa-trash-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; &lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;&#39;
+
+objTo.appendChild(divtest)</code></pre>
+
+<p>}</p>
+
+<p>function clone_product_attributes_2(key, val) {</p>
+
+<pre><code>room++;
+var objTo = document.getElementById(&#39;clone_product_attributes&#39;)
+var divtest = document.createElement(&quot;div&quot;);
+divtest.setAttribute(&quot;class&quot;, &quot;row form-group removeclass&quot; + room);
+var rdiv = &#39;removeclass&#39; + room;
+divtest.innerHTML = &#39;&lt;div class=&quot;col-md-4 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;order[field_name][]&quot; name=&quot;clone_order_field_name&quot; placeholder=&quot;Attribute Name&quot; value=&quot;&#39; + key + &#39;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-md-6 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;order[field_value][]&quot; name=&quot;clone_order_field_value&quot; placeholder=&quot;Attribute Value&quot; value=&quot;&#39; + val + &#39;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-md-2 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;button class=&quot;btn btn-outline-danger&quot; type=&quot;button&quot; onclick=&quot;remove_education_fields(&#39; + room + &#39;);&quot;&gt; &lt;span class=&quot;fa fa-trash-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; &lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;&#39;
+
+objTo.appendChild(divtest)</code></pre>
+
+<p>}</p>
+
+<p>function add_product_attributes() {</p>
+
+<pre><code>room++;
+var objTo = document.getElementById(&#39;add_product_attributes&#39;)
+var divtest = document.createElement(&quot;div&quot;);
+divtest.setAttribute(&quot;class&quot;, &quot;row form-group removeclass&quot; + room);
+var rdiv = &#39;removeclass&#39; + room;
+divtest.innerHTML = &#39;&lt;div class=&quot;col-md-4 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;order[field_name][]&quot; name=&quot;add_order_field_name&quot; value=&quot;&quot; placeholder=&quot;Attribute Name&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-md-6 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;order[field_value][]&quot; name=&quot;add_order_field_value&quot; value=&quot;&quot; placeholder=&quot;Attribute Value&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-md-2 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;button class=&quot;btn btn-outline-danger&quot; type=&quot;button&quot; onclick=&quot;remove_education_fields(&#39; + room + &#39;);&quot;&gt; &lt;span class=&quot;fa fa-trash-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; &lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;&#39;
+
+objTo.appendChild(divtest)</code></pre>
+
+<p>}</p>
+
+<p>function generate_attributes(key, val, element) {</p>
+
+<pre><code>room++;
+var divtest = document.createElement(&quot;div&quot;);
+divtest.setAttribute(&quot;class&quot;, &quot;row form-group removeclass&quot; + room);
+var rdiv = &#39;removeclass&#39; + room;
+divtest.innerHTML = &#39;&lt;div class=&quot;col-md-4 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;order[field_name][]&quot; name=&quot;order_field_name&quot; placeholder=&quot;Attribute Name&quot; value=&quot;&#39; + key + &#39;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-md-6 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;order[field_value][]&quot; name=&quot;order_field_value&quot; placeholder=&quot;Attribute Value&quot; value=&quot;&#39; + val + &#39;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-md-2 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;button class=&quot;btn btn-outline-danger&quot; type=&quot;button&quot; onclick=&quot;remove_education_fields(&#39; + room + &#39;);&quot;&gt; &lt;span class=&quot;fa fa-trash-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; &lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;&#39;
+
+$(element).append(divtest);</code></pre>
+
+<p>}</p>
+
+<p>function add_attribute(element) {</p>
+
+<pre><code>room++;
+var divtest = document.createElement(&quot;div&quot;);
+divtest.setAttribute(&quot;class&quot;, &quot;row form-group removeclass&quot; + room);
+var rdiv = &#39;removeclass&#39; + room;
+divtest.innerHTML = &#39;&lt;div class=&quot;col-md-4 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;order[field_name][]&quot; name=&quot;order_field_name&quot; value=&quot;&quot; placeholder=&quot;Attribute Name&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-md-6 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;order[field_value][]&quot; name=&quot;order_field_value&quot; value=&quot;&quot; placeholder=&quot;Attribute Value&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-md-2 nopadding&quot;&gt;&lt;div class=&quot;form-group&quot;&gt; &lt;button class=&quot;btn btn-outline-danger&quot; type=&quot;button&quot; onclick=&quot;remove_education_fields(&#39; + room + &#39;);&quot;&gt; &lt;span class=&quot;fa fa-trash-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; &lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;&#39;
+
+$(element).append(divtest)</code></pre>
+
+<p>}</p>
+
+<p>function remove_education_fields(rid) {</p>
+
+<pre><code>$(&#39;.removeclass&#39; + rid).remove();</code></pre>
+
+<p>}</p>
+
+<p>function onSearchFilter() {</p>
+
+<pre><code>// Declare variables
+var input, filter, div, buttons, btn, i;
+input = document.getElementById(&quot;filterSearch&quot;);
+filter = input.value.toUpperCase();
+div = document.getElementsByClassName(&quot;item-list&quot;);
+buttons = div[0].getElementsByTagName(&quot;button&quot;);
+
+// Loop through all table rows, and hide those who don&#39;t match the search query
+for (i = 0; i &lt; buttons.length; i++) {
+    btn = buttons[i]
+    if (btn) {
+        if (btn.innerHTML.toUpperCase().indexOf(filter) &gt; -1) {
+            btn.style.display = &quot;&quot;;
+        } else {
+            btn.style.display = &quot;none&quot;;
+        }
+    }
+}</code></pre>
+
+<p>}</p>
+
+<p>function submitForm(id, elem) {</p>
+
+<pre><code>form_id = &quot;#&quot; + id;
+$(form_id).submit();
+$(elem).attr(&#39;disabled&#39;, &#39;disabled&#39;);
+$(elem).html(&#39;Please Wait...&#39;);</code></pre>
+
+<p>}</p>
+
+<p>function showEditOrderEntries() {</p>
+
+<pre><code>$(&#39;#editOrderEntries&#39;).modal(&#39;show&#39;);</code></pre>
+
+<p>}</p>
+
+<p>function showEditOrder(id) {</p>
+
+<pre><code>$.ajax({
+    method: &quot;GET&quot;,
+    url: &quot;/api/simple/orders/&quot; + id
+}).done(function (data) {
+    $(&#39;#edit_order&#39;).find(&#39;#order_id&#39;).val(data.id);
+    $(&#39;#edit_order&#39;).find(&#39;#order_status&#39;).val(data.status);
+    $(&#39;#edit_order&#39;).find(&#39;#order_brand_id&#39;).val(data.brand_id);
+    $(&#39;#edit_order&#39;).find(&#39;#order_total_budget&#39;).val(data.total_budget);
+    $(&#39;#edit_order&#39;).find(&#39;#order_lead_time&#39;).val(data.lead_time);
+    $(&#39;#editOrder&#39;).modal(&#39;show&#39;);
+    $(&#39;.selectpicker&#39;).selectpicker(&#39;refresh&#39;)
+});</code></pre>
+
+<p>} function setFormValues(data, form) {</p>
+
+<pre><code>$(form).find(&#39;#order_entry_id&#39;).val(data.id);
+$(form).find(&#39;#order_entry_category_id&#39;).val(data.category_id);
+$(form).find(&#39;#order_entry_vendor&#39;).val(data.vendor_list);
+$(form).find(&#39;#order_entry_product_id&#39;).val(data.product_id);
+$(form).find(&#39;#order_entry_quoted_by&#39;).val(data.quoted_by);
+$(form).find(&#39;#order_entry_price&#39;).val(data.price);
+$(form).find(&#39;#order_entry_cost&#39;).val(data.cost);
+$(form).find(&#39;#order_entry_tax&#39;).val(data.tax);
+$(form).find(&#39;#order_entry_quantity&#39;).val(data.quantity);
+$(form).find(&#39;#order_entry_specs&#39;).val(data.specs);
+$(form).find(&#39;#order_entry_vendor_quote_prices&#39;).val(data.vendor_quote_prices);
+$(form).find(&#39;#order_entry_notes&#39;).val(data.notes);
+var element = $(form).find(&#39;#product_attributes&#39;);
+element.html(&#39;&#39;);
+if (data.convert_dynamic_fields != &#39;&#39; &amp;&amp; data.convert_dynamic_fields != null &amp;&amp; data.convert_dynamic_fields != undefined) {
+    foo = JSON.parse(data.convert_dynamic_fields);
+    Object.keys(foo)
+        .forEach(function eachKey(key) {
+            generate_attributes(key, foo[key], element);
+        });
+}
+$(&#39;.selectpicker2&#39;).selectpicker(&#39;refresh&#39;)
+$(&#39;.selectpicker&#39;).selectpicker(&#39;refresh&#39;)</code></pre>
+
+<p>}</p>
+
+<p>function setVendors(btn_type){</p>
+
+<pre><code>if ($(&#39;.item_ids&#39;).is(&quot;:checked&quot;)) {
+    var formData = $(&#39;#form_order_checklist&#39;).serialize();
+    $.ajax({
+        type: &quot;GET&quot;,
+        url: &quot;/api/simple/order_entries/vendor_email_list&quot;,
+        data: formData
+    }).done(function (data) {
+        $(&#39;#email_template_btn_type&#39;).val(btn_type);
+        var arr = data[0];
+        $(&#39;#new_email_template&#39;).find(&#39;#email_template_to&#39;).tagsinput(&#39;removeAll&#39;);
+        jQuery.each( arr, function( i, val ) {
+            $(&#39;#new_email_template&#39;).find(&#39;#email_template_to&#39;).tagsinput(&#39;add&#39;, val);
+            console.log(val);
+        });
+        $(&#39;#new_email_template&#39;).find(&#39;#email_template_order_entry_ids&#39;).val(data[1]);
+        $(&#39;#requestQuote&#39;).modal(&#39;show&#39;);
+
+    });
+    $.ajax({
+        type: &quot;GET&quot;,
+        url: &quot;/api/simple/order_entries/attachment_list&quot;,
+        data: formData
+    }).done(function (data) {
+        console.log(data);
+        var removedItems = [];
+        var emailPreviewDropzone = new Dropzone(&quot;#new_email_template&quot;, {
+            url: &#39;/email_templates&#39;,
+            addRemoveLinks: true,
+            autoProcessQueue: false,
+            uploadMultiple: true,
+            parallelUploads: 10,
+            maxFiles: 10,
+            previewsContainer: &#39;#dropzoneEmailPreview&#39;,
+            clickable: &#39;#dropzoneEmailPreview&#39;,
+
+            // The setting up of the dropzone
+            init: function () {
+                var myDropzone = this;
+                myDropzone = this; // closure
+                $.each(data, function (i, currAttachment) {
+                    var mockFile = { name: currAttachment.attachment_file_file_name, size: parseInt(currAttachment.attachment_file_file_size), id: currAttachment.id };
+                    myDropzone.emit(&quot;addedfile&quot;, mockFile);
+                    myDropzone.emit(&quot;complete&quot;, mockFile);
+                    myDropzone.files.push(mockFile)
+                });
+                this.element.querySelector(&quot;button[type=submit]&quot;).addEventListener(&quot;click&quot;, function(e) {
+                    // Make sure that the form isn&#39;t actually being sent.
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $(&#39;#email_template_removed_attachments&#39;).val(removedItems);
+                    if (myDropzone.getQueuedFiles().length === 0) {
+                        $(&#39;#new_email_template&#39;).submit();
+                    }
+                    else {
+                        myDropzone.processQueue();
+
+                    }
+                });
+                $(&#39;#requestQuote&#39;).on(&#39;hidden.bs.modal&#39;, function (e) {
+                    myDropzone.destroy();
+                });
+                this.on(&quot;successmultiple&quot;, function(files, response) {
+                    var data = response;
+                    location.reload(true);
+
+                });
+            },
+            removedfile: function (file) {
+                console.log(file);
+                removedItems.push(file.id);
+                var ref;
+                return (ref = file.previewElement) != null ? ref.parentNode.removeChild(file.previewElement) : void 0;
+            },
+        });
+
+    });
+}</code></pre>
+
+<p>} function itemDetails(id, entry_id) {</p>
+
+<pre><code>$.ajax({
+    method: &quot;GET&quot;,
+    url: &quot;/api/simple/order_entries/&quot; + entry_id
+}).done(function (data) {
+    $(&#39;#add_product_attributes&#39;).html(&#39;&#39;);
+    $(&#39;#add_product_id&#39;).val(data.product_id);
+    $(&#39;#add_product_id_2&#39;).val(data.product_id);
+    $(&#39;#order_entry_id_2&#39;).val(entry_id);
+    $(&#39;#order_entry_id_3&#39;).val(entry_id);
+    $(&quot;#pic1&quot;).attr(&quot;src&quot;, data.product_picture);
+    $(&#39;.product-name-header&#39;).html(&quot;(&quot; + data.product.name + &quot;)&quot;);
+
+    $(&#39;#order-entry-details&#39;).html(&#39;&#39;);
+    checkDataValue(&#39;Product&#39;, data.product.name);
+    checkDataValue(&#39;Category&#39;, data.category.name);
+    checkDataValue(&#39;Vendor&#39;, data.vendor_name);
+    checkDataValue(&#39;Hotel Price&#39;, data.price);
+    checkDataValue(&#39;Vendor Cost&#39;, data.cost);
+    checkDataValue(&#39;Tax&#39;, data.tax);
+    checkDataValue(&#39;Quantity&#39;, data.quantity);
+    setFormValues(data, $(&#39;#edit_order_entry&#39;))
+
+    var editProductDropzone = new Dropzone(&quot;#edit_order_entry&quot;, {
+        url: &#39;/order_entries/update_entry&#39;,
+        addRemoveLinks: true,
+        autoProcessQueue: false,
+        uploadMultiple: true,
+        parallelUploads: 10,
+        maxFiles: 10,
+        previewsContainer: &#39;#dropzoneEditPreview&#39;,
+        clickable: &#39;#dropzoneEditPreview&#39;,
+
+        // The setting up of the dropzone
+        init: function () {
+            var myDropzone = this;
+            myDropzone = this; // closure
+            $.each(data.attachments, function (i, currAttachment) {
+                var mockFile = { name: currAttachment.file_name, size: parseInt(currAttachment.file_size), id: currAttachment.id };
+                myDropzone.emit(&quot;addedfile&quot;, mockFile);
+                myDropzone.emit(&quot;complete&quot;, mockFile);
+                myDropzone.files.push(mockFile)
+            });
+            this.element.querySelector(&quot;button[type=submit]&quot;).addEventListener(&quot;click&quot;, function(e) {
+                // Make sure that the form isn&#39;t actually being sent.
+                e.preventDefault();
+                e.stopPropagation();
+                if (myDropzone.getQueuedFiles().length === 0) {
+                    $(&#39;#edit_order_entry&#39;).submit();
+                }
+                else {
+                    setAttributesOnForm($(&#39;#edit_order_entry&#39;));
+                    myDropzone.processQueue();
+
+                }
+            });
+            $(&#39;#editOrderEntries&#39;).on(&#39;hidden.bs.modal&#39;, function (e) {
+                console.log(&quot;working&quot;);
+                myDropzone.destroy();
+            });
+            $(&#39;#viewProducts&#39;).on(&#39;hidden.bs.modal&#39;, function (e) {
+                console.log(&quot;working&quot;);
+                myDropzone.destroy();
+            })
+            this.on(&quot;successmultiple&quot;, function(files, response) {
+                // Gets triggered when the files have successfully been sent.
+                // Redirect user or notify of success.
+                var data = response;
+                location.reload(true);
+
+            });
+        },
+        removedfile: function (file) {
+            console.log(file);
+            $.ajax({
+                type: &#39;POST&#39;,
+                url: &#39;/api/simple/order_entries/destroy_attachment&#39;,
+                data: {id: file.id}
+            }).done(function (data) {
+            });
+            var ref;
+            return (ref = file.previewElement) != null ? ref.parentNode.removeChild(file.previewElement) : void 0;
+        },
+    });
+
+    if (data.specs != &quot;&quot; &amp;&amp; data.specs != null &amp;&amp; data.specs != undefined) {
+        $(&#39;#nav-specs&#39;).html(data.specs_html)
+        $(&#39;#add_specs&#39;).val(data.specs_html);
+    }
+    if (data.vendor_quote_prices != &quot;&quot; &amp;&amp; data.vendor_quote_prices != null &amp;&amp; data.vendor_quote_prices != undefined) {
+        $(&#39;#nav-quotes&#39;).html(data.vendor_quote_prices_html)
+        $(&#39;#add_vendor_quote_prices&#39;).val(data.vendor_quote_prices_html);
+    }
+    if (data.notes != &quot;&quot; &amp;&amp; data.notes != null &amp;&amp; data.notes != undefined) {
+        $(&#39;#nav-notes&#39;).html(data.notes_html)
+        $(&#39;#add_notes&#39;).val(data.notes_html);
+    }
+    $(&#39;#dynamic-attributes&#39;).html(&#39;&#39;);
+    if (data.convert_dynamic_fields != &#39;&#39; &amp;&amp; data.convert_dynamic_fields != null &amp;&amp; data.convert_dynamic_fields != undefined) {
+        foo = JSON.parse(data.convert_dynamic_fields);
+        Object.keys(foo)
+            .forEach(function eachKey(key) {
+                dynamic_attributes = $(&#39;#dynamic-attributes&#39;).html();
+                $(&#39;#dynamic-attributes&#39;).html(dynamic_attributes + generateTableRow(key, foo[key]));
+            });
+    } else {
+        $(&#39;#dynamic-attributes&#39;).html(&#39;No Attributes Available&#39;);
+    }
+
+    $.ajax({
+        method: &quot;GET&quot;,
+        url: &quot;/order_entries/history?id=&quot; + entry_id
+    }).done(function (data) {
+        $(&#39;#order_entry_histories&#39;).html(&#39;&#39;);
+        $(&#39;#order_entry_histories&#39;).html(data);
+        $(&#39;#viewProducts&#39;).modal(&#39;show&#39;);
+    });
+});</code></pre>
+
+<p>}</p>
+
+<p>function generateAttachments(order_entry_id) {</p>
+
+<pre><code>$.ajax({
+    method: &quot;GET&quot;,
+    url: &quot;/order_entries/attachment?id=&quot; + order_entry_id
+}).done(function (data) {
+    $(&#39;#order_entry_attachments&#39;).html(&#39;&#39;);
+    $(&#39;#order_entry_attachments&#39;).html(data);
+    $(&#39;#viewAttachments&#39;).modal(&#39;show&#39;);
+});</code></pre>
+
+<p>}</p>
+
+<p>function generateTableRow(key, value) {</p>
+
+<pre><code>return &quot;&lt;tr style=&#39;margin-bottom: 2%&#39;&gt;&lt;td&gt; &lt;span class=&#39;float-left&#39;&gt;&quot; + key + &quot;&lt;/span&gt; &lt;span class=&#39;float-right&#39;&gt;&quot; + value + &quot;&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&quot;
+</code></pre>
+
+<p>}</p>
+
+<p>function checkDataValue(key, value) {</p>
+
+<pre><code>if (value != &#39;null&#39; &amp;&amp; value != &#39;&#39; &amp;&amp; value != null &amp;&amp; value != undefined) {
+    $(&#39;#order-entry-details&#39;).html($(&#39;#order-entry-details&#39;).html() + generateTableRow(key, value));
+} else {
+    $(&#39;#order-entry-details&#39;).html($(&#39;#order-entry-details&#39;).html() + generateTableRow(key, &#39;&#39;));
+}</code></pre>
+
+<p>}</p>
+
+<p>function openEditAttributes() {</p>
+
+<pre><code>$(&#39;#viewProducts&#39;).modal(&#39;hide&#39;);
+$(&#39;#editAttributes&#39;).modal(&#39;show&#39;);</code></pre>
+
+<p>}</p>
+
+<p>function openViewItems() {</p>
+
+<pre><code>$(&#39;#editFreeFlow&#39;).modal(&#39;hide&#39;);
+$(&#39;#editAttributes&#39;).modal(&#39;hide&#39;);
+$(&#39;#viewProducts&#39;).modal(&#39;show&#39;);</code></pre>
+
+<p>}</p>
+
+<p>function openEditFreeFlow() {</p>
+
+<pre><code>$(&#39;#viewProducts&#39;).modal(&#39;hide&#39;);
+$(&#39;#editFreeFlow&#39;).modal(&#39;show&#39;);</code></pre>
+
+<p>}</p>
+
+<p>function submitEditAttributes() {</p>
+
+<pre><code>var product_id = $(&#39;#add_product_id&#39;).val();
+var entry_id = $(&#39;#order_entry_id_3&#39;).val();
+var dynamic_fields = {};
+var field_names = $(&#39;input[name=add_order_field_name]&#39;);
+var field_values = $(&#39;input[name=add_order_field_value]&#39;);
+
+for (var i = field_names.length - 1; i &gt;= 0; i--) {
+    dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
+}
+$.ajax({
+    method: &quot;POST&quot;,
+    url: &quot;/api/simple/products/update_product&quot;,
+    data: {
+        id: product_id,
+        dynamic_fields: dynamic_fields
+    }
+}).done(function (data) {
+    $(&#39;#editAttributes&#39;).modal(&#39;hide&#39;);
+    itemDetails(data.id, entry_id);
+});</code></pre>
+
+<p>}</p>
+
+<p>function submitEditFreeFlow() {</p>
+
+<pre><code>var product_id = $(&#39;#add_product_id&#39;).val();
+var entry_id = $(&#39;#order_entry_id_3&#39;).val();
+var specs = $(&#39;#add_specs&#39;).val();
+var vendor_quote_prices = $(&#39;#add_vendor_quote_prices&#39;).val();
+var notes = $(&#39;#add_notes&#39;).val();
+$.ajax({
+    method: &quot;POST&quot;,
+    url: &quot;/api/simple/products/update_product&quot;,
+    data: {
+        id: product_id,
+        specs: specs,
+        vendor_quote_prices: vendor_quote_prices,
+        notes: notes
+    }
+}).done(function (data) {
+    $(&#39;#editFreeFlow&#39;).modal(&#39;hide&#39;);
+    itemDetails(data.id, entry_id);
+});</code></pre>
+
+<p>}</p>
+
+<p>function setAttributesOnForm(element) {</p>
+
+<pre><code>var dynamic_fields = {};
+
+var field_names = $(element).find(&#39;input[name=order_field_name]&#39;);
+var field_values = $(element).find(&#39;input[name=order_field_value]&#39;);
+
+for (var i = field_names.length - 1; i &gt;= 0; i--) {
+    dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
+}
+
+$(element).find(&#39;#dynamic_fields&#39;).val(JSON.stringify(dynamic_fields));
+return true;</code></pre>
+
+<p>}</p>
+
+<p>function setCloneAttributesOnForm(element) {</p>
+
+<pre><code>var dynamic_fields = {};
+
+var field_names = $(element).find(&#39;input[name=clone_order_field_name]&#39;);
+var field_values = $(element).find(&#39;input[name=clone_order_field_value]&#39;);
+
+for (var i = field_names.length - 1; i &gt;= 0; i--) {
+    dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
+}
+
+$(element).find(&#39;#clone_dynamic_fields&#39;).val(JSON.stringify(dynamic_fields));
+return true;</code></pre>
+
+<p>}</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

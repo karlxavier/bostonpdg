@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>toastr.min.js</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            toastr.min.js
+        </h1>
+        <ul class="files">
+            
+            <li>
+                app/assets/javascripts/toastr.min.js
+                
+            </li>
+            <li>Last modified: 2018-06-21 04:01:49 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>!function(e){<a href=""jquery"">e(</a>,function(e){return
+function(){function t(e,t,n){return
+f({type:O.error,iconClass:g().iconClasses.error,message:e,optionsOverride:n,title:t})}function
+n(t,n){return
+t||(t=g()),v=e(“#”+t.containerId),v.length?v:(n&amp;&amp;(v=c(t)),v)}function
+i(e,t,n){return
+f({type:O.info,iconClass:g().iconClasses.info,message:e,optionsOverride:n,title:t})}function
+o(e){w=e}function s(e,t,n){return
+f({type:O.success,iconClass:g().iconClasses.success,message:e,optionsOverride:n,title:t})}function
+a(e,t,n){return
+f({type:O.warning,iconClass:g().iconClasses.warning,message:e,optionsOverride:n,title:t})}function
+r(e){var t=g();v||n(t),l(e,t)||u(t)}function d(t){var i=g();return
+v||n(i),t&amp;&amp;0===e(“:focus”,t).length?void
+h(t):void(v.children().length&amp;&amp;v.remove())}function u(t){for(var <a
+href="i">n=v.children(),i=n.length-1;i>=0;i–)l(e(n</a>),t)}function
+l(t,n){return <a
+href="n.hideMethod">t&&0===e(“:focus”,t).length?(t</a>({duration:n.hideDuration,easing:n.hideEasing,complete:function(){h(t)}}),!0):!1}function
+c(t){return
+v=e(“&lt;div/&gt;”).attr(“id”,t.containerId).addClass(t.positionClass).attr(“aria-live”,“polite”).attr(“role”,“alert”),v.appendTo(e(t.target)),v}function
+p(){return{tapToDismiss:!0,toastClass:“toast”,containerId:“toast-container”,debug:!1,showMethod:“fadeIn”,showDuration:300,showEasing:“swing”,onShown:void
+0,hideMethod:“fadeOut”,hideDuration:1e3,hideEasing:“swing”,onHidden:void
+0,extendedTimeOut:1e3,iconClasses:{error:“toast-error”,info:“toast-info”,success:“toast-success”,warning:“toast-warning”},iconClass:“toast-info”,positionClass:“toast-top-right”,timeOut:5e3,titleClass:“toast-title”,messageClass:“toast-message”,target:“body”,closeHtml:&#39;&lt;button
+type=“button”&gt;&amp;times;&lt;/button&gt;&#39;,newestOnTop:!0,preventDuplicates:!1,progressBar:!1}}function
+m(e){w&amp;&amp;w(e)}function f(t){function i(t){<a
+href="r.hideMethod">return!e(“:focus”,l).length||t?(clearTimeout(O.intervalId),l</a>({duration:r.hideDuration,easing:r.hideEasing,complete:function(){h(l),r.onHidden&amp;&amp;“hidden”!==b.state&amp;&amp;r.onHidden(),b.state=“hidden”,b.endTime=new
+Date,m(b)}})):void 0}function
+o(){(r.timeOut&gt;0||r.extendedTimeOut&gt;0)&amp;&amp;(u=setTimeout(i,r.extendedTimeOut),O.maxHideTime=parseFloat(r.extendedTimeOut),O.hideEta=(new
+Date).getTime()+O.maxHideTime)}function s(){<a
+href="r.showMethod">clearTimeout(u),O.hideEta=0,l.stop(!0,!0)</a>({duration:r.showDuration,easing:r.showEasing})}function
+a(){var e=(O.hideEta-(new
+Date).getTime())/O.maxHideTime*100;f.width(e+“%”)}var
+r=g(),d=t.iconClass||r.iconClass;if(“undefined”!=typeof
+t.optionsOverride&amp;&amp;(r=e.extend(r,t.optionsOverride),d=t.optionsOverride.iconClass||d),r.preventDuplicates){if(t.message===C)return;C=t.message}T++,v=n(r,!0);var
+u=null,l=e(“&lt;div/&gt;”),c=e(“&lt;div/&gt;”),p=e(“&lt;div/&gt;”),f=e(“&lt;div/&gt;”),w=e(r.closeHtml),O={intervalId:null,hideEta:null,maxHideTime:null},b={toastId:T,state:“visible”,startTime:new
+Date,options:r,map:t};return <a
+href="r.showMethod">t.iconClass&&l.addClass(r.toastClass).addClass(d),t.title&&(c.append(t.title).addClass(r.titleClass),l.append©),t.message&&(p.append(t.message).addClass(r.messageClass),l.append(p)),r.closeButton&&(w.addClass(“toast-close-button”).attr(“role”,“button”),l.prepend(w)),r.progressBar&&(f.addClass(“toast-progress”),l.prepend(f)),l.hide(),r.newestOnTop?v.prepend(l):v.append(l),l</a>({duration:r.showDuration,easing:r.showEasing,complete:r.onShown}),r.timeOut&gt;0&amp;&amp;(u=setTimeout(i,r.timeOut),O.maxHideTime=parseFloat(r.timeOut),O.hideEta=(new
+Date).getTime()+O.maxHideTime,r.progressBar&amp;&amp;(O.intervalId=setInterval(a,10))),l.hover(s,o),!r.onclick&amp;&amp;r.tapToDismiss&amp;&amp;l.click(i),r.closeButton&amp;&amp;w&amp;&amp;w.click(function(e){e.stopPropagation?e.stopPropagation():void
+0!==e.cancelBubble&amp;&amp;e.cancelBubble!==!0&amp;&amp;(e.cancelBubble=!0),i(!0)}),r.onclick&amp;&amp;l.click(function(){r.onclick(),i()}),m(b),r.debug&amp;&amp;console&amp;&amp;console.log(b),l}function
+g(){return e.extend({},p(),b.options)}function
+h(e){v||(v=n()),e.is(“:visible”)||(e.remove(),e=null,0===v.children().length&amp;&amp;(v.remove(),C=void
+0))}var
+v,w,C,T=0,O={error:“error”,info:“info”,success:“success”,warning:“warning”},b={clear:r,remove:d,error:t,getContainer:n,info:i,options:{},subscribe:o,success:s,version:“2.1.0”,warning:a};return
+b}()})}(“function”==typeof
+define&amp;&amp;define.amd?define:function(e,t){“undefined”!=typeof
+module&amp;&amp;module.exports?module.exports=t(require(“jquery”)):window.toastr=t(window.jQuery)});
+//# sourceMappingURL=/toastr.js.map</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

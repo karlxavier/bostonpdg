@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>dropzone_initializer.js</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            dropzone_initializer.js
+        </h1>
+        <ul class="files">
+            <li>app/assets/javascripts/dropzone_initializer.js</li>
+            <li>Last modified: 2018-08-21 02:26:40 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>let dropzoneInit = function() {</p>
+
+<pre><code>    const zone = document.querySelector(&#39;.dropzonable&#39;)
+    const input = document.querySelector(&#39;#message-attachment&#39;)
+    const form = document.querySelector(&#39;#new_message&#39;)
+
+    if (zone) {
+      const dropzone = new Dropzone(zone, { 
+        url: form.action.replace(&#39;messages.js&#39;, &#39;dropfiles&#39;),
+        error: function(file, errorMessage, xhr) {
+          console.log(errorMessage)
+          toastr.options = {
+              closeButton: true,
+              progressBar: true,
+              showMethod: &#39;slideDown&#39;,
+              positionClass: &#39;toast-bottom-left&#39;,
+              timeOut: 7000
+          }
+
+          toastr.error(errorMessage.error)
+        }
+      })
+
+      dropzone.on(&quot;complete&quot;, function(file) {
+        dropzone.removeFile(file);
+      });
+    }
+
+    var order_messages = document.getElementById(&#39;order_messages&#39;);
+    if (order_messages) {
+          var height = order_messages.scrollHeight;
+  $(order_messages).scrollTop(height);
+    }
+
+    var modal = document.getElementById(&#39;msg_preview&#39;);
+var imgs = document.getElementsByClassName(&#39;msg_image&#39;);
+var modalImg = document.getElementById(&quot;img01&quot;);
+
+[].forEach.call(imgs, function (img) {
+  img.onclick = function(){
+    modal.style.display = &quot;block&quot;;
+    modalImg.src = this.src;
+  }
+});
+
+var span = document.getElementsByClassName(&quot;close_preview&quot;)[0];
+
+span.onclick = function() { 
+    modal.style.display = &quot;none&quot;;
+}</code></pre>
+
+<p>}</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

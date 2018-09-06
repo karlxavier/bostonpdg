@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Inventory</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="Inventory">
+
+  
+    
+    <meta name="description" content="Schema Information  Table name: inventories  id         :bigint(8)        not null, primary key loc_id     :integer bin_id     :integer quantity   :integer created_at :datetime         not null update.">
+    <meta property="og:description" content="Schema Information  Table name: inventories  id         :bigint(8)        not null, primary key loc_id     :integer bin_id     :integer quantity   :integer created_at :datetime         not null update.">
+  
+
+    <meta name="keywords" content="Inventory class">
+  
+    <meta name="keywords" content="_quantity">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            Inventory
+            
+                <span class="parent">&lt;
+                    
+                    <a href="ApplicationRecord.html">ApplicationRecord</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/app/models/inventory_rb.html">app/models/inventory.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h2 id="class-Inventory-label-Schema+Information">Schema Information</h2>
+
+<p>Table name: inventories</p>
+
+<pre><code>id         :bigint(8)        not null, primary key
+loc_id     :integer
+bin_id     :integer
+quantity   :integer
+created_at :datetime         not null
+updated_at :datetime         not null
+aisle_id   :integer
+product_id :integer</code></pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-_quantity">_quantity</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-_quantity">
+            
+              <b>_quantity</b>()
+            
+            <a href="../classes/Inventory.html#method-i-_quantity" name="method-i-_quantity" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-_quantity_source')" id="l_method-i-_quantity_source">show</a>
+                
+              </p>
+              <div id="method-i-_quantity_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/inventory.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">_quantity</span>
+<span class="ruby-identifier">quantity</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

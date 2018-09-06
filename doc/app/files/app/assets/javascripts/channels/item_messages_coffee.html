@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>item_messages.coffee</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            item_messages.coffee
+        </h1>
+        <ul class="files">
+            <li>app/assets/javascripts/channels/item_messages.coffee</li>
+            <li>Last modified: 2018-07-19 11:41:00 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>App.item_messages = App.cable.subscriptions.create “ItemMessagesChannel”,</p>
+
+<pre><code>connected: -&gt;
+  console.log &#39;item connected&#39;
+
+disconnected: -&gt;
+  console.log &#39;item disconnected&#39;
+
+received: (data) -&gt;
+  console.log &#39;item message received&#39;
+  active_chatroom = $(&quot;[data-behavior=&#39;messages&#39;][data-item-chatroom-id=&#39;#{data.item_id}&#39;]&quot;)
+
+  if active_chatroom.length &gt; 0
+    active_chatroom.append(data.message)
+
+    chat_messages = $(&quot;#chat_messages&quot;)[0]
+    if chat_messages
+      height = chat_messages.scrollHeight
+      $(chat_messages).scrollTop(height)
+
+    $(&quot;#new_item_message&quot;)[0].reset()
+  else
+    chatroom_badge = $(&quot;[data-behavior=&#39;chatroom-badge&#39;][data-item-chatroom-id=&#39;#{data.item_id}&#39;]&quot;)
+    if chatroom_badge[0]
+      badge_value = chatroom_badge[0].innerHTML
+      badge_value++
+      chatroom_badge[0].innerHTML = badge_value
+      chatroom_badge[0].className += &quot;badge badge-warning&quot;
+    else
+        toastr.options =
+        closeButton: true
+        progressBar: true
+        showMethod: &#39;slideDown&#39;
+        positionClass: &#39;toast-bottom-left&#39;
+        timeOut: 7000
+        toastr.warning data.username + &#39; sent a message in &#39; + data.item_name , &#39;New Message&#39;</code></pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

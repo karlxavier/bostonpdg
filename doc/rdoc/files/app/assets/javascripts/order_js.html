@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>order.js</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            order.js
+        </h1>
+        <ul class="files">
+            
+            <li>
+                app/assets/javascripts/order.js
+                
+            </li>
+            <li>Last modified: 2018-08-30 21:08:14 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>$(function() {</p>
+
+<pre><code>$(&#39;select.brandpicker&#39;).on(&#39;change&#39;, function(e){
+    getAddress(this.value)
+});
+$(&#39;select.clone_products&#39;).on(&#39;change&#39;, function(e){
+    $.ajax({
+        method: &quot;GET&quot;,
+        url: &quot;/api/simple/products/&quot;+this.value
+    }).done(function( data ) {
+        $(&#39;#clone_product_name&#39;).val(data.name);
+        $(&#39;#clone_category_id&#39;).val(data.category);
+        $(&#39;#clone_item_category_id&#39;).val(data.item_category_id);
+        $(&#39;#clone_vendor_id&#39;).val(data.vendor_id);
+        $(&#39;#clone_specs&#39;).val(data.specs)
+        $(&#39;#clone_vendor_quote_prices&#39;).val(data.vendor_quote_prices)
+        $(&#39;#clone_notes&#39;).val(data.notes)
+        $(&#39;#clone_product_attributes&#39;).html(&#39;&#39;);
+        $(&#39;.clone_categories&#39;).selectpicker(&#39;refresh&#39;);
+        foo = JSON.parse(data.convert_dynamic_fields);
+        Object.keys(foo)
+            .forEach(function eachKey(key) {
+                clone_product_attributes_2(key, foo[key]);
+            });
+    });
+});
+$(&#39;.selectpicker&#39;).selectpicker(&#39;refresh&#39;);
+$(&#39;.selectpicker2&#39;).selectpicker(&#39;refresh&#39;);
+var addNewProductDropzone = new Dropzone(&quot;#add-new-product&quot;, {
+    url: &#39;/order_entries&#39;,
+    autoProcessQueue: false,
+    uploadMultiple: true,
+    parallelUploads: 10,
+    maxFiles: 10,
+    previewsContainer: &#39;#dropzonePreview&#39;,
+    clickable: &#39;#dropzonePreview&#39;,
+    // The setting up of the dropzone
+    init: function () {
+        var myDropzone = this;
+        myDropzone = this; // closure
+        this.element.querySelector(&#39;#save&#39;).addEventListener(&quot;click&quot;, function(e) {
+            // Make sure that the form isn&#39;t actually being sent.
+            e.preventDefault();
+            e.stopPropagation();
+            if (myDropzone.getQueuedFiles().length === 0) {
+                submitNewProduct();
+            }
+            else {
+                setAttributesOnForm($(&#39;#add-new-product&#39;));
+                myDropzone.processQueue();
+            }
+        });
+        this.on(&quot;successmultiple&quot;, function(files, response) {
+            // Gets triggered when the files have successfully been sent.
+            // Redirect user or notify of success.
+            var data = response;
+            myDropzone.removeAllFiles( true );
+            $(&#39;#product_name&#39;).val(&#39;&#39;);
+            $(&#39;#category_id&#39;).val(&#39;&#39;);
+            $(&#39;#item_category_id&#39;).val(&#39;&#39;);
+            $(&#39;#vendor_id&#39;).val(&#39;&#39;);
+            $(&#39;#specs&#39;).val(&#39;&#39;);
+            $(&#39;#vendor_quote_prices&#39;).val(&#39;&#39;);
+            $(&#39;.default_attributes&#39;).val(&#39;&#39;);
+            $(&#39;#notes&#39;).val(&#39;&#39;)
+            $(&#39;#product_attributes&#39;).html(&#39;&#39;);
+            $(&#39;.categories&#39;).selectpicker(&#39;refresh&#39;);
+            if (product_list.length === 0) {
+                $(&#39;.stitched&#39;).html(&#39;&#39;)
+            }
+            product_list.push(data.id)
+            order_entries = $(&#39;.stitched&#39;).html();
+            $(&#39;.stitched&#39;).html(order_entries + &quot;&lt;div class=&#39;col-md-1 nopadding text-align-right row-button-&quot; + data.id + &quot;&#39;&gt;&lt;div class=&#39;form-group&#39;&gt; &lt;button class=&#39;btn btn-outline-danger&#39; type=&#39;button&#39; onclick=&#39;removeOrderEntry(&quot; + data.id + &quot;);&#39;&gt; &lt;span class=&#39;fa fa-trash-o&#39; aria-hidden=&#39;true&#39;&gt;&lt;/span&gt; &lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#39;col-md-11 nopadding text-align-left row-name-&quot; + data.id + &quot;&#39;&gt;&lt;div class=&#39;form-group&#39;&gt;&quot; + data.name + &quot;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#39;clear&#39;&gt;&lt;/div&gt;&quot;)
+        });
+    }
+});
+var addCloneProductDropzone = new Dropzone(&quot;#add-clone-product&quot;, {
+    url: &#39;/api/simple/products/create_item&#39;,
+    autoProcessQueue: false,
+    uploadMultiple: true,
+    parallelUploads: 10,
+    maxFiles: 10,
+    previewsContainer: &#39;#dropzoneClonePreview&#39;,
+    clickable: &#39;#dropzoneClonePreview&#39;,
+    // The setting up of the dropzone
+    init: function () {
+        var myDropzone = this;
+        myDropzone = this; // closure
+        this.element.querySelector(&#39;#save-clone&#39;).addEventListener(&quot;click&quot;, function(e) {
+            // Make sure that the form isn&#39;t actually being sent.
+            e.preventDefault();
+            e.stopPropagation();
+            if (myDropzone.getQueuedFiles().length === 0) {
+                submitNewClonedProduct();
+            }
+            else {
+                setCloneAttributesOnForm($(&#39;#add-clone-product&#39;));
+                myDropzone.processQueue();
+            }
+        });
+        this.on(&quot;successmultiple&quot;, function(files, response) {
+            // Gets triggered when the files have successfully been sent.
+            // Redirect user or notify of success.
+            var data = response;
+            myDropzone.removeAllFiles( true );
+            $(&#39;#clone_product_id&#39;).val(&#39;&#39;);
+            $(&#39;#clone_product_name&#39;).val(&#39;&#39;);
+            $(&#39;#clone_category_id&#39;).val(&#39;&#39;);
+            $(&#39;#clone_item_category_id&#39;).val(&#39;&#39;);
+            $(&#39;#clone_vendor_id&#39;).val(&#39;&#39;);
+            $(&#39;#clone_specs&#39;).val(&#39;&#39;)
+            $(&#39;#clone_vendor_quote_prices&#39;).val(&#39;&#39;)
+            $(&#39;#clone_notes&#39;).val(&#39;&#39;)
+            $(&#39;#clone_product_attributes&#39;).html(&#39;&#39;);
+            $(&#39;.clone_categories&#39;).selectpicker(&#39;refresh&#39;);
+            $(&#39;.clone_products&#39;).selectpicker(&#39;refresh&#39;);
+            if (product_list.length === 0) {
+                $(&#39;.stitched&#39;).html(&#39;&#39;)
+            }
+            product_list.push(data.id)
+            order_entries = $(&#39;.stitched&#39;).html();
+            $(&#39;.stitched&#39;).html(order_entries + &quot;&lt;div class=&#39;col-md-1 nopadding text-align-right row-button-&quot; + data.id + &quot;&#39;&gt;&lt;div class=&#39;form-group&#39;&gt; &lt;button class=&#39;btn btn-outline-danger&#39; type=&#39;button&#39; onclick=&#39;removeOrderEntry(&quot; + data.id + &quot;);&#39;&gt; &lt;span class=&#39;fa fa-trash-o&#39; aria-hidden=&#39;true&#39;&gt;&lt;/span&gt; &lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#39;col-md-11 nopadding text-align-left row-name-&quot; + data.id + &quot;&#39;&gt;&lt;div class=&#39;form-group&#39;&gt;&quot; + data.name + &quot;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#39;clear&#39;&gt;&lt;/div&gt;&quot;)
+        });
+    }
+});
+</code></pre>
+
+<p>});</p>
+
+<p>function getAddress(id) {</p>
+
+<pre><code>if (id == null || id == &#39;&#39;) {
+    id = $(&#39;#order_brand_id&#39;).val()
+}
+$.ajax({
+    method: &quot;GET&quot;,
+    url: &quot;/api/simple/addresses/branches?brand_id=&quot;+id
+}).done(function( data ) {
+    $(&#39;#brand-list&#39;).html(&#39;&#39;);
+    all_address_list = [];
+    data.forEach(function (item, index, arr) {
+        all_address_list.push(item[&#39;id&#39;]);
+        brand_list = $(&#39;#brand-list&#39;).html();
+        $(&#39;#brand-list&#39;).html(brand_list + &quot;&lt;a class=&#39;btn btn-nav select-items&#39; onclick=&#39;selectAndUnselect(&quot; + item[&#39;id&#39;] + &quot;, $(this) )&#39;&gt; &quot; + item[&#39;state&#39;] + &quot; - &quot; +  item[&#39;city&#39;] + &quot;&lt;/a&gt;&amp;nbsp;&quot;);
+    });
+});
+</code></pre>
+
+<p>} function selectAndUnselect(id, elem) {</p>
+
+<pre><code>if (address_list.includes(id)) {
+    for(var i = address_list.length - 1; i &gt;= 0; i--) {
+        if(address_list[i] === id) {
+            address_list.splice(i, 1);
+        }
+    }
+    elem.removeClass(&#39;btn-yellow&#39;);
+}else{
+    address_list.push(id);
+    elem.addClass(&#39;btn-yellow&#39;);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>function selectAllBranches() {</p>
+
+<pre><code>$(&#39;.select-items&#39;).removeClass(&#39;btn-yellow&#39;);
+$(&#39;.select-items&#39;).addClass(&#39;btn-yellow&#39;);
+address_list = all_address_list;
+</code></pre>
+
+<p>}</p>
+
+<p>function unselectAllBranches() {</p>
+
+<pre><code>$(&#39;.select-items&#39;).removeClass(&#39;btn-yellow&#39;);
+address_list = [];
+</code></pre>
+
+<p>}</p>
+
+<p>function in_array(array, id) {</p>
+
+<pre><code>for(var i=0;i&lt;array.length;i++) {
+    return (array[i] === id)
+}
+return false;
+</code></pre>
+
+<p>}</p>
+
+<p>function submitFormWithVal(id, elem) {</p>
+
+<pre><code>form_id = &quot;#&quot;+id;
+var input = $(&quot;&lt;input&gt;&quot;)
+    .attr(&quot;type&quot;, &quot;hidden&quot;)
+    .attr(&quot;name&quot;, &quot;order_branch&quot;).val(address_list);
+var input2 = $(&quot;&lt;input&gt;&quot;)
+    .attr(&quot;type&quot;, &quot;hidden&quot;)
+    .attr(&quot;name&quot;, &quot;order_entries&quot;).val(product_list);
+$(form_id).append($(input));
+$(form_id).append($(input2));
+if (entry_list.length &gt; 0) {
+    var input3 = $(&quot;&lt;input&gt;&quot;)
+        .attr(&quot;type&quot;, &quot;hidden&quot;)
+        .attr(&quot;name&quot;, &quot;existing_entries&quot;).val(entry_list);
+    $(form_id).append($(input3));
+}
+$( form_id ).submit();
+$(elem).attr(&#39;disabled&#39;,&#39;disabled&#39;);
+$(elem).addClass( &quot;disabled&quot; );
+$(elem).html(&#39;Please Wait...&#39;);
+</code></pre>
+
+<p>}</p>
+
+<p>function submitNewClonedProduct() {</p>
+
+<pre><code>var product_name = $(&#39;#clone_product_name&#39;).val();
+var category_id = $(&#39;#clone_category_id&#39;).val();
+var item_category_id = $(&#39;#clone_item_category_id&#39;).val();
+var vendor_id = $(&#39;#clone_vendor_id&#39;).val();
+var specs =  $(&#39;#clone_specs&#39;).val();
+var vendor_quote_prices = $(&#39;#clone_vendor_quote_prices&#39;).val();
+var notes = $(&#39;#clone_notes&#39;).val();
+var dynamic_fields = {};
+var field_names = $(&#39;input[name=clone_order_field_name]&#39;);
+var field_values = $(&#39;input[name=clone_order_field_value]&#39;);
+for(var i = field_names.length - 1; i &gt;= 0; i--) {
+    dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
+}
+if (product_name != &#39;&#39; &amp;&amp; (category_id != &#39;&#39; || item_category_id != &#39;&#39;)) {
+    $.ajax({
+        method: &quot;POST&quot;,
+        url: &quot;/api/simple/products/create_item&quot;,
+        data: {product_name: product_name, category_id: category_id, item_category_id: item_category_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes, dynamic_fields: dynamic_fields, vendor_id: vendor_id}
+    }).done(function( data ) {
+        $(&#39;#clone_product_id&#39;).val(&#39;&#39;);
+        $(&#39;#clone_product_name&#39;).val(&#39;&#39;);
+        $(&#39;#clone_category_id&#39;).val(&#39;&#39;);
+        $(&#39;#clone_item_category_id&#39;).val(&#39;&#39;);
+        $(&#39;#clone_vendor_id&#39;).val(&#39;&#39;);
+        $(&#39;#clone_specs&#39;).val(&#39;&#39;)
+        $(&#39;#clone_vendor_quote_prices&#39;).val(&#39;&#39;)
+        $(&#39;#clone_notes&#39;).val(&#39;&#39;)
+        $(&#39;#clone_product_attributes&#39;).html(&#39;&#39;);
+        $(&#39;.clone_categories&#39;).selectpicker(&#39;refresh&#39;);
+        $(&#39;.clone_products&#39;).selectpicker(&#39;refresh&#39;);
+        if (product_list.length === 0) {
+            $(&#39;.stitched&#39;).html(&#39;&#39;)
+        }
+        product_list.push(data.id)
+        order_entries = $(&#39;.stitched&#39;).html();
+        $(&#39;.stitched&#39;).html(order_entries + &quot;&lt;div class=&#39;col-md-1 nopadding text-align-right row-button-&quot; + data.id + &quot;&#39;&gt;&lt;div class=&#39;form-group&#39;&gt; &lt;button class=&#39;btn btn-outline-danger&#39; type=&#39;button&#39; onclick=&#39;removeOrderEntry(&quot; + data.id + &quot;);&#39;&gt; &lt;span class=&#39;fa fa-trash-o&#39; aria-hidden=&#39;true&#39;&gt;&lt;/span&gt; &lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#39;col-md-11 nopadding text-align-left row-name-&quot; + data.id + &quot;&#39;&gt;&lt;div class=&#39;form-group&#39;&gt;&quot; + data.name + &quot;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#39;clear&#39;&gt;&lt;/div&gt;&quot;)
+    });
+}
+</code></pre>
+
+<p>} function submitNewProduct() {</p>
+
+<pre><code>var product_name = $(&#39;#product_name&#39;).val();
+var category_id = $(&#39;#category_id&#39;).val();
+var item_category_id = $(&#39;#item_category_id&#39;).val();
+var vendor_id = $(&#39;#vendor_id&#39;).val();
+var specs =  $(&#39;#specs&#39;).val();
+var vendor_quote_prices = $(&#39;#vendor_quote_prices&#39;).val();
+var notes = $(&#39;#notes&#39;).val();
+var dynamic_fields = {};
+var field_names = $(&#39;input[name=order_field_name]&#39;);
+var field_values = $(&#39;input[name=order_field_value]&#39;);
+for(var i = field_names.length - 1; i &gt;= 0; i--) {
+    dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
+}
+if (product_name != &#39;&#39; &amp;&amp; (category_id != &#39;&#39; || item_category_id != &#39;&#39;)) {
+    $.ajax({
+        method: &quot;POST&quot;,
+        url: &quot;/api/simple/products/create_item&quot;,
+        data: {product_name: product_name, category_id: category_id, item_category_id: item_category_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes, dynamic_fields: dynamic_fields, vendor_id: vendor_id}
+    }).done(function( data ) {
+        $(&#39;#product_name&#39;).val(&#39;&#39;);
+        $(&#39;#category_id&#39;).val(&#39;&#39;);
+        $(&#39;#item_category_id&#39;).val(&#39;&#39;);
+        $(&#39;#vendor_id&#39;).val(&#39;&#39;);
+        $(&#39;#specs&#39;).val(&#39;&#39;);
+        $(&#39;#vendor_quote_prices&#39;).val(&#39;&#39;);
+        $(&#39;.default_attributes&#39;).val(&#39;&#39;);
+        $(&#39;#notes&#39;).val(&#39;&#39;)
+        $(&#39;#product_attributes&#39;).html(&#39;&#39;);
+        $(&#39;.categories&#39;).selectpicker(&#39;refresh&#39;);
+        if (product_list.length === 0) {
+            $(&#39;.stitched&#39;).html(&#39;&#39;)
+        }
+        product_list.push(data.id)
+        order_entries = $(&#39;.stitched&#39;).html();
+        $(&#39;.stitched&#39;).html(order_entries + &quot;&lt;div class=&#39;col-md-1 nopadding text-align-right row-button-&quot; + data.id + &quot;&#39;&gt;&lt;div class=&#39;form-group&#39;&gt; &lt;button class=&#39;btn btn-outline-danger&#39; type=&#39;button&#39; onclick=&#39;removeOrderEntry(&quot; + data.id + &quot;);&#39;&gt; &lt;span class=&#39;fa fa-trash-o&#39; aria-hidden=&#39;true&#39;&gt;&lt;/span&gt; &lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#39;col-md-11 nopadding text-align-left row-name-&quot; + data.id + &quot;&#39;&gt;&lt;div class=&#39;form-group&#39;&gt;&quot; + data.name + &quot;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#39;clear&#39;&gt;&lt;/div&gt;&quot;)
+    });
+}
+</code></pre>
+
+<p>}</p>
+
+<p>function addExistingItem() {</p>
+
+<pre><code>var id = $(&#39;#product_id&#39;).val()
+$.ajax({
+    method: &quot;GET&quot;,
+    url: &quot;/api/simple/products/&quot;+id
+}).done(function( data ) {
+    $(&#39;#product_id&#39;).val(&#39;&#39;);
+    $(&#39;.products&#39;).selectpicker(&#39;refresh&#39;);
+    if (product_list.length === 0 &amp;&amp; entry_list.length === 0) {
+        $(&#39;.stitched&#39;).html(&#39;&#39;)
+    }
+    product_list.push(data.id)
+    order_entries = $(&#39;.stitched&#39;).html();
+    $(&#39;.stitched&#39;).html(order_entries + &quot;&lt;div class=&#39;col-md-1 nopadding text-align-right row-button-&quot; + data.id + &quot;&#39;&gt;&lt;div class=&#39;form-group&#39;&gt; &lt;button class=&#39;btn btn-outline-danger&#39; type=&#39;button&#39; onclick=&#39;removeOrderEntry(&quot; + data.id + &quot;);&#39;&gt; &lt;span class=&#39;fa fa-trash-o&#39; aria-hidden=&#39;true&#39;&gt;&lt;/span&gt; &lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#39;col-md-11 nopadding text-align-left row-name-&quot; + data.id + &quot;&#39;&gt;&lt;div class=&#39;form-group&#39;&gt;&quot; + data.name + &quot;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#39;clear&#39;&gt;&lt;/div&gt;&quot;)
+});
+</code></pre>
+
+<p>}</p>
+
+<p>function removeOrderEntry(id) {</p>
+
+<pre><code>if (product_list.includes(id)) {
+    for(var i = product_list.length - 1; i &gt;= 0; i--) {
+        if(product_list[i] === id) {
+            product_list.splice(i, 1);
+        }
+    }
+    $(&#39;.row-button-&#39;+id).remove();
+    $(&#39;.row-name-&#39;+id).remove();
+    if (product_list.length === 0 &amp;&amp; entry_list.length === 0) {
+        $(&#39;.stitched&#39;).html(&quot;&lt;div class=&#39;col&#39;&gt;Empty&lt;/div&gt;&quot;)
+    }
+}
+</code></pre>
+
+<p>} function removeOrderEntryWithId(id, entry_id) {</p>
+
+<pre><code>if (entry_list.includes(entry_id)) {
+    for(var i = entry_list.length - 1; i &gt;= 0; i--) {
+        if(entry_list[i] === entry_id) {
+            entry_list.splice(i, 1);
+        }
+    }
+    console.log(entry_list);
+    $(&#39;.row-button-&#39;+id).remove();
+    $(&#39;.row-name-&#39;+id).remove();
+    if (product_list.length === 0 &amp;&amp; entry_list.length === 0) {
+        $(&#39;.stitched&#39;).html(&quot;&lt;div class=&#39;col&#39;&gt;Empty&lt;/div&gt;&quot;)
+    }
+}
+</code></pre>
+
+<p>}</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

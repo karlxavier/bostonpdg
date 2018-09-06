@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>nestable.js</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            nestable.js
+        </h1>
+        <ul class="files">
+            
+            <li>
+                app/assets/javascripts/nestable.js
+                
+            </li>
+            <li>Last modified: 2018-07-11 23:28:49 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<pre><code>!
+ Nestable jQuery Plugin - Copyright (c) 2012 David Bushell - http://dbushell.com/
+ Dual-licensed under the BSD or MIT licenses
+</code></pre>
+
+<p>;(function($, window, document, undefined) {</p>
+
+<pre><code>var hasTouch = &#39;ontouchstart&#39; in document;
+
+/**
+   Detect CSS pointer-events property
+   events are normally disabled on the dragging element to avoid conflicts
+   https://github.com/ausi/Feature-detection-technique-for-pointer-events/blob/master/modernizr-pointerevents.js
+  /
+var hasPointerEvents = (function()
+{
+    var el    = document.createElement(&#39;div&#39;),
+        docEl = document.documentElement;
+    if (!(&#39;pointerEvents&#39; in el.style)) {
+        return false;
+    }
+    el.style.pointerEvents = &#39;auto&#39;;
+    el.style.pointerEvents = &#39;x&#39;;
+    docEl.appendChild(el);
+    var supports = window.getComputedStyle &amp;&amp; window.getComputedStyle(el, &#39;&#39;).pointerEvents === &#39;auto&#39;;
+    docEl.removeChild(el);
+    return !!supports;
+})();
+
+var defaults = {
+    listNodeName    : &#39;ol&#39;,
+    itemNodeName    : &#39;li&#39;,
+    rootClass       : &#39;dd&#39;,
+    listClass       : &#39;dd-list&#39;,
+    itemClass       : &#39;dd-item&#39;,
+    dragClass       : &#39;dd-dragel&#39;,
+    handleClass     : &#39;dd-handle&#39;,
+    collapsedClass  : &#39;dd-collapsed&#39;,
+    placeClass      : &#39;dd-placeholder&#39;,
+    noDragClass     : &#39;dd-nodrag&#39;,
+    emptyClass      : &#39;dd-empty&#39;,
+    expandBtnHTML   : &#39;&lt;button data-action=&quot;expand&quot; type=&quot;button&quot;&gt;Expand&lt;/button&gt;&#39;,
+    collapseBtnHTML : &#39;&lt;button data-action=&quot;collapse&quot; type=&quot;button&quot;&gt;Collapse&lt;/button&gt;&#39;,
+    group           : 0,
+    maxDepth        : 5,
+    threshold       : 20
+};
+
+function Plugin(element, options)
+{
+    this.w  = $(document);
+    this.el = $(element);
+    this.options = $.extend({}, defaults, options);
+    this.init();
+}
+
+Plugin.prototype = {
+
+    init: function()
+    {
+        var list = this;
+
+        list.reset();
+
+        list.el.data(&#39;nestable-group&#39;, this.options.group);
+
+        list.placeEl = $(&#39;&lt;div class=&quot;&#39; + list.options.placeClass + &#39;&quot;/&gt;&#39;);
+
+        $.each(this.el.find(list.options.itemNodeName), function(k, el) {
+            list.setParent($(el));
+        });
+
+        list.el.on(&#39;click&#39;, &#39;button&#39;, function(e) {
+            if (list.dragEl) {
+                return;
+            }
+            var target = $(e.currentTarget),
+                action = target.data(&#39;action&#39;),
+                item   = target.parent(list.options.itemNodeName);
+            if (action === &#39;collapse&#39;) {
+                list.collapseItem(item);
+            }
+            if (action === &#39;expand&#39;) {
+                list.expandItem(item);
+            }
+        });
+
+        var onStartEvent = function(e)
+        {
+            var handle = $(e.target);
+            if (!handle.hasClass(list.options.handleClass)) {
+                if (handle.closest(&#39;.&#39; + list.options.noDragClass).length) {
+                    return;
+                }
+                handle = handle.closest(&#39;.&#39; + list.options.handleClass);
+            }
+
+            if (!handle.length || list.dragEl) {
+                return;
+            }
+
+            list.isTouch = /^touch/.test(e.type);
+            if (list.isTouch &amp;&amp; e.touches.length !== 1) {
+                return;
+            }
+
+            e.preventDefault();
+            list.dragStart(e.touches ? e.touches[0] : e);
+        };
+
+        var onMoveEvent = function(e)
+        {
+            if (list.dragEl) {
+                e.preventDefault();
+                list.dragMove(e.touches ? e.touches[0] : e);
+            }
+        };
+
+        var onEndEvent = function(e)
+        {
+            if (list.dragEl) {
+                e.preventDefault();
+                list.dragStop(e.touches ? e.touches[0] : e);
+            }
+        };
+
+        if (hasTouch) {
+            list.el[0].addEventListener(&#39;touchstart&#39;, onStartEvent, false);
+            window.addEventListener(&#39;touchmove&#39;, onMoveEvent, false);
+            window.addEventListener(&#39;touchend&#39;, onEndEvent, false);
+            window.addEventListener(&#39;touchcancel&#39;, onEndEvent, false);
+        }
+
+        list.el.on(&#39;mousedown&#39;, onStartEvent);
+        list.w.on(&#39;mousemove&#39;, onMoveEvent);
+        list.w.on(&#39;mouseup&#39;, onEndEvent);
+
+    },
+
+    serialize: function()
+    {
+        var data,
+            depth = 0,
+            list  = this;
+        step  = function(level, depth)
+        {
+            var array = [ ],
+                items = level.children(list.options.itemNodeName);
+            items.each(function()
+            {
+                var li   = $(this),
+                    item = $.extend({}, li.data()),
+                    sub  = li.children(list.options.listNodeName);
+                if (sub.length) {
+                    item.children = step(sub, depth + 1);
+                }
+                array.push(item);
+            });
+            return array;
+        };
+        data = step(list.el.find(list.options.listNodeName).first(), depth);
+        return data;
+    },
+
+    serialise: function()
+    {
+        return this.serialize();
+    },
+
+    reset: function()
+    {
+        this.mouse = {
+            offsetX   : 0,
+            offsetY   : 0,
+            startX    : 0,
+            startY    : 0,
+            lastX     : 0,
+            lastY     : 0,
+            nowX      : 0,
+            nowY      : 0,
+            distX     : 0,
+            distY     : 0,
+            dirAx     : 0,
+            dirX      : 0,
+            dirY      : 0,
+            lastDirX  : 0,
+            lastDirY  : 0,
+            distAxX   : 0,
+            distAxY   : 0
+        };
+        this.isTouch    = false;
+        this.moving     = false;
+        this.dragEl     = null;
+        this.dragRootEl = null;
+        this.dragDepth  = 0;
+        this.hasNewRoot = false;
+        this.pointEl    = null;
+    },
+
+    expandItem: function(li)
+    {
+        li.removeClass(this.options.collapsedClass);
+        li.children(&#39;[data-action=&quot;expand&quot;]&#39;).hide();
+        li.children(&#39;[data-action=&quot;collapse&quot;]&#39;).show();
+        li.children(this.options.listNodeName).show();
+    },
+
+    collapseItem: function(li)
+    {
+        var lists = li.children(this.options.listNodeName);
+        if (lists.length) {
+            li.addClass(this.options.collapsedClass);
+            li.children(&#39;[data-action=&quot;collapse&quot;]&#39;).hide();
+            li.children(&#39;[data-action=&quot;expand&quot;]&#39;).show();
+            li.children(this.options.listNodeName).hide();
+        }
+    },
+
+    expandAll: function()
+    {
+        var list = this;
+        list.el.find(list.options.itemNodeName).each(function() {
+            list.expandItem($(this));
+        });
+    },
+
+    collapseAll: function()
+    {
+        var list = this;
+        list.el.find(list.options.itemNodeName).each(function() {
+            list.collapseItem($(this));
+        });
+    },
+
+    setParent: function(li)
+    {
+        if (li.children(this.options.listNodeName).length) {
+            li.prepend($(this.options.expandBtnHTML));
+            li.prepend($(this.options.collapseBtnHTML));
+        }
+        li.children(&#39;[data-action=&quot;expand&quot;]&#39;).hide();
+    },
+
+    unsetParent: function(li)
+    {
+        li.removeClass(this.options.collapsedClass);
+        li.children(&#39;[data-action]&#39;).remove();
+        li.children(this.options.listNodeName).remove();
+    },
+
+    dragStart: function(e)
+    {
+        var mouse    = this.mouse,
+            target   = $(e.target),
+            dragItem = target.closest(this.options.itemNodeName);
+
+        this.placeEl.css(&#39;height&#39;, dragItem.height());
+
+        mouse.offsetX = e.offsetX !== undefined ? e.offsetX : e.pageX - target.offset().left;
+        mouse.offsetY = e.offsetY !== undefined ? e.offsetY : e.pageY - target.offset().top;
+        mouse.startX = mouse.lastX = e.pageX;
+        mouse.startY = mouse.lastY = e.pageY;
+
+        this.dragRootEl = this.el;
+
+        this.dragEl = $(document.createElement(this.options.listNodeName)).addClass(this.options.listClass + &#39; &#39; + this.options.dragClass);
+        this.dragEl.css(&#39;width&#39;, dragItem.width());
+
+        dragItem.after(this.placeEl);
+        dragItem[0].parentNode.removeChild(dragItem[0]);
+        dragItem.appendTo(this.dragEl);
+
+        $(document.body).append(this.dragEl);
+        this.dragEl.css({
+            &#39;left&#39; : e.pageX - mouse.offsetX,
+            &#39;top&#39;  : e.pageY - mouse.offsetY
+        });
+        // total depth of dragging item
+        var i, depth,
+            items = this.dragEl.find(this.options.itemNodeName);
+        for (i = 0; i &lt; items.length; i++) {
+            depth = $(items[i]).parents(this.options.listNodeName).length;
+            if (depth &gt; this.dragDepth) {
+                this.dragDepth = depth;
+            }
+        }
+    },
+
+    dragStop: function(e)
+    {
+        var el = this.dragEl.children(this.options.itemNodeName).first();
+        el[0].parentNode.removeChild(el[0]);
+        this.placeEl.replaceWith(el);
+
+        this.dragEl.remove();
+        this.el.trigger(&#39;change&#39;);
+        if (this.hasNewRoot) {
+            this.dragRootEl.trigger(&#39;change&#39;);
+        }
+        this.reset();
+    },
+
+    dragMove: function(e)
+    {
+        var list, parent, prev, next, depth,
+            opt   = this.options,
+            mouse = this.mouse;
+
+        this.dragEl.css({
+            &#39;left&#39; : e.pageX - mouse.offsetX,
+            &#39;top&#39;  : e.pageY - mouse.offsetY
+        });
+
+        // mouse position last events
+        mouse.lastX = mouse.nowX;
+        mouse.lastY = mouse.nowY;
+        // mouse position this events
+        mouse.nowX  = e.pageX;
+        mouse.nowY  = e.pageY;
+        // distance mouse moved between events
+        mouse.distX = mouse.nowX - mouse.lastX;
+        mouse.distY = mouse.nowY - mouse.lastY;
+        // direction mouse was moving
+        mouse.lastDirX = mouse.dirX;
+        mouse.lastDirY = mouse.dirY;
+        // direction mouse is now moving (on both axis)
+        mouse.dirX = mouse.distX === 0 ? 0 : mouse.distX &gt; 0 ? 1 : -1;
+        mouse.dirY = mouse.distY === 0 ? 0 : mouse.distY &gt; 0 ? 1 : -1;
+        // axis mouse is now moving on
+        var newAx   = Math.abs(mouse.distX) &gt; Math.abs(mouse.distY) ? 1 : 0;
+
+        // do nothing on first move
+        if (!mouse.moving) {
+            mouse.dirAx  = newAx;
+            mouse.moving = true;
+            return;
+        }
+
+        // calc distance moved on this axis (and direction)
+        if (mouse.dirAx !== newAx) {
+            mouse.distAxX = 0;
+            mouse.distAxY = 0;
+        } else {
+            mouse.distAxX += Math.abs(mouse.distX);
+            if (mouse.dirX !== 0 &amp;&amp; mouse.dirX !== mouse.lastDirX) {
+                mouse.distAxX = 0;
+            }
+            mouse.distAxY += Math.abs(mouse.distY);
+            if (mouse.dirY !== 0 &amp;&amp; mouse.dirY !== mouse.lastDirY) {
+                mouse.distAxY = 0;
+            }
+        }
+        mouse.dirAx = newAx;
+
+        /**
+           move horizontal
+          /
+        if (mouse.dirAx &amp;&amp; mouse.distAxX &gt;= opt.threshold) {
+            // reset move distance on x-axis for new phase
+            mouse.distAxX = 0;
+            prev = this.placeEl.prev(opt.itemNodeName);
+            // increase horizontal level if previous sibling exists and is not collapsed
+            if (mouse.distX &gt; 0 &amp;&amp; prev.length &amp;&amp; !prev.hasClass(opt.collapsedClass)) {
+                // cannot increase level when item above is collapsed
+                list = prev.find(opt.listNodeName).last();
+                // check if depth limit has reached
+                depth = this.placeEl.parents(opt.listNodeName).length;
+                if (depth + this.dragDepth &lt;= opt.maxDepth) {
+                    // create new sub-level if one doesn&#39;t exist
+                    if (!list.length) {
+                        list = $(&#39;&lt;&#39; + opt.listNodeName + &#39;/&gt;&#39;).addClass(opt.listClass);
+                        list.append(this.placeEl);
+                        prev.append(list);
+                        this.setParent(prev);
+                    } else {
+                        // else append to next level up
+                        list = prev.children(opt.listNodeName).last();
+                        list.append(this.placeEl);
+                    }
+                }
+            }
+            // decrease horizontal level
+            if (mouse.distX &lt; 0) {
+                // we can&#39;t decrease a level if an item preceeds the current one
+                next = this.placeEl.next(opt.itemNodeName);
+                if (!next.length) {
+                    parent = this.placeEl.parent();
+                    this.placeEl.closest(opt.itemNodeName).after(this.placeEl);
+                    if (!parent.children().length) {
+                        this.unsetParent(parent.parent());
+                    }
+                }
+            }
+        }
+
+        var isEmpty = false;
+
+        // find list item under cursor
+        if (!hasPointerEvents) {
+            this.dragEl[0].style.visibility = &#39;hidden&#39;;
+        }
+        this.pointEl = $(document.elementFromPoint(e.pageX - document.body.scrollLeft, e.pageY - (window.pageYOffset || document.documentElement.scrollTop)));
+        if (!hasPointerEvents) {
+            this.dragEl[0].style.visibility = &#39;visible&#39;;
+        }
+        if (this.pointEl.hasClass(opt.handleClass)) {
+            this.pointEl = this.pointEl.parent(opt.itemNodeName);
+        }
+        if (this.pointEl.hasClass(opt.emptyClass)) {
+            isEmpty = true;
+        }
+        else if (!this.pointEl.length || !this.pointEl.hasClass(opt.itemClass)) {
+            return;
+        }
+
+        // find parent list of item under cursor
+        var pointElRoot = this.pointEl.closest(&#39;.&#39; + opt.rootClass),
+            isNewRoot   = this.dragRootEl.data(&#39;nestable-id&#39;) !== pointElRoot.data(&#39;nestable-id&#39;);
+
+        /**
+           move vertical
+          /
+        if (!mouse.dirAx || isNewRoot || isEmpty) {
+            // check if groups match if dragging over new root
+            if (isNewRoot &amp;&amp; opt.group !== pointElRoot.data(&#39;nestable-group&#39;)) {
+                return;
+            }
+            // check depth limit
+            depth = this.dragDepth - 1 + this.pointEl.parents(opt.listNodeName).length;
+            if (depth &gt; opt.maxDepth) {
+                return;
+            }
+            var before = e.pageY &lt; (this.pointEl.offset().top + this.pointEl.height() / 2);
+            parent = this.placeEl.parent();
+            // if empty create new list to replace empty placeholder
+            if (isEmpty) {
+                list = $(document.createElement(opt.listNodeName)).addClass(opt.listClass);
+                list.append(this.placeEl);
+                this.pointEl.replaceWith(list);
+            }
+            else if (before) {
+                this.pointEl.before(this.placeEl);
+            }
+            else {
+                this.pointEl.after(this.placeEl);
+            }
+            if (!parent.children().length) {
+                this.unsetParent(parent.parent());
+            }
+            if (!this.dragRootEl.find(opt.itemNodeName).length) {
+                this.dragRootEl.append(&#39;&lt;div class=&quot;&#39; + opt.emptyClass + &#39;&quot;/&gt;&#39;);
+            }
+            // parent root list has changed
+            if (isNewRoot) {
+                this.dragRootEl = pointElRoot;
+                this.hasNewRoot = this.el[0] !== this.dragRootEl[0];
+            }
+        }
+    }
+
+};
+
+$.fn.nestable = function(params)
+{
+    var lists  = this,
+        retval = this;
+
+    lists.each(function()
+    {
+        var plugin = $(this).data(&quot;nestable&quot;);
+
+        if (!plugin) {
+            $(this).data(&quot;nestable&quot;, new Plugin(this, params));
+            $(this).data(&quot;nestable-id&quot;, new Date().getTime());
+        } else {
+            if (typeof params === &#39;string&#39; &amp;&amp; typeof plugin[params] === &#39;function&#39;) {
+                retval = plugin[params]();
+            }
+        }
+    });
+
+    return retval || lists;
+};
+</code></pre>
+
+<p>})(window.jQuery || window.Zepto, window, document);</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

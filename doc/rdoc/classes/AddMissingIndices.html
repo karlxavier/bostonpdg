@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AddMissingIndices</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="AddMissingIndices">
+
+  
+    
+    <meta name="description" content="This migration comes from mailboxer_engine (originally 20131206080417).">
+    <meta property="og:description" content="This migration comes from mailboxer_engine (originally 20131206080417).">
+  
+
+    <meta name="keywords" content="AddMissingIndices class">
+  
+    <meta name="keywords" content="change">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            AddMissingIndices
+            
+                <span class="parent">&lt;
+                    
+                    ActiveRecord::Migration[4.2]
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/db/migrate/20180410214424_add_missing_indices_mailboxer_engine_rb.html">db/migrate/20180410214424_add_missing_indices.mailboxer_engine.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>This migration comes from mailboxer_engine (originally 20131206080417)</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-change">change</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-change">
+            
+              <b>change</b>()
+            
+            <a href="../classes/AddMissingIndices.html#method-i-change" name="method-i-change" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-change_source')" id="l_method-i-change_source">show</a>
+                
+              </p>
+              <div id="method-i-change_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File db/migrate/20180410214424_add_missing_indices.mailboxer_engine.rb, line 3</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">change</span>
+  <span class="ruby-comment"># We&#39;ll explicitly specify its name, as the auto-generated name is too long and exceeds 63</span>
+  <span class="ruby-comment"># characters limitation.</span>
+  <span class="ruby-identifier">add_index</span> <span class="ruby-value">:mailboxer_conversation_opt_outs</span>, [<span class="ruby-value">:unsubscriber_id</span>, <span class="ruby-value">:unsubscriber_type</span>],
+    <span class="ruby-value">name:</span> <span class="ruby-string">&#39;index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type&#39;</span>
+  <span class="ruby-identifier">add_index</span> <span class="ruby-value">:mailboxer_conversation_opt_outs</span>, <span class="ruby-value">:conversation_id</span>
+
+  <span class="ruby-identifier">add_index</span> <span class="ruby-value">:mailboxer_notifications</span>, <span class="ruby-value">:type</span>
+  <span class="ruby-identifier">add_index</span> <span class="ruby-value">:mailboxer_notifications</span>, [<span class="ruby-value">:sender_id</span>, <span class="ruby-value">:sender_type</span>]
+
+  <span class="ruby-comment"># We&#39;ll explicitly specify its name, as the auto-generated name is too long and exceeds 63</span>
+  <span class="ruby-comment"># characters limitation.</span>
+  <span class="ruby-identifier">add_index</span> <span class="ruby-value">:mailboxer_notifications</span>, [<span class="ruby-value">:notified_object_id</span>, <span class="ruby-value">:notified_object_type</span>],
+    <span class="ruby-value">name:</span> <span class="ruby-string">&#39;index_mailboxer_notifications_on_notified_object_id_and_type&#39;</span>
+
+  <span class="ruby-identifier">add_index</span> <span class="ruby-value">:mailboxer_receipts</span>, [<span class="ruby-value">:receiver_id</span>, <span class="ruby-value">:receiver_type</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ladda-spin.js</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            ladda-spin.js
+        </h1>
+        <ul class="files">
+            
+            <li>
+                app/assets/javascripts/ladda-spin.js
+                
+            </li>
+            <li>Last modified: 2018-06-14 19:00:47 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>!function(a,b){“object”==typeof
+exports?module.exports=b():“function”==typeof
+define&amp;&amp;define.amd?define(b):a.Spinner=b()}(this,function(){“use
+strict”;function a(a,b){var c,d=document.createElement(a||“div”);for(c in
+<a href="c">b)d</a>=<a href="c">b</a>;return d}function b(a){for(var <a
+href="b">b=1,c=arguments.length;c>b;b++)a.appendChild(arguments</a>);return
+a}function c(a,b,c,d){var <a
+href=""opacity",b,~~(100*a),c,d">e=</a>.join(“-”),f=.01+c/d*100,g=Math.max(1-(1-a)/b*(100-f),a),h=j.substring(0,j.indexOf(“Animation”)).toLowerCase(),i=h&amp;&amp;“-”<code>h</code>“-”||“”;return
+<a href="e">l</a>||(m.insertRule(“@”<code>i</code>“keyframes
+”<code>e</code>“{0%{opacity:”<code>g</code>“}”<code>f</code>“%{opacity:”<code>a</code>“}”+(f+.01)+“%{opacity:1}”+(f+b)%100+“%{opacity:”<code>a</code>“}100%{opacity:”<code>g</code>“}}”,<a
+href="e">m.cssRules.length),l</a>=1),e}function d(a,b){var <a
+href="d">c,d,e=a.style;for(b=b.charAt(0).toUpperCase()+b.slice(1),d=0;d<k.length;d++)if(c=k</a>+b,void
+<a href="c">0!==e</a>)return c;return void <a href="b">0!==e</a>?b:void
+0}function e(a,b){for(var c in <a href="d(a,c)||c">b)a.style</a>=<a
+href="c">b</a>;return a}function f(a){for(var
+b=1;b&lt;arguments.length;b++){var <a href="b">c=arguments</a>;for(var d in
+c)void <a href="d">0===a</a>&amp;&amp;(<a href="d">a</a>=<a
+href="d">c</a>)}return a}function g(a,b){return“string”==typeof <a
+href="b%a.length">a?a:a</a>}function
+h(a){this.opts=f(a||{},h.defaults,n)}function i(){function c(b,c){return
+a(“&lt;”<code>b</code>&#39; xmlns=“urn:schemas-microsoft.com:vml”
+class=“spin-vml”&gt;&#39;,c)}m.addRule(“.spin-vml”,“behavior:url(#default#VML)”),h.prototype.lines=function(a,d){function
+f(){return e(c(“group”,{coordsize:k+“ ”+k,coordorigin:-j+“
+”+-j}),{width:k,height:k})}function
+h(a,h,i){b(m,b(e(f(),{rotation:360/d.lines*a+“deg”,left:~~h}),b(e(c(“roundrect”,{arcsize:d.corners}),{width:j,height:d.width,left:d.radius,top:-d.width&gt;&gt;1,filter:i}),c(“fill”,{color:g(d.color,a),opacity:d.opacity}),c(“stroke”,{opacity:0}))))}var
+i,j=d.length+d.width,k=2*j,l=2*-(d.width+d.length)+“px”,m=e(f(),{position:“absolute”,top:l,left:l});if(d.shadow)for(i=1;i&lt;=d.lines;i++)h(i,-2,“progid:DXImageTransform.Microsoft.Blur(pixelradius=2,makeshadow=1,shadowopacity=.3)”);for(i=1;i&lt;=d.lines;i++)h(i);return
+b(a,m)},h.prototype.opacity=function(a,b,c,d){var <a
+href="b+d">e=a.firstChild;d=d.shadow&&d.lines||0,e&&b+d<e.childNodes.length&&(e=e.childNodes</a>,e=e&amp;&amp;e.firstChild,e=e&amp;&amp;e.firstChild,e&amp;&amp;(e.opacity=c))}}var
+<a href=""webkit","Moz","ms","O"">j,k=</a>,l={},m=function(){var
+c=a(“style”,{type:“text/css”});return <a
+href="0">b(document.getElementsByTagName(“head”)</a>,c),c.sheet||c.styleSheet}(),n={lines:12,length:7,width:5,radius:10,rotate:0,corners:1,color:“#000”,direction:1,speed:1,trail:100,opacity:.25,fps:20,zIndex:2e9,className:“spinner”,top:“50%”,left:“50%”,position:“absolute”};h.defaults={},f(h.prototype,{spin:function(b){this.stop();var
+c=this,d=c.opts,f=c.el=e(a(0,{className:d.className}),{position:d.position,width:0,zIndex:d.zIndex});d.radius+d.length+d.width;if(e(f,{left:d.left,top:d.top}),b&amp;&amp;b.insertBefore(f,b.firstChild||null),f.setAttribute(“role”,“progressbar”),c.lines(f,c.opts),!j){var
+g,h=0,i=(d.lines-1)*(1-d.direction)/2,k=d.fps,l=k/d.speed,m=(1-d.opacity)/(l*d.trail/100),n=l/d.lines;!function
+o(){h++;for(var
+a=0;a&lt;d.lines;a++)g=Math.max(1-(h+(d.lines-a)*n)%l*m,d.opacity),c.opacity(f,a*d.direction+i,g,d);c.timeout=c.el&amp;&amp;setTimeout(o,~~(1e3/k))}()}return
+c},stop:function(){var a=this.el;return
+a&amp;&amp;(clearTimeout(this.timeout),a.parentNode&amp;&amp;a.parentNode.removeChild(a),this.el=void
+0),this},lines:function(d,f){function h(b,c){return
+e(a(),{position:“absolute”,width:f.length+f.width+“px”,height:f.width+“px”,background:b,boxShadow:c,transformOrigin:“left”,transform:“rotate(”+~~(360/f.lines*k+f.rotate)+“deg)
+translate(”<code>f.radius</code>“px,0)”,borderRadius:(f.corners*f.width&gt;&gt;1)+“px”})}for(var
+i,k=0,l=(f.lines-1)*(1-f.direction)/2;k&lt;f.lines;k++)i=e(a(),{position:“absolute”,top:1+~(f.width/2)+“px”,transform:f.hwaccel?“translate3d(0,0,0)”:“”,opacity:f.opacity,animation:j&amp;&amp;c(f.opacity,f.trail,l+k*f.direction,f.lines)+“
+”<code>1/f.speed</code>“s linear
+infinite”}),f.shadow&amp;&amp;b(i,e(h(“#000”,“0 0 4px
+#000”),{top:“2px”})),b(d,b(i,h(g(f.color,k),“0 0 1px
+rgba(0,0,0,.1)”)));return d},opacity:function(a,b,c){<a
+href="b">b<a.childNodes.length&&(a.childNodes</a>.style.opacity=c)}});var
+o=e(a(“group”),{behavior:“url(#default#VML)”});return!d(o,“transform”)&amp;&amp;o.adj?i():j=d(o,“animation”),h});</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

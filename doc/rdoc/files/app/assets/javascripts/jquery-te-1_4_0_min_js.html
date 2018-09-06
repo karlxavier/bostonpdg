@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>jquery-te-1.4.0.min.js</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            jquery-te-1.4.0.min.js
+        </h1>
+        <ul class="files">
+            
+            <li>
+                app/assets/javascripts/jquery-te-1.4.0.min.js
+                
+            </li>
+            <li>Last modified: 2018-08-23 03:52:10 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<pre><code>!
+
+ jQuery TE 1.4.0 , http://jqueryte.com/
+ Copyright (C) 2013, Fatih Koca (fattih@fattih.com), (http://jqueryte.com/about)
+
+ jQuery TE is provided under the MIT LICENSE.
+</code></pre>
+
+<p>(function(e){e.fn.jqte=function(t){function l(e,t,n,r,i){var
+s=f.length+1;return
+f.push({name:e,cls:s,command:t,key:n,tag:r,emphasis:i})}var n=[{title:“Text
+Format”},{title:“Font
+Size”},{title:“Color”},{title:“Bold”,hotkey:“B”},{title:“Italic”,hotkey:“I”},{title:“Underline”,hotkey:“U”},{title:“Ordered
+List”,hotkey:“.”},{title:“Unordered
+List”,hotkey:“,”},{title:“Subscript”,hotkey:“down
+arrow”},{title:“Superscript”,hotkey:“up
+arrow”},{title:“Outdent”,hotkey:“left arrow”},{title:“Indent”,hotkey:“right
+arrow”},{title:“Justify Left”},{title:“Justify Center”},{title:“Justify
+Right”},{title:“Strike Through”,hotkey:“K”},{title:“Add
+Link”,hotkey:“L”},{title:“Remove Link”},{title:“Cleaner
+Style”,hotkey:“Delete”},{title:“Horizontal
+Rule”,hotkey:“H”},{title:“Source”}];var <a
+href=""p","Normal"">r=[</a>,[“h1”,“Header 1”],[“h2”,“Header
+2”],[“h3”,“Header 3”],[“h4”,“Header 4”],[“h5”,“Header 5”],[“h6”,“Header <a
+href=""pre","Preformatted"">6”],</a>];var <a
+href=""10","12","16","18","20","24","28"">i=</a>;var <a
+href=""0,0,0","68,68,68","102,102,102","153,153,153","204,204,204","238,238,238","243,243,243","255,255,255",null,"255,0,0","255,153,0","255,255,0","0,255,0","0,255,255","0,0,255","153,0,255","255,0,255",null,"244,204,204","252,229,205","255,242,204","217,234,211","208,224,227","207,226,243","217,210,233","234,209,220","234,153,153","249,203,156","255,229,153","182,215,168","162,196,201","159,197,232","180,167,214","213,166,189","224,102,102","246,178,107","255,217,102","147,196,125","118,165,175","111,168,220","142,124,195","194,123,160","204,0,0","230,145,56","241,194,50","106,168,79","69,129,142","61,133,198","103,78,167","166,77,121","153,0,0","180,95,6","191,144,0","56,118,29","19,79,92","11,83,148","53,28,117","116,27,71","102,0,0","120,63,4","127,96,0","39,78,19","12,52,61","7,55,99","32,18,77","76,17,48"">s=</a>;var
+o=[“Web Address”,“E-mail Address”,“Picture URL”];var
+u=e.extend({status:true,css:“jqte”,title:true,titletext:n,button:“OK”,format:true,formats:r,fsize:true,fsizes:i,funit:“px”,color:true,linktypes:o,b:true,i:true,u:true,ol:true,ul:true,sub:true,sup:true,outdent:true,indent:true,left:true,center:true,right:true,strike:true,<a
+href="../../../../true,unlink:true,remove:true,rule:true,source:true,placeholder:false,br:true,p:true,change:"",focus:"",blur:""},t);e.fn.jqteVal=function(t){e(this).closest("."+u.css).find("."u.css"_editor").html(t)};var">true,unlink:true,remove:true,rule:true,source:true,placeholder:false,br:true,p:true,change:“”,focus:“”,blur:“”},t);e.fn.jqteVal=function(t){e(this).closest(“.”+u.css).find(“.”u.css“_editor”).html(t)};var</a>
+a=navigator.userAgent.toLowerCase();if(/msie
+[1-7]./.test(a))u.title=false;var <a
+href=""b","strong"">f=[];l(“format”,“formats”,“”,“”,false);l(“fsize”,“fSize”,“”,“”,false);l(“color”,“colors”,“”,“”,false);l(“b”,“Bold”,“B”,</a>,<a
+href=""i","em"">true);l(“i”,“Italic”,“I”,</a>,<a
+href=""u"">true);l(“u”,“Underline”,“U”,</a>,<a
+href=""ol"">true);l(“ol”,“insertorderedlist”,“¾”,</a>,<a
+href=""ul"">true);l(“ul”,“insertunorderedlist”,“¼”,</a>,<a
+href=""sub"">true);l(“sub”,“subscript”,“(”,</a>,<a
+href=""sup"">true);l(“sup”,“superscript”,“&”,</a>,<a
+href=""blockquote"">true);l(“outdent”,“outdent”,“%”,</a>,<a
+href=""blockquote"">false);l(“indent”,“indent”,“‘”,</a>,<a
+href=""strike"">true);l(“left”,“justifyLeft”,“”,“”,false);l(“center”,“justifyCenter”,“”,“”,false);l(“right”,“justifyRight”,“”,“”,false);l(“strike”,“strikeThrough”,“K”,</a>,<a
+href=""a"">true);l(“link”,“linkcreator”,“L”,</a>,<a
+href=""a"">true);l(“unlink”,“unlink”,“”,</a>,<a
+href=""hr"">false);l(“remove”,“removeformat”,“.”,“”,false);l(“rule”,“inserthorizontalrule”,“H”,</a>,false);l(“source”,“displaysource”,“”,“”,false);return
+this.each(function(){function B(){if(window.getSelection)return
+window.getSelection();else
+if(document.selection&amp;&amp;document.selection.createRange&amp;&amp;document.selection.type!=“None”)return
+document.selection.createRange()}function j(e,t){var
+n,r=B();if(window.getSelection){if(r.anchorNode&amp;&amp;r.getRangeAt)n=r.getRangeAt(0);if(n){r.removeAllRanges();r.addRange(n)}if(!a.match(/msie/))document.execCommand(“StyleWithCSS”,false,false);document.execCommand(e,false,t)}else
+if(document.selection&amp;&amp;document.selection.createRange&amp;&amp;document.selection.type!=“None”){n=document.selection.createRange();n.execCommand(e,false,t)}q(false,false)}function
+F(t,n,r){if(v.not(“:focus”))v.focus();if(window.getSelection){var
+i=B(),s,o,u;if(i.anchorNode&amp;&amp;i.getRangeAt){s=i.getRangeAt(0);o=document.createElement(t);e(o).attr(n,r);u=s.extractContents();o.appendChild(u);s.insertNode(o);i.removeAllRanges();if(n==“style”)q(e(o),r);else
+q(e(o),false)}}else
+if(document.selection&amp;&amp;document.selection.createRange&amp;&amp;document.selection.type!=“None”){var
+a=document.selection.createRange();var f=a.htmlText;var
+l=“&lt;”<code>t</code>“
+”<code>n</code>&#39;=“&#39;<code>r</code>&#39;”&gt;&#39;<code>f</code>“&lt;/”<code>t</code>“&gt;”;document.selection.createRange().pasteHTML(l)}}function
+q(e,t){var n=I();n=n?n:e;if(n&amp;&amp;t==false){<a
+href="style">if(n.parent().is(“</a>”))<a
+href="style">n.attr(“style”,n.parent().attr(“style”));if(n.is(“</a>”))n.find(“*”).attr(“style”,n.attr(“style”))}else
+<a href="style">if(e&&t&&e.is(“</a>”)){var <a
+href="0">r=t.split(“;”);r=r</a>.<a
+href="0">split(“:”);if(e.is(“[style*=”+r</a>+“]”))<a
+href="0">e.find(“*”).css(r</a>,<a href="1">r</a>);R(e)}}function
+R(t){if(t){var <a href="0">t=t</a>;if(document.body.createTextRange){var
+n=document.body.createTextRange();n.moveToElementText(t);n.select()}else
+if(window.getSelection){var r=window.getSelection();var
+n=document.createRange();if(t!=“undefined”&amp;&amp;t!=null){n.selectNodeContents(t);r.removeAllRanges();r.addRange(n);if(e(t).is(“:empty”)){e(t).append(“ ”);R(e(t))}}}}}function
+U(){if(!p.data(“sourceOpened”)){var t=I();var n=“<a
+href="http://";W(true);if(t){var">”;W(true);if(t){var</a> <a
+href="href">r=t.prop(“tagName”).toLowerCase();if(r==“a”&&t.is(“</a>”)){n=t.attr(“href”);t.attr(S,“”)}else
+F(“a”,S,“”)}else
+y.val(n).focus();g.click(function(t){if(e(t.target).hasClass(u.css+“_linktypetext”)||e(t.target).hasClass(u.css+“_linktypearrow”))X(true)});w.find(“a”).click(function(){var
+t=e(this).attr(u.css+“-linktype”);w.data(“linktype”,t);E.find(“.”<code>u.css</code>“_linktypetext”).html(w.find(“a:eq(”+w.data(“linktype”)+“)”).text());V(n);X()});V(n);y.focus().val(n).bind(“keypress
+keyup”,function(e){if(e.keyCode==13){<a href=""S"">z(h.find(“</a>”));return
+false}});b.click(function(){<a href=""S"">z(h.find(“</a>”))})}else
+W(false)}function
+z(t){y.focus();R(t);t.removeAttr(S);if(w.data(“linktype”)!=“2”)j(“createlink”,y.val());else{j(“insertImage”,y.val());v.find(“img”).each(function(){var
+t=e(this).prev(“a”);var
+n=e(this).next(“a”);if(t.length&gt;0&amp;&amp;t.html()==“”)t.remove();else
+if(n.length&gt;0&amp;&amp;n.html()==“”)n.remove()})}W();v.trigger(“change”)}function
+W(e){<a href=""S"">Q(“</a>:<a href="href">not(</a>)”);<a
+href=""S"">h.find(“</a>[href]”).removeAttr(S);if(e){p.data(“linkOpened”,true);d.show()}else{p.data(“linkOpened”,false);d.hide()}X()}function
+X(e){if(e)w.show();else w.hide()}function V(e){var
+t=w.data(“linktype”);if(t==“1”&&(y.val()==“http://”||y.is(“[value^=http://]”)||!y.is(“[value^=mailto]”)))y.val(“mailto:”);else
+if(t!=“1”&&!y.is(“[value^=http://]”))y.val(“http://”);else
+y.val(e)}function
+J(t){if(!p.data(“sourceOpened”)){if(t==“fSize”)styleField=P;else
+if(t==“colors”)styleField=H;K(styleField,true);styleField.find(“a”).unbind(“click”).click(function(){var
+n=e(this).attr(u.css+“-styleval”);if(t==“fSize”){styleType=“font-size”;n=n+u.funit}else
+if(t==“colors”){styleType=“color”;n=“rgb(”<code>n</code>“)”}var
+r=G(styleType);F(“span”,“style”,styleType+“:”<code>n</code>“;”+r);K(“”,false);e(“.”<code>u.css</code>“_title”).remove();v.trigger(“change”)})}else
+K(styleField,false);W(false)}function K(e,t){var <a
+href="{d:"fsizeOpened",f:P},{d:"cpallOpened",f:H}">n=“”,r=</a>;if(e!=“”){for(var
+i=0;i&lt;r.length;i++){<a href="i">if(e==r</a>[“<a
+href="i">f”])n=r</a>}}if(t){<a href=""d"">p.data(n</a>,<a
+href=""f"">true);n</a>.slideDown(100);for(var i=0;i&lt;r.length;i++){<a
+href=""d"">if(n</a>!=<a href="i">r</a>[“d”]){<a href="i">p.data(r</a>[“<a
+href="i">d”],false);r</a>[“f”].slideUp(100)}}}else{for(var
+i=0;i&lt;r.length;i++){<a href="i">p.data(r</a>[“<a
+href="i">d”],false);r</a>[“f”].slideUp(100)}}}function
+Q(t){h.find(t).each(function(){e(this).before(e(this).html()).remove()})}function
+G(e){var <a
+href="style">t=I();if(t&&t.is(“</a>”)&amp;&amp;t.css(e)!=“”){var
+n=t.css(e);t.css(e,“”);var r=t.attr(“style”);t.css(e,n);return r}else
+return“”}function
+Y(){Z(true);D.find(“a”).click(function(){e(“*”,this).click(function(e){e.preventDefault();return
+false});et(e(this).text());var
+t=e(this).attr(u.css+“-formatval”);j(“formatBlock”,“&lt;”<code>t</code>“&gt;”);Z(false)})}function
+Z(e){var
+t=e?true:false;t=e&amp;&amp;D.data(“status”)?true:false;if(t||!e)D.data(“status”,false).slideUp(200);else
+D.data(“status”,true).slideDown(200)}function et(e){var
+t=D.closest(“.”<code>u.css</code>“_tool”).find(“.”<code>u.css</code>“_tool_label”).find(“.”<code>u.css</code>“_tool_text”);if(e.length&gt;10)e=e.substr(0,7)+“…”;t.html(e)}function
+tt(e){var
+t,n,r;t=e.replace(/n/gim,“”).replace(/r/gim,“”).replace(/t/gim,“”).replace(/ /gim,“
+”);<a
+href="^p">n=[/<span(|\s+.*?)><span(|\s+.*?)>(.*?)<\/span><\/span>/gim,/<(\w*</a>)<a
+href=“^/>”>s*</a>*&gt;<a
+href=“”<span$2>$3</span>“,”“,”<p$1>$2</p>“,”<b$1>$2</b>“,”<i$1>$2</i>“”>s*<\/\1>/gim,/<div(|\s+.*?)>(.*?)<\/div>/gim,/<strong(|\s+.*?)>(.*?)<\/strong>/gim,/<em(|\s+.*?)>(.*?)<\/em>/gim];r=</a>;for(A=0;A&lt;5;A++){for(var
+i=0;i&lt;n.length;i++){<a href="i">t=t.replace(n</a>,<a
+href="i">r</a>)}}if(!u.p)t=t.replace(/&lt;p(|s+.*?)&gt;(.*?)&lt;/p&gt;/ig,“&lt;br/&gt;$2”);if(!u.br){<a
+href="/<br>(.*?)/ig,/<br\/>(.*?)/ig“>n=</a>;<a
+href=""<p>$1</p>”,“<p>$1</p>”“>r=</a>;for(var i=0;i&lt;n.length;i++){<a
+href="i">t=t.replace(n</a>,<a
+href="i">r</a>)}}if(!u.p&amp;&amp;!u.br)t=t.replace(/&lt;p&gt;(.*?)&lt;/p&gt;/ig,”&lt;div&gt;$1&lt;/div&gt;“);return
+t}function nt(){var
+e=v.text()==”“&amp;&amp;v.html().length&lt;12?”“:v.html();l.val(tt(e))}function
+rt(){v.html(tt(l.val()))}function it(t){var
+n=false,r=I(),i;if®{e.each(t,function(t,s){i=r.prop(”tagName“).toLowerCase();if(i==s)n=true;else{r.parents().each(function(){i=e(this).prop(”tagName“).toLowerCase();if(i==s)n=true})}});return
+n}else return false}function st(t){for(var n=0;n&lt;f.length;n++){<a
+href="n">if(u[f</a>.<a href="n">name]&&f</a>.<a href="n">emphasis&&f</a>.<a
+href="n">tag!=”“)it(f</a>.<a href="n">tag)?p.find(”.“u.css”tool“+f</a>.<a
+href="n">cls).addClass(m):e(”.“u.css”tool“+f</a>.cls).removeClass(m)}if(u.format&amp;&amp;e.isArray(u.formats)){var
+r=false;for(var i=0;i&lt;u.formats.length;i++){var <a
+href="0">s=[];s</a>=<a href="i">u.formats</a>[<a
+href="i">0];if(u.formats</a>[0].length&gt;0&amp;&amp;it(s)){<a
+href="i">et(u.formats</a>[1]);r=true;break}}<a
+href="0">if(!r)et(u.formats</a>[1])}K(”“,false);Z(false)}if(!e(this).data(”jqte“)||e(this).data(”jqte“)==null||e(this).data(”jqte“)==”undefined“)e(this).data(”jqte“,true);else
+e(this).data(”jqte“,false);if(!u.status||!e(this).data(”jqte“)){if(e(this).closest(”.“+u.css).length&gt;0){var
+t=e(this).closest(”.“+u.css).find(”.“<code>u.css</code>”_editor“).html();var
+<a
+href="0">n=”“;e(e(this)</a>.attributes).each(function(){if(this.nodeName!=”style“)n=n+”
+“<code>this.nodeName</code>&#39;=”&#39;<code>this.nodeValue</code>&#39;“&#39;});var
+<a
+href="data-origin">r=e(this).is(”</a>“)&amp;&amp;e(this).attr(”data-origin“)!=”“?e(this).attr(”data-origin“):”textarea“;var
+i=”&gt;“+t;if(r==”input“||r==”option“){t=t.replace(/”/g,“&amp;#34;”).replace(/&#39;/g,“&amp;#39;”).replace(/&lt;/g,“&lt;”).replace(/&gt;/g,“&gt;”);i=&#39;value=“&#39;<code>t</code>&#39;”&gt;&#39;}var
+o=e(this).clone();e(this).data(“jqte”,false).closest(“.”+u.css).before(o).remove();o.replaceWith(“&lt;”+r+n+i+“&lt;/”<code>r</code>“&gt;”)}return}var
+l=e(this);var
+r=e(this).prop(“tagName”).toLowerCase();e(this).attr(“data-origin”,r);var
+<a
+href="value">c=e(this).is(“</a>”)||r==“textarea”?e(this).val():e(this).html();c=c.replace(/&amp;#34;/g,&#39;“&#39;).replace(/&amp;#39;/g,”&#39;“).replace(/&lt;/g,”&lt;“).replace(/&gt;/g,”&gt;“).replace(/&amp;/g,”&amp;“);e(this).after(&#39;&lt;div
+class=”&#39;<code>u.css</code>&#39;“&gt;&lt;/div&gt;&#39;);var
+h=e(this).next(”.“+u.css);h.html(&#39;&lt;div
+class=”&#39;<code>u.css</code>“_toolbar”+&#39;“ role=”toolbar“
+unselectable&gt;&lt;/div&gt;&lt;div
+class=”&#39;<code>u.css</code>&#39;_linkform“ style=”display:none“
+role=”dialog“&gt;&lt;/div&gt;&lt;div
+class=”&#39;<code>u.css</code>“_editor”+&#39;“&gt;&lt;/div&gt;&#39;);var
+p=h.find(”.“<code>u.css</code>”_toolbar“);var
+d=h.find(”.“<code>u.css</code>”_linkform“);var
+v=h.find(”.“<code>u.css</code>”_editor“);var
+m=u.css+”_tool_depressed“;d.append(&#39;&lt;div
+class=”&#39;<code>u.css</code>&#39;_linktypeselect“
+unselectable&gt;&lt;/div&gt;&lt;input
+class=”&#39;<code>u.css</code>&#39;_linkinput“ type=”text/css“
+value=”“&gt;&lt;div class=”&#39;<code>u.css</code>&#39;_linkbutton“
+unselectable&gt;&#39;<code>u.button</code>&#39;&lt;/div&gt; &lt;div
+style=”height:1px;float:none;clear:both“&gt;&lt;/div&gt;&#39;);var
+g=d.find(”.“<code>u.css</code>”_linktypeselect“);var
+y=d.find(”.“<code>u.css</code>”_linkinput“);var
+b=d.find(”.“<code>u.css</code>”_linkbutton“);g.append(&#39;&lt;div
+class=”&#39;<code>u.css</code>&#39;_linktypeview“
+unselectable&gt;&lt;/div&gt;&lt;div
+class=”&#39;<code>u.css</code>&#39;_linktypes“ role=”menu“
+unselectable&gt;&lt;/div&gt;&#39;);var
+w=g.find(”.“<code>u.css</code>”_linktypes“);var
+E=g.find(”.“<code>u.css</code>”_linktypeview“);var
+S=u.css+”-setlink“;v.after(&#39;&lt;div
+class=”&#39;<code>u.css</code>“_source
+”<code>u.css</code>&#39;_hiddenField“&gt;&lt;/div&gt;&#39;);var
+x=h.find(”.“<code>u.css</code>”_source“);l.appendTo(x);if(r!=”textarea“){var
+<a
+href="0">n=”“;e(l</a>.attributes).each(function(){if(this.nodeName!=”type“&amp;&amp;this.nodeName!=”value“)n=n+”
+“<code>this.nodeName</code>&#39;=”&#39;<code>this.nodeValue</code>&#39;“&#39;});l.replaceWith(”&lt;textarea
+“<code>n</code>”&gt;“<code>c</code>”&lt;/textarea&gt;“);l=x.find(”textarea“)}v.attr(”contenteditable“,”true“).html©;for(var
+T=0;T&lt;f.length;T++){<a href="T">if(u[f</a>.name]){var <a
+href="T">N=f</a>.<a href="T">key.length>0?u.titletext</a>.<a
+href="T">hotkey!=null&&u.titletext</a>.<a
+href="T">hotkey!=”undefined“&&u.titletext</a>.hotkey!=”“?” (<a
+href="T">Ctrl+“+u.titletext</a>.hotkey+”)“:”“:”“;var <a
+href="T">C=u.titletext</a>.<a href="T">title!=null&&u.titletext</a>.<a
+href="T">title!=”undefined“&&u.titletext</a>.<a
+href="T">title!=”“?u.titletext</a>.title+N:”“;p.append(&#39;&lt;div
+class=”&#39;<code>u.css</code>“_tool
+”<code>u.css"tool"+f[T]</code>.cls+&#39;“ role=”button“
+data-tool=”&#39;<code>T</code>&#39;“ unselectable&gt;&lt;a
+class=”&#39;<code>u.css</code>&#39;_tool_icon“ <a
+href="data-tool="T"">unselectable></a></div>’);p.find(”.“u.css”_tool</a>“).data({<a
+href="T">tag:f</a>.<a href="T">tag,command:f</a>.<a
+href="T">command,emphasis:f</a>.emphasis,title:C});<a
+href="T">if(f</a>.name==”format“&amp;&amp;e.isArray(u.formats)){var <a
+href="0">k=u.formats</a>[<a href="0">1].length>0&&u.formats</a>[<a
+href="0">1]!=”undefined“?u.formats</a>[<a
+href="T">1]:”“;p.find(”.“u.css”tool“+f</a>.cls).find(”.“<code>u.css</code>”_tool_icon“).replaceWith(&#39;&lt;a
+class=”&#39;<code>u.css</code>&#39;_tool_label“ unselectable&gt;&lt;span
+class=”&#39;<code>u.css</code>&#39;_tool_text“
+unselectable&gt;&#39;<code>k</code>&#39;&lt;/span&gt;&lt;span
+class=”&#39;<code>u.css</code>&#39;_tool_icon“ <a
+href="T">unselectable></span></a>‘);p.find(”.“u.css”tool“+f</a>.cls).append(&#39;&lt;div
+class=”&#39;<code>u.css</code>&#39;_formats“
+unselectable&gt;&lt;/div&gt;&#39;);for(var
+L=0;L&lt;u.formats.length;L++){p.find(”.“<code>u.css</code>”_formats“).append(”&lt;a
+“<code>u.css'-formatval="'+u.formats[L]</code>[0]+&#39;”
+class=“&#39;<code>u.css</code>”_format“+”
+“<code>u.css</code>”<em>format</em>“<code>L</code>&#39;” role=“menuitem” <a
+href="L">unselectable>’+u.formats</a>[1]+“&lt;/a&gt;”)}p.find(“.”<code>u.css</code>“_formats”).data(“status”,false)}else
+<a href="T">if(f</a>.name==“fsize”&amp;&amp;e.isArray(u.fsizes)){<a
+href="T">p.find(“.”u.css“tool”+f</a>.cls).append(&#39;&lt;div
+class=“&#39;<code>u.css</code>&#39;_fontsizes”
+unselectable&gt;&lt;/div&gt;&#39;);for(var
+L=0;L&lt;u.fsizes.length;L++){p.find(“.”<code>u.css</code>“_fontsizes”).append(“&lt;a
+”<code>u.css'-styleval="'+u.fsizes[L]</code>+&#39;“
+class=”&#39;<code>u.css</code>“_fontsize”+&#39;“ <a
+href="L">style=”font-size:‘+u.fsizes</a><code>u.funit</code>&#39;“
+role=”menuitem“ unselectable&gt;Abcdefgh…&lt;/a&gt;&#39;)}}else <a
+href="T">if(f</a>.name==”color“&amp;&amp;e.isArray(s)){<a
+href="T">p.find(”.“u.css”tool“+f</a>.cls).append(&#39;&lt;div
+class=”&#39;<code>u.css</code>&#39;_cpalette“
+unselectable&gt;&lt;/div&gt;&#39;);for(var A=0;A&lt;s.length;A++){<a
+href="A">if(s</a>!=null)p.find(”.“<code>u.css</code>”_cpalette“).append(”&lt;a
+“<code>u.css'-styleval="'+s[A]</code>+&#39;”
+class=“&#39;<code>u.css</code>”_color“+&#39;” style=“background-color: <a
+href="A">rgb(’+s</a>+&#39;)” role=“gridcell”
+unselectable&gt;&lt;/a&gt;&#39;);else
+p.find(“.”<code>u.css</code>“_cpalette”).append(&#39;&lt;div
+class=“&#39;<code>u.css</code>”_colorSeperator“+&#39;”&gt;&lt;/div&gt;&#39;)}}}}w.data(“linktype”,“0”);for(var
+T=0;T&lt;3;T++){w.append(“&lt;a
+”<code>u.css</code>&#39;-linktype=“&#39;<code>T</code>&#39;” <a
+href="T">unselectable>‘+u.linktypes</a>+“&lt;/a&gt;”);E.html(&#39;&lt;div
+class=“&#39;<code>u.css</code>&#39;_linktypearrow”
+unselectable&gt;&lt;/div&gt;&lt;div
+class=“&#39;<code>u.css</code>&#39;_linktypetext”&gt;&#39;+w.find(“a:eq(”+w.data(“linktype”)+“)”).text()+“&lt;/div&gt;”)}var
+O=“”;if(/msie/.test(a))O=“-ms-”;else
+if(/chrome/.test(a)||/safari/.test(a)||/yandex/.test(a))O=“-webkit-”;else
+if(/mozilla/.test(a))O=“-moz-”;else if(/opera/.test(a))O=“-o-”;else
+if(/konqueror/.test(a))O=“-khtml-”;else
+O=“”;if(u.placeholder&amp;&amp;u.placeholder!=“”){h.prepend(&#39;&lt;div
+class=“&#39;<code>u.css</code>&#39;_placeholder” unselectable&gt;&lt;div
+class=“&#39;<code>u.css</code>&#39;_placeholder_text”&gt;&#39;<code>u.placeholder</code>“&lt;/div&gt;&lt;/div&gt;”);var
+M=h.find(“.”<code>u.css</code>“_placeholder”);M.click(function(){v.focus()})}<a
+href="unselectable">h.find(“</a>”).css(O+“user-select”,“none”).addClass(“unselectable”).attr(“unselectable”,“on”).on(“selectstart
+mousedown”,false);var _=p.find(“.”<code>u.css</code>“_tool”);var
+D=p.find(“.”<code>u.css</code>“_formats”);var
+P=p.find(“.”<code>u.css</code>“_fontsizes”);var
+H=p.find(“.”<code>u.css</code>“_cpalette”);var I=function(){var
+t,n;if(window.getSelection){n=getSelection();t=n.anchorNode}if(!t&amp;&amp;document.selection&amp;&amp;document.selection.createRange&amp;&amp;document.selection.type!=“None”){n=document.selection;var
+r=n.getRangeAt?n.getRangeAt(0):n.createRange();t=r.commonAncestorContainer?r.commonAncestorContainer:r.parentElement?r.parentElement():r.item(0)}if(t){return
+t.nodeName==“#text”?e(t.parentNode):e(t)}else return
+false};_.unbind(“click”).click(function(t){if(e(this).data(“command”)==“displaysource”&amp;&amp;!p.data(“sourceOpened”)){p.find(“.”<code>u.css</code>“_tool”).addClass(u.css+“_hiddenField”);e(this).removeClass(u.css+“_hiddenField”);p.data(“sourceOpened”,true);l.css(“height”,v.outerHeight());x.removeClass(u.css+“_hiddenField”);v.addClass(u.css+“_hiddenField”);l.focus();W(false);K(“”,false);Z();if(u.placeholder&amp;&amp;u.placeholder!=“”)M.hide()}else{if(!p.data(“sourceOpened”)){if(e(this).data(“command”)==“linkcreator”){if(!p.data(“linkOpened”))U();else{W(false);Z(false)}}else
+if(e(this).data(“command”)==“formats”){if(e(this).data(“command”)==“formats”&amp;&amp;!e(t.target).hasClass(u.css+“_format”))Y();K(“”,false);if(v.not(“:focus”))v.focus()}else
+if(e(this).data(“command”)==“fSize”||e(this).data(“command”)==“colors”){if(e(this).data(“command”)==“fSize”&amp;&amp;!e(t.target).hasClass(u.css+“_fontsize”)||e(this).data(“command”)==“colors”&amp;&amp;!e(t.target).hasClass(u.css+“_color”))J(e(this).data(“command”));Z(false);if(v.not(“:focus”))v.focus()}else{if(v.not(“:focus”))v.focus();j(e(this).data(“command”),null);K(“”,false);Z(false);X();e(this).data(“emphasis”)==true&amp;&amp;!e(this).hasClass(m)?e(this).addClass(m):e(this).removeClass(m);x.addClass(u.css+“_hiddenField”);v.removeClass(u.css+“_hiddenField”)}}else{p.data(“sourceOpened”,false);p.find(“.”<code>u.css</code>“_tool”).removeClass(u.css+“_hiddenField”);x.addClass(u.css+“_hiddenField”);v.removeClass(u.css+“_hiddenField”)}if(u.placeholder&amp;&amp;u.placeholder!=“”)v.html()!=“”?M.hide():M.show()}v.trigger(“change”)}).hover(function(t){if(u.title&amp;&amp;e(this).data(“title”)!=“”&amp;&amp;(e(t.target).hasClass(u.css+“_tool”)||e(t.target).hasClass(u.css+“_tool_icon”))){e(“.”<code>u.css</code>“_title”).remove();h.append(&#39;&lt;div
+class=“&#39;<code>u.css</code>&#39;_title”&gt;&lt;div
+class=“&#39;<code>u.css</code>&#39;_titleArrow”&gt;&lt;div
+class=“&#39;<code>u.css</code>&#39;_titleArrowIcon”&gt;&lt;/div&gt;&lt;/div&gt;&lt;div
+class=“&#39;<code>u.css</code>&#39;_titleText”&gt;&#39;+e(this).data(“title”)+“&lt;/div&gt;&lt;/div&gt;”);var
+n=e(“.”<code>u.css</code>“_title:first”);var
+r=n.find(“.”<code>u.css</code>“_titleArrowIcon”);var
+i=e(this).position();var
+s=i.left+e(this).outerWidth()-n.outerWidth()/2-e(this).outerWidth()/2;var
+o=i.top+e(this).outerHeight()+5;n.delay(400).css({top:o,left:s}).fadeIn(200)}},function(){e(“.”<code>u.css</code>“_title”).remove()});var
+ot=null;v.bind(“keypress keyup keydown drop cut copy paste
+DOMCharacterDataModified
+DOMSubtreeModified”,function(){if(!p.data(“sourceOpened”))e(this).trigger(“change”);X();if(e.isFunction(u.change))u.change();if(u.placeholder&amp;&amp;u.placeholder!=“”)e(this).text()!=“”?M.hide():M.show()}).bind(“change”,function(){if(!p.data(“sourceOpened”)){clearTimeout(ot);ot=setTimeout(nt,10)}}).keydown(function(e){if(e.ctrlKey){for(var
+t=0;t&lt;f.length;t++){<a href="t">if(u[f</a>.<a
+href="t">name]&&e.keyCode==f</a>.key.charCodeAt(0)){<a href="t">if(f</a>.<a
+href="t">command!=“”&&f</a>.<a
+href="t">command!=“linkcreator”)j(f</a>.command,null);else <a
+href="t">if(f</a>.command==“linkcreator”)U();return
+false}}}}).bind(“mouseup
+keyup”,st).focus(function(){if(e.isFunction(u.focus))u.focus();h.addClass(u.css+“_focused”);if(/opera/.test(a)){var
+<a
+href="0">t=document.createRange();t.selectNodeContents(v</a>);t.collapse(false);var
+n=window.getSelection();n.removeAllRanges();n.addRange(t)}}).focusout(function(){<a
+href="0">_.removeClass(m);K(“”,false);Z(false);X();if(e.isFunction(u.blur))u.blur();h.removeClass(u.css+“_focused”);if(e.isArray(u.formats))et(u.formats</a>[1])});l.bind(“keydown
+keyup”,function(){<a
+href="0">setTimeout(rt,0);e(this).height(e(this)</a>.scrollHeight);if(e(this).val()==“”)e(this).height(0)}).focus(function(){h.addClass(u.css+“_focused”)}).focusout(function(){h.removeClass(u.css+“_focused”)})})}})(jQuery)</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

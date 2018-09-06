@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>front.js</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            front.js
+        </h1>
+        <ul class="files">
+            <li>app/assets/javascripts/front.js</li>
+            <li>Last modified: 2018-05-14 11:37:20 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>$(document).ready(function () {</p>
+
+<pre><code>// ------------------------------------------------------- //
+// Custom Scrollbar
+// ------------------------------------------------------ //
+if ($(window).outerWidth() &gt; 992) {
+    $(&quot;nav.side-navbar&quot;).mCustomScrollbar({
+        scrollInertia: 200
+    });
+}
+// Main Template Color
+var brandPrimary = &#39;#33b35a&#39;;
+// ------------------------------------------------------- //
+// Side Navbar Functionality
+// ------------------------------------------------------ //
+$(&#39;#toggle-btn&#39;).on(&#39;click&#39;, function (e) {
+    e.preventDefault();
+    if ($(window).outerWidth() &gt; 1194) {
+        $(&#39;nav.side-navbar&#39;).toggleClass(&#39;shrink&#39;);
+        $(&#39;.page&#39;).toggleClass(&#39;active&#39;);
+    } else {
+        $(&#39;nav.side-navbar&#39;).toggleClass(&#39;show-sm&#39;);
+        $(&#39;.page&#39;).toggleClass(&#39;active-sm&#39;);
+    }
+});
+// ------------------------------------------------------- //
+// Universal Form Validation
+// ------------------------------------------------------ //
+$(&#39;.form-validate&#39;).each(function() {  
+    $(this).validate({
+        errorElement: &quot;div&quot;,
+        errorClass: &#39;is-invalid&#39;,
+        validClass: &#39;is-valid&#39;,
+        ignore: &#39;:hidden:not(.summernote),.note-editable.card-block&#39;,
+        errorPlacement: function (error, element) {
+            // Add the `invalid-feedback` class to the error element
+            error.addClass(&quot;invalid-feedback&quot;);
+            //console.log(element);
+            if (element.prop(&quot;type&quot;) === &quot;checkbox&quot;) {
+                error.insertAfter(element.siblings(&quot;label&quot;));
+            } 
+            else {
+                error.insertAfter(element);
+            }
+        }
+    });
+});
+// ------------------------------------------------------- //
+// Material Inputs
+// ------------------------------------------------------ //
+var materialInputs = $(&#39;input.input-material&#39;);
+// activate labels for prefilled values
+materialInputs.filter(function () {
+    return $(this).val() !== &quot;&quot;;
+}).siblings(&#39;.label-material&#39;).addClass(&#39;active&#39;);
+// move label on focus
+materialInputs.on(&#39;focus&#39;, function () {
+    $(this).siblings(&#39;.label-material&#39;).addClass(&#39;active&#39;);
+});
+// remove/keep label on blur
+materialInputs.on(&#39;blur&#39;, function () {
+    $(this).siblings(&#39;.label-material&#39;).removeClass(&#39;active&#39;);
+    if ($(this).val() !== &#39;&#39;) {
+        $(this).siblings(&#39;.label-material&#39;).addClass(&#39;active&#39;);
+    } else {
+        $(this).siblings(&#39;.label-material&#39;).removeClass(&#39;active&#39;);
+    }
+});
+// ------------------------------------------------------- //
+// Jquery Progress Circle
+// ------------------------------------------------------ //
+var progress_circle = $(&quot;#progress-circle&quot;).gmpc({
+    color: brandPrimary,
+    line_width: 5,
+    percent: 80
+});
+progress_circle.gmpc(&#39;animate&#39;, 80, 3000);
+// ------------------------------------------------------- //
+// External links to new window
+// ------------------------------------------------------ //
+$(&#39;.external&#39;).on(&#39;click&#39;, function (e) {
+    e.preventDefault();
+    window.open($(this).attr(&quot;href&quot;));
+});
+// ------------------------------------------------------ //
+// For demo purposes, can be deleted
+// ------------------------------------------------------ //
+var stylesheet = $(&#39;link#theme-stylesheet&#39;);
+$(&quot;&lt;link id=&#39;new-stylesheet&#39; rel=&#39;stylesheet&#39;&gt;&quot;).insertAfter(stylesheet);
+var alternateColour = $(&#39;link#new-stylesheet&#39;);
+if ($.cookie(&quot;theme_csspath&quot;)) {
+    alternateColour.attr(&quot;href&quot;, $.cookie(&quot;theme_csspath&quot;));
+}
+$(&quot;#colour&quot;).change(function () {
+    if ($(this).val() !== &#39;&#39;) {
+        var theme_csspath = &#39;css/style.&#39; + $(this).val() + &#39;.css&#39;;
+        alternateColour.attr(&quot;href&quot;, theme_csspath);
+        $.cookie(&quot;theme_csspath&quot;, theme_csspath, {
+            expires: 365,
+            path: document.URL.substr(0, document.URL.lastIndexOf(&#39;/&#39;))
+        });
+    }
+    return false;
+});</code></pre>
+
+<p>});</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>OrderEntry</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="OrderEntry">
+
+  
+    
+    <meta name="description" content="Schema Information  Table name: order_entries  id                  :bigint(8)        not null, primary key order_id            :integer product_id          :integer price               :decimal(, ) co.">
+    <meta property="og:description" content="Schema Information  Table name: order_entries  id                  :bigint(8)        not null, primary key order_id            :integer product_id          :integer price               :decimal(, ) co.">
+  
+
+    <meta name="keywords" content="OrderEntry class">
+  
+    <meta name="keywords" content="attachments, product, product_picture, specs_html, vendor_quote_prices_html, notes_html, convert_dynamic_fields, get_html_safe_fields, product_name, quoted_name, vendor_name, category_name, category, product_hash, vendor_obj, quoted_by_obj, get_status, vendor_list, vendor_email, picture_url">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            OrderEntry
+            
+                <span class="parent">&lt;
+                    
+                    <a href="ApplicationRecord.html">ApplicationRecord</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/app/models/order_entry_rb.html">app/models/order_entry.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h2 id="class-OrderEntry-label-Schema+Information">Schema Information</h2>
+
+<p>Table name: order_entries</p>
+
+<pre><code>id                  :bigint(8)        not null, primary key
+order_id            :integer
+product_id          :integer
+price               :decimal(, )
+cost                :decimal(, )
+tax                 :decimal(, )
+quoted_by           :integer
+quantity            :integer
+vendor              :integer
+created_at          :datetime         not null
+updated_at          :datetime         not null
+category_id         :integer
+status              :integer          default(1)
+dynamic_fields      :string
+specs               :text
+vendor_quote_prices :text
+notes               :text
+</code></pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-attachments">attachments</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-category">category</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-category_name">category_name</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-convert_dynamic_fields">convert_dynamic_fields</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-get_html_safe_fields">get_html_safe_fields</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-get_status">get_status</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-notes_html">notes_html</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-picture_url">picture_url</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-product">product</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-product_hash">product_hash</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-product_name">product_name</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-product_picture">product_picture</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>Q</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-quoted_by_obj">quoted_by_obj</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-quoted_name">quoted_name</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-specs_html">specs_html</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-vendor_email">vendor_email</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-vendor_list">vendor_list</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-vendor_name">vendor_name</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-vendor_obj">vendor_obj</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-vendor_quote_prices_html">vendor_quote_prices_html</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-attachments">
+            
+              <b>attachments</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-attachments" name="method-i-attachments" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-attachments_source')" id="l_method-i-attachments_source">show</a>
+                
+              </p>
+              <div id="method-i-attachments_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attachments</span>
+  <span class="ruby-ivar">@urls</span> = []
+  <span class="ruby-constant">OrderEntryAttachment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_entry_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&#39;id DESC&#39;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attachment</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@urls</span>.<span class="ruby-identifier">push</span>({<span class="ruby-value">:id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:file_name</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">attachment_file_file_name</span>, <span class="ruby-value">:file_size</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">attachment_file_file_size</span>, <span class="ruby-value">:updated_at</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">attachment_file_updated_at</span>, <span class="ruby-value">:url_path</span> <span class="ruby-operator">=&gt;</span>  <span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">attachment_file</span>.<span class="ruby-identifier">url</span>})
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@urls</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-category">
+            
+              <b>category</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-category" name="method-i-category" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-category_source')" id="l_method-i-category_source">show</a>
+                
+              </p>
+              <div id="method-i-category_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">category</span>
+  <span class="ruby-identifier">obj</span> = {}
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">category_id</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">category</span> = <span class="ruby-constant">Category</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">category_id</span>)
+    <span class="ruby-identifier">obj</span> = {<span class="ruby-value">:id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">category</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:name</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">category</span>.<span class="ruby-identifier">name</span>, <span class="ruby-value">:view</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">category</span>.<span class="ruby-identifier">name</span>}
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">obj</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-category_name">
+            
+              <b>category_name</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-category_name" name="method-i-category_name" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-category_name_source')" id="l_method-i-category_name_source">show</a>
+                
+              </p>
+              <div id="method-i-category_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">category_name</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">category_id</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">category</span> = <span class="ruby-constant">Category</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">category_id</span>)
+    <span class="ruby-identifier">category</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-convert_dynamic_fields">
+            
+              <b>convert_dynamic_fields</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-convert_dynamic_fields" name="method-i-convert_dynamic_fields" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-convert_dynamic_fields_source')" id="l_method-i-convert_dynamic_fields_source">show</a>
+                
+              </p>
+              <div id="method-i-convert_dynamic_fields_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_dynamic_fields</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dynamic_fields</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">dynamic_fields</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dynamic_fields</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;=&gt;&quot;</span>, <span class="ruby-string">&quot;:&quot;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-string">&#39;&#39;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get_html_safe_fields">
+            
+              <b>get_html_safe_fields</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-get_html_safe_fields" name="method-i-get_html_safe_fields" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_html_safe_fields_source')" id="l_method-i-get_html_safe_fields_source">show</a>
+                
+              </p>
+              <div id="method-i-get_html_safe_fields_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_html_safe_fields</span>
+  <span class="ruby-ivar">@dyna_fields</span> = <span class="ruby-string">&#39;&#39;</span>
+  <span class="ruby-identifier">eval</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dynamic_fields</span>).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@dyna_fields</span> = <span class="ruby-ivar">@dyna_fields</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{key}: #{value}&lt;br/&gt;&quot;</span> }
+  <span class="ruby-ivar">@dyna_fields</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get_status">
+            
+              <b>get_status</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-get_status" name="method-i-get_status" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_status_source')" id="l_method-i-get_status_source">show</a>
+                
+              </p>
+              <div id="method-i-get_status_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_status</span>
+  <span class="ruby-identifier">status</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">status</span>
+  <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;&#39;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;New&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;Quoting&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;Pending Approval&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;Ready to Process&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">4</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;In Production&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">5</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;Shipped&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">6</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;Delivered&#39;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@txt</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-notes_html">
+            
+              <b>notes_html</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-notes_html" name="method-i-notes_html" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-notes_html_source')" id="l_method-i-notes_html_source">show</a>
+                
+              </p>
+              <div id="method-i-notes_html_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">notes_html</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">notes</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-string">&quot;&lt;&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;&lt;&quot;</span>, <span class="ruby-string">&quot;&lt;br/&gt;&quot;</span>).<span class="ruby-identifier">html_safe</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-picture_url">
+            
+              <b>picture_url</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-picture_url" name="method-i-picture_url" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-picture_url_source')" id="l_method-i-picture_url_source">show</a>
+                
+              </p>
+              <div id="method-i-picture_url_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 182</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">picture_url</span>
+  <span class="ruby-identifier">product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">product_id</span>)
+  <span class="ruby-ivar">@url</span> = <span class="ruby-node">&quot;#{ActionController::Base.helpers.asset_path(&#39;default-product.png&#39;)}&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">image_data?</span>
+    <span class="ruby-ivar">@url</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">image_url</span>(<span class="ruby-value">:original</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">picture</span>.<span class="ruby-identifier">exists?</span>
+    <span class="ruby-ivar">@url</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">picture</span>.<span class="ruby-identifier">url</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@url</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-product">
+            
+              <b>product</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-product" name="method-i-product" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-product_source')" id="l_method-i-product_source">show</a>
+                
+              </p>
+              <div id="method-i-product_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">product</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">product_id</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">product_id</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-product_hash">
+            
+              <b>product_hash</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-product_hash" name="method-i-product_hash" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-product_hash_source')" id="l_method-i-product_hash_source">show</a>
+                
+              </p>
+              <div id="method-i-product_hash_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">product_hash</span>
+  <span class="ruby-identifier">obj</span> = {}
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">product_id</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">product_id</span>)
+    <span class="ruby-identifier">obj</span> = {<span class="ruby-value">:id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:name</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">name</span>, <span class="ruby-value">:view</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">name</span>}
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">obj</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-product_name">
+            
+              <b>product_name</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-product_name" name="method-i-product_name" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-product_name_source')" id="l_method-i-product_name_source">show</a>
+                
+              </p>
+              <div id="method-i-product_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">product_name</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">product_id</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">product_id</span>)
+    <span class="ruby-identifier">product</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-product_picture">
+            
+              <b>product_picture</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-product_picture" name="method-i-product_picture" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-product_picture_source')" id="l_method-i-product_picture_source">show</a>
+                
+              </p>
+              <div id="method-i-product_picture_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">product_picture</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">product_id</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">product_id</span>)
+    <span class="ruby-ivar">@url</span> = <span class="ruby-node">&quot;#{ActionController::Base.helpers.asset_path(&#39;default-product.png&#39;)}&quot;</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">image_data?</span>
+      <span class="ruby-ivar">@url</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">image_url</span>(<span class="ruby-value">:original</span>)
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">picture</span>.<span class="ruby-identifier">exists?</span>
+      <span class="ruby-ivar">@url</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">picture</span>.<span class="ruby-identifier">url</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@url</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-quoted_by_obj">
+            
+              <b>quoted_by_obj</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-quoted_by_obj" name="method-i-quoted_by_obj" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-quoted_by_obj_source')" id="l_method-i-quoted_by_obj_source">show</a>
+                
+              </p>
+              <div id="method-i-quoted_by_obj_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quoted_by_obj</span>
+  <span class="ruby-identifier">obj</span> = {}
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">quoted_by</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">quoted_by</span>)
+    <span class="ruby-identifier">obj</span> = {<span class="ruby-value">:id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:name</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">full_name</span>, <span class="ruby-value">:view</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">full_name</span>}
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">obj</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-quoted_name">
+            
+              <b>quoted_name</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-quoted_name" name="method-i-quoted_name" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-quoted_name_source')" id="l_method-i-quoted_name_source">show</a>
+                
+              </p>
+              <div id="method-i-quoted_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quoted_name</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">quoted_by</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">quoted_by</span>)
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">first_name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">last_name</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-specs_html">
+            
+              <b>specs_html</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-specs_html" name="method-i-specs_html" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-specs_html_source')" id="l_method-i-specs_html_source">show</a>
+                
+              </p>
+              <div id="method-i-specs_html_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">specs_html</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">specs</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-string">&quot;&lt;&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;&lt;&quot;</span>, <span class="ruby-string">&quot;&lt;br/&gt;&quot;</span>).<span class="ruby-identifier">html_safe</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-vendor_email">
+            
+              <b>vendor_email</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-vendor_email" name="method-i-vendor_email" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-vendor_email_source')" id="l_method-i-vendor_email_source">show</a>
+                
+              </p>
+              <div id="method-i-vendor_email_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">vendor_email</span>
+  <span class="ruby-identifier">vendor_list</span> = <span class="ruby-constant">OrderEntryVendor</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_entry_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:vendor_id</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;,&#39;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">vendor_list</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-constant">Vendor</span>.<span class="ruby-identifier">where</span>(<span class="ruby-node">&quot;id IN (#{vendor_list})&quot;</span>).<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:email</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:inspect</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">gsub!</span>(<span class="ruby-string">&#39;&quot;&#39;</span>, <span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-vendor_list">
+            
+              <b>vendor_list</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-vendor_list" name="method-i-vendor_list" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-vendor_list_source')" id="l_method-i-vendor_list_source">show</a>
+                
+              </p>
+              <div id="method-i-vendor_list_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">vendor_list</span>
+  <span class="ruby-ivar">@ids</span> = []
+  <span class="ruby-constant">OrderEntryVendor</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_entry_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">oev</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@ids</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">oev</span>.<span class="ruby-identifier">vendor_id</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@ids</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-vendor_name">
+            
+              <b>vendor_name</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-vendor_name" name="method-i-vendor_name" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-vendor_name_source')" id="l_method-i-vendor_name_source">show</a>
+                
+              </p>
+              <div id="method-i-vendor_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">vendor_name</span>
+  <span class="ruby-ivar">@names</span> = []
+  <span class="ruby-constant">Vendor</span>.<span class="ruby-identifier">where</span>(<span class="ruby-node">&quot;id IN (SELECT vendor_id FROM order_entry_vendors WHERE order_entry_id = #{self.id})&quot;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">vendor</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@names</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">vendor</span>.<span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@names</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:inspect</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>).<span class="ruby-identifier">gsub!</span>(<span class="ruby-string">&#39;&quot;&#39;</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-vendor_obj">
+            
+              <b>vendor_obj</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-vendor_obj" name="method-i-vendor_obj" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-vendor_obj_source')" id="l_method-i-vendor_obj_source">show</a>
+                
+              </p>
+              <div id="method-i-vendor_obj_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">vendor_obj</span>
+  <span class="ruby-identifier">obj</span> = {}
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">vendor</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">vendor</span> = <span class="ruby-constant">Vendor</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">vendor</span>)
+    <span class="ruby-identifier">obj</span> = {<span class="ruby-value">:id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">vendor</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:name</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">vendor</span>.<span class="ruby-identifier">name</span>, <span class="ruby-value">:view</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">vendor</span>.<span class="ruby-identifier">name</span>}
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">obj</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-vendor_quote_prices_html">
+            
+              <b>vendor_quote_prices_html</b>()
+            
+            <a href="../classes/OrderEntry.html#method-i-vendor_quote_prices_html" name="method-i-vendor_quote_prices_html" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-vendor_quote_prices_html_source')" id="l_method-i-vendor_quote_prices_html_source">show</a>
+                
+              </p>
+              <div id="method-i-vendor_quote_prices_html_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/models/order_entry.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">vendor_quote_prices_html</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">vendor_quote_prices</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-string">&quot;&lt;&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;&lt;&quot;</span>, <span class="ruby-string">&quot;&lt;br/&gt;&quot;</span>).<span class="ruby-identifier">html_safe</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

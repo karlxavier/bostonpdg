@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ProductsController</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="ProductsController">
+
+  
+
+    <meta name="keywords" content="ProductsController class">
+  
+    <meta name="keywords" content="item_details, change_picture, create">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            ProductsController
+            
+                <span class="parent">&lt;
+                    
+                    <a href="ApplicationController.html">ApplicationController</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/app/controllers/products_controller_rb.html">app/controllers/products_controller.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-change_picture">change_picture</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-create">create</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-item_details">item_details</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-change_picture">
+            
+              <b>change_picture</b>()
+            
+            <a href="../classes/ProductsController.html#method-i-change_picture" name="method-i-change_picture" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-change_picture_source')" id="l_method-i-change_picture_source">show</a>
+                
+              </p>
+              <div id="method-i-change_picture_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/products_controller.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">change_picture</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>])
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:picture</span> =<span class="ruby-operator">&gt;</span> (<span class="ruby-identifier">params</span>[<span class="ruby-value">:picture</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:file</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:picture</span>]))
+      <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@product</span>,<span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:picture_url</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-create">
+            
+              <b>create</b>()
+            
+            <a href="../classes/ProductsController.html#method-i-create" name="method-i-create" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-create_source')" id="l_method-i-create_source">show</a>
+                
+              </p>
+              <div id="method-i-create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/products_controller.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:product_name</span>]
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">category</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:category_id</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-comment">#Add Vendor on List</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>].<span class="ruby-identifier">present?</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">id</span><span class="ruby-operator">|</span>
+          <span class="ruby-constant">VendorsProduct</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:vendor_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:quantity</span>].<span class="ruby-identifier">present?</span>
+      <span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:quantity</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:quantity</span>].<span class="ruby-identifier">to_i</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:quantity</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Product Item has saved successfully.&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;Product Item save Failed!&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">inventories_path</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-item_details">
+            
+              <b>item_details</b>()
+            
+            <a href="../classes/ProductsController.html#method-i-item_details" name="method-i-item_details" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-item_details_source')" id="l_method-i-item_details_source">show</a>
+                
+              </p>
+              <div id="method-i-item_details_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/products_controller.rb, line 5</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier">item_details</span>
+              <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+                      <span class="ruby-comment"># @order_entry</span>
+                      <span class="ruby-ivar">@messages</span> = <span class="ruby-constant">ItemMessage</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">product_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">product_id</span>)
+                      <span class="ruby-comment"># @messages = @product.item_messages</span>
+
+                      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+              <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

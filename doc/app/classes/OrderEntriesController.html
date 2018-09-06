@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>OrderEntriesController</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="OrderEntriesController">
+
+  
+
+    <meta name="keywords" content="OrderEntriesController class">
+  
+    <meta name="keywords" content="create, destroy, update_entry, change_status, change_status_on_checklist, history, attachment">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            OrderEntriesController
+            
+                <span class="parent">&lt;
+                    
+                    <a href="ApplicationController.html">ApplicationController</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/app/controllers/order_entries_controller_rb.html">app/controllers/order_entries_controller.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-attachment">attachment</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-change_status">change_status</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-change_status_on_checklist">change_status_on_checklist</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-create">create</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-destroy">destroy</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-history">history</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-update_entry">update_entry</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-attachment">
+            
+              <b>attachment</b>()
+            
+            <a href="../classes/OrderEntriesController.html#method-i-attachment" name="method-i-attachment" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-attachment_source')" id="l_method-i-attachment_source">show</a>
+                
+              </p>
+              <div id="method-i-attachment_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/order_entries_controller.rb, line 136</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">attachment</span>
+  <span class="ruby-ivar">@order_entry_attachments</span> = <span class="ruby-constant">OrderEntryAttachment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">render</span> <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-change_status">
+            
+              <b>change_status</b>()
+            
+            <a href="../classes/OrderEntriesController.html#method-i-change_status" name="method-i-change_status" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-change_status_source')" id="l_method-i-change_status_source">show</a>
+                
+              </p>
+              <div id="method-i-change_status_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/order_entries_controller.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">change_status</span>
+  <span class="ruby-ivar">@order_entry</span> = <span class="ruby-constant">OrderEntry</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:status</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:status</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:status</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:status</span>])
+      <span class="ruby-constant">OrderHistory</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:order_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">order_id</span>, <span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;has changed to #{@order_entry.get_status}&quot;</span>, <span class="ruby-value">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
+      <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Item Status Successfully Updated&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;Item Status Updated Failed&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;Item Status Updated Failed&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">orders_path</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">order_id</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-change_status_on_checklist">
+            
+              <b>change_status_on_checklist</b>()
+            
+            <a href="../classes/OrderEntriesController.html#method-i-change_status_on_checklist" name="method-i-change_status_on_checklist" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-change_status_on_checklist_source')" id="l_method-i-change_status_on_checklist_source">show</a>
+                
+              </p>
+              <div id="method-i-change_status_on_checklist_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/order_entries_controller.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">change_status_on_checklist</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:item_ids</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:item_ids</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:item_ids</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">params</span>[<span class="ruby-value">:item_ids</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">id</span><span class="ruby-operator">|</span>
+        <span class="ruby-ivar">@order_entry</span> = <span class="ruby-constant">OrderEntry</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">id</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>)
+          <span class="ruby-constant">OrderHistory</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:order_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">order_id</span>, <span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;has changed to Ordered&#39;</span>, <span class="ruby-value">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
+          <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Item Statuses Successfully Updated&quot;</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;Item Statuses Updated Failed&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;No Item has been checked&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;No Item has been checked&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">orders_path</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-create">
+            
+              <b>create</b>()
+            
+            <a href="../classes/OrderEntriesController.html#method-i-create" name="method-i-create" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-create_source')" id="l_method-i-create_source">show</a>
+                
+              </p>
+              <div id="method-i-create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/order_entries_controller.rb, line 3</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@order_entry</span> = <span class="ruby-constant">OrderEntry</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">order_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:order_id</span>]
+  <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">product_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:product_id</span>]
+  <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">quoted_by</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:quoted_by</span>]
+  <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">category_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:category_id</span>]
+  <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">price</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:price</span>]
+  <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">cost</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:cost</span>]
+  <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">tax</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:tax</span>]
+  <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">quantity</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:quantity</span>]
+  <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">specs</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:specs</span>]
+  <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">vendor_quote_prices</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:vendor_quote_prices</span>]
+  <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">notes</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:notes</span>]
+  <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">dynamic_fields</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:dynamic_fields</span>].<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:order_id</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:product_id</span>].<span class="ruby-identifier">present?</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:vendor</span>].<span class="ruby-identifier">present?</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:vendor</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+          <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:vendor</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">id</span><span class="ruby-operator">|</span>
+            <span class="ruby-constant">OrderEntryVendor</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">product_id</span>, <span class="ruby-value">:vendor_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_i</span>)
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:file</span>].<span class="ruby-identifier">present?</span>
+        <span class="ruby-identifier">params</span>[<span class="ruby-value">:file</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attachment_file</span><span class="ruby-operator">|</span>
+          <span class="ruby-constant">OrderEntryAttachment</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">product_id</span>, <span class="ruby-value">:attachment_file</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:file</span>][<span class="ruby-node">&quot;#{attachment_file}&quot;</span>])
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-constant">OrderHistory</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:order_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">order_id</span>, <span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;has been Added&#39;</span>, <span class="ruby-value">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
+      <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Order Entry Successfully Created&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;Order Entry Created Failed&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;Order Entry Created Failed&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">orders_path</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">order_id</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-destroy">
+            
+              <b>destroy</b>()
+            
+            <a href="../classes/OrderEntriesController.html#method-i-destroy" name="method-i-destroy" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-destroy_source')" id="l_method-i-destroy_source">show</a>
+                
+              </p>
+              <div id="method-i-destroy_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/order_entries_controller.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-identifier">order_entry</span> = <span class="ruby-constant">OrderEntry</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_entry</span>.<span class="ruby-identifier">destroy</span>
+    <span class="ruby-constant">OrderEntryVendor</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]).<span class="ruby-identifier">destroy_all</span>
+    <span class="ruby-constant">OrderEntryAttachment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]).<span class="ruby-identifier">destroy_all</span>
+    <span class="ruby-constant">OrderHistory</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:order_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">order_entry</span>.<span class="ruby-identifier">order_id</span>, <span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">order_entry</span>.<span class="ruby-identifier">product_id</span>, <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;has been Removed&#39;</span>, <span class="ruby-value">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Order Entry Successfully Deleted&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;Order Entry Deleted Failed&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">orders_path</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">order_entry</span>.<span class="ruby-identifier">order_id</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-history">
+            
+              <b>history</b>()
+            
+            <a href="../classes/OrderEntriesController.html#method-i-history" name="method-i-history" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-history_source')" id="l_method-i-history_source">show</a>
+                
+              </p>
+              <div id="method-i-history_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/order_entries_controller.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">history</span>
+  <span class="ruby-ivar">@order_histories</span> = <span class="ruby-constant">OrderHistory</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">render</span> <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update_entry">
+            
+              <b>update_entry</b>()
+            
+            <a href="../classes/OrderEntriesController.html#method-i-update_entry" name="method-i-update_entry" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-update_entry_source')" id="l_method-i-update_entry_source">show</a>
+                
+              </p>
+              <div id="method-i-update_entry_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/order_entries_controller.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_entry</span>
+  <span class="ruby-ivar">@order_entry</span> = <span class="ruby-constant">OrderEntry</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:id</span>])
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:order_id</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:product_id</span>].<span class="ruby-identifier">present?</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:category_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:category_id</span>], <span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:product_id</span>], <span class="ruby-value">:order_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:order_id</span>], <span class="ruby-value">:quoted_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:quoted_by</span>], <span class="ruby-value">:price</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:price</span>], <span class="ruby-value">:tax</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:tax</span>], <span class="ruby-value">:cost</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:cost</span>], <span class="ruby-value">:quantity</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:quantity</span>], <span class="ruby-value">:specs</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:specs</span>], <span class="ruby-value">:vendor_quote_prices</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:vendor_quote_prices</span>], <span class="ruby-value">:notes</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:notes</span>], <span class="ruby-value">:dynamic_fields</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:dynamic_fields</span>].<span class="ruby-identifier">to_s</span> )
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:vendor</span>].<span class="ruby-identifier">present?</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:vendor</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+          <span class="ruby-identifier">temp_existing_vendors</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry</span>][<span class="ruby-value">:vendor</span>]
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{temp_existing_vendors}&quot;</span>
+          <span class="ruby-identifier">order_entry_vendors</span> = <span class="ruby-constant">OrderEntryVendor</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">id</span>)
+          <span class="ruby-identifier">order_entry_vendors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">oe</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">temp_existing_vendors</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">oe</span>.<span class="ruby-identifier">vendor_id</span>.<span class="ruby-identifier">to_s</span>
+              <span class="ruby-identifier">oe</span>.<span class="ruby-identifier">destroy</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+          <span class="ruby-identifier">temp_existing_vendors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">vl</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-constant">OrderEntryVendor</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:vendor_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">vl</span>.<span class="ruby-identifier">to_i</span>).<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+              <span class="ruby-constant">OrderEntryVendor</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">product_id</span>, <span class="ruby-value">:vendor_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">vl</span>.<span class="ruby-identifier">to_i</span>)
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-constant">OrderEntryVendor</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">destroy_all</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:file</span>].<span class="ruby-identifier">present?</span>
+        <span class="ruby-identifier">params</span>[<span class="ruby-value">:file</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attachment_file</span><span class="ruby-operator">|</span>
+          <span class="ruby-constant">OrderEntryAttachment</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">product_id</span>, <span class="ruby-value">:attachment_file</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:file</span>][<span class="ruby-node">&quot;#{attachment_file}&quot;</span>])
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Order Entry Successfully Updated&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;Order Entry Updated Failed&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;Order Entry Updated Failed&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">orders_path</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">order_id</span>, <span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">product_id</span>, <span class="ruby-value">:order_entry_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">id</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

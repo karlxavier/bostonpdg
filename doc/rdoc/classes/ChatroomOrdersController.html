@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ChatroomOrdersController</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="ChatroomOrdersController">
+
+  
+
+    <meta name="keywords" content="ChatroomOrdersController class">
+  
+    <meta name="keywords" content="index, load_messages, update, load_item_messages">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            ChatroomOrdersController
+            
+                <span class="parent">&lt;
+                    
+                    <a href="ApplicationController.html">ApplicationController</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/app/controllers/chatroom_orders_controller_rb.html">app/controllers/chatroom_orders_controller.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-index">index</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-load_item_messages">load_item_messages</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-load_messages">load_messages</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-update">update</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-index">
+            
+              <b>index</b>()
+            
+            <a href="../classes/ChatroomOrdersController.html#method-i-index" name="method-i-index" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-index_source')" id="l_method-i-index_source">show</a>
+                
+              </p>
+              <div id="method-i-index_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/chatroom_orders_controller.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">admin?</span>
+    <span class="ruby-ivar">@chatroom_orders</span> = <span class="ruby-constant">ChatroomOrder</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">id:</span> <span class="ruby-value">:desc</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@chatroom_orders</span> = <span class="ruby-constant">ChatroomOrder</span>.<span class="ruby-identifier">only_my_chatrooms</span>(<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">order</span>(<span class="ruby-value">id:</span> <span class="ruby-value">:desc</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-load_item_messages">
+            
+              <b>load_item_messages</b>()
+            
+            <a href="../classes/ChatroomOrdersController.html#method-i-load_item_messages" name="method-i-load_item_messages" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-load_item_messages_source')" id="l_method-i-load_item_messages_source">show</a>
+                
+              </p>
+              <div id="method-i-load_item_messages_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/chatroom_orders_controller.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_item_messages</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry_id</span>].<span class="ruby-identifier">present?</span>
+      <span class="ruby-ivar">@order_entry</span> = <span class="ruby-constant">OrderEntry</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entry_id</span>])
+      <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+        <span class="ruby-ivar">@messages</span> = <span class="ruby-constant">ItemMessage</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">order_entry_id:</span> <span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">id</span>)
+        <span class="ruby-ivar">@product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@order_entry</span>.<span class="ruby-identifier">product_id</span>)
+
+        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-load_messages">
+            
+              <b>load_messages</b>()
+            
+            <a href="../classes/ChatroomOrdersController.html#method-i-load_messages" name="method-i-load_messages" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-load_messages_source')" id="l_method-i-load_messages_source">show</a>
+                
+              </p>
+              <div id="method-i-load_messages_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/chatroom_orders_controller.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_messages</span>
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># @chatroom = Chatroom.find(params[:chatroom_id])</span>
+      <span class="ruby-ivar">@messages</span> = <span class="ruby-ivar">@chatroom</span>.<span class="ruby-identifier">messages</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">created_at:</span> <span class="ruby-value">:desc</span>).<span class="ruby-identifier">limit</span>(<span class="ruby-value">100</span>).<span class="ruby-identifier">reverse</span>
+      <span class="ruby-comment"># @unread_count = Message.unread_count(current_user.id, @chatroom.id, @chatroom.chatroom_users.first.last_read_at)</span>
+
+      <span class="ruby-comment"># chatroom_user = ChatroomUser.where(chatroom_id: @chatroom.id, user_id: current_user.id).first</span>
+      <span class="ruby-comment"># chatroom_user.update_attributes(last_read_at: Time.zone.now)</span>
+
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update">
+            
+              <b>update</b>()
+            
+            <a href="../classes/ChatroomOrdersController.html#method-i-update" name="method-i-update" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-update_source')" id="l_method-i-update_source">show</a>
+                
+              </p>
+              <div id="method-i-update_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/chatroom_orders_controller.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">order_user_ids</span> = <span class="ruby-constant">OrderUser</span>.<span class="ruby-identifier">chatroom_order_users</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]).<span class="ruby-identifier">ids</span>
+    <span class="ruby-identifier">params</span>[<span class="ruby-value">:chatroom_order</span>][<span class="ruby-value">:ids</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">id</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">order_user_ids</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">id</span>)
+        <span class="ruby-constant">OrderUser</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">regional:</span> <span class="ruby-identifier">id</span>, <span class="ruby-value">order_id:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-ivar">@chatroom</span> = <span class="ruby-constant">ChatroomOrder</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

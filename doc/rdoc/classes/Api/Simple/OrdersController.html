@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Api::Simple::OrdersController</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="Api::Simple::OrdersController">
+
+  
+
+    <meta name="keywords" content="Api::Simple::OrdersController class">
+  
+    <meta name="keywords" content="list, show, get_latest_order, show_entries, show_branches, show_users, update_status_entry, send_orders, update, create, update_assign_user, set_order, orders_params">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            Api::Simple::OrdersController
+            
+                <span class="parent">&lt;
+                    
+                    <a href="../../ApplicationController.html">ApplicationController</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/app/controllers/api/simple/orders_controller_rb.html">app/controllers/api/simple/orders_controller.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-create">create</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-get_latest_order">get_latest_order</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-list">list</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-orders_params">orders_params</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-send_orders">send_orders</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-set_order">set_order</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-show">show</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-show_branches">show_branches</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-show_entries">show_entries</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-show_users">show_users</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-update">update</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-update_assign_user">update_assign_user</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-update_status_entry">update_status_entry</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-create">
+            
+              <b>create</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-create" name="method-i-create" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-create_source')" id="l_method-i-create_source">show</a>
+                
+              </p>
+              <div id="method-i-create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 87</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
+        <span class="ruby-identifier">temp_order</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order</span>]
+        <span class="ruby-identifier">order</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">brand_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:temp_brand</span>][<span class="ruby-value">:id</span>]
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">lead_time</span> = <span class="ruby-identifier">temp_order</span>[<span class="ruby-value">:lead_time</span>]
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">status</span> = <span class="ruby-identifier">temp_order</span>[<span class="ruby-value">:status</span>]
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">total_budget</span> = <span class="ruby-identifier">temp_order</span>[<span class="ruby-value">:total_budget</span>]
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">urgent</span> = <span class="ruby-identifier">temp_order</span>[<span class="ruby-value">:urget</span>]
+
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">save</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_branch</span>].<span class="ruby-identifier">present?</span>
+            <span class="ruby-identifier">temp_order_branch</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_branch</span>]
+            <span class="ruby-identifier">temp_order_branch</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ob</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">order_branch</span> = <span class="ruby-constant">OrderBranch</span>.<span class="ruby-identifier">new</span>
+              <span class="ruby-identifier">order_branch</span>.<span class="ruby-identifier">brand_id</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">brand_id</span>
+              <span class="ruby-identifier">order_branch</span>.<span class="ruby-identifier">order_id</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">id</span>
+              <span class="ruby-identifier">order_branch</span>.<span class="ruby-identifier">address_id</span> = <span class="ruby-identifier">ob</span>
+              <span class="ruby-identifier">order_branch</span>.<span class="ruby-identifier">save</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+          <span class="ruby-identifier">regional</span> = []
+          <span class="ruby-identifier">comms</span> = []
+          <span class="ruby-identifier">art</span> = []
+          <span class="ruby-identifier">processor</span> = []
+          <span class="ruby-identifier">arr_count</span> = []
+          <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+          <span class="ruby-identifier">params</span>[<span class="ruby-value">:regional</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>[<span class="ruby-value">:selected</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;true&#39;</span>
+              <span class="ruby-identifier">regional</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">user</span>)
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-identifier">params</span>[<span class="ruby-value">:comms</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>[<span class="ruby-value">:selected</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;true&#39;</span>
+              <span class="ruby-identifier">comms</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">user</span>)
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-identifier">params</span>[<span class="ruby-value">:art</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>[<span class="ruby-value">:selected</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;true&#39;</span>
+              <span class="ruby-identifier">art</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">user</span>)
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-identifier">params</span>[<span class="ruby-value">:processor</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>[<span class="ruby-value">:selected</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;true&#39;</span>
+              <span class="ruby-identifier">processor</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">user</span>)
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-identifier">arr_count</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">regional</span>.<span class="ruby-identifier">length</span>)
+          <span class="ruby-identifier">arr_count</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">comms</span>.<span class="ruby-identifier">length</span>)
+          <span class="ruby-identifier">arr_count</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">art</span>.<span class="ruby-identifier">length</span>)
+          <span class="ruby-identifier">arr_count</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">processor</span>.<span class="ruby-identifier">length</span>)
+
+          <span class="ruby-keyword">while</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">arr_count</span>.<span class="ruby-identifier">max</span>
+            <span class="ruby-identifier">order_user</span> = <span class="ruby-constant">OrderUser</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-identifier">order_user</span>.<span class="ruby-identifier">order_id</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">id</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">regional</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">present?</span>
+              <span class="ruby-identifier">order_user</span>.<span class="ruby-identifier">regional</span> = <span class="ruby-identifier">regional</span>[<span class="ruby-identifier">i</span>][<span class="ruby-value">:id</span>]
+            <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">comms</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">present?</span>
+              <span class="ruby-identifier">order_user</span>.<span class="ruby-identifier">comms</span> = <span class="ruby-identifier">comms</span>[<span class="ruby-identifier">i</span>][<span class="ruby-value">:id</span>]
+            <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">art</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">present?</span>
+              <span class="ruby-identifier">order_user</span>.<span class="ruby-identifier">art</span> = <span class="ruby-identifier">art</span>[<span class="ruby-identifier">i</span>][<span class="ruby-value">:id</span>]
+            <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">processor</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">present?</span>
+              <span class="ruby-identifier">order_user</span>.<span class="ruby-identifier">processor</span> = <span class="ruby-identifier">processor</span>[<span class="ruby-identifier">i</span>][<span class="ruby-value">:id</span>]
+            <span class="ruby-keyword">end</span>
+            <span class="ruby-identifier">order_user</span>.<span class="ruby-identifier">save</span>
+            <span class="ruby-identifier">i</span> = <span class="ruby-identifier">i</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+          <span class="ruby-keyword">end</span>
+
+<span class="ruby-comment">=begin
+          if params[:order_user].present?
+            i = 0
+            #temp_order_user = params[:order_user]
+            @temp_length = 1
+
+            if temp_order_user[:art].length &gt; 0
+              @temp_length = temp_order_user[:art].length
+            end
+
+            while i &lt; @temp_length
+              order_user = OrderUser.new
+              order_user.order_id = order.id
+              if i == 0
+                if temp_order_user[:comms].present?
+                  order_user.comms = temp_order_user[:comms]
+                end
+                if temp_order_user[:processor].present?
+                  order_user.processor = temp_order_user[:processor]
+                end
+                if temp_order_user[:regional].present?
+                  order_user.regional = temp_order_user[:regional]
+                end
+                order_user.art = temp_order_user[:art][i]
+              end
+              if temp_order_user[:art][i].present?
+                order_user.art = temp_order_user[:art][i]
+              end
+              order_user.save
+              i = i+1;
+            end
+          end
+=end</span>
+
+            <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">order</span>,<span class="ruby-value">methods:</span> [<span class="ruby-value">:created_by_name</span>, <span class="ruby-value">:customer_name</span>, <span class="ruby-value">:last_updated_by_name</span>, <span class="ruby-value">:created_date</span>, <span class="ruby-value">:updated_date</span>, <span class="ruby-value">:brand_name</span>, <span class="ruby-value">:brand_branches</span>, <span class="ruby-value">:art</span>, <span class="ruby-value">:comms</span>, <span class="ruby-value">:regional</span>, <span class="ruby-value">:processor</span>, <span class="ruby-value">:temp_brand</span>]
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get_latest_order">
+            
+              <b>get_latest_order</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-get_latest_order" name="method-i-get_latest_order" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_latest_order_source')" id="l_method-i-get_latest_order_source">show</a>
+                
+              </p>
+              <div id="method-i-get_latest_order_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_latest_order</span>
+  <span class="ruby-ivar">@order</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&#39;updated_at, created_by DESC&#39;</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-ivar">@order</span>,<span class="ruby-value">methods:</span> [<span class="ruby-value">:created_by_name</span>, <span class="ruby-value">:customer_name</span>, <span class="ruby-value">:last_updated_by_name</span>, <span class="ruby-value">:created_date</span>, <span class="ruby-value">:updated_date</span>, <span class="ruby-value">:brand_name</span>, <span class="ruby-value">:brand_branches</span>, <span class="ruby-value">:art</span>, <span class="ruby-value">:regional</span>, <span class="ruby-value">:comms</span>, <span class="ruby-value">:processor</span>, <span class="ruby-value">:temp_brand</span>, <span class="ruby-value">:art_users</span>, <span class="ruby-value">:regional_users</span>, <span class="ruby-value">:comms_users</span>, <span class="ruby-value">:processor_users</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-list">
+            
+              <b>list</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-list" name="method-i-list" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-list_source')" id="l_method-i-list_source">show</a>
+                
+              </p>
+              <div id="method-i-list_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list</span>
+  <span class="ruby-ivar">@orders</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;updated_at, created_by DESC&quot;</span>)
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-ivar">@orders</span>,<span class="ruby-value">methods:</span> [<span class="ruby-value">:created_by_name</span>, <span class="ruby-value">:customer_name</span>, <span class="ruby-value">:last_updated_by_name</span>, <span class="ruby-value">:created_date</span>, <span class="ruby-value">:brand_name</span>, <span class="ruby-value">:brand_branches</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-send_orders">
+            
+              <b>send_orders</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-send_orders" name="method-i-send_orders" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-send_orders_source')" id="l_method-i-send_orders_source">show</a>
+                
+              </p>
+              <div id="method-i-send_orders_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_orders</span>
+  <span class="ruby-ivar">@order</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order_id</span>].<span class="ruby-identifier">to_i</span>)
+  <span class="ruby-ivar">@vendor</span> = <span class="ruby-constant">Vendor</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>].<span class="ruby-identifier">to_i</span>)
+  <span class="ruby-ivar">@order_entries</span> = <span class="ruby-constant">OrderEntry</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:vendor</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-ivar">@vendor</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:email</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;notifications@burningmidnight.com&quot;</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@vendor</span>.<span class="ruby-identifier">email</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@vendor</span>.<span class="ruby-identifier">email</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-constant">OrderMailer</span>.<span class="ruby-identifier">with</span>(<span class="ruby-value">order:</span> <span class="ruby-ivar">@order</span>, <span class="ruby-value">vendor:</span> <span class="ruby-ivar">@vendor</span>, <span class="ruby-value">order_entries:</span> <span class="ruby-ivar">@order_entries</span>).<span class="ruby-identifier">send_order_entries</span>.<span class="ruby-identifier">deliver_now</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Order has sent successfully.&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;Vendor doesn&#39;t have an email!&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_order_path</span>(<span class="ruby-ivar">@order</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-show">
+            
+              <b>show</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-show" name="method-i-show" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-show_source')" id="l_method-i-show_source">show</a>
+                
+              </p>
+              <div id="method-i-show_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-ivar">@order</span>,<span class="ruby-value">methods:</span> [<span class="ruby-value">:created_by_name</span>, <span class="ruby-value">:customer_name</span>, <span class="ruby-value">:last_updated_by_name</span>, <span class="ruby-value">:created_date</span>, <span class="ruby-value">:updated_date</span>, <span class="ruby-value">:brand_name</span>, <span class="ruby-value">:brand_branches</span>, <span class="ruby-value">:art</span>, <span class="ruby-value">:regional</span>, <span class="ruby-value">:comms</span>, <span class="ruby-value">:processor</span>, <span class="ruby-value">:temp_brand</span>, <span class="ruby-value">:art_users</span>, <span class="ruby-value">:regional_users</span>, <span class="ruby-value">:comms_users</span>, <span class="ruby-value">:processor_users</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-show_branches">
+            
+              <b>show_branches</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-show_branches" name="method-i-show_branches" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-show_branches_source')" id="l_method-i-show_branches_source">show</a>
+                
+              </p>
+              <div id="method-i-show_branches_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show_branches</span>
+  <span class="ruby-identifier">order</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order_id</span>])
+  <span class="ruby-ivar">@order_branches</span> = <span class="ruby-constant">OrderBranch</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:brand_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">brand_id</span>)
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-ivar">@order_branches</span>, <span class="ruby-value">methods:</span> [<span class="ruby-value">:state_and_city</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-show_entries">
+            
+              <b>show_entries</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-show_entries" name="method-i-show_entries" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-show_entries_source')" id="l_method-i-show_entries_source">show</a>
+                
+              </p>
+              <div id="method-i-show_entries_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show_entries</span>
+  <span class="ruby-ivar">@order_entries</span> = <span class="ruby-constant">OrderEntry</span>.<span class="ruby-identifier">where</span>(<span class="ruby-node">&quot;order_id = &#39;#{params[:order_id]}&#39;&quot;</span>)
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-ivar">@order_entries</span>, <span class="ruby-value">methods:</span> [<span class="ruby-value">:product_name</span>, <span class="ruby-value">:category_name</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-show_users">
+            
+              <b>show_users</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-show_users" name="method-i-show_users" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-show_users_source')" id="l_method-i-show_users_source">show</a>
+                
+              </p>
+              <div id="method-i-show_users_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show_users</span>
+  <span class="ruby-ivar">@order_users</span> = <span class="ruby-constant">OrderUser</span>.<span class="ruby-identifier">where</span>(<span class="ruby-node">&quot;order_id = &#39;#{params[:order_id]}&#39;&quot;</span>)
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-ivar">@order_users</span>, <span class="ruby-value">methods:</span> [<span class="ruby-value">:regional_name</span>, <span class="ruby-value">:comms_name</span>, <span class="ruby-value">:art_name</span>, <span class="ruby-value">:processor_name</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update">
+            
+              <b>update</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-update" name="method-i-update" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-update_source')" id="l_method-i-update_source">show</a>
+                
+              </p>
+              <div id="method-i-update_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>
+  <span class="ruby-identifier">temp_order</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order</span>]
+  <span class="ruby-identifier">order</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">order</span>.<span class="ruby-identifier">brand_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:temp_brand</span>][<span class="ruby-value">:id</span>]
+  <span class="ruby-identifier">order</span>.<span class="ruby-identifier">lead_time</span> = <span class="ruby-identifier">temp_order</span>[<span class="ruby-value">:lead_time</span>]
+  <span class="ruby-identifier">order</span>.<span class="ruby-identifier">status</span> = <span class="ruby-identifier">temp_order</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-identifier">order</span>.<span class="ruby-identifier">total_budget</span> = <span class="ruby-identifier">temp_order</span>[<span class="ruby-value">:total_budget</span>]
+  <span class="ruby-identifier">order</span>.<span class="ruby-identifier">urgent</span> = <span class="ruby-identifier">temp_order</span>[<span class="ruby-value">:urget</span>]
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:brand_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">brand_id</span>, <span class="ruby-value">:lead_time</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">lead_time</span>, <span class="ruby-value">:status</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">status</span>, <span class="ruby-value">:total_budget</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">total_budget</span>, <span class="ruby-value">:urgent</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">urgent</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_branch</span>].<span class="ruby-identifier">present?</span>
+      <span class="ruby-constant">OrderBranch</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">destroy_all</span>
+      <span class="ruby-identifier">temp_order_branch</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_branch</span>]
+      <span class="ruby-identifier">temp_order_branch</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ob</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">order_branch</span> = <span class="ruby-constant">OrderBranch</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">order_branch</span>.<span class="ruby-identifier">brand_id</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">brand_id</span>
+        <span class="ruby-identifier">order_branch</span>.<span class="ruby-identifier">order_id</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">id</span>
+        <span class="ruby-identifier">order_branch</span>.<span class="ruby-identifier">address_id</span> = <span class="ruby-identifier">ob</span>
+        <span class="ruby-identifier">order_branch</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:art</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:comms</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:processor</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:regional</span>].<span class="ruby-identifier">present?</span>
+      <span class="ruby-identifier">user</span> = <span class="ruby-constant">OrderUser</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span>
+      <span class="ruby-identifier">user</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:art</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:art</span>][<span class="ruby-value">:id</span>], <span class="ruby-value">:regional</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:regional</span>][<span class="ruby-value">:id</span>], <span class="ruby-value">:processor</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:processor</span>][<span class="ruby-value">:id</span>], <span class="ruby-value">:comms</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:comms</span>][<span class="ruby-value">:id</span>])
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-ivar">@order</span>,<span class="ruby-value">methods:</span> [<span class="ruby-value">:created_by_name</span>, <span class="ruby-value">:customer_name</span>, <span class="ruby-value">:last_updated_by_name</span>, <span class="ruby-value">:created_date</span>, <span class="ruby-value">:updated_date</span>, <span class="ruby-value">:brand_name</span>, <span class="ruby-value">:brand_branches</span>, <span class="ruby-value">:art</span>, <span class="ruby-value">:comms</span>, <span class="ruby-value">:regional</span>, <span class="ruby-value">:processor</span>, <span class="ruby-value">:temp_brand</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update_assign_user">
+            
+              <b>update_assign_user</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-update_assign_user" name="method-i-update_assign_user" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-update_assign_user_source')" id="l_method-i-update_assign_user_source">show</a>
+                
+              </p>
+              <div id="method-i-update_assign_user_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 199</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update_assign_user</span>
+  <span class="ruby-ivar">@order</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order_id</span>])
+  <span class="ruby-identifier">regional</span> = []
+  <span class="ruby-identifier">comms</span> = []
+  <span class="ruby-identifier">art</span> = []
+  <span class="ruby-identifier">processor</span> = []
+  <span class="ruby-identifier">arr_count</span> = []
+  <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-constant">OrderUser</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">destroy_all</span>
+    <span class="ruby-identifier">params</span>[<span class="ruby-value">:regional</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>[<span class="ruby-value">:selected</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;true&#39;</span>
+        <span class="ruby-identifier">regional</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">user</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">params</span>[<span class="ruby-value">:comms</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>[<span class="ruby-value">:selected</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;true&#39;</span>
+        <span class="ruby-identifier">comms</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">user</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">params</span>[<span class="ruby-value">:art</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>[<span class="ruby-value">:selected</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;true&#39;</span>
+        <span class="ruby-identifier">art</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">user</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">params</span>[<span class="ruby-value">:processor</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>[<span class="ruby-value">:selected</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;true&#39;</span>
+        <span class="ruby-identifier">processor</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">user</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">arr_count</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">regional</span>.<span class="ruby-identifier">length</span>)
+    <span class="ruby-identifier">arr_count</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">comms</span>.<span class="ruby-identifier">length</span>)
+    <span class="ruby-identifier">arr_count</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">art</span>.<span class="ruby-identifier">length</span>)
+    <span class="ruby-identifier">arr_count</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">processor</span>.<span class="ruby-identifier">length</span>)
+
+    <span class="ruby-keyword">while</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">arr_count</span>.<span class="ruby-identifier">max</span>
+      <span class="ruby-identifier">order_user</span> = <span class="ruby-constant">OrderUser</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">order_user</span>.<span class="ruby-identifier">order_id</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">id</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">regional</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">present?</span>
+        <span class="ruby-identifier">order_user</span>.<span class="ruby-identifier">regional</span> = <span class="ruby-identifier">regional</span>[<span class="ruby-identifier">i</span>][<span class="ruby-value">:id</span>]
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">comms</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">present?</span>
+        <span class="ruby-identifier">order_user</span>.<span class="ruby-identifier">comms</span> = <span class="ruby-identifier">comms</span>[<span class="ruby-identifier">i</span>][<span class="ruby-value">:id</span>]
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">art</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">present?</span>
+        <span class="ruby-identifier">order_user</span>.<span class="ruby-identifier">art</span> = <span class="ruby-identifier">art</span>[<span class="ruby-identifier">i</span>][<span class="ruby-value">:id</span>]
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">processor</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">present?</span>
+        <span class="ruby-identifier">order_user</span>.<span class="ruby-identifier">processor</span> = <span class="ruby-identifier">processor</span>[<span class="ruby-identifier">i</span>][<span class="ruby-value">:id</span>]
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">order_user</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-identifier">i</span> = <span class="ruby-identifier">i</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">end</span>
+
+
+    <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-ivar">@order</span>,<span class="ruby-value">methods:</span> [<span class="ruby-value">:created_by_name</span>, <span class="ruby-value">:customer_name</span>, <span class="ruby-value">:last_updated_by_name</span>, <span class="ruby-value">:created_date</span>, <span class="ruby-value">:updated_date</span>, <span class="ruby-value">:brand_name</span>, <span class="ruby-value">:brand_branches</span>, <span class="ruby-value">:art</span>, <span class="ruby-value">:comms</span>, <span class="ruby-value">:regional</span>, <span class="ruby-value">:processor</span>, <span class="ruby-value">:temp_brand</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update_status_entry">
+            
+              <b>update_status_entry</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-update_status_entry" name="method-i-update_status_entry" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-update_status_entry_source')" id="l_method-i-update_status_entry_source">show</a>
+                
+              </p>
+              <div id="method-i-update_status_entry_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update_status_entry</span>
+  <span class="ruby-identifier">entry</span> = <span class="ruby-constant">OrderEntry</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:entry_id</span>].<span class="ruby-identifier">to_i</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:status</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:status</span>])
+    <span class="ruby-identifier">order</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order_id</span>].<span class="ruby-identifier">to_i</span>)
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_order_path</span>(<span class="ruby-identifier">order</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-orders_params">
+            
+              <b>orders_params</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-orders_params" name="method-i-orders_params" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-orders_params_source')" id="l_method-i-orders_params_source">show</a>
+                
+              </p>
+              <div id="method-i-orders_params_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 268</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">orders_params</span>
+  <span class="ruby-identifier">params</span>[<span class="ruby-value">:order</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-set_order">
+            
+              <b>set_order</b>()
+            
+            <a href="../../../classes/Api/Simple/OrdersController.html#method-i-set_order" name="method-i-set_order" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-set_order_source')" id="l_method-i-set_order_source">show</a>
+                
+              </p>
+              <div id="method-i-set_order_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/orders_controller.rb, line 264</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_order</span>
+  <span class="ruby-ivar">@order</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

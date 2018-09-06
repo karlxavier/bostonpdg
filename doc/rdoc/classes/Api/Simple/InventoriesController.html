@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Api::Simple::InventoriesController</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="Api::Simple::InventoriesController">
+
+  
+
+    <meta name="keywords" content="Api::Simple::InventoriesController class">
+  
+    <meta name="keywords" content="list, index, overall, show, create, update, set_inventory, inventories_params">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            Api::Simple::InventoriesController
+            
+                <span class="parent">&lt;
+                    
+                    <a href="../../ApplicationController.html">ApplicationController</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/app/controllers/api/simple/inventories_controller_rb.html">app/controllers/api/simple/inventories_controller.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-create">create</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-index">index</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-inventories_params">inventories_params</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-list">list</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-overall">overall</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-set_inventory">set_inventory</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-show">show</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-update">update</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-create">
+            
+              <b>create</b>()
+            
+            <a href="../../../classes/Api/Simple/InventoriesController.html#method-i-create" name="method-i-create" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-create_source')" id="l_method-i-create_source">show</a>
+                
+              </p>
+              <div id="method-i-create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/inventories_controller.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
+  <span class="ruby-ivar">@inventory</span> = <span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">inventories_params</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inventory</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-ivar">@inventory</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">nothing:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">status:</span> <span class="ruby-value">:bad_request</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-index">
+            
+              <b>index</b>()
+            
+            <a href="../../../classes/Api/Simple/InventoriesController.html#method-i-index" name="method-i-index" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-index_source')" id="l_method-i-index_source">show</a>
+                
+              </p>
+              <div id="method-i-index_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/inventories_controller.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:category</span>].<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">inventories</span> = <span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;product_id IN (SELECT id from products where category=?)&quot;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:category</span>])
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">inventories</span> = <span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">inventories</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">inventory</span><span class="ruby-operator">|</span> { <span class="ruby-value">id:</span> <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">quantity:</span> <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">quantity</span>, <span class="ruby-value">product_name:</span> <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">product_id</span>).<span class="ruby-identifier">name</span>, <span class="ruby-value">force_in_stock:</span> <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">product_id</span>).<span class="ruby-identifier">force_in_stock</span> } }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-list">
+            
+              <b>list</b>()
+            
+            <a href="../../../classes/Api/Simple/InventoriesController.html#method-i-list" name="method-i-list" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-list_source')" id="l_method-i-list_source">show</a>
+                
+              </p>
+              <div id="method-i-list_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/inventories_controller.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list</span>
+  <span class="ruby-identifier">inventories</span> = <span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">inventories</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">inventory</span><span class="ruby-operator">|</span> { <span class="ruby-value">id:</span> <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">quantity:</span> <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">quantity</span>, <span class="ruby-value">product_name:</span> <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">product_id</span>).<span class="ruby-identifier">name</span>, <span class="ruby-value">force_in_stock:</span> <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">product_id</span>).<span class="ruby-identifier">force_in_stock</span> } }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-overall">
+            
+              <b>overall</b>()
+            
+            <a href="../../../classes/Api/Simple/InventoriesController.html#method-i-overall" name="method-i-overall" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-overall_source')" id="l_method-i-overall_source">show</a>
+                
+              </p>
+              <div id="method-i-overall_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/inventories_controller.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">overall</span>
+  <span class="ruby-identifier">restock</span> = <span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;quantity &lt; 10&quot;</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-identifier">no_stock</span> = <span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;quantity = 0 OR quantity is null&quot;</span>).<span class="ruby-identifier">count</span>
+
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> {<span class="ruby-value">restock:</span> <span class="ruby-identifier">restock</span>, <span class="ruby-value">no_stock:</span> <span class="ruby-identifier">no_stock</span>}
+
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-show">
+            
+              <b>show</b>()
+            
+            <a href="../../../classes/Api/Simple/InventoriesController.html#method-i-show" name="method-i-show" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-show_source')" id="l_method-i-show_source">show</a>
+                
+              </p>
+              <div id="method-i-show_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/inventories_controller.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-ivar">@inventory</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update">
+            
+              <b>update</b>()
+            
+            <a href="../../../classes/Api/Simple/InventoriesController.html#method-i-update" name="method-i-update" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-update_source')" id="l_method-i-update_source">show</a>
+                
+              </p>
+              <div id="method-i-update_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/inventories_controller.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inventory</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">inventories_params</span>)
+    <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> { <span class="ruby-value">status:</span> <span class="ruby-string">&#39;failed&#39;</span> }, <span class="ruby-value">status:</span> <span class="ruby-value">:unprocessable_entity</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-inventories_params">
+            
+              <b>inventories_params</b>()
+            
+            <a href="../../../classes/Api/Simple/InventoriesController.html#method-i-inventories_params" name="method-i-inventories_params" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-inventories_params_source')" id="l_method-i-inventories_params_source">show</a>
+                
+              </p>
+              <div id="method-i-inventories_params_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/inventories_controller.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inventories_params</span>
+  <span class="ruby-identifier">params</span>[<span class="ruby-value">:inventory</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-set_inventory">
+            
+              <b>set_inventory</b>()
+            
+            <a href="../../../classes/Api/Simple/InventoriesController.html#method-i-set_inventory" name="method-i-set_inventory" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-set_inventory_source')" id="l_method-i-set_inventory_source">show</a>
+                
+              </p>
+              <div id="method-i-set_inventory_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/inventories_controller.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_inventory</span>
+  <span class="ruby-ivar">@inventory</span> = <span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>metisMenu.js</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            metisMenu.js
+        </h1>
+        <ul class="files">
+            <li>app/assets/javascripts/metisMenu.js</li>
+            <li>Last modified: 2018-06-29 04:49:59 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<pre><code>metismenu - v2.0.2
+A jQuery menu plugin
+https://github.com/onokumus/metisMenu
+
+Made by Osman Nuri Okumus
+Under MIT License</code></pre>
+
+<p>!function(a) {</p>
+
+<pre><code>&quot;use strict&quot;;
+function b() {
+    var a = document.createElement(&quot;mm&quot;)
+      , b = {
+        WebkitTransition: &quot;webkitTransitionEnd&quot;,
+        MozTransition: &quot;transitionend&quot;,
+        OTransition: &quot;oTransitionEnd otransitionend&quot;,
+        transition: &quot;transitionend&quot;
+    };
+    for (var c in b)
+        if (void 0 !== a.style[c])
+            return {
+                end: b[c]
+            };
+    return !1
+}
+function c(b) {
+    return this.each(function() {
+        var c = a(this)
+          , d = c.data(&quot;mm&quot;)
+          , f = a.extend({}, e.DEFAULTS, c.data(), &quot;object&quot; == typeof b &amp;&amp; b);
+        d || c.data(&quot;mm&quot;, d = new e(this,f)),
+        &quot;string&quot; == typeof b &amp;&amp; d[b]()
+    })
+}
+a.fn.emulateTransitionEnd = function(b) {
+    var c = !1
+      , e = this;
+    a(this).one(&quot;mmTransitionEnd&quot;, function() {
+        c = !0
+    });
+    var f = function() {
+        c || a(e).trigger(d.end)
+    };
+    return setTimeout(f, b),
+    this
+}
+;
+var d = b();
+d &amp;&amp; (a.event.special.mmTransitionEnd = {
+    bindType: d.end,
+    delegateType: d.end,
+    handle: function(b) {
+        return a(b.target).is(this) ? b.handleObj.handler.apply(this, arguments) : void 0
+    }
+});
+var e = function(b, c) {
+    this.$element = a(b),
+    this.options = a.extend({}, e.DEFAULTS, c),
+    this.transitioning = null,
+    this.init()
+};
+e.TRANSITION_DURATION = 350,
+e.DEFAULTS = {
+    toggle: !0,
+    doubleTapToGo: !1,
+    activeClass: &quot;active&quot;
+},
+e.prototype.init = function() {
+    var b = this
+      , c = this.options.activeClass;
+    this.$element.find(&quot;li.&quot; + c).has(&quot;ul&quot;).children(&quot;ul&quot;).addClass(&quot;collapse in&quot;),
+    this.$element.find(&quot;li&quot;).not(&quot;.&quot; + c).has(&quot;ul&quot;).children(&quot;ul&quot;).addClass(&quot;collapse&quot;),
+    this.options.doubleTapToGo &amp;&amp; this.$element.find(&quot;li.&quot; + c).has(&quot;ul&quot;).children(&quot;a&quot;).addClass(&quot;doubleTapToGo&quot;),
+    this.$element.find(&quot;li&quot;).has(&quot;ul&quot;).children(&quot;a&quot;).on(&quot;click.metisMenu&quot;, function(d) {
+        var e = a(this)
+          , f = e.parent(&quot;li&quot;)
+          , g = f.children(&quot;ul&quot;);
+        return d.preventDefault(),
+        f.hasClass(c) ? b.hide(g) : b.show(g),
+        b.options.doubleTapToGo &amp;&amp; b.doubleTapToGo(e) &amp;&amp; &quot;#&quot; !== e.attr(&quot;href&quot;) &amp;&amp; &quot;&quot; !== e.attr(&quot;href&quot;) ? (d.stopPropagation(),
+        void (document.location = e.attr(&quot;href&quot;))) : void 0
+    })
+}
+,
+e.prototype.doubleTapToGo = function(a) {
+    var b = this.$element;
+    return a.hasClass(&quot;doubleTapToGo&quot;) ? (a.removeClass(&quot;doubleTapToGo&quot;),
+    !0) : a.parent().children(&quot;ul&quot;).length ? (b.find(&quot;.doubleTapToGo&quot;).removeClass(&quot;doubleTapToGo&quot;),
+    a.addClass(&quot;doubleTapToGo&quot;),
+    !1) : void 0
+}
+,
+e.prototype.show = function(b) {
+    var c = this.options.activeClass
+      , f = a(b)
+      , g = f.parent(&quot;li&quot;);
+    if (!this.transitioning &amp;&amp; !f.hasClass(&quot;in&quot;)) {
+        g.addClass(c),
+        this.options.toggle &amp;&amp; this.hide(g.siblings().children(&quot;ul.in&quot;)),
+        f.removeClass(&quot;collapse&quot;).addClass(&quot;collapsing&quot;).height(0),
+        this.transitioning = 1;
+        var h = function() {
+            f.removeClass(&quot;collapsing&quot;).addClass(&quot;collapse in&quot;).height(&quot;&quot;),
+            this.transitioning = 0
+        };
+        return d ? void f.one(&quot;mmTransitionEnd&quot;, a.proxy(h, this)).emulateTransitionEnd(e.TRANSITION_DURATION).height(f[0].scrollHeight) : h.call(this)
+    }
+}
+,
+e.prototype.hide = function(b) {
+    var c = this.options.activeClass
+      , f = a(b);
+    if (!this.transitioning &amp;&amp; f.hasClass(&quot;in&quot;)) {
+        f.parent(&quot;li&quot;).removeClass(c),
+        f.height(f.height())[0].offsetHeight,
+        f.addClass(&quot;collapsing&quot;).removeClass(&quot;collapse&quot;).removeClass(&quot;in&quot;),
+        this.transitioning = 1;
+        var g = function() {
+            this.transitioning = 0,
+            f.removeClass(&quot;collapsing&quot;).addClass(&quot;collapse&quot;)
+        };
+        return d ? void f.height(0).one(&quot;mmTransitionEnd&quot;, a.proxy(g, this)).emulateTransitionEnd(e.TRANSITION_DURATION) : g.call(this)
+    }
+}
+;
+var f = a.fn.metisMenu;
+a.fn.metisMenu = c,
+a.fn.metisMenu.Constructor = e,
+a.fn.metisMenu.noConflict = function() {
+    return a.fn.metisMenu = f,
+    this
+}</code></pre>
+
+<p>}(jQuery);</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

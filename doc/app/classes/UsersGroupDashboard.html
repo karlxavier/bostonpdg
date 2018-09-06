@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>UsersGroupDashboard</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="UsersGroupDashboard">
+
+  
+
+    <meta name="keywords" content="UsersGroupDashboard class">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            UsersGroupDashboard
+            
+                <span class="parent">&lt;
+                    
+                    Administrate::BaseDashboard
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/app/dashboards/users_group_dashboard_rb.html">app/dashboards/users_group_dashboard.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">ATTRIBUTE_TYPES</td>
+            <td>=</td>
+            <td class="attr-value">{
+id: Field::Number,
+user_id: Field::Hidden,
+group_id: Field::CollectionSelect.with_options(
+collection: proc { Group.all },
+value_method: :id,
+text_method: :name,
+options: {
+include_blank: &#39;Please Select a Group&#39;,
+include_hidden: false,
+}
+),
+created_at: Field::DateTime,
+updated_at: Field::DateTime,
+}.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a href="UsersGroupDashboard.html#ATTRIBUTE_TYPES">ATTRIBUTE_TYPES</a> a
+hash that describes the type of each of the model&#39;s fields.</p>
+
+<p>Each different type represents an Administrate::Field object, which
+determines how the attribute is displayed on pages throughout the
+dashboard.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">COLLECTION_ATTRIBUTES</td>
+            <td>=</td>
+            <td class="attr-value">[
+:id,
+:user_id,
+:group_id,
+:created_at,
+].freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a
+href="UsersGroupDashboard.html#COLLECTION_ATTRIBUTES">COLLECTION_ATTRIBUTES</a>
+an array of attributes that will be displayed on the model&#39;s index
+page.</p>
+
+<p>By default, it&#39;s limited to four items to reduce clutter on index
+pages. Feel free to add, remove, or rearrange items.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">SHOW_PAGE_ATTRIBUTES</td>
+            <td>=</td>
+            <td class="attr-value">[
+:id,
+:user_id,
+:group_id,
+:created_at,
+:updated_at,
+].freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a
+href="UsersGroupDashboard.html#SHOW_PAGE_ATTRIBUTES">SHOW_PAGE_ATTRIBUTES</a>
+an array of attributes that will be displayed on the model&#39;s show page.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">FORM_ATTRIBUTES</td>
+            <td>=</td>
+            <td class="attr-value">[
+:user_id,
+:group_id,
+].freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a href="UsersGroupDashboard.html#FORM_ATTRIBUTES">FORM_ATTRIBUTES</a> an
+array of attributes that will be displayed on the model&#39;s form (`new`
+and `edit`) pages.</p></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

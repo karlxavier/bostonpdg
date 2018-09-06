@@ -71,6 +71,8 @@ gem 'amoeba'
 gem 'scenic'
 gem 'textacular', '~> 5.0'
 
+gem 'sdoc'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

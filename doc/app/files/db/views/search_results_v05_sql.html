@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>search_results_v05.sql</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            search_results_v05.sql
+        </h1>
+        <ul class="files">
+            <li>db/views/search_results_v05.sql</li>
+            <li>Last modified: 2018-07-22 21:00:59 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>SELECT</p>
+
+<pre><code>order_entries.order_id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+products.name AS search_term</code></pre>
+
+<p>FROM order_entries JOIN products ON products.id = order_entries.product_id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>order_entries.order_id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+products.id::text AS search_term</code></pre>
+
+<p>FROM order_entries JOIN products ON products.id = order_entries.product_id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+orders.brand_id::text AS search_term</code></pre>
+
+<p>FROM orders</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+brands.name AS search_term</code></pre>
+
+<p>FROM orders JOIN brands ON brands.id = orders.brand_id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+order_users.regional::text AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id WHERE
+order_users.regional IS NOT NULL</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+order_users.comms::text AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id WHERE
+order_users.comms IS NOT NULL</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+order_users.art::text AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id WHERE
+order_users.art IS NOT NULL</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+order_users.processor::text AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id WHERE
+order_users.processor IS NOT NULL</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+order_users.designer::text AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id WHERE
+order_users.designer IS NOT NULL</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+order_users.client_contact::text AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id WHERE
+order_users.client_contact IS NOT NULL</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.email AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.regional = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.first_name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.regional = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.last_name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.regional = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+concat(users.first_name, &#39; &#39;, users.last_name) AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.regional = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.email AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.comms = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.first_name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.comms = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.last_name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.comms = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+concat(users.first_name, &#39; &#39;, users.last_name) AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.comms = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.email AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.art = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.first_name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.art = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.last_name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.art = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+concat(users.first_name, &#39; &#39;, users.last_name) AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.art = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.email AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.processor = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.first_name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.processor = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.last_name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.processor = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+concat(users.first_name, &#39; &#39;, users.last_name) AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.processor = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.email AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.designer = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.first_name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.designer = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.last_name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.designer = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+concat(users.first_name, &#39; &#39;, users.last_name) AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.designer = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.email AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.client_contact = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.first_name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.client_contact = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+users.last_name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.client_contact = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+concat(users.first_name, &#39; &#39;, users.last_name) AS search_term</code></pre>
+
+<p>FROM orders JOIN order_users ON order_users.order_id = orders.id JOIN users
+ON order_users.client_contact = users.id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+orders.id::text AS search_term</code></pre>
+
+<p>FROM orders</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+categories.name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_entries ON order_entries.order_id = orders.id JOIN
+categories ON categories.id = order_entries.category_id</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>orders.id AS searchable_id,
+&#39;Order&#39; AS searchable_type,
+vendors.name AS search_term</code></pre>
+
+<p>FROM orders JOIN order_entries ON order_entries.order_id = orders.id JOIN
+vendors ON vendors.id = order_entries.vendor</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>users.id AS searchable_id,
+&#39;User&#39; AS searchable_type,
+users.email AS search_term</code></pre>
+
+<p>FROM users</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>users.id AS searchable_id,
+&#39;User&#39; AS searchable_type,
+users.first_name AS search_term</code></pre>
+
+<p>FROM users</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>users.id AS searchable_id,
+&#39;User&#39; AS searchable_type,
+users.last_name AS search_term</code></pre>
+
+<p>FROM users</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>messages.id AS searchable_id,
+&#39;Message&#39; AS search_term,
+messages.body AS search_term</code></pre>
+
+<p>FROM messages WHERE messages.body IS NOT NULL AND coalesce(messages.body,
+&#39;&#39;) != &#39;&#39;</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>item_messages.id AS searchable_id,
+&#39;ItemMessage&#39; AS search_term,
+item_messages.body AS search_term</code></pre>
+
+<p>FROM item_messages WHERE item_messages.body IS NOT NULL AND
+coalesce(item_messages.body, &#39;&#39;) != &#39;&#39;</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>users.id AS searchable_id,
+&#39;User&#39; AS searchable_type,
+concat(users.first_name, &#39; &#39;,users.last_name) AS search_term</code></pre>
+
+<p>FROM users</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>products.id AS searchable_id,
+&#39;Product&#39; AS searchable_type,
+products.name AS search_term</code></pre>
+
+<p>FROM products</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>categories.id AS searchable_id,
+&#39;Category&#39; AS searchable_type,
+categories.name AS search_term</code></pre>
+
+<p>FROM categories</p>
+
+<p>UNION</p>
+
+<p>SELECT</p>
+
+<pre><code>brands.id AS searchable_id,
+&#39;Brand&#39; AS searchable_type,
+brands.name AS search_term</code></pre>
+
+<p>FROM brands</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

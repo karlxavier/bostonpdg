@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>OrderDashboard</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="OrderDashboard">
+
+  
+
+    <meta name="keywords" content="OrderDashboard class">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            OrderDashboard
+            
+                <span class="parent">&lt;
+                    
+                    Administrate::BaseDashboard
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/app/dashboards/order_dashboard_rb.html">app/dashboards/order_dashboard.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">ATTRIBUTE_TYPES</td>
+            <td>=</td>
+            <td class="attr-value">{
+id: Field::Number,
+created_by: Field::CollectionSelect.with_options(
+collection: proc { User.all },
+value_method: :id,
+text_method: :first_name,
+options: {
+include_blank: &#39;Please Select A User&#39;,
+include_hidden: false,
+}
+),
+status: Field::SelectBasic.with_options({
+choices: [&#39;Quote Request&#39;, &#39;Sales&#39;, &#39;Design&#39;, &#39;Processing&#39;, &#39;Shipping&#39;]
+}),
+customer: Field::CollectionSelect.with_options(
+collection: proc { User.all },
+value_method: :id,
+text_method: :first_name,
+options: {
+include_blank: &#39;Please Select A Customer&#39;,
+include_hidden: false,
+}
+),
+delivery_address: Field::CollectionSelect.with_options(
+collection: proc { Address.all },
+value_method: :id,
+text_method: :street,
+options: {
+include_blank: &#39;Please Select A/Some Address&#39;,
+include_hidden: false,
+}
+),
+payment_address: Field::CollectionSelect.with_options(
+collection: proc { Address.all },
+value_method: :id,
+text_method: :street,
+options: {
+include_blank: &#39;Please Select A/Some Address&#39;,
+include_hidden: false,
+}
+),
+total_cost: Field::String.with_options(searchable: false),
+total_tax: Field::String.with_options(searchable: false),
+total_discount: Field::String.with_options(searchable: false),
+margin: Field::String.with_options(searchable: false),
+last_updated_by: Field::CollectionSelect.with_options(
+collection: proc { User.all },
+value_method: :id,
+text_method: :first_name,
+options: {
+include_blank: &#39;Please Select A User&#39;,
+include_hidden: false,
+}
+),
+lead_time: Field::Number,
+total_budget: Field::Number,
+urgent: Field::Boolean,
+brand_id: Field::CollectionSelect.with_options(
+collection: proc { Brand.all },
+value_method: :id,
+text_method: :name,
+options: {
+include_blank: &#39;Please Select a Brand&#39;,
+include_hidden: false,
+}
+),
+
+promise_date: Field::DateTime,
+notes: Field::Text,
+fulfillment_date: Field::DateTime,
+created_at: Field::DateTime,
+updated_at: Field::DateTime,
+}.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a href="OrderDashboard.html#ATTRIBUTE_TYPES">ATTRIBUTE_TYPES</a> a hash
+that describes the type of each of the model&#39;s fields.</p>
+
+<p>Each different type represents an Administrate::Field object, which
+determines how the attribute is displayed on pages throughout the
+dashboard.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">COLLECTION_ATTRIBUTES</td>
+            <td>=</td>
+            <td class="attr-value">[
+:id,
+:brand_id,
+:status,
+:created_at,
+:updated_at
+].freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a
+href="OrderDashboard.html#COLLECTION_ATTRIBUTES">COLLECTION_ATTRIBUTES</a>
+an array of attributes that will be displayed on the model&#39;s index
+page.</p>
+
+<p>By default, it&#39;s limited to four items to reduce clutter on index
+pages. Feel free to add, remove, or rearrange items.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">FORM_ATTRIBUTES</td>
+            <td>=</td>
+            <td class="attr-value">[
+:created_by,
+:status,
+:customer,
+:delivery_address,
+:payment_address,
+:total_cost,
+:total_tax,
+:total_discount,
+:lead_time,
+:total_budget,
+:urgent,
+:brand_id,
+:margin,
+:last_updated_by,
+:promise_date,
+:notes,
+:fulfillment_date,
+].freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a href="OrderDashboard.html#FORM_ATTRIBUTES">FORM_ATTRIBUTES</a> an array
+of attributes that will be displayed on the model&#39;s form (`new` and
+`edit`) pages.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">SHOW_PAGE_ATTRIBUTES</td>
+            <td>=</td>
+            <td class="attr-value">[
+:id,
+:created_by,
+:status,
+:customer,
+:delivery_address,
+:payment_address,
+:total_cost,
+:total_tax,
+:total_discount,
+:lead_time,
+:total_budget,
+:urgent,
+:brand_id,
+:margin,
+:last_updated_by,
+:promise_date,
+:notes,
+:fulfillment_date,
+:created_at,
+:updated_at,
+].freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a href="OrderDashboard.html#SHOW_PAGE_ATTRIBUTES">SHOW_PAGE_ATTRIBUTES</a>
+an array of attributes that will be displayed on the model&#39;s show page.</p></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

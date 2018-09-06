@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>chosen.css.scss</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            chosen.css.scss
+        </h1>
+        <ul class="files">
+            
+            <li>
+                app/assets/stylesheets/chosen.css.scss
+                
+            </li>
+            <li>Last modified: 2018-08-01 22:00:21 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>.chosen-select {</p>
+
+<pre><code>width: 100%; }
+</code></pre>
+
+<p>.chosen-select-deselect {</p>
+
+<pre><code>width: 100%; }
+</code></pre>
+
+<p>.chosen-container {</p>
+
+<pre><code>display: inline-block;
+font-size: 13px;
+position: relative;
+vertical-align: middle; }
+</code></pre>
+
+<p>.chosen-container .chosen-drop {</p>
+
+<pre><code>background: #fff;
+border: 1px solid #e5e6e7;
+border-bottom-right-radius: 4px;
+border-bottom-left-radius: 4px;
+margin-top: -1px;
+position: absolute;
+top: 100%;
+left: -9000px;
+z-index: 1060; }
+</code></pre>
+
+<p>.chosen-container.chosen-with-drop .chosen-drop {</p>
+
+<pre><code>left: 0;
+right: 0; }
+</code></pre>
+
+<p>.chosen-container .chosen-results {</p>
+
+<pre><code>color: #555555;
+margin: 0 4px 4px 0;
+max-height: 240px;
+padding: 0 0 0 4px;
+position: relative;
+overflow-x: hidden;
+overflow-y: auto;
+-webkit-overflow-scrolling: touch; }
+</code></pre>
+
+<p>.chosen-container .chosen-results li {</p>
+
+<pre><code>display: none;
+line-height: 1.42857;
+list-style: none;
+margin: 0;
+padding: 5px 6px; }
+</code></pre>
+
+<p>.chosen-container .chosen-results li em {</p>
+
+<pre><code>background: #feffde;
+font-style: normal; }
+</code></pre>
+
+<p>.chosen-container .chosen-results li.group-result {</p>
+
+<pre><code>display: list-item;
+cursor: default;
+color: #999;
+font-weight: bold; }
+</code></pre>
+
+<p>.chosen-container .chosen-results li.group-option {</p>
+
+<pre><code>padding-left: 15px; }
+</code></pre>
+
+<p>.chosen-container .chosen-results li.active-result {</p>
+
+<pre><code>cursor: pointer;
+display: list-item; }
+</code></pre>
+
+<p>.chosen-container .chosen-results li.highlighted {</p>
+
+<pre><code>background-color: #1ab394;
+background-image: none;
+color: white; }
+</code></pre>
+
+<p>.chosen-container .chosen-results li.highlighted em {</p>
+
+<pre><code>background: transparent; }
+</code></pre>
+
+<p>.chosen-container .chosen-results li.disabled-result {</p>
+
+<pre><code>display: list-item;
+color: #777777; }
+</code></pre>
+
+<p>.chosen-container .chosen-results .no-results {</p>
+
+<pre><code>background: #eeeeee;
+display: list-item; }
+</code></pre>
+
+<p>.chosen-container .chosen-results-scroll {</p>
+
+<pre><code>background: white;
+margin: 0 4px;
+position: absolute;
+text-align: center;
+width: 321px;
+z-index: 1; }
+</code></pre>
+
+<p>.chosen-container .chosen-results-scroll span {</p>
+
+<pre><code>display: inline-block;
+height: 1.42857;
+text-indent: -5000px;
+width: 9px; }
+</code></pre>
+
+<p>.chosen-container .chosen-results-scroll-down {</p>
+
+<pre><code>bottom: 0; }
+</code></pre>
+
+<p>.chosen-container .chosen-results-scroll-down span {</p>
+
+<pre><code>background: asset-url(&quot;chosen-sprite.png&quot;) no-repeat -4px -3px; }
+</code></pre>
+
+<p>.chosen-container .chosen-results-scroll-up span {</p>
+
+<pre><code>background: asset-url(&quot;chosen-sprite.png&quot;) no-repeat -22px -3px; }
+</code></pre>
+
+<p>.chosen-container-single .chosen-single {</p>
+
+<pre><code>background-color: #fff;
+-webkit-background-clip: padding-box;
+-moz-background-clip: padding;
+background-clip: padding-box;
+border: 1px solid #e5e6e7;
+border-top-right-radius: 4px;
+border-top-left-radius: 4px;
+border-bottom-right-radius: 4px;
+border-bottom-left-radius: 4px;
+color: #555555;
+display: block;
+height: 34px;
+overflow: hidden;
+line-height: 24px;
+padding: 0 0 0 8px;
+position: relative;
+text-decoration: none;
+white-space: nowrap; }
+</code></pre>
+
+<p>.chosen-container-single .chosen-single span {</p>
+
+<pre><code>display: block;
+margin-right: 26px;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap; }
+</code></pre>
+
+<p>.chosen-container-single .chosen-single abbr {</p>
+
+<pre><code>background: asset-url(&quot;chosen-sprite.png&quot;) right top no-repeat;
+display: block;
+font-size: 1px;
+height: 10px;
+position: absolute;
+right: 26px;
+top: 12px;
+width: 12px; }
+</code></pre>
+
+<p>.chosen-container-single .chosen-single abbr:hover {</p>
+
+<pre><code>background-position: right -11px; }
+</code></pre>
+
+<p>.chosen-container-single .chosen-single.chosen-disabled .chosen-single
+abbr:hover {</p>
+
+<pre><code>background-position: right 2px; }
+</code></pre>
+
+<p>.chosen-container-single .chosen-single div {</p>
+
+<pre><code>display: block;
+height: 100%;
+position: absolute;
+top: 0;
+right: 0;
+width: 18px; }
+</code></pre>
+
+<p>.chosen-container-single .chosen-single div b {</p>
+
+<pre><code>background: asset-url(&quot;chosen-sprite.png&quot;) no-repeat 0 7px;
+display: block;
+height: 100%;
+width: 100%; }
+</code></pre>
+
+<p>.chosen-container-single .chosen-default {</p>
+
+<pre><code>color: #777777; }
+</code></pre>
+
+<p>.chosen-container-single .chosen-search {</p>
+
+<pre><code>margin: 0;
+padding: 3px 4px;
+position: relative;
+white-space: nowrap;
+z-index: 1000; }
+</code></pre>
+
+<p>.chosen-container-single .chosen-search <a href="type="text"">input</a> {</p>
+
+<pre><code>background: asset-url(&quot;chosen-sprite.png&quot;) no-repeat 100% -20px, #fff;
+border: 1px solid #e5e6e7;
+border-top-right-radius: 4px;
+border-top-left-radius: 4px;
+border-bottom-right-radius: 4px;
+border-bottom-left-radius: 4px;
+margin: 1px 0;
+padding: 4px 20px 4px 4px;
+width: 100%; }
+</code></pre>
+
+<p>.chosen-container-single .chosen-drop {</p>
+
+<pre><code>margin-top: -1px;
+border-bottom-right-radius: 4px;
+border-bottom-left-radius: 4px;
+-webkit-background-clip: padding-box;
+-moz-background-clip: padding;
+background-clip: padding-box; }
+</code></pre>
+
+<p>.chosen-container-single-nosearch .chosen-search <a
+href="type="text"">input</a> {</p>
+
+<pre><code>position: absolute;
+left: -9000px; }
+</code></pre>
+
+<p>.chosen-container-multi .chosen-choices {</p>
+
+<pre><code>background-color: #fff;
+border: 1px solid #e5e6e7;
+border-top-right-radius: 4px;
+border-top-left-radius: 4px;
+border-bottom-right-radius: 4px;
+border-bottom-left-radius: 4px;
+cursor: text;
+height: auto !important;
+height: 1%;
+margin: 0;
+overflow: hidden;
+padding: 0;
+position: relative; }
+</code></pre>
+
+<p>.chosen-container-multi .chosen-choices li {</p>
+
+<pre><code>float: left;
+list-style: none; }
+</code></pre>
+
+<p>.chosen-container-multi .chosen-choices .search-field {</p>
+
+<pre><code>margin: 0;
+padding: 0;
+white-space: nowrap; }
+</code></pre>
+
+<p>.chosen-container-multi .chosen-choices .search-field <a
+href="type="text"">input</a> {</p>
+
+<pre><code>background: transparent !important;
+border: 0 !important;
+-webkit-box-shadow: none;
+box-shadow: none;
+color: #555555;
+height: 32px;
+margin: 0;
+padding: 4px;
+outline: 0; }
+</code></pre>
+
+<p>.chosen-container-multi .chosen-choices .search-field .default {</p>
+
+<pre><code>color: #999; }
+</code></pre>
+
+<p>.chosen-container-multi .chosen-choices .search-choice {</p>
+
+<pre><code>-webkit-background-clip: padding-box;
+-moz-background-clip: padding;
+background-clip: padding-box;
+background-color: #eeeeee;
+border: 1px solid #e5e6e7;
+border-top-right-radius: 4px;
+border-top-left-radius: 4px;
+border-bottom-right-radius: 4px;
+border-bottom-left-radius: 4px;
+background-image: -webkit-linear-gradient(top, white 0%, #eeeeee 100%);
+background-image: -o-linear-gradient(top, white 0%, #eeeeee 100%);
+background-image: linear-gradient(to bottom, white 0%, #eeeeee 100%);
+background-repeat: repeat-x;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=&#39;#FFFFFFFF&#39;, endColorstr=&#39;#FFEEEEEE&#39;, GradientType=0);
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+color: #333333;
+cursor: default;
+line-height: 13px;
+margin: 6px 0 3px 5px;
+padding: 3px 20px 3px 5px;
+position: relative; }
+</code></pre>
+
+<p>.chosen-container-multi .chosen-choices .search-choice .search-choice-close
+{</p>
+
+<pre><code>background: asset-url(&quot;chosen-sprite.jpg&quot;) right top no-repeat;
+display: block;
+font-size: 1px;
+height: 10px;
+position: absolute;
+right: 4px;
+top: 5px;
+width: 12px;
+cursor: pointer; }
+</code></pre>
+
+<p>.chosen-container-multi .chosen-choices .search-choice
+.search-choice-close:hover {</p>
+
+<pre><code>background-position: right -11px; }
+</code></pre>
+
+<p>.chosen-container-multi .chosen-choices .search-choice-focus {</p>
+
+<pre><code>background: #d4d4d4; }
+</code></pre>
+
+<p>.chosen-container-multi .chosen-choices .search-choice-focus
+.search-choice-close {</p>
+
+<pre><code>background-position: right -11px; }
+</code></pre>
+
+<p>.chosen-container-multi .chosen-results {</p>
+
+<pre><code>margin: 0 0 0 0;
+padding: 0; }
+</code></pre>
+
+<p>.chosen-container-multi .chosen-drop .result-selected {</p>
+
+<pre><code>display: none; }
+</code></pre>
+
+<p>.chosen-container-active .chosen-single {</p>
+
+<pre><code>border: 1px solid #e5e6e7;
+-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+-o-transition: border linear 0.2s, box-shadow linear 0.2s;
+transition: border linear 0.2s, box-shadow linear 0.2s; }
+</code></pre>
+
+<p>.chosen-container-active.chosen-with-drop .chosen-single {</p>
+
+<pre><code>background-color: #fff;
+border: 1px solid #1ab394;
+border-bottom-right-radius: 0;
+border-bottom-left-radius: 0;
+-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+-o-transition: border linear 0.2s, box-shadow linear 0.2s;
+transition: border linear 0.2s, box-shadow linear 0.2s; }
+</code></pre>
+
+<p>.chosen-container-active.chosen-with-drop .chosen-single div {</p>
+
+<pre><code>background: transparent;
+border-left: none; }
+</code></pre>
+
+<p>.chosen-container-active.chosen-with-drop .chosen-single div b {</p>
+
+<pre><code>background-position: -18px 7px; }
+</code></pre>
+
+<p>.chosen-container-active .chosen-choices {</p>
+
+<pre><code>border: 1px solid #1ab394;
+border-bottom-right-radius: 0;
+border-bottom-left-radius: 0;
+-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+-o-transition: border linear 0.2s, box-shadow linear 0.2s;
+transition: border linear 0.2s, box-shadow linear 0.2s; }
+</code></pre>
+
+<p>.chosen-container-active .chosen-choices .search-field <a
+href="type="text"">input</a> {</p>
+
+<pre><code>color: #111 !important; }
+</code></pre>
+
+<p>.chosen-container-active.chosen-with-drop .chosen-choices {</p>
+
+<pre><code>border-bottom-right-radius: 0;
+border-bottom-left-radius: 0; }
+</code></pre>
+
+<p>.chosen-disabled {</p>
+
+<pre><code>cursor: default;
+opacity: 0.5 !important; }
+</code></pre>
+
+<p>.chosen-disabled .chosen-single {</p>
+
+<pre><code>cursor: default; }
+</code></pre>
+
+<p>.chosen-disabled .chosen-choices .search-choice .search-choice-close {</p>
+
+<pre><code>cursor: default; }
+</code></pre>
+
+<p>.chosen-rtl {</p>
+
+<pre><code>text-align: right; }
+</code></pre>
+
+<p>.chosen-rtl .chosen-single {</p>
+
+<pre><code>padding: 0 8px 0 0;
+overflow: visible; }
+</code></pre>
+
+<p>.chosen-rtl .chosen-single span {</p>
+
+<pre><code>margin-left: 26px;
+margin-right: 0;
+direction: rtl; }
+</code></pre>
+
+<p>.chosen-rtl .chosen-single div {</p>
+
+<pre><code>left: 7px;
+right: auto; }
+</code></pre>
+
+<p>.chosen-rtl .chosen-single abbr {</p>
+
+<pre><code>left: 26px;
+right: auto; }
+</code></pre>
+
+<p>.chosen-rtl .chosen-choices .search-field <a href="type="text"">input</a> {</p>
+
+<pre><code>direction: rtl; }
+</code></pre>
+
+<p>.chosen-rtl .chosen-choices li {</p>
+
+<pre><code>float: right; }
+</code></pre>
+
+<p>.chosen-rtl .chosen-choices .search-choice {</p>
+
+<pre><code>margin: 6px 5px 3px 0;
+padding: 3px 5px 3px 19px; }
+</code></pre>
+
+<p>.chosen-rtl .chosen-choices .search-choice .search-choice-close {</p>
+
+<pre><code>background-position: right top;
+left: 4px;
+right: auto; }
+</code></pre>
+
+<p>.chosen-rtl.chosen-container-single .chosen-results {</p>
+
+<pre><code>margin: 0 0 4px 4px;
+padding: 0 4px 0 0; }
+</code></pre>
+
+<p>.chosen-rtl .chosen-results .group-option {</p>
+
+<pre><code>padding-left: 0;
+padding-right: 15px; }
+</code></pre>
+
+<p>.chosen-rtl.chosen-container-active.chosen-with-drop .chosen-single div {</p>
+
+<pre><code>border-right: none; }
+</code></pre>
+
+<p>.chosen-rtl .chosen-search <a href="type="text"">input</a> {</p>
+
+<pre><code>background: asset-url(&quot;chosen-sprite.jpg&quot;) no-repeat -28px -20px, #fff;
+direction: rtl;
+padding: 4px 5px 4px 20px; }
+</code></pre>
+
+<p>@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and
+(min-resolution: 2dppx) {</p>
+
+<pre><code>  .chosen-rtl .chosen-search input[type=&quot;text&quot;],
+  .chosen-container-single .chosen-single abbr,
+  .chosen-container-single .chosen-single div b,
+  .chosen-container-single .chosen-search input[type=&quot;text&quot;],
+  .chosen-container-multi .chosen-choices .search-choice .search-choice-close,
+  .chosen-container .chosen-results-scroll-down span,
+  .chosen-container .chosen-results-scroll-up span {
+      background-image: asset-url(&quot;chosen-sprite@2x.png&quot;) !important;
+      background-size: 52px 37px !important;
+      background-repeat: no-repeat !important; } }
+
+# sourceMappingURL=bootstrap-chosen.css.map
+</code></pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

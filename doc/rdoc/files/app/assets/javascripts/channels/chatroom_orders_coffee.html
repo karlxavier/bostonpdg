@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>chatroom_orders.coffee</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            chatroom_orders.coffee
+        </h1>
+        <ul class="files">
+            
+            <li>
+                app/assets/javascripts/channels/chatroom_orders.coffee
+                
+            </li>
+            <li>Last modified: 2018-07-05 19:23:23 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>App.chatroom_orders = App.cable.subscriptions.create
+“ChatroomOrdersChannel”,</p>
+
+<pre><code>connected: -&gt;
+  console.log &#39;chika-minute!&#39;
+
+disconnected: -&gt;
+  console.log &#39;chatroom disconnected&#39;
+
+received: (data) -&gt;
+  console.log &#39;message received&#39;
+  $(&quot;#new_message&quot;)[0].reset()
+  active_chatroom = $(&quot;[data-behavior=&#39;chatroom-orders&#39;][data-chatroom-id=&#39;#{data.chatroom_id}&#39;]&quot;)
+  chatbox = $(&quot;[data-behavior=&#39;chatbox&#39;][data-chatroom-id=&#39;#{data.chatroom_id}&#39;]&quot;)
+
+  if active_chatroom.length &gt; 0
+    active_chatroom.append(data.message)
+
+    chat_messages = $(&quot;#chat_messages&quot;)[0]
+    if chat_messages
+      height = chat_messages.scrollHeight
+      $(chat_messages).scrollTop(height)
+  else if chatbox.length &gt; 0
+    chatbox.append(data.message)
+
+    chat_messages = $(&quot;#chat_messages&quot;)[0]
+    if chat_messages
+      height = chat_messages.scrollHeight
+      $(chat_messages).scrollTop(height)
+  else
+      toastr.options =
+      closeButton: true
+      progressBar: true
+      onclick: -&gt;
+        window.location.replace &quot;/chatroom_orders/#{data.chatroom_id}/messages/#{data.chatroom_id}&quot;
+        return
+      showMethod: &#39;slideDown&#39;
+      positionClass: &#39;toast-bottom-left&#39;
+      timeOut: 7000
+      toastr.warning data.username + &#39; sent a message in &#39; + data.chatroom_name , &#39;New Message&#39;
+</code></pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

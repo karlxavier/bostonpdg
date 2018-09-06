@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>chatbox_dropzone.js</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            chatbox_dropzone.js
+        </h1>
+        <ul class="files">
+            
+            <li>
+                app/assets/javascripts/chatbox_dropzone.js
+                
+            </li>
+            <li>Last modified: 2018-06-21 04:01:49 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>// import Dropzone from “../node_modules/dropzone”; $(function (){</p>
+
+<pre><code>const zone = document.querySelector(&#39;.dropzonable&#39;)
+const input = document.querySelector(&#39;#message-attachment&#39;)
+const form = document.querySelector(&#39;#new_message&#39;)
+
+if (zone) {
+  const dropzone = new Dropzone(zone, { 
+    url: form.action.replace(&#39;messages.js&#39;, &#39;dropfiles&#39;),
+    error: function(file, errorMessage, xhr) {
+      console.log(errorMessage)
+      toastr.options = {
+          closeButton: true,
+          progressBar: true,
+          showMethod: &#39;slideDown&#39;,
+          positionClass: &#39;toast-bottom-left&#39;,
+          timeOut: 7000
+      }
+
+      toastr.error(errorMessage.error)
+    }
+  })
+
+  dropzone.on(&quot;complete&quot;, function(file) {
+    dropzone.removeFile(file);
+  });
+}
+</code></pre>
+
+<p>})</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>DefaultAttributeDashboard</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="DefaultAttributeDashboard">
+
+  
+
+    <meta name="keywords" content="DefaultAttributeDashboard class">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            DefaultAttributeDashboard
+            
+                <span class="parent">&lt;
+                    
+                    Administrate::BaseDashboard
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/app/dashboards/default_attribute_dashboard_rb.html">app/dashboards/default_attribute_dashboard.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">ATTRIBUTE_TYPES</td>
+            <td>=</td>
+            <td class="attr-value">{
+id: Field::Number,
+field_name: Field::String,
+description: Field::String,
+input_type: Field::SelectBasic.with_options({
+choices: [&#39;Text&#39;, &#39;Number&#39;, &#39;Date&#39;, &#39;File&#39;, &#39;Checkbox&#39;, &#39;Radio&#39;, &#39;Image&#39;, &#39;Password&#39;]
+}),
+user_id: Field::Hidden,
+created_at: Field::DateTime,
+updated_at: Field::DateTime,
+}.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a
+href="DefaultAttributeDashboard.html#ATTRIBUTE_TYPES">ATTRIBUTE_TYPES</a> a
+hash that describes the input_type of each of the model&#39;s fields.</p>
+
+<p>Each different input_type represents an Administrate::Field object, which
+determines how the attribute is displayed on pages throughout the
+dashboard.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">COLLECTION_ATTRIBUTES</td>
+            <td>=</td>
+            <td class="attr-value">[
+:id,
+:field_name,
+:input_type,
+:description,
+].freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a
+href="DefaultAttributeDashboard.html#COLLECTION_ATTRIBUTES">COLLECTION_ATTRIBUTES</a>
+an array of attributes that will be displayed on the model&#39;s index
+page.</p>
+
+<p>By default, it&#39;s limited to four items to reduce clutter on index
+pages. Feel free to add, remove, or rearrange items.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">SHOW_PAGE_ATTRIBUTES</td>
+            <td>=</td>
+            <td class="attr-value">[
+:id,
+:field_name,
+:description,
+:input_type,
+:user_id,
+:created_at,
+:updated_at,
+].freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a
+href="DefaultAttributeDashboard.html#SHOW_PAGE_ATTRIBUTES">SHOW_PAGE_ATTRIBUTES</a>
+an array of attributes that will be displayed on the model&#39;s show page.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">FORM_ATTRIBUTES</td>
+            <td>=</td>
+            <td class="attr-value">[
+:field_name,
+:description,
+:input_type,
+:user_id,
+].freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a
+href="DefaultAttributeDashboard.html#FORM_ATTRIBUTES">FORM_ATTRIBUTES</a>
+an array of attributes that will be displayed on the model&#39;s form
+(`new` and `edit`) pages.</p></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Api::Simple::ProductsController</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="Api::Simple::ProductsController">
+
+  
+
+    <meta name="keywords" content="Api::Simple::ProductsController class">
+  
+    <meta name="keywords" content="list, get_item_list, index, show, create, create_item, update, update_product, get_products_category, set_product, products_params">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            Api::Simple::ProductsController
+            
+                <span class="parent">&lt;
+                    
+                    <a href="../../ApplicationController.html">ApplicationController</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/app/controllers/api/simple/products_controller_rb.html">app/controllers/api/simple/products_controller.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-create">create</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-create_item">create_item</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-get_item_list">get_item_list</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-get_products_category">get_products_category</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-index">index</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-list">list</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-products_params">products_params</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-set_product">set_product</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-show">show</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-update">update</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-update_product">update_product</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-create">
+            
+              <b>create</b>()
+            
+            <a href="../../../classes/Api/Simple/ProductsController.html#method-i-create" name="method-i-create" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-create_source')" id="l_method-i-create_source">show</a>
+                
+              </p>
+              <div id="method-i-create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/products_controller.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:product</span>][<span class="ruby-value">:name</span>]
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">category</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:product</span>][<span class="ruby-value">:category_id</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-ivar">@attributes</span> = <span class="ruby-constant">StyleAttribute</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:product</span>][<span class="ruby-value">:name</span>]
+    <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">height</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:height</span>]
+    <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">width</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:width</span>]
+    <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">finish</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:finish</span>]
+    <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">product_id</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">save</span>
+
+    <span class="ruby-constant">VendorCategory</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:vendor_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>], <span class="ruby-value">:category_id</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-identifier">params</span>[<span class="ruby-value">:product</span>][<span class="ruby-value">:category_id</span>]).<span class="ruby-identifier">save</span>
+    <span class="ruby-constant">VendorsProduct</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:vendor_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>], <span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">save</span>
+
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@product</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-create_item">
+            
+              <b>create_item</b>()
+            
+            <a href="../../../classes/Api/Simple/ProductsController.html#method-i-create_item" name="method-i-create_item" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-create_item_source')" id="l_method-i-create_item_source">show</a>
+                
+              </p>
+              <div id="method-i-create_item_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/products_controller.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_item</span>
+  <span class="ruby-ivar">@product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:product_name</span>]
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">category</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:category_id</span>]
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">item_category_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:item_category_id</span>]
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">specs</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:specs</span>]
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">vendor_quote_prices</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_quote_prices</span>]
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">notes</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:notes</span>]
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">dynamic_fields</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:dynamic_fields</span>].<span class="ruby-identifier">to_s</span>
+  <span class="ruby-comment"># @product.vendor_id = params[:vendor_id]</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-comment">#Add Vendor on List</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>].<span class="ruby-identifier">present?</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">id</span><span class="ruby-operator">|</span>
+          <span class="ruby-constant">OrderEntryVendor</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:vendor_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:file</span>].<span class="ruby-identifier">present?</span>
+      <span class="ruby-identifier">params</span>[<span class="ruby-value">:file</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attachment_file</span><span class="ruby-operator">|</span>
+        <span class="ruby-constant">OrderEntryAttachment</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:product_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:attachment_file</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:file</span>][<span class="ruby-node">&quot;#{attachment_file}&quot;</span>])
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@product</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get_item_list">
+            
+              <b>get_item_list</b>()
+            
+            <a href="../../../classes/Api/Simple/ProductsController.html#method-i-get_item_list" name="method-i-get_item_list" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_item_list_source')" id="l_method-i-get_item_list_source">show</a>
+                
+              </p>
+              <div id="method-i-get_item_list_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/products_controller.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_item_list</span>
+  <span class="ruby-identifier">products</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">where</span>(<span class="ruby-node">&quot;name LIKE &#39;#{params[:name]}%&#39;&quot;</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>).<span class="ruby-identifier">limit</span>(<span class="ruby-value">50</span>)
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span>  <span class="ruby-identifier">products</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">product</span><span class="ruby-operator">|</span> { <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">name</span> } }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get_products_category">
+            
+              <b>get_products_category</b>()
+            
+            <a href="../../../classes/Api/Simple/ProductsController.html#method-i-get_products_category" name="method-i-get_products_category" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_products_category_source')" id="l_method-i-get_products_category_source">show</a>
+                
+              </p>
+              <div id="method-i-get_products_category_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/products_controller.rb, line 181</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_products_category</span>
+  <span class="ruby-identifier">products</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:category</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:category_id</span>])
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-identifier">products</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-index">
+            
+              <b>index</b>()
+            
+            <a href="../../../classes/Api/Simple/ProductsController.html#method-i-index" name="method-i-index" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-index_source')" id="l_method-i-index_source">show</a>
+                
+              </p>
+              <div id="method-i-index_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/products_controller.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:category</span>].<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">inventories</span> = <span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;product_id IN (SELECT id from products where category=?)&quot;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:category</span>])
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">inventories</span> = <span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-identifier">inventories</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">inventory</span><span class="ruby-operator">|</span> { <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">quantity</span><span class="ruby-operator">:</span> <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">quantity</span>, <span class="ruby-identifier">product_name</span><span class="ruby-operator">:</span> <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">product_id</span>).<span class="ruby-identifier">name</span>, <span class="ruby-identifier">force_in_stock</span><span class="ruby-operator">:</span> <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">product_id</span>).<span class="ruby-identifier">force_in_stock</span>, <span class="ruby-identifier">price</span><span class="ruby-operator">:</span> <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">product_id</span>).<span class="ruby-identifier">price</span> } }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-list">
+            
+              <b>list</b>()
+            
+            <a href="../../../classes/Api/Simple/ProductsController.html#method-i-list" name="method-i-list" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-list_source')" id="l_method-i-list_source">show</a>
+                
+              </p>
+              <div id="method-i-list_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/products_controller.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">list</span>
+  <span class="ruby-identifier">products</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;created_at DESC&quot;</span>)
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span>  <span class="ruby-identifier">products</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">product</span><span class="ruby-operator">|</span> { <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">name</span> } }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-show">
+            
+              <b>show</b>()
+            
+            <a href="../../../classes/Api/Simple/ProductsController.html#method-i-show" name="method-i-show" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-show_source')" id="l_method-i-show_source">show</a>
+                
+              </p>
+              <div id="method-i-show_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/products_controller.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@product</span>,<span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:convert_dynamic_fields</span>, <span class="ruby-value">:picture_url</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update">
+            
+              <b>update</b>()
+            
+            <a href="../../../classes/Api/Simple/ProductsController.html#method-i-update" name="method-i-update" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-update_source')" id="l_method-i-update_source">show</a>
+                
+              </p>
+              <div id="method-i-update_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/products_controller.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
+  <span class="ruby-ivar">@temp_product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:product_name</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:product_name</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:product_name</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">name</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:category_id</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:category_id</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">category</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:category_id</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">category</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">category</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:item_category_id</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:item_category_id</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">item_category_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:item_category_id</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">item_category_id</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">item_category_id</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:specs</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:specs</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">specs</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:specs</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">specs</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">specs</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_quote_prices</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_quote_prices</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">vendor_quote_prices</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_quote_prices</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">vendor_quote_prices</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">vendor_quote_prices</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:notes</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:notes</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">notes</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:notes</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">notes</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">notes</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:dynamic_fields</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:dynamic_fields</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">dynamic_fields</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:dynamic_fields</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">dynamic_fields</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">dynamic_fields</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">vendor_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">vendor_id</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">vendor_id</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">name</span>, <span class="ruby-value">:category</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">category</span>, <span class="ruby-value">:item_category_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">item_category_id</span>, <span class="ruby-value">:specs</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">specs</span>, <span class="ruby-value">:vendor_quote_prices</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">vendor_quote_prices</span>, <span class="ruby-value">:notes</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">notes</span>, <span class="ruby-value">:dynamic_fields</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">dynamic_fields</span>, <span class="ruby-value">:vendor_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">vendor_id</span>)
+    <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;failed&#39;</span> }, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update_product">
+            
+              <b>update_product</b>()
+            
+            <a href="../../../classes/Api/Simple/ProductsController.html#method-i-update_product" name="method-i-update_product" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-update_product_source')" id="l_method-i-update_product_source">show</a>
+                
+              </p>
+              <div id="method-i-update_product_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/products_controller.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_product</span>
+  <span class="ruby-ivar">@product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-ivar">@temp_product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:product_name</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:product_name</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:product_name</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">name</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:category_id</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:category_id</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">category</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:category_id</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">category</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">category</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:item_category_id</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:item_category_id</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">item_category_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:item_category_id</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">item_category_id</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">item_category_id</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:specs</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:specs</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">specs</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:specs</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">specs</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">specs</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_quote_prices</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_quote_prices</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">vendor_quote_prices</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_quote_prices</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">vendor_quote_prices</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">vendor_quote_prices</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:notes</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:notes</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">notes</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:notes</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">notes</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">notes</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:dynamic_fields</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:dynamic_fields</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">dynamic_fields</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:dynamic_fields</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">dynamic_fields</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">dynamic_fields</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">vendor_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor_id</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">vendor_id</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">vendor_id</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">name</span>, <span class="ruby-value">:category</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">category</span>, <span class="ruby-value">:item_category_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">item_category_id</span>, <span class="ruby-value">:specs</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">specs</span>, <span class="ruby-value">:vendor_quote_prices</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">vendor_quote_prices</span>, <span class="ruby-value">:notes</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">notes</span>, <span class="ruby-value">:dynamic_fields</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">dynamic_fields</span>, <span class="ruby-value">:vendor_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@temp_product</span>.<span class="ruby-identifier">vendor_id</span>)
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@product</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;failed&#39;</span> }, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-products_params">
+            
+              <b>products_params</b>()
+            
+            <a href="../../../classes/Api/Simple/ProductsController.html#method-i-products_params" name="method-i-products_params" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-products_params_source')" id="l_method-i-products_params_source">show</a>
+                
+              </p>
+              <div id="method-i-products_params_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/products_controller.rb, line 196</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">products_params</span>
+  <span class="ruby-identifier">params</span>[<span class="ruby-value">:product</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-set_product">
+            
+              <b>set_product</b>()
+            
+            <a href="../../../classes/Api/Simple/ProductsController.html#method-i-set_product" name="method-i-set_product" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-set_product_source')" id="l_method-i-set_product_source">show</a>
+                
+              </p>
+              <div id="method-i-set_product_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/controllers/api/simple/products_controller.rb, line 192</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_product</span>
+  <span class="ruby-ivar">@product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

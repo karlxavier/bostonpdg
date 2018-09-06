@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ApplicationHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="ApplicationHelper">
+
+  
+
+    <meta name="keywords" content="ApplicationHelper class">
+  
+    <meta name="keywords" content="get_vendor_link, get_product_link, get_user_link, generate_history_information, get_status, check_picture_url">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Module</span>
+            ApplicationHelper
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/app/helpers/application_helper_rb.html">app/helpers/application_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-check_picture_url">check_picture_url</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-generate_history_information">generate_history_information</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-get_product_link">get_product_link</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-get_status">get_status</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-get_user_link">get_user_link</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-get_vendor_link">get_vendor_link</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-check_picture_url">
+            
+              <b>check_picture_url</b>(entry)
+            
+            <a href="../classes/ApplicationHelper.html#method-i-check_picture_url" name="method-i-check_picture_url" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-check_picture_url_source')" id="l_method-i-check_picture_url_source">show</a>
+                
+              </p>
+              <div id="method-i-check_picture_url_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">check_picture_url</span> <span class="ruby-identifier">entry</span>
+  <span class="ruby-identifier">product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">entry</span>.<span class="ruby-identifier">product_id</span>)
+  <span class="ruby-identifier">product</span>.<span class="ruby-identifier">picture_url</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-generate_history_information">
+            
+              <b>generate_history_information</b>(history)
+            
+            <a href="../classes/ApplicationHelper.html#method-i-generate_history_information" name="method-i-generate_history_information" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-generate_history_information_source')" id="l_method-i-generate_history_information_source">show</a>
+                
+              </p>
+              <div id="method-i-generate_history_information_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_history_information</span> <span class="ruby-identifier">history</span>
+  <span class="ruby-ivar">@str_text</span> = <span class="ruby-node">&quot;#{history.created_at.strftime(&#39;%B %e, %Y&#39;)}: &quot;</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">history</span>.<span class="ruby-identifier">user_id</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">history</span>.<span class="ruby-identifier">order_entry_id</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">history</span>.<span class="ruby-identifier">order_entry_id</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">history</span>.<span class="ruby-identifier">order_entry_id</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-identifier">order_entry</span> = <span class="ruby-constant">OrderEntry</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">history</span>.<span class="ruby-identifier">order_entry_id</span>).<span class="ruby-identifier">first</span> 
+  
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_entry</span>.<span class="ruby-identifier">present?</span>
+      <span class="ruby-identifier">product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_entry</span>.<span class="ruby-identifier">product_id</span>).<span class="ruby-identifier">first</span>
+    <span class="ruby-keyword">end</span>  
+   
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_entry</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">present?</span>
+       <span class="ruby-ivar">@str_text</span> = <span class="ruby-ivar">@str_text</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{product.name} #{history.description} by #{@user.full_name}&quot;</span>
+    <span class="ruby-keyword">else</span>
+       <span class="ruby-ivar">@str_text</span> = <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-keyword">end</span>  
+   
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">history</span>.<span class="ruby-identifier">product_id</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">history</span>.<span class="ruby-identifier">product_id</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">history</span>.<span class="ruby-identifier">product_id</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-identifier">product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">history</span>.<span class="ruby-identifier">product_id</span>).<span class="ruby-identifier">first</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">present?</span>
+      <span class="ruby-ivar">@str_text</span> = <span class="ruby-ivar">@str_text</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{product.name} #{history.description} from Order ##{history.order_id} by #{@user.full_name}&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@str_text</span> = <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@str_text</span> = <span class="ruby-ivar">@str_text</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;Order ##{history.order_id} #{history.description} by #{@user.full_name}&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@str_text</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get_product_link">
+            
+              <b>get_product_link</b>(id)
+            
+            <a href="../classes/ApplicationHelper.html#method-i-get_product_link" name="method-i-get_product_link" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_product_link_source')" id="l_method-i-get_product_link_source">show</a>
+                
+              </p>
+              <div id="method-i-get_product_link_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_product_link</span> <span class="ruby-identifier">id</span>
+  <span class="ruby-identifier">product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">id</span>)
+  <span class="ruby-identifier">link_to</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">admin_product_path</span>(<span class="ruby-identifier">vendor</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get_status">
+            
+              <b>get_status</b>(status)
+            
+            <a href="../classes/ApplicationHelper.html#method-i-get_status" name="method-i-get_status" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_status_source')" id="l_method-i-get_status_source">show</a>
+                
+              </p>
+              <div id="method-i-get_status_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_status</span> <span class="ruby-identifier">status</span>
+  <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;&#39;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;New&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;Quoting&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;Pending Approval&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;Ready to Process&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">4</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;In Production&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">5</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;Shipped&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">6</span>
+    <span class="ruby-ivar">@txt</span> = <span class="ruby-string">&#39;Delivered&#39;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@txt</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get_user_link">
+            
+              <b>get_user_link</b>(id)
+            
+            <a href="../classes/ApplicationHelper.html#method-i-get_user_link" name="method-i-get_user_link" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_user_link_source')" id="l_method-i-get_user_link_source">show</a>
+                
+              </p>
+              <div id="method-i-get_user_link_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_user_link</span> <span class="ruby-identifier">id</span>
+  <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">id</span>)
+  <span class="ruby-identifier">link_to</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">first_name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">last_name</span>, <span class="ruby-identifier">admin_user_path</span>(<span class="ruby-identifier">vendor</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get_vendor_link">
+            
+              <b>get_vendor_link</b>(id)
+            
+            <a href="../classes/ApplicationHelper.html#method-i-get_vendor_link" name="method-i-get_vendor_link" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_vendor_link_source')" id="l_method-i-get_vendor_link_source">show</a>
+                
+              </p>
+              <div id="method-i-get_vendor_link_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_vendor_link</span> <span class="ruby-identifier">id</span>
+  <span class="ruby-identifier">vendor</span> = <span class="ruby-constant">Vendor</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">id</span>)
+  <span class="ruby-identifier">link_to</span> <span class="ruby-identifier">vendor</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">admin_vendor_path</span>(<span class="ruby-identifier">vendor</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

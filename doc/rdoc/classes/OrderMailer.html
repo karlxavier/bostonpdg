@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>OrderMailer</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="OrderMailer">
+
+  
+
+    <meta name="keywords" content="OrderMailer class">
+  
+    <meta name="keywords" content="send_order_entries, send_request_quote">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            OrderMailer
+            
+                <span class="parent">&lt;
+                    
+                    <a href="ApplicationMailer.html">ApplicationMailer</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/app/mailers/order_mailer_rb.html">app/mailers/order_mailer.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-send_order_entries">send_order_entries</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-send_request_quote">send_request_quote</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-send_order_entries">
+            
+              <b>send_order_entries</b>()
+            
+            <a href="../classes/OrderMailer.html#method-i-send_order_entries" name="method-i-send_order_entries" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-send_order_entries_source')" id="l_method-i-send_order_entries_source">show</a>
+                
+              </p>
+              <div id="method-i-send_order_entries_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 3</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_order_entries</span>
+  <span class="ruby-ivar">@vendor</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:vendor</span>]
+  <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order</span>]
+  <span class="ruby-ivar">@order_entries</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_entries</span>]
+  <span class="ruby-ivar">@products</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-identifier">attachments</span>.<span class="ruby-identifier">inline</span>[<span class="ruby-string">&#39;logo.png&#39;</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-node">&quot;#{Rails.root}/app/assets/images/logo.png&quot;</span>)
+  <span class="ruby-ivar">@order_entries</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">oe</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">oe</span>.<span class="ruby-identifier">picture_url</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span>
+      <span class="ruby-identifier">attachments</span>.<span class="ruby-identifier">inline</span>[<span class="ruby-node">&quot;#{oe.id}.png&quot;</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">oe</span>.<span class="ruby-identifier">picture_url</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">mail</span>(
+      <span class="ruby-value">:from</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;jerico@maddington.net&quot;</span>,
+      <span class="ruby-value">:to</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-ivar">@vendor</span>.<span class="ruby-identifier">email</span>,
+      <span class="ruby-value">:subject</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;Order Ticket ##{@order.id}&quot;</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-send_request_quote">
+            
+              <b>send_request_quote</b>(email_template, to_user)
+            
+            <a href="../classes/OrderMailer.html#method-i-send_request_quote" name="method-i-send_request_quote" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-send_request_quote_source')" id="l_method-i-send_request_quote_source">show</a>
+                
+              </p>
+              <div id="method-i-send_request_quote_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_request_quote</span>(<span class="ruby-identifier">email_template</span>, <span class="ruby-identifier">to_user</span>)
+  <span class="ruby-ivar">@email_template</span> = <span class="ruby-identifier">email_template</span>
+  <span class="ruby-identifier">order_entry_ids</span> = <span class="ruby-constant">EmailTemplateOrderEntry</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:email_template_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">email_template</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:order_entry_id</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_entry_ids</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@order_entries</span> = <span class="ruby-constant">OrderEntry</span>.<span class="ruby-identifier">where</span>(<span class="ruby-node">&quot;id IN (#{order_entry_ids.map(&amp;:inspect).join(&#39;,&#39;)})&quot;</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@cc</span> = <span class="ruby-constant">EmailTemplateUser</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:email_template_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">email_template</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:user_type</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;cc&#39;</span>).<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:email</span>)
+  <span class="ruby-ivar">@sender</span> = <span class="ruby-constant">EmailTemplateUser</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:email_template_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">email_template</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:user_type</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;sender&#39;</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-ivar">@subject</span> = <span class="ruby-node">&quot;Order Ticket ##{email_template.id}&quot;</span>
+  <span class="ruby-constant">EmailTemplateAttachment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:email_template_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">email_template</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">eta</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">eta</span>.<span class="ruby-identifier">attachment_file</span>.<span class="ruby-identifier">path</span>(<span class="ruby-value">:original</span>) <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span>
+      <span class="ruby-identifier">attachments</span>.<span class="ruby-identifier">inline</span>[<span class="ruby-node">&quot;#{eta.attachment_file.original_filename}&quot;</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">eta</span>.<span class="ruby-identifier">attachment_file</span>.<span class="ruby-identifier">path</span>(<span class="ruby-value">:original</span>))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">mail</span>(
+      <span class="ruby-value">:from</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-ivar">@sender</span>.<span class="ruby-identifier">email</span>,
+      <span class="ruby-value">:to</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">to_user</span>,
+      <span class="ruby-value">:cc</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-ivar">@cc</span>,
+      <span class="ruby-value">:subject</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-ivar">@subject</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

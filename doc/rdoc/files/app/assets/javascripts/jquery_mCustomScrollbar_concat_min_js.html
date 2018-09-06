@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>jquery.mCustomScrollbar.concat.min.js</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            jquery.mCustomScrollbar.concat.min.js
+        </h1>
+        <ul class="files">
+            
+            <li>
+                app/assets/javascripts/jquery.mCustomScrollbar.concat.min.js
+                
+            </li>
+            <li>Last modified: 2018-05-14 11:38:42 +0800</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<pre><code>== jquery mousewheel plugin == Version: 3.1.13, License: MIT License (MIT)
+</code></pre>
+
+<p>!function(a){“function”==typeof <a
+href=""jquery"">define&&define.amd?define(</a>,a):“object”==typeof
+exports?module.exports=a:a(jQuery)}(function(a){function b(b){var
+g=b||window.event,h=i.call(arguments,1),j=0,l=0,m=0,n=0,o=0,p=0;if(b=a.event.fix(g),b.type=“mousewheel”,“detail”in
+g&amp;&amp;(m=-1*g.detail),“wheelDelta”in
+g&amp;&amp;(m=g.wheelDelta),“wheelDeltaY”in
+g&amp;&amp;(m=g.wheelDeltaY),“wheelDeltaX”in
+g&amp;&amp;(l=-1*g.wheelDeltaX),“axis”in
+g&amp;&amp;g.axis===g.HORIZONTAL_AXIS&amp;&amp;(l=-1*m,m=0),j=0===m?l:m,“deltaY”in
+g&amp;&amp;(m=-1*g.deltaY,j=m),“deltaX”in
+g&amp;&amp;(l=g.deltaX,0===m&amp;&amp;(j=-1*l)),0!==m||0!==l){if(1===g.deltaMode){var
+q=a.data(this,“mousewheel-line-height”);j*=q,m*=q,l*=q}else
+if(2===g.deltaMode){var
+r=a.data(this,“mousewheel-page-height”);j*=r,m*=r,l*=r}<a
+href="j>=1?“floor”:“ceil”“>if(n=Math.max(Math.abs(m),Math.abs(l)),(!f||f>n)&&(f=n,d(g,n)&&(f/=40)),d(g,n)&&(j/=40,l/=40,m/=40),j=Math</a>(<a
+href="l>=1?”floor“:”ceil“”>j/f),l=Math</a>(<a
+href="m>=1?“floor”:“ceil”“>l/f),m=Math</a>(m/f),k.settings.normalizeOffset&amp;&amp;this.getBoundingClientRect){var
+s=this.getBoundingClientRect();o=b.clientX-s.left,p=b.clientY-s.top}return
+b.deltaX=l,b.deltaY=m,b.deltaFactor=f,b.offsetX=o,b.offsetY=p,b.deltaMode=0,h.unshift(b,j,l,m),e&amp;&amp;clearTimeout(e),e=setTimeout(c,200),(a.event.dispatch||a.event.handle).apply(this,h)}}function
+c(){f=null}function d(a,b){return
+k.settings.adjustOldDeltas&amp;&amp;”mousewheel“===a.type&amp;&amp;b%120===0}var
+<a
+href=""wheel","mousewheel","DOMMouseScroll","MozMousePixelScroll"">e,f,g=</a>,h=”onwheel“in
+<a
+href=""wheel"">document||document.documentMode>=9?</a>:[”mousewheel“,”DomMouseScroll“,”MozMousePixelScroll“],i=Array.prototype.slice;if(a.event.fixHooks)for(var
+<a href="--j">j=g.length;j;)a.event.fixHooks[g</a>]=a.event.mouseHooks;var
+k=a.event.special.mousewheel={version:”3.1.12“,setup:function(){if(this.addEventListener)for(var
+<a href="--c">c=h.length;c;)this.addEventListener(h</a>,b,!1);else
+this.onmousewheel=b;a.data(this,”mousewheel-line-height“,k.getLineHeight(this)),a.data(this,”mousewheel-page-height“,k.getPageHeight(this))},teardown:function(){if(this.removeEventListener)for(var
+<a href="--c">c=h.length;c;)this.removeEventListener(h</a>,b,!1);else
+this.onmousewheel=null;a.removeData(this,”mousewheel-line-height“),a.removeData(this,”mousewheel-page-height“)},getLineHeight:function(b){var
+c=a(b),d=c[”offsetParent“in a.fn?”offsetParent“:”parent“]();return
+d.length||(d=a(”body“)),parseInt(d.css(”fontSize“),10)||parseInt(c.css(”fontSize“),10)||16},getPageHeight:function(b){return
+a(b).height()},settings:{adjustOldDeltas:!0,normalizeOffset:!0}};a.fn.extend({mousewheel:function(a){return
+a?this.bind(”mousewheel“,a):this.trigger(”mousewheel“)},unmousewheel:function(a){return
+this.unbind(”mousewheel“,a)}})});!function(a){”function“==typeof <a
+href=""jquery"">define&&define.amd?define(</a>,a):”object“==typeof
+exports?module.exports=a:a(jQuery)}(function(a){function b(b){var
+g=b||window.event,h=i.call(arguments,1),j=0,l=0,m=0,n=0,o=0,p=0;if(b=a.event.fix(g),b.type=”mousewheel“,”detail“in
+g&amp;&amp;(m=-1*g.detail),”wheelDelta“in
+g&amp;&amp;(m=g.wheelDelta),”wheelDeltaY“in
+g&amp;&amp;(m=g.wheelDeltaY),”wheelDeltaX“in
+g&amp;&amp;(l=-1*g.wheelDeltaX),”axis“in
+g&amp;&amp;g.axis===g.HORIZONTAL_AXIS&amp;&amp;(l=-1*m,m=0),j=0===m?l:m,”deltaY“in
+g&amp;&amp;(m=-1*g.deltaY,j=m),”deltaX“in
+g&amp;&amp;(l=g.deltaX,0===m&amp;&amp;(j=-1*l)),0!==m||0!==l){if(1===g.deltaMode){var
+q=a.data(this,”mousewheel-line-height“);j*=q,m*=q,l*=q}else
+if(2===g.deltaMode){var
+r=a.data(this,”mousewheel-page-height“);j*=r,m*=r,l*=r}<a
+href="j>=1?”floor“:”ceil“”>if(n=Math.max(Math.abs(m),Math.abs(l)),(!f||f>n)&&(f=n,d(g,n)&&(f/=40)),d(g,n)&&(j/=40,l/=40,m/=40),j=Math</a>(<a
+href="l>=1?“floor”:“ceil”“>j/f),l=Math</a>(<a
+href="m>=1?”floor“:”ceil“”>l/f),m=Math</a>(m/f),k.settings.normalizeOffset&amp;&amp;this.getBoundingClientRect){var
+s=this.getBoundingClientRect();o=b.clientX-s.left,p=b.clientY-s.top}return
+b.deltaX=l,b.deltaY=m,b.deltaFactor=f,b.offsetX=o,b.offsetY=p,b.deltaMode=0,h.unshift(b,j,l,m),e&amp;&amp;clearTimeout(e),e=setTimeout(c,200),(a.event.dispatch||a.event.handle).apply(this,h)}}function
+c(){f=null}function d(a,b){return
+k.settings.adjustOldDeltas&amp;&amp;“mousewheel”===a.type&amp;&amp;b%120===0}var
+<a
+href=""wheel","mousewheel","DOMMouseScroll","MozMousePixelScroll"">e,f,g=</a>,h=“onwheel”in
+<a
+href=""wheel"">document||document.documentMode>=9?</a>:[“mousewheel”,“DomMouseScroll”,“MozMousePixelScroll”],i=Array.prototype.slice;if(a.event.fixHooks)for(var
+<a href="--j">j=g.length;j;)a.event.fixHooks[g</a>]=a.event.mouseHooks;var
+k=a.event.special.mousewheel={version:“3.1.12”,setup:function(){if(this.addEventListener)for(var
+<a href="--c">c=h.length;c;)this.addEventListener(h</a>,b,!1);else
+this.onmousewheel=b;a.data(this,“mousewheel-line-height”,k.getLineHeight(this)),a.data(this,“mousewheel-page-height”,k.getPageHeight(this))},teardown:function(){if(this.removeEventListener)for(var
+<a href="--c">c=h.length;c;)this.removeEventListener(h</a>,b,!1);else
+this.onmousewheel=null;a.removeData(this,“mousewheel-line-height”),a.removeData(this,“mousewheel-page-height”)},getLineHeight:function(b){var
+c=a(b),d=c[“offsetParent”in a.fn?“offsetParent”:“parent”]();return
+d.length||(d=a(“body”)),parseInt(d.css(“fontSize”),10)||parseInt(c.css(“fontSize”),10)||16},getPageHeight:function(b){return
+a(b).height()},settings:{adjustOldDeltas:!0,normalizeOffset:!0}};a.fn.extend({mousewheel:function(a){return
+a?this.bind(“mousewheel”,a):this.trigger(“mousewheel”)},unmousewheel:function(a){return
+this.unbind(“mousewheel”,a)}})});</p>
+
+<pre><code>== malihu jquery custom scrollbar plugin == Version: 3.1.5, License: MIT License (MIT)
+</code></pre>
+
+<p>!function(e){“function”==typeof <a
+href=""jquery"">define&&define.amd?define(</a>,e):“undefined”!=typeof
+module&amp;&amp;module.exports?module.exports=e:e(jQuery,window,document)}(function(e){!function(t){var
+o=“function”==typeof define&amp;&amp;define.amd,a=“undefined”!=typeof
+module&amp;&amp;module.exports,n=“<a
+href="https:"==document.location.protocol?"https:":"http:",i="cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js";o||(a?require("jquery-mousewheel")(e):e.event.special.mousewheel||e("head").append(decodeURI("%3Cscript">”==document.location.protocol?“https:”:“http:”,i=“cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js”;o||(a?require(“jquery-mousewheel”)(e):e.event.special.mousewheel||e(“head”).append(decodeURI(“%3Cscript</a>
+src=”<code>n</code>“//”<code>i</code>“%3E%3C/script%3E”))),t()}(function(){var
+t,o=“mCustomScrollbar”,a=“mCS”,n=“.mCustomScrollbar”,i={setTop:0,setLeft:0,axis:“y”,scrollbarPosition:“inside”,scrollInertia:950,autoDraggerLength:!0,alwaysShowScrollbar:0,snapOffset:0,mouseWheel:{<a
+href=""select","option","keygen","datalist","textarea"">enable:!0,scrollAmount:“auto”,axis:“y”,deltaFactor:“auto”,disableOver:</a>},scrollButtons:{scrollType:“stepless”,scrollAmount:“auto”},keyboard:{enable:!0,scrollType:“stepless”,scrollAmount:“auto”},contentTouchScroll:25,documentTouchScroll:!0,advanced:{<a
+href="tabindex">autoScrollOnFocus:“input,textarea,select,button,datalist,keygen,a</a>,<a
+href="contenteditable='true'">area,object,</a>”,updateOnContentResize:!0,updateOnImageLoad:“auto”,autoUpdateTimeout:60},theme:“light”,callbacks:{onTotalScrollOffset:0,onTotalScrollBackOffset:0,alwaysTriggerOffsets:!0}},r=0,l={},<a
+href=""mCSB_dragger_onDrag","mCSB_scrollTools_onDrag","mCS_img_loaded","mCS_disabled","mCS_destroyed","mCS_no_scrollbar","mCS-autoHide","mCS-dir-rtl","mCS_no_scrollbar_y","mCS_no_scrollbar_x","mCS_y_hidden","mCS_x_hidden","mCSB_draggerContainer","mCSB_buttonUp","mCSB_buttonDown","mCSB_buttonLeft","mCSB_buttonRight"">s=window.attachEvent&&!window.addEventListener?1:0,c=!1,d=</a>,u={init:function(t){var
+t=e.extend(!0,{},i,t),o=f.call(this);if(t.live){var
+s=t.liveSelector||this.selector||n,c=e(s);if(“off”===t.live)return void <a
+href="s">m(s);l</a>=setTimeout(function(){c.mCustomScrollbar(t),“once”===t.live&amp;&amp;c.length&amp;&amp;m(s)},500)}else
+m(s);return
+t.setWidth=t.set_width?t.set_width:t.setWidth,t.setHeight=t.set_height?t.set_height:t.setHeight,t.axis=t.horizontalScroll?“x”:p(t.axis),t.scrollInertia=t.scrollInertia&gt;0&amp;&amp;t.scrollInertia&lt;17?17:t.scrollInertia,“object”!=typeof
+t.mouseWheel&amp;&amp;1==t.mouseWheel&amp;&amp;(t.mouseWheel={enable:!0,scrollAmount:“auto”,axis:“y”,preventDefault:!1,deltaFactor:“auto”,normalizeDelta:!1,invert:!1}),t.mouseWheel.scrollAmount=t.mouseWheelPixels?t.mouseWheelPixels:t.mouseWheel.scrollAmount,t.mouseWheel.normalizeDelta=t.advanced.normalizeMouseWheelDelta?t.advanced.normalizeMouseWheelDelta:t.mouseWheel.normalizeDelta,t.scrollButtons.scrollType=g(t.scrollButtons.scrollType),h(t),e(o).each(function(){var
+o=e(this);if(!o.data(a)){o.data(a,{idx:++r,opt:t,scrollRatio:{y:null,x:null},overflowed:null,contentReset:{y:null,x:null},bindEvents:!1,tweenRunning:!1,sequential:{},langDir:o.css(“direction”),cbOffsets:null,trigger:null,poll:{size:{o:0,n:0},img:{o:0,n:0},change:{o:0,n:0}}});var
+n=o.data(a),i=n.opt,l=o.data(“mcs-axis”),s=o.data(“mcs-scrollbar-position”),c=o.data(“mcs-theme”);l&amp;&amp;(i.axis=l),s&amp;&amp;(i.scrollbarPosition=s),c&amp;&amp;(i.theme=c,h(i)),v.call(this),n&amp;&amp;i.callbacks.onCreate&amp;&amp;“function”==typeof
+i.callbacks.onCreate&amp;&amp;i.callbacks.onCreate.call(this),e(“#mCSB_”<code>n.idx</code>“_container
+<a href="2">img:not(.”+d</a>+“)”).<a
+href="2">addClass(d</a>),u.update.call(null,o)}})},update:function(t,o){var
+n=t||f.call(this);return e(n).each(function(){var
+t=e(this);if(t.data(a)){var <a
+href="e("#mCSB_"n.idx"_dragger_vertical"),e("#mCSB_"n.idx"_dragger_horizontal")">n=t.data(a),i=n.opt,r=e(“#mCSB_”n.idx“_container”),l=e(“#mCSB_”+n.idx),s=</a>;if(!r.length)return;n.tweenRunning&amp;&amp;Q(t),o&amp;&amp;n&amp;&amp;i.callbacks.onBeforeUpdate&amp;&amp;“function”==typeof
+<a
+href="3">i.callbacks.onBeforeUpdate&&i.callbacks.onBeforeUpdate.call(this),t.hasClass(d</a>)&amp;&amp;<a
+href="3">t.removeClass(d</a>),<a href="4">t.hasClass(d</a>)&amp;&amp;<a
+href="4">t.removeClass(d</a>),l.css(“max-height”,“none”),l.height()!==t.height()&amp;&amp;l.css(“max-height”,t.height()),_.call(this),“y”===i.axis||i.advanced.autoExpandHorizontalScroll||r.css(“width”,x®),n.overflowed=y.call(this),M.call(this),i.autoDraggerLength&amp;&amp;S.call(this),b.call(this),T.call(this);var
+<a href="0">c=[Math.abs(r</a>.<a href="0">offsetTop),Math.abs(r</a>.<a
+href="0">offsetLeft)];“x”!==i.axis&&(n.overflowed</a>?<a href="0">s</a>.<a
+href="0">height()>s</a>.<a
+href="0">parent().height()?B.call(this):(G(t,c</a>.toString(),{dir:“y”,dur:0,overwrite:“none”}),<a
+href="1">n.contentReset.y=null):(B.call(this),“y”===i.axis?k.call(this):“yx”===i.axis&&n.overflowed</a>&amp;&amp;<a
+href="1">G(t,c</a>.toString(),{dir:“x”,dur:0,overwrite:“none”}))),“<a
+href="1">y”!==i.axis&&(n.overflowed</a>?<a href="1">s</a>.<a
+href="1">width()>s</a>.<a
+href="1">parent().width()?B.call(this):(G(t,c</a>.toString(),{dir:“x”,dur:0,overwrite:“none”}),<a
+href="0">n.contentReset.x=null):(B.call(this),“x”===i.axis?k.call(this):“yx”===i.axis&&n.overflowed</a>&amp;&amp;<a
+href="0">G(t,c</a>.toString(),{dir:“y”,dur:0,overwrite:“none”}))),o&amp;&amp;n&amp;&amp;(2===o&amp;&amp;i.callbacks.onImageLoad&amp;&amp;“function”==typeof
+i.callbacks.onImageLoad?i.callbacks.onImageLoad.call(this):3===o&amp;&amp;i.callbacks.onSelectorChange&amp;&amp;“function”==typeof
+i.callbacks.onSelectorChange?i.callbacks.onSelectorChange.call(this):i.callbacks.onUpdate&amp;&amp;“function”==typeof
+i.callbacks.onUpdate&amp;&amp;i.callbacks.onUpdate.call(this)),N.call(this)}})},scrollTo:function(t,o){if(“undefined”!=typeof
+t&amp;&amp;null!=t){var n=f.call(this);return e(n).each(function(){var
+n=e(this);if(n.data(a)){var
+i=n.data(a),r=i.opt,l={trigger:“external”,scrollInertia:r.scrollInertia,scrollEasing:“mcsEaseInOut”,moveDragger:!1,timeout:60,callbacks:!0,onStart:!0,onUpdate:!0,onComplete:!0},s=e.extend(!0,{},<a
+href="0">l,o),c=Y.call(this,t),d=s.scrollInertia>0&&s.scrollInertia<17?17:s.scrollInertia;c</a>=<a
+href="0">X.call(this,c</a>,“<a href="1">y”),c</a>=<a
+href="1">X.call(this,c</a>,“<a href="0">x”),s.moveDragger&&(c</a>*=<a
+href="1">i.scrollRatio.y,c</a>*=i.scrollRatio.x),s.dur=ne()?0:d,setTimeout(function(){<a
+href="0">null!==c</a>&amp;&amp;“undefined”!=typeof <a
+href="0">c</a>&amp;&amp;“<a
+href="0">x”!==r.axis&&i.overflowed</a>&amp;&amp;(<a
+href="0">s.dir=“y”,s.overwrite=“all”,G(n,c</a>.<a
+href="1">toString(),s)),null!==c</a>&amp;&amp;“undefined”!=typeof <a
+href="1">c</a>&amp;&amp;“<a
+href="1">y”!==r.axis&&i.overflowed</a>&amp;&amp;(<a
+href="1">s.dir=“x”,s.overwrite=“none”,G(n,c</a>.toString(),s))},s.timeout)}})}},stop:function(){var
+t=f.call(this);return e(t).each(function(){var
+t=e(this);t.data(a)&amp;&amp;Q(t)})},disable:function(t){var
+o=f.call(this);return e(o).each(function(){var o=e(this);if(o.data(a)){<a
+href="3">o.data(a);N.call(this,“remove”),k.call(this),t&&B.call(this),M.call(this,!0),o.addClass(d</a>)}})},destroy:function(){var
+t=f.call(this);return e(t).each(function(){var n=e(this);if(n.data(a)){var
+<a
+href="2">i=n.data(a),r=i.opt,l=e(“#mCSB_”+i.idx),s=e(“#mCSB_”i.idx“_container”),c=e(“.mCSB_”i.idx“_scrollbar”);r.live&&m(r.liveSelector||e(t).selector),N.call(this,“remove”),k.call(this),B.call(this),n.removeData(a),$(this,“mcs”),c.remove(),s.find(“img.”+d</a>).<a
+href="2">removeClass(d</a>),l.replaceWith(s.contents()),n.removeClass(o+“
+_”<code>a</code>“_”<code>i.idx</code>“ ”+<a href="6">d</a>+“ ”+<a
+href="7">d</a>+“ ”+<a href="5">d</a>+“ ”+<a href="3">d</a>).<a
+href="4">addClass(d</a>)}})}},f=function(){return“object”!=typeof
+e(this)||e(this).length&lt;1?n:this},h=function(t){var <a
+href=""rounded","rounded-dark","rounded-dots","rounded-dots-dark"">o=</a>,<a
+href=""rounded-dots","rounded-dots-dark","3d","3d-dark","3d-thick","3d-thick-dark","inset","inset-dark","inset-2","inset-2-dark","inset-3","inset-3-dark"">a=</a>,<a
+href=""minimal","minimal-dark"">n=</a>,<a
+href=""minimal","minimal-dark"">i=</a>,<a
+href=""minimal","minimal-dark"">r=</a>;t.autoDraggerLength=e.inArray(t.theme,o)&gt;-1?!1:t.autoDraggerLength,t.autoExpandScrollbar=e.inArray(t.theme,a)&gt;-1?!1:t.autoExpandScrollbar,t.scrollButtons.enable=e.inArray(t.theme,n)&gt;-1?!1:t.scrollButtons.enable,t.autoHideScrollbar=e.inArray(t.theme,i)&gt;-1?!0:t.autoHideScrollbar,t.scrollbarPosition=e.inArray(t.theme,r)&gt;-1?“outside”:t.scrollbarPosition},m=function(e){<a
+href="e">l</a>&amp;&amp;(<a
+href="e">clearTimeout(l</a>),$(l,e))},p=function(e){return“yx”===e||“xy”===e||“auto”===e?“yx”:“x”===e||“horizontal”===e?“x”:“y”},g=function(e){return“stepped”===e||“pixels”===e||“step”===e||“click”===e?“stepped”:“stepless”},v=function(){var
+t=e(this),n=t.data(a),i=n.opt,r=i.autoExpandScrollbar?“ ”+<a
+href="1">d</a>+“_expand”:“”,l=[“&lt;div
+id=&#39;mCSB_”<code>n.idx</code>“_scrollbar_vertical&#39;
+class=&#39;mCSB_scrollTools mCSB_”<code>n.idx</code>“_scrollbar
+mCS-”<code>i.theme</code>“
+mCSB_scrollTools_vertical”<code>r</code>“&#39;&gt;&lt;div <a
+href="12">class=‘”+d</a>+“&#39;&gt;&lt;div
+id=&#39;mCSB_”<code>n.idx</code>“_dragger_vertical&#39;
+class=&#39;mCSB_dragger&#39; style=&#39;position:absolute;&#39;&gt;&lt;div
+class=&#39;mCSB_dragger_bar&#39; /&gt;&lt;/div&gt;&lt;div
+class=&#39;mCSB_draggerRail&#39; /&gt;&lt;/div&gt;&lt;/div&gt;”,“&lt;div
+id=&#39;mCSB_”<code>n.idx</code>“_scrollbar_horizontal&#39;
+class=&#39;mCSB_scrollTools mCSB_”<code>n.idx</code>“_scrollbar
+mCS-”<code>i.theme</code>“
+mCSB_scrollTools_horizontal”<code>r</code>“&#39;&gt;&lt;div <a
+href="12">class=’”+d</a>+“&#39;&gt;&lt;div
+id=&#39;mCSB_”<code>n.idx</code>“_dragger_horizontal&#39;
+class=&#39;mCSB_dragger&#39; style=&#39;position:absolute;&#39;&gt;&lt;div
+class=&#39;mCSB_dragger_bar&#39; /&gt;&lt;/div&gt;&lt;div
+class=&#39;mCSB_draggerRail&#39; /&gt;&lt;/<a
+href="0">div></div>”],s=“yx”===i.axis?“mCSB_vertical_horizontal”:“x”===i.axis?“mCSB_horizontal”:“mCSB_vertical”,c=“yx”===i.axis?l</a>+<a
+href="1">l</a>:“<a href="1">x”===i.axis?l</a>:<a
+href="0">l</a>,u=“yx”===i.axis?“&lt;div
+id=&#39;mCSB_”<code>n.idx</code>“_container_wrapper&#39;
+class=&#39;mCSB_container_wrapper&#39; /&gt;”:“”,f=i.autoHideScrollbar?“
+”+<a href="6">d</a>:“”,h=“x”!==i.axis&amp;&amp;“rtl”===n.langDir?“ ”+<a
+href="7">d</a>:“”;i.setWidth&amp;&amp;t.css(“width”,i.setWidth),i.setHeight&amp;&amp;t.css(“height”,i.setHeight),i.setLeft=“y”!==i.axis&amp;&amp;“rtl”===n.langDir?“989999px”:i.setLeft,t.addClass(o+“
+_”<code>a</code>“_”+n.idx+f+h).wrapInner(“&lt;div
+id=&#39;mCSB_”<code>n.idx</code>“&#39; class=&#39;mCustomScrollBox
+mCS-”<code>i.theme</code>“ ”<code>s</code>“&#39;&gt;&lt;div
+id=&#39;mCSB_”<code>n.idx</code>“_container&#39;
+class=&#39;mCSB_container&#39; style=&#39;position:relative;
+top:”<code>i.setTop</code>“; left:”<code>i.setLeft</code>“;&#39;
+dir=&#39;”<code>n.langDir</code>“&#39; /&gt;&lt;/div&gt;”);var
+m=e(“#mCSB_”+n.idx),p=e(“#mCSB_”<code>n.idx</code>“_container”);“y”===i.axis||i.advanced.autoExpandHorizontalScroll||p.css(“width”,x(p)),“outside”===i.scrollbarPosition?(“static”===t.css(“position”)&amp;&amp;t.css(“position”,“relative”),t.css(“overflow”,“visible”),m.addClass(“mCSB_outside”).after©):(m.addClass(“mCSB_inside”).append©,p.wrap(u)),w.call(this);var
+<a
+href="e("#mCSB_"n.idx"_dragger_vertical"),e("#mCSB_"n.idx"_dragger_horizontal")">g=</a>;<a
+href="0">g</a>.<a href="0">css(“min-height”,g</a>.<a
+href="1">height()),g</a>.<a
+href="1">css(“min-width”,g</a>.width())},x=function(t){var <a
+href="0">o=[t</a>.scrollWidth,Math.max.apply(Math,t.children().map(function(){return
+e(this).outerWidth(!0)}).get())],a=t.parent().width();return <a
+href="0">o</a>&gt;<a href="0">a?o</a>:<a href="1">o</a>&gt;<a
+href="1">a?o</a>:“100%”},_=function(){var
+t=e(this),o=t.data(a),n=o.opt,i=e(“#mCSB_”<code>o.idx</code>“_container”);if(n.advanced.autoExpandHorizontalScroll&amp;&amp;“y”!==n.axis){i.css({width:“auto”,“min-width”:0,“overflow-x”:“scroll”});var
+<a
+href="0">r=Math.ceil(i</a>.scrollWidth);3===n.advanced.autoExpandHorizontalScroll||2!==n.advanced.autoExpandHorizontalScroll&amp;&amp;r&gt;i.parent().width()?i.css({width:r,“min-width”:“100%”,“overflow-x”:“inherit”}):i.css({“overflow-x”:“inherit”,position:“absolute”}).wrap(“&lt;div
+class=&#39;mCSB_h_wrapper&#39; style=&#39;position:relative; left:0;
+width:999999px;&#39; /&gt;”).css({<a href="0">width:Math.ceil(i</a>.<a
+href="0">getBoundingClientRect().right+.4)-Math.floor(i</a>.getBoundingClientRect().left),“min-width”:“100%”,position:“relative”}).unwrap()}},w=function(){var
+t=e(this),o=t.data(a),n=o.opt,i=e(“.mCSB_”<code>o.idx</code>“_scrollbar:first”),r=oe(n.scrollButtons.tabindex)?“tabindex=&#39;”<code>n.scrollButtons.tabindex</code>“&#39;”:“”,l=[“&lt;a
+href=&#39;#&#39; <a href="13">class=‘”+d</a>+“&#39; ”<code>r</code>“
+/&gt;”,“&lt;a href=&#39;#&#39; <a href="14">class=’”+d</a>+“&#39;
+”<code>r</code>“ /&gt;”,“&lt;a href=&#39;#&#39; <a
+href="15">class=‘”+d</a>+“&#39; ”<code>r</code>“ /&gt;”,“&lt;a
+href=&#39;#&#39; <a href="16">class=’”+d</a>+“&#39; ”<code>r</code>“
+/&gt;”],<a href="2">s=[“x”===n.axis?l</a>:<a href="0">l</a>,“<a
+href="3">x”===n.axis?l</a>:<a href="1">l</a>,<a href="2">l</a>,<a
+href="3">l</a>];<a href="0">n.scrollButtons.enable&&i.prepend(s</a>).<a
+href="1">append(s</a>).<a
+href="2">next(“.mCSB_scrollTools”).prepend(s</a>).<a
+href="3">append(s</a>)},S=function(){var <a
+href="e("#mCSB_"o.idx"_dragger_vertical"),e("#mCSB_"o.idx"_dragger_horizontal")">t=e(this),o=t.data(a),n=e(“#mCSB_”+o.idx),i=e(“#mCSB_”o.idx“_container”),r=</a>,<a
+href="n.height()/i.outerHeight(!1),n.width()/i.outerWidth(!1)">l=</a>,<a
+href="0">c=[parseInt(r</a>.<a
+href="0">css(“min-height”)),Math.round(l</a>*<a href="0">r</a>.<a
+href="1">parent().height()),parseInt(r</a>.<a
+href="1">css(“min-width”)),Math.round(l</a>*<a href="1">r</a>.<a
+href="1">parent().width())],d=s&&c</a>&lt;<a href="0">c</a>?<a
+href="0">c</a>:<a href="1">c</a>,<a href="3">u=s&&c</a>&lt;<a
+href="2">c</a>?<a href="2">c</a>:<a href="3">c</a>;<a
+href="0">r</a>.css({<a
+href="0">height:d,“max-height”:r</a>.parent().height()-10}).find(“.mCSB_dragger_bar”).css({“<a
+href="0">line-height”:c</a>+“px”}),<a href="1">r</a>.css({<a
+href="1">width:u,“max-width”:r</a>.parent().width()-10})},b=function(){var
+<a
+href="e("#mCSB_"o.idx"_dragger_vertical"),e("#mCSB_"o.idx"_dragger_horizontal")">t=e(this),o=t.data(a),n=e(“#mCSB_”+o.idx),i=e(“#mCSB_”o.idx“_container”),r=</a>,<a
+href="i.outerHeight(!1)-n.height(),i.outerWidth(!1)-n.width()">l=</a>,<a
+href="0">s=[l</a>/(<a href="0">r</a>.<a href="0">parent().height()-r</a>.<a
+href="1">height()),l</a>/(<a href="1">r</a>.<a
+href="1">parent().width()-r</a>.width())];o.scrollRatio={<a
+href="0">y:s</a>,<a href="1">x:s</a>}},C=function(e,t,o){var <a
+href="0">a=o?d</a>+“<a
+href="0">_expanded”:“”,n=e.closest(“.mCSB_scrollTools”);“active”===t?(e.toggleClass(d</a>+“
+”+<a href="1">a),n.toggleClass(d</a>),<a href="0">e</a>.<a
+href="0">_draggable=e</a>.<a href="0">_draggable?0:1):e</a>.<a
+href="0">_draggable||(“hide”===t?(e.removeClass(d</a>),<a
+href="1">n.removeClass(d</a>)):(<a href="0">e.addClass(d</a>),<a
+href="1">n.addClass(d</a>)))},y=function(){var <a
+href="0">t=e(this),o=t.data(a),n=e(“#mCSB_”+o.idx),i=e(“#mCSB_”o.idx“_container”),r=null==o.overflowed?i.height():i.outerHeight(!1),l=null==o.overflowed?i.width():i.outerWidth(!1),s=i</a>.<a
+href="0">scrollHeight,c=i</a>.scrollWidth;return <a
+href="r>n.height(),l>n.width()“>s>r&&(r=s),c>l&&(l=c),</a>},B=function(){var
+<a
+href="e("#mCSB_"o.idx"_dragger_vertical"),e("#mCSB_"o.idx"_dragger_horizontal")">t=e(this),o=t.data(a),n=o.opt,i=e(”#mCSB_“+o.idx),r=e(”#mCSB_“o.idx”_container“),l=</a>;<a
+href="0">if(Q(t),(”x“!==n.axis&&!o.overflowed</a>||”<a
+href="0">y“===n.axis&&o.overflowed</a>)&amp;&amp;(<a href="0">l</a>.<a
+href="1">add®.css(”top“,0),G(t,”_resetY“)),”y“!==n.axis&&!o.overflowed</a>||”<a
+href="1">x“===n.axis&&o.overflowed</a>){var <a
+href="1">s=dx=0;”rtl“===o.langDir&&(s=i.width()-r.outerWidth(!1),dx=Math.abs(s/o.scrollRatio.x)),r.css(”left“,s),l</a>.css(”left“,dx),G(t,”_resetX“)}},T=function(){function
+t(){r=setTimeout(function(){<a
+href="0">e.event.special.mousewheel?(clearTimeout®,W.call(o</a>)):t()},100)}var
+o=e(this),n=o.data(a),i=n.opt;if(!n.bindEvents){if(I.call(this),i.contentTouchScroll&amp;&amp;D.call(this),E.call(this),i.mouseWheel.enable){var
+r;t()}P.call(this),U.call(this),i.advanced.autoScrollOnFocus&amp;&amp;H.call(this),i.scrollButtons.enable&amp;&amp;F.call(this),i.keyboard.enable&amp;&amp;q.call(this),n.bindEvents=!0}},k=function(){var
+t=e(this),o=t.data(a),n=o.opt,i=a+”_“+o.idx,r=”.mCSB_“<code>o.idx</code>”_scrollbar“,l=e(”#mCSB_“<code>o.idx</code>”,#mCSB_“<code>o.idx</code>”_container,#mCSB_“<code>o.idx</code>”_container_wrapper,“<code>r</code>”
+.“+<a
+href="12">d</a>+”,#mCSB_“<code>o.idx</code>”_dragger_vertical,#mCSB_“<code>o.idx</code>”_dragger_horizontal,“<code>r</code>”&gt;a“),s=e(”#mCSB_“<code>o.idx</code>”_container“);n.advanced.releaseDraggableSelectors&amp;&amp;l.add(e(n.advanced.releaseDraggableSelectors)),n.advanced.extraDraggableSelectors&amp;&amp;l.add(e(n.advanced.extraDraggableSelectors)),o.bindEvents&amp;&amp;(e(document).add(e(!A()||top.document)).unbind(”.“+i),l.each(function(){e(this).unbind(”.“+i)}),<a
+href="0">clearTimeout(t</a>.<a href="0">_focusTimeout),$(t</a>,”<a
+href="0">_focusTimeout“),clearTimeout(o.sequential.step),$(o.sequential,”step“),clearTimeout(s</a>.<a
+href="0">onCompleteTimeout),$(s</a>,”onCompleteTimeout“),o.bindEvents=!1)},M=function(t){var
+<a
+href="e("#mCSB_"n.idx"_scrollbar_vertical"),e("#mCSB_"n.idx"_scrollbar_horizontal")">o=e(this),n=o.data(a),i=n.opt,r=e(”#mCSB_“n.idx”_container_wrapper“),l=r.length?r:e(”#mCSB_“n.idx”_container“),s=</a>,<a
+href="0">c=[s</a>.<a href="1">find(”.mCSB_dragger“),s</a>.<a
+href="0">find(”.mCSB_dragger“)];”x“!==i.axis&&(n.overflowed</a>&amp;&amp;!<a
+href="0">t?(s</a>.<a href="0">add(c</a>).<a href="0">add(s</a>.<a
+href="8">children(”a“)).css(”display“,”block“),l.removeClass(d</a>+” “+<a
+href="10">d</a>)):(<a
+href="0">i.alwaysShowScrollbar?(2!==i.alwaysShowScrollbar&&c</a>.<a
+href="10">css(”display“,”none“),l.removeClass(d</a>)):(<a href="0">s</a>.<a
+href="10">css(”display“,”none“),l.addClass(d</a>)),<a
+href="8">l.addClass(d</a>))),”<a
+href="1">y“!==i.axis&&(n.overflowed</a>&amp;&amp;!<a href="1">t?(s</a>.<a
+href="1">add(c</a>).<a href="1">add(s</a>.<a
+href="9">children(”a“)).css(”display“,”block“),l.removeClass(d</a>+” “+<a
+href="11">d</a>)):(<a
+href="1">i.alwaysShowScrollbar?(2!==i.alwaysShowScrollbar&&c</a>.<a
+href="11">css(”display“,”none“),l.removeClass(d</a>)):(<a href="1">s</a>.<a
+href="11">css(”display“,”none“),l.addClass(d</a>)),<a
+href="9">l.addClass(d</a>))),<a href="0">n.overflowed</a>||<a
+href="1">n.overflowed</a>?<a href="5">o.removeClass(d</a>):<a
+href="5">o.addClass(d</a>)},O=function(t){var <a
+href="e(frameElement).offset().top,e(frameElement).offset().left">o=t.type,a=t.target.ownerDocument!==document&&null!==frameElement?</a>:<a
+href="e(t.view.frameElement).offset().top,e(t.view.frameElement).offset().left">null,n=A()&&t.target.ownerDocument!==top.document&&null!==frameElement?</a>:[0,0];switch(o){case”pointerdown“:case”MSPointerDown“:case”pointermove“:case”MSPointerMove“:case”pointerup“:case”MSPointerUp“:return
+<a href="0">a?[t.originalEvent.pageY-a</a>+<a href="0">n</a>,<a
+href="1">t.originalEvent.pageX-a</a>+<a href="1">n</a>,!<a
+href="t.originalEvent.pageY,t.originalEvent.pageX,!1">1]:</a>;case”touchstart“:case”touchmove“:case”touchend“:var
+<a href="0">i=t.originalEvent.touches</a>||<a
+href="0">t.originalEvent.changedTouches</a>,r=t.originalEvent.touches.length||t.originalEvent.changedTouches.length;return
+<a
+href="i.screenY,i.screenX,r>1”>t.target.ownerDocument!==document?</a>:[i.pageY,i.pageX,r&gt;1];default:return
+<a href="0">a?[t.pageY-a</a>+<a href="0">n</a>,<a href="1">t.pageX-a</a>+<a
+href="1">n</a>,!<a
+href="t.pageY,t.pageX,!1">1]:</a>}},I=function(){function t(e,t,a,n){<a
+href="0">if(h</a>.<a
+href="1">idleTimer=d.scrollInertia<233?250:0,o.attr("id")===f</a>)var <a
+href="0">i=“x”,s=(o</a>.offsetLeft-t+n)*l.scrollRatio.x;else var <a
+href="0">i=“y”,s=(o</a>.offsetTop-e+a)*l.scrollRatio.y;G(r,s.toString(),{dir:i,drag:!0})}var
+<a
+href=""mCSB_"l.idx"_dragger_vertical","mCSB_"l.idx"_dragger_horizontal"">o,n,i,r=e(this),l=r.data(a),d=l.opt,u=a+“_”+l.idx,f=</a>,<a
+href="0">h=e(“#mCSB_”l.idx“_container”),m=e(“#”+f</a>+“,#”+<a
+href="1">f</a>),p=d.advanced.releaseDraggableSelectors?m.add(e(d.advanced.releaseDraggableSelectors)):m,g=d.advanced.extraDraggableSelectors?e(!A()||top.document).add(e(d.advanced.extraDraggableSelectors)):e(!A()||top.document);m.bind(“contextmenu.”+u,function(e){e.preventDefault()}).bind(“mousedown.”<code>u</code>“
+touchstart.”<code>u</code>“ pointerdown.”<code>u</code>“
+MSPointerDown.”+u,function(t){if(t.stopImmediatePropagation(),t.preventDefault(),ee(t)){c=!0,s&amp;&amp;(document.onselectstart=function(){return!1}),L.call(h,!1),Q®,o=e(this);var
+<a href="0">a=o.offset(),l=O(t)</a>-<a
+href="1">a.top,u=O(t)</a>-a.left,f=o.height()+a.top,m=o.width()+a.left;f&gt;l&amp;&amp;l&gt;0&amp;&amp;m&gt;u&amp;&amp;u&gt;0&amp;&amp;(n=l,i=u),C(o,“active”,d.autoExpandScrollbar)}}).bind(“touchmove.”+u,function(e){e.stopImmediatePropagation(),e.preventDefault();var
+<a href="0">a=o.offset(),r=O(e)</a>-<a
+href="1">a.top,l=O(e)</a>-a.left;t(n,i,r,l)}),e(document).add(g).bind(“mousemove.”<code>u</code>“
+pointermove.”<code>u</code>“ MSPointerMove.”+u,function(e){if(o){var <a
+href="0">a=o.offset(),r=O(e)</a>-<a
+href="1">a.top,l=O(e)</a>-a.left;if(n===r&amp;&amp;i===l)return;t(n,i,r,l)}}).add(p).bind(“mouseup.”<code>u</code>“
+touchend.”<code>u</code>“ pointerup.”<code>u</code>“
+MSPointerUp.”+u,function(){o&amp;&amp;(C(o,“active”,d.autoExpandScrollbar),o=null),c=!1,s&amp;&amp;(document.onselectstart=null),L.call(h,!0)})},D=function(){function
+o(e){<a href="2">if(!te(e)||c||O(e)</a>)return
+void(t=0);t=1,b=0,C=0,d=1,y.removeClass(“mCS_touch_action”);var <a
+href="0">o=I.offset();u=O(e)</a>-<a href="1">o.top,f=O(e)</a>-<a
+href="0">o.left,z=[O(e)</a>,<a href="1">O(e)</a>]}function n(e){<a
+href="2">if(te(e)&&!c&&!O(e)</a>&amp;&amp;(T.documentTouchScroll||e.preventDefault(),e.stopImmediatePropagation(),(!C||b)&amp;&amp;d)){g=K();var
+<a href="0">t=M.offset(),o=O(e)</a>-<a href="1">t.top,a=O(e)</a>-<a
+href="2">t.left,n=“mcsLinearOut”;if(E.push(o),W.push(a),z</a>=<a
+href="0">Math.abs(O(e)</a>-<a href="0">z</a>),<a href="3">z</a>=<a
+href="1">Math.abs(O(e)</a>-<a href="1">z</a>),<a
+href="0">B.overflowed</a>)var <a href="0">i=D</a>.<a
+href="0">parent().height()-D</a>.<a
+href="3">height(),r=u-o>0&&o-u>-(i*B.scrollRatio.y)&&(2*z</a>&lt;<a
+href="2">z</a>||“<a href="1">yx”===T.axis);if(B.overflowed</a>)var <a
+href="1">l=D</a>.<a href="1">parent().width()-D</a>.<a
+href="2">width(),h=f-a>0&&a-f>-(l*B.scrollRatio.x)&&(2*z</a>&lt;<a
+href="3">z</a>||“<a
+href="u-o,f-a">yx”===T.axis);r||h?(U||e.preventDefault(),b=1):(C=1,y.addClass(“mCS_touch_action”)),U&&e.preventDefault(),w=“yx”===T.axis?</a>:“<a
+href="null,f-a">x”===T.axis?</a>:[<a href="0">u-o,null],I</a>.<a
+href="0">idleTimer=250,B.overflowed</a>&amp;&amp;<a href="0">s(w</a>,<a
+href="1">R,n,“y”,“all”,!0),B.overflowed</a>&amp;&amp;<a
+href="1">s(w</a>,R,n,“x”,L,!0)}}function i(e){<a
+href="2">if(!te(e)||c||O(e)</a>)return
+void(t=0);t=1,e.stopImmediatePropagation(),Q(y),p=K();var <a
+href="0">o=M.offset();h=O(e)</a>-<a href="1">o.top,m=O(e)</a>-<a
+href="">o.left,E=[],W=</a>}function r(e){<a
+href="2">if(te(e)&&!c&&!O(e)</a>){d=0,e.stopImmediatePropagation(),b=0,C=0,v=K();var
+<a href="0">t=M.offset(),o=O(e)</a>-<a
+href="1">t.top,a=O(e)</a>-t.left;if(!(v-g&gt;30)){_=1e3/(v-p);var <a
+href="E.length-2">n=“mcsEaseOut”,i=2.5>_,r=i?[E</a>,<a
+href="W.length-2">W</a>]:[<a href="0">0,0];x=i?[o-r</a>,<a
+href="1">a-r</a>]:[o-h,a-m];var <a href="0">u=[Math.abs(x</a>),<a
+href="1">Math.abs(x</a>)];<a href="0">_=i?[Math.abs(x</a>/<a
+href="1">4),Math.abs(x</a>/<a href="_,_">4)]:</a>;var <a
+href="0">f=[Math.abs(I</a>.<a href="0">offsetTop)-x</a>*<a
+href="0">l(u</a>/<a href="0">_</a>,<a href="0">_</a>),<a
+href="0">Math.abs(I</a>.<a href="1">offsetLeft)-x</a>*<a
+href="1">l(u</a>/<a href="1">_</a>,<a href="1">_</a>)];<a
+href="0">w=“yx”===T.axis?[f</a>,<a href="1">f</a>]:“<a
+href="1">x”===T.axis?[null,f</a>]:[<a href="0">f</a>,<a
+href="0">null],S=[4*u</a>+<a
+href="1">T.scrollInertia,4*u</a>+T.scrollInertia];var <a
+href="0">y=parseInt(T.contentTouchScroll)||0;w</a>=<a href="0">u</a>&gt;<a
+href="0">y?w</a>:<a href="1">0,w</a>=<a href="1">u</a>&gt;<a
+href="1">y?w</a>:<a href="0">0,B.overflowed</a>&amp;&amp;<a
+href="0">s(w</a>,<a href="0">S</a>,<a
+href="1">n,“y”,L,!1),B.overflowed</a>&amp;&amp;<a href="1">s(w</a>,<a
+href="1">S</a>,n,“x”,L,!1)}}}function l(e,t){var <a
+href="1.5*t,2*t,t/1.5,t/2">o=</a>;return <a href="0">e>90?t>4?o</a>:<a
+href="3">o</a>:<a href="3">e>60?t>3?o</a>:<a href="2">o</a>:<a
+href="1">e>30?t>8?o</a>:<a href="0">t>6?o</a>:<a href="2">t>4?t:o</a>:<a
+href="3">t>8?t:o</a>}function
+s(e,t,o,a,n,i){e&amp;&amp;G(y,e.toString(),{dur:t,scrollEasing:o,dir:a,overwrite:n,drag:i})}var
+<a
+href="e("#mCSB_"B.idx"_dragger_vertical"),e("#mCSB_"B.idx"_dragger_horizontal")">d,u,f,h,m,p,g,v,x,_,w,S,b,C,y=e(this),B=y.data(a),T=B.opt,k=a+“_”+B.idx,M=e(“#mCSB_”+B.idx),I=e(“#mCSB_”B.idx“_container”),D=</a>,<a
+href="">E=[],W=</a>,R=0,L=“yx”===T.axis?“none”:“all”,z=[],P=I.find(“iframe”),H=[“touchstart.”<code>k</code>“
+pointerdown.”<code>k</code>“ MSPointerDown.”+k,“touchmove.”<code>k</code>“
+pointermove.”<code>k</code>“ MSPointerMove.”+k,“touchend.”<code>k</code>“
+pointerup.”<code>k</code>“ MSPointerUp.”+k],U=void <a
+href="0">0!==document.body.style.touchAction&&“”!==document.body.style.touchAction;I.bind(H</a>,function(e){o(e)}).<a
+href="1">bind(H</a>,function(e){n(e)}),<a
+href="0">M.bind(H</a>,function(e){i(e)}).<a
+href="2">bind(H</a>,function(e){r(e)}),P.length&amp;&amp;P.each(function(){e(this).bind(“load”,function(){<a
+href="0">A(this)&&e(this.contentDocument||this.contentWindow.document).bind(H</a>,function(e){o(e),i(e)}).<a
+href="1">bind(H</a>,function(e){n(e)}).<a
+href="2">bind(H</a>,function(e){r(e)})})})},E=function(){function
+o(){return
+window.getSelection?window.getSelection().toString():document.selection&amp;&amp;“Control”!=document.selection.type?document.selection.createRange().text:0}function
+n(e,t,o){d.type=o&amp;&amp;i?“stepped”:“stepless”,d.scrollAmount=10,j(r,e,t,“mcsLinearOut”,o?60:null)}var
+i,r=e(this),l=r.data(a),s=l.opt,d=l.sequential,u=a+“_”+l.idx,f=e(“#mCSB_”<code>l.idx</code>“_container”),h=f.parent();f.bind(“mousedown.”+u,function(){t||i||(i=1,c=!0)}).add(document).bind(“mousemove.”+u,function(e){if(!t&amp;&amp;i&amp;&amp;o()){var
+<a href="0">a=f.offset(),r=O(e)</a>-<a href="0">a.top+f</a>.<a
+href="1">offsetTop,c=O(e)</a>-<a href="0">a.left+f</a>.<a
+href="0">offsetLeft;r>0&&r<h.height()&&c>0&&c<h.width()?d.step&&n("off",null,"stepped"):("x"!==s.axis&&l.overflowed</a>&amp;&amp;(<a
+href="1">0>r?n(“on”,38):r>h.height()&&n(“on”,40)),“y”!==s.axis&&l.overflowed</a>&amp;&amp;(0&gt;c?n(“on”,37):c&gt;h.width()&amp;&amp;n(“on”,39)))}}).bind(“mouseup.”<code>u</code>“
+dragend.”+u,function(){t||(i&amp;&amp;(i=0,n(“off”,null)),c=!1)})},W=function(){function
+t(t,a){if(Q(o),!z(o,t.target)){var
+r=“auto”!==i.mouseWheel.deltaFactor?parseInt(i.mouseWheel.deltaFactor):s&amp;&amp;t.deltaFactor&lt;100?100:t.deltaFactor||100,d=i.scrollInertia;if(“x”===i.axis||“x”===i.mouseWheel.axis)var
+<a
+href="Math.round(r*n.scrollRatio.x),parseInt(i.mouseWheel.scrollAmount)">u=“x”,f=</a>,<a
+href="1">h=“auto”!==i.mouseWheel.scrollAmount?f</a>:<a
+href="0">f</a>&gt;=<a href="0">l.width()?.9*l.width():f</a>,<a
+href="0">m=Math.abs(e(“#mCSB_”n.idx“_container”)</a>.<a
+href="1">offsetLeft),p=c</a>[<a href="1">0].offsetLeft,g=c</a>.<a
+href="1">parent().width()-c</a>.width(),v=“y”===i.mouseWheel.axis?t.deltaY||a:t.deltaX;else
+var <a
+href="Math.round(r*n.scrollRatio.y),parseInt(i.mouseWheel.scrollAmount)">u=“y”,f=</a>,<a
+href="1">h=“auto”!==i.mouseWheel.scrollAmount?f</a>:<a
+href="0">f</a>&gt;=<a href="0">l.height()?.9*l.height():f</a>,<a
+href="0">m=Math.abs(e(“#mCSB_”n.idx“_container”)</a>.<a
+href="0">offsetTop),p=c</a>[<a href="0">0].offsetTop,g=c</a>.<a
+href="0">parent().height()-c</a>.<a
+href="0">height(),v=t.deltaY||a;“y”===u&&!n.overflowed</a>||“<a
+href="1">x”===u&&!n.overflowed</a>||((i.mouseWheel.invert||t.webkitDirectionInvertedFromDevice)&amp;&amp;(v=-v),i.mouseWheel.normalizeDelta&amp;&amp;(v=0&gt;v?-1:1),(v&gt;0&amp;&amp;0!==p||0&gt;v&amp;&amp;p!==g||i.mouseWheel.preventDefault)&amp;&amp;(t.stopImmediatePropagation(),t.preventDefault()),t.deltaFactor&lt;5&amp;&amp;!i.mouseWheel.normalizeDelta&amp;&amp;(h=t.deltaFactor,d=17),G(o,(m-v*h).toString(),{dir:u,dur:d}))}}if(e(this).data(a)){var
+<a
+href="e("#mCSB_"n.idx"_dragger_vertical"),e("#mCSB_"n.idx"_dragger_horizontal")">o=e(this),n=o.data(a),i=n.opt,r=a+“_”+n.idx,l=e(“#mCSB_”+n.idx),c=</a>,d=e(“#mCSB_”<code>n.idx</code>“_container”).find(“iframe”);d.length&amp;&amp;d.each(function(){e(this).bind(“load”,function(){A(this)&amp;&amp;e(this.contentDocument||this.contentWindow.document).bind(“mousewheel.”+r,function(e,o){t(e,o)})})}),l.bind(“mousewheel.”+r,function(e,o){t(e,o)})}},R=new
+<a href="../../../../classes/Object.html">Object</a>,A=function(t){var
+o=!1,a=!1,n=null;if(void 0===t?a=“#empty”:void
+0!==e(t).attr(“id”)&amp;&amp;(a=e(t).attr(“id”)),a!==!1&amp;&amp;void <a
+href="a">0!==R</a>)return <a href="a">R</a>;if(t){try{var
+i=t.contentDocument||t.contentWindow.document;n=i.body.innerHTML}catch®{}o=null!==n}else{try{var
+i=top.document;n=i.body.innerHTML}catch®{}o=null!==n}return <a
+href="a">a!==!1&&(R</a>=o),o},L=function(e){var
+t=this.find(“iframe”);if(t.length){var
+o=e?“auto”:“none”;t.css(“pointer-events”,o)}},z=function(t,o){var <a
+href=""select","textarea"">n=o.nodeName.toLowerCase(),i=t.data(a).opt.mouseWheel.disableOver,r=</a>;return
+e.inArray(n,i)&gt;-1&amp;&amp;!(e.inArray(n,r)&gt;-1&amp;&amp;!e(o).is(“:focus”))},P=function(){var
+t,o=e(this),n=o.data(a),i=a+“_”+n.idx,r=e(“#mCSB_”<code>n.idx</code>“_container”),l=r.parent(),s=e(“.mCSB_”<code>n.idx</code>“_scrollbar
+.”+<a href="12">d</a>);s.bind(“mousedown.”<code>i</code>“
+touchstart.”<code>i</code>“ pointerdown.”<code>i</code>“
+MSPointerDown.”+i,function(o){c=!0,e(o.target).hasClass(“mCSB_dragger”)||(t=1)}).bind(“touchend.”<code>i</code>“
+pointerup.”<code>i</code>“
+MSPointerUp.”+i,function(){c=!1}).bind(“click.”+i,function(a){<a
+href="12">if(t&&(t=0,e(a.target).hasClass(d</a>)||e(a.target).hasClass(“mCSB_draggerRail”))){Q(o);var
+i=e(this),s=i.find(“.mCSB_dragger”);if(i.parent(“.mCSB_scrollTools_horizontal”).length&gt;0){<a
+href="1">if(!n.overflowed</a>)return;var <a
+href="0">c=“x”,u=a.pageX>s.offset().left?-1:1,f=Math.abs(r</a>.offsetLeft)-u*(.9*l.width())}else{<a
+href="0">if(!n.overflowed</a>)return;var <a
+href="0">c=“y”,u=a.pageY>s.offset().top?-1:1,f=Math.abs(r</a>.offsetTop)-u*(.9*l.height())}G(o,f.toString(),{dir:c,scrollEasing:“mcsEaseInOut”})}})},H=function(){var
+t=e(this),o=t.data(a),n=o.opt,i=a+“_”+o.idx,r=e(“#mCSB_”<code>o.idx</code>“_container”),l=r.parent();r.bind(“focusin.”+i,function(){var
+<a
+href="0">o=e(document.activeElement),a=r.find(“.mCustomScrollBox”).length,i=0;o.is(n.advanced.autoScrollOnFocus)&&(Q(t),clearTimeout(t</a>.<a
+href="0">_focusTimeout),t</a>.<a
+href="0">_focusTimer=a?(i+17)*a:0,t</a>._focusTimeout=setTimeout(function(){var
+<a href="0">e=[ae(o)</a>,<a href="1">ae(o)</a>],<a href="0">a=[r</a>.<a
+href="0">offsetTop,r</a>.<a href="0">offsetLeft],s=[a</a>+<a
+href="0">e</a>&gt;=<a href="0">0&&a</a>+<a href="0">e</a>&lt;<a
+href="1">l.height()-o.outerHeight(!1),a</a>+<a href="1">e</a>&gt;=<a
+href="0">0&&a</a>+<a href="1">e</a>&lt;<a
+href="0">l.width()-o.outerWidth(!1)],c=“yx”!==n.axis||s</a>||<a
+href="1">s</a>?“<a href="0">all”:“none”;“x”===n.axis||s</a>||<a
+href="0">G(t,e</a>.toString(),{dir:“y”,scrollEasing:“mcsEaseInOut”,overwrite:c,dur:i}),“<a
+href="1">y”===n.axis||s</a>||<a
+href="1">G(t,e</a>.toString(),{dir:“x”,scrollEasing:“mcsEaseInOut”,overwrite:c,dur:i})},<a
+href="0">t</a>._focusTimer))})},U=function(){var
+t=e(this),o=t.data(a),n=a+“_”+o.idx,i=e(“#mCSB_”<code>o.idx</code>“_container”).parent();i.bind(“scroll.”+n,function(){0===i.scrollTop()&amp;&amp;0===i.scrollLeft()||e(“.mCSB_”<code>o.idx</code>“_scrollbar”).css(“visibility”,“hidden”)})},F=function(){var
+t=e(this),o=t.data(a),n=o.opt,i=o.sequential,r=a+“_”+o.idx,l=“.mCSB_”<code>o.idx</code>“_scrollbar”,s=e(l+“&gt;a”);s.bind(“contextmenu.”+r,function(e){e.preventDefault()}).bind(“mousedown.”<code>r</code>“
+touchstart.”<code>r</code>“ pointerdown.”<code>r</code>“
+MSPointerDown.”<code>r</code>“ mouseup.”<code>r</code>“
+touchend.”<code>r</code>“ pointerup.”<code>r</code>“
+MSPointerUp.”<code>r</code>“ mouseout.”<code>r</code>“
+pointerout.”<code>r</code>“ MSPointerOut.”<code>r</code>“
+click.”+r,function(a){function
+r(e,o){i.scrollAmount=n.scrollButtons.scrollAmount,j(t,e,o)}if(a.preventDefault(),ee(a)){var
+l=e(this).attr(“class”);switch(i.type=n.scrollButtons.scrollType,a.type){case“mousedown”:case“touchstart”:case“pointerdown”:case“MSPointerDown”:if(“stepped”===i.type)return;c=!0,o.tweenRunning=!1,r(“on”,l);break;case“mouseup”:case“touchend”:case“pointerup”:case“MSPointerUp”:case“mouseout”:case“pointerout”:case“MSPointerOut”:if(“stepped”===i.type)return;c=!1,i.dir&amp;&amp;r(“off”,l);break;case“click”:if(“stepped”!==i.type||o.tweenRunning)return;r(“on”,l)}}})},q=function(){function
+t(t){function
+a(e,t){r.type=i.keyboard.scrollType,r.scrollAmount=i.keyboard.scrollAmount,“stepped”===r.type&amp;&amp;n.tweenRunning||j(o,e,t)}switch(t.type){case“blur”:n.tweenRunning&amp;&amp;r.dir&amp;&amp;a(“off”,null);break;case“keydown”:case“keyup”:var
+l=t.keyCode?t.keyCode:t.which,s=“on”;if(“x”!==i.axis&amp;&amp;(38===l||40===l)||“y”!==i.axis&amp;&amp;(37===l||39===l)){<a
+href="0">if((38===l||40===l)&&!n.overflowed</a>||(<a
+href="1">37===l||39===l)&&!n.overflowed</a>)return;“keyup”===t.type&amp;&amp;(s=“off”),e(document.activeElement).is(u)||(t.preventDefault(),t.stopImmediatePropagation(),a(s,l))}else
+if(33===l||34===l){<a href="0">if((n.overflowed</a>||<a
+href="1">n.overflowed</a>)&amp;&amp;(t.preventDefault(),t.stopImmediatePropagation()),“keyup”===t.type){Q(o);var
+<a
+href="1">f=34===l?-1:1;if(“x”===i.axis||“yx”===i.axis&&n.overflowed</a>&amp;&amp;!<a
+href="0">n.overflowed</a>)var <a
+href="0">h=“x”,m=Math.abs(c</a>.offsetLeft)-f*(.9*d.width());else var <a
+href="0">h=“y”,m=Math.abs(c</a>.offsetTop)-f*(.9*d.height());G(o,m.toString(),{dir:h,scrollEasing:“mcsEaseInOut”})}}else
+<a
+href="0">if((35===l||36===l)&&!e(document.activeElement).is(u)&&((n.overflowed</a>||<a
+href="1">n.overflowed</a>)&amp;&amp;(t.preventDefault(),t.stopImmediatePropagation()),“keyup”===t.type)){<a
+href="1">if(“x”===i.axis||“yx”===i.axis&&n.overflowed</a>&amp;&amp;!<a
+href="0">n.overflowed</a>)var
+h=“x”,m=35===l?Math.abs(d.width()-c.outerWidth(!1)):0;else var
+h=“y”,m=35===l?Math.abs(d.height()-c.outerHeight(!1)):0;G(o,m.toString(),{dir:h,scrollEasing:“mcsEaseInOut”})}}}var
+<a
+href="contenteditable='true'">o=e(this),n=o.data(a),i=n.opt,r=n.sequential,l=a+“_”+n.idx,s=e(“#mCSB_”+n.idx),c=e(“#mCSB_”n.idx“_container”),d=c.parent(),u=“input,textarea,select,datalist,keygen,</a>”,f=c.find(“iframe”),h=[“blur.”<code>l</code>“
+keydown.”<code>l</code>“
+keyup.”+l];f.length&amp;&amp;f.each(function(){e(this).bind(“load”,function(){<a
+href="0">A(this)&&e(this.contentDocument||this.contentWindow.document).bind(h</a>,function(e){t(e)})})}),<a
+href="0">s.attr(“tabindex”,“0”).bind(h</a>,function(e){t(e)})},j=function(t,o,n,i,r){function
+l(e){u.snapAmount&amp;&amp;(f.scrollAmount=u.snapAmount instanceof <a
+href="0">Array?“x”===f.dir</a>?<a href="1">u.snapAmount</a>:<a
+href="0">u.snapAmount</a>:u.snapAmount);var <a
+href="0">o=“stepped”!==f.type,a=r?r:e?o?p/1.5:g:1e3/60,n=e?o?7.5:40:2.5,s=[Math.abs(h</a>.<a
+href="0">offsetTop),Math.abs(h</a>.<a
+href="c.scrollRatio.y>10?10:c.scrollRatio.y,c.scrollRatio.x>10?10:c.scrollRatio.x“>offsetLeft)],d=</a>,<a
+href="0">m=”x“===f.dir</a>?<a href="1">s</a>+<a href="1">f.dir</a>*(<a
+href="1">d</a>*<a href="0">n):s</a>+<a href="1">f.dir</a>*(<a
+href="0">d</a>*<a href="0">n),v=”x“===f.dir</a>?<a href="1">s</a>+<a
+href="1">f.dir</a>*<a href="0">parseInt(f.scrollAmount):s</a>+<a
+href="1">f.dir</a>*parseInt(f.scrollAmount),x=”auto“!==f.scrollAmount?v:m,_=i?i:e?o?”mcsLinearOut“:”mcsEaseInOut“:”mcsLinear“,w=!!e;return
+<a href="0">e&&17>a&&(x=”x“===f.dir</a>?<a href="1">s</a>:<a
+href="0">s</a>),G(t,x.toString(),{<a
+href="0">dir:f.dir</a>,scrollEasing:_,dur:a,onComplete:w}),e?void(f.dir=!1):(clearTimeout(f.step),void(f.step=setTimeout(function(){l()},a)))}function
+s(){clearTimeout(f.step),$(f,”step“),Q(t)}var
+c=t.data(a),u=c.opt,f=c.sequential,h=e(”#mCSB_“<code>c.idx</code>”_container“),m=”stepped“===f.type,p=u.scrollInertia&lt;26?26:u.scrollInertia,g=u.scrollInertia&lt;1?17:u.scrollInertia;switch(o){<a
+href="16">case”on“:if(f.dir=[n===d</a>||<a href="15">n===d</a>||<a
+href="13">39===n||37===n?”x“:”y“,n===d</a>||<a
+href="15">n===d</a>||38===n||37===n?-1:1],Q(t),oe(n)&amp;&amp;”stepped“===f.type)return;l(m);break;case”off“:s(),(m||c.tweenRunning&amp;&amp;f.dir)&amp;&amp;l(!0)}},Y=function(t){var
+o=e(this).data(a).opt,n=[];return”function“==typeof t&amp;&amp;(t=t()),t
+instanceof <a href="0">Array?n=t.length>1?[t</a>,<a href="1">t</a>]:”<a
+href="0">x“===o.axis?[null,t</a>]:[<a href="0">t</a>,<a
+href="0">null]:(n</a>=<a
+href="1">t.y?t.y:t.x||”x“===o.axis?null:t,n</a>=t.x?t.x:t.y||”y“===o.axis?null:t),”function“==typeof
+<a href="0">n</a>&amp;&amp;(<a href="0">n</a>=<a
+href="0">n</a>()),”function“==typeof <a href="1">n</a>&amp;&amp;(<a
+href="1">n</a>=<a
+href="1">n</a>()),n},X=function(t,o){if(null!=t&amp;&amp;”undefined“!=typeof
+t){var
+n=e(this),i=n.data(a),r=i.opt,l=e(”#mCSB_“<code>i.idx</code>”_container“),s=l.parent(),c=typeof
+t;o||(o=”x“===r.axis?”x“:”y“);var <a
+href="0">d=”x“===o?l.outerWidth(!1)-s.width():l.outerHeight(!1)-s.height(),f=”x“===o?l</a>.<a
+href="0">offsetLeft:l</a>.offsetTop,h=”x“===o?”left“:”top“;switch©{case”function“:return
+t();case”object“:var <a
+href="1">m=t.jquery?t:e(t);if(!m.length)return;return”x“===o?ae(m)</a>:<a
+href="0">ae(m)</a>;case”string“:case”number“:if(oe(t))return
+Math.abs(t);if(-1!==t.indexOf(”%“))return
+Math.abs(d*parseInt(t)/100);if(-1!==t.indexOf(”-=“))return <a
+href="1">Math.abs(f-parseInt(t.split(”-=“)</a>));if(-1!==t.indexOf(”+=“)){var
+<a href="1">p=f+parseInt(t.split(”+=“)</a>);return p&gt;=0?0:Math.abs(p)}<a
+href="0">if(-1!==t.indexOf(”px“)&&oe(t.split(”px“)</a>))return <a
+href="0">Math.abs(t.split(”px“)</a>);if(”top“===t||”left“===t)return
+0;if(”bottom“===t)return
+Math.abs(s.height()-l.outerHeight(!1));if(”right“===t)return
+Math.abs(s.width()-l.outerWidth(!1));if(”first“===t||”last“===t){var <a
+href="1">m=l.find(”:“+t);return”x“===o?ae(m)</a>:<a
+href="0">ae(m)</a>}return <a href="1">e(t).length?”x“===o?ae(e(t))</a>:<a
+href="0">ae(e(t))</a>:(l.css(h,t),void <a
+href="0">u.update.call(null,n</a>))}}},N=function(t){function o(){return <a
+href="0">clearTimeout(f</a>.<a
+href="0">autoUpdate),0===l.parents(”html“).length?void(l=null):void(f</a>.autoUpdate=setTimeout(function(){return
+c.advanced.updateOnSelectorChange&amp;&amp;(s.poll.change.n=i(),s.poll.change.n!==s.poll.change.o)?(s.poll.change.o=s.poll.change.n,void
+<a href="0">r(3)):c.advanced.updateOnContentResize&&(s.poll.size.n=l</a>.<a
+href="0">scrollHeight+l</a>.<a href="0">scrollWidth+f</a>.<a
+href="0">offsetHeight+l</a>.<a
+href="0">offsetHeight+l</a>.offsetWidth,s.poll.size.n!==s.poll.size.o)?(s.poll.size.o=s.poll.size.n,void
+r(1)):!c.advanced.updateOnImageLoad||”auto“===c.advanced.updateOnImageLoad&amp;&amp;”y“===c.axis||(s.poll.img.n=f.find(”img“).length,s.poll.img.n===s.poll.img.o)?void((c.advanced.updateOnSelectorChange||c.advanced.updateOnContentResize||c.advanced.updateOnImageLoad)&amp;&amp;o()):(s.poll.img.o=s.poll.img.n,void
+f.find(”img“).each(function(){n(this)}))},c.advanced.autoUpdateTimeout))}function
+n(t){function o(e,t){return function(){ return
+t.apply(e,arguments)}}function a(){<a
+href="2">this.onload=null,e(t).addClass(d</a>),r(2)}<a
+href="2">if(e(t).hasClass(d</a>))return void r();var n=new
+Image;n.onload=o(n,a),n.src=t.src}function
+i(){c.advanced.updateOnSelectorChange===!0&amp;&amp;(c.advanced.updateOnSelectorChange=”*“);var
+e=0,t=f.find(c.advanced.updateOnSelectorChange);return
+c.advanced.updateOnSelectorChange&amp;&amp;t.length&gt;0&amp;&amp;t.each(function(){e+=this.offsetHeight+this.offsetWidth}),e}function
+r(e){<a href="0">clearTimeout(f</a>.<a
+href="0">autoUpdate),u.update.call(null,l</a>,e)}var
+l=e(this),s=l.data(a),c=s.opt,f=e(”#mCSB_“<code>s.idx</code>”_container“);return
+<a href="0">t?(clearTimeout(f</a>.autoUpdate),void $(<a
+href="0">f</a>,”autoUpdate“)):void o()},V=function(e,t,o){return
+Math.round(e/t)*t-o},Q=function(t){var
+o=t.data(a),n=e(”#mCSB_“<code>o.idx</code>”_container,#mCSB_“<code>o.idx</code>”_container_wrapper,#mCSB_“<code>o.idx</code>”_dragger_vertical,#mCSB_“<code>o.idx</code>”_dragger_horizontal“);n.each(function(){Z.call(this)})},G=function(t,o,n){function
+i(e){return <a href="e">s&&c.callbacks</a>&amp;&amp;”function“==typeof <a
+href="e">c.callbacks</a>}function r(){<a
+href="0">return[c.callbacks.alwaysTriggerOffsets||w>=S</a>+y,c.callbacks.alwaysTriggerOffsets||-B&gt;=w]}function
+l(){var <a href="0">e=[h</a>.<a href="0">offsetTop,h</a>.<a
+href="0">offsetLeft],o=[x</a>.<a href="0">offsetTop,x</a>.<a
+href="h.outerHeight(!1),h.outerWidth(!1)">offsetLeft],a=</a>,<a
+href="f.height(),f.width()">i=</a>;<a href="0">t</a>.mcs={<a
+href="0">content:h,top:e</a>,<a href="1">left:e</a>,<a
+href="0">draggerTop:o</a>,<a href="1">draggerLeft:o</a>,<a
+href="0">topPct:Math.round(100*Math.abs(e</a>)/(<a
+href="0">Math.abs(a</a>)-<a href="0">i</a>)),<a
+href="1">leftPct:Math.round(100*Math.abs(e</a>)/(<a
+href="1">Math.abs(a</a>)-<a href="1">i</a>)),direction:n.dir}}var
+s=t.data(a),c=s.opt,d={trigger:”internal“,dir:”y“,scrollEasing:”mcsEaseOut“,drag:!1,dur:c.scrollInertia,overwrite:”all“,callbacks:!0,onStart:!0,onUpdate:!0,onComplete:!0},<a
+href="n.dur,n.drag?0:n.dur">n=e.extend(d,n),u=</a>,<a
+href="0,0">f=e(”#mCSB_“+s.idx),h=e(”#mCSB_“s.idx”_container“),m=h.parent(),p=c.callbacks.onTotalScrollOffset?Y.call(t,c.callbacks.onTotalScrollOffset):</a>,<a
+href="0,0">g=c.callbacks.onTotalScrollBackOffset?Y.call(t,c.callbacks.onTotalScrollBackOffset):</a>;<a
+href="0">if(s.trigger=n.trigger,0===m.scrollTop()&&0===m.scrollLeft()||(e(”.mCSB_“s.idx”_scrollbar“).css(”visibility“,”visible“),m.scrollTop(0).scrollLeft(0)),”_resetY“!==o||s.contentReset.y||(i(”onOverflowYNone“)&&c.callbacks.onOverflowYNone.call(t</a>),<a
+href="0">s.contentReset.y=1),”_resetX“!==o||s.contentReset.x||(i(”onOverflowXNone“)&&c.callbacks.onOverflowXNone.call(t</a>),s.contentReset.x=1),”_resetY“!==o&amp;&amp;”_resetX“!==o){<a
+href="0">if(!s.contentReset.y&&t</a>.<a
+href="0">mcs||!s.overflowed</a>||(<a
+href="0">i(”onOverflowY“)&&c.callbacks.onOverflowY.call(t</a>),<a
+href="0">s.contentReset.x=null),!s.contentReset.x&&t</a>.<a
+href="1">mcs||!s.overflowed</a>||(<a
+href="0">i(”onOverflowX“)&&c.callbacks.onOverflowX.call(t</a>),s.contentReset.x=null),c.snapAmount){var
+v=c.snapAmount instanceof <a href="1">Array?”x“===n.dir?c.snapAmount</a>:<a
+href="0">c.snapAmount</a>:c.snapAmount;o=V(o,v,c.snapOffset)}switch(n.dir){case”x“:var
+<a href="0">x=e(”#mCSB_“s.idx”_dragger_horizontal“),_=”left“,w=h</a>.<a
+href="f.width()-h.outerWidth(!1),x.parent().width()-x.width()">offsetLeft,S=</a>,<a
+href="o,0===o?0:o/s.scrollRatio.x">b=</a>,<a href="1">y=p</a>,<a
+href="1">B=g</a>,T=y&gt;0?y/s.scrollRatio.x:0,k=B&gt;0?B/s.scrollRatio.x:0;break;case”y“:var
+<a href="0">x=e(”#mCSB_“s.idx”_dragger_vertical“),_=”top“,w=h</a>.<a
+href="f.height()-h.outerHeight(!1),x.parent().height()-x.height()">offsetTop,S=</a>,<a
+href="o,0===o?0:o/s.scrollRatio.y">b=</a>,<a href="0">y=p</a>,<a
+href="0">B=g</a>,T=y&gt;0?y/s.scrollRatio.y:0,k=B&gt;0?B/s.scrollRatio.y:0}<a
+href="1">b</a>&lt;<a href="0">0||0===b</a>&amp;&amp;<a
+href="1">0===b</a>?<a href="0,0">b=</a>:<a href="1">b</a>&gt;=<a
+href="1">S</a>?<a href="0">b=[S</a>,<a href="1">S</a>]:<a
+href="0">b</a>=-<a href="0">b</a>,<a href="0">t</a>.<a
+href="0">mcs||(l(),i(”onInit“)&&c.callbacks.onInit.call(t</a>)),<a
+href="0">clearTimeout(h</a>.<a href="0">onCompleteTimeout),J(x</a>,<a
+href="1">_,Math.round(b</a>),<a href="1">u</a>,<a
+href="0">n.scrollEasing),!s.tweenRunning&&(0===w&&b</a>&gt;=<a
+href="0">0||w===S</a>&amp;&amp;<a href="0">b</a>&lt;=<a href="0">S</a>)||<a
+href="0">J(h</a>,<a href="0">_,Math.round(b</a>),<a
+href="0">u</a>,n.scrollEasing,n.overwrite,{onStart:function(){<a
+href="0">n.callbacks&&n.onStart&&!s.tweenRunning&&(i(”onScrollStart“)&&(l(),c.callbacks.onScrollStart.call(t</a>)),s.tweenRunning=!0,C(x),s.cbOffsets=r())},onUpdate:function(){<a
+href="0">n.callbacks&&n.onUpdate&&i(”whileScrolling“)&&(l(),c.callbacks.whileScrolling.call(t</a>))},onComplete:function(){if(n.callbacks&amp;&amp;n.onComplete){”<a
+href="0">yx“===c.axis&&clearTimeout(h</a>.onCompleteTimeout);var <a
+href="0">e=h</a>.<a
+href="0">idleTimer||0;h</a>.onCompleteTimeout=setTimeout(function(){<a
+href="0">i(”onScroll“)&&(l(),c.callbacks.onScroll.call(t</a>)),<a
+href="1">i(”onTotalScroll“)&&b</a>&gt;=<a href="1">S</a>-<a
+href="0">T&&s.cbOffsets</a>&amp;&amp;(<a
+href="0">l(),c.callbacks.onTotalScroll.call(t</a>)),<a
+href="1">i(”onTotalScrollBack“)&&b</a>&lt;=<a
+href="1">k&&s.cbOffsets</a>&amp;&amp;(<a
+href="0">l(),c.callbacks.onTotalScrollBack.call(t</a>)),<a
+href="0">s.tweenRunning=!1,h</a>.idleTimer=0,C(x,”hide“)},e)}}})}},J=function(e,t,o,a,n,i,r){function
+l(){S.stop||(x||m.call(),x=K()-v,s(),x&gt;=S.time&amp;&amp;(S.time=x&gt;S.time?x+f-(x-S.time):x+f-1,S.time&lt;x+1&amp;&amp;(S.time=x+1)),S.time&lt;a?S.id=h(l):g.call())}function
+s(){<a href="t">a>0?(S.currVal=u(S.time,_,b,a,n),w</a>=<a
+href="t">Math.round(S.currVal)+”px“):w</a>=o+”px“,p.call()}function
+c(){f=1e3/60,S.time=x+f,h=window.requestAnimationFrame?window.requestAnimationFrame:function(e){return
+s(),setTimeout(e,.01)},S.id=h(l)}function
+d(){null!=S.id&amp;&amp;(window.requestAnimationFrame?window.cancelAnimationFrame(S.id):clearTimeout(S.id),S.id=null)}function
+u(e,t,o,a,n){switch(n){case”linear“:case”mcsLinear“:return
+o*e/a+t;case”mcsLinearOut“:return
+e/=a,e–,o*Math.sqrt(1-e*e)+t;case”easeInOutSmooth“:return
+e/=a/2,1&gt;e?o/2*e*e+t:(e–,-o/2*(e*(e-2)-1)+t);case”easeInOutStrong“:return
+e/=a/2,1&gt;e?o/2*Math.pow(2,10*(e-1))+t:(e–,o/2*(-Math.pow(2,-10*e)+2)+t);case”easeInOut“:case”mcsEaseInOut“:return
+e/=a/2,1&gt;e?o/2*e*e*e+t:(e-=2,o/2*(e*e*e+2)+t);case”easeOutSmooth“:return
+e/=a,e–,-o*(e*e*e*e-1)+t;case”easeOutStrong“:return
+o*(-Math.pow(2,-10*e/a)+1)+t;case”easeOut“:case”mcsEaseOut“:default:var
+i=(e/=a)*e,r=i*e;return
+t+o*(.499999999999997*r*i+-2.5*i*i+5.5*r+-6.5*i+4*e)}}e._mTween||(e._mTween={top:{},left:{}});var
+f,h,r=r||{},m=r.onStart||function(){},p=r.onUpdate||function(){},g=r.onComplete||function(){},<a
+href="t">v=K(),x=0,_=e.offsetTop,w=e.style,S=e._mTween</a>;”left“===t&amp;&amp;(_=e.offsetLeft);var
+b=o-_;S.stop=0,”none“!==i&amp;&amp;d(),c()},K=function(){return
+window.performance&amp;&amp;window.performance.now?window.performance.now():window.performance&amp;&amp;window.performance.webkitNow?window.performance.webkitNow():Date.now?Date.now():(new
+Date).getTime()},Z=function(){var
+e=this;e._mTween||(e._mTween={top:{},left:{}});for(var <a
+href=""top","left"">t=</a>,o=0;o&lt;t.length;o++){var <a
+href="o">a=t</a>;<a href="a">e._mTween</a>.<a
+href="a">id&&(window.requestAnimationFrame?window.cancelAnimationFrame(e._mTween</a>.<a
+href="a">id):clearTimeout(e._mTween</a>.<a href="a">id),e._mTween</a>.<a
+href="a">id=null,e._mTween</a>.stop=1)}},$=function(e,t){try{delete <a
+href="t">e</a>}catch(o){<a
+href="t">e</a>=null}},ee=function(e){return!(e.which&amp;&amp;1!==e.which)},te=function(e){var
+t=e.originalEvent.pointerType;return!(t&amp;&amp;”touch“!==t&amp;&amp;2!==t)},oe=function(e){return!isNaN(parseFloat(e))&amp;&amp;isFinite(e)},ae=function(e){var
+<a
+href="e.offset().top-t.offset().top,e.offset().left-t.offset().left">t=e.parents(”.mCSB_container“);return</a>},ne=function(){function
+e(){var <a href=""webkit","moz","ms","o"">e=</a>;if(”hidden“in
+document)return”hidden“;for(var <a
+href="t">t=0;t<e.length;t++)if(e</a>+”Hidden“in document)return <a
+href="t">e</a>+”Hidden“;return null}var t=e();return <a
+href="t">t?document</a>:!1};<a href="o">e.fn</a>=function(t){return <a
+href="t">u</a>?<a
+href="t">u</a>.apply(this,Array.prototype.slice.call(arguments,1)):”object“!=typeof
+t&amp;&amp;t?void e.error(”Method “<code>t</code>” does not
+exist“):u.init.apply(this,arguments)},<a href="o">e</a>=function(t){return
+<a href="t">u</a>?<a
+href="t">u</a>.apply(this,Array.prototype.slice.call(arguments,1)):”object“!=typeof
+t&amp;&amp;t?void e.error(”Method “<code>t</code>” does not
+exist“):u.init.apply(this,arguments)},<a href="o">e</a>.<a
+href="o">defaults=i,window</a>=!0,e(window).bind(”load“,function(){<a
+href="o">e(n)</a>(),<a href="":"">e.extend(e.expr</a>,{<a
+href="":"">mcsInView:e.expr</a>.mcsInView||function(t){var
+o,a,n=e(t),i=n.parents(”.mCSB_container“);if(i.length)return <a
+href="0">o=i.parent(),a=[i</a>.<a href="0">offsetTop,i</a>.<a
+href="0">offsetLeft],a</a>+<a href="0">ae(n)</a>&gt;=<a
+href="0">0&&a</a>+<a href="0">ae(n)</a>&lt;<a
+href="1">o.height()-n.outerHeight(!1)&&a</a>+<a href="1">ae(n)</a>&gt;=<a
+href="1">0&&a</a>+<a href="1">ae(n)</a>&lt;o.width()-n.outerWidth(!1)},<a
+href="":"">mcsInSight:e.expr</a>.mcsInSight||function(t,o,a){var <a
+href="3">n,i,r,l,s=e(t),c=s.parents(”.mCSB_container“),d=”exact“===a</a>?[[<a
+href="1,0">1,0],</a>]:[[.<a href=".6,.4">9,.1],</a>];if(c.length)return <a
+href="s.outerHeight(!1),s.outerWidth(!1)">n=</a>,<a href="0">r=[c</a>.<a
+href="0">offsetTop+ae(s)</a>,<a href="0">c</a>.<a
+href="1">offsetLeft+ae(s)</a>],<a href="0">i=[c.parent()</a>.<a
+href="0">offsetHeight,c.parent()</a>.<a
+href="0">offsetWidth],l=[n</a>&lt;<a href="0">i</a>?<a href="0">d</a>:<a
+href="1">d</a>,<a href="1">n</a>&lt;<a href="1">i</a>?<a href="0">d</a>:<a
+href="1">d</a>],<a href="0">r</a>-<a href="0">i</a>*<a href="0">l</a>[<a
+href="0">0]<0&&r</a>+<a href="0">n</a>-<a href="0">i</a>*<a
+href="0">l</a>[<a href="1">1]>=0&&r</a>-<a href="1">i</a>*<a
+href="1">l</a>[<a href="1">0]<0&&r</a>+<a href="1">n</a>-<a
+href="1">i</a>*<a href="1">l</a>[1]&gt;=0},<a
+href="":"">mcsOverflow:e.expr</a>.mcsOverflow||function(t){var
+o=e(t).data(a);if(o)return <a href="0">o.overflowed</a>||<a
+href="1">o.overflowed</a>}})})})});</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>
