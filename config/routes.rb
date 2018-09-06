@@ -184,6 +184,8 @@ Rails.application.routes.draw do
       end
       resources :sessions do
       end
+      resources :hotels do
+      end
     end
   end
   get 'static_pages/dashboard'

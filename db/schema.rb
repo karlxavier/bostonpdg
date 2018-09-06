@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180906115237) do
+ActiveRecord::Schema.define(version: 20180906144249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(version: 20180906115237) do
     t.index ["user_id"], name: "index_item_messages_on_user_id"
   end
 
-  create_table "mailboxer_conversation_opt_outs", id: :integer, default: nil, force: :cascade do |t|
+  create_table "mailboxer_conversation_opt_outs", id: :serial, force: :cascade do |t|
     t.string "unsubscriber_type"
     t.integer "unsubscriber_id"
     t.integer "conversation_id"
@@ -230,13 +230,13 @@ ActiveRecord::Schema.define(version: 20180906115237) do
     t.index ["unsubscriber_id", "unsubscriber_type"], name: "index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type"
   end
 
-  create_table "mailboxer_conversations", id: :integer, default: nil, force: :cascade do |t|
+  create_table "mailboxer_conversations", id: :serial, force: :cascade do |t|
     t.string "subject", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "mailboxer_notifications", id: :integer, default: nil, force: :cascade do |t|
+  create_table "mailboxer_notifications", id: :serial, force: :cascade do |t|
     t.string "type"
     t.text "body"
     t.string "subject", default: ""
@@ -259,7 +259,7 @@ ActiveRecord::Schema.define(version: 20180906115237) do
     t.index ["type"], name: "index_mailboxer_notifications_on_type"
   end
 
-  create_table "mailboxer_receipts", id: :integer, default: nil, force: :cascade do |t|
+  create_table "mailboxer_receipts", id: :serial, force: :cascade do |t|
     t.string "receiver_type"
     t.integer "receiver_id"
     t.integer "notification_id", null: false
@@ -292,6 +292,7 @@ ActiveRecord::Schema.define(version: 20180906115237) do
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "hotel_id"
   end
 
   create_table "order_entries", force: :cascade do |t|
@@ -356,6 +357,7 @@ ActiveRecord::Schema.define(version: 20180906115237) do
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "chatroom_order_id"
     t.integer "client_contact"
     t.integer "designer"
   end
@@ -500,6 +502,7 @@ ActiveRecord::Schema.define(version: 20180906115237) do
     t.integer "vendor_id"
     t.datetime "last_notified"
     t.index ["brand_id"], name: "index_users_on_brand_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

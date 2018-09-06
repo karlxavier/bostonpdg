@@ -144,14 +144,14 @@ function getAddress(id) {
     }
     $.ajax({
         method: "GET",
-        url: "/api/simple/addresses/branches?brand_id="+id
+        url: "/api/simple/hotels?brand_id="+id
     }).done(function( data ) {
         $('#brand-list').html('');
         all_address_list = [];
         data.forEach(function (item, index, arr) {
             all_address_list.push(item['id']);
             brand_list = $('#brand-list').html();
-            $('#brand-list').html(brand_list + "<a class='btn btn-nav select-items' onclick='selectAndUnselect(" + item['id'] + ", $(this) )'> " + item['state'] + " - " +  item['city'] + "</a>&nbsp;");
+            $('#brand-list').html(brand_list + "<a class='btn btn-nav select-items' onclick='selectAndUnselect(" + item['id'] + ", $(this) )'> " + item['name'] + "</a>&nbsp;");
         });
     });
 

@@ -29,7 +29,7 @@
   </div>
   <div class="row" style="padding-top: 2%;">
     <div class="col padding-left">
-      <h4 class="inline-text"><b>Choose from the applicable branches</b></h4>
+      <h4 class="inline-text"><b>Choose from the applicable hotel/s</b></h4>
       <a class="btn btn-outline-dark btn-padding-margin" style="padding: .2% 1% !important;" onclick="selectAllBranches();"> Select All </a>
       <a class="btn btn-outline-dark btn-padding-margin" style="padding: .2% 1% !important;" onclick="unselectAllBranches();"> Unselect All </a>
     </div>
@@ -37,14 +37,14 @@
   <div class="row" style="padding-top: .8%;" >
     <div class="col search-bar-padding text-justify item-list" id="brand-list">
       <% if order.brand_id.present? %>
-        <% Address.where("id IN (SELECT billing_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{order.brand_id}))  OR id IN (SELECT shipping_address FROM users WHERE id IN (SELECT user_id FROM users_brands WHERE brand_id = #{order.brand_id}))").each do |address| %>
+        <% Hotel.where(:brand_id => order.brand_id).each do |hotel| %>
           <% @bol = false %>
           <% OrderBranch.where(:order_id => order.id).each do |ob| %>
-            <% if address.id == ob.address_id %>
+            <% if hotel.id == ob.hotel_id %>
               <% @bol = true %>
             <% end %>
           <% end %>
-          <a class='btn btn-nav select-items<% if @bol%> btn-yellow<% end %>' onclick='selectAndUnselect(<%= address.id %>, $(this))'> <%= address.state + " - " + address.city %></a>&nbsp;
+          <a class='btn btn-nav select-items<% if @bol%> btn-yellow<% end %>' onclick='selectAndUnselect(<%= hotel.id %>, $(this))'> <%= hotel.name %></a>&nbsp;
         <% end %>
       <% end %>
     </div>

@@ -174,11 +174,9 @@ class OrdersController < ApplicationController
             order_branch = OrderBranch.new
             order_branch.brand_id = @order.brand_id
             order_branch.order_id = @order.id
-            order_branch.address_id = ob
+            order_branch.hotel_id = ob
             order_branch.save
-            if order_entry.save
-              OrderHistory.create(:order_id => order_entry.order_id, :order_entry_id => order_entry.id, :description => "has been Added", :user_id => current_user.id)
-            end
+
           end
         end
         if params[:order_user].present?
@@ -305,7 +303,7 @@ class OrdersController < ApplicationController
           order_branch = OrderBranch.new
           order_branch.brand_id = @order.brand_id
           order_branch.order_id = @order.id
-          order_branch.address_id = ob
+          order_branch.hotel_id = ob
           order_branch.save
         end
       end
