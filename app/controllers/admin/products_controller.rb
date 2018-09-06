@@ -2,7 +2,7 @@ class Admin::ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update]
 
   def index
-    @products = Product.order(id: :desc)
+    @products = Product.product_wd_inventories
   end
 
   def new

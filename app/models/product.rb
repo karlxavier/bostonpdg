@@ -49,6 +49,8 @@ class Product < ApplicationRecord
   include ProductImageUploader[:image]
   audited
 
+  scope :product_wd_inventories, -> { includes(:inventories).order(id: :desc) }
+
   validates :name, presence: true
 
   has_attached_file :picture, styles: { small: "64x64", med: "100x100", large: "200x200" }
