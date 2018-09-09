@@ -76,8 +76,10 @@ class OrderEntry < ApplicationRecord
 
   def get_html_safe_fields
     @dyna_fields = ''
-    eval(self.dynamic_fields).each {|key, value| @dyna_fields = @dyna_fields + "#{key}: #{value}<br/>" }
-    @dyna_fields
+    if self.dynamic_fields.present? && !self.dynamic_fields.nil? && self.dynamic_fields != ''
+      eval(self.dynamic_fields).each {|key, value| @dyna_fields = @dyna_fields + "#{key}: #{value}<br/>" }
+      @dyna_fields
+    end
   end
 
   def product_name
