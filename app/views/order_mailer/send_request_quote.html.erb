@@ -22,7 +22,7 @@ From: <b><a href="mailto:<%= @sender.email %>?subject=RE:<%= @subject %>" target
         <tr>
           <td><%= order_entry.product.name %></td>
           <td><%= order_entry.quantity %></td>
-          <td><%= order_entry.get_html_safe_fields.html_safe %></td>
+          <td><%= ( order_entry.dynamic_fields.present? && !order_entry.dynamic_fields.nil? && order_entry.dynamic_fields != '' ) ?  order_entry.get_html_safe_fields.html_safe : '' %></td>
           <td><%= order_entry.specs %></td>
         </tr>
       <% end %>
