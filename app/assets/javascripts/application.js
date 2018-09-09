@@ -37,6 +37,7 @@
 //= require dropzone_initializer
 //= require jquery-te-1.4.0.min
 //= require tagsinput
+//= require bootstrap-notify.min
 
 $(document).on('turbolinks:load', function () {
     $('.selectpicker').selectpicker();
@@ -347,7 +348,9 @@ function itemDetails(id, entry_id) {
             init: function () {
                 var myDropzone = this;
                 myDropzone = this; // closure
+                console.log('working...');
                 $.each(data.attachments, function (i, currAttachment) {
+
                     var mockFile = { name: currAttachment.file_name, size: parseInt(currAttachment.file_size), id: currAttachment.id };
                     myDropzone.emit("addedfile", mockFile);
                     myDropzone.emit("complete", mockFile);
@@ -370,10 +373,10 @@ function itemDetails(id, entry_id) {
                     console.log("working");
                     myDropzone.destroy();
                 });
-                $('#viewProducts').on('hidden.bs.modal', function (e) {
-                    console.log("working");
+                $('#close-item-details').on('click', function (e) {
+                    $('#viewProducts').modal('hide');
                     myDropzone.destroy();
-                })
+                });
                 this.on("successmultiple", function(files, response) {
                     // Gets triggered when the files have successfully been sent.
                     // Redirect user or notify of success.
