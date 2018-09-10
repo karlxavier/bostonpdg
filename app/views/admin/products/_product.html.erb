@@ -1,0 +1,44 @@
+<tr id="oe-<%= oe.id %>">
+    <td class="issue-info" style="width: 20%;">
+        <% if oe.product.present? %>
+            <%= link_to oe.product.name, admin_product_path(oe.product) %>
+        <% else %>
+            N/A
+        <% end %>
+        <small>
+            Name
+        </small>
+    </td>
+    <td class="issue-info" style="width: 20%;">
+        <a href="#">
+            <%= oe.product.category.present? ? oe.product.category.name : 'N/A' %>
+        </a>
+        <small>
+            Category
+        </small>
+    </td>
+    <td class="issue-info" style="width: 10%;">
+        <a href="#">
+            <%= number_to_currency(oe.price, unit: "$ ", :precision => 2, :delimiter => ',') %>
+        </a>
+        <small>
+            Price
+        </small>
+    </td>
+    <td class="issue-info" style="width: 10%;">
+        <a href="#">
+            <%= number_to_currency(oe.cost, unit: "$ ", :precision => 2, :delimiter => ',') %>
+        </a>
+        <small>
+            Cost
+        </small>
+    </td>
+    <td class="issue-info" style="width: 10%;">
+        <a href="#">
+            <%= number_to_currency(oe.quantity, unit: "", :precision => 2, :delimiter => ',') %>
+        </a>
+        <small>
+            Quantity
+        </small>
+    </td>
+</tr>

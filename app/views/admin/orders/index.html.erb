@@ -30,11 +30,10 @@
               <thead>
                           <tr role="row">
                             <th>Id</th>
+                            <th>Ticket No.</th>
                             <th>Status</th>
                             <th>Customer</th>
                             <th>Brand</th>
-                            <th>Promise Date</th>
-                            <th>Fulfillment Date</th>
                             <th>Total Cost</th>
                             <th></th>
                         </thead>
@@ -42,11 +41,10 @@
                           <% @orders.each do |order| %>
                             <tr>
                                 <td><%= order.id %></td>
+                                <td><%= link_to "Order-#{order.id}", admin_order_path(order) %></td>
                                 <td><%= order.order_status.present? ? order.order_status.name : '' %></td>
                                 <td><%= order.customer.present? ? order.customer.customer_fullname : '' %></td>
                                 <td><%= order.brand.present? ? order.brand.name : '' %></td>
-                                <td><%= order.promise_date.present? ? order.promise_date.strftime("%d-%m-%Y") : '' %></td>
-                                <td><%= order.fulfillment_date.present? ? order.fulfillment_date.strftime("%d-%m-%Y") : '' %></td>
                                 <td><%= order.total_cost %></td>
                                 <td>
                                   <div class="btn-group">

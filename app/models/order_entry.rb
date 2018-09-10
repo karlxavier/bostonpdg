@@ -35,6 +35,8 @@ class OrderEntry < ApplicationRecord
     @urls
   end
 
+  # ********* NOTE *******
+  # Product can be access directly through order_entry.product
   def product
     if self.product_id.present?
       Product.find(self.product_id)

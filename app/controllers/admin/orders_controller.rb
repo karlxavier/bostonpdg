@@ -1,5 +1,5 @@
 class Admin::OrdersController < ApplicationController
-    before_action :set_order, only: [:edit, :update]
+    before_action :set_order, only: [:edit, :update, :show]
 
     def index
         @orders = Order.all
@@ -20,6 +20,9 @@ class Admin::OrdersController < ApplicationController
 
     def new
         @order = Order.new
+    end
+
+    def show
     end
 
     def create

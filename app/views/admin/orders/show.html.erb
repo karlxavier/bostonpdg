@@ -1,383 +1,105 @@
-<%#
-# Show
-
-This view is the template for the show page.
-It renders the attributes of a resource,
-as well as a link to its edit page.
-
-## Local variables:
-
-- `page`:
-  An instance of [Administrate::Page::Show][1].
-  Contains methods for accessing the resource to be displayed on the page,
-  as well as helpers for describing how each attribute of the resource
-  should be displayed.
-
-[1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Show
-%>
-
-<% content_for(:title) { t("administrate.actions.show_resource", name: page.page_title) } %>
-
-<header class="main-content__header" role="banner">
-  <h1 class="main-content__page-title">
-    <%= content_for(:title) %>
-  </h1>
-
-  <div>
-    <%= link_to(
-                t("administrate.actions.edit_resource", name: page.page_title),
-        [:edit, namespace, page.resource],
-        class: "button",
-        ) if valid_action?(:edit) && show_action?(:edit, page.resource) %>
-        </div>
-        </header>
-
-        <section class="main-content__body">
-          <dl>
-            <% page.attributes.each do |attribute| %>
-
-                <dt class="attribute-label" id="<%= attribute.name %>">
-                  <%= t(
-                              "helpers.label.#{resource_name}.#{attribute.name}",
-                              default: attribute.name.titleize,
-                      ) %>
-                </dt>
-
-                <dd class="attribute-data attribute-data--<%=attribute.html_class%>">
-
-                  <% if !attribute.data.nil? && attribute.data.present? && attribute.data != "" %>
-                      <% if attribute.name.to_s == "created_by" || attribute.name.to_s == "last_updated_by" || attribute.name.to_s == "customer" %>
-                          <% user = User.find(attribute.data)%>
-                          <%= link_to "#{user.first_name + ' ' + user.last_name}", admin_user_path(user) %>
-                      <% elsif  attribute.name.to_s == "delivery_address" || attribute.name.to_s == "payment_address"%>
-                          <% address = Address.find(attribute.data)%>
-                          <%= link_to "#{address.state + ' - ' + address.city}", admin_address_path(address) %>
-                      <% elsif  attribute.name.to_s == "brand_id"%>
-                          <% brand = Brand.find(attribute.data)%>
-                          <%= link_to "#{brand.name}", admin_brand_path(brand) %>
-                          <br/>
-                          <br/>
-                          <% order_branch = OrderBranch.where("order_id = '#{page.resource.id}' AND brand_id = '#{attribute.data}'") %>
-                          <div style="display: block;padding-bottom:3%;">
-                            <%= link_to "Add Branch", new_admin_order_branch_path(:order_id => page.resource.id, :brand_id => attribute.data)%>
-                          </div>
-                          <% if order_branch.present? %>
-                              <table style="margin-bottom: 2%;">
-                                <thead>
-                                <tr>
-                                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Branch/es  </th>
-                                  <th scope="col"></th>
-                                  <th scope="col"></th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                <% order_branch.each do |branch| %>
-                                    <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/order_branches/<%= branch.id %>">
-                                      <td class="cell-data cell-data--number">
-                                        <a href="/admin/order_branches/<%= branch.id %>" class="action-show">
-                                          <%= branch.state_and_city %>
-                                        </a>
-                                      </td>
-                                      <td></td>
-
-                                      <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/order_branches/<%= branch.id %>">Destroy</a></td>
-
-                                    </tr>
-                                <% end %>
-                                </tbody>
-                              </table>
-
-                          <% end %>
-                      <% else %>
-                          <%= render_field attribute %>
-                      <% end %>
-                  <% end %>
-                </dd>
-            <% end %>
-            <dt class="attribute-label" id="users">
-              Users Assigned on Ticket
-            </dt>
-            <dd class="attribute-data attribute-data--has-many">
-              <% order_users = OrderUser.where("order_id = '#{page.resource.id}'") %>
-              <div style="display: block;padding-bottom:3%;">
-                <%= link_to "Assign Users", new_admin_order_user_path(:order_id => page.resource.id)%>
-              </div>
-               <% if order_users.present? %>
-              <table style="margin-bottom: 2%;">
-                <thead>
-                <tr>
-                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Regional Director  </th>
-                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Comms Director  </th>
-                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Art Director  </th>
-                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Processor  </th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <% order_users.each do |user| %>
-                    <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/order_users/<%= user.id %>">
-                      <td class="cell-data cell-data--number">
-                        <a href="/admin/order_users/<%= user.id %>" class="action-show">
-                          <%= user.regional_name %>
-                        </a>
-                      </td>
-                      <td class="cell-data cell-data--number">
-                        <a href="/admin/order_users/<%= user.id %>" class="action-show">
-                        <%= user.comms_name %>
-                        </a>
-                      </td>
-                      <td class="cell-data cell-data--number">
-                        <a href="/admin/order_users/<%= user.id %>" class="action-show">
-                        <%= user.art_name %>
-                        </a>
-                      </td>
-                      <td class="cell-data cell-data--number">
-                        <a href="/admin/order_users/<%= user.id %>" class="action-show">
-                        <%= user.processor_name %>
-                        </a>
-                      </td>
-
-                      <td><a class="action-edit" href="/admin/order_users/<%= user.id %>/edit">Edit</a></td>
-
-                      <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/order_users/<%= user.id %>">Destroy</a></td>
-
-                    </tr>
-                <% end %>
-                </tbody>
-              </table>
-
-              <% end %>
-            </dd>
-            <dt class="attribute-label" id="users">
-              Order Entries
-            </dt>
-
-            <dd class="attribute-data attribute-data--has-many">
-              <% order_entry_list = OrderEntryVendor.where("order_entry_id IN (SELECT id FROM order_entries WHERE order_id = #{page.resource.id})") %>
-
-              <% temp_order_entry_list = order_entry_list.select(:order_entry_id).distinct%>
-              <% order_entry_list2 = [] %>
-              <% temp_order_entry_list.each do |toel| %>
-                <% if !toel.order_entry_id.nil? %>
-                    <% order_entry_list2.push(toel.order_entry_id) %>
-                <% end %>
-            <% end %>
-              <% order_entries_with_no_vendors = OrderEntry.where("id NOT IN (#{order_entry_list2.map(&:inspect).join(',')})").where("order_id = #{page.resource.id}") %>
-
-              <div style="display: block;padding-bottom:3%;">
-                <%= link_to "Add Entry", new_admin_order_entry_path(:order_id => page.resource.id)%>
-
-              </div>
-
-
-              <% if order_entry_list.present? %>
-                  <% temp_vendor_list = order_entry_list.select(:vendor_id).distinct%>
-                  <% vendor_list = [] %>
-                  <% temp_vendor_list.each do |tvl| %>
-                      <% if !tvl.vendor_id.nil? %>
-                        <% vendor_list.push(tvl.vendor_id) %>
-                      <% end %>
-                  <% end %>
-                  <% if vendor_list.length > 0 %>
-                      <% vendors = Vendor.where("id IN (#{vendor_list.map(&:inspect).join(',')})").order("name ASC")%>
-
-                      <% vendors.each do |vendor| %>
-                          <h2 style="font-size: 1.3em; padding-top: 3%; padding-bottom: 3%;margin-right:3%;display:inline;"><%= vendor.name %></h2>  <%= link_to "Send Order", send_orders_api_simple_orders_path(:order_id => page.resource.id, :vendor_id => vendor.id), class: "button display-inline"%>
-                              <table style="margin-bottom: 2%;">
-                                <thead>
-                                <tr>
-                                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Entry ID  </th>
-                                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Product  </th>
-                                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Price  </th>
-                                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Cost  </th>
-                                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Tax  </th>
-                                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Quoted By  </th>
-                                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Quantity  </th>
-                                  <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Status  </th>
-                                  <th scope="col"></th>
-                                  <th scope="col"></th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                <% OrderEntry.where("order_id = #{page.resource.id} AND id IN (SELECT order_entry_id FROM order_entry_vendors WHERE vendor_id = #{vendor.id})").each do |order_entry| %>
-                                        <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/order_entries/<%= order_entry.id %>">
-                                          <td class="cell-data cell-data--number">
-                                            <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-
-                                              <%= order_entry.id %>
-
-                                            </a>
-                                          </td>
-
-                                          <td class="cell-data cell-data--number">
-                                            <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-                                              <% if order_entry.product_id.present? && !order_entry.product_id.nil? %>
-                                                  <%  product = Product.find(order_entry.product_id)  %>
-                                                  <%= link_to product.name, admin_product_path(product) %>
-                                              <% end %>
-
-                                            </a>
-                                          </td>
-
-                                          <td class="cell-data cell-data--number">
-                                            <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-
-                                              <%= order_entry.price %>
-
-                                            </a>
-                                          </td>
-
-                                          <td class="cell-data cell-data--number">
-                                            <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-
-                                              <%= order_entry.cost %>
-
-                                            </a>
-                                          </td>
-
-                                          <td class="cell-data cell-data--number">
-                                            <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-
-                                              <%= order_entry.tax %>
-
-                                            </a>
-                                          </td>
-
-                                          <td class="cell-data cell-data--number">
-                                            <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-                                              <% if order_entry.quoted_by.present? && !order_entry.quoted_by.nil? %>
-                                                  <% user = User.find(order_entry.quoted_by) %>
-                                                  <%= link_to "#{user.first_name + ' ' + user.last_name}", admin_user_path(user) %>
-                                              <% end %>
-                                            </a>
-                                          </td>
-
-                                          <td class="cell-data cell-data--number">
-                                            <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-
-                                              <%= order_entry.quantity %>
-
-                                            </a>
-                                          </td>
-
-                                          <td class="cell-data cell-data--number">
-                                            <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-
-                                              <%= order_entry.status %>
-
-                                            </a>
-                                          </td>
-
-                                          <td><a class="action-edit" href="/admin/order_entries/<%= order_entry.id %>/edit">Edit</a></td>
-
-                                          <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/order_entries/<%= order_entry.id %>">Destroy</a></td>
-                                        </tr>
-                                <% end %>
-                                </tbody>
-                              </table>
-                          <% end %>
-                      <% end %>
-                  <% end %>
-                <% if order_entries_with_no_vendors.present? %>
-                    <h2 style="font-size: 1.3em; padding-top: 3%; padding-bottom: 3%;margin-right:3%;display:inline;"> No Vendors</h2>
-                    <table style="margin-bottom: 2%;">
-                      <thead>
-                      <tr>
-                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Entry ID  </th>
-                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Product  </th>
-                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Price  </th>
-                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Cost  </th>
-                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Tax  </th>
-                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Quoted By  </th>
-                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Quantity  </th>
-                        <th class="cell-label cell-label--number cell-label--false" scope="col" role="columnheader" aria-sort="none"> Status  </th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                      </tr>
-                      </thead>
-
-                      <tbody>
-                      <% order_entries_with_no_vendors.each do |order_entry| %>
-                          <tr class="js-table-row" tabindex="0" role="link" data-url="/admin/order_entries/<%= order_entry.id %>">
-                            <td class="cell-data cell-data--number">
-                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-
-                                <%= order_entry.id %>
-
-                              </a>
-                            </td>
-
-                            <td class="cell-data cell-data--number">
-                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-                                <% if order_entry.product_id.present? && !order_entry.product_id.nil? %>
-                                    <%  product = Product.find(order_entry.product_id)  %>
-                                    <%= link_to product.name, admin_product_path(product) %>
-                                <% end %>
-                              </a>
-                            </td>
-
-                            <td class="cell-data cell-data--number">
-                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-
-                                <%= order_entry.price %>
-
-                              </a>
-                            </td>
-
-                            <td class="cell-data cell-data--number">
-                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-
-                                <%= order_entry.cost %>
-
-                              </a>
-                            </td>
-
-                            <td class="cell-data cell-data--number">
-                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-
-                                <%= order_entry.tax %>
-
-                              </a>
-                            </td>
-
-                            <td class="cell-data cell-data--number">
-                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
-                                <% if order_entry.quoted_by.present? && !order_entry.quoted_by.nil? %>
-                                <% user = User.find(order_entry.quoted_by) %>
-                                <%= link_to "#{user.first_name + ' ' + user.last_name}", admin_user_path(user) %>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Orders</h2>
+        <ol class="breadcrumb">
+            <li>
+                <%= link_to 'Dashboard', admin_root_path %>
+            </li>
+            <li>
+                <%= link_to 'Orders List', admin_orders_path %>
+            </li>
+            <li class="active">
+                <strong><%= "Order-#{@order.id}" %></strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox product-detail">
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="product-main-price pull-right">
+                                <%= number_to_currency(@order.total_cost, unit: '$', :precision => 2, :delimiter => ',') %><br>
+                                <small class="text-muted">Total Cost</small> 
+                            </h2>
+
+                            <h2 class="font-bold m-b-xs text-warning">
+                                <%= "Order-#{@order.id}" %>
+                            </h2>
+                            <small style="font-size: 11px;"><%= @order.created_at.strftime("%d-%b-%Y %I:%M%P") %></small>
+                            <div>
+                                <div class="btn-group">
+                                    <%= link_to edit_admin_order_path(@order), class: "btn btn-primary btn-xs" do %>
+                                        <i class="fa fa-pencil"></i> Edit Order
                                     <% end %>
-                              </a>
-                            </td>
+                                    <%= link_to admin_orders_path, class: "btn btn-white btn-xs" do %>
+                                        <i class="fa fa-bars"></i> Back to List
+                                    <% end %>
+                                </div>
+                            </div>
+                            <hr>
 
-                            <td class="cell-data cell-data--number">
-                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+                            <h4>Order Details</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="dl-horizontal m-t-md small">
+                                <dt>Delivery Address</dt>
+                                <dd><%= !@order.delivery_address.nil? ? Address.find(@order.delivery_address).full_address : 'N/A' %></dd>
 
-                                <%= order_entry.quantity %>
+                                <dt>Brand</dt>
+                                <dd><%= link_to @order.brand.name, admin_brand_path(@order) %></dd>
 
-                              </a>
-                            </td>
+                                <dt>Customer</dt>
+                                <dd><%= link_to @order.customer.present? ? @order.customer.name : 'N/A' %></dd>
+                            </dl>
 
-                            <td class="cell-data cell-data--number">
-                              <a href="/admin/order_entries/<%= order_entry.id %>" class="action-show">
+                            <hr>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="dl-horizontal m-t-md small">
+                                <dt>Payment Address</dt>
+                                <dd><%= !@order.payment_address.nil? ? Address.find(@order.payment_address).full_address : 'N/A' %></dd>
 
-                                <%= order_entry.status %>
+                                <dt>Created By</dt>
+                                <dd><%= @order.created_by.nil? ? 'N/A' : @order.created_by %></dd>
 
-                              </a>
-                            </td>
+                                <dt>Notes</dt>
+                                <dd><%= @order.notes.nil? ? 'N/A' : @order.notes %></dd>
+                            </dl>
 
-                            <td><a class="action-edit" href="/admin/order_entries/<%= order_entry.id %>/edit">Edit</a></td>
+                            <hr>
+                        </div>
+                    </div>
 
-                            <td><a class="text-color-red" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/admin/order_entries/<%= order_entry.id %>">Destroy</a></td>
-                          </tr>
-                      <% end %>
-                      </tbody>
-                    </table>
-                <% end %>
-                  </dd>
-                  </dl>
-                  </section>
+                </div>
+            </div>
 
+             <div class="ibox">
+                <div class="ibox-title text-info">
+                    Items
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive" style="overflow: visible;">
+                        <table class="table table-hover issue-tracker">
+                            <tbody id="tbody_orders">
+                                <% @order.order_entries.each do |oe| %> 
+                                    <% if oe.present? %>
+                                        <%= render '/admin/products/product', oe: oe %>
+                                    <% end %>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

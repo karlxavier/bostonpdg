@@ -29,6 +29,8 @@ class Order < ApplicationRecord
   has_many :order_users
   has_many :order_entries
   has_many :products, through: :order_entries
+  has_many :order_branches
+  has_many :hotels, through: :order_branches
 
   belongs_to :brand
   belongs_to :order_status

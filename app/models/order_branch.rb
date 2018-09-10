@@ -11,6 +11,10 @@
 #
 
 class OrderBranch < ApplicationRecord
+  belongs_to :order
+  belongs_to :brand
+  belongs_to :hotel
+
   def state_and_city
     if self.address_id.present?
       address = Address.find(self.address_id)
