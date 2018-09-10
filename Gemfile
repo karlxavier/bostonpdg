@@ -66,6 +66,7 @@ gem "audited", "~> 4.7"
 gem 'summernote-rails', '~> 0.8.10.0'
 gem 'country_select', '~> 3.1'
 gem 'amoeba'
+gem 'friendly_id', '~> 5.2.0'
 
 # global search
 gem 'scenic'

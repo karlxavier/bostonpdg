@@ -56,7 +56,7 @@ class Admin::HotelsController < ApplicationController
         end
 
         def set_hotel
-            @hotel = Hotel.find(params[:id])
+            @hotel = Hotel.friendly.find(params[:id])
         end
 
 end

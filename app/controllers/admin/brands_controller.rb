@@ -45,7 +45,7 @@ class Admin::BrandsController < ApplicationController
         end
 
         def set_brand
-            @brand = Brand.find(params[:id])
+            @brand = Brand.friendly.find(params[:id])
         end
 
 end
