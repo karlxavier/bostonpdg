@@ -291,6 +291,8 @@ function setVendors(btn_type){
                         }
                     });
                     $('#requestQuote').on('hidden.bs.modal', function (e) {
+                        myDropzone.off();
+                        myDropzone.removeAllFiles(true);
                         myDropzone.destroy();
                     });
                     this.on("successmultiple", function(files, response) {
@@ -348,7 +350,6 @@ function itemDetails(id, entry_id) {
             init: function () {
                 var myDropzone = this;
                 myDropzone = this; // closure
-                console.log('working...');
                 $.each(data.attachments, function (i, currAttachment) {
 
                     var mockFile = { name: currAttachment.file_name, size: parseInt(currAttachment.file_size), id: currAttachment.id };
@@ -369,10 +370,6 @@ function itemDetails(id, entry_id) {
 
                     }
                 });
-                $('#editOrderEntries').on('hidden.bs.modal', function (e) {
-                    console.log("working");
-                    myDropzone.destroy();
-                });
                 $('#close-item-details').on('click', function (e) {
                     $('#viewProducts').modal('hide');
                     myDropzone.destroy();
@@ -386,15 +383,19 @@ function itemDetails(id, entry_id) {
                 });
             },
             removedfile: function (file) {
-                console.log(file);
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/simple/order_entries/destroy_attachment',
-                    data: {id: file.id}
-                }).done(function (data) {
-                });
+                if (!this.disabled) {
+                    console.log(file);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/simple/order_entries/destroy_attachment',
+                        data: {id: file.id}
+                    }).done(function (data) {
+                    });
+                }
+
                 var ref;
                 return (ref = file.previewElement) != null ? ref.parentNode.removeChild(file.previewElement) : void 0;
+
             },
         });
 
