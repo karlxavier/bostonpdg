@@ -1,5 +1,5 @@
 // import Dropzone from "../node_modules/dropzone";
-$(function (){
+$( document ).on('turbolinks:load', function() {
   const zone = document.querySelector('.dropzonable')
   const input = document.querySelector('#message-attachment')
   const form = document.querySelector('#new_message')
