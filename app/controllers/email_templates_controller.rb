@@ -54,7 +54,7 @@ class EmailTemplatesController < ApplicationController
         params[:file].each do |attachment_file|
           email_template_attachment = EmailTemplateAttachment.new
           email_template_attachment.email_template_id = @email_template.id
-          email_template_attachment.attachment_file = attachment_file
+          email_template_attachment.attachment_file = params[:file]["#{attachment_file}"]
           email_template_attachment.save
         end
       end
