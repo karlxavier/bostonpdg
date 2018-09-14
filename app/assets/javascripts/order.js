@@ -10,7 +10,6 @@ $(function() {
             url: "/api/simple/products/"+this.value
         }).done(function( data ) {
             $('#clone_product_name').val(data.name);
-            $('#clone_category_id').val(data.category);
             $('#clone_item_category_id').val(data.item_category_id);
             $('#clone_vendor_id').val(data.vendor_id);
             $('#clone_specs').val(data.specs)
@@ -61,7 +60,6 @@ $(function() {
                 var data = response;
                 myDropzone.removeAllFiles( true );
                 $('#product_name').val('');
-                $('#category_id').val('');
                 $('#item_category_id').val('');
                 $('#vendor_id').val('');
                 $('#specs').val('');
@@ -115,7 +113,6 @@ $(function() {
                 myDropzone.removeAllFiles( true );
                 $('#clone_product_id').val('');
                 $('#clone_product_name').val('');
-                $('#clone_category_id').val('');
                 $('#clone_item_category_id').val('');
                 $('#clone_vendor_id').val('');
                 $('#clone_specs').val('')
@@ -212,7 +209,6 @@ function submitFormWithVal(id, elem) {
 
 function submitNewClonedProduct() {
     var product_name = $('#clone_product_name').val();
-    var category_id = $('#clone_category_id').val();
     var item_category_id = $('#clone_item_category_id').val();
     var vendor_id = $('#clone_vendor_id').val();
     var specs =  $('#clone_specs').val();
@@ -226,15 +222,14 @@ function submitNewClonedProduct() {
     for(var i = field_names.length - 1; i >= 0; i--) {
         dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
     }
-    if (product_name != '' && (category_id != '' || item_category_id != '')) {
+    if (product_name != '' && item_category_id != '') {
         $.ajax({
             method: "POST",
             url: "/api/simple/products/create_item",
-            data: {product_name: product_name, category_id: category_id, item_category_id: item_category_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes, dynamic_fields: dynamic_fields, vendor_id: vendor_id}
+            data: {product_name: product_name, item_category_id: item_category_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes, dynamic_fields: dynamic_fields, vendor_id: vendor_id}
         }).done(function( data ) {
             $('#clone_product_id').val('');
             $('#clone_product_name').val('');
-            $('#clone_category_id').val('');
             $('#clone_item_category_id').val('');
             $('#clone_vendor_id').val('');
             $('#clone_specs').val('')
@@ -255,7 +250,6 @@ function submitNewClonedProduct() {
 }
 function submitNewProduct() {
     var product_name = $('#product_name').val();
-    var category_id = $('#category_id').val();
     var item_category_id = $('#item_category_id').val();
     var vendor_id = $('#vendor_id').val();
     var specs =  $('#specs').val();
@@ -269,14 +263,13 @@ function submitNewProduct() {
     for(var i = field_names.length - 1; i >= 0; i--) {
         dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
     }
-    if (product_name != '' && (category_id != '' || item_category_id != '')) {
+    if (product_name != '' && item_category_id != '') {
         $.ajax({
             method: "POST",
             url: "/api/simple/products/create_item",
-            data: {product_name: product_name, category_id: category_id, item_category_id: item_category_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes, dynamic_fields: dynamic_fields, vendor_id: vendor_id}
+            data: {product_name: product_name, item_category_id: item_category_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes, dynamic_fields: dynamic_fields, vendor_id: vendor_id}
         }).done(function( data ) {
             $('#product_name').val('');
-            $('#category_id').val('');
             $('#item_category_id').val('');
             $('#vendor_id').val('');
             $('#specs').val('');

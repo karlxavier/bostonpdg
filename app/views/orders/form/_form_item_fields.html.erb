@@ -24,20 +24,7 @@
           <!--Categories-->
           <div class="row" style="padding-top: 2%;">
             <div class="col padding-left">
-              <h4>Select Product Category</h4>
-              <div class="input-group search-bar-padding">
-                <select class="categories form-control glow-input" data-live-search="true" name="category_id" id="category_id" >
-                  <option></option>
-                  <% Category.order("id DESC").each do |category| %>
-                    <option value="<%= category.id %>"><%= category.name %></option>
-                  <% end %>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="row" style="padding-top: 2%;">
-            <div class="col padding-left">
-              <h4>Select Item Category</h4>
+              <h4>Select Category</h4>
               <div class="input-group search-bar-padding">
                 <select class="categories form-control glow-input" data-live-search="true" name="item_category_id" id="item_category_id">
                   <option></option>
@@ -169,20 +156,7 @@
     <!--Categories-->
     <div class="row" style="padding-top: 2%;">
       <div class="col padding-left">
-        <h4>Select Product Category</h4>
-        <div class="input-group search-bar-padding">
-          <select class="clone_categories form-control glow-input" data-live-search="true" name="category_id" id="clone_category_id" >
-            <option></option>
-            <% Category.order("id DESC").each do |category| %>
-              <option value="<%= category.id %>"><%= category.name %></option>
-            <% end %>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row" style="padding-top: 2%;">
-      <div class="col padding-left">
-        <h4>Select Item Category</h4>
+        <h4>Select Category</h4>
         <div class="input-group search-bar-padding">
           <select class="clone_categories form-control glow-input" data-live-search="true" name="item_category_id" id="clone_item_category_id">
             <option></option>
