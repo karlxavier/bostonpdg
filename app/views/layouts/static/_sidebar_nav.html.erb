@@ -5,7 +5,7 @@
     <!-- Sidebar Navigation Menus-->
     <div class="main-menu">
       <ul id="side-main-menu" class="side-menu list-unstyled">
-        <li><a href="index.html"> <i data-feather="grid"></i><br/>DASHBOARD</a></li>
+        <li><a href="<%= admin_root_path %>"> <i data-feather="grid"></i><br/>DASHBOARD</a></li>
         <li>
           <%= link_to chatroom_orders_path do %>
               <i data-feather="message-square"></i><br/>
@@ -14,9 +14,9 @@
         </li>
         <li><a href="<%= orders_path %>"> <i data-feather="trending-up"></i><br/>SALES</a></li>
         <li><a href="<%= inventories_path %>"> <i data-feather="package"></i><br/>INVENTORY</a></li>
-        <li><a href="tables.html"> <i data-feather="edit-2"></i><br/>DESIGN</a></li>
-        <li><a href="tables.html"> <i data-feather="users"></i><br/>MANAGE</a></li>
-        <li><a href="tables.html"> <i data-feather="file-text"></i><br/>ACCOUNTING</a></li>
+        <li><a href="#"> <i data-feather="edit-2"></i><br/>DESIGN</a></li>
+        <!--<li><a href="tables.html"> <i data-feather="users"></i><br/>MANAGE</a></li>
+        <li><a href="tables.html"> <i data-feather="file-text"></i><br/>ACCOUNTING</a></li>-->
         <li><a href="/search_results"> <i data-feather="search"></i><br/>SEARCH</a></li>
         <% if user_signed_in? %>
             <li><a href="<%= destroy_user_session_path %>" data-method="delete"> <i data-feather="log-out"></i><br/>LOGOUT</a></li>
