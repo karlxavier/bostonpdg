@@ -82,9 +82,9 @@
                             <div class="table-responsive" style="overflow: visible;">
                                 <table class="table table-hover issue-tracker">
                                     <tbody id="tbody_orders">
-                                        <% @brand.orders.where.not(order_status_id: 6).order(id: :desc).each do |order| %> 
-                                            <% if order.present? %>
-                                                <%= render '/admin/orders/order', order: order %>
+                                        <% @brand.orders.each do |order| %>
+                                            <% if order.present? %> 
+                                                <%= render '/admin/orders/order_wd_hotel', order: order %>
                                             <% end %>
                                         <% end %>
                                     </tbody>

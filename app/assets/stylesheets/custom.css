@@ -848,3 +848,7 @@ dd, dt {
 dt {
     font-weight: 700;
 }
+
+.prime-link {
+    color: #33b35a!important;
+}

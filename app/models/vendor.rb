@@ -14,7 +14,9 @@
 #
 
 class Vendor < ApplicationRecord
-  # audited
+  
+  audited
+  
   require 'csv'
   
   has_many :vendors_products

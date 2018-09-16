@@ -1,4 +1,7 @@
 class Hotel < ApplicationRecord
+
+	audited
+	
 	belongs_to :brand
 	belongs_to :address
 	has_many :order_branches
