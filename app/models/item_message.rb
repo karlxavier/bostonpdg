@@ -16,6 +16,9 @@ class ItemMessage < ApplicationRecord
   belongs_to :user
   # belongs_to :product
   belongs_to :order_entry
+
+  include AttachmentUploader[:attachment]
+  
   def self.search(query:, order_entry_id:)
 		return self.where(order_entry_id: order_entry_id) if query.blank?
 		self.where(order_entry_id: order_entry_id).basic_search(query)

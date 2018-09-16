@@ -27,6 +27,8 @@ class OrderEntry < ApplicationRecord
   belongs_to :product
   has_many :item_messages
 
+  scope :product_wd_messages, -> { joins(:order, :product) }
+
   def attachments
     @urls = []
     OrderEntryAttachment.where(:order_entry_id => self.id).order('id DESC').each do |attachment|

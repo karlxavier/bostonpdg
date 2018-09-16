@@ -91,6 +91,46 @@
           </div>
           <div class="hr-line-dashed"></div>
 
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Regional Director</label>
+              <div class="col-sm-4">
+                <%= f.check_box :regional_director, class: "form-control" %>
+              </div>
+
+              <label class="col-sm-2 control-label">Client Contacts</label>
+              <div class="col-sm-4">
+                <%= f.check_box :client_contacts, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Communications</label>
+              <div class="col-sm-4">
+                <%= f.check_box :communications, class: "form-control" %>
+              </div>
+
+              <label class="col-sm-2 control-label">Art Director</label>
+              <div class="col-sm-4">
+                <%= f.check_box :art_director, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Designers</label>
+              <div class="col-sm-4">
+                <%= f.check_box :designers, class: "form-control" %>
+              </div>
+
+              <label class="col-sm-2 control-label">Processor</label>
+              <div class="col-sm-4">
+                <%= f.check_box :processor, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
           <div class="form-group">
               <div class="col-sm-4 col-sm-offset-2">
                   <%= link_to 'Cancel', admin_users_path, class: "btn btn-white" %>

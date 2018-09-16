@@ -18,7 +18,7 @@
                         <% OrderUser.regional_users(@order.id).each do |user|  %>
                             <option value="<%= user.id %>" selected><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
-                        <% OrderUser.not_in_users(OrderUser.regional(@order.id).empty? ? 0 : OrderUser.regional(@order.id)).each do |user| %>
+                        <% OrderUser.not_in_users(OrderUser.regional(@order.id).empty? ? 0 : OrderUser.regional(@order.id) + User.where(regional_director: false).pluck(:id)).each do |user| %>
                           <option value="<%= user.id %>"><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
               </select>
@@ -33,7 +33,7 @@
                         <% OrderUser.client_contact_users(@order.id).each do |user|  %>
                             <option value="<%= user.id %>" selected><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
-                        <% OrderUser.not_in_users(OrderUser.client_contact(@order.id).empty? ? 0 : OrderUser.client_contact(@order.id)).each do |user| %>
+                        <% OrderUser.not_in_users(OrderUser.client_contact(@order.id).empty? ? 0 : OrderUser.client_contact(@order.id) + User.where(client_contacts: false).pluck(:id)).each do |user| %>
                           <option value="<%= user.id %>"><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
               </select>
@@ -48,7 +48,7 @@
                         <% OrderUser.comms_users(@order.id).each do |user|  %>
                             <option value="<%= user.id %>" selected><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
-                        <% OrderUser.not_in_users(OrderUser.comms(@order.id).empty? ? 0 : OrderUser.comms(@order.id)).each do |user| %>
+                        <% OrderUser.not_in_users(OrderUser.comms(@order.id).empty? ? 0 : OrderUser.comms(@order.id) + User.where(communications: false).pluck(:id)).each do |user| %>
                           <option value="<%= user.id %>"><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
               </select>
@@ -64,7 +64,7 @@
                         <% OrderUser.art_users(@order.id).each do |user|  %>
                             <option value="<%= user.id %>" selected><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
-                        <% OrderUser.not_in_users(OrderUser.art(@order.id).empty? ? 0 : OrderUser.art(@order.id)).each do |user| %>
+                        <% OrderUser.not_in_users(OrderUser.art(@order.id).empty? ? 0 : OrderUser.art(@order.id) + User.where(art_director: false).pluck(:id)).each do |user| %>
                           <option value="<%= user.id %>"><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
               </select>
@@ -79,7 +79,7 @@
                         <% OrderUser.designer_users(@order.id).each do |user|  %>
                             <option value="<%= user.id %>" selected><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
-                        <% OrderUser.not_in_users(OrderUser.designer(@order.id).empty? ? 0 : OrderUser.designer(@order.id)).each do |user| %>
+                        <% OrderUser.not_in_users(OrderUser.designer(@order.id).empty? ? 0 : OrderUser.designer(@order.id) + User.where(designers: false).pluck(:id)).each do |user| %>
                           <option value="<%= user.id %>"><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
               </select>
@@ -94,7 +94,7 @@
                         <% OrderUser.processor_users(@order.id).each do |user|  %>
                             <option value="<%= user.id %>" selected><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
-                        <% OrderUser.not_in_users(OrderUser.processor(@order.id).empty? ? 0 : OrderUser.processor(@order.id)).each do |user| %>
+                        <% OrderUser.not_in_users(OrderUser.processor(@order.id).empty? ? 0 : OrderUser.processor(@order.id) + User.where(processor: false).pluck(:id)).each do |user| %>
                           <option value="<%= user.id %>"><%= [user.first_name, user.last_name].join(' ') %></option>
                         <% end %>
               </select>

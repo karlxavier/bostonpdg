@@ -3,9 +3,13 @@
   	<div class="input-group">
   		<%= f.text_area :body, rows: 1, class: "form-control message-body", autofocus: true, placeholder: "Enter message text", autocomplete: "off" %>
 
-	    <%= button_tag(type: "submit", class: "btn btn-primary btn-circle btn-lg", style: "margin-left: 10px;") do %>
-          <i class="fa fa-paper-plane"></i>
-      <% end %>
+	    <span class="input-group-btn"> 
+          <label class="btn btn-white btn-bitbucket btn-file">
+            <i class="fa fa-paperclip"></i>
+            <%= f.file_field :attachment, id: 'message-attachment', style: "display: none;", title: "Image upload" %>
+        </label>
+        <%= f.submit "Send", class: "btn btn-primary" %>
+      </span>
 
     </div>
   <% end %>
