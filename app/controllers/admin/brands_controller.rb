@@ -1,5 +1,5 @@
 class Admin::BrandsController < ApplicationController
-    before_action :set_brand, only: [:edit, :update, :show]
+    before_action :set_brand, only: [:edit, :update, :show, :destroy]
 
     def index
         @brands = Brand.all
@@ -36,6 +36,16 @@ class Admin::BrandsController < ApplicationController
                 format.html { render 'edit' }
             end
         end
+    end
+
+    def destroy
+        @brands = Brand.all
+        if @brand.destroy
+            flash.now[:notice] = "Brand #{@brand.name} successfully deleted."
+        else
+            flash.now[:error] = "Cannot delete this brand, associations still exist."
+        end
+        render action: :index
     end
 
     private

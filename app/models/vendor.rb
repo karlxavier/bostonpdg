@@ -32,6 +32,8 @@ class Vendor < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
 
+  before_destroy :check_for_associations
+
   def country_name
     if !country_origin.nil?
       country = ISO3166::Country[country_origin]
@@ -151,5 +153,13 @@ class Vendor < ApplicationRecord
       else raise "Unknown file type: #{file.original_filename}"
     end
   end
+
+  private
+
+    def check_for_associations
+      if vendors_products.any? || products.any? || vendor_categories.any? || vendor_reviews.any?
+        throw(:abort)
+      end
+    end
 
 end

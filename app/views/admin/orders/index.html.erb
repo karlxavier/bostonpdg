@@ -43,8 +43,14 @@
                                 <td><%= order.id %></td>
                                 <td><%= link_to "Order-#{order.id}", admin_order_path(order) %></td>
                                 <td><%= order.order_status.present? ? order.order_status.name : '' %></td>
-                                <td><%= order.customer.present? ? order.customer.customer_fullname : '' %></td>
-                                <td><%= order.brand.present? ? order.brand.name : '' %></td>
+                                <td><%= order.customer.present? ? order.customer.name : '' %></td>
+                                <td>
+                                    <% if order.brand.present? %>
+                                        <%= link_to order.brand.name, admin_brand_path(order.brand) %>
+                                    <% else %>
+                                        N/A
+                                    <% end %>
+                                </td>
                                 <td><%= order.total_cost %></td>
                                 <td>
                                   <div class="btn-group">

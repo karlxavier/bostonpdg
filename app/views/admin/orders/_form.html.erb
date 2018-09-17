@@ -37,7 +37,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">Customer</label>
             <div class="col-sm-10">
-               <%= f.collection_select( :customer_id, Customer.all, :id, :customer_fullname, {include_blank: true}, {id: "order_status_id_selection", class: "chosen-select"})%>
+               <%= f.collection_select( :customer_id, Customer.all, :id, :name, {include_blank: true}, {id: "customer_id_selection", class: "chosen-select"})%>
             </div>
           </div>
           <div class="hr-line-dashed"></div>
@@ -45,7 +45,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">Delivery Address</label>
             <div class="col-sm-10">
-               <%= f.collection_select( :delivery_address, Address.all, :id, :full_address, {include_blank: true}, {id: "order_status_id_selection", class: "chosen-select"})%>
+               <%= f.collection_select( :delivery_address, Address.all, :id, :full_address, {include_blank: true}, {id: "del_address_id_selection", class: "chosen-select"})%>
             </div>
           </div>
           <div class="hr-line-dashed"></div>
@@ -53,7 +53,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">Payment Address</label>
             <div class="col-sm-10">
-               <%= f.collection_select( :payment_address, Address.all, :id, :full_address, {include_blank: true}, {id: "order_status_id_selection", class: "chosen-select"})%>
+               <%= f.collection_select( :payment_address, Address.all, :id, :full_address, {include_blank: true}, {id: "payment_address_id_selection", class: "chosen-select"})%>
             </div>
           </div>
           <div class="hr-line-dashed"></div>

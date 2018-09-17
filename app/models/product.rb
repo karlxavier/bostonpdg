@@ -53,6 +53,8 @@ class Product < ApplicationRecord
 
   validates :name, presence: true
 
+  before_destroy :check_for_associations
+
   has_attached_file :picture, styles: { small: "64x64", med: "100x100", large: "200x200" }
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
 
@@ -143,5 +145,13 @@ class Product < ApplicationRecord
       else raise "Unknown file type: #{file.original_filename}"
     end
   end
+
+    private
+
+      def check_for_associations
+        if inventories.any? || order_entries.any? || vendors_products.any? || orders.any?
+          throw(:abort)
+        end
+      end
 
 end

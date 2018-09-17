@@ -15,6 +15,8 @@ class Category < ApplicationRecord
 
 	validates :name, presence: true
 
+	before_destroy :check_for_associations
+
 	require 'csv'
 
   	def self.import(file)
@@ -45,5 +47,13 @@ class Category < ApplicationRecord
 	      else raise "Unknown file type: #{file.original_filename}"
 	    end
 	  end
+
+	private
+
+	    def check_for_associations
+	      if vendor_categories.any? || vendors.any?
+	        throw(:abort)
+	      end
+	    end
 
 end

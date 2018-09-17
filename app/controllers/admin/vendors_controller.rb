@@ -1,5 +1,5 @@
 class Admin::VendorsController < ApplicationController
-    before_action :set_vendor, only: [:show, :edit, :update]
+    before_action :set_vendor, only: [:show, :edit, :update, :destroy]
 
     def index
         @vendors = Vendor.all
@@ -38,6 +38,16 @@ class Admin::VendorsController < ApplicationController
                 format.html { render 'edit' }
             end
         end
+    end
+
+    def destroy
+        @vendors = Vendor.all
+        if @vendor.destroy
+            flash.now[:notice] = "Vendor #{@vendor.name} successfully deleted."
+        else
+            flash.now[:error] = "Cannot delete this vendor, associations still exist."
+        end
+        render action: :index
     end
 
     private

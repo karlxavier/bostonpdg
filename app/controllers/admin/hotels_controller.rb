@@ -1,5 +1,5 @@
 class Admin::HotelsController < ApplicationController
-    before_action :set_hotel, only: [:edit, :update, :show]
+    before_action :set_hotel, only: [:edit, :update, :show, :destroy]
 
     def index
         @hotels = Hotel.hotel_with_brands
@@ -47,6 +47,16 @@ class Admin::HotelsController < ApplicationController
     def import_csv
         Hotel.import(params[:file])
         redirect_to admin_hotels_path
+    end
+
+    def destroy
+        @hotels = Hotel.hotel_with_brands
+        if @hotel.destroy
+            flash.now[:notice] = "Hotel #{@hotel.name} successfully deleted."
+        else
+            flash.now[:error] = "Cannot delete this hotel, associations still exist."
+        end
+        render action: :index
     end
 
     private

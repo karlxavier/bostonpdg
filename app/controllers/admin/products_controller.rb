@@ -1,5 +1,5 @@
 class Admin::ProductsController < ApplicationController
-  before_action :set_product, only: [:edit, :update]
+  before_action :set_product, only: [:edit, :update, :destroy]
 
   def index
     @products = Product.product_wd_inventories
@@ -38,9 +38,19 @@ class Admin::ProductsController < ApplicationController
   end
 
   def import_csv
-        Product.import(params[:file])
-        redirect_to admin_products_path
-    end
+      Product.import(params[:file])
+      redirect_to admin_products_path
+  end
+
+  def destroy
+      @products = Product.product_wd_inventories
+      if @product.destroy
+          flash.now[:notice] = "Product #{@product.name} successfully deleted."
+      else
+          flash.now[:error] = "Cannot delete this product, associations still exist."
+      end
+      render action: :index
+  end
 
   private
 

@@ -10,6 +10,8 @@ class Hotel < ApplicationRecord
 	validates :name, :brand_id, presence: true
 	validates :name, uniqueness: true
 
+	before_destroy :check_for_associations
+
 	scope :hotel_with_brands, -> { includes(:brand) }
 
 	extend FriendlyId
@@ -57,5 +59,13 @@ class Hotel < ApplicationRecord
       else raise "Unknown file type: #{file.original_filename}"
     end
   end
+
+  private
+
+    def check_for_associations
+      if order_branches.any? || orders.any?
+        throw(:abort)
+      end
+    end
 
 end

@@ -22,11 +22,21 @@ class Brand < ApplicationRecord
 	validates :name, presence: true
 	validates :name, uniqueness: true
 
+	before_destroy :check_for_associations
+
 	extend FriendlyId
   	friendly_id :name, use: [:slugged, :finders]
 
   	def should_generate_new_friendly_id?
 	 	name_changed?
 	end
+
+	private
+
+	    def check_for_associations
+	      	if orders.any? || hotels.any? || users_brands.any? || customers.any? || order_branches.any?
+	        	throw(:abort)
+	      	end
+	    end
 	
 end

@@ -28,6 +28,8 @@
                                         <i class="fa fa-pencil bg-primary""></i>
                                     <% elsif audit.action =='create' %>
                                         <i class="fa fa-file-o bg-warning""></i>
+                                    <% elsif audit.action =='destroy' %>
+                                        <i class="fa fa-close bg-danger""></i>
                                     <% end %>
                                 </div>
                                 <div class="stream-panel" style="font-size: 13px;">
@@ -55,6 +57,8 @@
                                         </div>
                                     <% elsif audit.action == 'create' %>
                                         Created new <strong class="text-info"><%= audit.auditable_type %></strong><br>
+                                    <% elsif audit.action == 'destroy' %>
+                                        Deleted <strong class="text-error"><%= audit.auditable_type %></strong> <%= audit.audited_changes.first[1] %><br>
                                     <% end %>
                                 </div>
                             </div>

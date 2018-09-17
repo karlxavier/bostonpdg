@@ -24,9 +24,13 @@
 #
 
 class Customer < ApplicationRecord
+
+  audited
+
   has_many :orders
   belongs_to :brand
-  # audited
+
+  before_destroy :check_for_associations
 
   # validates :first_name, :last_name, :email, presence: true
 
@@ -112,4 +116,13 @@ class Customer < ApplicationRecord
       else raise "Unknown file type: #{file.original_filename}"
     end
   end
+
+  private
+
+    def check_for_associations
+      if orders.any?
+        throw(:abort)
+      end
+    end
+
 end

@@ -1,5 +1,5 @@
 class Admin::CustomersController < ApplicationController
-    before_action :set_customer, only: [:edit, :update]
+    before_action :set_customer, only: [:edit, :update, :destroy]
 
     def index
         @customers = Customer.customer_with_brands
@@ -32,6 +32,16 @@ class Admin::CustomersController < ApplicationController
                 format.html { render 'edit' }
             end
         end
+    end
+
+    def destroy
+        @customers = Customer.customer_with_brands
+        if @customer.destroy
+            flash.now[:notice] = "Customer #{@customer.name} successfully deleted."
+        else
+            flash.now[:error] = "Cannot delete this customer which still have orders associated with it."
+        end
+        render action: :index
     end
 
     private
