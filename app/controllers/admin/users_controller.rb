@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-	before_action :set_user, only: [:edit, :update]
+	before_action :set_user, only: [:edit, :update, :destroy]
 
     def index
     	@users = User.all
@@ -23,6 +23,16 @@ class Admin::UsersController < ApplicationController
 				format.html	{ render 'edit' }
 			end
 		end
+    end
+
+    def destroy
+        @users = User.all
+        if @user.destroy
+            flash.now[:notice] = "User #{@user.full_name} successfully deleted."
+        else
+            flash.now[:error] = "Cannot delete this user, associations still exist."
+        end
+        render action: :index
     end
 
     private

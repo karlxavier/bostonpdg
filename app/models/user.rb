@@ -53,6 +53,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true
 
+  before_destroy :check_for_associations
+
   ROLES = %i[admin product_manager sales_manager views_only]
 
   def roles=(roles)
@@ -88,5 +90,13 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  private
+
+    def check_for_associations
+        if brands.any? || groups.any? || users_brands.any?
+          throw(:abort)
+        end
+    end
 
 end
