@@ -549,3 +549,10 @@ function setCloneAttributesOnForm(element) {
     $(element).find('#clone_dynamic_fields').val(JSON.stringify(dynamic_fields));
     return true;
 }
+
+function setAttribute(field_name, field_value) {
+    var  element = $('#'+field_name)
+    var field_elem = $(element).find('input[name=order_field_value]');
+    console.log(field_elem);
+    $(field_elem[0]).val(field_value);
+}

@@ -17,6 +17,12 @@ $(function() {
             $('#clone_notes').val(data.notes)
             $('#clone_product_attributes').html('');
             $('.clone_categories').selectpicker('refresh');
+            console.log(data.default_attributes.value);
+            setAttribute('field-value', data.default_attributes.value);
+            setAttribute('field-default', data.default_attributes.default);
+            setAttribute('field-height', data.default_attributes.height);
+            setAttribute('field-width', data.default_attributes.width);
+            setAttribute('field-finish', data.default_attributes.finish);
             foo = JSON.parse(data.convert_dynamic_fields);
             Object.keys(foo)
                 .forEach(function eachKey(key) {

@@ -18,4 +18,6 @@ class StyleAttribute < ApplicationRecord
 	belongs_to :product
 
 	validates :product_id, presence: true
+
+	FIELD_NAMES = ['value', 'default', 'height', 'width', 'finish']
 end

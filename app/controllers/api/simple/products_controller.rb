@@ -184,7 +184,7 @@ module Api
       end
 
       def show
-        render json: @product,methods: [:picture_url]
+        render json: @product,methods: [:picture_url, :default_attributes]
       end
 
       protected

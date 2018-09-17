@@ -95,7 +95,7 @@ class Product < ApplicationRecord
     headers = Hash.new
     spreadsheet.row(1).each_with_index {|header,i|headers[header] = i}
     ((spreadsheet.first_row + 1)..spreadsheet.last_row).each do |row|
-      
+
       active = spreadsheet.row(row)[headers['Active Status']]
       product_type = spreadsheet.row(row)[headers['Type']]
       name = spreadsheet.row(row)[headers['Item']]
@@ -133,25 +133,29 @@ class Product < ApplicationRecord
       inv.save
 
     end
-  
+
   end
-  
+
 
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
-      when ".csv" then Roo::CSV.new(file.path)
-      when ".xls" then Roo::Excel.new (file.path)
-      when ".xlsx" then Roo::Excelx.new(file.path)
-      else raise "Unknown file type: #{file.original_filename}"
+    when ".csv" then Roo::CSV.new(file.path)
+    when ".xls" then Roo::Excel.new (file.path)
+    when ".xlsx" then Roo::Excelx.new(file.path)
+    else raise "Unknown file type: #{file.original_filename}"
     end
   end
 
-    private
+  def default_attributes
+    StyleAttribute.where(:product_id => self.id).first
+  end
 
-      def check_for_associations
-        if inventories.any? || order_entries.any? || vendors_products.any? || orders.any?
-          throw(:abort)
-        end
-      end
+  private
+
+  def check_for_associations
+    if inventories.any? || order_entries.any? || vendors_products.any? || orders.any?
+      throw(:abort)
+    end
+  end
 
 end
