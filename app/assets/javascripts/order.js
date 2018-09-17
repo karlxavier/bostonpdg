@@ -28,7 +28,7 @@ $(function() {
     $('.selectpicker').selectpicker('refresh');
     $('.selectpicker2').selectpicker('refresh');
     var addNewProductDropzone = new Dropzone("#add-new-product", {
-        url: '/order_entries',
+        url: '/api/simple/products/create_item',
         autoProcessQueue: false,
         uploadMultiple: true,
         parallelUploads: 10,
