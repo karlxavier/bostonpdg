@@ -54,10 +54,22 @@
                                 <dd><%= !@order.delivery_address.nil? ? Address.find(@order.delivery_address).full_address : 'N/A' %></dd>
 
                                 <dt>Brand</dt>
-                                <dd><%= link_to @order.brand.name, admin_brand_path(@order) %></dd>
+                                <dd>
+                                    <% if @order.brand.present? %>        
+                                        <%= link_to @order.brand.name, admin_brand_path(@order.brand) %>
+                                    <% else %>
+                                        N/A
+                                    <% end %>
+                                </dd>
 
                                 <dt>Customer</dt>
-                                <dd><%= link_to @order.customer.present? ? @order.customer.name : 'N/A' %></dd>
+                                <dd>
+                                    <% if @order.customer.present? %>
+                                        <%= link_to @order.customer.name, admin_customer_path(@order.customer) %>
+                                    <% else %>
+                                        N/A
+                                    <% end %>
+                                </dd>
                             </dl>
 
                             <hr>

@@ -1,0 +1,140 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Customer</h2>
+        <ol class="breadcrumb">
+            <li>
+                <%= link_to 'Dashboard', admin_root_path %>
+            </li>
+            <li>
+                <%= link_to 'Customers List', admin_customers_path %>
+            </li>
+            <li class="active">
+                <strong><%= @customer.name %></strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox product-detail">
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <h2 class="font-bold m-b-xs text-warning">
+                                <%= @customer.name %>
+                            </h2>
+                            <small style="font-size: 11px;"><%= @customer.email %></small><br>
+                            <small style="font-size: 11px;"><%= @customer.phone %></small>
+                            <div>
+                                <div class="btn-group">
+                                    <%= link_to edit_admin_customer_path(@customer), class: "btn btn-primary btn-xs" do %>
+                                        <i class="fa fa-pencil"></i> Edit Customer
+                                    <% end %>
+                                    <%= link_to admin_customers_path, class: "btn btn-white btn-xs" do %>
+                                        <i class="fa fa-bars"></i> Back to List
+                                    <% end %>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <h4>Customer Details</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <dl class="dl-horizontal m-t-md small">
+
+                                <dt><strong>Status</strong></dt>
+                                <dd>
+                                    <% if @customer.active? %>
+                                        <span class="label label-primary">
+                                            Active
+                                        </span>
+                                    <% else %>
+                                        <span class="label label-warning">
+                                            Not Active
+                                        </span>
+                                    <% end %>
+                                </dd>
+
+                                <dt>Brand</dt>
+                                <dd>
+                                    <% if @customer.brand.present? %>        
+                                        <%= link_to @customer.brand.name, admin_brand_path(@customer.brand) %>
+                                    <% else %>
+                                        N/A
+                                    <% end %>
+                                </dd>
+
+                                <dt>Owned By</dt>
+                                <dd><%= @customer.owned_by.nil? ? 'N/A' : User.find(@customer.owned_by) %></dd>
+
+                                <dt>Managed By</dt>
+                                <dd><%= @customer.manage_by.nil? ? 'N/A' : User.find(@customer.manage_by) %></dd>
+
+                            </dl>
+
+                        </div>
+                        <div class="col-md-4">
+                            <dl class="dl-horizontal m-t-md small">
+                                <dt>Bill 1</dt>
+                                <dd><%= @customer.bill_1 %></dd>
+
+                                <dt>Bill 2</dt>
+                                <dd><%= @customer.bill_2 %></dd>
+
+                                <dt>Ship 1</dt>
+                                <dd><%= @customer.ship_1 %></dd>
+
+                                <dt>Ship 2</dt>
+                                <dd><%= @customer.ship_2 %></dd>
+
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl class="dl-horizontal m-t-md small">
+                                <dt>Payment Terms</dt>
+                                <dd><%= @customer.terms %></dd>
+
+                                <dt>Sales Tax Code</dt>
+                                <dd><%= @customer.sales_tax_code %></dd>
+
+                                <dt>Tax Item</dt>
+                                <dd><%= @customer.tax_item %></dd>
+
+                                <dt>Notes</dt>
+                                <dd><%= @customer.notes %></dd>
+
+                            </dl>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+             <div class="ibox">
+                <div class="ibox-title text-info">
+                    Order History
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive" style="overflow: visible;">
+                        <table class="table table-hover issue-tracker">
+                            <tbody id="tbody_orders">
+                                <% @customer.orders.each do |order| %>
+                                    <% if order.present? %> 
+                                        <%= render '/admin/orders/order', order: order %>
+                                    <% end %>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -55,7 +55,7 @@
                               <% @customers.each do |customer| %>
                                 <tr>
                                     <td><%= customer.id %></td>
-                                    <td><%= customer.name %></td>
+                                    <td><%= link_to customer.name, admin_customer_path(customer) %></td>
                                     <td>
                                         <% if customer.brand.present? %>
                                             <%= link_to customer.brand.name, admin_brand_path(customer.brand_id) %>

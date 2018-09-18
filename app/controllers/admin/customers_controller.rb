@@ -1,5 +1,5 @@
 class Admin::CustomersController < ApplicationController
-    before_action :set_customer, only: [:edit, :update, :destroy]
+    before_action :set_customer, only: [:edit, :update, :destroy, :show]
 
     def index
         @customers = Customer.customer_with_brands
@@ -7,6 +7,9 @@ class Admin::CustomersController < ApplicationController
 
     def new
         @customer = Customer.new
+    end
+
+    def show
     end
 
     def create
