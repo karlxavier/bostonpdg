@@ -10,6 +10,15 @@ class Admin::UsersController < ApplicationController
     end
 
     def create
+        @user = User.new(user_params)
+
+        respond_to do |format|
+           if @user.save
+                format.html { redirect_to admin_users_path }
+            else
+                format.html { render 'new' }
+            end
+        end
     end
 
     def edit
@@ -38,7 +47,7 @@ class Admin::UsersController < ApplicationController
     private
 
     	def user_params
-    		params.require(:user).permit(:email, :role_mask, :admin, :billing_address, :shipping_address, :first_name, 
+    		params.require(:user).permit(:email, :password, :password_confirmation, :role_mask, :admin, :billing_address, :shipping_address, :first_name, 
     									:last_name, :brand_id, :group_id, :mobile, :notes, :active, :title, :phone, 
     									:customer_id, :vendor_id, :regional_director, :client_contacts, :communications,
                                         :art_director, :designers, :processor)
