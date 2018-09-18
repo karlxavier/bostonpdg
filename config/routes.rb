@@ -123,7 +123,7 @@ Rails.application.routes.draw do
       get 'compose_email', :to => 'hotels#compose_email', as: 'compose_email'
     end  
     
-    root to: "users#index" # <--- Root route
+    root to: "dashboards#index" # <--- Root route
   end
   #API Simple
   namespace :api do

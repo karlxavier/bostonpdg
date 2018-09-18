@@ -38,6 +38,7 @@
 //= require jquery-te-1.4.0.min
 //= require tagsinput
 //= require bootstrap-notify.min
+//= require Chart.min
 
 $(document).on('turbolinks:load', function () {
     $('.selectpicker').selectpicker();

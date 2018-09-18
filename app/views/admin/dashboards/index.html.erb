@@ -1,0 +1,148 @@
+<div class="wrapper wrapper-content">
+	<div class="row">
+        
+        <div class="col-lg-3">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="widget style1">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <i class="fa fa-bar-chart-o fa-5x"></i>
+                            </div>
+                            <div class="col-md-8 text-right">
+                                <span> Total Orders </span>
+                                <h2 class="font-bold"><%= link_to Order.count, admin_orders_path, style: "color: #9B9B9B!important;" %></h2>
+                            </div>
+                        </div>
+                	</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="widget style1">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <i class="fa fa-globe fa-5x"></i>
+                            </div>
+                            <div class="col-md-8 text-right">
+                                <span> Customers </span>
+                                <h2 class="font-bold"><%= link_to Customer.count, admin_customers_path, style: "color: #9B9B9B!important;" %></h2>
+                            </div>
+                        </div>
+                	</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="widget style1">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <i class="fa fa-bank fa-5x"></i>
+                            </div>
+                            <div class="col-md-8 text-right">
+                                <span> Hotels </span>
+                                <h2 class="font-bold"><%= link_to Hotel.count, admin_hotels_path, style: "color: #9B9B9B!important;"  %></h2>
+                            </div>
+                        </div>
+                	</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="widget style1">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <i class="fa fa-cubes fa-5x"></i>
+                            </div>
+                            <div class="col-md-8 text-right">
+                                <span> Vendors </span>
+                                <h2 class="font-bold"><%= link_to Vendor.count, admin_vendors_path, style: "color: #9B9B9B!important;" %></h2>
+                            </div>
+                        </div>
+                	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                        <div>
+                            <span class="pull-right text-right">
+                            <small>Average value of sales in the past month in: <strong>United states</strong></small>
+                                <br>
+                                All sales: 162,862
+                            </span>
+                            <h1 class="m-b-xs">$ 50,992</h1>
+                            <h3 class="font-bold no-margins">
+                                Half-year revenue margin
+                            </h3>
+                            <small>Sales marketing.</small>
+                        </div>
+
+                    <div><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
+                        <canvas id="lineChart" height="190" style="display: block; width: 817px; height: 190px;" width="817"></canvas>
+                    </div>
+
+                    <div class="m-t-md">
+                        <small class="pull-right">
+                            <i class="fa fa-clock-o"> </i>
+                            Update on 16.07.2015
+                        </small>
+                       <small>
+                           <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
+                       </small>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	
+        $( document ).on('turbolinks:load', function() {
+
+            var lineData = {
+                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                datasets: [
+                    {
+                        label: "Example dataset",
+                        backgroundColor: "rgba(26,179,148,0.5)",
+                        borderColor: "rgba(26,179,148,0.7)",
+                        pointBackgroundColor: "rgba(26,179,148,1)",
+                        pointBorderColor: "#fff",
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    },
+                    {
+                        label: "Example dataset",
+                        backgroundColor: "rgba(220,220,220,0.5)",
+                        borderColor: "rgba(220,220,220,1)",
+                        pointBackgroundColor: "rgba(220,220,220,1)",
+                        pointBorderColor: "#fff",
+                        data: [65, 59, 80, 81, 56, 55, 40]
+                    }
+                ]
+            };
+
+            var lineOptions = {
+                responsive: true
+            };
+
+
+            var ctx = document.getElementById("lineChart").getContext("2d");
+            new Chart(ctx, {type: 'line', data: lineData, options:lineOptions});
+
+        });
+    
+</script>
