@@ -25,11 +25,11 @@
                             <div class="stream">
                                 <div class="stream-badge">
                                     <% if audit.action == 'update' %>
-                                        <i class="fa fa-pencil bg-primary""></i>
+                                        <i class="fa fa-edit bg-primary""></i>
                                     <% elsif audit.action =='create' %>
-                                        <i class="fa fa-file-o bg-warning""></i>
+                                        <i class="fa fa-pen bg-warning""></i>
                                     <% elsif audit.action =='destroy' %>
-                                        <i class="fa fa-close bg-danger""></i>
+                                        <i class="fa fa-cut bg-danger""></i>
                                     <% end %>
                                 </div>
                                 <div class="stream-panel" style="font-size: 13px;">

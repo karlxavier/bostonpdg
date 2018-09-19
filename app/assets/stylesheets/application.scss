@@ -12,7 +12,6 @@
  *
  *= require_tree .
  *= require bootstrap.min
- *= require font-awesome.min
  *= require fontastic
  *= require grasp_mobile_progress_circle-1.0.0.min
  *= require jquery.mCustomScrollbar
@@ -33,6 +32,8 @@
 
 @import "summernote-bs4";
 @import "summernote-custom-theme.min";
+@import "font-awesome-sprockets";
+@import "font-awesome";
  
 .display-block {
     display: block;

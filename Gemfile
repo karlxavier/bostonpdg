@@ -60,6 +60,8 @@ gem 'fastimage'
 gem 'image_processing'
 gem 'mini_magick'
 gem 'aws-sdk', '~> 3'
+gem 'font-awesome-sass'
+gem 'redis', '~> 3.0'
 
 # for crm log audits
 gem "audited", "~> 4.7"

@@ -713,6 +713,8 @@ GEM
     ffi (1.9.23)
     figaro (1.1.1)
       thor (~> 0.14)
+    font-awesome-sass (5.3.1)
+      sassc (>= 1.11)
     friendly_id (5.2.4)
       activerecord (>= 4.0.0)
     globalid (0.4.1)
@@ -811,6 +813,7 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rdoc (6.0.4)
+    redis (3.3.5)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -832,6 +835,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sassc (1.12.1)
+      ffi (~> 1.9.6)
+      sass (>= 3.3.0)
     scenic (1.4.1)
       activerecord (>= 4.0.0)
       railties (>= 4.0.0)
@@ -915,6 +921,7 @@ DEPENDENCIES
   fastimage
   feathericon-rails
   figaro
+  font-awesome-sass
   friendly_id (~> 5.2.0)
   image_processing
   jbuilder (~> 2.5)
@@ -925,6 +932,7 @@ DEPENDENCIES
   puma (~> 3.7)
   rack-cors
   rails (~> 5.1.4)
+  redis (~> 3.0)
   roo
   sass-rails (~> 5.0)
   scenic
