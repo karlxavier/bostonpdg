@@ -165,7 +165,7 @@
           <% OrderEntry.where(:order_id => order.id).each do |oe| %>
             <div class='col-md-1 nopadding text-align-right row-button-<%= oe.product_id %>'>
               <div class='form-group'>
-                <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntryWithId(<%= oe.product_id %>, <%= oe.id %>);'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button>
+                <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntryWithId(<%= oe.product_id %>, <%= oe.id %>);'> <span class='fa fa-trash' aria-hidden='true'></span> </button>
               </div>
             </div>
             <div class='col-md-11 nopadding text-align-left row-name-<%= oe.product_id %>'>
