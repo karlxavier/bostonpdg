@@ -79,7 +79,7 @@ $(function() {
                 }
                 product_list.push(data.id)
                 order_entries = $('.stitched').html();
-                $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
+                $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
 
             });
         }
@@ -132,7 +132,7 @@ $(function() {
                 }
                 product_list.push(data.id)
                 order_entries = $('.stitched').html();
-                $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
+                $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
 
             });
         }
@@ -249,7 +249,7 @@ function submitNewClonedProduct() {
             }
             product_list.push(data.id)
             order_entries = $('.stitched').html();
-            $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
+            $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
         });
     }
 
@@ -289,7 +289,7 @@ function submitNewProduct() {
             }
             product_list.push(data.id)
             order_entries = $('.stitched').html();
-            $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
+            $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
         });
     }
 
@@ -309,7 +309,7 @@ function addExistingItem() {
         }
         product_list.push(data.id)
         order_entries = $('.stitched').html();
-        $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash-o' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
+        $('.stitched').html(order_entries + "<div class='col-md-1 nopadding text-align-right row-button-" + data.id + "'><div class='form-group'> <button class='btn btn-outline-danger' type='button' onclick='removeOrderEntry(" + data.id + ");'> <span class='fa fa-trash' aria-hidden='true'></span> </button></div></div><div class='col-md-11 nopadding text-align-left row-name-" + data.id + "'><div class='form-group'>" + data.name + "</div></div><div class='clear'></div>")
     });
 }
 

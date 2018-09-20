@@ -160,7 +160,7 @@
                 <td><%= number_to_currency((entry.quantity.nil? ? 0 : entry.quantity) * (entry.price.nil? ? 0 : entry.price), unit: "$ ", :precision => 2, :delimiter => ',') %> </td>
                 <td><a href="javascript:void(0)" class="btn btn-outline-success btn-nav-selected-circle" onclick="itemDetails(<%= entry.product_id %>, '<%= entry.id %>');" data-toggle="tooltip" data-placement="top" title="Item Details"><i class="fa fa-eye fa-2" aria-hidden="true"></i></a></td>
                 <td><a href="javascript:void(0)" class="btn btn-outline-info btn-nav-selected-circle" onclick="generateAttachments(<%= entry.id %>);" data-toggle="tooltip" data-placement="top" title="Show Attachments"><i class="fa fa-paperclip fa-2" aria-hidden="true" ></i></a></td>
-                <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-outline-danger btn-nav-selected-circle" data-toggle="tooltip" data-placement="top" title="Delete Item"><i class="fa fa-trash-o" aria-hidden="true"></i></td>
+                <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/order_entries/<%= entry.id %>" class="btn btn-outline-danger btn-nav-selected-circle" data-toggle="tooltip" data-placement="top" title="Delete Item"><i class="fa fa-trash" aria-hidden="true"></i></td>
                 <td>
                   <input type="checkbox" name="item_ids[]" value="<%= entry.id %>" class="item_ids"/>
                 </td>

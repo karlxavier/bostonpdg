@@ -1,6 +1,5 @@
 <% if @order.present? %>
     <%= render "orders/modals/email_form" %>
-    <%= render "orders/modals/add_order_entries" %>
     <%= render "orders/modals/manage_users" %>
     <%= render "orders/modals/attachments" %>
     <%= render "orders/modals/item_details" %>
@@ -170,7 +169,7 @@
         }
     });
 
-    var addNewProductDropzone = new Dropzone("#new_order_entry", {
+    /*var addNewProductDropzone = new Dropzone("#new_order_entry", {
         url: '/order_entries',
         addRemoveLinks: true,
         autoProcessQueue: false,
@@ -206,9 +205,106 @@
 
             });
         }
+    });*/
+
+    var addNewProductDropzone = new Dropzone("#add-new-product", {
+        url: '/api/simple/products/create_item',
+        autoProcessQueue: false,
+        uploadMultiple: true,
+        parallelUploads: 10,
+        maxFiles: 10,
+        previewsContainer: '#dropzonePreview',
+        clickable: '#dropzonePreview',
+
+        // The setting up of the dropzone
+        init: function () {
+            var myDropzone = this;
+            myDropzone = this; // closure
+
+            this.element.querySelector('#save').addEventListener("click", function(e) {
+                // Make sure that the form isn't actually being sent.
+                e.preventDefault();
+                e.stopPropagation();
+                if (myDropzone.getQueuedFiles().length === 0) {
+                    submitNewProduct();
+                }
+                else {
+                    setAttributesOnForm($('#add-new-product'));
+                    myDropzone.processQueue();
+
+                }
+            });
+            this.on("successmultiple", function(files, response) {
+                location.reload(true);
+
+            });
+        }
     });
 
+    var addCloneProductDropzone = new Dropzone("#add-clone-product", {
+        url: '/api/simple/products/create_item',
+        autoProcessQueue: false,
+        uploadMultiple: true,
+        parallelUploads: 10,
+        maxFiles: 10,
+        previewsContainer: '#dropzoneClonePreview',
+        clickable: '#dropzoneClonePreview',
+
+        // The setting up of the dropzone
+        init: function () {
+            var myDropzone = this;
+            myDropzone = this; // closure
+
+            this.element.querySelector('#save-clone').addEventListener("click", function(e) {
+                // Make sure that the form isn't actually being sent.
+                e.preventDefault();
+                e.stopPropagation();
+                if (myDropzone.getQueuedFiles().length === 0) {
+                    submitNewClonedProduct();
+                }
+                else {
+                    setCloneAttributesOnForm($('#add-clone-product'));
+                    myDropzone.processQueue();
+
+                }
+            });
+            this.on("successmultiple", function(files, response) {
+                location.reload(true);
+
+            });
+        }
+    });
+
+
     $(function(){
+
+        $('select.clone_products').on('change', function(e){
+            $.ajax({
+                method: "GET",
+                url: "/api/simple/products/"+this.value
+            }).done(function( data ) {
+                $('#clone_product_name').val(data.name);
+                $('#clone_item_category_id').val(data.item_category_id);
+                $('#clone_vendor_id').val(data.vendor_id);
+                $('#clone_specs').val(data.specs)
+                $('#clone_vendor_quote_prices').val(data.vendor_quote_prices)
+                $('#clone_notes').val(data.notes)
+                $('#clone_product_attributes').html('');
+                $('.clone_categories').selectpicker('refresh');
+                console.log(data.default_attributes.value);
+                setAttribute('field-value', data.default_attributes.value);
+                setAttribute('field-default', data.default_attributes.default);
+                setAttribute('field-height', data.default_attributes.height);
+                setAttribute('field-width', data.default_attributes.width);
+                setAttribute('field-finish', data.default_attributes.finish);
+                foo = JSON.parse(data.convert_dynamic_fields);
+                Object.keys(foo)
+                    .forEach(function eachKey(key) {
+                        clone_product_attributes_2(key, foo[key]);
+                    });
+            });
+        });
+
         $("#pictureUpload, #editOrderEntries, #viewHistories").on('hidden.bs.modal', function (e) {
             // Load up a new modal...
             $('#viewProducts').modal('show');

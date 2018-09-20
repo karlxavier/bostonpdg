@@ -97,7 +97,7 @@ function product_attributes() {
     var divtest = document.createElement("div");
     divtest.setAttribute("class", "row form-group removeclass" + room);
     var rdiv = 'removeclass' + room;
-    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
     objTo.appendChild(divtest)
 }
@@ -108,7 +108,7 @@ function clone_product_attributes() {
     var divtest = document.createElement("div");
     divtest.setAttribute("class", "row form-group removeclass" + room);
     var rdiv = 'removeclass' + room;
-    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="clone_order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="clone_order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="clone_order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="clone_order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
     objTo.appendChild(divtest)
 }
@@ -119,7 +119,7 @@ function clone_product_attributes_2(key, val) {
     var divtest = document.createElement("div");
     divtest.setAttribute("class", "row form-group removeclass" + room);
     var rdiv = 'removeclass' + room;
-    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="clone_order_field_name" placeholder="Attribute Name" value="' + key + '"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="clone_order_field_value" placeholder="Attribute Value" value="' + val + '"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="clone_order_field_name" placeholder="Attribute Name" value="' + key + '"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="clone_order_field_value" placeholder="Attribute Value" value="' + val + '"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
     objTo.appendChild(divtest)
 }
@@ -130,7 +130,7 @@ function add_product_attributes() {
     var divtest = document.createElement("div");
     divtest.setAttribute("class", "row form-group removeclass" + room);
     var rdiv = 'removeclass' + room;
-    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="add_order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="add_order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="add_order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="add_order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
     objTo.appendChild(divtest)
 }
@@ -140,7 +140,7 @@ function generate_attributes(key, val, element) {
     var divtest = document.createElement("div");
     divtest.setAttribute("class", "row form-group removeclass" + room);
     var rdiv = 'removeclass' + room;
-    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="order_field_name" placeholder="Attribute Name" value="' + key + '"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="order_field_value" placeholder="Attribute Value" value="' + val + '"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="order_field_name" placeholder="Attribute Name" value="' + key + '"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="order_field_value" placeholder="Attribute Value" value="' + val + '"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
     $(element).append(divtest);
 }
@@ -150,7 +150,7 @@ function add_attribute(element) {
     var divtest = document.createElement("div");
     divtest.setAttribute("class", "row form-group removeclass" + room);
     var rdiv = 'removeclass' + room;
-    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash-o" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
+    divtest.innerHTML = '<div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_name][]" name="order_field_name" value="" placeholder="Attribute Name"></div></div><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="order[field_value][]" name="order_field_value" value="" placeholder="Attribute Value"></div></div><div class="col-md-2 nopadding"><div class="form-group"> <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(' + room + ');"> <span class="fa fa-trash" aria-hidden="true"></span> </button></div></div><div class="clear"></div>'
 
     $(element).append(divtest)
 }
