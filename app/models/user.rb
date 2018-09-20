@@ -51,7 +51,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :email, :password, presence: true
+  validates :email, presence: true
 
   before_destroy :check_for_associations
 
