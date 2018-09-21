@@ -160,9 +160,11 @@ class OrdersController < ApplicationController
             order_entry.vendor_quote_prices = product.vendor_quote_prices
             order_entry.dynamic_fields = product.dynamic_fields
             if order_entry.save
-              order_entry_attachment = OrderEntryAttachment.where(:product_id => product.id).where('order_entry_id IS NULL').first
+              order_entry_attachment = OrderEntryAttachment.where(:product_id => product.id).where('order_entry_id IS NULL')
               if order_entry_attachment.present?
-                order_entry_attachment.update_attributes(:order_entry_id => order_entry.id)
+                order_entry_attachment.each do |oea|
+                  oea.update_attributes(:order_entry_id => order_entry.id)
+                end
               end
               vendors = OrderEntryVendor.where(:product_id => oe)
               if vendors.present? && !vendors.nil?
@@ -288,9 +290,11 @@ class OrdersController < ApplicationController
           order_entry.dynamic_fields = product.dynamic_fields
           order_entry.save
           if order_entry.save
-            order_entry_attachment = OrderEntryAttachment.where(:product_id => product.id).where('order_entry_id IS NULL').first
+            order_entry_attachment = OrderEntryAttachment.where(:product_id => product.id).where('order_entry_id IS NULL')
             if order_entry_attachment.present?
-              order_entry_attachment.update_attributes(:order_entry_id => order_entry.id)
+              order_entry_attachment.each do |oea|
+                oea.update_attributes(:order_entry_id => order_entry.id)
+              end
             end
             vendors = OrderEntryVendor.where(:product_id => oe)
             if vendors.present? && !vendors.nil?
