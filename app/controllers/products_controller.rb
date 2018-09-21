@@ -29,26 +29,59 @@ before_action :set_product, only: [:show, :edit, :item_details]
     @product = Product.new
     @product.name = params[:product_name]
     @product.category = params[:category_id]
+    @product.item_category_id = params[:item_category_id]
+    @product.specs = params[:specs]
+    @product.vendor_quote_prices = params[:vendor_quote_prices]
+    @product.notes = params[:notes]
+    @product.dynamic_fields = params[:dynamic_fields].to_s
+    # @product.vendor_id = params[:vendor_id]
     if @product.save
       #Add Vendor on List
+      @order_entry_id = nil
+      if params[:order_id].present?
+        @order_entry = OrderEntry.new
+        @order_entry.order_id = params[:order_id]
+        @order_entry.product_id = @product.id
+        @order_entry.quoted_by = params[:quoted_by]
+        @order_entry.category_id = params[:item_category_id]
+        @order_entry.price = params[:price]
+        @order_entry.cost = params[:cost]
+        @order_entry.quantity = params[:quantity]
+        @order_entry.specs = params[:specs]
+        @order_entry.vendor_quote_prices = [:vendor_quote_prices]
+        @order_entry.notes = [:notes]
+        @order_entry.dynamic_fields = params[:dynamic_fields].to_s
+        if @order_entry.save
+          @order_entry_id = @order_entry.id
+        end
+      end
+
       if params[:vendor_id].present?
         if params[:vendor_id].length > 0
           params[:vendor_id].each do |id|
-            VendorsProduct.create(:product_id => @product.id, :vendor_id => id)
+            if @order_entry_id.nil?
+              OrderEntryVendor.create(:product_id => @product.id, :vendor_id => id)
+            else
+              OrderEntryVendor.create(:order_entry_id => @order_entry_id,:product_id => @product.id, :vendor_id => id)
+            end
           end
         end
       end
-      if params[:quantity].present?
-        Inventory.create(:product_id => @product.id, :quantity => params[:quantity].to_i)
-      else
-        Inventory.create(:product_id => @product.id, :quantity => 0)
+      if params[:file].present?
+        params[:file].each do |attachment_file|
+          if @order_entry_id.nil?
+            OrderEntryAttachment.create(:product_id => @product.id, :attachment_file => params[:file]["#{attachment_file}"])
+          else
+            OrderEntryAttachment.create(:order_entry_id => @order_entry_id, :product_id => @product.id, :attachment_file => params[:file]["#{attachment_file}"])
+          end
+        end
       end
       flash[:notice] = "Product Item has saved successfully."
     else
       flash[:error] = "Product Item save Failed!"
     end
 
-    redirect_to inventories_path
+    redirect_to orders_path
   end
 
 	private

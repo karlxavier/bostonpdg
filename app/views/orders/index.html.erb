@@ -151,6 +151,59 @@
         return setAttributesOnForm($(this));
     });
 
+    function submitNewClonedProduct() {
+        var product_name = $('#clone_product_name').val();
+        var item_category_id = $('#clone_item_category_id').val();
+        var vendor_id = $('#clone_vendor_id').val();
+        var specs =  $('#clone_specs').val();
+        var vendor_quote_prices = $('#clone_vendor_quote_prices').val();
+        var notes = $('#clone_notes').val();
+
+        var dynamic_fields = {};
+        var field_names = $('input[name=clone_order_field_name]');
+        var field_values = $('input[name=clone_order_field_value]');
+
+        for(var i = field_names.length - 1; i >= 0; i--) {
+            dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
+        }
+        if (product_name != '' && item_category_id != '') {
+            $.ajax({
+                method: "POST",
+                url: "/api/simple/products/create_item",
+                data: {product_name: product_name, item_category_id: item_category_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes, dynamic_fields: dynamic_fields, vendor_id: vendor_id}
+            }).done(function( data ) {
+                location.reload(true);
+            });
+        }
+
+    }
+    function submitNewProduct() {
+        var product_name = $('#product_name').val();
+        var item_category_id = $('#item_category_id').val();
+        var vendor_id = $('#vendor_id').val();
+        var specs =  $('#specs').val();
+        var vendor_quote_prices = $('#vendor_quote_prices').val();
+        var notes = $('#notes').val();
+        var dynamic_fields = {};
+
+        var field_names = $('input[name=order_field_name]');
+        var field_values = $('input[name=order_field_value]');
+
+        for(var i = field_names.length - 1; i >= 0; i--) {
+            dynamic_fields[$(field_names[i]).val()] = $(field_values[i]).val();
+        }
+        if (product_name != '' && item_category_id != '') {
+            $.ajax({
+                method: "POST",
+                url: "/api/simple/products/create_item",
+                data: {product_name: product_name, item_category_id: item_category_id, specs: specs, vendor_quote_prices: vendor_quote_prices, notes: notes, dynamic_fields: dynamic_fields, vendor_id: vendor_id}
+            }).done(function( data ) {
+                location.reload(true);
+            });
+        }
+
+    }
+
 
     var pictureUploadDropzone = new Dropzone("#picture_upload", {
         url: '/products/change_picture',
@@ -209,7 +262,7 @@
     });*/
 
     var addNewProductDropzone = new Dropzone("#add-new-product", {
-        url: '/api/simple/products/create_item',
+        url: '/products',
         autoProcessQueue: false,
         uploadMultiple: true,
         parallelUploads: 10,
@@ -226,11 +279,11 @@
                 // Make sure that the form isn't actually being sent.
                 e.preventDefault();
                 e.stopPropagation();
+                setAttributesOnForm($('#add-new-product'));
                 if (myDropzone.getQueuedFiles().length === 0) {
-                    submitNewProduct();
+                    $( "#add-new-product" ).submit();
                 }
                 else {
-                    setAttributesOnForm($('#add-new-product'));
                     myDropzone.processQueue();
 
                 }
@@ -243,7 +296,7 @@
     });
 
     var addCloneProductDropzone = new Dropzone("#add-clone-product", {
-        url: '/api/simple/products/create_item',
+        url: '/products',
         autoProcessQueue: false,
         uploadMultiple: true,
         parallelUploads: 10,
@@ -260,11 +313,11 @@
                 // Make sure that the form isn't actually being sent.
                 e.preventDefault();
                 e.stopPropagation();
+                setCloneAttributesOnForm($('#add-clone-product'));
                 if (myDropzone.getQueuedFiles().length === 0) {
-                    submitNewClonedProduct();
+                    $( "#add-clone-product" ).submit();
                 }
                 else {
-                    setCloneAttributesOnForm($('#add-clone-product'));
                     myDropzone.processQueue();
 
                 }

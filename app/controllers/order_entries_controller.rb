@@ -128,6 +128,30 @@ class OrderEntriesController < ApplicationController
     redirect_to orders_path(:id => params[:id])
   end
 
+  def add_existing_item
+    if params[:order_id].present? && params[:product_id].present?
+      product = Product.find(params[:product_id])
+      order_entry = OrderEntry.new
+      order_entry.order_id =params[:order_id]
+      order_entry.category_id = product.item_category_id
+      order_entry.product_id = params[:product_id]
+      order_entry.specs = product.specs
+      order_entry.notes = product.notes
+      order_entry.vendor_quote_prices = product.vendor_quote_prices
+      order_entry.dynamic_fields = product.dynamic_fields
+      if order_entry.save
+        flash[:notice] = "Item Successfully Added to Order ##{params[:order_id]}"
+      else
+        flash[:error] = "Add Item Failed"
+      end
+      redirect_to orders_path(:id => params[:order_id])
+    else
+      flash[:error] = "No Product Selected."
+      redirect_to orders_path
+    end
+
+  end
+
   def history
     @order_histories = OrderHistory.where(:order_entry_id => params[:id])
     render :layout => false

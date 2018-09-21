@@ -22,6 +22,12 @@ class OrdersController < ApplicationController
         @order_entries = @order.order_entries.order("updated_at DESC")
       end
     end
+
+    if params[:id].present?
+      @order = Order.find(params[:id])
+      @order_entries = @order.order_entries.order("updated_at DESC")
+    end
+
     if params[:product_id].present?
       @product_id = params[:product_id]
     end

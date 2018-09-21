@@ -9,8 +9,9 @@
 
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane padding-top-1 active" id="nav-new" role="tabpanel" aria-labelledby="nav-new-tab">
-    <form action="/api/simple/products/create_item" method="POST" enctype="multipart/form-data" id="add-new-product">
-      <input type="hidden"  name="order_entry[dynamic_fields]" id="dynamic_fields"/>
+    <form action="/products" method="POST" enctype="multipart/form-data" id="add-new-product">
+      <input type="hidden"  name="dynamic_fields" id="dynamic_fields"/>
+      <input type="hidden" name="order_id" value="<%= @order.id %>">
       <div class="row" style="padding-top: 2%;">
         <div class="col padding-left">
           <h4>Product Name</h4>
@@ -47,6 +48,46 @@
           </div>
         </div>
       </div>
+
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left">
+          <h4>Quote By:</h4>
+          <div class="input-group search-bar-padding">
+            <select class="selectpicker2 form-control glow-input" data-live-search="true" name="quoted_by" id="order_entry_quoted_by">
+              <option></option>
+              <% User.order('id DESC').each do |user| %>
+                <option value="<%= user.id %>"><%= user.full_name %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left">
+          <h4>Hotel Price</h4>
+          <div class="input-group search-bar-padding">
+            <input step=".01"  class="form-control glow-input onlyNumbers" name="price" id="order_entry_price"/>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left">
+          <h4>Vendor Cost</h4>
+          <div class="input-group search-bar-padding">
+            <input step=".01" class="form-control glow-input onlyNumbers" name="cost" id="order_entry_cost"/>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left">
+          <h4>Quantity</h4>
+          <div class="input-group search-bar-padding">
+            <input step=".01" class="form-control glow-input onlyNumbers" name="quantity" id="order_entry_quantity"/>
+          </div>
+        </div>
+      </div>
+
 
       <div class="row" style="padding-top: 2%;">
         <div class="col padding-left">
@@ -126,8 +167,9 @@
     </form>
   </div>
   <div class="tab-pane padding-top-1" id="nav-clone" role="tabpanel" aria-labelledby="nav-clone-tab">
-    <form action="/api/simple/products/create_item" method="POST" enctype="multipart/form-data"  id="add-clone-product">
-      <input type="hidden"  name="order_entry[dynamic_fields]" id="clone_dynamic_fields"/>
+    <form action="/products" method="POST" enctype="multipart/form-data"  id="add-clone-product">
+      <input type="hidden" name="order_id" value="<%= @order.id %>">
+      <input type="hidden"  name="dynamic_fields" id="clone_dynamic_fields"/>
       <div class="row" style="padding-top: 2%;">
         <div class="col padding-left">
           <h4>Select Product to Copy it's Attributes</h4>
@@ -178,6 +220,47 @@
           </div>
         </div>
       </div>
+
+
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left">
+          <h4>Quote By:</h4>
+          <div class="input-group search-bar-padding">
+            <select class="selectpicker2 form-control glow-input" data-live-search="true" name="quoted_by" id="order_entry_quoted_by">
+              <option></option>
+              <% User.order('id DESC').each do |user| %>
+                <option value="<%= user.id %>"><%= user.full_name %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left">
+          <h4>Hotel Price</h4>
+          <div class="input-group search-bar-padding">
+            <input step=".01"  class="form-control glow-input onlyNumbers" name="price" id="order_entry_price"/>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left">
+          <h4>Vendor Cost</h4>
+          <div class="input-group search-bar-padding">
+            <input step=".01" class="form-control glow-input onlyNumbers" name="cost" id="order_entry_cost"/>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left">
+          <h4>Quantity</h4>
+          <div class="input-group search-bar-padding">
+            <input step=".01" class="form-control glow-input onlyNumbers" name="quantity" id="order_entry_quantity"/>
+          </div>
+        </div>
+      </div>
+
 
       <div class="row" style="padding-top: 2%;">
         <div class="col padding-left">
@@ -259,24 +342,28 @@
     </form>
   </div>
   <div class="tab-pane padding-top-1" id="nav-exist" role="tabpanel" aria-labelledby="nav-exist-tab">
-    <div class="row" style="padding-top: 2%;">
-      <div class="col padding-left">
-        <h4>Select Existing Product</h4>
-        <div class="input-group search-bar-padding">
-          <select class="categories form-control glow-input" data-live-search="true" name="product_id" id="product_id">
-            <option></option>
-            <% Product.order("id DESC").each do |product| %>
-              <option value="<%= product.id %>"><%= product.name %></option>
-            <% end %>
-          </select>
+    <form action="/order_entries/add_existing_item" method="POST" enctype="multipart/form-data"  id="add-existing-product">
+      <input type="hidden" name="order_id" value="<%= @order.id %>">
+      <div class="row" style="padding-top: 2%;">
+        <div class="col padding-left">
+          <h4>Select Existing Product</h4>
+          <div class="input-group search-bar-padding">
+            <select class="categories form-control glow-input" data-live-search="true" name="product_id" id="product_id">
+              <option></option>
+              <% Product.order("id DESC").each do |product| %>
+                <option value="<%= product.id %>"><%= product.name %></option>
+              <% end %>
+            </select>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="row" style="padding-top: 5%;">
-      <div class="col padding-left" style="padding-right: 5%; padding-left: 5%;">
-        <a class="btn btn-outline-dark" style="width: 100%;" onclick="addExistingItem();">Add this Existing Item</a>
+      <div class="row" style="padding-top: 5%;">
+        <div class="col padding-left" style="padding-right: 5%; padding-left: 5%;">
+          <button class="btn btn-outline-dark" style="width: 100%;" >Add this Existing Item</button>
+        </div>
       </div>
-    </div>
+
+    </form>
   </div>
 </div>
