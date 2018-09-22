@@ -1,12 +1,12 @@
 <div class="form-group">
   <%= form_for [chatroom, Message.new], format: 'js', remote: true do |f| %>
-  	<div class="input-group">
-  		<%= f.text_area :body, rows: 1, class: "form-control message-body", autofocus: true, placeholder: "Enter message text", autocomplete: "off" %>
+  	<div class="input-group input-group-sm">
+  		<%= f.text_area :body, rows: 1, class: "form-control message-body py-1 px-1", autofocus: true, placeholder: "Enter message text", autocomplete: "off" %>
 
-      <span class="input-group-btn"> 
-          <label class="btn btn-white btn-bitbucket btn-file">
+      <span class="input-group-append"> 
+        <label class="btn btn-primary border-right btn-bitbucket btn-file mb-0 px-3 py-2">
             <i class="fa fa-paperclip"></i>
-            <%= f.file_field :attachment, id: 'message-attachment', style: "display: none;", title: "Image upload" %>
+            <%= f.file_field :attachment, id: 'message-attachment', class: 'd-none', title: "Image upload" %>
         </label>
         <%= f.submit "Send", class: "btn btn-primary" %>
       </span>
