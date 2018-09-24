@@ -10,7 +10,7 @@
 <% end %>
 <% if @order.present? && @orders.present? %>
     <div class="row" style="position:relative;">
-      <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: hidden; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 30% !important;">
+      <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: hidden; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 25% !important;">
         <div class="d-flex flex-row justify-content-center">
           <div class="search-box">
             <%= render 'search_filter_box' %>
@@ -18,9 +18,9 @@
         </div>
         <nav style="margin-top: 15px;" class="font-size-11">
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-orders" data-name="orders">Orders</a>
-            <a class="nav-item nav-link" data-toggle="tab" href="#nav-messages" data-name="messages">Messages</a>
-            <a class="nav-item nav-link" data-toggle="tab" href="#nav-notifications" data-name="notifications">Notifications</a>
+            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-orders" data-name="orders">ORDERS</a>
+            <a class="nav-item nav-link" data-toggle="tab" href="#nav-messages" data-name="messages">MESSAGES</a>
+            <a class="nav-item nav-link" data-toggle="tab" href="#nav-notifications" data-name="notifications">NOTIFICATIONS</a>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
