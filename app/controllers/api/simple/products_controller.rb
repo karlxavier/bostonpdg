@@ -63,7 +63,9 @@ module Api
           if params[:vendor_id].present?
             if params[:vendor_id].length > 0
               params[:vendor_id].each do |id|
-                OrderEntryVendor.create(:product_id => @product.id, :vendor_id => id)
+                if !id.nil? && id != '' && id != ' '
+                  OrderEntryVendor.create(:product_id => @product.id, :vendor_id => id)
+                end
               end
             end
           end

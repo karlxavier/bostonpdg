@@ -59,10 +59,12 @@ before_action :set_product, only: [:show, :edit, :item_details]
       if params[:vendor_id].present?
         if params[:vendor_id].length > 0
           params[:vendor_id].each do |id|
-            if @order_entry_id.nil?
-              OrderEntryVendor.create(:product_id => @product.id, :vendor_id => id)
-            else
-              OrderEntryVendor.create(:order_entry_id => @order_entry_id,:product_id => @product.id, :vendor_id => id)
+            if !id.nil? && id != '' && id != ' '
+              if @order_entry_id.nil?
+                OrderEntryVendor.create(:product_id => @product.id, :vendor_id => id)
+              else
+                OrderEntryVendor.create(:order_entry_id => @order_entry_id,:product_id => @product.id, :vendor_id => id)
+              end
             end
           end
         end

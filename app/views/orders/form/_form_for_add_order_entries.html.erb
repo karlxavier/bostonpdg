@@ -135,7 +135,7 @@
               <div class="row form-group" id="field-<%= fn %>">
                 <div class="col-md-4 nopadding">
                   <div class="form-group">
-                    <input type="hidden" class="form-control" id="order[field_name][]" name="order_field_name" value="<%= fn %>" />
+                    <input type="hidden" class="form-control" id="order[field_name][]" name="order_field_name" value="<%= fn.titleize %>" />
                     <b><%= fn.titleize %></b>
                   </div>
                 </div>
@@ -309,13 +309,13 @@
               <div class="row form-group" id="field-<%= fn %>">
                 <div class="col-md-4 nopadding">
                   <div class="form-group">
-                    <input type="hidden" class="form-control" id="order[field_name][]" name="order_field_name" value="<%= fn %>" />
+                    <input type="hidden" class="form-control" id="order[field_name][]" name="clone_order_field_name" value="<%= fn.titleize %>" />
                     <b><%= fn.titleize %></b>
                   </div>
                 </div>
                 <div class="col-md-6 nopadding">
                   <div class="form-group">
-                    <input type="text" class="form-control default_attributes" id="order[field_value][]" name="order_field_value" value="" placeholder="Field Value">
+                    <input type="text" class="form-control default_attributes" id="order[field_value][]" name="clone_order_field_value" value="" placeholder="Field Value">
                   </div>
                 </div>
                 <div class="col-md-2 nopadding">

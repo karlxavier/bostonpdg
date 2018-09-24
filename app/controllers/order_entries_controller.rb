@@ -19,7 +19,9 @@ class OrderEntriesController < ApplicationController
         if params[:order_entry][:vendor].present?
           if params[:order_entry][:vendor].length > 0
             params[:order_entry][:vendor].each do |id|
-              OrderEntryVendor.create(:order_entry_id => @order_entry.id, :product_id => @order_entry.product_id, :vendor_id => id.to_i)
+              if !id.nil? && id != '' && id != ' '
+                OrderEntryVendor.create(:order_entry_id => @order_entry.id, :product_id => @order_entry.product_id, :vendor_id => id.to_i)
+              end
             end
           end
         end
@@ -68,8 +70,10 @@ class OrderEntriesController < ApplicationController
               end
             end
             temp_existing_vendors.each do |vl|
-              if OrderEntryVendor.where(:order_entry_id => @order_entry.id, :vendor_id => vl.to_i).length == 0
-                OrderEntryVendor.create(:order_entry_id => @order_entry.id, :product_id => @order_entry.product_id, :vendor_id => vl.to_i)
+              if !vl.nil? && vl != '' && vl != ' '
+                if OrderEntryVendor.where(:order_entry_id => @order_entry.id, :vendor_id => vl.to_i).length == 0
+                  OrderEntryVendor.create(:order_entry_id => @order_entry.id, :product_id => @order_entry.product_id, :vendor_id => vl.to_i)
+                end
               end
             end
           end
