@@ -11,7 +11,7 @@
   <div class="tab-pane padding-top-1 active" id="nav-new" role="tabpanel" aria-labelledby="nav-new-tab">
     <form action="/products" method="POST" enctype="multipart/form-data" id="add-new-product">
       <input type="hidden"  name="dynamic_fields" id="dynamic_fields"/>
-      <input type="hidden" name="order_id" value="<%= @order.id %>">
+      <input type="hidden" class="order_id" name="order_id" value="<%= @order.id %>">
       <div class="row" style="padding-top: 2%;">
         <div class="col padding-left">
           <h4>Product Name</h4>
@@ -168,7 +168,7 @@
   </div>
   <div class="tab-pane padding-top-1" id="nav-clone" role="tabpanel" aria-labelledby="nav-clone-tab">
     <form action="/products" method="POST" enctype="multipart/form-data"  id="add-clone-product">
-      <input type="hidden" name="order_id" value="<%= @order.id %>">
+      <input type="hidden" class="order_id" name="order_id" value="<%= @order.id %>">
       <input type="hidden"  name="dynamic_fields" id="clone_dynamic_fields"/>
       <div class="row" style="padding-top: 2%;">
         <div class="col padding-left">
@@ -343,7 +343,7 @@
   </div>
   <div class="tab-pane padding-top-1" id="nav-exist" role="tabpanel" aria-labelledby="nav-exist-tab">
     <form action="/order_entries/add_existing_item" method="POST" enctype="multipart/form-data"  id="add-existing-product">
-      <input type="hidden" name="order_id" value="<%= @order.id %>">
+      <input type="hidden" class="order_id" name="order_id" value="<%= @order.id %>">
       <div class="row" style="padding-top: 2%;">
         <div class="col padding-left">
           <h4>Select Existing Product</h4>

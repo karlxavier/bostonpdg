@@ -5,6 +5,7 @@ $("div#message_items").html("<%= escape_javascript(render 'message_items', order
 $("tbody#notification_entry").html("<%= escape_javascript(render 'order_histories', order_histories: @order_histories ) %>");
 $("input#order_entry_order_id").val("<%= @order.id %>")
 $("input#order_user_order_id").val("<%= @order.id %>")
+$("input.order_id").val("<%= @order.id %>")
 
 
 
