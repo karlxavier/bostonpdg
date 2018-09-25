@@ -186,7 +186,7 @@ module Api
       end
 
       def show
-        render json: @product,methods: [:picture_url, :default_attributes]
+        render json: @product,methods: [:picture_url, :default_attributes, :convert_dynamic_fields]
       end
 
       protected

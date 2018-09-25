@@ -150,6 +150,14 @@ class Product < ApplicationRecord
     StyleAttribute.where(:product_id => self.id).first
   end
 
+  def convert_dynamic_fields
+    if self.dynamic_fields.present? && !self.dynamic_fields.nil?
+      self.dynamic_fields.gsub("=>", ":")
+    else
+      ''
+    end
+  end
+
   private
 
   def check_for_associations

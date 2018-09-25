@@ -129,10 +129,11 @@
       <div class="row" style="padding-top: 2%;">
         <div class="col padding-left" >
           <span class="float-left"><h5>Attributes</h5></span>
-          <a class="btn btn-outline-dark float-right" onclick="clone_product_attributes();" >Add Attributes</a>
-          <div class="padding-top-1" id="clone_product_attbutes" style="padding-top: 5%;">
+          <a class="btn btn-outline-dark float-right" onclick="product_attributes();" >Add Attributes</a>
+          <div class="padding-top-1" id="product_attributes" style="padding-top: 5%;">
+            <% count = 1 %>
             <% StyleAttribute::FIELD_NAMES.each do |fn| %>
-              <div class="row form-group" id="field-<%= fn %>">
+              <div class="row form-group removeclass<%= count %>" id="field-<%= fn %>">
                 <div class="col-md-4 nopadding">
                   <div class="form-group">
                     <input type="hidden" class="form-control" id="order[field_name][]" name="order_field_name" value="<%= fn.titleize %>" />
@@ -146,15 +147,13 @@
                 </div>
                 <div class="col-md-2 nopadding">
                   <div class="form-group">
-                    <!--<button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash" aria-hidden="true"></span> </button>-->
+                    <button class="btn btn-outline-danger" type="button" onclick="remove_education_fields(<%= count %>);"> <span class="fa fa-trash" aria-hidden="true"></span> </button>
                   </div>
                 </div>
                 <div class="clear"></div>
               </div>
+              <% count = count+1 %>
             <% end %>
-            <div class="padding-top-1" id="clone_product_attributes">
-
-            </div>
           </div>
         </div>
 
@@ -304,32 +303,10 @@
         <div class="col padding-left" >
           <span class="float-left"><h5>Attributes</h5></span>
           <a class="btn btn-outline-dark float-right" onclick="clone_product_attributes();" >Add Attributes</a>
-          <div class="padding-top-1" id="clone_product_attbutes" style="padding-top: 5%;">
-            <% StyleAttribute::FIELD_NAMES.each do |fn| %>
-              <div class="row form-group" id="field-<%= fn %>">
-                <div class="col-md-4 nopadding">
-                  <div class="form-group">
-                    <input type="hidden" class="form-control" id="order[field_name][]" name="clone_order_field_name" value="<%= fn.titleize %>" />
-                    <b><%= fn.titleize %></b>
-                  </div>
-                </div>
-                <div class="col-md-6 nopadding">
-                  <div class="form-group">
-                    <input type="text" class="form-control default_attributes" id="order[field_value][]" name="clone_order_field_value" value="" placeholder="Field Value">
-                  </div>
-                </div>
-                <div class="col-md-2 nopadding">
-                  <div class="form-group">
-                    <!--<button class="btn btn-outline-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-trash" aria-hidden="true"></span> </button>-->
-                  </div>
-                </div>
-                <div class="clear"></div>
-              </div>
-            <% end %>
-            <div class="padding-top-1" id="clone_product_attributes">
+          <div class="padding-top-1" id="clone_product_attributes" style="padding-top: 5%;">
 
-            </div>
           </div>
+
         </div>
 
       </div>
@@ -367,3 +344,6 @@
     </form>
   </div>
 </div>
+<script>
+  room = <%= count %>;
+</script>
