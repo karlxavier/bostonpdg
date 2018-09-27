@@ -8,66 +8,47 @@
     <h3 class="make-green"><b>Product Information</b></h3><br/>
   </div>
 </div>
-<form class="form" id="new_product" action="/products" accept-charset="UTF-8" method="post">
-  <input type="hidden"  name="dynamic_fields" id="dynamic_fields"/>
 
-  <!--Categories-->
-  <div class="row" style="padding-top: 2%;">
-    <div class="col padding-left">
-      <h4>Product Category</h4>
-      <div class="input-group search-bar-padding">
-        <select class="categories form-control glow-input" data-live-search="true" name="category_id" id="category_id" >
-          <% Category.all.each do |category| %>
-              <option value="<%= category.id %>"><%= category.name %></option>
-          <% end %>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="row" style="padding-top: 2%;">
-    <div class="col padding-left">
-      <h4>Product Name</h4>
-      <div class="input-group search-bar-padding">
-        <input type="text" class="form-control glow-input" name="product_name" id="product_name"/>
-      </div>
-    </div>
-  </div>
-
-  <div class="row" style="padding-top: 2%;">
-    <div class="col padding-left">
-      <h4>Select Vendor</h4>
-      <div class="input-group search-bar-padding">
-        <select class="categories form-control glow-input" data-live-search="true" name="vendor_id[]" id="vendor_id" multiple>
-          <option></option>
-          <% Vendor.all.each do |vendor| %>
-              <option value="<%= vendor.id %>"><%= vendor.name %></option>
-          <% end %>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="row" style="padding-top: 2%;">
-    <div class="col padding-left">
-      <h4>Stock/Quantity</h4>
-      <div class="input-group search-bar-padding">
-        <input type="number" class="form-control glow-input" name="quantity" id="quantity"/>
-      </div>
-    </div>
-  </div>
-
-  <div class="row" style="padding-top: 2%;">
-    <div class="col padding-left">
-      <label class="item float-right">
-        <input type="submit" class="btn btn-outline-primary" value="Save"/>
-      </label>
-    </div>
-  </div>
-</form>
+<%= render "orders/form/form_for_add_order_entries"%>
 
 <script>
     $(function() {
+        $('#save-clone').click(function (){
+            setAttributesOnForm($('#add-new-product'));
+            $( "#add-new-product" ).submit();
+            window.location.pathname = "/inventories/view_stocks";
+        });
+
+        $('#save-clone').click(function (){
+            setCloneAttributesOnForm($('#add-clone-product'));
+            $( "#add-clone-product" ).submit();
+            window.location.pathname = "/inventories/view_stocks";
+        });
+
+
+
+        $('select.clone_products').on('change', function(e){
+            $.ajax({
+                method: "GET",
+                url: "/api/simple/products/"+this.value
+            }).done(function( data ) {
+                $('#clone_product_name').val(data.name);
+                $('#clone_item_category_id').val(data.item_category_id);
+                $('#clone_vendor_id').val(data.vendor_id);
+                $('#clone_specs').val(data.specs)
+                $('#clone_vendor_quote_prices').val(data.vendor_quote_prices)
+                $('#clone_notes').val(data.notes)
+                $('#clone_product_attributes').html('');
+                $('.clone_categories').selectpicker('refresh');
+                console.log(JSON.parse(data.convert_dynamic_fields));
+                foo = JSON.parse(data.convert_dynamic_fields);
+                Object.keys(foo)
+                    .forEach(function eachKey(key) {
+                        clone_product_attributes_2(key, foo[key]);
+                    });
+            });
+        });
+
         $('#new_product').submit(function() {
             var dynamic_fields = {};
 

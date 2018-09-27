@@ -82,8 +82,11 @@ before_action :set_product, only: [:show, :edit, :item_details]
     else
       flash[:error] = "Product Item save Failed!"
     end
-
-    redirect_to orders_path
+    if params[:current_controller] == "inventories"
+      redirect_to view_stocks_inventories_path
+    else
+      redirect_to orders_path
+    end
   end
 
 	private

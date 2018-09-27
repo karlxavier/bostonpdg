@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       get   'manage_by_hotel'
       get   'view_stocks'
       get   'show_brand'
+      post  'create_item'
     end
   end
 

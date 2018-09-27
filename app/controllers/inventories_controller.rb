@@ -8,6 +8,23 @@ class InventoriesController < ApplicationController
     @brands = Brand.all
   end
 
+  def create_item
+    @product = Product.new
+    @product.name = params[:product_name]
+    @product.category = params[:category_id]
+    @product.item_category_id = params[:item_category_id]
+    @product.specs = params[:specs]
+    @product.vendor_quote_prices = params[:vendor_quote_prices]
+    @product.notes = params[:notes]
+    @product.dynamic_fields = params[:dynamic_fields].to_s
+    if @product.save
+      inventory = Inventory.new
+      inventory.product_id = @product.id
+      inventory.quantity = params[:quantity]
+      inventory.save
+    end
+  end
+
   def manage_by_hotel
     @brands = Brand.all
   end
