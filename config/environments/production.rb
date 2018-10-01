@@ -49,7 +49,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ /(http|https):\/\/.*\.aws-production.5fsrj3kfbx.us-west-2.elasticbeanstalk\.com/ ]
 
   config.action_cable.url = '/cable'
-  config.action_cable.allowed_request_origins = ["ws://aws-production.5fsrj3kfbx.us-west-2.elasticbeanstalk.com"]
+  config.action_cable.allowed_request_origins = ["aws-production.5fsrj3kfbx.us-west-2.elasticbeanstalk.com"]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
