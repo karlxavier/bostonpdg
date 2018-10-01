@@ -38,4 +38,19 @@ class InventoriesController < ApplicationController
     @brand = Brand.find(params[:brand_id])
   end
 
+  def restock
+    if params[:inventory_id].present? && params[:quantity].present?
+      inventory = Inventory.find(params[:inventory_id])
+      quantity = (inventory.quantity.nil? ? 0 : inventory.quantity) + params[:quantity].to_i
+      if inventory.update_attributes(:quantity => quantity)
+        flash[:notice] = "Item has successfully restock"
+      else
+        flash[:error] = "Item Restock Failed. Invalid Quantity"
+      end
+    else
+      flash[:error] = "Item Restock Failed. No Quantity Entered."
+    end
+    redirect_to view_stocks_inventories_path
+  end
+
 end

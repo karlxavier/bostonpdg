@@ -1,3 +1,5 @@
+
+<%= render "inventories/modal/restock" %>
 <div class="row" >
   <div class="col padding-left">
     <h1><b> VIEW ALL CURRENT ITEMS AND SHELLS</b></h1><br/>
@@ -48,7 +50,7 @@
             <td><%= invent.product.name %></td>
             <td><%= invent.quantity %></td>
             <td><%= invent.product.price %></td>
-            <td></td>
+            <td><button class="btn btn-primary" onclick="restockItem(<%= invent.id %>, '<%= invent.product.name %>');">Restock</button></td>
             <!--<td><button class="btn btn-nav-selected btn-nav-selected-circle" ng-click="orderDetails()"><i class="icon ion-plus-round"></i></button></td>-->
           </tr>
       <% end %>
@@ -89,4 +91,11 @@
             }
         } );
     } );
+
+    function restockItem(id, item_name){
+        console.log(id);
+      $('.item-name').html(item_name);
+      $('#inventory_id').val(id);
+      $('#restockItem').modal('show');
+    }
 </script>

@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       get   'view_stocks'
       get   'show_brand'
       post  'create_item'
+      post  'restock'
     end
   end
 
