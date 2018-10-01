@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  mount ActionCable.server => "/cable"
-  
+  # mount ActionCable.server => "/cable"
+
   devise_for :users
   devise_scope :user do
     authenticated :user do
