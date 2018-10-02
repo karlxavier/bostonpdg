@@ -13,21 +13,19 @@
 
 <script>
     $(function() {
-        $('#save-clone').click(function (){
+        $('#save').click(function (){
             setAttributesOnForm($('#add-new-product'));
             $( "#add-new-product" ).submit();
-            window.location.pathname = "/inventories/view_stocks";
+            // window.location.pathname = "/inventories/view_stocks";
         });
 
         $('#save-clone').click(function (){
             setCloneAttributesOnForm($('#add-clone-product'));
             $( "#add-clone-product" ).submit();
-            window.location.pathname = "/inventories/view_stocks";
+            // window.location.pathname = "/inventories/view_stocks";
         });
 
-
-
-        $('select.clone_products').on('change', function(e){
+        $('select.clone_products').on(' change', function(e){
             $.ajax({
                 method: "GET",
                 url: "/api/simple/products/"+this.value

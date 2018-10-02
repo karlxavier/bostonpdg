@@ -26,4 +26,12 @@ class Inventory < ApplicationRecord
     	quantity || 0
   	end
 
+	def total_quantity
+		total_quantity_by_orders = OrderEntry.where(:product_id => self.product_id).sum(:quantity)
+		if self._quantity > total_quantity_by_orders
+			self._quantity - total_quantity_by_orders
+		else
+			0
+		end
+	end
 end

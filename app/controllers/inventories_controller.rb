@@ -23,6 +23,7 @@ class InventoriesController < ApplicationController
       inventory.quantity = params[:quantity]
       inventory.save
     end
+    redirect_to view_stocks_inventories_path
   end
 
   def manage_by_hotel

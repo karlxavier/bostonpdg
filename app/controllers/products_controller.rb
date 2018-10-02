@@ -36,6 +36,8 @@ before_action :set_product, only: [:show, :edit, :item_details]
     @product.dynamic_fields = params[:dynamic_fields].to_s
     # @product.vendor_id = params[:vendor_id]
     if @product.save
+      #Add Product on Inventory
+      Inventory.create(:product_id => @product.id)
       #Add Vendor on List
       @order_entry_id = nil
       if params[:order_id].present?
