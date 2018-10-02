@@ -50,6 +50,7 @@ Rails.application.routes.draw do
       get   'add_item'
       get   'supplier'
       get   'products'
+      get   'items'
     end
   end
 

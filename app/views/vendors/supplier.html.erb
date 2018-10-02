@@ -1,4 +1,5 @@
 
+<%= render "vendors/modal/items" %>
 <div class="row" >
   <div class="col padding-left">
     <h1><b>SUPPLIER DATABASE</b></h1><br/>
@@ -17,6 +18,7 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -25,6 +27,8 @@
             <th scope="row"><%= vendor.id %></th>
             <td><%= vendor.name %></td>
             <td><%= vendor.email %></td>
+            <td><button class="btn btn-primary" onclick="vendorItems(<%= vendor.id %>);">See Items</button></td>
+
             <!--<td><button class="btn btn-nav-selected btn-nav-selected-circle" ng-click="orderDetails()"><i class="icon ion-plus-round"></i></button></td>-->
           </tr>
       <% end %>
@@ -65,4 +69,15 @@
             }
         } );
     } );
+    function vendorItems(id) {
+        $.ajax({
+            method: "GET",
+            url: "/vendors/items?vendor_id=" + id
+        }).done(function (data) {
+            $('#item-vendors').html('');
+            $('#item-vendors').html(data);
+            $('#itemVendors').modal('show');
+        });
+    }
+
 </script>

@@ -1,0 +1,25 @@
+<table class="table table-striped">
+  <thead>
+    <th>#</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Order</th>
+  </thead>
+  <tbody>
+  <% if !@order_entries.nil? %>
+    <% @order_entries.each do |order_entry| %>
+      <tr>
+        <th><%= order_entry.id %></th>
+        <th><%= order_entry.product.nil? ? '' : order_entry.product.name %></th>
+        <th><%= order_entry.product.nil? ? '' : order_entry.product.category_name %></th>
+        <th>Order Ticket #<%= order_entry.order_id %></th>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <th colspan="4" style="text-align: center;"><b>No Items Yet.</b></th>
+    </tr>
+  <% end %>
+
+  </tbody>
+</table>

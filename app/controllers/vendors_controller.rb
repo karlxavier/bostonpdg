@@ -41,6 +41,27 @@ class VendorsController < ApplicationController
 
   end
 
+  def items
+    if params[:vendor_id].present?
+      order_entry_vendors = OrderEntryVendor.where("vendor_id = '#{params[:vendor_id]}' AND order_entry_id IS NOT NULL").distinct(:order_entry_id)
+      if !order_entry_vendors.nil? && order_entry_vendors.present?
+        order_entry_ids = order_entry_vendors.pluck(:order_entry_id).map(&:inspect).join(',')
+        puts "#{order_entry_ids.to_json}"
+        if order_entry_ids != ''
+          @order_entries = OrderEntry.where("id IN (#{order_entry_ids})")
+        else
+          @order_entries = nil
+        end
+      else
+        @order_entries = nil
+      end
+    else
+      @order_entries = nil
+    end
+
+    render :layout => false
+  end
+
   def products
     @product = Product.where(:vendor_id => params[:id])
     render :layout => false
