@@ -37,7 +37,7 @@
       }
 
       $('textarea').keypress(function (event) {
-       if (event.keyCode == 13 && event.ctrlKey) {
+        if (event.keyCode == 13 && event.ctrlKey) {
            var content = this.value;
            var caret = getCaret(this);
            this.value = content.substring(0,caret)+"\n"+content.substring(caret,content.length);

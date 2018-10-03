@@ -37,17 +37,33 @@
       }
 
       $('textarea').keypress(function (event) {
-       if (event.keyCode == 13 && event.ctrlKey) {
-           var content = this.value;
-           var caret = getCaret(this);
-           this.value = content.substring(0,caret)+"\n"+content.substring(caret,content.length);
-           event.stopPropagation();
-           
-        }else if(event.keyCode == 13)
-        {
-            event.preventDefault();
-            $('#new_message').submit();
-        }
+        var text_class = $(event.target).attr('class');
+
+          if (text_class == 'form-control message-body py-1 px-1') {
+            
+            if (event.keyCode == 13 && event.ctrlKey) {
+              var content = this.value;
+              var caret = getCaret(this);
+              this.value = content.substring(0,caret)+"\n"+content.substring(caret,content.length);
+              event.stopPropagation();
+            }
+            else if(event.keyCode == 13)
+            {
+                event.preventDefault();
+                $('#new_message').submit();
+            }
+          }
+            
+          else {
+            if (event.keyCode == 13) {
+              var content = this.value;
+              var caret = getCaret(this);
+              this.value = content.substring(0,caret)+"\n"+content.substring(caret,content.length);
+              event.stopPropagation();
+              event.preventDefault();
+            }
+          }
+
       });
 
       function expandTextarea(id) {
