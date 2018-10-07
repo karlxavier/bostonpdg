@@ -15,7 +15,7 @@
 							<div style="text-align: left;">
 								<br>
 								<%= file_icon(mime_type) %>
-								<%= link_to attachment_data.original.metadata.filename, item_message.attachment_url(:original), download: attachment_data.original.metadata.filename %>
+								<%= link_to attachment_data.original.metadata.filename, item_message.attachment_url(:original), download: attachment_data.original.metadata.filename, target: :_blank %>
 							</div>
 						<% else %>
 						<div class="feed-photo">
