@@ -292,8 +292,7 @@ function setVendors(btn_type){
                         }
                     });
                     $('#requestQuote').on('hidden.bs.modal', function (e) {
-                        myDropzone.off();
-                        myDropzone.removeAllFiles(true);
+                        console.log('working...');
                         myDropzone.destroy();
                     });
                     this.on("successmultiple", function(files, response) {
