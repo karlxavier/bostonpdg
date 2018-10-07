@@ -37,6 +37,7 @@ class Product < ApplicationRecord
   belongs_to :product_account
   belongs_to :product_cog
   belongs_to :product_asset_account
+  belongs_to :hotel
 
   has_many :order_entries
   has_many :orders, through: :order_entries
@@ -57,6 +58,10 @@ class Product < ApplicationRecord
 
   has_attached_file :picture, styles: { small: "64x64", med: "100x100", large: "200x200" }
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
+
+  def _per_carton
+    per_carton || 0
+  end
 
   def picture_url
     @url = "#{ActionController::Base.helpers.asset_path('default-product.png')}"

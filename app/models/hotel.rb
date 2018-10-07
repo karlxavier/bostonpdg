@@ -6,6 +6,7 @@ class Hotel < ApplicationRecord
 	belongs_to :address
 	has_many :order_branches
 	has_many :orders, through: :order_branches
+	has_many :products
 
 	validates :name, :brand_id, presence: true
 	validates :name, uniqueness: true

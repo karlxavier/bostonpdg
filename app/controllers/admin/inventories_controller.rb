@@ -2,7 +2,7 @@ class Admin::InventoriesController < ApplicationController
     before_action :set_inventory, only: [:edit, :update]
 
     def index
-        @inventories = Inventory.all
+        @inventories = Inventory.inventory_with_products
     end
 
     def new
@@ -34,10 +34,15 @@ class Admin::InventoriesController < ApplicationController
         end
     end
 
+    def import_csv
+        Inventory.import(params[:file])
+        redirect_to admin_inventories_path
+    end
+
     private
 
         def inventory_params
-            params.require(:inventory).permit(:loc_id, :bin_id, :quantity, :aisle_id, :product_id)
+            params.require(:inventory).permit(:loc_id, :bin_id, :quantity, :aisle_id, :product_id, :hotel_id, :cartons)
         end
 
         def set_inventory
