@@ -35,15 +35,7 @@ class EmailTemplatesController < ApplicationController
         parse_template[:order_entry_ids].split(',').each do |id|
 
           @order_entry = OrderEntry.find(id)
-          if parse_template[:btn_type] == 'create_order'
-            if @order_entry.update_attributes(:status => 2)
-              OrderHistory.create(:order_id => @order_entry.order_id, :order_entry_id => @order_entry.id, :description => 'has changed to Pending Approval', :user_id => current_user.id)
-            end
-          elsif parse_template[:btn_type] == 'request_quote'
-            if @order_entry.update_attributes(:status => 1)
-              OrderHistory.create(:order_id => @order_entry.order_id, :order_entry_id => @order_entry.id, :description => 'has changed to Quoting', :user_id => current_user.id)
-            end
-          end
+
           EmailTemplateOrderEntry.create(:email_template_id => @email_template.id, :order_entry_id => id.to_i)
         end
       end
