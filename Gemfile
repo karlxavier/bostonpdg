@@ -59,7 +59,7 @@ gem 'shrine', '~> 2.6'
 gem 'fastimage'
 gem 'image_processing'
 gem 'mini_magick'
-gem 'aws-sdk', '~> 3'
+gem 'aws-sdk', '< 3.0'
 gem 'font-awesome-sass'
 gem 'redis', '~> 3.0'
 
