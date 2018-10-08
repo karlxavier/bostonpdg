@@ -3,6 +3,7 @@ $("div#order_messages").html("<%= escape_javascript(render 'chatroom_tab', chatr
 $("div#chatroom_message").html("<%= escape_javascript(render '/chatroom_orders/chatroom_message', chatroom: @chatroom_order ) %>");
 $("div#message_items").html("<%= escape_javascript(render 'message_items', order: @order, chatroom: @chatroom_order ) %>");
 $("tbody#notification_entry").html("<%= escape_javascript(render 'order_histories', order_histories: @order_histories ) %>");
+$("div#manage_users").html("<%= escape_javascript(render 'orders/modals/manage_users', order: @order ) %>");
 $("input#order_entry_order_id").val("<%= @order.id %>")
 $("input#order_user_order_id").val("<%= @order.id %>")
 $("input.order_id").val("<%= @order.id %>")
@@ -66,5 +67,5 @@ $(function () {
 		modal.style.display = "none";
 	}
 
-
+	$('.selectpicker2').selectpicker();
 })

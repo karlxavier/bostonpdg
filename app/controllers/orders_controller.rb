@@ -58,6 +58,7 @@ class OrdersController < ApplicationController
   end
 
   def update_assign_user
+    puts '************* update_assign_user'
     @order = Order.find(params[:order_user][:order_id])
     if @order.present?
       OrderUser.where(:order_id => @order.id).destroy_all
@@ -102,8 +103,7 @@ class OrdersController < ApplicationController
       end
 
       while i < arr_count.max
-        order_user = OrderUser.new
-        order_user.order_id = @order.id
+        order_user = @order.order_users.new
         if params[:order_user][:regional].present?
           order_user.regional = regional[i]
         end
