@@ -15,7 +15,7 @@
                     style: "width: 100%;", 
                     remote: true do %>
                       <span class="label label-info"><i class="fa fa-cog"></i></span>
-                      <span class="pull-right"><%= chatroom.hotels.first.name %></span>
+                      <span class="pull-right"><%= chatroom.hotels.present? ? chatroom.hotels.first.name : '' %></span>
                       <%= "Order-#{chatroom.id}" %>
                   <% end %>
                 <% if chatroom.order_entries.present? %>
