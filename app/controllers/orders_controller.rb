@@ -58,7 +58,6 @@ class OrdersController < ApplicationController
   end
 
   def update_assign_user
-    puts '************* update_assign_user'
     @order = Order.find(params[:order_user][:order_id])
     if @order.present?
       OrderUser.where(:order_id => @order.id).destroy_all

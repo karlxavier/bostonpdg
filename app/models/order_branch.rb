@@ -12,6 +12,7 @@
 
 class OrderBranch < ApplicationRecord
   belongs_to :order
+  belongs_to :chatroom_order, class_name: 'Order'
   belongs_to :brand
   belongs_to :hotel
 
