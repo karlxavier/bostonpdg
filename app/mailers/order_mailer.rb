@@ -29,7 +29,10 @@ class OrderMailer < ApplicationMailer
     @subject = "Order Ticket ##{email_template.order_id}"
     EmailTemplateAttachment.where(:email_template_id => email_template.id).each do |eta|
       if eta.attachment_file.path(:original) != ""
-        attachments.inline["#{eta.attachment_file.original_filename}"] = File.read(eta.attachment_file.path(:original))
+        require 'open-uri'
+        url = "http:"+eta.attachment_file.url(:original, false)
+        data = open(url).read
+        attachments.inline["#{eta.attachment_file.original_filename}"] = data
       end
     end
     mail(
