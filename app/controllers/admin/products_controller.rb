@@ -1,5 +1,5 @@
 class Admin::ProductsController < ApplicationController
-  before_action :set_product, only: [:edit, :update, :destroy]
+  before_action :set_product, only: [:edit, :update, :destroy, :show]
 
   def index
     @products = Product.product_wd_inventories
@@ -10,6 +10,9 @@ class Admin::ProductsController < ApplicationController
   end
 
   def edit
+  end
+
+  def show
   end
 
   def update

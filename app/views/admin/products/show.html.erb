@@ -1,0 +1,112 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Products</h2>
+        <ol class="breadcrumb">
+            <li>
+                <%= link_to 'Dashboard', admin_root_path %>
+            </li>
+            <li>
+                <%= link_to 'Products List', admin_products_path %>
+            </li>
+            <li class="active">
+                <strong><%= @product.name %></strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox product-detail">
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <% if @product.image_data? %>
+                                <%= image_tag @product.image_url(:original), class: "img-circle circle-border m-b-md", style: "height: 150px; width: 150px; margin-bottom: 5px;" %>  
+                            <% else %>
+                                <%= image_tag 'default-product.png', class: "img-circle circle-border m-b-md", style: "height: 150px; width: 150px; margin-bottom: 5px;" %>  
+                            <% end %>
+                            <br>
+
+                            <h2 class="font-bold m-b-xs text-warning">
+                                <%= @product.name %>
+                            </h2>
+                            <small style="font-size: 11px;"><%= @product.created_at.strftime("%d-%b-%Y %I:%M%P") %></small>
+                            <div>
+                                <div class="btn-group">
+                                    <%= link_to edit_admin_product_path(@product), class: "btn btn-primary btn-xs" do %>
+                                        <i class="fa fa-pencil"></i> Edit Product
+                                    <% end %>
+                                    <%= link_to admin_products_path, class: "btn btn-white btn-xs" do %>
+                                        <i class="fa fa-bars"></i> Back to List
+                                    <% end %>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <h4>Product Details</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="dl-horizontal m-t-md small">
+                                <dt>Description</dt>
+                                <dd><%= @product.description %></dd>
+
+                                <dt>Purchase Price</dt>
+                                <dd>
+                                    <dd><%= number_to_currency(@product.purchase_price, unit: '$', precision: 2, delimeter: ",") %></dd>
+                                </dd>
+
+                                <dt>Per Carton</dt>
+                                <dd>
+                                    <%= @product.per_carton %>
+                                </dd>
+                            </dl>
+
+                            <hr>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="dl-horizontal m-t-md small">
+                                <dt>Price</dt>
+                                <dd><%= number_to_currency(@product.price, unit: '$', precision: 2, delimeter: ",") %></dd>
+
+                                <dt>Price per Carton</dt>
+                                <dd><%= number_to_currency(@product.price_per_carton, unit: '$', precision: 2, delimeter: ",") %></dd>
+
+                                <dt>Vendor Price</dt>
+                                <dd><%= number_to_currency(@product.vendor_price, unit: '$', precision: 2, delimeter: ",") %></dd>
+                            </dl>
+
+                            <hr>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+             <div class="ibox">
+                <div class="ibox-title text-info">
+                    Previous Orders
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive" style="overflow: visible;">
+                        <table class="table table-hover issue-tracker">
+                            <tbody id="tbody_orders">
+                                <% @product.orders.each do |order| %> 
+                                    <% if order.present? %>
+                                        <%= render '/admin/orders/order', order: order %>
+                                    <% end %>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

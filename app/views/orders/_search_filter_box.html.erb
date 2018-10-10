@@ -3,11 +3,11 @@
     <%= f.search_field :term, class: 'form-control search-form-field py-1 px-1', placedholder: 'Search...' %>
     <div class="input-group-append">
       <div class="btn-group btn-group-sm">
-        <%= f.button class: 'btn btn-dark rounded-0' do %>
+        <%= f.button class: 'btn btn-dark rounded-0', style: "z-index: 1;" do %>
           <i data-feather="search"></i>
         <% end %>
         <div class="btn-group btn-group-sm">
-          <button class="btn btn-dark dropdown-toggle font-size-11" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-dark dropdown-toggle font-size-11" style="z-index: 1;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="align-middle" data-feather="filter"></i>SORT BY</a>
             <i class="fa fa-caret-down"></i>
           </button>

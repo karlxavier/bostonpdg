@@ -62,7 +62,7 @@
                                                 <span class="label label-warning">Not Active</span>
                                             <% end %>
                                         </td>
-                                        <td><%= product.name %></td>
+                                        <td><%= link_to product.name, admin_product_path(product) %></td>
                                         <td><%= number_to_currency(product._purchase_price, unit: '$', :precision => 2, :delimiter => ',') %></td>
                                         <td><%= number_to_currency(product._price, unit: '$', :precision => 2, :delimiter => ',') %></td>
                                         <td><%= product.inventories.present? ? number_with_precision(product.inventories.first._quantity, :precision => 2, :delimiter => ',') : '0' %></td>
