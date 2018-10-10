@@ -10,7 +10,7 @@
       <tr>
         <th><%= attachment.attachment_file_file_name %></th>
         <th><%= attachment.attachment_file_file_size %></th>
-        <th><%= link_to "Download", attachment.attachment_file.url(:original, false), target: '_blank' %></th>
+        <th><%= link_to "Download", download_attachment_order_entries_path(:id => attachment.id) %></th>
       </tr>
     <% end %>
   <% else %>

@@ -65,6 +65,7 @@ Rails.application.routes.draw do
       get   'history'
       get   'attachment'
       post  'add_existing_item'
+      get   'download_attachment'
     end
   end
 

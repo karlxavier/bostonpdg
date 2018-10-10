@@ -166,4 +166,14 @@ class OrderEntriesController < ApplicationController
     render :layout => false
   end
 
+  def download_attachment
+    if params[:id].present?
+      attachment = OrderEntryAttachment.find(params[:id])
+      require 'open-uri'
+      url = "http:"+attachment.attachment_file.url(:original, false)
+      data = open(url).read
+      send_data data, :disposition => 'attachment', :type => attachment.attachment_file_content_type, :filename => attachment.attachment_file.original_filename
+    end
+  end
+
 end
