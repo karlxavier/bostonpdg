@@ -79,14 +79,13 @@ class Order < ApplicationRecord
       str_text = '';
       if order_branches.present? && !order_branches.nil?
         order_branches.each do |ob|
-          if !ob.nil?
+          if !ob.city.nil?
             if str_text == ''
               str_text = ob.city
             else
               str_text = str_text + ', ' +ob.city
             end
           end
-
         end
       end
       str_text
