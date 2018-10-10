@@ -143,6 +143,8 @@ class OrderEntriesController < ApplicationController
       order_entry.notes = product.notes
       order_entry.vendor_quote_prices = product.vendor_quote_prices
       order_entry.dynamic_fields = product.dynamic_fields
+      order_entry.quantity = product.per_carton
+      order_entry.price = product.price_per_carton
       if order_entry.save
         flash[:notice] = "Item Successfully Added to Order ##{params[:order_id]}"
       else
