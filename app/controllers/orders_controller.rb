@@ -158,6 +158,7 @@ class OrdersController < ApplicationController
             order_entry.notes = product.notes
             order_entry.vendor_quote_prices = product.vendor_quote_prices
             order_entry.dynamic_fields = product.dynamic_fields
+            order_entry.quantity = product.per_carton
             if order_entry.save
               order_entry_attachment = OrderEntryAttachment.where(:product_id => product.id).where('order_entry_id IS NULL')
               if order_entry_attachment.present?
@@ -287,6 +288,7 @@ class OrdersController < ApplicationController
           order_entry.notes = product.notes
           order_entry.vendor_quote_prices = product.vendor_quote_prices
           order_entry.dynamic_fields = product.dynamic_fields
+          order_entry.quantity = product.per_carton
           order_entry.save
           if order_entry.save
             order_entry_attachment = OrderEntryAttachment.where(:product_id => product.id).where('order_entry_id IS NULL')
