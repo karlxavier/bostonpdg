@@ -1,20 +1,4 @@
-<style>
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
 
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-</style>
 From: <b><a href="mailto:<%= @sender.email %>?subject=RE:<%= @subject %>" target="_blank"><%= @sender.email %></a></b>
 
 <br/>
@@ -23,26 +7,3 @@ From: <b><a href="mailto:<%= @sender.email %>?subject=RE:<%= @subject %>" target
 
 <br/>
 
-<% if @order_entries.present? %>
-  <h3>Items to Quote: </h3>
-  <br/>
-  <p>
-  <table style="font-family: arial, sans-serif;border-collapse: collapse;width: 100%;">
-    <tr>
-      <td style="font-weight: bold;border: 1px solid #dddddd;text-align: left;padding: 8px;">Name</td>
-      <td style="font-weight: bold;border: 1px solid #dddddd;text-align: left;padding: 8px;">Quantity (pcs)</td>
-      <td style="font-weight: bold;border: 1px solid #dddddd;text-align: left;padding: 8px;">Attribute/s</td>
-      <td style="font-weight: bold;border: 1px solid #dddddd;text-align: left;padding: 8px;">Specifications</td>
-    </tr>
-    <% @order_entries.each do |order_entry| %>
-      <tr>
-        <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;"><%= order_entry.product.name %></td>
-        <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;"><%= order_entry.quantity %></td>
-        <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;"><%= ( order_entry.dynamic_fields.present? && !order_entry.dynamic_fields.nil? && order_entry.dynamic_fields != '' ) ?  order_entry.get_html_safe_fields.html_safe : '' %></td>
-        <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;"><%= order_entry.specs %></td>
-      </tr>
-    <% end %>
-  </table>
-  </p>
-
-<% end %>

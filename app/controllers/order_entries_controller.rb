@@ -168,6 +168,11 @@ class OrderEntriesController < ApplicationController
     render :layout => false
   end
 
+  def list
+    @order_entries = OrderEntry.where("id IN (#{params[:item_ids].map(&:inspect).join(',').gsub!('"', '')})")
+    render :layout => false
+  end
+
   def download_attachment
     if params[:id].present?
       attachment = OrderEntryAttachment.find(params[:id])

@@ -66,6 +66,7 @@ Rails.application.routes.draw do
       get   'attachment'
       post  'add_existing_item'
       get   'download_attachment'
+      get   'list'
     end
   end
 
