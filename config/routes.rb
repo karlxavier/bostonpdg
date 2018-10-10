@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       post  'update_order'
       get   'send_orders'
       post  'send_orders_to_vendors'
+      get   'item_details'
     end
   end
   resources :products do

@@ -47,6 +47,7 @@ $(document).on('turbolinks:load', function () {
     $('.brandpicker').selectpicker();
     $('.clone_categories').selectpicker();
     $('.clone_products').selectpicker();
+    $('.existing_product').selectpicker();
 
 
     $(function () {
@@ -63,6 +64,16 @@ $(document).on('turbolinks:load', function () {
         });
         $("#view_history").click(function () {
             $('#viewHistories').modal('show');
+        });
+
+        $('select.existing_product').on('change', function(e){
+            $.ajax({
+                method: "GET",
+                url: "/orders/item_details?id="+this.value
+            }).done(function( data ) {
+                $('#order_product_details').html('');
+                $('#order_product_details').html(data);
+            });
         });
     });
 

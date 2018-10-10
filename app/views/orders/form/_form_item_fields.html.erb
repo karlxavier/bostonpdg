@@ -264,7 +264,7 @@
       <div class="col padding-left">
         <h4>Select Existing Product</h4>
         <div class="input-group search-bar-padding">
-          <select class="categories form-control glow-input" data-live-search="true" name="product_id" id="product_id">
+          <select class="existing_product form-control glow-input" data-live-search="true" name="product_id" id="product_id">
             <option></option>
             <% Product.order("id DESC").each do |product| %>
               <option value="<%= product.id %>"><%= product.name %></option>
@@ -272,6 +272,10 @@
           </select>
         </div>
       </div>
+    </div>
+
+    <div id="order_product_details" >
+
     </div>
 
     <div class="row" style="padding-top: 5%;">

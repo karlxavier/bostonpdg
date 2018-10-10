@@ -76,6 +76,8 @@ class Product < ApplicationRecord
   def category_name
     if self.category.present?
       Category.find(self.category).name
+    else
+      ""
     end
   end
 

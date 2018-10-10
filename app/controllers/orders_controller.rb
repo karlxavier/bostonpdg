@@ -455,6 +455,11 @@ class OrdersController < ApplicationController
     end
   end
 
+  def item_details
+    @product = Product.find(params[:id])
+    render :layout => false
+  end
+
   private
 
   def set_order

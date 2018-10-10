@@ -68,38 +68,6 @@ ActiveRecord::Schema.define(version: 20181007151744) do
     t.integer "parent"
   end
 
-  create_table "chat_thread_users", force: :cascade do |t|
-    t.integer "chat_thread_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "chat_threads", force: :cascade do |t|
-    t.string "channel_id"
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "chatroom_users", force: :cascade do |t|
-    t.bigint "chatroom_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "last_read_at"
-    t.index ["chatroom_id"], name: "index_chatroom_users_on_chatroom_id"
-    t.index ["user_id"], name: "index_chatroom_users_on_user_id"
-  end
-
-  create_table "chatrooms", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "order_id"
-    t.index ["order_id"], name: "index_chatrooms_on_order_id"
-  end
-
   create_table "customers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -238,7 +206,7 @@ ActiveRecord::Schema.define(version: 20181007151744) do
     t.index ["user_id"], name: "index_item_messages_on_user_id"
   end
 
-  create_table "mailboxer_conversation_opt_outs", id: :integer, default: nil, force: :cascade do |t|
+  create_table "mailboxer_conversation_opt_outs", id: :serial, force: :cascade do |t|
     t.string "unsubscriber_type"
     t.integer "unsubscriber_id"
     t.integer "conversation_id"
@@ -246,13 +214,13 @@ ActiveRecord::Schema.define(version: 20181007151744) do
     t.index ["unsubscriber_id", "unsubscriber_type"], name: "index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type"
   end
 
-  create_table "mailboxer_conversations", id: :integer, default: nil, force: :cascade do |t|
+  create_table "mailboxer_conversations", id: :serial, force: :cascade do |t|
     t.string "subject", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "mailboxer_notifications", id: :integer, default: nil, force: :cascade do |t|
+  create_table "mailboxer_notifications", id: :serial, force: :cascade do |t|
     t.string "type"
     t.text "body"
     t.string "subject", default: ""
@@ -275,7 +243,7 @@ ActiveRecord::Schema.define(version: 20181007151744) do
     t.index ["type"], name: "index_mailboxer_notifications_on_type"
   end
 
-  create_table "mailboxer_receipts", id: :integer, default: nil, force: :cascade do |t|
+  create_table "mailboxer_receipts", id: :serial, force: :cascade do |t|
     t.string "receiver_type"
     t.integer "receiver_id"
     t.integer "notification_id", null: false
@@ -397,7 +365,6 @@ ActiveRecord::Schema.define(version: 20181007151744) do
     t.decimal "total_budget"
     t.boolean "urgent"
     t.integer "brand_id"
-    t.string "chatroom_name"
   end
 
   create_table "product_accounts", force: :cascade do |t|
@@ -530,6 +497,7 @@ ActiveRecord::Schema.define(version: 20181007151744) do
     t.boolean "designers", default: true
     t.boolean "processor", default: true
     t.index ["brand_id"], name: "index_users_on_brand_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -594,9 +562,6 @@ ActiveRecord::Schema.define(version: 20181007151744) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "chatroom_users", "chatrooms"
-  add_foreign_key "chatroom_users", "users"
-  add_foreign_key "chatrooms", "orders"
   add_foreign_key "item_messages", "order_entries"
   add_foreign_key "item_messages", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
