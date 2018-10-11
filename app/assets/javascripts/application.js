@@ -252,7 +252,7 @@ function setVendors(btn_type, current_user_name){
             url: "/order_entries/list",
             data: formData
         }).done(function (data) {
-            var textContent = "Estimate Request<br/><br/>Hello<br/><br/>We’d like to recieve a quotation on the following items below with the listed specs. Attached are the mock ups and print ready files below.<br/><br/>Please get back to us before in a few days.<br/><br/>Thanks,<br/>" + current_user_name + "<br/>Regency Management<br/><br/>"
+            var textContent = "Estimate Request<br/><br/>Hello<br/><br/>We’d like to receive a quotation on the following items below with the listed specs. Attached are the mock ups and print ready files below.<br/><br/>Please get back to us before in a few days.<br/><br/>Thanks,<br/>" + current_user_name + "<br/><br/>"
             textContent = textContent + data + "<br/>";
             $(".textarea-format").jqteVal(textContent);
 
