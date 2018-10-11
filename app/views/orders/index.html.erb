@@ -97,6 +97,7 @@
 
 
 <script type="text/javascript">
+    var textContent =  '<%= DefaultTemplate.first.message.html_safe %>';
     $('#search_form').on('submit', function() {
       var filters = document.querySelectorAll('.filter-link');
       var input = document.querySelector('.search-form-field');

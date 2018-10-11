@@ -126,7 +126,7 @@ Rails.application.routes.draw do
     resources :order_branches
     resources :vendors_products
     resources :vendor_categories
-    resources :default_attributes
+    resources :default_templates
     resources :brands do
       resources :hotels, only: [:show]
     end
