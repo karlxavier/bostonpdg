@@ -1,6 +1,10 @@
 class Admin::DefaultTemplatesController < ApplicationController
   before_action :set_default_template, only: [:edit, :update, :show]
 
+  def index
+
+  end
+
   def show
 
   end
@@ -12,7 +16,7 @@ class Admin::DefaultTemplatesController < ApplicationController
   def update
       respond_to do |format|
         if @default_template.update_attributes(default_template_params)
-          format.html { redirect_to edit_admin_default_template_path(:id => @default_template.id) }
+          format.html { redirect_to admin_default_templates_path }
         else
           format.html { render 'edit' }
         end
@@ -26,7 +30,7 @@ class Admin::DefaultTemplatesController < ApplicationController
     end
 
     def set_default_template
-      @default_template = DefaultTemplate.first
+      @default_template = DefaultTemplate.find(params[:id])
     end
 
 end

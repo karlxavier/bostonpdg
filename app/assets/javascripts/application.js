@@ -252,7 +252,12 @@ function setVendors(btn_type, current_user_name){
             url: "/order_entries/list",
             data: formData
         }).done(function (data) {
-            $(".textarea-format").jqteVal(textContent + data  + "<br/>");
+
+            if (btn_type === 'request_quote') {
+                $(".textarea-format").jqteVal(textContentQuote + data  + "<br/>");
+            }else if (btn_type === 'create_order') {
+                $(".textarea-format").jqteVal(textContentOrder + data  + "<br/>");
+            }
 
         })
 

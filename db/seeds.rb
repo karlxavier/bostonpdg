@@ -1,5 +1,7 @@
+DefaultTemplate.destroy_all
+DefaultTemplate.create!(:template_type=> "Quote", :message => "Estimate Request<br/><br/>Hello<br/><br/>We’d like to receive a quotation on the following items below with the listed specs. Attached are the mock ups and print ready files below.<br/><br/>Please get back to us before in a few days.<br/><br/>Thanks,<br/>Regency Management<br/><br/>")
+DefaultTemplate.create!(:template_type=> "Order", :message => "Estimate Request<br/><br/>Hello<br/><br/>We’d like to receive a quotation on the following items below with the listed specs. Attached are the mock ups and print ready files below.<br/><br/>Please get back to us before in a few days.<br/><br/>Thanks,<br/>Regency Management<br/><br/>")
 
-DefaultTemplate.create!(:message => "Estimate Request<br/><br/>Hello<br/><br/>We’d like to receive a quotation on the following items below with the listed specs. Attached are the mock ups and print ready files below.<br/><br/>Please get back to us before in a few days.<br/><br/>Thanks,<br/>Regency Management<br/><br/>")
 =begin
 ProductType.destroy_all
 ProductType.create!([
