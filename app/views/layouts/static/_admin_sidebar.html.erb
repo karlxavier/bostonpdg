@@ -1,7 +1,7 @@
 <div id="wrapper">
 	<nav class="navbar-default navbar-static-side" role="navigation" style="background-color: #2f4050; height: 100%; position: fixed;">
         <div class="sidebar-collapse">
-            <ul class="nav metismenu" id="side-menu">
+            <ul class="nav metismenu" id="side-menu" style="height: auto;">
             	<li class="nav-header">
                     <div class="dropdown profile-element"> 
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -133,6 +133,10 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		$('#side-menu').metisMenu();
+        $('#side-menu').metisMenu();
+        $('.sidebar-collapse').slimScroll({
+            height: 'auto',
+            color: '#fff'
+        });
 	})
 </script>
