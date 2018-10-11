@@ -28,9 +28,11 @@ class Customer < ApplicationRecord
   audited
 
   has_many :orders
+  has_many :customer_emails
   belongs_to :brand
 
   before_destroy :check_for_associations
+  accepts_nested_attributes_for :customer_emails, reject_if: :all_blank, allow_destroy: true
 
   # validates :first_name, :last_name, :email, presence: true
 

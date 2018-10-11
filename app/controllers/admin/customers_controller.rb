@@ -7,6 +7,7 @@ class Admin::CustomersController < ApplicationController
 
     def new
         @customer = Customer.new
+        # @customer.customer_emails.build
     end
 
     def show
@@ -25,6 +26,7 @@ class Admin::CustomersController < ApplicationController
     end
 
     def edit
+        # @customer.customer_emails.build
     end
 
     def update
@@ -55,7 +57,7 @@ class Admin::CustomersController < ApplicationController
                                             :po_required, :payment_terms, :notes, :website, :name, :bill_1,
                                             :bill_2, :bill_3, :bill_4, :bill_5, :ship_1, :ship_2, :ship_3,
                                             :ship_4, :ship_5, :terms, :rep, :sales_tax_code, :tax_item,
-                                            :active, :fax)
+                                            :active, :fax, customer_emails_attributes: [:id, :email, :primary, :customer_id, :_destroy])
         end
 
         def set_customer

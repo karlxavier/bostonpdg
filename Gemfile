@@ -63,6 +63,8 @@ gem 'aws-sdk', '< 3.0'
 gem 'font-awesome-sass'
 gem 'redis', '~> 3.0'
 
+gem 'cocoon'
+
 # for crm log audits
 gem "audited", "~> 4.7"
 gem 'summernote-rails', '~> 0.8.10.0'
