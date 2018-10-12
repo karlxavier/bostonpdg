@@ -58,7 +58,7 @@
                                                 No Product
                                             <% end %>
                                         </td>
-				                        <td><%= inventory.product.present? ? number_with_precision(inventory._quantity, :precision => 0, :delimiter => ',') : 0 %></td>
+				                        <td><%= inventory.product.present? ? number_with_precision(inventory.total_quantity, :precision => 0, :delimiter => ',') : 0 %></td>
 				                        <td><%= inventory.product.present? ? number_to_currency(inventory.product._per_carton, unit: '$', :precision => 2, :delimiter => ',') : 0 %></td>
 				                        <td><%= number_with_precision(inventory._cartons, precision: 0, delimiter: ',') %></td>
 				                        <td>
