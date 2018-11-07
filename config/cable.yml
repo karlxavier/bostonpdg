@@ -5,10 +5,8 @@ test:
   adapter: async
 
 production:
-  # adapter: async
-  # adapter: postgresql
-  adapter: redis
-  url: <%= ENV['REDIS_URL'] %>
-  channel_prefix: <%= ENV['CABLE_CHANNEL_PREFIX'] %>
-  # url: redis://aws-production.5fsrj3kfbx.us-west-2.elasticbeanstalk.com:6379
-  # channel_prefix: regency_app_production
+  adapter: async
+  # For AWS
+  # adapter: redis
+  # url: <%= ENV['REDIS_URL'] %>
+  # channel_prefix: <%= ENV['CABLE_CHANNEL_PREFIX'] %>
