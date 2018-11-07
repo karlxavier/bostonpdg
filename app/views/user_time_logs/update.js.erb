@@ -1,0 +1,7 @@
+$("div#time_log").html(
+  "<%= escape_javascript(render 'time_in' ) %>"
+);
+
+$("div#log_lists").html(
+  "<%= escape_javascript(render 'log_lists', time_logs: @time_logs ) %>"
+);

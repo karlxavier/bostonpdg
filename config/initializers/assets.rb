@@ -11,6 +11,7 @@ Rails.application.config.assets.compile = true
 Rails.application.config.assets.precompile += %w( Chart.min.js )
 Rails.application.config.assets.precompile += %w( charts-home.js )
 Rails.application.config.assets.precompile += %w( order.js )
+Rails.application.config.assets.precompile += %w( Timer.js )
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.

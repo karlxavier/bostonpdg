@@ -3,11 +3,12 @@ class ChatroomOrdersController < ApplicationController
   before_action :set_chatroom, except: [:index, :update]
 
   def index
-    if current_user.admin?
-      @chatroom_orders = ChatroomOrder.order(id: :desc)
-    else
-      @chatroom_orders = ChatroomOrder.only_my_chatrooms(current_user.id).order(id: :desc)
-    end
+    # if current_user.admin?
+    #   @chatroom_orders = ChatroomOrder.order(id: :desc)
+    # else
+    #   @chatroom_orders = ChatroomOrder.only_my_chatrooms(current_user.id).order(id: :desc)
+    # end
+    @chatroom_orders = ChatroomOrder.order(id: :desc)
   end
 
   def load_messages

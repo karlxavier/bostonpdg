@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   post 'admin/categories/import_csv'
   post 'admin/inventories/import_csv'
 
+  resources :user_time_logs
+
+  get 'get_start_second', :to => 'user_time_logs#get_start_second', as: 'get_start_second'
+
   resources :search_results, only: :index
   resources :dynamic_messages, only: :show
   resources :dynamic_item_messages, only: :show

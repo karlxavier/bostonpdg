@@ -5,6 +5,35 @@ body {
   padding: 0px;
 }
 
+.label-outline {
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  width: 55px;
+}
+
+.play-stop:hover {
+  transform: scale(1.1);
+  .icon-hover {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  .icon-default {
+    transform: rotate(180deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.panel-heading .accordion-toggle:after {
+  font-family: FontAwesome; /* essential for enabling glyphicon */
+  content: "\f078"; /* adjust as needed, taken from bootstrap.css */
+  float: right; /* adjust as needed */
+  color: grey; /* adjust as needed */
+}
+.panel-heading .accordion-toggle.collapsed:after {
+  content: "\f077"; /* adjust as needed, taken from bootstrap.css */
+}
+
 .chat-discussion {
   background: #eee;
   padding: 15px;

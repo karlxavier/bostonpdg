@@ -1,0 +1,58 @@
+<div class="accordion">
+    <% time_logs.each do |day, day_count| %>
+            <div class="gray-bg ibox-title">
+                <div class="row">
+                    <div class="col-md-2">
+                        <h4 class="border border-info label-outline">
+                            <%= replace_unwanted_words remove_unwanted_words distance_of_time_in_words(day_count) %>
+                        <h4>
+                    </div>
+                    <div class="col-md-9">
+                        <h5><%= day.today? ? 'Today' : day.strftime('%A') %></h5>
+                        <br>
+                        <small><%= day.strftime('%B %d, %Y') %></small>
+                    </div>
+                    <div class="col-md-1" style="padding-right: 10px; text-align: right;">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<%= day.strftime("%d%m%Y") %>">
+                            <i class="fas fa-ellipsis-v fa-1x" style="color: #dee2e6;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <div class="ibox-content no-padding collapse show" id="<%= day.strftime("%d%m%Y") %>">
+            <ul class="list-group">
+                <% UserTimeLog.log_details(current_user.id, day).each do |detail| %>
+                    <div class="faq-item">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <strong>
+                                    <%= replace_unwanted_words remove_unwanted_words distance_of_time_in_words(detail.time_out, detail.time_in, include_seconds: true) %>
+                                </strong>
+                            </div>
+                            <div class="col-md-6">
+                                <a data-toggle="collapse" href="#faq1" class="faq-question" style="cursor: default;"><%= detail.description.truncate(35) %></a>
+                                <small>Working on</small>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="small font-bold">Time in </span><br>
+                                <small>
+                                <strong>
+                                    <%= detail.time_in.strftime("%I:%M %P") %>
+                                </strong>
+                                </small>
+                            </div>
+                                <div class="col-md-2">
+                                <span class="small font-bold">Time out </span><br>
+                                <small>
+                                <strong>
+                                    <%= detail.time_out.strftime("%I:%M %P") %>
+                                </strong>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+</div>

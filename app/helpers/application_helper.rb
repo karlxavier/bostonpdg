@@ -1,4 +1,22 @@
 module ApplicationHelper
+
+  def remove_unwanted_words string
+    bad_words = ["less than", "about", " "]
+  
+    bad_words.each do |bad|
+      string.gsub!(bad, '')
+    end
+  
+    return string
+  end
+
+  def replace_unwanted_words string
+    replacements = [ ["halfaminute", "30s"], ["aminute", "1m"], ["minutes", "m"], ["minute", "m"], ["hours", "h"], ["hour", "h"], ["seconds", "s"] ]
+    replacements.each {|replacement| string.gsub!(replacement[0], replacement[1])}
+  
+    return string
+  end
+
   def get_vendor_link id
     vendor = Vendor.find(id)
     link_to vendor.name, admin_vendor_path(vendor)

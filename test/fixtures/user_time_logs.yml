@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyString
+  time_in: 2018-11-05 20:53:12
+  time_out: 2018-11-05 20:53:12
+  user_id: 1
+  ip_address: MyString
+
+two:
+  description: MyString
+  time_in: 2018-11-05 20:53:12
+  time_out: 2018-11-05 20:53:12
+  user_id: 1
+  ip_address: MyString

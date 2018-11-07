@@ -40,6 +40,7 @@
 //= require bootstrap-notify.min
 //= require Chart.min
 //= require cocoon
+//= require awesome_complete
 
 $(document).on("turbolinks:load", function() {
   $(".selectpicker").selectpicker();

@@ -18,6 +18,12 @@
         <!--<li><a href="tables.html"> <i data-feather="users"></i><br/>MANAGE</a></li>
         <li><a href="tables.html"> <i data-feather="file-text"></i><br/>ACCOUNTING</a></li>-->
         <li><a href="/search_results"> <i data-feather="search"></i><br/>SEARCH</a></li>
+        <li>
+          <%= link_to user_time_logs_path do %>
+              <i data-feather="clock"></i><br/>
+            TIME LOGS
+          <% end %>
+        </li>
         <% if user_signed_in? %>
             <li><a href="<%= destroy_user_session_path %>" data-method="delete"> <i data-feather="log-out"></i><br/>LOGOUT</a></li>
         <% else %>
