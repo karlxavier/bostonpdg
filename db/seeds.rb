@@ -1,66 +1,66 @@
-# DefaultTemplate.destroy_all
-# DefaultTemplate.create!(:template_type=> "Quote", :message => "Estimate Request<br/><br/>Hello<br/><br/>We’d like to receive a quotation on the following items below with the listed specs. Attached are the mock ups and print ready files below.<br/><br/>Please get back to us before in a few days.<br/><br/>Thanks,<br/>Regency Management<br/><br/>")
-# DefaultTemplate.create!(:template_type=> "Order", :message => "Estimate Request<br/><br/>Hello<br/><br/>We’d like to receive a quotation on the following items below with the listed specs. Attached are the mock ups and print ready files below.<br/><br/>Please get back to us before in a few days.<br/><br/>Thanks,<br/>Regency Management<br/><br/>")
+DefaultTemplate.destroy_all
+DefaultTemplate.create!(:template_type=> "Quote", :message => "Estimate Request<br/><br/>Hello<br/><br/>We’d like to receive a quotation on the following items below with the listed specs. Attached are the mock ups and print ready files below.<br/><br/>Please get back to us before in a few days.<br/><br/>Thanks,<br/>Regency Management<br/><br/>")
+DefaultTemplate.create!(:template_type=> "Order", :message => "Estimate Request<br/><br/>Hello<br/><br/>We’d like to receive a quotation on the following items below with the listed specs. Attached are the mock ups and print ready files below.<br/><br/>Please get back to us before in a few days.<br/><br/>Thanks,<br/>Regency Management<br/><br/>")
 
 
-# ProductType.destroy_all
-# ProductType.create!([
-#   {name: 'Discount'},
-#   {name: 'Group'},
-#   {name: 'Inventory Assembly'},
-#   {name: 'Inventory Part'},
-#   {name: 'Non Inventory Part'},
-#   {name: 'Other Charge'},
-#   {name: 'Sales Tax Item'},
-#   {name: 'Service'}
-# ])
+ProductType.destroy_all
+ProductType.create!([
+  {name: 'Discount'},
+  {name: 'Group'},
+  {name: 'Inventory Assembly'},
+  {name: 'Inventory Part'},
+  {name: 'Non Inventory Part'},
+  {name: 'Other Charge'},
+  {name: 'Sales Tax Item'},
+  {name: 'Service'}
+])
 
-# ProductAccount.destroy_all
-# ProductAccount.create!([
-#   {name: 'Bad Debt'},
-#   {name: 'Loans & Exchanges'},
-#   {name: 'Professional Fees'},
-#   {name: 'Purchase'},
-#   {name: 'Shareholder Distribution'},
-#   {name: 'Taxes Payable'}
-# ])
+ProductAccount.destroy_all
+ProductAccount.create!([
+  {name: 'Bad Debt'},
+  {name: 'Loans & Exchanges'},
+  {name: 'Professional Fees'},
+  {name: 'Purchase'},
+  {name: 'Shareholder Distribution'},
+  {name: 'Taxes Payable'}
+])
 
-# ProductCog.destroy_all
-# ProductCog.create!([
-#   {name: 'Purchase'},
-#   {name: 'Sales'},
-#   {name: 'Cost of Goods Sold'}
-# ])
+ProductCog.destroy_all
+ProductCog.create!([
+  {name: 'Purchase'},
+  {name: 'Sales'},
+  {name: 'Cost of Goods Sold'}
+])
 
-# ProductAssetAccount.destroy_all
-# ProductAssetAccount.create!([
-#   {name: 'Inventory Asset'},
-#   {name: 'Purchase'}
-# ])
+ProductAssetAccount.destroy_all
+ProductAssetAccount.create!([
+  {name: 'Inventory Asset'},
+  {name: 'Purchase'}
+])
 
-# Category.create!([
-#   {name: 'Sample Category 1'},
-#   {name: 'Sample Category 2'},
-#   {name: 'Sample Category 3'},
-#   {name: 'Sample Category 4'},
-#   {name: 'Sample Category 5'}
-#                ])
+Category.create!([
+  {name: 'Sample Category 1'},
+  {name: 'Sample Category 2'},
+  {name: 'Sample Category 3'},
+  {name: 'Sample Category 4'},
+  {name: 'Sample Category 5'}
+               ])
 
-# Brand.create!([
-#   {name: 'Sample Brand 1'},
-#   {name: 'Sample Brand 2'},
-#   {name: 'Sample Brand 3'},
-#   {name: 'Sample Brand 4'},
-#   {name: 'Sample Brand 5'}
-#             ])
+Brand.create!([
+  {name: 'Sample Brand 1'},
+  {name: 'Sample Brand 2'},
+  {name: 'Sample Brand 3'},
+  {name: 'Sample Brand 4'},
+  {name: 'Sample Brand 5'}
+            ])
 
-# Group.create!([
-#   {name: 'Sample Brand 1', description: 'Sample Description Brand 1'},
-#   {name: 'Sample Brand 2', description: 'Sample Description Brand 2'},
-#   {name: 'Sample Brand 3', description: 'Sample Description Brand 3'},
-#   {name: 'Sample Brand 4', description: 'Sample Description Brand 4'},
-#   {name: 'Sample Brand 5', description: 'Sample Description Brand 5'},
-            # ])
+Group.create!([
+  {name: 'Sample Brand 1', description: 'Sample Description Brand 1'},
+  {name: 'Sample Brand 2', description: 'Sample Description Brand 2'},
+  {name: 'Sample Brand 3', description: 'Sample Description Brand 3'},
+  {name: 'Sample Brand 4', description: 'Sample Description Brand 4'},
+  {name: 'Sample Brand 5', description: 'Sample Description Brand 5'},
+])
 
 
 User.create!([
@@ -98,7 +98,7 @@ OrderUser.destroy_all
 Product.destroy_all
 StyleAttribute.destroy_all
 OrderStatus.destroy_all
-
+=end
 
 OrderStatus.create(name: 'Quote Request')
 OrderStatus.create(name: 'Sales')
@@ -145,7 +145,6 @@ Group.create!([
 
 if !User.all.present?
   User.create!([
-                   {email: "admin@regency.com",password: 'password', password_confirmation: 'password', first_name: "Regency", last_name: "Admin", admin: true},
       {email: "robert@simbyone.com",password: 'password', password_confirmation: 'password', first_name: "Popa", last_name: "Robert"},
       {email: "simbyone2@gmail.com",password: 'password', password_confirmation: 'password', first_name: "Popa", last_name: "Robert"},
       {email: "simbyone3@gmail.com",password: 'password', password_confirmation: 'password', first_name: "Test", last_name: "Test"},
@@ -282,4 +281,4 @@ end
   Order.create!([
       {brand_id: Brand.first.id}
   ])
-=end
+
