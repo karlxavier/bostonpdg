@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   devise_scope :user do
+    # match '/sign-in' => "devise/sessions#new", :as => :login
     authenticated :user do
       root 'orders#index', as: :authenticated_root
     end

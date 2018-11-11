@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :authenticate_user!
   helper_method :user_notification_count
 
   def user_notification_count
@@ -38,5 +38,13 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || stored_location_for(resource) || orders_path
   end
+
+  # def authenticate_user!
+  #   if user_signed_in?
+  #     super
+  #   else
+  #     redirect_to new_user_session_path
+  #   end
+  # end
   
 end

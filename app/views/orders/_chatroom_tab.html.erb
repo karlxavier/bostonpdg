@@ -1,7 +1,5 @@
 <% if chatroom.present? %>
-    <div class="feed-activity-list" >
-      <%= render '/messages/messages', active_room: chatroom, messages: chatroom.messages.order(created_at: :desc).limit(100).reverse %>
-    </div>
+      <%= render '/messages/messages', active_room: chatroom, messages: chatroom.messages.order(created_at: :desc).limit(100).reverse %> 
 <% end %>
 
 

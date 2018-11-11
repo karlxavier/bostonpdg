@@ -1,18 +1,27 @@
-<div class="form-group">
-  <%= form_for [chatroom, Message.new], format: 'js', remote: true do |f| %>
-  	<div class="input-group input-group-sm">
-  		<%= f.text_area :body, rows: 1, class: "form-control message-body py-1 px-1", autofocus: true, placeholder: "Enter message text", autocomplete: "off" %>
+<div class="widget-input widget-input-rounded">
+    <%= form_for [chatroom, Message.new], format: 'js', remote: true do |f| %>
+        <div class="widget-input-container">
+            <div class="widget-input-box">
+                <%= f.text_area :body, rows: 1, class: "form-control form-control-sm", style: "margin-left: 5px;", autofocus: true, placeholder: "Enter message text", autocomplete: "off" %>
+            </div>
 
-      <span class="input-group-append"> 
-        <label class="btn btn-primary border-right btn-bitbucket btn-file mb-0 px-3 py-2" style="z-index: 1;">
-            <i class="fa fa-paperclip"></i>
-            <%= f.file_field :attachment, id: 'message-attachment', class: 'd-none', title: "Image upload" %>
-        </label>
-        <%= f.submit "Send", class: "btn btn-primary", style: "z-index: 1;"%>
-      </span>
+            <div class="widget-input-icon">
+              <label class="text-grey mb-0 px-3 py-2 pointer-cursor" style="z-index: 1;">
+                <i class="fa fa-paperclip"></i>
+                <%= f.file_field :attachment, id: 'message-attachment', class: 'd-none', title: "Image upload" %>
+              </label>
+            </div>
 
-    </div>
-  <% end %>
+            <div class="widget-input-divider"></div>
+
+            <div class="widget-input-icon">
+              <label class="text-grey mb-0 px-3 py-2 pointer-cursor" style="z-index: 1;">
+                <i class="fa fa-send"></i>
+                <%= f.submit "Send", class: 'd-none', title: "Send Message" %>
+              </label>
+            </div>
+        </div>
+    <% end %>
 
   <script type="text/javascript">
       function getCaret(el) { 

@@ -1,6 +1,6 @@
 <div id="msg_body_<%= message.id %>">
-    <div class="well">
-        <%= simple_format(message.body , style: "margin-bottom: 0;") %>
+
+        <%= message.body %>
     
         <% if message.attachment_data? %>
 					<% 
@@ -20,5 +20,5 @@
 						</div>
 					<% end %>
   		<% end %>
-  	</div>
+
 </div>

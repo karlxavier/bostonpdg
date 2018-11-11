@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(version: 20181107104151) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
+  create_table "friendly_id_slugs", id: :integer, default: nil, force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
@@ -221,7 +221,7 @@ ActiveRecord::Schema.define(version: 20181107104151) do
     t.index ["user_id"], name: "index_item_messages_on_user_id"
   end
 
-  create_table "mailboxer_conversation_opt_outs", id: :serial, force: :cascade do |t|
+  create_table "mailboxer_conversation_opt_outs", id: :integer, default: nil, force: :cascade do |t|
     t.string "unsubscriber_type"
     t.integer "unsubscriber_id"
     t.integer "conversation_id"
@@ -229,13 +229,13 @@ ActiveRecord::Schema.define(version: 20181107104151) do
     t.index ["unsubscriber_id", "unsubscriber_type"], name: "index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type"
   end
 
-  create_table "mailboxer_conversations", id: :serial, force: :cascade do |t|
+  create_table "mailboxer_conversations", id: :integer, default: nil, force: :cascade do |t|
     t.string "subject", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "mailboxer_notifications", id: :serial, force: :cascade do |t|
+  create_table "mailboxer_notifications", id: :integer, default: nil, force: :cascade do |t|
     t.string "type"
     t.text "body"
     t.string "subject", default: ""
@@ -258,7 +258,7 @@ ActiveRecord::Schema.define(version: 20181107104151) do
     t.index ["type"], name: "index_mailboxer_notifications_on_type"
   end
 
-  create_table "mailboxer_receipts", id: :serial, force: :cascade do |t|
+  create_table "mailboxer_receipts", id: :integer, default: nil, force: :cascade do |t|
     t.string "receiver_type"
     t.integer "receiver_id"
     t.integer "notification_id", null: false

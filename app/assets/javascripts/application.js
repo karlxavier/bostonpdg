@@ -40,11 +40,12 @@
 //= require bootstrap-notify.min
 //= require Chart.min
 //= require cocoon
+//= require color_admin
 //= require awesome_complete
 
 $(document).on("turbolinks:load", function() {
   $(".selectpicker").selectpicker();
-  $(".selectpicker2").selectpicker();
+  // $(".selectpicker2").selectpicker();
   $(".categories").selectpicker();
   $(".brandpicker").selectpicker();
   $(".clone_categories").selectpicker();
@@ -58,9 +59,9 @@ $(document).on("turbolinks:load", function() {
         $(this)
           .find(".selectpicker")
           .selectpicker("toggle");
-        $(this)
-          .find(".selectpicker2")
-          .selectpicker("toggle");
+        // $(this)
+        //   .find(".selectpicker2")
+        //   .selectpicker("toggle");
         $(this)
           .find(".categories")
           .selectpicker("toggle");

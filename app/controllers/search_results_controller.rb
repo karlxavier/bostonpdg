@@ -1,5 +1,6 @@
 class SearchResultsController < ApplicationController
   def index
+    puts '************** SEARCH ***********'
     if params[:search_term]
       @results = SearchResult.
         new(search_params).
@@ -16,4 +17,5 @@ class SearchResultsController < ApplicationController
       sort_by: params[:sort_by]
     }
   end
+  
 end

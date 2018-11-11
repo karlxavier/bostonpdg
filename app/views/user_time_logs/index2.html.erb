@@ -1,4 +1,3 @@
-<h1 class="page-header">Time Logs <small>Your timelog history</small></h1>
 <div class ="row">
     <div class="col-md-7">
         <h2>Time Logs</h2>
@@ -10,7 +9,9 @@
 <div class="row">
     <div class="col-md-7">
         <div class="gray-bg ibox " id="log_lists">
+
             <%= render 'log_lists', time_logs: @time_logs %>
+
         </div>
     </div>
     <div class="col-md-5">
@@ -27,3 +28,4 @@
         </div>
     </div>
 </div>
+

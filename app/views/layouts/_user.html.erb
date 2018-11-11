@@ -1,43 +1,97 @@
-<% if current_user.present? %>
-  <%= render "layouts/static/sidebar_nav" %>
-<% end %>
-<div class="page active <% if (params[:controller] == 'inventories' && params[:action] != 'index') || params[:controller] == 'vendors'%>body-margin<% end %>" style="padding-bottom: 0;">
-  <% if current_user.present? && params[:action] != 'index' && params[:action] != 'show' %>
-      <a href="javascript:history.back()" class="badge badge-secondary btn btn-nav btn-back">Back</a>
-  <% end %>
-  <section class="dashboard-header section-padding">
-    <div class="container-fluid">
-      <%= render "layouts/static/notification" %>
-      <%= yield %>
+<div class="page-container fade page-sidebar-fixed page-header-fixed show" id="page-container">
+    <div id="header" class="header navbar-default">
+                <!-- begin navbar-header -->
+                <div class="navbar-header">
+                    <%= link_to authenticated_root_path, class: "navbar-brand" do %>
+                        <%= image_tag 'logo.png' %>
+                        <b>Boston Pediatric</b> Dental Group
+                    <% end %>
+                    <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- end navbar-header -->
+                
+                <!-- begin header-nav -->
+                <ul class="navbar-nav navbar-right">
+                    <li>
+                        <form class="navbar-form">
+                            <div class="form-group">
+                                <%= render "./search_results/form" %>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14" aria-expanded="false">
+                            <i class="fa fa-bell"></i>
+                            <span class="label">5</span>
+                        </a>
+                        <ul class="dropdown-menu media-list dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(44px, 50px, 0px);">
+                            <li class="dropdown-header">NOTIFICATIONS (5)</li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="media-left">
+                                        <i class="fa fa-bug media-object bg-silver-darker"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
+                                        <div class="text-muted f-s-11">3 minutes ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="media-left">
+                                        <i class="fa fa-plus media-object bg-silver-darker"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading"> New User Registered</h6>
+                                        <div class="text-muted f-s-11">1 hour ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="media-left">
+                                        <i class="fa fa-envelope media-object bg-silver-darker"></i>
+                                        <i class="fab fa-google text-warning media-object-icon f-s-14"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading"> New Email From John</h6>
+                                        <div class="text-muted f-s-11">2 hour ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="dropdown-footer text-center">
+                                <a href="javascript:;">View more</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown navbar-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="../assets/img/user/user-13.jpg" alt=""> 
+                            <span class="d-none d-md-inline"><%= current_user.full_name %></span> <b class="caret"></b>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="javascript:;" class="dropdown-item">Edit Profile</a>
+                            <a href="javascript:;" class="dropdown-item"><span class="badge badge-danger pull-right">2</span> Inbox</a>
+                            <a href="javascript:;" class="dropdown-item">Setting</a>
+                            <div class="dropdown-divider"></div>
+                            <% if user_signed_in? %>
+                                <%= link_to 'Log Out', destroy_user_session_path, method: 'delete', class: "dropdown-item" %>
+                            <% end %>
+                        </div>
+                    </li>
+                </ul>
+                <!-- end header navigation right -->
+            </div>
+
+    <% if current_user.present? %>
+        <%= render "layouts/static/sidebar_nav" %>
+    <% end %>
+    <div class="content">
+        <%= yield %>
     </div>
-  </section>
 </div>
-<div id="modal-shows"></div>
-<div id="msg_preview" class="msg_modal">
-  <span class="close_preview">&times;</span>
-  <img class="msg_modal-content" id="img01">
-</div>
-
-<%= render "search_results/full_screen_search" %>
-<script type="text/javascript">
-  $(function() {
-    $('a[href="#search"]').on("click", function(event) {
-      event.preventDefault();
-      $("#search").addClass("open");
-      $('#search > form > input[type="search"]').focus();
-    });
-
-    $("#search, #search button.close, #search i.close").on("click keyup", function(event) {
-      if (
-        event.target == this ||
-        event.target.className.includes("close") ||
-        event.keyCode == 27
-      ) {
-        $(this).removeClass("open");
-      }
-    });
-  });
-</script>
-<script>
-    feather.replace({ class: 'align-middle' })
-</script>

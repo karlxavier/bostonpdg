@@ -2,7 +2,9 @@
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Assign a Team to this Ticket: <span class="sub-header-modal">(Manage User to Assign on this Order) [EDIT]</span></h5>
+        <p class="modal-title" id="exampleModalLongTitle">
+          Manage User to Assign on this Order
+        </p>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -102,14 +104,31 @@
           </div>
         </form>
       </div>
-      <div class="modal-footer" style="display: block;">
-        <div class="buttons pull-left">
-          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+      <div class="modal-footer">
+        <div class="buttons">
+          <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
         </div>
-        <div class="buttons pull-right">
+        <div class="buttons">
           <button type="button" class="btn btn-info" onclick="submitForm('edit_order_user', $(this))">Update</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+<script>
+  $( document ).ready(function() {
+    $(".selectpicker2").selectpicker();
+
+      $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+        $(".dropdown").bind("keydown", function(event) {
+          if (event.keyCode === 9) {
+            $(this)
+              .find(".selectpicker2")
+              .selectpicker("toggle");
+          }
+        });
+      })
+
+  });
+</script>

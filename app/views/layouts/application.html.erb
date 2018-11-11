@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Regency Group | Official Page</title>
+  <title>Boston Pediatric Dental Group</title>
+  <%= favicon_link_tag 'logo.png'%>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
@@ -25,8 +26,9 @@
 </head>
 
 <body>
-
-  <% if ["Admin"].exclude? controller.class.name.split("::").first %>
+  <% if !user_signed_in? %>
+    <%= render '/devise/sessions/new' %>
+  <% elsif ["Admin"].exclude? controller.class.name.split("::").first %>
     <%= render "layouts/user" %>
   <% else %>
     <%= render "layouts/admin" %>
@@ -70,5 +72,10 @@
   <%= javascript_include_tag 'order', 'data-turbolinks-track': 'reload' %>
 <% end %>
 <div id="modal-shows"></div><!-- For modal shows, partial rendering -->
+<script>
+		$(document).ready(function() {
+			App.init();
+		});
+	</script>
 </body>
 </html>

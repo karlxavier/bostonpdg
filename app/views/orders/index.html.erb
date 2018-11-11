@@ -11,73 +11,88 @@
     <%= render "orders/modals/manage_users", order: @order %>
 </div>
 <% if @order.present? && @orders.present? %>
-    <div class="row" style="position:relative;">
-      <div id="left" class="col-lg-3 orders_and_order_form" style="overflow-y: hidden; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 30% !important; max-width: 25% !important;">
-        <div class="d-flex flex-row justify-content-center">
-          <div class="search-box">
-            <%= render 'search_filter_box' %>
-          </div>
-        </div>
-        <nav style="margin-top: 15px;" class="font-size-11">
-          <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-orders" data-name="orders">ORDERS</a>
-            <a class="nav-item nav-link" data-toggle="tab" href="#nav-messages" data-name="messages">MESSAGES</a>
-            <a class="nav-item nav-link" data-toggle="tab" href="#nav-notifications" data-name="notifications">NOTIFICATIONS</a>
-          </div>
-        </nav>
-        <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane active" id="nav-orders">
-            <div class="row">
-              <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;" id="order_list">
-                <%= render @orders %>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="nav-messages">
-            <div class="row">
-              
-                <div class="ibox" style="padding: 15px; width: 100%;">
-                  <div class="ibox-title" style="border:none; padding-top: 0;">
-                    <div id="message_items">
-                      <%= render 'message_items', order: @order, chatroom: @chatroom_order  %>
+    <h1 class="page-header">
+        Orders <small>List of client orders.</small>
+    </h1>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-sm-4">
+            <ul class="nav nav-tabs">
+                <li class="nav-items">
+                    <a href="#default-tab-1" data-toggle="tab" class="nav-link active show">
+                        <span class="d-sm-none">Orders</span>
+                        <span class="d-sm-block d-none">Orders</span>
+                    </a>
+                </li>
+                <li class="nav-items">
+                    <a href="#default-tab-2" data-toggle="tab" class="nav-link">
+                        <span class="d-sm-none">Messages</span>
+                        <span class="d-sm-block d-none">Messages</span>
+                    </a>
+                </li>
+                <li class="nav-items">
+                    <a href="#default-tab-3" data-toggle="tab" class="nav-link">
+                        <span class="d-sm-none">Notifications</span>
+                        <span class="d-sm-block d-none">Notifications</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane widget-chat active show" id="default-tab-1">
+                    <div class="widget-chat-header">
+                        <div class="widget-chat-header-icon">
+                            <i class="fas fa-calendar-alt width-30 height-30 f-s-20 bg-yellow text-inverse text-center rounded-corner" style="line-height: 30px"></i>
+                        </div>
+                        <div class="widget-chat-header-content">
+                            <h4 class="widget-chat-header-title">Orders</h4>
+                            <p class="widget-chat-header-desc"><%= @orders.count %> orders</p>
+                        </div>
                     </div>
-                  </div>
-                  <div class="ibox-content" id="order_messages" style="padding-left: 0;">
-                    <div id="order_messages">
-                      <%= render 'chatroom_tab', chatroom: @chatroom_order  %>
+                    <div class="widget-list widget-list-rounded m-b-30 slimScrollDiv" data-id="widget">
+                        <%= render @orders %>
                     </div>
-                  </div>
-                  <div class="ibox-footer">
-                      <div class="chat-message-form" id="chatroom_message">
-                        <%= render '/chatroom_orders/chatroom_message', chatroom: @chatroom_order %>
-                      </div>
-                  </div>
                 </div>
+                <div class="tab-pane" id="default-tab-2">
+
+                        <div class="widget-chat" style="margin-left: -15px;margin-right: -15px;">
+                            <div class="widget-chat-header">
+                                <div class="widget-chat-header-icon">
+                                    <i class="fas fa-comments width-30 height-30 f-s-20 bg-yellow text-inverse text-center rounded-corner" style="line-height: 30px"></i>
+                                </div>
+                                <div class="widget-chat-header-content">
+                                    <h4 class="widget-chat-header-title">Order Discussion Group</h4>
+                                    <p class="widget-chat-header-desc"><%= @chatroom_order.messages.count %> messages</p>
+                                </div>
+                            </div>
+                            <div class="slimScrollDiv widget-chat-body">
+                                <div id="order_messages">
+                                    <%= render 'chatroom_tab', chatroom: @chatroom_order  %>
+                                </div>
+                            </div>
+                            <%= render '/chatroom_orders/chatroom_message', chatroom: @chatroom_order %>
+                        </div>
                 
-            </div>
-          </div>
-          <div class="tab-pane" id="nav-notifications">
-            <div class="row">
-              <div class="col orders_and_order_form_2" style="overflow-y: auto; overflow-x: hidden; padding-bottom: 5% !important; flex: 0 0 100% !important;">
-                <table class="table table-striped">
-                  <tbody id="notification_entry">
+                </div>
+                <div class="tab-pane widget-chat" id="default-tab-3">
+                     <div class="widget-chat-header">
+                        <div class="widget-chat-header-icon">
+                            <i class="fas fa-exclamation width-30 height-30 f-s-20 bg-yellow text-inverse text-center rounded-corner" style="line-height: 30px"></i>
+                        </div>
+                        <div class="widget-chat-header-content">
+                            <h4 class="widget-chat-header-title">Notifications</h4>
+                            <p class="widget-chat-header-desc"><%= @order_histories.count %> notifications</p>
+                        </div>
+                    </div>
                     <%= render 'order_histories', order_histories: @order_histories %>
-                  </tbody>
-                </table>
-              </div>
+                </div>
             </div>
-          </div>
         </div>
-
-      </div>
-
-      <div class="col padding-left orders_and_order_form" style="overflow-y: auto; overflow-x: hidden">
-        <div id="show_order">
-          <%= render 'show_order', order: @order, chatroom_order: @chatroom_order, order_entries: @order_entries %>
+        <div class="col-sm-8">
+            <div id="show_order">
+                <%= render 'show_order', order: @order, chatroom_order: @chatroom_order, order_entries: @order_entries %>
+            </div>
         </div>
-      </div>
-
     </div>
+
 <% else %>
     <style>
         #wrapper-div{width:100%; height:400px}
@@ -335,6 +350,12 @@
 
 
     $(function(){
+
+        $('.slimScrollDiv').slimScroll({
+          railOpacity: 0.4,
+          start: 'bottom',
+          height: '500px',
+      });
 
         $('select.clone_products').on('change', function(e){
             $.ajax({

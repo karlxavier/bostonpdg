@@ -10,8 +10,8 @@ $("input.order_id").val("<%= @order.id %>")
 
 
 
-if ($(".card").hasClass("orange-left")) {
-	$(".card").removeClass("orange-left")
+if ($(".cardlist").hasClass("orange-left")) {
+	$(".cardlist").removeClass("orange-left")
 }
 
 $("div#order-<%= @order.id %>").addClass('orange-left');

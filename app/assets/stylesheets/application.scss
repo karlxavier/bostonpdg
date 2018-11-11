@@ -28,6 +28,8 @@
  *= require jquery-te-1.4.0
  *= require tagsinput
  *= require awesome_complete
+ *= require color_admin
+ *= require color_admin_responsive
  *= require_self
  */
 
@@ -70,19 +72,19 @@
   border-top-right-radius: 0 !important;
 }
 
-.modal-gray .modal-header {
-  background-color: #292929;
-  color: #00c851;
-  border-top-left-radius: 0 !important;
-  border-top-right-radius: 0 !important;
-}
+// .modal-gray .modal-header {
+//   background-color: #292929;
+//   color: #00c851;
+//   border-top-left-radius: 0 !important;
+//   border-top-right-radius: 0 !important;
+// }
 
-.modal-gray .modal-footer {
-  background-color: #292929;
-  color: #00c851;
-  border-bottom-left-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-}
+// .modal-gray .modal-footer {
+//   background-color: #292929;
+//   color: #00c851;
+//   border-bottom-left-radius: 0 !important;
+//   border-bottom-right-radius: 0 !important;
+// }
 
 /*
 .modal-gray .fa {
@@ -91,7 +93,7 @@
 */
 
 .modal-gray h5 {
-  color: #ffffff;
+  // color: #ffffff;
 }
 
 /*.modal-gray button span {

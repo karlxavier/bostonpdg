@@ -1,11 +1,15 @@
-<% if order_histories.present? %>
-    <% order_histories.each do |history| %>
+  <% if order_histories.present? %>
+      <% order_histories.each do |history| %>
+        <div class="widget-list-item">
+          <div class="cardlist widget-list-content">
+            <p class="widget-list-desc">
+              <%= generate_history_information(history) %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+  <% else %>
       <tr>
-        <th><%= generate_history_information(history) %></th>
+        <th><b>No Notifications Yet.</b></th>
       </tr>
-    <% end %>
-<% else %>
-    <tr>
-      <th><b>No Notifications Yet.</b></th>
-    </tr>
-<% end %>
+  <% end %>
