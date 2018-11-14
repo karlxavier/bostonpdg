@@ -1,7 +1,7 @@
 <div id="time_in">
     <%= form_for UserTimeLog.new, remote: true do |f| %>
         <div class="form-group">
-            <%= f.text_field :description, class: "form-control awesomplete", data: {list: '#mylist'}, style: "font-size: 20px;", placeholder: "What are you working on?", autocomplete: :off, required: true %>
+            <%= f.autocomplete_field :description, autocomplete_default_work_description_user_time_logs_path, class: "form-control", style: "font-size: 20px;", placeholder: "What are you working on?", autocomplete: :off, required: true %>
             <ul id="mylist" style="display: none;">
                 <% TimeLogWork.all.each do |work| %>
                     <li><%= work.description %></li>

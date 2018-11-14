@@ -1,4 +1,5 @@
 class UserTimeLogsController < ApplicationController
+    autocomplete :default_work, :description, full: true
     # before_action :set_user_time_log, only: [:index, :get_start_second]
 
     def index

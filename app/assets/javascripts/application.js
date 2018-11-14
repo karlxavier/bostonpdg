@@ -42,6 +42,8 @@
 //= require cocoon
 //= require color_admin
 //= require awesome_complete
+//= require jquery-ui/widgets/autocomplete
+//= require autocomplete-rails
 
 $(document).on("turbolinks:load", function() {
   $(".selectpicker").selectpicker();

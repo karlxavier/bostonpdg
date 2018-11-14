@@ -12,6 +12,23 @@ body {
   width: 55px;
 }
 
+.ui-menu {
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #222;
+  position: absolute;
+}
+
+.ui-autocomplete {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #222;
+  position: absolute;
+}
+
 .play-stop:hover {
   transform: scale(1.1);
   .icon-hover {
