@@ -68,7 +68,9 @@
                                     <%= render 'chatroom_tab', chatroom: @chatroom_order  %>
                                 </div>
                             </div>
-                            <%= render '/chatroom_orders/chatroom_message', chatroom: @chatroom_order %>
+                            <div id="chatroom_message">
+                                <%= render '/chatroom_orders/chatroom_message', chatroom: @chatroom_order %>
+                            </div>
                         </div>
                 
                 </div>
@@ -353,8 +355,11 @@
 
         $('.slimScrollDiv').slimScroll({
           railOpacity: 0.4,
-          start: 'bottom',
           height: '500px',
+          wheelStep:  '1',
+          scrollOverflow: true,
+          wheelStep : 10,
+          touchScrollStep : 75
       });
 
         $('select.clone_products').on('change', function(e){
