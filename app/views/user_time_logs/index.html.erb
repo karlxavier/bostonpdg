@@ -8,11 +8,6 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-7">
-        <div class="gray-bg ibox " id="log_lists">
-            <%= render 'log_lists', time_logs: @time_logs %>
-        </div>
-    </div>
     <div class="col-md-5">
         <div class="gray-bg ibox">
             <div class="ibox-content">
@@ -24,6 +19,11 @@
                     <% end %>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="gray-bg ibox " id="log_lists">
+            <%= render 'log_lists', time_logs: @time_logs %>
         </div>
     </div>
 </div>
