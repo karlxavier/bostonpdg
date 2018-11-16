@@ -1,0 +1,89 @@
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+
+        <% if @user_time_log.errors.any? %>
+          <div class="alert alert-danger alert-dismissable">
+              <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+              <ul style="margin-bottom: 0;">
+                <% @user_time_log.errors.full_messages.each do |error_message| %>
+                  <li>
+                    <%= error_message if @user_time_log.errors.full_messages.first == error_message %> <br />
+                  </li>
+                <% end %>
+              </ul>
+          </div>
+        <% end %>
+        
+        <%= form_for [:admin, @user_time_log], html: { class: "form-horizontal" } do |f| %>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">User</label>
+              <div class="col-sm-10">
+                <%= f.collection_select( :user_id, User.all, :id, :full_name, {include_blank: true}, {id: "owned_by_selection", class: "chosen-select"})%>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Work</label>
+              <div class="col-sm-10">
+                <%= f.text_field :description, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Time In</label>
+              <div class="col-sm-10">
+                <%= f.text_field :time_in, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Time Out</label>
+              <div class="col-sm-10">
+                <%= f.text_field :time_out, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Duration</label>
+              <div class="col-sm-10">
+                <%= f.text_field :duration, class: "form-control" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Office</label>
+              <div class="col-sm-10">
+                <%= f.collection_select( :office_time_log_id, OfficeTimeLog.all, :id, :name, {include_blank: true}, {id: "office_time_log_id_selection", class: "chosen-select"})%>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                  <%= link_to 'Cancel', admin_user_time_logs_path, class: "btn btn-white" %>
+                  <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
+                    Save changes
+                  <% end %> 
+              </div>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.chosen-select').chosen({width: "100%"});
+  })
+</script>

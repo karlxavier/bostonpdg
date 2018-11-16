@@ -39,12 +39,12 @@ class Admin::BrandsController < ApplicationController
     end
 
     def destroy
-        @brands = Brand.all
         if @brand.destroy
             flash.now[:notice] = "Brand #{@brand.name} successfully deleted."
         else
             flash.now[:error] = "Cannot delete this brand, associations still exist."
         end
+        @brands = Brand.all
         render action: :index
     end
 

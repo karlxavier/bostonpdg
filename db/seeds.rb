@@ -1,3 +1,59 @@
+user = User.where(email: 'alisha@bpdg.com').first_or_create do |user|
+    user.first_name = 'Alisha'
+    user.password = 'password'
+  end
+  
+  user.first_name = 'Alisha'
+  user.save!
+
+  user = User.where(email: 'amanda@bpdg.com').first_or_create do |user|
+    user.first_name = 'Amanda'
+    user.password = 'password'
+  end
+  
+  user.first_name = 'Amanda'
+  user.save!
+
+  user = User.where(email: 'maroua@bpdg.com').first_or_create do |user|
+    user.first_name = 'Maroua'
+    user.password = 'password'
+  end
+  
+  user.first_name = 'Maroua'
+  user.save!
+
+  user = User.where(email: 'renee@bpdg.com').first_or_create do |user|
+    user.first_name = 'Renee'
+    user.password = 'password'
+  end
+  
+  user.first_name = 'Renee'
+  user.save!
+
+  user = User.where(email: 'tamesis@bpdg.com').first_or_create do |user|
+    user.first_name = 'Tamesis'
+    user.password = 'password'
+  end
+  
+  user.first_name = 'Tamesis'
+  user.save!
+
+  user = User.where(email: 'jonas@bpdg.com').first_or_create do |user|
+    user.first_name = 'Jonas'
+    user.password = 'password'
+  end
+  
+  user.first_name = 'Jonas'
+  user.save!
+
+OfficeTimeLog.create(name: 'Lynn')
+OfficeTimeLog.create(name: 'Cambridge')
+OfficeTimeLog.create(name: 'Arlington')
+OfficeTimeLog.create(name: 'Other (Off-Site)')
+
+
+# *******************************************************
+
 # DefaultWork.destroy_all
 # DefaultWork.create!(description: "Programming")
 # DefaultWork.create!(description: "Design")

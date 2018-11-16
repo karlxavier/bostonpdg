@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   post 'admin/products/import_csv'
   post 'admin/categories/import_csv'
   post 'admin/inventories/import_csv'
+  post 'admin/user_time_logs/import_csv'
 
   resources :user_time_logs do
     get :autocomplete_default_work_description, :on => :collection
@@ -111,6 +112,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :notifications
     resources :users
+    resources :user_time_logs
     resources :users_brands
     resources :users_groups
     resources :customers
