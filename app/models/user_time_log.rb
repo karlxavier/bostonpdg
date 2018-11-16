@@ -3,8 +3,8 @@ class UserTimeLog < ApplicationRecord
     belongs_to :office_time_log
 
     scope :get_active_time_in, -> (user_id) { UserTimeLog.where(user_id: user_id, active: true) }
-    scope :group_logs, -> (user_id) { UserTimeLog.where(user_id: user_id).group("created_at::date").order("created_at::date DESC").sum(:duration)}
-    scope :log_details, -> (user_id, created_at) { UserTimeLog.where("user_id = ? AND created_at::date = ?", user_id, created_at).where('duration IS NOT NULL AND time_in IS NOT NULL AND time_out IS NOT NULL ').order("created_at DESC") }
+    scope :group_logs, -> (user_id) { UserTimeLog.where(user_id: user_id).group("time_in::date").order("time_in::date DESC").sum(:duration)}
+    scope :log_details, -> (user_id, time_in) { UserTimeLog.where("user_id = ? AND time_in::date = ?", user_id, time_in).where('duration IS NOT NULL AND time_in IS NOT NULL AND time_out IS NOT NULL ').order("time_in DESC") }
 
     scope :all_active_logs, -> { includes(:office_time_log) }
 
