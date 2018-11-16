@@ -51,12 +51,12 @@
 # OfficeTimeLog.create(name: 'Arlington')
 # OfficeTimeLog.create(name: 'Other (Off-Site)')
 
-UserTimeLog.all.each do |log|
-    if log.duration.nil?
-        log.duration = (log.time_out - log.time_in).to_i
-        log.save
-    end
-end
+# UserTimeLog.all.each do |log|
+#     if log.duration.nil?
+#         log.duration = (log.time_out - log.time_in).to_i
+#         log.save
+#     end
+# end
 
 # *******************************************************
 

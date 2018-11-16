@@ -6,6 +6,7 @@ class UserTimeLog < ApplicationRecord
     scope :group_logs, -> (user_id) { UserTimeLog.where(user_id: user_id).group("created_at::date").order("created_at::date DESC").sum(:duration)}
     scope :log_details, -> (user_id, created_at) { UserTimeLog.where("user_id = ? AND created_at::date = ?", user_id, created_at).where('duration IS NOT NULL AND time_in IS NOT NULL AND time_out IS NOT NULL ').order("created_at DESC") }
 
+    scope :all_active_logs, -> { includes(:office_time_log) }
 
     require 'csv'
 

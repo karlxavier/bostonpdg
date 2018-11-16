@@ -61,7 +61,11 @@
                                     <td><%= utl.description %></td>
                                     <td><%= utl.time_in %></td>
                                     <td><%= utl.time_out %></td>
-                                    <td><%= replace_unwanted_words remove_unwanted_words distance_of_time_in_words(utl.time_out, utl.time_in, include_seconds: true) %></td>
+                                    <td>
+                                        <% if utl.time_out.present? %>
+                                            <%= replace_unwanted_words remove_unwanted_words distance_of_time_in_words(utl.time_out, utl.time_in, include_seconds: true) %>
+                                        <% end %>
+                                    </td>
                                     <td><%= utl.office_time_log.present? ? utl.office_time_log.name : '' %></td>
                                     <td>
                                         <div class="btn-group">

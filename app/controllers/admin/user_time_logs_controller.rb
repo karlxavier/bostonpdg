@@ -2,7 +2,7 @@ class Admin::UserTimeLogsController < ApplicationController
     before_action :set_user_time_log, only: [:edit, :update, :show, :destroy]
 
     def index
-        @user_time_logs = UserTimeLog.all
+        @user_time_logs = UserTimeLog.all_active_logs
     end
 
     def new
