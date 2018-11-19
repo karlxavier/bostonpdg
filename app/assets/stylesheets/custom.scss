@@ -5,6 +5,11 @@ body {
   padding: 0px;
 }
 
+.row:before,
+.row:after {
+  display: none !important;
+}
+
 .label-outline {
   padding: 10px;
   text-align: center;
