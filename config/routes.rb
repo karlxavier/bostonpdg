@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   mount ActionCable.server => "/cable"
 
+  root 'user_time_logs#index'
   devise_for :users
   devise_scope :user do
     # match '/sign-in' => "devise/sessions#new", :as => :login
     authenticated :user do
-      root 'orders#index', as: :authenticated_root
+      root 'user_time_logs#index', as: :authenticated_root
     end
 
     unauthenticated do
