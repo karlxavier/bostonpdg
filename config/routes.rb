@@ -27,6 +27,11 @@ Rails.application.routes.draw do
 
   get 'get_start_second', :to => 'user_time_logs#get_start_second', as: 'get_start_second'
 
+  resources :channels do
+    resources :channel_users
+    resources :messages
+  end
+
   resources :search_results, only: :index
   resources :dynamic_messages, only: :show
   resources :dynamic_item_messages, only: :show

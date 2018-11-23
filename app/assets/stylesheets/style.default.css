@@ -33,9 +33,9 @@ https://bootstrapious.com/p/bootstrap-4-dashboard
 }
 
 a {
-  display: inline-block;
+  /* display: inline-block;
   text-decoration: none;
-  color: #fff;
+  color: #fff; */
 }
 
 body {
@@ -2346,7 +2346,7 @@ STYLE SWITCHER FOR DEMO
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
-  border-radius: 0;
+  /* border-radius: 0; */
 }
 
 /*
@@ -2362,14 +2362,14 @@ STYLE SWITCHER FOR DEMO
 } */
 
 a {
-  color: #33b35a;
-  text-decoration: none;
+  /* color: #33b35a;
+  text-decoration: none; */
 }
 
 a:focus,
 a:hover {
-  color: #22773c;
-  text-decoration: underline;
+  /* color: #22773c;
+  text-decoration: underline; */
 }
 
 h1,
@@ -2599,15 +2599,15 @@ a.text-primary:hover {
 * 5. DROPDOWNS
 */
 .dropdown-menu {
-  z-index: 1000;
+  /* z-index: 1000;
   min-width: 10rem;
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
-  /* font-size: 1rem; */
+  font-size: 1rem;
   color: #212529;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0;
+  border-radius: 0; */
 }
 
 .dropdown-item {

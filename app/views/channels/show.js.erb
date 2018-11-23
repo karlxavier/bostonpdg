@@ -1,0 +1,7 @@
+$("div#messages").html("<%= escape_javascript(render 'messages', channel: @channel ) %>");
+
+$('#chatroom_msgs').slimScroll({
+    railOpacity: 0.4,
+    start: 'bottom',
+    height: '550px',
+});

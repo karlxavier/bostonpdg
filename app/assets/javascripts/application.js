@@ -44,6 +44,7 @@
 //= require awesome_complete
 //= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
+//= require select2.min
 
 $(document).on("turbolinks:load", function() {
   $(".selectpicker").selectpicker();

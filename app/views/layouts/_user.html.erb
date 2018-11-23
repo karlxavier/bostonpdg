@@ -91,7 +91,9 @@
     <% if current_user.present? %>
         <%= render "layouts/static/sidebar_nav" %>
     <% end %>
-    <div class="content">
-        <%= yield %>
+    <div id="content" class="content">
+        <div style="margin-top: 40px;">
+            <%= yield %>
+        </div>
     </div>
 </div>

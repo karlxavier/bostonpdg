@@ -9,8 +9,12 @@ class ChatroomOrdersChannel < ApplicationCable::Channel
 	    #   		stream_from "chatrooms:#{chatroom.id}"
 	    # 	end
 		# end
-		ChatroomOrder.all.each do |chatroom|
-			stream_from "chatrooms:#{chatroom.id}"
+		# ChatroomOrder.all.each do |chatroom|
+		# 	stream_from "chatrooms:#{chatroom.id}"
+		  # end
+		
+		Channel.all.each do |channel|
+			stream_from "channels:#{channel.id}"
 	  	end
   	end
 

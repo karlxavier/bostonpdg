@@ -14,7 +14,8 @@
 class Message < ApplicationRecord
 	extend Textacular
 	belongs_to :chatroom_order
-  	belongs_to :user
+	  belongs_to :user
+	  belongs_to :channel
 
   	include AttachmentUploader[:attachment]
 

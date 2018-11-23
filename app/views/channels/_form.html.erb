@@ -1,0 +1,31 @@
+<%= form_for :channel do |f| %>
+    <div class="row row-space-10">
+        <div class="col-md-12">
+            <div class="form-group m-b-10 p-t-5">
+                <%= f.text_field :name, class: "form-control form-control-lg", placeholder: "Name" %>
+            </div>
+        </div>
+    </div>
+    <div class="row row-space-10">
+        <div class="col-md-12">
+            <strong>Members</strong>
+            <div class="form-group m-t-10 p-t-5">
+
+                <%= collection_select(:channel, :user_ids, 
+                  User.order(:email),:id,:full_name, 
+                  {selected: channel.user_ids, include_hidden: false}, 
+                  {class: "select2 form-control", style: "width: 100%;", required: true, multiple: true}) 
+                %>
+
+            </div>
+        </div>
+    </div>
+<% end %>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            width: 'resolve',
+            dropdownParent: $("#modal-dialog")
+        });
+    });
+</script>

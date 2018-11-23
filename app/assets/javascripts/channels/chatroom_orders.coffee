@@ -8,8 +8,8 @@ App.chatroom_orders = App.cable.subscriptions.create "ChatroomOrdersChannel",
   received: (data) ->
     console.log 'message received'
     $("#new_message")[0].reset()
-    active_chatroom = $("[data-behavior='chatroom-orders'][data-chatroom-id='#{data.chatroom_id}']")
-    chatbox = $("[data-behavior='chatbox'][data-chatroom-id='#{data.chatroom_id}']")
+    active_chatroom = $("[data-behavior='chatroom-orders'][data-chatroom-id='#{data.channel_id}']")
+    chatbox = $("[data-behavior='chatbox'][data-chatroom-id='#{data.channel_id}']")
     
     if active_chatroom.length > 0
       active_chatroom.append(data.message)
@@ -30,7 +30,7 @@ App.chatroom_orders = App.cable.subscriptions.create "ChatroomOrdersChannel",
         closeButton: true
         progressBar: true
         onclick: ->
-          window.location.replace "/chatroom_orders/#{data.chatroom_id}/messages/#{data.chatroom_id}"
+          window.location.replace "/chatroom_orders/#{data.channel_id}/messages/#{data.channel_id}"
           return
         showMethod: 'slideDown'
         positionClass: 'toast-bottom-left'

@@ -1,11 +1,13 @@
 class MessagesController < ApplicationController
 skip_before_action :verify_authenticity_token
 before_action :authenticate_user!
-before_action :set_chatroom, except: [:edit, :update, :cancel_msg_update]
+# before_action :set_chatroom, except: [:edit, :update, :cancel_msg_update]
+before_action :set_channel, except: [:edit, :update, :cancel_msg_update]
 before_action :set_message_edit, only: [:edit, :update, :cancel_msg_update]
 
 	def create
-		message = @chatroom.messages.new(message_params)
+		# message = @chatroom.messages.new(message_params)
+		message = @channel.messages.new(message_params)
 		message.user = current_user
 		
 		message.save
@@ -45,8 +47,8 @@ before_action :set_message_edit, only: [:edit, :update, :cancel_msg_update]
 			params.require(:message).permit(:body, :attachment)
 		end
 
-		def set_chatroom
-			@chatroom = ChatroomOrder.find(params[:chatroom_order_id])
+		def set_channel
+			@channel = Channel.find(params[:channel_id])
 		end
 
 		def set_message_edit			
