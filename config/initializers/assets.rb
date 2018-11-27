@@ -7,7 +7,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.paths << Emoji.images_path
 # Add Yarn node_modules folder to the asset load path.
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
-Rails.application.config.assets.compile = true
+# Rails.application.config.assets.compile = true
 Rails.application.config.assets.precompile += %w( Chart.min.js )
 Rails.application.config.assets.precompile += %w( charts-home.js )
 Rails.application.config.assets.precompile += %w( order.js )
