@@ -14,14 +14,14 @@ App.chatroom_orders = App.cable.subscriptions.create "ChatroomOrdersChannel",
     if active_chatroom.length > 0
       active_chatroom.append(data.message)
 
-      chat_messages = $("#chat_messages")[0]
+      chat_messages = $("#chatroom_msgs")[0]
       if chat_messages
         height = chat_messages.scrollHeight
         $(chat_messages).scrollTop(height)
     else if chatbox.length > 0
       chatbox.append(data.message)
 
-      chat_messages = $("#chat_messages")[0]
+      chat_messages = $("#chatroom_msgs")[0]
       if chat_messages
         height = chat_messages.scrollHeight
         $(chat_messages).scrollTop(height)
