@@ -28,11 +28,12 @@ class UserTimeLog < ApplicationRecord
 
                 utl = UserTimeLog.new
                 
-                utl.description = "Uploaded"
+                utl.description = office
                 utl.time_in = timein
                 utl.time_out = timeout
                 utl.user_id = User.where(first_name: employee).first.id
                 utl.office_time_log_id = OfficeTimeLog.where(name: office).first.id
+                utl.active = false
                 # utl.duration = (DateTime.parse(timeout).stftime("%Y-%-m-%d %H:%M:%S") - DateTime.parse(timein).stftime("%Y-%-m-%d %H:%M:%S")).to_i
 
                 utl.save
