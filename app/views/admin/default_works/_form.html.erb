@@ -1,0 +1,52 @@
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        
+        <% if @default_work.errors.any? %>
+          <div class="alert alert-danger alert-dismissable">
+              <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+              <ul style="margin-bottom: 0;">
+                <% @default_work.errors.full_messages.each do |error_message| %>
+                  <li>
+                    <%= error_message if @default_work.errors.full_messages.first == error_message %> <br />
+                  </li>
+                <% end %>
+              </ul>
+              
+          </div>
+        <% end %>
+        
+        <%= form_for [:admin, @default_work], html: { class: "form-horizontal" } do |f| %>
+
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Description</label>
+              <div class="col-sm-10">
+                <%= f.text_field :description, class: "form-control", required: "" %>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                  <%= link_to 'Cancel', admin_default_works_path, class: "btn btn-white" %>
+                  <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
+                    Save changes
+                  <% end %> 
+              </div>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.chosen-select').chosen({width: "100%"});
+  })
+</script>

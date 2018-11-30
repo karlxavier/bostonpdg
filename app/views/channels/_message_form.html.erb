@@ -2,7 +2,7 @@
     <%= form_for [channel, Message.new], format: 'js', remote: true do |f| %>
         <div class="widget-input-container">
             <div class="widget-input-box">
-                <%= f.text_area :body, rows: 1, class: "form-control form-control-sm", style: "margin-left: 5px;", autofocus: true, placeholder: "Enter message text", autocomplete: "off" %>
+                <%= f.text_field :body, class: "form-control form-control-sm", style: "margin-left: 5px;", autofocus: true, placeholder: "Enter message text", autocomplete: "off" %>
             </div>
 
             <div class="widget-input-icon">

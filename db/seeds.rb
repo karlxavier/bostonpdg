@@ -46,10 +46,10 @@ user = User.where(email: 'alisha@bpdg.com').first_or_create do |user|
   user.first_name = 'Jonas'
   user.save!
 
-OfficeTimeLog.create(name: 'Lynn')
-OfficeTimeLog.create(name: 'Cambridge')
-OfficeTimeLog.create(name: 'Arlington')
-OfficeTimeLog.create(name: 'Other (Off-Site)')
+# OfficeTimeLog.create(name: 'Lynn')
+# OfficeTimeLog.create(name: 'Cambridge')
+# OfficeTimeLog.create(name: 'Arlington')
+# OfficeTimeLog.create(name: 'Other (Off-Site)')
 
 # UserTimeLog.all.each do |log|
 #     if log.duration.nil?

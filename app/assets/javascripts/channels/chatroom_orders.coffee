@@ -10,7 +10,7 @@ App.chatroom_orders = App.cable.subscriptions.create "ChatroomOrdersChannel",
     $("#new_message")[0].reset()
     active_chatroom = $("[data-behavior='chatroom-orders'][data-chatroom-id='#{data.channel_id}']")
     chatbox = $("[data-behavior='chatbox'][data-chatroom-id='#{data.channel_id}']")
-    
+
     if active_chatroom.length > 0
       active_chatroom.append(data.message)
 

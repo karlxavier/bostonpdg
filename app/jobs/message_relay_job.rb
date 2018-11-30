@@ -16,6 +16,7 @@ class MessageRelayJob < ApplicationJob
 			username: message.user.email,
 			message_user_id: message.user.id,
 			message: MessagesController.render(message),
+			# sender_message: MessagesController.render(sender_message),
 			channel_id: message.channel_id,
 			chatroom_name: "Order-#{message.channel_id}"
 		}

@@ -126,6 +126,7 @@ Rails.application.routes.draw do
     resources :vendors do
       resources :vendor_reviews
     end
+    resources :default_works
     resources :products
     resources :categories
     resources :addresses

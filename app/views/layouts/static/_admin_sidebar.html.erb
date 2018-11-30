@@ -26,25 +26,31 @@
                     </div>
                 </li>
                 <li class="special_link">
-                    <%= link_to authenticated_root_path do %>
+                    <%= link_to authenticated_root_path, style: "display: block;" do %>
                         <i class="fa fa-backward"></i> 
                         <span class="nav-label">Sales Page</span>
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to admin_root_path do %>
+                    <%= link_to admin_root_path, style: "display: block;" do %>
                         <i class="fa fa-cogs"></i> 
                         <span class="nav-label">Dashboard</span>
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to admin_user_time_logs_path do %>
+                    <%= link_to admin_user_time_logs_path, style: "display: block;" do %>
                         <i class="fa fa-clock"></i> 
                         <span class="nav-label">Time Logs</span>
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to admin_notifications_path do %>
+                    <%= link_to admin_default_works_path, style: "display: block;" do %>
+                        <i class="fa fa-magic"></i> 
+                        <span class="nav-label">Timelog Default Work</span>
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to admin_notifications_path, style: "display: block;" do %>
                         <i class="fa fa-bell"></i> 
                         <span class="nav-label">Notifications </span>
                         <% if user_notification_count > 0 %>
@@ -53,82 +59,82 @@
                     <% end %>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#" style="display: block" >
                         <i class="fa fa-bar-chart-o"></i> 
                         <span class="nav-label">Orders</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <%= link_to 'Orders', admin_orders_path %>
+                            <%= link_to 'Orders', admin_orders_path, style: "display: block;" %>
                         </li>
                         <li>
-                            <%= link_to 'Archive Orders', admin_archive_orders_path %>
+                            <%= link_to 'Archive Orders', admin_archive_orders_path, style: "display: block;" %>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <%= link_to admin_customers_path do %>
+                    <%= link_to admin_customers_path, style: "display: block;" do %>
                         <i class="fa fa-globe"></i> 
                         <span class="nav-label">Customers</span>
                     <% end %>
                 </li>
             	<li>
-                    <%= link_to admin_users_path do %>
+                    <%= link_to admin_users_path, style: "display: block;" do %>
                     	<i class="fa fa-users"></i> 
                     	<span class="nav-label">Users</span>
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to admin_inventories_path do %>
+                    <%= link_to admin_inventories_path, style: "display: block;" do %>
                         <i class="fa fa-bars"></i> 
                         <span class="nav-label">Inventories</span>
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to admin_vendors_path do %>
+                    <%= link_to admin_vendors_path, style: "display: block;" do %>
                         <i class="fa fa-cubes"></i> 
                         <span class="nav-label">Vendors</span>
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to admin_products_path do %>
+                    <%= link_to admin_products_path, style: "display: block;" do %>
                         <i class="fa fa-th-large"></i> 
                         <span class="nav-label">Products</span>
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to admin_categories_path do %>
+                    <%= link_to admin_categories_path, style: "display: block;" do %>
                         <i class="fa fa-bookmark"></i> 
                         <span class="nav-label">Categories</span>
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to admin_brands_path do %>
+                    <%= link_to admin_brands_path, style: "display: block;" do %>
                         <i class="fa fa-cube"></i> 
                         <span class="nav-label">Brands</span>
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to admin_hotels_path do %>
+                    <%= link_to admin_hotels_path, style: "display: block;" do %>
                         <i class="fa fa-bank"></i> 
                         <span class="nav-label">Hotels</span>
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to admin_groups_path do %>
+                    <%= link_to admin_groups_path, style: "display: block;" do %>
                         <i class="fa fa-object-group"></i> 
                         <span class="nav-label">Groups</span>
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to admin_style_attributes_path do %>
+                    <%= link_to admin_style_attributes_path, style: "display: block;" do %>
                         <i class="fa fa-paint-brush"></i> 
                         <span class="nav-label">Style Attributes</span>
                     <% end %>
                 </li>
               <li>
-                <%= link_to admin_default_templates_path do %>
+                <%= link_to admin_default_templates_path, style: "display: block;" do %>
                   <i class="fa fa-envelope-open"></i>
                   <span class="nav-label">Default Template</span>
                 <% end %>
