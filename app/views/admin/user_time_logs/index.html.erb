@@ -57,7 +57,7 @@
                             <% @user_time_logs.order(id: :desc).each do |utl| %>
                                 <tr>
                                     <td><%= utl.id %></td>
-                                    <td><%= link_to utl.user.full_name, admin_user_path(utl.user_id) %></td>
+                                    <td><%= link_to utl.user.email, admin_user_path(utl.user_id) %></td>
                                     <td><%= utl.description %></td>
                                     <td><%= utl.time_in %></td>
                                     <td><%= utl.time_out %></td>
