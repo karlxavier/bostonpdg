@@ -1776,11 +1776,11 @@ STYLE SWITCHER FOR DEMO
 .btn-primary:not([disabled]):not(.disabled):active,
 .btn-primary:not([disabled]):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
-  color: color-yiq(#288b46);
+  /* color: color-yiq(#288b46);
   background-color: #288b46;
   border-color: #258141;
   -webkit-box-shadow: 0 0 0 0.2rem rgba(51, 179, 90, 0.5);
-  box-shadow: 0 0 0 0.2rem rgba(51, 179, 90, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(51, 179, 90, 0.5); */
 }
 
 .btn-secondary {

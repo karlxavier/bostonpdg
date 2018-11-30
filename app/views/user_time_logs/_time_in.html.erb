@@ -8,6 +8,12 @@
                 <% end %>
             </ul>
         </div>
+        <div class="form-group">
+            <button id="btnArlington" onclick="arlington()" class="btn btn-primary btn-outline" type="button" >Arlington</button>
+            <button id="btnCambridge" onclick="cambridge()" class="btn btn-primary btn-outline" type="button" >Cambridge</button>
+            <button id="btnLynn" onclick="lynn()" class="btn btn-primary btn-outline" type="button" >Lynn</button>
+        </div>
+        
         <div style="text-align: center;">
             <%= button_tag type: 'submit', id: "register-button", style: "background: none; border: none;" do %>
                 <i class="fas fa-play-circle fa-10x play-stop" style="color: #4286f4;"></i>
@@ -41,6 +47,18 @@
             if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
             return i;
         }
+    }
+
+    function arlington() {
+        document.getElementById("user_time_log_description").value = "Arlington";
+    }
+
+    function cambridge() {
+        document.getElementById("user_time_log_description").value = "Cambridge";
+    }
+
+    function lynn() {
+        document.getElementById("user_time_log_description").value = "Lynn";
     }
 
     if( document.readyState === 'complete' ) {
