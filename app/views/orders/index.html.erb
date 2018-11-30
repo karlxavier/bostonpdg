@@ -395,7 +395,7 @@
 
 
         $(".textarea-format").jqte({remove: false,rule: false,unlink: false, });
-        $("div#order-<%= @order.id %>").addClass('orange-left');
+        $("div#order-<%= @order.present? ? @order.id : '' %>").addClass('orange-left');
         $('.ibox-content').slimScroll({
           railOpacity: 0.4,
           start: 'bottom',

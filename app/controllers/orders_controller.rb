@@ -34,13 +34,13 @@ class OrdersController < ApplicationController
     if params[:order_entry_id].present?
       @order_entry_id = params[:order_entry_id]
     end
-    @chatroom_order = ChatroomOrder.find(@order.id)
+    @chatroom_order = @order.present? ? ChatroomOrder.find(@order.id) : ChatroomOrder.first
     @chatroom_orders = ChatroomOrder.order(id: :desc)
     @categories = Category.all
     @vendors = Vendor.all
     @products = Product.all
     @brands = Brand.all
-    @order_histories = OrderHistory.where(:order_id => @order.id).order("created_at DESC")
+    @order_histories = @order.present? ? OrderHistory.where(:order_id => @order.id).order("created_at DESC") : OrderHistory.first
   end
 
   def show
