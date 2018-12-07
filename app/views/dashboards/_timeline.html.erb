@@ -21,7 +21,7 @@
 					<div class="pull-right">
 						<span class="vertical-date">
 							Time Out <br>
-							<strong class="text-warning"><%= user_timelog.time_out.strftime("%I:%M %P") %></strong>
+							<strong class="text-warning"><%= user_timelog.time_out.present? ? user_timelog.time_out.strftime("%I:%M %P") : "...." %></strong>
 						</span>
 					</div>
 					

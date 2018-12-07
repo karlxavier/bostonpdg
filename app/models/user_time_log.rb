@@ -7,7 +7,7 @@ class UserTimeLog < ApplicationRecord
     scope :log_details, -> (user_id, time_in) { UserTimeLog.where("user_id = ? AND time_in::date = ?", user_id, time_in).where('duration IS NOT NULL AND time_in IS NOT NULL AND time_out IS NOT NULL ').order("time_in DESC") }
 
     scope :all_active_logs, -> { includes(:user, :office_time_log) }
-    scope :dashboard_latest_logs, -> (date) { includes(:user).select("DISTINCT ON (user_id) *").where("DATE(time_in) = ?", date).where(active: false)  }
+    scope :dashboard_latest_logs, -> (date) { includes(:user).select("DISTINCT ON (user_id) *").where("DATE(time_in) = ?", date)  }
     scope :user_time_log, -> (date, user_id) { includes(:user).where("DATE(time_in) = ?", date).where(user_id: user_id)  }
 
     require 'csv'
