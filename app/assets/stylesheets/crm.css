@@ -1908,7 +1908,7 @@ div.dt-button-info {
   color: #ed5565;
 }
 .input-group-addon {
-  background-color: #fff;
+  /* background-color: #fff;
   border: 1px solid #E5E6E7;
   border-radius: 1px;
   color: inherit;
@@ -1916,7 +1916,7 @@ div.dt-button-info {
   font-weight: 400;
   line-height: 1;
   padding: 6px 12px;
-  text-align: center;
+  text-align: center; */
 }
 .spinner-buttons.input-group-btn .btn-xs {
   line-height: 1.13;

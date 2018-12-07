@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     get :autocomplete_default_work_description, :on => :collection
   end
 
+  resources :dashboards, only: [:index, :show]
+
   get 'get_start_second', :to => 'user_time_logs#get_start_second', as: 'get_start_second'
 
   resources :channels do

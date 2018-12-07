@@ -12,6 +12,12 @@
         </ul>
         <ul class="nav">
             <li class="<%= controller.class.name.split("::").first == 'OrdersController' ? 'active' : '' %>">
+                <%= link_to dashboards_path do %>
+                    <i class="fas fa-stopwatch"></i> 
+                    <span>Timelogs Dashboard</span> 
+                <% end %>
+            </li>
+            <li class="<%= controller.class.name.split("::").first == 'OrdersController' ? 'active' : '' %>">
                 <%= link_to orders_path do %>
                     <i class="fas fa-calendar-alt"></i> 
                     <span>Orders</span> 

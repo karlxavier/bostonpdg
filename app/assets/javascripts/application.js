@@ -33,7 +33,8 @@
 //= require watcher
 //= require chosen
 //= require metisMenu
-//= require datepicker
+//= require moment
+//= require bootstrap-datepicker
 //= require dropzone_initializer
 //= require jquery-te-1.4.0.min
 //= require tagsinput
