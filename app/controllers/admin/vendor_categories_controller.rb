@@ -1,4 +1,4 @@
-class Admin::VendorCategoriesController < ApplicationController
+class Admin::VendorCategoriesController < Admin::BaseController
 
   def create
     @vendor_category = VendorCategory.new(vc_params)

@@ -1,4 +1,4 @@
-class Admin::AddressesController < ApplicationController
+class Admin::AddressesController < Admin::BaseController
     before_action :set_address, only: [:edit, :update]
 
     def index

@@ -1,4 +1,4 @@
-class Admin::UsersBrandsController < ApplicationController
+class Admin::UsersBrandsController < Admin::BaseController
 
     def create
         @users_brand = UsersBrand.new(ub_params)

@@ -1,4 +1,4 @@
-class Admin::HotelsController < ApplicationController
+class Admin::HotelsController < Admin::BaseController
     before_action :set_hotel, only: [:edit, :update, :show, :destroy]
 
     def index

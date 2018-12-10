@@ -1,4 +1,4 @@
-class Admin::UserTimeLogsController < ApplicationController
+class Admin::UserTimeLogsController < Admin::BaseController
     before_action :set_user_time_log, only: [:edit, :update, :show, :destroy]
 
     def index

@@ -1,4 +1,4 @@
-class Admin::StyleAttributesController < ApplicationController
+class Admin::StyleAttributesController < Admin::BaseController
     before_action :set_style_attribute, only: [:edit, :update]
 
     def index

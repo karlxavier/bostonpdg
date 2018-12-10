@@ -1,4 +1,4 @@
-class Admin::DefaultWorksController < ApplicationController
+class Admin::DefaultWorksController < Admin::BaseController
     before_action :set_default_work, only: [:edit, :update, :show, :destroy]
 
     def index

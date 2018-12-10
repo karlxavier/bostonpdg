@@ -1,4 +1,4 @@
-class Admin::NotificationsController < ApplicationController
+class Admin::NotificationsController < Admin::BaseController
 
 	def index
 		@audits = Audit.order(created_at: :desc).limit(100)

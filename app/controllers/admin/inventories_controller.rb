@@ -1,4 +1,4 @@
-class Admin::InventoriesController < ApplicationController
+class Admin::InventoriesController < Admin::BaseController
     before_action :set_inventory, only: [:edit, :update]
 
     def index

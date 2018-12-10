@@ -1,4 +1,4 @@
-class Admin::DefaultTemplatesController < ApplicationController
+class Admin::DefaultTemplatesController < Admin::BaseController
   before_action :set_default_template, only: [:edit, :update, :show]
 
   def index

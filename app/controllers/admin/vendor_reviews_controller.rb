@@ -1,4 +1,4 @@
-class Admin::VendorReviewsController < ApplicationController
+class Admin::VendorReviewsController < Admin::BaseController
 	before_action :set_vendor
 
 	def index

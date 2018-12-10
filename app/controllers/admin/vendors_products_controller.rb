@@ -1,4 +1,4 @@
-class Admin::VendorsProductsController < ApplicationController
+class Admin::VendorsProductsController < Admin::BaseController
 
   def create
     @vendors_product = VendorsProduct.new(vp_params)

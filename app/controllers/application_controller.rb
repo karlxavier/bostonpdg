@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
-  helper_method :user_notification_count
+  helper_method :user_notification_count 
 
   def user_notification_count
     @notifications_count = Audit.unread_count(current_user.last_notified)

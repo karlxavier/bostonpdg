@@ -1,5 +1,5 @@
 module Admin
-  class OrderEntriesController < Admin::ApplicationController
+  class OrderEntriesController < Admin::BaseController
     # To customize the behavior of this controller,
     # you can overwrite any of the RESTful actions. For example:
     #
