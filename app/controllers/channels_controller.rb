@@ -2,7 +2,13 @@ class ChannelsController < ApplicationController
     before_action :set_channel, only: [:edit, :update, :show, :destory]
 
     def index
-        @channels = Channel.order(created_at: :desc)
+        if user_signed_in?
+            if current_user.admin?
+                @channels = Channel.order(created_at: :desc)
+            else
+                @channels = Channel.user_channels(current_user.id)
+            end
+        end
         @channel = @channels.first
     end
 

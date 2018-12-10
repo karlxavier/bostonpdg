@@ -65,8 +65,8 @@
                                         <% end %>
                                     </td>
                                     <td><%= utl.description %></td>
-                                    <td><%= utl.time_in %></td>
-                                    <td><%= utl.time_out %></td>
+                                    <td><%= utl.time_in.strftime("%B %d, %Y %I:%M %P") %></td>
+                                    <td><%= utl.time_out.present? ? utl.time_out.strftime("%B %d, %Y %I:%M %P") : '...' %></td>
                                     <td>
                                         <% if utl.time_out.present? %>
                                             <%= replace_unwanted_words remove_unwanted_words distance_of_time_in_words(utl.time_out, utl.time_in, include_seconds: true) %>
