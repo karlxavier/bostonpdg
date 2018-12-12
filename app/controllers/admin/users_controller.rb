@@ -50,7 +50,7 @@ class Admin::UsersController < Admin::BaseController
     		params.require(:user).permit(:email, :password, :password_confirmation, :role_mask, :admin, :billing_address, :shipping_address, :first_name, 
     									:last_name, :brand_id, :group_id, :mobile, :notes, :active, :title, :phone, 
     									:customer_id, :vendor_id, :regional_director, :client_contacts, :communications,
-                                        :art_director, :designers, :processor)
+                                        :art_director, :designers, :processor, :ip_address)
     	end
 
     	def set_user
