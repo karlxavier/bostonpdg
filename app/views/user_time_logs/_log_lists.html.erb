@@ -30,17 +30,17 @@
                                 <small>Duration</small>
                             </td>
                             <td class="project-title">
-                                <strong><%= detail.description.truncate(35) %></strong>
+                                <strong><%= detail.description.present? ? detail.description.truncate(35) : '' %></strong>
                                 <br>
                                 <small>Working on</small>
                             </td>
                             <td class="project-title">
-                                <strong><%= detail.time_in.strftime("%I:%M %P") %></strong>
+                                <strong><%= detail.time_in.present? ? detail.time_in.strftime("%I:%M %P") : '' %></strong>
                                 <br>
                                 <small>Time in</small>
                             </td>
                             <td class="project-title">
-                                <strong><%= detail.time_out.strftime("%I:%M %P") %></strong>
+                                <strong><%= detail.time_out.present? ? detail.time_out.strftime("%I:%M %P") : '' %></strong>
                                 <br>
                                 <small>Time out</small>
                             </td>
