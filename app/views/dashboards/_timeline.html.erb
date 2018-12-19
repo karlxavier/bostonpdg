@@ -11,20 +11,36 @@
 
 				<div class="vertical-timeline-content">
 					<h2><%= user_timelog.description %></h2>
-					<div>
-						<span class="vertical-date">
-							Time In <br>
-							<strong class="text-warning"><%= user_timelog.time_in.strftime("%I:%M %P") %></strong>
-						</span>
+
+					<div class="row">
+						<div class="col-md-4" align="center">
+							<span>
+								Time In <br>
+								<strong class="text-warning"><%= user_timelog.time_in.strftime("%I:%M %P") %></strong>
+							</span>
+						</div>
+
+						<div class="col-md-4" align="center">
+							<span>
+								Duration <br>
+								<strong class="text-success">
+									<% if user_timelog.time_out.present? %>
+										<%= replace_unwanted_words remove_unwanted_words distance_of_time_in_words(user_timelog.time_out, user_timelog.time_in, include_seconds: true) %>
+									<% else %>
+										....
+                                    <% end %>
+								</strong>
+							</span>
+						</div>
+
+						<div class="col-md-4" align="center">
+							<span>
+								Time Out <br>
+								<strong class="text-warning"><%= user_timelog.time_out.present? ? user_timelog.time_out.strftime("%I:%M %P") : "...." %></strong>
+							</span>
+						</div>
 					</div>
 
-					<div class="pull-right">
-						<span class="vertical-date">
-							Time Out <br>
-							<strong class="text-warning"><%= user_timelog.time_out.present? ? user_timelog.time_out.strftime("%I:%M %P") : "...." %></strong>
-						</span>
-					</div>
-					
 				</div>
 			</div>
 		<% end %>
