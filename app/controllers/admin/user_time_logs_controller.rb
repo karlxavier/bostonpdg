@@ -56,7 +56,7 @@ class Admin::UserTimeLogsController < Admin::BaseController
     private
 
         def user_time_log_params
-            params.require(:user_time_log).permit(:time_in, :time_out, :user_id, :duration, :active, :office_time_log_id)
+            params.require(:user_time_log).permit(:time_in, :time_out, :user_id, :duration, :active, :office_time_log_id, :description)
         end
 
         def set_user_time_log
