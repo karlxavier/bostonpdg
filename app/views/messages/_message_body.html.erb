@@ -8,17 +8,17 @@
 					mime_type = attachment_data.original.metadata.mime_type
 					%>
       		<% if is_downloadable_file?(mime_type)%>
-						<div style="text-align: left;">
-							<br>
-							<%= file_icon(mime_type) %>
-							<%= link_to attachment_data.original.metadata.filename, message.attachment_url(:original), download: attachment_data.original.metadata.filename, target: :_blank %>
-						</div>
-					<% else %>
-					<div class="feed-photo">
-							<br>
-							<%= image_tag message.attachment_url(:original), class: "msg_image" %>	
-						</div>
-					<% end %>
+				<div style="text-align: left;">
+					<br>
+					<%= file_icon(mime_type) %>
+					<%= link_to attachment_data.original.metadata.filename, message.attachment_url(:original), download: attachment_data.original.metadata.filename, target: :_blank %>
+				</div>
+			<% else %>
+				<div class="feed-photo">
+					<br>
+					<%= image_tag message.attachment_url(:original), class: "msg_image" %>	
+				</div>
+			<% end %>
   		<% end %>
 
 </div>

@@ -1,0 +1,61 @@
+<div class="fh-breadcrumb">
+    <div class="fh-column">
+        <ul class="list-group elements-list">
+            <% @documents.each do |document| %>
+                <li class="list-group-item">
+                    <a class="nav-link active show" data-toggle="tab" href="#tab-1">
+                        <div class="file-box">
+                            <div class="file">
+                                <a href="#">
+                                    <span class="corner"></span>
+
+                                    <div class="icon">
+                                        <i class="fa fa-line-chart"></i>
+                                    </div>
+                                    <div class="file-name">
+                                        <%= document.description %>
+                                        <br>
+                                        <small>Uploaded: <%= document.created_at %></small>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                    </a>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+
+    <div class="full-height">
+        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div class="full-height-scroll white-bg border-left" style="overflow: hidden; width: auto; height: 100%;">
+
+            <div class="element-detail-box" style="background-color: #000000;">
+
+                <div class="tab-content" style="background-color: #000000;">
+                    <div id="tab-1" class="tab-pane active show">
+
+                        <div class="float-right">
+                            <div class="tooltip-demo">
+                                <button class="btn btn-white btn-xs" data-toggle="tooltip" data-placement="left" title="" data-original-title="Plug this message"><i class="fa fa-plug"></i> Plug it</button>
+                                <button class="btn btn-white btn-xs" data-toggle="tooltip" data-placement="top" title="Mark as read"><i class="fa fa-eye"></i> </button>
+                                <button class="btn btn-white btn-xs" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as important"><i class="fa fa-exclamation"></i> </button>
+                                <button class="btn btn-white btn-xs" data-toggle="tooltip" data-placement="top" title="" data-original-title="Move to trash"><i class="fa fa-trash-o"></i> </button>
+
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <% if @documents.first.attachment_data? %>
+                                <%= image_tag @documents.first.attachment_url(:original) %>	
+                            <% end %> 
+                        </div>
+                       
+                    </div>
+                </div>
+
+            </div>
+
+        </div><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 564.004px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+    </div>
+
+</div>

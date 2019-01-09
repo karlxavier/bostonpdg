@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181212145634) do
+ActiveRecord::Schema.define(version: 20190109110744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,20 @@ ActiveRecord::Schema.define(version: 20181212145634) do
 
   create_table "default_works", force: :cascade do |t|
     t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "document_shares", force: :cascade do |t|
+    t.integer "document_upload_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "document_uploads", force: :cascade do |t|
+    t.string "description"
+    t.text "attachment_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -578,11 +592,19 @@ ActiveRecord::Schema.define(version: 20181212145634) do
     t.boolean "main_contact", default: false
   end
 
+  create_table "users_group_details", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "users_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users_groups", force: :cascade do |t|
     t.integer "user_id"
     t.integer "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
   end
 
   create_table "vendor_categories", force: :cascade do |t|

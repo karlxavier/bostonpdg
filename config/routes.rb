@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:edit, :update]
+  resources :document_uploads, only: [:index]
   resources :search_results, only: :index
   resources :dynamic_messages, only: :show
   resources :dynamic_item_messages, only: :show
@@ -120,10 +121,14 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :notifications
-    resources :users
+    resources :users do
+      get 'group_assign', to: 'users_groups#group_assign', as: 'group_assign'
+    end
+    resources :document_uploads
     resources :user_time_logs
     resources :users_brands
     resources :users_groups
+    resources :users_group_details
     resources :customers
     resources :inventories
     resources :vendors do

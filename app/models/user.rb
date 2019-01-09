@@ -43,9 +43,14 @@ class User < ApplicationRecord
   has_many :groups
   has_many :users_brands
   has_many :user_time_logs
+  has_many :users_group_details
+  has_many :users_groups, through: :users_group_details
 
   has_many :channel_users
   has_many :channels, through: :channel_users
+
+  has_many :document_shares
+  has_many :document_uploads, through: :document_shares
 
   # has_many :comms, class_name: 'OrderUser', primary_key: 'id', foreign_key: 'comms'
   # has_many :chatroom_orders, through: :comms

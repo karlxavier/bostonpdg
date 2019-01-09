@@ -86,6 +86,12 @@
                     <% end %>
                 </li>
                 <li>
+                    <%= link_to admin_document_uploads_path, style: "display: block;" do %>
+                        <i class="fa fa-clock"></i> 
+                        <span class="nav-label">Uploaded Documents</span>
+                    <% end %>
+                </li>
+                <li>
                     <%= link_to admin_inventories_path, style: "display: block;" do %>
                         <i class="fa fa-bars"></i> 
                         <span class="nav-label">Inventories</span>
@@ -137,6 +143,12 @@
                 <%= link_to admin_default_templates_path, style: "display: block;" do %>
                   <i class="fa fa-envelope-open"></i>
                   <span class="nav-label">Default Template</span>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to admin_users_groups_path, style: "display: block;" do %>
+                  <i class="fa fa-users"></i>
+                  <span class="nav-label">User Groups</span>
                 <% end %>
               </li>
             </ul>

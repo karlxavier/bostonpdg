@@ -26,7 +26,8 @@ class AttachmentUploader < Shrine
   	plugin :validation_helpers
   	plugin :processing
   	plugin :versions
-  	plugin :versions, names: [:original]
+	plugin :versions, names: [:original]
+	plugin :metadata_attributes, filename: :original_filename
 
   	Attacher.validate do
     	validate_max_size 5.megabytes, message: 'is too large (max is 5 MB)'
