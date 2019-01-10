@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   mount ActionCable.server => "/cable"
+  mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
 
   root 'user_time_logs#index'
   devise_for :users
@@ -35,7 +36,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:edit, :update]
-  resources :document_uploads, only: [:index]
+  resources :document_uploads, only: [:index, :show]
   resources :search_results, only: :index
   resources :dynamic_messages, only: :show
   resources :dynamic_item_messages, only: :show

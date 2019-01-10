@@ -46,6 +46,7 @@
 //= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
 //= require select2.min
+//= require pdfjs
 
 $(document).on("turbolinks:load", function() {
   $(".selectpicker").selectpicker();

@@ -67,6 +67,7 @@ gem 'redis', '~> 3.0'
 gem 'cocoon'
 gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
+gem 'pdfjs_viewer-rails'
 
 # for crm log audits
 gem "audited", "~> 4.7"
