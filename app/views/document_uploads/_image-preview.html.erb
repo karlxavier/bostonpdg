@@ -18,5 +18,7 @@
         </div>  
     </div>
 <% else %>
-    <%= image_tag document.attachment_url(:original), class: "image-preview" %>	
+    <div id="pdf" style="height:100vh; padding-top: 10px;"> 
+        <%= image_tag document.attachment_url(:original), class: "image-preview" %>	
+    </div>
 <% end %>
