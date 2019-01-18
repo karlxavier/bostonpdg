@@ -60,7 +60,6 @@
   </div>
 </div>
 <script type="text/javascript">
-    $( document ).on('turbolinks:load', function() {
         if (! $('.dataTables-list').hasClass('initialized')) {
             $('.dataTables-list').not('.initialized').addClass('initialized').DataTable({
                 pageLength: 25,
@@ -84,11 +83,9 @@
                     }
                 ]
             });
-        }
+        };
 
         $(document).on('click', '#upload-hotels', function (e) {
           e.stopPropagation();
         });
-
-    });
 </script>
