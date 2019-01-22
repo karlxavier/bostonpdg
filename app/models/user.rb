@@ -39,6 +39,8 @@ class User < ApplicationRecord
   
   audited except: [:last_notified, :updated_at, :last_notified, :last_sign_in_at, :last_sign_in_ip, :sign_in_count, :current_sign_in_at, :current_sign_in_ip]
 
+  has_associated_audits
+
   has_many :brands
   has_many :groups
   has_many :users_brands

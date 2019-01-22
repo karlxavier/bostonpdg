@@ -12,10 +12,14 @@
 #
 
 class Message < ApplicationRecord
+	
 	extend Textacular
 	belongs_to :chatroom_order
-	  belongs_to :user
-	  belongs_to :channel
+	belongs_to :user
+	belongs_to :channel
+
+	audited associated_with: :channel
+	audited associated_with: :user
 
   	include AttachmentUploader[:attachment]
 

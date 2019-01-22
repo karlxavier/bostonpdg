@@ -1,7 +1,11 @@
 class Channel < ApplicationRecord
+    audited
+    
     has_many :channel_users
     has_many :users, through: :channel_users
     has_many :messages
+
+    has_associated_audits
 
     accepts_nested_attributes_for :channel_users, allow_destroy: :destroy
 

@@ -23,7 +23,7 @@
                     <span>Orders</span> 
                 <% end %>
             </li>
-            <li class="<%= controller.class.name.split("::").first == 'DocumentUploadsController' ? 'active' : '' %>" style="display: none;">
+            <li class="<%= controller.class.name.split("::").first == 'DocumentUploadsController' ? 'active' : '' %>">
                 <%= link_to document_uploads_path do %>
                     <i class="fas fa-file-image"></i> 
                     <span>Shared Documents</span> 
@@ -39,6 +39,12 @@
                 <%= link_to user_time_logs_path do %>
                     <i class="far fa-clock"></i> 
                     Time Logs
+                <% end %>
+            </li>
+            <li class="<%= controller.class.name.split("::").first == 'NotificationsController' ? 'active' : '' %>">
+                <%= link_to notifications_path do %>
+                    <i class="far fa-bell"></i> 
+                    Notifications
                 <% end %>
             </li>
         </ul>

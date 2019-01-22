@@ -3,11 +3,35 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   helper_method :user_notification_count 
+  helper_method :front_notification_count 
+  helper_method :user_notifications 
+  helper_method :front_unread_notifications
 
   def user_notification_count
     @notifications_count = Audit.unread_count(current_user.last_notified)
   end
 
+  def front_notification_count
+    if current_user.admin?
+      @notifications_count =  Audit.admin_unread_count(current_user.front_last_notified, current_user.id)
+    else
+      @notifications_count =  Audit.user_unread_notifications(current_user.front_last_notified, current_user.id).count
+    end
+  end
+
+  def front_unread_notifications
+    if current_user.admin?
+      @notifications =  Audit.admin_unread_notifications(current_user.front_last_notified, current_user.id)
+    else
+      @notifications =  Audit.user_unread_notifications(current_user.front_last_notified, current_user.id)
+    end
+  end
+
+  def user_notifications
+    if current_user.admin?
+      Audit.admin_unread_notifications(current_user.front_last_notified, current_user.id)
+    end
+  end
 
   protected
 

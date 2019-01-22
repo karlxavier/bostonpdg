@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :messages
   end
 
+  resources :notifications, only: [:index]
   resources :users, only: [:edit, :update]
   resources :document_uploads, only: [:index, :show]
   resources :search_results, only: :index

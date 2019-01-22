@@ -2,6 +2,8 @@ class UserTimeLog < ApplicationRecord
     belongs_to :user
     belongs_to :office_time_log
 
+    audited associated_with: :user
+
     scope :get_active_time_in, -> (user_id) { includes(:user).where(user_id: user_id, active: true) }
     scope :group_logs, -> (user_id) { UserTimeLog.where(user_id: user_id).group("time_in::date").order("time_in::date DESC").sum(:duration)}
     scope :log_details, -> (user_id, time_in) { UserTimeLog.where("user_id = ? AND time_in::date = ?", user_id, time_in).where('duration IS NOT NULL AND time_in IS NOT NULL AND time_out IS NOT NULL ').order("time_in DESC") }

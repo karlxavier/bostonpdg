@@ -12,10 +12,56 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>
-                <!-- end navbar-header -->
-                
-                <!-- begin header-nav -->
+
                 <ul class="navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14" aria-expanded="true">
+                            <i class="fa fa-bell"></i>
+                            <span class="label"><%= front_notification_count %></span>
+                        </a>
+                        <ul class="dropdown-menu media-list dropdown-menu-right" x-placement="bottom-end" style="width: 320px; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-314px, 50px, 0px);">
+                            <li class="dropdown-header">NOTIFICATIONS (<%= front_notification_count %>)</li>
+                            <% if front_notification_count === 0 %>
+                                <li class="text-center text-warning">
+                                    No new notifications
+                                </li>
+                            <% end %>
+                            <% front_unread_notifications.limit(6).each do |notification| %>
+                                <% if notification.auditable_type === 'Message'  %>
+                                    <li class="media">
+                                        <%= link_to channels_path do %>
+                                            <div class="media-left">
+                                                <i class="fa fa-comments media-object bg-silver-darker"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><%= notification.user.full_name %></h6>
+                                                <p style="font-size: 12px;"><%= notification.audited_changes['body'] %></p>
+                                                <div class="text-muted f-s-11"><%= time_ago_in_words(notification.created_at) %> ago</div>
+                                            </div>
+                                        <% end %>
+                                    </li>
+                                <% else %>
+                                    <li class="media">
+                                        <%= link_to dashboards_path do %>
+                                            <div class="media-left">
+                                                <i class="fa fa-clock media-object bg-silver-darker"></i>
+                                                <i class="fas fa-stopwatch <%= notification.action === 'create' ? 'text-success' : 'text-warning' %> media-object-icon f-s-14"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><%= notification.action === 'create' ? "Time In at #{notification.audited_changes['description']}" : "Time Out" %></h6>
+                                                <p style="font-size: 12px;"><%= notification.user.full_name %></p>
+                                                <div class="text-muted f-s-11"><%= time_ago_in_words(notification.created_at) %> ago</div>
+                                            </div>
+                                        <% end %>
+                                    </li>
+                                <% end %>
+                            <% end %>
+
+                            <li class="dropdown-footer text-center">
+                                <%= link_to 'View more', notifications_path %>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="dropdown navbar-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="d-none d-md-inline"><%= current_user.full_name %></span> <b class="caret"></b>
