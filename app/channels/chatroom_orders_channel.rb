@@ -9,13 +9,17 @@ class ChatroomOrdersChannel < ApplicationCable::Channel
 	    #   		stream_from "chatrooms:#{chatroom.id}"
 	    # 	end
 		# end
-		# ChatroomOrder.all.each do |chatroom|
-		# 	stream_from "chatrooms:#{chatroom.id}"
-		  # end
-		
-		Channel.all.each do |channel|
-			stream_from "channels:#{channel.id}"
+
+		if current_user.admin?
+			Channel.all.each do |channel|	
+				stream_from "channels:#{channel.id}"
+		  	end
+		else
+			Channel.user_broadcast_channels(current_user.id).each do |channel|
+				stream_from "channels:#{channel.channel_id}"
+		  	end
 	  	end
+
   	end
 
   	def unsubscribed

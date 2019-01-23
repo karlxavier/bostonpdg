@@ -1,0 +1,17 @@
+<li class="dropdown-header">NOTIFICATIONS (<%= front_notification_count %>)</li>
+<% if front_notification_count === 0 %>
+    <li class="text-center text-warning">
+        No new notifications
+    </li>
+<% end %>
+<% front_unread_notifications.limit(6).each do |notification| %>
+    <% if notification.auditable_type === 'Message'  %>
+        <%= render 'layouts/static/notification_message', notification: notification %>
+    <% else %>
+        <%= render 'layouts/static/notification_timelog', notification: notification %>
+    <% end %>
+<% end %>
+
+<li class="dropdown-footer text-center">
+    <%= link_to 'View more', notifications_path %>
+</li>

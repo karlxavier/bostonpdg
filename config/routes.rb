@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :dashboards, only: [:index, :show]
 
   get 'get_start_second', :to => 'user_time_logs#get_start_second', as: 'get_start_second'
+  get 'load_notifications', :to => 'notifications#load_notifications', as: 'load_notifications'
 
   resources :channels do
     resources :channel_users

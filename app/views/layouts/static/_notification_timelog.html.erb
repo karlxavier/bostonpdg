@@ -1,0 +1,13 @@
+<li class="media">
+    <%= link_to dashboards_path do %>
+        <div class="media-left">
+            <i class="fa fa-clock media-object bg-silver-darker"></i>
+            <i class="fas fa-stopwatch <%= notification.action === 'create' ? 'text-success' : 'text-warning' %> media-object-icon f-s-14"></i>
+        </div>
+        <div class="media-body">
+            <h6 class="media-heading"><%= notification.action === 'create' ? "Time In at #{notification.audited_changes['description']}" : "Time Out" %></h6>
+            <p style="font-size: 12px;"><%= notification.user.full_name %></p>
+            <div class="text-muted f-s-11"><%= time_ago_in_words(notification.created_at) %> ago</div>
+        </div>
+    <% end %>
+</li>

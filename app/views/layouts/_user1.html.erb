@@ -14,13 +14,13 @@
                 </div>
 
                 <ul class="navbar-nav navbar-right" id="user-notifications">
-                    <li class="dropdown">
-                        <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14" aria-expanded="true">
+                    <li id="notificaiton_dropdown" class="dropdown">
+                        <%= link_to load_notifications_path, class: "dropdown-toggle f-s-14", data: {toggle: 'dropdown'}, aria: {expanded: true}, remote: true do %>
                             <i class="fa fa-bell"></i>
                             <span id="notification-count" class="label" style="<%= front_notification_count > 0 ? '' : 'display: none;' %>">
                                 <%= front_notification_count %>
                             </span>
-                        </a>
+                        <% end %>
                         <ul id="load_notifications" class="dropdown-menu media-list dropdown-menu-right" x-placement="bottom-end" style="width: 320px; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-314px, 50px, 0px);">
                             <%= render 'layouts/notifications' %>
                         </ul>
@@ -53,11 +53,7 @@
     <input type="hidden" id="browser_id" value="<%= current_user.id %>">
 </div>
 <script>
-    $('.dropdown').on('show.bs.dropdown', function (event) {
-        $.ajax({
-            type: 'GET',
-            dataType: 'script',
-            url: '/load_notifications'
-        });
+    $('.show.bs.dropdown').on('show.bs.dropdown', function () {
+        alert("x");
     })
 </script>

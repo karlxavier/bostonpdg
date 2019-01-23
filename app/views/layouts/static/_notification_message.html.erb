@@ -1,0 +1,12 @@
+<li class="media">
+    <%= link_to channels_path do %>
+        <div class="media-left">
+            <i class="fa fa-comments media-object bg-silver-darker"></i>
+        </div>
+        <div class="media-body">
+            <h6 class="media-heading"><%= notification.user.full_name %></h6>
+            <p style="font-size: 12px;"><%= notification.audited_changes['body'] %></p>
+            <div class="text-muted f-s-11"><%= time_ago_in_words(notification.created_at) %> ago</div>
+        </div>
+    <% end %>
+</li>

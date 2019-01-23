@@ -37,6 +37,29 @@
                                 </ul>
                                 <%= link_to 'Create New', new_admin_user_time_log_path, class: "btn btn-primary btn-sm" %>
                             </div>
+                            <%= form_for :filter, method: :get do |f| %>
+                                <div class=row>
+                                    <div class="col-md-2">
+                                        <div class="input-group date" id="datetimepicker1">
+                                            <%= f.text_field :from_date, class: "form-control", placeholder: "From Date", required: "" %>
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group date" id="datetimepicker2">
+                                            <%= f.text_field :to_date, class: "form-control", placeholder: "To Date", required: "" %>
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <%= f.submit 'Filter', class: "btn btn-lime btn-sm m-r-5 m-b-5"%>
+                                    </div>
+                                </div>
+                            <% end %>
                 </div>
                 <div class="ibox-content">
                   <div class="table-responsive">
@@ -49,7 +72,6 @@
                                 <th>Time-in</th>
                                 <th>Time-out</th>
                                 <th>Duration</th>
-                                <th>Office</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -72,7 +94,7 @@
                                             <%= replace_unwanted_words remove_unwanted_words distance_of_time_in_words(utl.time_out, utl.time_in, include_seconds: true) %>
                                         <% end %>
                                     </td>
-                                    <td><%= utl.office_time_log.present? ? utl.office_time_log.name : '' %></td>
+                                    
                                     <td>
                                         <div class="btn-group">
                                             <%= link_to 'Edit', edit_admin_user_time_log_path(utl), class: "btn btn-xs btn-white" %>
@@ -90,7 +112,7 @@
     </div>
 </div>
 <script type="text/javascript">
- 
+    $(document).ready(function(){
         if (! $('.dataTables-list').hasClass('initialized')) {
             $('.dataTables-list').not('.initialized').addClass('initialized').DataTable({
                 pageLength: 25,
@@ -120,5 +142,14 @@
           e.stopPropagation();
         });
 
- 
+        $("#datetimepicker1").datetimepicker({
+            format:'YYYY-MM-DD',
+        });
+
+        $("#datetimepicker2").datetimepicker({
+            format:'YYYY-MM-DD',
+        });
+
+    });
 </script>
+

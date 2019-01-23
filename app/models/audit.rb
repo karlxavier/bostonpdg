@@ -25,9 +25,9 @@ class Audit < Audited::Audit
 	scope :unread_count, -> (last_notified){ where('created_at > ?', last_notified).count }
 
 	# scope :normal_user_unread_count, -> (user_id) { where(auditable_type: 'Message').where("audited_changes['channel_id'] IN (?)", user_channels(user_id)) }
-	scope :new_messages, -> { select(:audited_changes['channel_id']).where(auditable_type: 'Message') }
+	# scope :new_messages, -> { select(:audited_changes['channel_id']).where(auditable_type: 'Message') }
 
-	scope :unread_messages, -> { ChannelUser.user_msg_channel(new_messages.audited_changes['channel_id']) }
+	# scope :unread_messages, -> { ChannelUser.user_msg_channel(new_messages.audited_changes['channel_id']) }
 
 	scope :user_channels, -> (user_id) { ChannelUser.select(:channel_id).where(user_id: user_id).distinct.pluck(:channel_id) }
 

@@ -2,7 +2,11 @@ class Admin::UserTimeLogsController < Admin::BaseController
     before_action :set_user_time_log, only: [:edit, :update, :show, :destroy]
 
     def index
-        @user_time_logs = UserTimeLog.all_active_logs
+        if params[:filter].present?
+            @user_time_logs = UserTimeLog.admin_filter_timelogs(DateTime.parse(params[:filter][:from_date].to_s).to_date, DateTime.parse(params[:filter][:to_date].to_s).to_date)
+        else
+            @user_time_logs = UserTimeLog.all_active_logs
+        end
     end
 
     def new
