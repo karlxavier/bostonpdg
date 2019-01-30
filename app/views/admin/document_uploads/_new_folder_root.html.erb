@@ -1,0 +1,43 @@
+<div id="modal-shows">
+<div class="modal fade" id="modal-dialog" style="display: none;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <h3>
+                    Create New Folder
+                </h3>
+                <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            </div>
+            <%= form_for [:admin, DocumentUpload.new], html: { class: "form-horizontal" } do |f| %>
+                <div class="modal-body">
+                        <div class="form-group">
+                            <label>Folder Name</label> 
+                            <%= f.text_field :description, class: "form-control" %>
+                        </div>
+                        <div class="form-group">
+                            <label>Shared To</label>
+                                <%= collection_select(:document_upload, :user_ids, 
+                                    User.order(:email),:id,:full_name, 
+                                    {:prompt=>true},
+                                    {class: "select2 form-control", style: "width: 100%;", multiple: true}) 
+                                %>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
+                        Save changes
+                    <% end %> 
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.chosen-select').chosen({width: "100%"});
+
+    $('.select2').select2();
+  })
+</script>

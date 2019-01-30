@@ -1,0 +1,13 @@
+<li>
+    <%= link_to 'Home', admin_document_uploads_path %>
+</li>
+<% parents.each do |parent| %>
+    <li>
+        <%= link_to parent.description, admin_document_upload_path(parent), remote: true  %>
+    </li>
+<% end %>
+<li>
+    <strong>
+        <%= selected.description %>
+    </strong>
+</li>

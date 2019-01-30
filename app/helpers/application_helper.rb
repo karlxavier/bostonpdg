@@ -1,5 +1,41 @@
 module ApplicationHelper
 
+  def render_tree(nodes)
+    return ''.html_safe if nodes.empty?
+    content_tag(:ul) do
+      nodes.map do |node|
+        content_tag(:li) do
+        #  link_to(page.name, page_path(node)) + render_tree(node.children)
+        node.description + render_tree(node.children)
+        # render_tree(node.children)
+        end
+      end.join.html_safe
+    end
+  end
+
+  def tree_data
+    output = []
+    DocumentUpload.roots.each do |docs|
+      output << data(docs)
+    end
+    "{ core: { 'data': " + output.to_json + " }}"
+  end
+
+  def data(docs)
+    children = []
+      unless docs.subs.blank?
+        docs.subs.each do |doc|
+          children << data(doc)
+        end
+      end
+      if children.blank?
+        {text: docs.description}
+      else
+        {text: docs.description, children: children}
+      end
+      
+  end
+
   def remove_unwanted_words string
     bad_words = ["less than", "about", " "]
   

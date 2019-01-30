@@ -1,0 +1,10 @@
+<h5>Options</h5>
+<div class="hr-line-dashed"></div>
+<%= link_to admin_document_upload_new_folder_sub_path(selected), class: "btn btn-outline btn-link", remote: true do %>
+    <i class="fa fa-folder-open"></i> Create New Folder
+<% end %>
+<%= link_to admin_document_upload_upload_files_path(selected), class: "btn btn-outline btn-link", remote: true do %>
+    <i class="fa fa-upload"></i> Upload File
+<% end %>
+
+<div class="clearfix"></div>

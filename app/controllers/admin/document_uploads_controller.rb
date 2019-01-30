@@ -1,8 +1,9 @@
 class Admin::DocumentUploadsController < Admin::BaseController
-    before_action :set_document, only: [:edit, :update]
+    before_action :set_document, only: [:edit, :update, :show]
 
     def index
-        @document_uploads = DocumentUpload.all
+        # @document_uploads = DocumentUpload.all
+        @roots = DocumentUpload.roots
     end
 
     def new
@@ -24,6 +25,13 @@ class Admin::DocumentUploadsController < Admin::BaseController
     def edit
     end
 
+    def show
+        @parents = @document_upload.get_parents
+        respond_to do |format|
+            format.js
+        end
+    end
+
     def update
         respond_to do |format|
             if @document_upload.update_attributes(doc_params)
@@ -34,10 +42,39 @@ class Admin::DocumentUploadsController < Admin::BaseController
         end
     end
 
+    def new_folder_root
+        respond_to do |format|
+            format.js
+        end
+    end
+
+    def new_folder_sub
+        @parent = DocumentUpload.find(params[:document_upload_id])
+        respond_to do |format|
+            format.js
+        end
+    end
+
+    def upload_files
+        if params[:document_upload_id] != '0'
+            @parent = DocumentUpload.find(params[:document_upload_id])
+        end
+        respond_to do |format|
+            format.js
+        end
+    end
+
+    def doc_preview
+        @document = DocumentUpload.find(params[:document_upload_id])
+        respond_to do |format|
+            format.js
+        end
+    end
+
     private
 
         def doc_params
-            params.require(:document_upload).permit(:description, :attachment, user_ids: [])
+            params.require(:document_upload).permit(:description, :attachment, :document_upload_id, user_ids: [])
         end
 
         def set_document

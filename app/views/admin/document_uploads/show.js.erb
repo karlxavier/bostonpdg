@@ -1,0 +1,4 @@
+$("div#document-list").html("<%= escape_javascript(render 'show', documents: @document_upload ) %>");
+$("#breadcrumb").html("<%= escape_javascript(render 'breadcrumb', parents: @parents, selected: @document_upload ) %>");
+$("div#options").html("<%= escape_javascript(render 'options_sub', selected: @document_upload ) %>");
+$('#documents').removeClass('sk-loading');

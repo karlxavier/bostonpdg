@@ -127,7 +127,12 @@ Rails.application.routes.draw do
     resources :users do
       get 'group_assign', to: 'users_groups#group_assign', as: 'group_assign'
     end
-    resources :document_uploads
+    resources :document_uploads do
+      get 'new_folder_root', on: :collection
+      get 'new_folder_sub'
+      get 'upload_files'
+      get 'doc_preview'
+    end
     resources :user_time_logs
     resources :users_brands
     resources :users_groups

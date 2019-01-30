@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190121124028) do
+ActiveRecord::Schema.define(version: 20190129152731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,9 @@ ActiveRecord::Schema.define(version: 20190121124028) do
     t.text "attachment_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "document_upload_id"
+    t.integer "status", default: 0
+    t.index ["document_upload_id"], name: "index_document_uploads_on_document_upload_id"
   end
 
   create_table "email_template_attachments", force: :cascade do |t|
@@ -653,6 +656,7 @@ ActiveRecord::Schema.define(version: 20190121124028) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "document_uploads", "document_uploads"
   add_foreign_key "item_messages", "order_entries"
   add_foreign_key "item_messages", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"

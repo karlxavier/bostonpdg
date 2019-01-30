@@ -47,6 +47,7 @@
 //= require autocomplete-rails
 //= require select2.min
 //= require pdfjs
+//= require jsTree.min
 
 $(document).on("turbolinks:load", function() {
   $(".selectpicker").selectpicker();
