@@ -49,6 +49,7 @@ class Admin::DocumentUploadsController < Admin::BaseController
     end
 
     def new_folder_sub
+        # @parent_document = DocumentUpload.find(params[:document_upload_id]).subs.new
         @parent = DocumentUpload.find(params[:document_upload_id])
         respond_to do |format|
             format.js
@@ -66,6 +67,20 @@ class Admin::DocumentUploadsController < Admin::BaseController
 
     def doc_preview
         @document = DocumentUpload.find(params[:document_upload_id])
+        respond_to do |format|
+            format.js
+        end
+    end
+
+    def edit_folder
+        @document_upload = DocumentUpload.find(params[:document_upload_id])
+        respond_to do |format|
+            format.js
+        end
+    end
+
+    def share_file
+        @document_upload = DocumentUpload.find(params[:document_upload_id])
         respond_to do |format|
             format.js
         end

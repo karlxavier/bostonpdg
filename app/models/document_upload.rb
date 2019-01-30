@@ -4,6 +4,9 @@ class DocumentUpload < ApplicationRecord
     has_many :document_shares
     has_many :users, through: :document_shares
 
+    # belongs_to :parent, class_name: 'DocumentUpload', optional: true, foreign_key: :document_upload_id
+    # has_many :subs, class_name: 'DocumentUpload', dependent: :destroy
+
     has_many :subs, class_name: 'DocumentUpload', dependent: :destroy
     belongs_to :parent, class_name: 'DocumentUpload', optional: true, foreign_key: :document_upload_id
 

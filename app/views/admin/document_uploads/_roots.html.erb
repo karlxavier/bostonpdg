@@ -11,20 +11,26 @@
                     mime_type = ''
                 end
             %>
-
+            
             <tr>
                 <td class="contact-type" style="padding-right: 0;">
                     <%= link_to mime_type === '' ? admin_document_upload_path(root) : admin_document_upload_doc_preview_path(root), class: "root", remote: true  do %>
                         <% if mime_type === 'application/pdf' %>
                             <i class="fa fa-file-pdf-o fa-4x text-danger" aria-hidden="true"></i>
+                        <% elsif mime_type === 'application/zip' %>
+                            <i class="fa fa-file-zip-o fa-4x text-danger" aria-hidden="true"></i>
                         <% elsif mime_type.include? "image" %>
                             <i class="fa fa-file-image-o fa-4x text-warning" aria-hidden="true"></i>
                         <% elsif mime_type.include? "sheet" %>
                             <i class="fa fa-file-excel-o fa-4x text-success" aria-hidden="true"></i>
                         <% elsif mime_type.include? "officedocument" %>
                             <i class="fa fa-file-word-o fa-4x text-info" aria-hidden="true"></i>
+                        <% elsif mime_type === 'text/plain' %>
+                            <i class="fa fa-file-excel-o fa-4x text-success" aria-hidden="true"></i>
                         <% elsif mime_type === '' %>
                             <i class="fa fa-folder fa-4x text-muted" aria-hidden="true"></i>
+                        <% else %>
+                            <i class="fa fa-file-code-o fa-4x text-muted" aria-hidden="true"></i>
                         <% end %>
                     <% end %>
                 </td>
@@ -48,12 +54,22 @@
                         <i class="fa fa-ellipsis-h"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user" x-placement="bottom-start" style="position: absolute; top: 18px; left: -68px; will-change: top, left;">
-                        <li><a href="#" class="dropdown-item">Share</a>
-                        </li>
-                        <li><a href="#" class="dropdown-item">Edit</a>
-                        </li>
-                        <li><a href="#" class="dropdown-item">Delete</a>
-                        </li>
+                        <% if mime_type === '' %>
+                            <li>
+                                <%= link_to 'Share', admin_document_upload_edit_folder_path(root), class: "dropdown-item", remote: true %>
+                            </li>
+                            <li>
+                                <%= link_to 'Edit', admin_document_upload_edit_folder_path(root), class: "dropdown-item", remote: true %>
+                            </li>
+                            <li><a href="#" class="dropdown-item">Delete</a>
+                            </li>
+                        <% else %>
+                            <li>
+                                <%= link_to 'Share', admin_document_upload_share_file_path(root), class: "dropdown-item", remote: true %>
+                            </li>
+                            <li><a href="#" class="dropdown-item">Delete</a>
+                            </li>
+                        <% end %>
                     </ul>
                 </td>
             </tr>

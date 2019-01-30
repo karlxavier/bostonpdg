@@ -1,0 +1,70 @@
+<div id="modal-shows">
+    <div class="modal fade" id="modal-dialog" style="display: none;">
+        <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <h3>
+                        <% 
+                            if @document_upload.attachment_data.present?
+                                attachment_data = JSON.parse(@document_upload.attachment_data, object_class: OpenStruct) 
+                                mime_type = attachment_data.original.metadata.mime_type
+                            else
+                                attachment_data = ''
+                                mime_type = ''
+                            end
+                        %>
+                        <% if mime_type === 'application/pdf' %>
+                            <i class="fa fa-file-pdf-o fa-4x text-danger" aria-hidden="true"></i>
+                        <% elsif mime_type.include? "image" %>
+                            <i class="fa fa-file-image-o fa-4x text-warning" aria-hidden="true"></i>
+                        <% elsif mime_type.include? "sheet" %>
+                            <i class="fa fa-file-excel-o fa-4x text-success" aria-hidden="true"></i>
+                        <% elsif mime_type.include? "officedocument" %>
+                            <i class="fa fa-file-word-o fa-4x text-info" aria-hidden="true"></i>
+                        <% elsif mime_type === '' %>
+                            <i class="fa fa-folder fa-4x text-muted" aria-hidden="true"></i>
+                        <% end %>
+                        <br>
+                        <small><%= attachment_data.original.metadata.filename %></small>
+                    </h3>
+                    <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </div>
+                <%= form_for [:admin, @document_upload], html: { class: "form-horizontal" } do |f| %>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label class="btn btn-success pointer-cursor" style="z-index: 1;">
+                                    <i class="fa fa-paperclip"></i>
+                                    Browse Files
+                                    <%= f.file_field :attachment, id: 'message-attachment', class: 'd-none', title: "Image upload" %>
+                                </label>
+                            </div> 
+                            <div class="form-group">
+                                <label>Shared To</label>
+                                    <%= collection_select(:document_upload, :user_ids, 
+                                        User.order(:email),:id,:full_name, 
+                                        {:prompt=>true},
+                                        {class: "select2 form-control", style: "width: 100%;", multiple: true}) 
+                                    %>
+                            </div>
+                            <% if @parent.present? %>
+                                <%= f.hidden_field :document_upload_id, value: @parent.id %>
+                            <% end %>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
+                            Save changes
+                        <% end %> 
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.chosen-select').chosen({width: "100%"});
+
+    $('.select2').select2();
+  })
+</script>

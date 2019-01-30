@@ -132,6 +132,8 @@ Rails.application.routes.draw do
       get 'new_folder_sub'
       get 'upload_files'
       get 'doc_preview'
+      get 'edit_folder'
+      get 'share_file'
     end
     resources :user_time_logs
     resources :users_brands
