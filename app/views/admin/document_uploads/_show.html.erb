@@ -53,12 +53,22 @@
                             <i class="fa fa-ellipsis-h"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user" x-placement="bottom-start" style="position: absolute; top: 18px; left: -68px; will-change: top, left;">
-                            <li><a href="#" class="dropdown-item">Share</a>
-                            </li>
-                            <li><a href="#" class="dropdown-item">Edit</a>
-                            </li>
-                            <li><a href="#" class="dropdown-item">Delete</a>
-                            </li>
+                            <% if mime_type === '' %>
+                                <li>
+                                    <%= link_to 'Share', admin_document_upload_edit_folder_path(document), class: "dropdown-item", remote: true %>
+                                </li>
+                                <li>
+                                    <%= link_to 'Edit', admin_document_upload_edit_folder_path(document), class: "dropdown-item", remote: true %>
+                                </li>
+                                <li><a href="#" class="dropdown-item">Delete</a>
+                                </li>
+                            <% else %>
+                                <li>
+                                    <%= link_to 'Share', admin_document_upload_share_file_path(document), class: "dropdown-item", remote: true %>
+                                </li>
+                                <li><a href="#" class="dropdown-item">Delete</a>
+                                </li>
+                            <% end %>
                         </ul>
                     </td>
                 </tr>
