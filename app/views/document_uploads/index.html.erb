@@ -13,8 +13,13 @@
                         <% @documents.each do |document| %>
 
                             <% 
-                            attachment_data = JSON.parse(document.attachment_data, object_class: OpenStruct) 
-                            mime_type = attachment_data.original.metadata.mime_type
+                                if document.attachment_data.present?
+                                    attachment_data = JSON.parse(document.attachment_data, object_class: OpenStruct) 
+                                    mime_type = attachment_data.original.metadata.mime_type
+                                else
+                                    attachment_data = ""
+                                    mime_type = ""
+                                end
                             %>
 
                             <div class="widget-list-item">
