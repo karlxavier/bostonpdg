@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
           redirect_to confirm_me_patients_patients_path
         end
       end
-    elsif self.class.to_s.split("::").first === 'Users'
+    elsif self.class.to_s.split("::").first === 'Users' || self.class.to_s.split("::").first === 'Admin'
       redirect_to new_user_session_path unless user_signed_in?
     end
   end
