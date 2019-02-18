@@ -54,7 +54,7 @@ class Patients::PatientsController < ApplicationController
      def patient_confirmed
      end
      
-     def send_message(message)
+    def send_message(message)
           @user = current_user
           twilio_number = ENV['TWILIO_NUMBER']
           @client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
@@ -64,9 +64,9 @@ class Patients::PatientsController < ApplicationController
             :body => message
           )
           puts message.to
-      end
+    end
  
-      def valid?(phone_number)
+    def valid?(phone_number)
           @lookup_client = Twilio::REST::Client.new(ENV["TWILIO_SID"], ENV["TWILIO_TOKEN"])
           phone_number = @lookup_client.lookups.phone_numbers(phone_number)
                begin
@@ -79,6 +79,8 @@ class Patients::PatientsController < ApplicationController
                else
                     raise e
                end
+               puts "************* VALID? ERROR"
+               puts e
            end
      end
 
