@@ -1,5 +1,5 @@
 <div id="time_out">
-     <%= form_for time_log, remote: true do |f| %>
+     <%= form_for [:users, time_log], remote: true do |f| %>
         <div style="text-align: center;">
             <%= button_tag type: 'submit', id: "register-button", style: "background: none; border: none;" do %>
                 <i class="fas fa-stop-circle fa-10x play-stop" style="color: #F17D55;"></i>

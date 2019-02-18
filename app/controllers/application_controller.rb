@@ -77,7 +77,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    request.env['omniauth.origin'] || stored_location_for(resource) || resource_name === 'patient' ? users_orders_path : patients_root_path
+    # request.env['omniauth.origin'] || stored_location_for(resource) || resource_name === 'patient' ? users_root_path : patients_root_path
+    if resource_name == :patient
+      patients_root_path 
+    elsif resource_name == :user
+      users_user_time_logs_path
+    end
   end
 
   def after_sign_out_path_for(resource_or_scope)

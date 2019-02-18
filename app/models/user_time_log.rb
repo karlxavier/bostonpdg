@@ -1,8 +1,9 @@
 class UserTimeLog < ApplicationRecord
     belongs_to :user
     belongs_to :office_time_log
+    # before_create :check_active_logs
 
-    audited associated_with: :user
+    # audited associated_with: :user
 
     scope :get_active_time_in, -> (user_id) { includes(:user).where(user_id: user_id, active: true) }
     scope :group_logs, -> (user_id) { UserTimeLog.where(user_id: user_id).group("time_in::date").order("time_in::date DESC").sum(:duration)}
@@ -49,13 +50,23 @@ class UserTimeLog < ApplicationRecord
   
     end
 
-
     def self.open_spreadsheet(file)
         case File.extname(file.original_filename)
             when ".csv" then Roo::CSV.new(file.path)
             when ".xls" then Roo::Excel.new (file.path)
             when ".xlsx" then Roo::Excelx.new(file.path)
             else raise "Unknown file type: #{file.original_filename}"
+        end
+    end
+
+    def check_active_logs
+        active_log = UserTimeLog.includes(:user).where(user_id: self.user_id, active: true)
+        if active_log.present?
+            puts '*********** false'
+            false
+        else
+            puts '*********** true'
+            true
         end
     end
 
