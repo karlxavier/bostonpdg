@@ -35,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'jquery-rails'
 
 gem 'devise'
 gem 'cancancan'
@@ -81,6 +82,12 @@ gem 'scenic'
 gem 'textacular', '~> 5.0'
 
 gem 'sdoc'
+
+# jwt patient portal
+gem 'devise-jwt'
+gem 'jwt'
+gem 'twilio-ruby'
+gem 'authy'
 
 
 group :development, :test do

@@ -86,6 +86,12 @@
                     <% end %>
                 </li>
                 <li>
+                    <%= link_to admin_patients_path, style: "display: block;" do %>
+                    	<i class="fa fa-wheelchair"></i> 
+                    	<span class="nav-label">Patients</span>
+                    <% end %>
+                </li>
+                <li>
                     <%= link_to admin_document_uploads_path, style: "display: block;" do %>
                         <i class="fa fa-clock"></i> 
                         <span class="nav-label">Uploaded Documents</span>

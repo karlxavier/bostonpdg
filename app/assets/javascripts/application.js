@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery_ujs
 //= require rails-ujs
 //= require jquery.min
 //= require turbolinks
@@ -48,6 +49,7 @@
 //= require select2.min
 //= require pdfjs
 //= require cropper
+//= require sweetalert
 
 $(document).on("turbolinks:load", function() {
   $(".selectpicker").selectpicker();

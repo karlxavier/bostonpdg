@@ -2910,8 +2910,8 @@ a.forum-item-title:hover {
   border-top: 1px solid #e7eaec;
 }
 .tabs-container .nav-tabs > li a:hover {
-  background: transparent;
-  border-color: transparent;
+  /* background: transparent;
+  border-color: transparent; */
 }
 .tabs-container .tabs-below > .nav-tabs,
 .tabs-container .tabs-right > .nav-tabs,

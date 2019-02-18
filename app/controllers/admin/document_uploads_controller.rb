@@ -89,7 +89,7 @@ class Admin::DocumentUploadsController < Admin::BaseController
     private
 
         def doc_params
-            params.require(:document_upload).permit(:description, :attachment, :document_upload_id, user_ids: [])
+            params.require(:document_upload).permit(:description, :attachment, :document_upload_id, user_ids: [], patient_ids: [])
         end
 
         def set_document

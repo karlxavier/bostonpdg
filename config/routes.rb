@@ -2,18 +2,43 @@ Rails.application.routes.draw do
   mount ActionCable.server => "/cable"
   mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
 
-  root 'user_time_logs#index'
-  devise_for :users
-  devise_scope :user do
-    # match '/sign-in' => "devise/sessions#new", :as => :login
-    authenticated :user do
-      root 'user_time_logs#index', as: :authenticated_root
-    end
+  root 'users/user_time_logs#index'
 
-    unauthenticated do
-      root 'devise/sessions#new', as: :unauthenticated_root
-    end
+  # get 'patients/sign_out' => "patients/sessions#destroy"
+  devise_for :patients,
+             path: 'patients',
+             path_names: {
+               sign_in: 'login',
+               sign_out: 'logout'
+             },
+             controllers: {
+               sessions: 'patients/sessions',
+               registrations: 'patients/registrations',
+               passwords: 'patients/passwords'
+             }
+  
+  devise_for :users,
+             path: 'users',
+             path_names: {
+              sign_in: 'login',
+              sign_out: 'logout'
+            },
+             controllers: {
+               sessions: 'users/sessions',
+               registrations: 'users/registrations',
+               passwords: 'users/passwords'
+             }
+  
+  devise_scope :user do
+              authenticated :user do
+                root 'user_time_logs#index', as: :authenticated_root
+              end
+          
+              unauthenticated do
+                root 'users/sessions#new', as: :unauthenticated_root
+              end
   end
+
   post 'vendors/import_csv'
   post 'customers/import_csv'
   post 'admin/hotels/import_csv'
@@ -22,105 +47,120 @@ Rails.application.routes.draw do
   post 'admin/inventories/import_csv'
   post 'admin/user_time_logs/import_csv'
 
-  resources :user_time_logs do
-    get :autocomplete_default_work_description, :on => :collection
-  end
-
-  resources :dashboards, only: [:index, :show]
-
-  get 'get_start_second', :to => 'user_time_logs#get_start_second', as: 'get_start_second'
-  get 'load_notifications', :to => 'notifications#load_notifications', as: 'load_notifications'
-
-  resources :channels do
-    resources :channel_users
-    resources :messages
-  end
-
-  resources :notifications, only: [:index]
-  resources :users, only: [:edit, :update]
-  resources :document_uploads, only: [:index, :show]
-  resources :search_results, only: :index
-  resources :dynamic_messages, only: :show
-  resources :dynamic_item_messages, only: :show
-  resources :filter_notifications, only: :show
-  resources :orders do
-    collection do
-      post  'update_assign_user'
-      post  'update_order'
-      get   'send_orders'
-      post  'send_orders_to_vendors'
-      get   'item_details'
+  namespace :users do
+    root 'users/user_time_logs#index'
+    resources :user_time_logs do
+      get :autocomplete_default_work_description, :on => :collection
     end
-  end
-  resources :products do
-    collection do
-      post  'change_picture'
-    end
-  end
-  resources :inventories do
-    collection do
-      get   'add_item'
-      get   'manage_by_hotel'
-      get   'view_stocks'
-      get   'show_brand'
-      post  'create_item'
-      post  'restock'
-    end
-  end
 
-  resources :vendors do
-    collection do
-      get   'list'
-      get   'add_item'
-      get   'supplier'
-      get   'products'
-      get   'items'
+    resources :dashboards, only: [:index, :show]
+
+    get 'get_start_second', :to => 'user_time_logs#get_start_second', as: 'get_start_second'
+    get 'load_notifications', :to => 'notifications#load_notifications', as: 'load_notifications'
+
+    resources :channels do
+      resources :channel_users
+      resources :messages
     end
-  end
 
-  resources :order_entries do
-    collection do
-      post  'update_entry'
-      post  'change_status'
-      post  'change_status_on_checklist'
-      get   'history'
-      get   'attachment'
-      post  'add_existing_item'
-      get   'download_attachment'
-      get   'list'
+    resources :notifications, only: [:index]
+    resources :users, only: [:edit, :update]
+    resources :document_uploads, only: [:index, :show]
+    resources :search_results, only: :index
+    resources :dynamic_messages, only: :show
+    resources :dynamic_item_messages, only: :show
+    resources :filter_notifications, only: :show
+    resources :orders do
+      collection do
+        post  'update_assign_user'
+        post  'update_order'
+        get   'send_orders'
+        post  'send_orders_to_vendors'
+        get   'item_details'
+      end
     end
-  end
+    resources :products do
+      collection do
+        post  'change_picture'
+      end
+    end
+    resources :inventories do
+      collection do
+        get   'add_item'
+        get   'manage_by_hotel'
+        get   'view_stocks'
+        get   'show_brand'
+        post  'create_item'
+        post  'restock'
+      end
+    end
 
-  resources :email_templates
+    resources :vendors do
+      collection do
+        get   'list'
+        get   'add_item'
+        get   'supplier'
+        get   'products'
+        get   'items'
+      end
+    end
 
-  resources :chatroom_orders do
-    resources :order_users
-    resources :messages
-    resources :dropfiles, only: :create
-    get 'load_messages/', :to => 'chatroom_orders#load_messages', as: 'load_messages'
+    resources :order_entries do
+      collection do
+        post  'update_entry'
+        post  'change_status'
+        post  'change_status_on_checklist'
+        get   'history'
+        get   'attachment'
+        post  'add_existing_item'
+        get   'download_attachment'
+        get   'list'
+      end
+    end
+
+    resources :email_templates
+
+    resources :chatroom_orders do
+      resources :order_users
+      resources :messages
+      resources :dropfiles, only: :create
+      get 'load_messages/', :to => 'chatroom_orders#load_messages', as: 'load_messages'
+
+      resources :order_entries, only: :load_item_messages do
+        get 'load_item_messages/', :to => 'chatroom_orders#load_item_messages', as: 'load_item_messages'
+      end
+      resources :order_entries, only: :index do
+        resources :item_messages, only: [:create, :new]
+      end
+    end
+
+    resources :orders do
+      resources :products do
+        resources :item_messages
+      end
+      get 'item_details/:id', :to => 'products#item_details', as: 'item_details'
+      resources :messages
+      get 'load_messages/:chatroom_id', :to => 'orders#load_messages', as: 'load_messages', on: :collection
+      get 'cancel_msg_update/:id', :to => 'messages#cancel_msg_update', as: 'cancel_msg_update', on: :collection
+    end
 
     resources :order_entries, only: :load_item_messages do
-      get 'load_item_messages/', :to => 'chatroom_orders#load_item_messages', as: 'load_item_messages'
-    end
-    resources :order_entries, only: :index do
-      resources :item_messages, only: [:create, :new]
+      get 'load_item_messages/', :to => 'orders#load_item_messages', as: 'load_item_messages'
     end
   end
 
-  resources :orders do
-    resources :products do
-      resources :item_messages
+  namespace :patients do
+    root to: "dashboards#index"
+    resources :patients, only: [:show, :edit, :update] do
+      get 'confirm_me', on: :collection
+      get 'verify_mobile', on: :collection, to: 'patients#verify_mobile', as: 'verify_mobile'
+      get "verify", to: 'patients#verify', as: 'verify'
+      resources :dashboards
+      resources :document_uploads, only: [:index, :show] do
+        get 'doc_preview'
+      end
     end
-    get 'item_details/:id', :to => 'products#item_details', as: 'item_details'
-    resources :messages
-    get 'load_messages/:chatroom_id', :to => 'orders#load_messages', as: 'load_messages', on: :collection
-    get 'cancel_msg_update/:id', :to => 'messages#cancel_msg_update', as: 'cancel_msg_update', on: :collection
   end
-
-  resources :order_entries, only: :load_item_messages do
-    get 'load_item_messages/', :to => 'orders#load_item_messages', as: 'load_item_messages'
-  end
-
 
   namespace :admin do
     resources :notifications
@@ -137,6 +177,7 @@ Rails.application.routes.draw do
     end
     resources :user_time_logs
     resources :users_brands
+    resources :patients
     resources :users_groups
     resources :users_group_details
     resources :customers
@@ -170,7 +211,7 @@ Rails.application.routes.draw do
     
     root to: "dashboards#index" # <--- Root route
   end
-  #API Simple
+  
   namespace :api do
     namespace :simple do
       resources :users do

@@ -3,6 +3,7 @@ class DocumentUpload < ApplicationRecord
     
     has_many :document_shares
     has_many :users, through: :document_shares
+    has_many :patients, through: :document_shares
 
     # belongs_to :parent, class_name: 'DocumentUpload', optional: true, foreign_key: :document_upload_id
     # has_many :subs, class_name: 'DocumentUpload', dependent: :destroy
@@ -14,6 +15,7 @@ class DocumentUpload < ApplicationRecord
     # belongs_to :parent, class_name: 'DocumentUpload', foreign_key: :document_upload_id
 
     scope :roots, -> { where(document_upload_id: nil) }
+    # scope :patient_roots, -> (patient_id) { includes(:document_shares).where(document_upload_id: nil, document_shares: { patient_id: patient_id }) }
 
     include AttachmentUploader[:attachment]
 

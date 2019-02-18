@@ -2870,14 +2870,19 @@ legend {
     color: #6e7179
 }
 
-.nav>li>a:focus,.nav>li>a:hover {
-    color: #333;
-    background: #fafafa
-}
-
 .nav-tabs {
     background: #c1ccd1;
-    border-radius: 5px 5px 0 0
+    border-radius: 5px 5px 0 0;
+    border: 1px solid #dee2e6;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+    color: #333;
+    background: #fafafa;
+}
+
+.nav-li-a:hover, .nav-li-a:focus {
+    color: #333;
+    background: #fafafa;
 }
 
 .nav-tabs-inverse>.nav-tabs,.nav-tabs.nav-tabs-inverse {
@@ -2897,7 +2902,7 @@ legend {
     border-radius: 3px 3px 0 0
 }
 
-.nav-tabs,.nav-tabs.nav-justified>.active>a,.nav-tabs.nav-justified>.active>a:focus,.nav-tabs.nav-justified>.active>a:hover,.nav-tabs.nav-justified>li>a,.nav-tabs>li.active>a,.nav-tabs>li.active>a:focus,.nav-tabs>li.active>a:hover,.nav-tabs>li>a {
+.nav-tabs.nav-justified>.active>a,.nav-tabs.nav-justified>.active>a:focus,.nav-tabs.nav-justified>.active>a:hover,.nav-tabs.nav-justified>li>a,.nav-tabs>li.active>a,.nav-tabs>li.active>a:focus,.nav-tabs>li.active>a:hover,.nav-tabs>li>a {
     border: none!important
 }
 
@@ -2952,10 +2957,10 @@ legend {
 }
 
 .tab-content {
-    padding: 15px;
+    // padding: 15px;
+    // background: #fff;
+    // border-radius: 3px;
     margin-bottom: 20px;
-    background: #fff;
-    border-radius: 3px
 }
 
 .nav-tabs+.tab-content {
@@ -9331,7 +9336,7 @@ div+.widget-input.widget-input-rounded {
     position: absolute;
     right: 40px;
     top: -2px;
-    opacity: .1
+    // opacity: .1
 }
 
 .login .login-header .icon i {

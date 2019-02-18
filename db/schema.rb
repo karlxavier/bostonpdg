@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190129152731) do
+ActiveRecord::Schema.define(version: 20190218140833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(version: 20190129152731) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "patient_id"
   end
 
   create_table "document_uploads", force: :cascade do |t|
@@ -256,6 +257,11 @@ ActiveRecord::Schema.define(version: 20190129152731) do
     t.bigint "order_entry_id"
     t.index ["order_entry_id"], name: "index_item_messages_on_order_entry_id"
     t.index ["user_id"], name: "index_item_messages_on_user_id"
+  end
+
+  create_table "jwt_blacklist", force: :cascade do |t|
+    t.string "jti", null: false
+    t.index ["jti"], name: "index_jwt_blacklist_on_jti"
   end
 
   create_table "mailboxer_conversation_opt_outs", id: :integer, default: nil, force: :cascade do |t|
@@ -426,6 +432,32 @@ ActiveRecord::Schema.define(version: 20190129152731) do
     t.integer "brand_id"
   end
 
+  create_table "patients", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.boolean "status", default: true
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "full_name"
+    t.string "mobile_no"
+    t.boolean "confirmed", default: false
+    t.datetime "confirmed_at"
+    t.string "authy_id"
+    t.string "area_code"
+    t.string "pin"
+    t.string "token"
+    t.index ["email"], name: "index_patients_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_patients_on_reset_password_token", unique: true
+  end
+
   create_table "product_accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -507,6 +539,12 @@ ActiveRecord::Schema.define(version: 20190129152731) do
     t.index ["vendor_id"], name: "index_products_on_vendor_id"
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.string "default_country_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "style_attributes", force: :cascade do |t|
     t.integer "product_id"
     t.string "name"
@@ -582,6 +620,7 @@ ActiveRecord::Schema.define(version: 20190129152731) do
     t.boolean "processor", default: true
     t.string "ip_address"
     t.datetime "front_last_notified"
+    t.string "token"
     t.index ["brand_id"], name: "index_users_on_brand_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["group_id"], name: "index_users_on_group_id"

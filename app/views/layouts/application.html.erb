@@ -26,12 +26,27 @@
 </head>
 
 <body>
-  <% if !user_signed_in? %>
-    <%= render '/devise/sessions/new' %>
-  <% elsif ["Admin"].exclude? controller.class.name.split("::").first %>
-    <%= render "layouts/user" %>
-  <% else %>
-    <%= render "layouts/admin" %>
+
+  <% if ["Users"].include? controller.class.name.split("::").first %>
+    <% if user_signed_in? %>
+      <%= render "layouts/user" %>
+    <% else %>
+      <%= render '/users/sessions/new' %>
+    <% end %>
+  <% elsif ["Admin"].include? controller.class.name.split("::").first %>
+    <% if user_signed_in? %>
+      <%= render "layouts/admin" %>
+    <% else %>
+      <%= render '/users/sessions/new' %>
+    <% end %>
+  <% elsif ["Patients"].include? controller.class.name.split("::").first %>
+    <% if patient_signed_in? %>
+      <div style="background-color: #fff; height: 100vh;">
+        <%= render "layouts/patient" %>
+      </div>
+    <% else %>
+      <%= render '/patients/sessions/new' %>
+    <% end %>
   <% end %>
 
 <%= render "search_results/full_screen_search" %>

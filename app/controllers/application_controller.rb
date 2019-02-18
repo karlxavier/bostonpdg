@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:new, :confirm_me, :update, :destroy]
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   helper_method :user_notification_count 
@@ -12,15 +12,16 @@ class ApplicationController < ActionController::Base
   end
 
   def front_notification_count
-    if current_user.admin?
-      @notifications_count =  Audit.admin_unread_count(current_user.front_last_notified, current_user.id)
-    else
-      @notifications_count =  Audit.user_unread_notifications(current_user.front_last_notified, current_user.id).count
+    if self.class.to_s.split("::").first === 'Users'
+      if current_user.admin?
+        @notifications_count =  Audit.admin_unread_count(current_user.front_last_notified, current_user.id)
+      else
+        @notifications_count =  Audit.user_unread_notifications(current_user.front_last_notified, current_user.id).count
+      end
     end
   end
 
   def front_unread_notifications
-    puts '******************** front_unread_notifications'
     if current_user.admin?
       @notifications =  Audit.admin_unread_notifications(current_user.front_last_notified, current_user.id)
     else
@@ -35,6 +36,21 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def authenticate_user!
+    if self.class.to_s.split("::").first === 'Patients'
+      unless patient_signed_in?
+        redirect_to( new_patient_session_path, alert: 'Please login to continue')
+      else
+        unless current_patient.confirmed?
+          # sign_out current_patient
+          redirect_to confirm_me_patients_patients_path
+        end
+      end
+    elsif self.class.to_s.split("::").first === 'Users'
+      redirect_to new_user_session_path unless user_signed_in?
+    end
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email,:password, :password_confirmation, roles: []])
@@ -61,15 +77,17 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    request.env['omniauth.origin'] || stored_location_for(resource) || orders_path
+    request.env['omniauth.origin'] || stored_location_for(resource) || resource_name === 'patient' ? users_orders_path : patients_root_path
   end
 
-  # def authenticate_user!
-  #   if user_signed_in?
-  #     super
-  #   else
-  #     redirect_to new_user_session_path
-  #   end
-  # end
+  def after_sign_out_path_for(resource_or_scope)
+    if resource_or_scope == :user
+      new_user_session_path
+    elsif resource_or_scope == :patient
+      new_patient_session_path
+    else
+      root_path
+    end
+  end
   
 end
