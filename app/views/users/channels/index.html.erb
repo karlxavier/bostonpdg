@@ -6,11 +6,13 @@
                     <div class="widget-todolist-header-left">
                         <h4 class="widget-todolist-header-title">Channels</h4>
                     </div>
-                    <div class="widget-todolist-header-right">
-                        <div class="widget-todolist-header-total">
-                            <%= link_to 'Add New', new_users_channel_path, class: "btn btn-white btn-sm", remote: true %>
+                    <% if current_user.admin? %>
+                        <div class="widget-todolist-header-right">
+                            <div class="widget-todolist-header-total">
+                                <%= link_to 'Add New', new_users_channel_path, class: "btn btn-white btn-sm", remote: true %>
+                            </div>
                         </div>
-                    </div>
+                    <% end %>
                 </div>
                 <div class="widget-list-body">
                     <div id="channels">

@@ -11,7 +11,7 @@ before_action :set_message_edit, only: [:edit, :update, :cancel_msg_update]
 		message.user = current_user
 		
 		message.save
-		MessageRelayJob.perform_later(message, current_user)
+		MessageRelayJob.perform_later(message)
 	end
 
 	def show

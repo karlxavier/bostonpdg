@@ -1,7 +1,7 @@
 class MessageRelayJob < ApplicationJob
   queue_as :default
 	  
-	def perform(message, current_user)
+	def perform_later(message)
 		ActionCable.server.broadcast "channels:#{message.channel_id}", {
 			username: message.user.email,
 			message_user_id: message.user.id,

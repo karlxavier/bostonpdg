@@ -14,7 +14,8 @@ class Admin::PatientsController < Admin::BaseController
   
           respond_to do |format|
              if @patient.save
-                  format.html { redirect_to admin_patients_path }
+                PatientMailer.welcome_mail(@patient).deliver
+                format.html { redirect_to admin_patients_path }
               else
                   format.html { render 'new' }
               end

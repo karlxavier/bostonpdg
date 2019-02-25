@@ -7,7 +7,8 @@ class UserTimeLog < ApplicationRecord
 
     scope :get_active_time_in, -> (user_id) { includes(:user).where(user_id: user_id, active: true) }
     scope :group_logs, -> (user_id) { UserTimeLog.where(user_id: user_id).group("time_in::date").order("time_in::date DESC").sum(:duration)}
-    scope :log_details, -> (user_id, time_in) { UserTimeLog.where("user_id = ? AND time_in::date = ?", user_id, time_in).where('duration IS NOT NULL AND time_in IS NOT NULL AND time_out IS NOT NULL ').order("time_in DESC") }
+    # scope :log_details, -> (user_id, time_in) { UserTimeLog.where("user_id = ? AND time_in::date = ?", user_id, time_in).where('duration IS NOT NULL AND time_in IS NOT NULL AND time_out IS NOT NULL ').order("time_in DESC") }
+    scope :log_details, -> (user_id, time_in) { includes(:user).where("user_id = ? AND time_in::date = ? AND duration IS NOT NULL AND time_in IS NOT NULL AND time_out IS NOT NULL", user_id, time_in).order("time_in DESC") }
 
     scope :all_active_logs, -> { includes(:user, :office_time_log).limit(500) }
     scope :admin_filter_timelogs, -> (from_date, to_date) { includes(:user, :office_time_log).where("DATE(time_in) BETWEEN ? AND ?", from_date, to_date) }

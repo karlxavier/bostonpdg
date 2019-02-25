@@ -10,7 +10,7 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports.
-  config.consider_all_requests_local = true
+  config.consider_all_requests_local = false
 
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp/caching-dev.txt').exist?
@@ -30,6 +30,21 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :letter_opener
+  config.active_job.queue_adapter = :inline
+
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.bostonpdg.com",
+    :port                 => 587,
+    :user_name            => ENV['DEFAULT_EMAIL'],
+    :password             => ENV['EMAIL_PASSWORD'],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

@@ -47,6 +47,8 @@
     <% else %>
       <%= render '/patients/sessions/new' %>
     <% end %>
+  <% else %>
+    <%= yield %>
   <% end %>
 
 <%= render "search_results/full_screen_search" %>

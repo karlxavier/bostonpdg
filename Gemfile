@@ -98,6 +98,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'dotenv-rails'
   gem 'annotate'
+  gem 'letter_opener'
 end
 
 group :development do
