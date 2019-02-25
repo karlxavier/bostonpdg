@@ -39,7 +39,7 @@
                          <th></th>
                     </thead>
                     <tbody>
-                         <% @patients.each do |patient| %>
+                         <% Patient.all.each do |patient| %>
                          <tr>
                               <td><%= patient.id %></td>
                               <td><%= link_to patient.full_name, admin_patient_path(patient) %></td>

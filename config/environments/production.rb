@@ -32,13 +32,14 @@ Rails.application.configure do
   # config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.bostonpdg.com",
+    :address              => "smtp.office365.com",
     :port                 => 587,
     :user_name            => ENV['DEFAULT_EMAIL'],
     :password             => ENV['EMAIL_PASSWORD'],
-    :authentication       => "plain",
+    :authentication       => :login,
     :enable_starttls_auto => true
   }
+
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   # config.assets.compile = true
