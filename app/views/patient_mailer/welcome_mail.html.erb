@@ -8,58 +8,50 @@
 
 <body>
 
-<table class="body-wrap">
-    <tbody><tr>
-        <td></td>
-        <td class="container" width="600">
-            <div class="content">
-                <table class="main" width="100%" cellpadding="0" cellspacing="0">
-                    <tbody><tr>
-                        <td class="content-wrap">
-                            <table cellpadding="0" cellspacing="0">
-                                <tbody><tr>
-                                    <td class="content-block">
-                                        <h3>Boston Pediatric Dental Group</h3>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="content-block">
-                                        <h3>Welcome <strong><%= @patient.full_name.present? ? @patient.full_name : '' %></strong></h3>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="content-block">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="content-block">
-                                        We may need to send you critical information about our service and it is important that we have an accurate email address.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="content-block aligncenter">
-                                        <a href="https://test-bostonpdg.herokuapp.com/patients/login" class="btn-primary">Login now</a>
-                                    </td>
-                                </tr>
-                              </tbody></table>
-                        </td>
-                    </tr>
-                </tbody></table>
-                <div class="footer">
-                    <table width="100%">
-                        <tbody><tr>
-                            <td class="aligncenter content-block">
-                                Copyright © 2019 Boston Pediatric Dental Group.
-                            </td>
-                        </tr>
-                    </tbody></table>
-                </div></div>
-        </td>
-        <td></td>
-    </tr>
-</tbody></table>
+    <table style="font-size: 14px; font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;">
+        <tbody>
+            <tr>
+                <td class="container" width="600">
+                    <div class="content">
+                        <h2 style="font-weight: bold; color: #333;font-size: 20px;">
+                            Boston Pediatric Dental Group Message Delivery
+                        </h2>
+                        <strong style="margin-top: 15px;">
+                            Cambridge Children’s Dentistry has created a secure e-mail message for you at:
+                        </strong>
+                        <div style="margin-top:20px;">
+                            <a href="test-bostonpdg.herokuapp.com">Link to our site</a>
+                        </div>
+                        <div>
+                            <h4>
+                                To access your message, simply follow these steps:
+                            </h4>
+                            <p style="margin-top: 10px;">
+                                1.    Click on the above link.
+                            </p>
+                            <p style="margin-top: 10px;">
+                                2.    Type {patient’s email.com} for your Login ID, and then your password.
+                            </p>
+                            <p style="margin-top: 10px;">
+                                3.    Access your Inbox to view your message.
+                            </p>
+                        </div>
+                        <p style="margin-top: 30px; ">
+                            Problems accessing the message?
+                        </p>
+                        <small>
+                            If you are unable to open the link, please make sure that your firewall or your company’s security settings are not blocking the link.
+                        </small>
+                        <br><br>
+                        <small>
+                            You will be asked to confirm your identity through your cellphone.
+                        </small>
+                    </div>
+                </td>
+            
+            </tr>
+        </tbody>
+    </table>
 
-
-
-</body></html>
+</body>
+</html>
