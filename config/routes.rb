@@ -178,6 +178,7 @@ Rails.application.routes.draw do
     resources :user_time_logs
     resources :users_brands
     resources :patients
+    resources :offices
     resources :users_groups
     resources :users_group_details
     resources :customers

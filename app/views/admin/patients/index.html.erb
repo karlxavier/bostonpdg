@@ -35,6 +35,8 @@
                          <th>Id</th>
                          <th>Name</th>
                          <th>Email</th>
+                         <th>Office</th>
+                         <th>Mobile Verified</th>
                          <th>Status</th>
                          <th></th>
                     </thead>
@@ -44,6 +46,14 @@
                               <td><%= patient.id %></td>
                               <td><%= link_to patient.full_name, admin_patient_path(patient) %></td>
                               <td><%= patient.email %></td>
+                              <td><%= patient.office.present? ? patient.office.name : '' %></td>
+                              <td>
+                                   <% if patient.confirmed %>
+                                   <span class="badge badge-success">Verified</span>
+                                   <% else %>
+                                   <span class="badge badge-danger">Unverified</span>
+                                   <% end %>
+                              </td>
                               <td>
                                    <% if patient.status %>
                                    <span class="badge badge-success">Active</span>

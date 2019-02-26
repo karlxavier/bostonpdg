@@ -50,7 +50,7 @@ class Admin::PatientsController < Admin::BaseController
       private
   
           def patient_params
-              params.require(:patient).permit(:full_name, :email, :status, :mobile_no, :password, :password_confirmation)
+              params.require(:patient).permit(:full_name, :email, :status, :mobile_no, :password, :password_confirmation, :office_id)
           end
   
           def set_patient
