@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  is_approve: false
+  remarks: MyString
+  type: 1
+  user_time_log_id: 1
+
+two:
+  user_id: 1
+  is_approve: false
+  remarks: MyString
+  type: 1
+  user_time_log_id: 1

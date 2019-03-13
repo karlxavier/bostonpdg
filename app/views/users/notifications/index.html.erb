@@ -1,8 +1,8 @@
-<h1 class="page-header">User Notifications 
-    <br>
-</h1>
 <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
+            <h1 class="page-header">Notifications 
+                <br>
+            </h1>
             <div class="ibox ">
                 <div class="ibox-content">
                     <div class="activity-stream">
@@ -53,5 +53,19 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-lg-6">
+            <h1 class="page-header">Requests 
+                <br>
+            </h1>
+            <%= link_to 'Request Manual Entry', new_users_user_request_path, class: "btn btn-default m-r-5", remote: true %>
+            <div class="row" style="margin-top:20px;">
+                <div class="col-lg-12">
+                    <div class="widget-list widget-list-rounded m-b-30" id="user_requests">
+                        <%= render 'user_requests', user_requests: @user_requests %>
+                    </div>
+                </div>
+            </div>
+           
         </div>
 </div>

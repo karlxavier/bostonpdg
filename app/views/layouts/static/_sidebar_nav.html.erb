@@ -11,40 +11,46 @@
             </li>
         </ul>
         <ul class="nav">
-            <li class="<%= controller.class.name.split("::").first == 'DashboardsController' ? 'active' : '' %>">
+            <li class="<%= controller.class.name == 'Users::DashboardsController' ? 'active' : '' %>">
                 <%= link_to users_dashboards_path do %>
                     <i class="fas fa-stopwatch"></i> 
                     <span>Timelogs Dashboard</span> 
                 <% end %>
             </li>
-            <li class="<%= controller.class.name.split("::").first == 'OrdersController' ? 'active' : '' %>">
+            <li class="<%= controller.class.name == 'Users::OrdersController' ? 'active' : '' %>">
                 <%= link_to users_orders_path do %>
                     <i class="fas fa-calendar-alt"></i> 
                     <span>Orders</span> 
                 <% end %>
             </li>
-            <li class="<%= controller.class.name.split("::").first == 'DocumentUploadsController' ? 'active' : '' %>">
+            <li class="<%= controller.class.name == 'Users::DocumentUploadsController' ? 'active' : '' %>">
                 <%= link_to users_document_uploads_path do %>
                     <i class="fas fa-file-image"></i> 
                     <span>Shared Documents</span> 
                 <% end %>
             </li>
-            <li class="<%= controller.class.name.split("::").first == 'ChannelsController' ? 'active' : '' %>">
+            <li class="<%= controller.class.name == 'Users::ChannelsController' ? 'active' : '' %>">
                 <%= link_to users_channels_path do %>
                     <i class="far fa-comments"></i> 
                     Messages
                 <% end %>
             </li>
-            <li class="<%= controller.class.name.split("::").first == 'UserTimeLogsController' ? 'active' : '' %>">
+            <li class="<%= controller.action_name == 'index' && controller.class.name == 'Users::UserTimeLogsController' ? 'active' : '' %>">
                 <%= link_to users_user_time_logs_path do %>
                     <i class="far fa-clock"></i> 
                     Time Logs
                 <% end %>
             </li>
-            <li class="<%= controller.class.name.split("::").first == 'NotificationsController' ? 'active' : '' %>">
+            <li class="<%= controller.class.name == 'Users::NotificationsController' ? 'active' : '' %>">
                 <%= link_to users_notifications_path do %>
                     <i class="far fa-bell"></i> 
-                    Notifications
+                    Notifications/Requests
+                <% end %>
+            </li>
+            <li class="<%= controller.action_name == 'timelog_report' && controller.class.name.split("::").first == 'UserTimeLogsController' ? 'active' : '' %>">
+                <%= link_to users_timelog_report_path do %>
+                    <i class="fa fa-print"></i> 
+                    Timelog Report
                 <% end %>
             </li>
         </ul>

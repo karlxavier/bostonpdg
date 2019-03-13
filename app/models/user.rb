@@ -48,6 +48,8 @@ class User < ApplicationRecord
   has_many :users_group_details
   has_many :users_groups, through: :users_group_details
 
+  has_many :user_requests
+
   has_many :channel_users
   has_many :channels, through: :channel_users
 

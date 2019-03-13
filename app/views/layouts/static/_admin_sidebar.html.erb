@@ -65,6 +65,15 @@
                     <% end %>
                 </li>
                 <li>
+                    <%= link_to admin_user_requests_path, style: "display: block;" do %>
+                        <i class="fa fa-retweet"></i> 
+                        <span class="nav-label">User Requests </span>
+                        <% if user_requests_count > 0 %>
+                            <span class="label label-warning pull-right"><%= user_requests_count %></span>
+                        <% end %>
+                    <% end %>
+                </li>
+                <li>
                     <a href="#" style="display: block" >
                         <i class="fa fa-bar-chart-o"></i> 
                         <span class="nav-label">Orders</span>

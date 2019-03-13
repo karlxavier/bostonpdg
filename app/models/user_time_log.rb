@@ -1,15 +1,19 @@
 class UserTimeLog < ApplicationRecord
     belongs_to :user
     belongs_to :office_time_log
+    has_many :user_requests
+
+    validates_uniqueness_of :time_in, scope: %i[user_id description]
+
     # before_create :check_active_logs
 
     # audited associated_with: :user
 
     scope :get_active_time_in, -> (user_id) { includes(:user).where(user_id: user_id, active: true) }
-    scope :group_logs, -> (user_id) { UserTimeLog.where(user_id: user_id).group("time_in::date").order("time_in::date DESC").sum(:duration)}
+    scope :group_logs, -> (user_id) { UserTimeLog.where(user_id: user_id).group("time_in::date").order("time_in::date DESC").limit(10).sum(:duration)}
     # scope :log_details, -> (user_id, time_in) { UserTimeLog.where("user_id = ? AND time_in::date = ?", user_id, time_in).where('duration IS NOT NULL AND time_in IS NOT NULL AND time_out IS NOT NULL ').order("time_in DESC") }
     scope :log_details, -> (user_id, time_in) { includes(:user).where("user_id = ? AND time_in::date = ? AND duration IS NOT NULL AND time_in IS NOT NULL AND time_out IS NOT NULL", user_id, time_in).order("time_in DESC") }
-
+    scope :user_filter_timelogs, -> (user_id, from_date, to_date) { includes(:user, :office_time_log).where(user_id: user_id).where("DATE(time_in) BETWEEN ? AND ?", from_date, to_date) }
     scope :all_active_logs, -> { includes(:user, :office_time_log).limit(500) }
     scope :admin_filter_timelogs, -> (from_date, to_date) { includes(:user, :office_time_log).where("DATE(time_in) BETWEEN ? AND ?", from_date, to_date) }
     scope :dashboard_latest_logs, -> (date) { includes(:user).select("DISTINCT ON (user_id) *").where("DATE(time_in) = ?", date)  }

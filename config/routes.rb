@@ -55,14 +55,22 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :index]
     resources :dashboards, only: [:index, :show]
 
+    get 'timelog_report', :to => 'user_time_logs#timelog_report', as: 'timelog_report'
     get 'get_start_second', :to => 'user_time_logs#get_start_second', as: 'get_start_second'
     get 'load_notifications', :to => 'notifications#load_notifications', as: 'load_notifications'
+    get 'request_timelog_update/:timelog_id', :to => 'user_requests#request_timelog_update', as: 'request_timelog_update'
+    get 'execute_new_timelog/:request_id', :to => 'user_requests#execute_new_timelog', as: 'execute_new_timelog'
+    get 'execute_edit_timelog/:request_id', :to => 'user_requests#execute_edit_timelog', as: 'execute_edit_timelog'
+
+    post 'execute_create_timelog', :to => 'user_time_logs#execute_create_timelog', as: 'execute_create_timelog'
+    get 'execute_update_timelog', :to => 'user_time_logs#execute_update_timelog', as: 'execute_update_timelog'
 
     resources :channels do
       resources :channel_users
       resources :messages
     end
 
+    resources :user_requests, only: [:new, :create, :show]
     resources :notifications, only: [:index]
     resources :users, only: [:edit, :update]
     resources :document_uploads, only: [:index, :show]
@@ -163,6 +171,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :user_requests
     resources :notifications
     resources :users do
       get 'group_assign', to: 'users_groups#group_assign', as: 'group_assign'

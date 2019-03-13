@@ -49,6 +49,7 @@
 //= require pdfjs
 //= require cropper
 //= require sweetalert
+//= require bootstrap-timepicker
 
 $(document).on("turbolinks:load", function() {
   $(".selectpicker").selectpicker();

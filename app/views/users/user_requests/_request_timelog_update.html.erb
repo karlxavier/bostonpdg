@@ -1,0 +1,37 @@
+<div id="modal-shows">
+    <div class="modal fade" id="modal-dialog" style="display: none;">
+        <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <h3 style="color: #242a30;">
+                        Update Timelog Request
+                    </h3>
+                    <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </div>
+                <%= form_for [:users, @user_request], html: { class: "form-horizontal", remote: true } do |f| %>
+                    <div class="modal-body">
+                        <%= f.hidden_field :request_type, value: :edit_request %>
+                        <%= f.hidden_field :user_time_log_id, value: @timelog.id %>
+                         <div class="form-group">
+                              <label>Reason</label> 
+                              <%= f.text_field :remarks, class: "form-control", required: "" %>
+                         </div>
+                         <div class="form-group">
+                              <div class="promotion-caption text-center">
+                                   <h2 class="promotion-title"><%= @timelog.description %></h2>
+                                   <p class="promotion-desc"><%= @timelog.time_in.strftime("%B %d %Y")  %></p>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
+                            Save Request
+                        <% end %> 
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+

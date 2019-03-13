@@ -7,12 +7,11 @@ class Users::NotificationsController < ApplicationController
 			@audits = Audit.user_all_notifications(current_user.id).limit(100)
 		end
 
+		@user_requests = current_user.user_requests.where(executed: false).all
 		current_user.update_attributes(front_last_notified: Time.zone.now)
 	end
 
 	def load_notifications
-		puts '******************'
-		puts 'load_notifications'
 		respond_to do |format|
 			format.js
 		end
