@@ -45,7 +45,7 @@ class Users::UserRequestsController < ApplicationController
      private
 
           def request_params
-               params.require(:user_request).permit(:date, :request_type, :remarks, :user_time_log_id)
+               params.require(:user_request).permit(:date, :request_type, :remarks, :user_time_log_id, :time_in, :time_out, :description)
           end
 
 end

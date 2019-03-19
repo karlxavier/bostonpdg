@@ -44,7 +44,7 @@
             <li class="<%= controller.class.name == 'Users::NotificationsController' ? 'active' : '' %>">
                 <%= link_to users_notifications_path do %>
                     <i class="far fa-bell"></i> 
-                    Notifications/Requests
+                    Notifications
                 <% end %>
             </li>
             <li class="<%= controller.action_name == 'timelog_report' && controller.class.name.split("::").first == 'UserTimeLogsController' ? 'active' : '' %>">

@@ -4,21 +4,21 @@
         <div class="modal-content animated bounceInRight">
                 <div class="modal-header">
                     <h3 style="color: #242a30;">
-                        Update Timelog Request
+                        Approve Timelog Request
                     </h3>
                     <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 </div>
-                <%= form_for [:users, @user_request], html: { class: "form-horizontal", remote: true } do |f| %>
+                <%= form_for [:admin, @user_request], html: { class: "form-horizontal", remote: true } do |f| %>
                     <div class="modal-body">
                         <%= f.hidden_field :request_type, value: :edit_request %>
-                        <%= f.hidden_field :user_time_log_id, value: @timelog.id %>
                          <div class="form-group">
-                              <label>Reason</label> 
-                              <%= f.text_field :remarks, class: "form-control", required: "" %>
+                              <label>Reason:
+                              <strong><%= @user_request.remarks %></strong>
+                              </label> 
                          </div>
                          <div class="form-group">
                             <label>Woking On</label> 
-                            <%= f.text_field :description, class: "form-control", required: "", value: @timelog.description %>
+                            <%= f.text_field :description, class: "form-control", required: "" %>
                             <div class="btn-group btn-group-justified" style="width: 100%; margin-bottom: 20px;">
                                 <button id="btnArlington" onclick="arlington()" class="btn btn-primary btn-block btn-outline" style="margin-top: 8px;" type="button" >Arlington</button>
                                 <button id="btnCambridge" onclick="cambridge()" class="btn btn-primary btn-block btn-outline" type="button" >Cambridge</button>
@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <label>Date</label> 
                             <div class="input-group date" id="datetimepicker1">
-                                <%= f.text_field :date, class: "form-control", placeholder: "Date filter", required: "", value: @timelog.time_in.strftime("%Y-%m-%d") %>
+                                <%= f.text_field :date, class: "form-control", placeholder: "Date filter", required: "" %>
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
@@ -37,14 +37,14 @@
                         <div class="form-group">
                             <label>Time In</label> 
                             <div class="input-group bootstrap-timepicker timepicker">
-                                <%= f.text_field :time_in, class: "form-control input-small timepicker1", required: "", readonly: true, value: @timelog.time_in.strftime("%H:%M %p") %>
+                                <%= f.text_field :time_in, class: "form-control input-small timepicker1", required: "", readonly: true, value: @user_request.time_in.strftime("%H:%M %p") %>
                                 <span class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Time Out</label> 
                             <div class="input-group bootstrap-timepicker timepicker">
-                                <%= f.text_field :time_out, class: "form-control input-small timepicker2", required: "", readonly: true, value: @timelog.time_out.strftime("%H:%M %p") %>
+                                <%= f.text_field :time_out, class: "form-control input-small timepicker2", required: "", readonly: true, value: @user_request.time_out.strftime("%H:%M %p") %>
                                 <span class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
                         <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
-                            Save Request
+                            Approve Request
                         <% end %> 
                     </div>
                 <% end %>
@@ -63,7 +63,7 @@
 <script type="text/javascript">
     $('.timepicker2').timepicker();
     $('.timepicker1').timepicker();
-    $("#user_request_created_at").datetimepicker({
+    $("#user_request_date").datetimepicker({
         format:'YYYY-MM-DD',
     });
 

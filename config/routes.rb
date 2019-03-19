@@ -171,7 +171,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :user_requests
+    resources :user_requests do
+      get 'approve_request', :to => 'user_requests#approve_request', as: 'approve_request'
+    end
     resources :notifications
     resources :users do
       get 'group_assign', to: 'users_groups#group_assign', as: 'group_assign'
