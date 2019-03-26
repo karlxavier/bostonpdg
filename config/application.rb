@@ -53,7 +53,7 @@ module RegencyApp
       :domain               => "office365.com",
       :user_name            => ENV['DEFAULT_EMAIL'],
       :password             => ENV['EMAIL_PASSWORD'],
-      :authentication       => :plain,
+      :authentication       => :login,
       :enable_starttls_auto => true
     }
   end
