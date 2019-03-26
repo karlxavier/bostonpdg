@@ -51,7 +51,6 @@ module RegencyApp
     config.action_mailer.smtp_settings = {
       :address              => "smtp.office365.com",
       :port                 => 587,
-      :domain               => "office365.com",
       :user_name            => ENV['DEFAULT_EMAIL'],
       :password             => ENV['EMAIL_PASSWORD'],
       :authentication       => :login,
