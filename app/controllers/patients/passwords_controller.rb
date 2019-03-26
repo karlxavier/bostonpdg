@@ -13,8 +13,6 @@ class Patients::PasswordsController < Devise::PasswordsController
 
   def edit
     digest_token = Devise.token_generator.digest(self, :reset_password_token, params[:reset_password_token])
-    puts '*************** digest_token'
-    puts digest_token
     @confirm_patient = Patient.where(reset_password_token: digest_token)
     # self.resource = resource_class.new
     # resource.reset_password_token = params[:reset_password_token]

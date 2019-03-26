@@ -16,8 +16,6 @@ class Admin::PatientsController < Admin::BaseController
              if @patient.save
                 # PatientMailer.welcome_mail(@patient).deliver
                 @patient.send_reset_password_instructions
-                puts '*************** reset_password_token'
-                puts @patient.reset_password_token
                 format.html { redirect_to admin_patients_path }
               else
                   format.html { render 'new' }
