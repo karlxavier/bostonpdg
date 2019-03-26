@@ -11,4 +11,9 @@ class Patient < ApplicationRecord
 
   belongs_to :office
 
+  protected
+    def password_required?
+      confirmed? ? super : false
+    end
+
 end

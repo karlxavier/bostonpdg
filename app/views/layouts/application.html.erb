@@ -44,6 +44,10 @@
       <div style="background-color: #fff; height: 100vh;">
         <%= render "layouts/patient" %>
       </div>
+    <% elsif action_name == 'edit' && controller.class.name.split("::").last == 'PasswordsController' %>
+      <div style="background-color: #fff; height: 100vh;">
+        <%= render "layouts/patient" %>
+      </div>
     <% else %>
       <%= render '/patients/sessions/new' %>
     <% end %>

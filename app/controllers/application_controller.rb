@@ -39,23 +39,32 @@ class ApplicationController < ActionController::Base
     rescue_from ActionController::RoutingError, with: -> { render_404  }
   end
 
-  # def render_404
-  #   respond_to do |format|
-  #     format.html { render template: 'errors/not_found', status: 404 }
-  #     format.all { render nothing: true, status: 404 }
+  protected
+
+  # def authenticate_user!
+  #   if self.class.to_s.split("::").first === 'Patients'
+  #     unless patient_signed_in?
+  #       redirect_to( new_patient_session_path, alert: 'Please login to continue')
+  #     else
+  #       unless current_patient.confirmed?
+  #         # sign_out current_patient
+  #         redirect_to confirm_me_patients_patients_path
+  #       end
+  #     end
+  #   elsif self.class.to_s.split("::").first === 'Users' || self.class.to_s.split("::").first === 'Admin'
+  #     redirect_to new_user_session_path unless user_signed_in?
   #   end
   # end
 
-  # rescue_from ActionController::UnknownController, with: -> { render_404  }
-  # rescue_from ActiveRecord::RecordNotFound,        with: -> { render_404  }
-
-  protected
-
-  def authenticate_user!
+    def authenticate_user!
     if self.class.to_s.split("::").first === 'Patients'
-      unless patient_signed_in?
+      if self.class.to_s.split("::").last === 'PasswordsController' && action_name === 'edit'
+        # redirect_to new_password_patients_patients_path
+      elsif !patient_signed_in?
+        puts '************** patient_signed_in?'
         redirect_to( new_patient_session_path, alert: 'Please login to continue')
       else
+        puts '************** else?'
         unless current_patient.confirmed?
           # sign_out current_patient
           redirect_to confirm_me_patients_patients_path

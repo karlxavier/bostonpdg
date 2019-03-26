@@ -22,6 +22,9 @@
 				</div>
 				<div id="login-content" class="login-content">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "margin-bottom-0" }, remote: true) do |f| %>
+						<%= devise_error_messages! %>
+  					<%= render 'layouts/devise_error' %>
+
 						<div class="form-group m-b-15">
               <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg", required: "" %>
 						</div>

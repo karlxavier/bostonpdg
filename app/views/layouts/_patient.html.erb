@@ -2,7 +2,7 @@
     <div id="header" class="header navbar-default p-navbar">
         <!-- begin navbar-header -->
         <div class="navbar-header p-navbar-header ">
-            <%= link_to patients_root_path, class: "navbar-brand" do %>
+            <%= link_to current_patient.present? ? patients_root_path : '#', class: "navbar-brand" do %>
                 <%= image_tag 'logo.png' %>
                 <b>Boston Pediatric</b> Dental Group
             <% end %>
@@ -14,9 +14,11 @@
         </div>
         <!-- end header navigation right -->
         <ul class="navbar-nav navbar-right">
-            <li>
-                <%= link_to 'Logout', destroy_patient_session_path, method: :delete, style: "font-size: 14px; font-weight: 500; line-height: 1.25; padding-top: 30px; padding-right: 50px;" %>
-            </li>
+            <% if current_patient.present? %>
+                <li>
+                    <%= link_to 'Logout', destroy_patient_session_path, method: :delete, style: "font-size: 14px; font-weight: 500; line-height: 1.25; padding-top: 30px; padding-right: 50px;" %>
+                </li>
+            <% end %>
         </ul>
     </div>
 
@@ -28,7 +30,7 @@
             <%= yield %>
         </div>
     </div>
-    <input type="hidden" id="browser_id" value="<%= current_patient.id %>">
+    <input type="hidden" id="browser_id" value="<%= current_patient.id if current_patient.present? %>">
 </div>
 <script>
     $('.dropdown').on('show.bs.dropdown', function (event) {
