@@ -14,7 +14,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you ue your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = "BostonPDG #{ENV['DEFAULT_EMAIL']}"
+  config.mailer_sender = "BostonPDG"
   config.scoped_views = true
   config.sign_out_via = :get
 
