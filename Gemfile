@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'jquery-rails'
 gem 'rb-readline'
+gem 'whenever', require: false
 
 gem 'devise'
 gem 'cancancan'
