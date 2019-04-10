@@ -9,6 +9,8 @@ class Patient < ApplicationRecord
   has_many :document_shares
   has_many :document_uploads, through: :document_shares
 
+  has_many :patient_shared_files
+
   belongs_to :office
 
   protected

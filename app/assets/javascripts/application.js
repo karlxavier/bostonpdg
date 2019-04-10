@@ -50,6 +50,7 @@
 //= require cropper
 //= require sweetalert
 //= require bootstrap-timepicker
+//= require dropzone_patients
 
 $(document).on("turbolinks:load", function() {
   $(".selectpicker").selectpicker();

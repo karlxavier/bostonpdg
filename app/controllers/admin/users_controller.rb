@@ -22,12 +22,14 @@ class Admin::UsersController < Admin::BaseController
     end
 
     def edit
+        session[:return_to] ||= request.referer
     end
 
     def update
     	respond_to do |format|
 			if @user.update_attributes(user_params)
-				format.html { redirect_to admin_users_path }
+                # format.html { redirect_to admin_users_path }
+                format.html { redirect_to session.delete(:return_to) } 
 			else
 				format.html	{ render 'edit' }
 			end

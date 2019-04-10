@@ -141,7 +141,7 @@
 
           <div class="form-group">
               <div class="col-sm-4 col-sm-offset-2">
-                  <%= link_to 'Cancel', admin_users_path, class: "btn btn-white" %>
+                  <%= link_to 'Cancel', session[:return_to], class: "btn btn-white" %>
                   <%= button_tag(type: 'Submit', class: "btn btn-primary") do %>
                     Save changes
                   <% end %> 

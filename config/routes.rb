@@ -168,6 +168,9 @@ Rails.application.routes.draw do
         get 'doc_preview'
       end
     end
+    resources :patient_shared_files do
+      get 'doc_preview'
+    end
   end
 
   namespace :admin do

@@ -28,6 +28,8 @@ class AttachmentUploader < Shrine
   	plugin :versions
 	plugin :versions, names: [:original]
 	plugin :metadata_attributes, filename: :original_filename
+	plugin :cached_attachment_data
+  	plugin :recache
 
   	Attacher.validate do
     	validate_max_size 5.megabytes, message: 'is too large (max is 5 MB)'
@@ -35,12 +37,12 @@ class AttachmentUploader < Shrine
   	end
 
   	def process(io, context)
-    	case context[:phase]
-    		when :store
-      			# thumb = resize_to_limit!(io.download, 200, 200)
-      			# { original: io, thumb: thumb }
+		case context[:phase]
+			when :store
+					# thumb = resize_to_limit!(io.download, 200, 200)
+					# { original: io, thumb: thumb }
 
-      			{ original: io}
-    	end
+					{ original: io}
+		end
   	end
 end
